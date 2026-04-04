@@ -1,0 +1,86 @@
+INFO:     Started server process [85105]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+
+============================================================
+🚀 Bryson语音MVP - 快速启动（外部访问版）
+============================================================
+时间: 2026-03-30 21:08:56
+目标: 为明天30分钟测试准备外部可访问链接
+============================================================
+
+1️⃣ 环境检查...
+🔍 检查依赖...
+  ✅ fastapi
+  ✅ uvicorn
+  ✅ websockets
+  ✅ pyngrok
+
+2️⃣ 端口检查...
+  ✅ 端口 8080 可用
+
+3️⃣ 启动服务器 (端口: 8080)...
+✅ 服务器已在端口 8080 启动
+  ✅ 服务器启动成功
+
+4️⃣ 创建外部访问链接...
+🔗 启动ngrok隧道...
+Downloading ngrok ...❌ ngrok隧道启动失败: An error occurred while downloading ngrok from https://bin.ngrok.com/c/bNyj1mQVY4c/ngrok-v3-stable-darwin-arm64.zip: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)>
+⚠️  备用方案: 使用公开端口8080
+   请尝试访问: http://113.176.70.27:8080
+
+❌ 无法创建外部链接
+备选方案:
+1. 手动配置路由器端口转发
+2. 使用其他隧道工具 (Cloudflare Tunnel, localhost.run)
+3. 临时使用云服务器部署
+🚀 启动Bryson语音MVP测试服务器...
+访问地址: http://localhost:8080
+按 Ctrl+C 停止服务器
+INFO:     127.0.0.1:61317 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62271 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62275 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62473 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62476 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62490 - "HEAD / HTTP/1.1" 405 Method Not Allowed
+INFO:     113.176.70.27:0 - "HEAD / HTTP/1.1" 405 Method Not Allowed
+INFO:     113.176.70.27:0 - "GET / HTTP/1.1" 200 OK
+INFO:     113.176.70.27:0 - "GET / HTTP/1.1" 200 OK
+INFO:     125.235.212.119:0 - "GET / HTTP/1.1" 200 OK
+INFO:     125.235.212.119:0 - "GET /styles.css HTTP/1.1" 200 OK
+INFO:     125.235.212.119:0 - "GET /app.js HTTP/1.1" 200 OK
+INFO:     125.235.212.119:0 - "WebSocket /ws/test-298295" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     connection closed
+INFO:     125.235.212.119:0 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     125.235.212.119:0 - "WebSocket /ws/test-298295" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     connection closed
+INFO:     125.235.212.119:0 - "WebSocket /ws/test-298295" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     connection closed
+INFO:     125.235.212.119:0 - "WebSocket /ws/test-298295" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     connection closed
+INFO:     125.235.212.119:0 - "WebSocket /ws/test-298295" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     connection closed
+INFO:     125.235.212.119:0 - "WebSocket /ws/test-298295" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     connection closed
+INFO:     127.0.0.1:62711 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62716 - "GET / HTTP/1.1" 200 OK
+INFO:     125.235.209.14:0 - "WebSocket /ws/test-864938" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     connection closed
+INFO:     125.235.209.14:0 - "WebSocket /ws/test-864938" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     connection closed
+INFO:     125.235.209.14:0 - "WebSocket /ws/test-864938" 403
+INFO:     connection rejected (403 Forbidden)
+INFO:     connection closed
+INFO:     203.210.222.182:0 - "GET / HTTP/1.1" 200 OK
+INFO:     203.210.222.182:0 - "GET /styles.css HTTP/1.1" 200 OK
+INFO:     203.210.222.182:0 - "GET /app.js HTTP/1.1" 200 OK
+INFO:     203.210.222.182:0 - "GET /api/status HTTP/1.1" 200 OK

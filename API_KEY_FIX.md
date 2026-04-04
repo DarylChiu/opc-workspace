@@ -8,7 +8,7 @@
 
 1. 请等待Daryl重启OpenClaw服务
 2. 重启后，确认你使用的是自己的API密钥：
-   - 你的API密钥：`API_KEY_REDACTED`
+   - 你的API密钥：`OPENROUTER_API_KEY_REDACTED`
    - 模型：`openrouter/deepseek/deepseek-r1`
 
 3. 同时请按照之前的指示使用共享记忆系统，检查：
