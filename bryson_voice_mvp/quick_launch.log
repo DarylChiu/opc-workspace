@@ -1,0 +1,30 @@
+INFO:     Started server process [85090]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+ERROR:    [Errno 48] error while attempting to bind on address ('0.0.0.0', 8080): [errno 48] address already in use
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+🚀 启动Bryson语音MVP测试服务器...
+访问地址: http://localhost:8080
+按 Ctrl+C 停止服务器
+
+============================================================
+🚀 Bryson语音MVP - 快速启动（外部访问版）
+============================================================
+时间: 2026-03-30 21:08:19
+目标: 为明天30分钟测试准备外部可访问链接
+============================================================
+
+1️⃣ 环境检查...
+🔍 检查依赖...
+  ✅ fastapi
+  ✅ uvicorn
+  ✅ websockets
+  ✅ pyngrok
+
+2️⃣ 端口检查...
+  ⚠️  端口 8080 被占用，尝试释放...
+
+3️⃣ 启动服务器 (端口: 8081)...
+❌ 服务器启动失败，端口 8081 不可用
+  ❌ 服务器启动失败

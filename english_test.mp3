@@ -1,0 +1,7 @@
+base64: invalid argument 英语测试_audio.base64.txt
+Usage:	base64 [-Ddh] [-b num] [-i in_file] [-o out_file]
+  -b, --break       break encoded output up into lines of length num
+  -D, -d, --decode  decode input
+  -h, --help        display this message
+  -i, --input       input file (default: "-" for stdin)
+  -o, --output      output file (default: "-" for stdout)
