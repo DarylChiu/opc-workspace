@@ -1,0 +1,209 @@
+{
+  "workflows": [
+    {
+      "id": "wf_video_mvp",
+      "name": "视频分析MVP V3.1",
+      "project": "视频分析MVP",
+      "lead": "Bryson (xiaofeng)",
+      "status": "in_progress",
+      "totalEstimatedHours": 72,
+      "totalActualHours": 0,
+      "description": "抖音/短视频内容多模态分析管道 — Bryson主导开发",
+      "nodes": [
+        {
+          "id": "n_v1",
+          "type": "taskNode",
+          "position": {
+            "x": 40,
+            "y": 60
+          },
+          "data": {
+            "label": "📥 视频接入",
+            "description": "URL解析/文件上传/批量导入",
+            "agent": "xiaofeng",
+            "estimatedHours": 6,
+            "actualHours": 0,
+            "status": "in_progress"
+          }
+        },
+        {
+          "id": "n_v2",
+          "type": "taskNode",
+          "position": {
+            "x": 40,
+            "y": 200
+          },
+          "data": {
+            "label": "🎵 音频提取",
+            "description": "ffmpeg提取音频轨道",
+            "agent": "xiaofeng",
+            "estimatedHours": 4,
+            "actualHours": 0,
+            "status": "done"
+          }
+        },
+        {
+          "id": "n_v3",
+          "type": "taskNode",
+          "position": {
+            "x": 38,
+            "y": 332
+          },
+          "data": {
+            "label": "📝 音频转写",
+            "description": "Whisper语音转文字 ⚠️ Bryson发现的盲区",
+            "agent": "xiaofeng",
+            "estimatedHours": 12,
+            "actualHours": 0,
+            "status": "pending"
+          }
+        },
+        {
+          "id": "n_v4",
+          "type": "taskNode",
+          "position": {
+            "x": 300,
+            "y": 340
+          },
+          "data": {
+            "label": "🎬 关键帧抽取",
+            "description": "场景切换检测+关键帧提取",
+            "agent": "xiaofeng",
+            "estimatedHours": 8,
+            "actualHours": 0,
+            "status": "pending"
+          }
+        },
+        {
+          "id": "n_v5",
+          "type": "taskNode",
+          "position": {
+            "x": 40,
+            "y": 480
+          },
+          "data": {
+            "label": "🧩 句子对齐采样",
+            "description": "转写文字与视频时间轴对齐",
+            "agent": "xiaofeng",
+            "estimatedHours": 10,
+            "actualHours": 0,
+            "status": "pending"
+          }
+        },
+        {
+          "id": "n_v6",
+          "type": "taskNode",
+          "position": {
+            "x": 300,
+            "y": 480
+          },
+          "data": {
+            "label": "⚡ 并行特征提取",
+            "description": "多线程文本+视觉特征并行提取",
+            "agent": "xiaofeng",
+            "estimatedHours": 12,
+            "actualHours": 0,
+            "status": "pending"
+          }
+        },
+        {
+          "id": "n_v7",
+          "type": "taskNode",
+          "position": {
+            "x": 40,
+            "y": 620
+          },
+          "data": {
+            "label": "🧠 多模态分析",
+            "description": "LLM文本分析 + 视觉模型分析",
+            "agent": "kitty",
+            "estimatedHours": 10,
+            "actualHours": 0,
+            "status": "pending"
+          }
+        },
+        {
+          "id": "n_v8",
+          "type": "taskNode",
+          "position": {
+            "x": 300,
+            "y": 620
+          },
+          "data": {
+            "label": "📊 结果整合",
+            "description": "分析结果汇总+结构化输出",
+            "agent": "kitty",
+            "estimatedHours": 6,
+            "actualHours": 0,
+            "status": "pending"
+          }
+        },
+        {
+          "id": "n_v9",
+          "type": "taskNode",
+          "position": {
+            "x": 160,
+            "y": 740
+          },
+          "data": {
+            "label": "🔄 反馈闭环",
+            "description": "质量检查 + 迭代优化 + 评测报告",
+            "agent": "xiaofeng",
+            "estimatedHours": 4,
+            "actualHours": 0,
+            "status": "pending"
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "ev1",
+          "source": "n_v1",
+          "target": "n_v2"
+        },
+        {
+          "id": "ev2",
+          "source": "n_v2",
+          "target": "n_v3"
+        },
+        {
+          "id": "ev3",
+          "source": "n_v2",
+          "target": "n_v4"
+        },
+        {
+          "id": "ev4",
+          "source": "n_v3",
+          "target": "n_v5"
+        },
+        {
+          "id": "ev5",
+          "source": "n_v4",
+          "target": "n_v6"
+        },
+        {
+          "id": "ev6",
+          "source": "n_v5",
+          "target": "n_v7"
+        },
+        {
+          "id": "ev7",
+          "source": "n_v6",
+          "target": "n_v7"
+        },
+        {
+          "id": "ev8",
+          "source": "n_v7",
+          "target": "n_v8"
+        },
+        {
+          "id": "ev9",
+          "source": "n_v8",
+          "target": "n_v9"
+        }
+      ],
+      "createdAt": "2026-06-17T01:08:00.000Z",
+      "updatedAt": "2026-06-17T01:18:34.402Z"
+    }
+  ]
+}

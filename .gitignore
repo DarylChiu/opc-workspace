@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+
+# Node
+node_modules/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets & Config
+*.key
+*.pem
+*.token
+.env
+.env.local
+agent_security_tokens.json
+
+# Media (large files)
+*.mp4
+*.mp3
+*.wav
+*.m4a
+*.mov
+*.avi
+
+# Logs
+*.log
+cf.log
+
+# Test artifacts
+test_audio/
+simple_test/
+
+# Temp
+tmp/
+temp/

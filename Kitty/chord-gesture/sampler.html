@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chord Sampler</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: #0a0a14;
+    color: #fff;
+    font-family: 'SF Pro Display', -apple-system, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  h1 { font-size: 22px; margin: 15px 0 5px; letter-spacing: 1px; }
+  .sub { color: rgba(255,255,255,0.25); font-size: 12px; margin-bottom: 15px; }
+
+  #main-area {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    margin: 10px 0;
+  }
+
+  #chord-svg-container {
+    width: 200px;
+    height: 240px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #chord-name {
+    font-size: 90px;
+    font-weight: 900;
+    color: rgba(150,255,200,0.9);
+    text-shadow: 0 0 40px rgba(150,255,200,0.3);
+    width: 220px;
+    text-align: center;
+  }
+
+  #recorder-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    min-width: 200px;
+  }
+
+  #arm-btn {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid rgba(255,200,100,0.5);
+    background: rgba(255,200,100,0.08);
+    color: rgba(255,255,255,0.7);
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 2px;
+    transition: all 0.3s;
+  }
+  #arm-btn:hover {
+    border-color: rgba(255,200,100,0.8);
+    background: rgba(255,200,100,0.18);
+    box-shadow: 0 0 35px rgba(255,200,100,0.25);
+  }
+  #arm-btn.armed {
+    border-color: rgba(255,150,50,0.7);
+    background: rgba(255,150,50,0.2);
+    animation: pulse-arm 1.5s infinite;
+  }
+  @keyframes pulse-arm {
+    0%,100% { box-shadow: 0 0 15px rgba(255,150,50,0.2); }
+    50% { box-shadow: 0 0 40px rgba(255,150,50,0.5); }
+  }
+
+  #start-btn {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid rgba(100,255,150,0.5);
+    background: rgba(100,255,150,0.1);
+    color: rgba(100,255,150,0.8);
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+  }
+  #start-btn:hover {
+    border-color: rgba(100,255,150,0.8);
+    background: rgba(100,255,150,0.2);
+    box-shadow: 0 0 35px rgba(100,255,150,0.3);
+  }
+  #start-btn.recording {
+    border-color: rgba(255,50,50,0.9);
+    background: rgba(255,50,50,0.35);
+    color: #fff;
+    animation: pulse-rec 1s infinite;
+  }
+  @keyframes pulse-rec {
+    0%,100% { box-shadow: 0 0 20px rgba(255,50,50,0.3); }
+    50% { box-shadow: 0 0 60px rgba(255,50,50,0.6); }
+  }
+
+  #cancel-btn {
+    padding: 8px 20px;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.04);
+    color: rgba(255,255,255,0.4);
+    border-radius: 18px;
+    font-size: 12px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+  }
+  #cancel-btn:hover {
+    border-color: rgba(255,100,100,0.4);
+    color: rgba(255,100,100,0.7);
+    background: rgba(255,100,100,0.08);
+  }
+
+  #record-btn {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 3px solid rgba(255,80,80,0.5);
+    background: rgba(255,80,80,0.1);
+    color: rgba(255,255,255,0.7);
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 2px;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #record-btn:hover {
+    border-color: rgba(255,80,80,0.8);
+    background: rgba(255,80,80,0.2);
+    box-shadow: 0 0 40px rgba(255,80,80,0.3);
+  }
+  #record-btn.recording {
+    border-color: rgba(255,50,50,0.9);
+    background: rgba(255,50,50,0.35);
+    animation: pulse-rec 1s infinite;
+    color: #fff;
+  }
+  #record-btn:disabled {
+    border-color: rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.03);
+    color: rgba(255,255,255,0.2);
+    cursor: default;
+  }
+  @keyframes pulse-rec {
+    0%,100% { box-shadow: 0 0 20px rgba(255,50,50,0.3); }
+    50% { box-shadow: 0 0 60px rgba(255,50,50,0.6); }
+  }
+
+  #status-line {
+    font-size: 13px;
+    color: rgba(255,255,255,0.3);
+    text-align: center;
+    min-height: 20px;
+  }
+
+  #progress {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    max-width: 650px;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  .chord-dot {
+    width: 25px; height: 25px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+    font-size: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.15);
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  .chord-dot.done { background: rgba(100,220,150,0.25); color: rgba(255,255,255,0.6); }
+  .chord-dot.current { background: rgba(150,255,200,0.55); color: #000; transform: scale(1.25); }
+  .chord-dot.skipped { background: rgba(255,255,255,0.06); }
+
+  .btn-row {
+    display: flex;
+    gap: 10px;
+    margin: 10px 0;
+  }
+  .btn {
+    padding: 8px 22px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.04);
+    color: rgba(255,255,255,0.5);
+    border-radius: 20px;
+    font-size: 12px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+  }
+  .btn:hover { border-color: rgba(255,255,255,0.3); color: #fff; background: rgba(255,255,255,0.08); }
+  .btn.primary { background: rgba(150,255,200,0.12); border-color: rgba(150,255,200,0.3); color: rgba(150,255,200,0.8); }
+  .btn.primary:hover { background: rgba(150,255,200,0.2); }
+  .btn:disabled { opacity: 0.25; cursor: default; }
+
+  #countdown-display {
+    font-size: 40px;
+    font-weight: 900;
+    color: rgba(255,150,100,0.7);
+    min-height: 50px;
+  }
+
+  #download-section { display: none; margin-top: 15px; }
+
+  .tip { color: rgba(255,255,255,0.15); font-size: 11px; margin-top: 5px; }
+</style>
+</head>
+<body>
+
+<h1>🎸 Chord Sampling Tool</h1>
+<div class="sub">点击录制 → 弹一下和弦 → 自动停止 → 下一个</div>
+
+<div id="main-area">
+  <div id="chord-name">—</div>
+  <div id="chord-svg-container">
+    <svg id="chord-svg" viewBox="0 0 200 240"></svg>
+  </div>
+  <div id="recorder-panel">
+    <div id="countdown-display"></div>
+    <button id="arm-btn" onclick="armRecording()">🔴 ARM</button>
+    <button id="start-btn" onclick="startRecording()" style="display:none">▶ START</button>
+    <button id="cancel-btn" onclick="cancelRecording()" style="display:none">✕ CANCEL</button>
+    <div id="status-line">Click ARM to prepare</div>
+  </div>
+</div>
+
+<div class="btn-row">
+  <button class="btn" onclick="prevChord()" id="prev-btn" disabled>◀ Prev</button>
+  <button class="btn" onclick="skipChord()">Skip</button>
+  <button class="btn" onclick="nextChord()" id="next-btn">Next ▶</button>
+  <button class="btn" onclick="reRecord()" id="rerecord-btn" disabled>↻ Re-record</button>
+</div>
+
+<div id="progress"></div>
+<div class="tip" id="counter">0 / 42 recorded</div>
+
+<div id="download-section">
+  <button class="btn primary" onclick="downloadAll()">⬇ Download All Samples</button>
+  <div class="tip">Download and place in chord-gesture/samples/, then run convert_samples.sh</div>
+</div>
+
+<script>
+// ============ CHORD DATA ============
+const ROOTS = ['C','D','E','F','G','A','B'];
+const TYPES = ['maj','m','7','m7','sus4'];
+
+function buildName(root, type) {
+  if (type === 'maj') return root;
+  if (type === 'm') return root + 'm';
+  if (type === '7') return root + '7';
+  if (type === 'm7') return root + 'm7';
+  if (type === 'sus4') return root + 'sus4';
+  return root;
+}
+
+const CHORDS = [];
+ROOTS.forEach(r => TYPES.forEach(t => CHORDS.push({ root:r, type:t, name: buildName(r,t) })));
+
+// ============ CHORD DIAGRAM DATA ============
+const DIAGRAMS = {
+  'C':     { frets:[-1,3,2,0,1,0] },
+  'Cm':    { frets:[-1,3,5,5,4,3], barres:[{fret:3,from:5,to:1}] },
+  'C7':    { frets:[-1,3,2,3,1,0] },
+  'Cm7':   { frets:[-1,3,5,3,4,3], barres:[{fret:3,from:5,to:1}] },
+  'Csus4': { frets:[-1,3,3,0,1,1] },
+  // D
+  'D':     { frets:[-1,-1,0,2,3,2] },
+  'Dm':    { frets:[-1,-1,0,2,3,1] },
+  'D7':    { frets:[-1,-1,0,2,1,2] },
+  'Dm7':   { frets:[-1,-1,0,2,1,1] },
+  'Dsus4': { frets:[-1,-1,0,2,3,3] },
+  // E
+  'E':     { frets:[0,2,2,1,0,0] },
+  'Em':    { frets:[0,2,2,0,0,0] },
+  'E7':    { frets:[0,2,0,1,0,0] },
+  'Em7':   { frets:[0,2,0,0,0,0] },
+  'Esus4': { frets:[0,2,2,2,0,0] },
+  // F
+  'F':     { frets:[1,3,3,2,1,1], barres:[{fret:1,from:5,to:0}] },
+  'Fm':    { frets:[1,3,3,1,1,1], barres:[{fret:1,from:5,to:0}] },
+  'F7':    { frets:[1,3,1,2,1,1], barres:[{fret:1,from:5,to:4}] },
+  'Fm7':   { frets:[1,3,1,1,1,1], barres:[{fret:1,from:5,to:0}] },
+  'Fsus4': { frets:[1,3,3,3,1,1], barres:[{fret:1,from:5,to:0}] },
+  // G
+  'G':     { frets:[3,2,0,0,0,3] },
+  'Gm':    { frets:[3,5,5,3,3,3], barres:[{fret:3,from:5,to:3}] },
+  'G7':    { frets:[3,2,0,0,0,1] },
+  'Gm7':   { frets:[3,5,3,3,3,3], barres:[{fret:3,from:5,to:3}] },
+  'Gsus4': { frets:[3,3,0,0,1,3] },
+  // A
+  'A':     { frets:[-1,0,2,2,2,0] },
+  'Am':    { frets:[-1,0,2,2,1,0] },
+  'A7':    { frets:[-1,0,2,0,2,0] },
+  'Am7':   { frets:[-1,0,2,0,1,0] },
+  'Asus4': { frets:[-1,0,2,2,3,0] },
+  // B
+  'B':     { frets:[-1,2,4,4,4,2], barres:[{fret:2,from:5,to:2}] },
+  'Bm':    { frets:[-1,2,4,4,3,2], barres:[{fret:2,from:5,to:2}] },
+  'B7':    { frets:[-1,2,1,2,0,2] },
+  'Bm7':   { frets:[-1,2,4,2,3,2], barres:[{fret:2,from:5,to:2}] },
+  'Bsus4': { frets:[-1,2,2,4,5,2] },
+};
+
+function drawDiagram(chordName) {
+  const data = DIAGRAMS[chordName];
+  const svg = document.getElementById('chord-svg');
+  if (!data) { svg.innerHTML = ''; return; }
+
+  const frets = data.frets;
+  const barres = data.barres || [];
+  const usedFrets = frets.filter(f => f > 0);
+  const minFret = Math.min(...usedFrets, 1);
+  const maxFret = Math.max(...usedFrets, 3);
+  let startFret = minFret;
+  if (maxFret - minFret > 3) startFret = Math.max(1, maxFret - 3);
+  if (minFret === 1 && maxFret <= 4) startFret = 1;
+
+  const pad = { t:30, b:20, l:25, r:15 };
+  const w = 200, h = 240;
+  const fc = 4;
+  const ss = (w - pad.l - pad.r) / 5;
+  const fs = (h - pad.t - pad.b) / fc;
+
+  let html = '';
+
+  // Frets
+  for (let i = 0; i <= fc; i++) {
+    const y = pad.t + i * fs;
+    html += `<line x1="${pad.l}" y1="${y}" x2="${w-pad.r}" y2="${y}" stroke="rgba(255,255,255,0.12)" stroke-width="${i===0?2:1}"/>`;
+  }
+  if (startFret > 1) {
+    html += `<text x="${pad.l-8}" y="${pad.t+fs/2+5}" text-anchor="end" fill="rgba(255,255,255,0.25)" font-size="10">${startFret}fr</text>`;
+  }
+
+  // Strings
+  for (let s = 0; s < 6; s++) {
+    const x = pad.l + s * ss;
+    const sw = s <= 2 ? 2.2 : 1.4;
+    html += `<line x1="${x}" y1="${pad.t}" x2="${x}" y2="${pad.t+fc*fs}" stroke="rgba(255,255,255,0.2)" stroke-width="${sw}"/>`;
+    html += `<text x="${x}" y="${pad.t-12}" text-anchor="middle" fill="rgba(255,255,255,0.12)" font-size="9">${['E','A','D','G','B','e'][s]}</text>`;
+  }
+
+  // Muted/open
+  for (let s = 0; s < 6; s++) {
+    const x = pad.l + s * ss, y = pad.t;
+    if (frets[s] === -1) {
+      html += `<text x="${x}" y="${y-18}" text-anchor="middle" fill="rgba(255,80,80,0.45)" font-size="10" font-weight="bold">X</text>`;
+    } else if (frets[s] === 0) {
+      html += `<circle cx="${x}" cy="${y-18}" r="5" fill="none" stroke="rgba(100,220,150,0.35)" stroke-width="1.5"/>`;
+    }
+  }
+
+  // Barres
+  for (const barre of barres) {
+    const fy = pad.t + (barre.fret - startFret + 0.5) * fs;
+    const x1 = pad.l + Math.max(0, barre.from - 0.25) * ss;
+    const x2 = pad.l + Math.min(5, barre.to + 0.25) * ss;
+    html += `<line x1="${x1}" y1="${fy}" x2="${x2}" y2="${fy}" stroke="rgba(255,255,255,0.4)" stroke-width="7" stroke-linecap="round"/>`;
+  }
+
+  // Finger dots
+  for (let s = 0; s < 6; s++) {
+    const fret = frets[s];
+    if (fret <= 0) continue;
+    const x = pad.l + s * ss;
+    const y = pad.t + (fret - startFret + 0.5) * fs;
+    html += `<circle cx="${x}" cy="${y}" r="7" fill="rgba(150,255,200,0.6)" stroke="rgba(150,255,200,0.3)" stroke-width="1"/>`;
+  }
+
+  svg.innerHTML = html;
+}
+
+// ============ STATE ============
+let currentIdx = 0;
+let recorded = {}; // idx → Blob
+let mediaRecorder = null;
+let stream = null;
+let isRecording = false;
+let isArmed = false;
+
+function resetButtons() {
+  isArmed = false;
+  document.getElementById('arm-btn').style.display = '';
+  document.getElementById('arm-btn').classList.remove('armed');
+  document.getElementById('start-btn').style.display = 'none';
+  document.getElementById('start-btn').classList.remove('recording');
+  document.getElementById('start-btn').textContent = '▶ START';
+  document.getElementById('start-btn').disabled = false;
+  document.getElementById('cancel-btn').style.display = 'none';
+  document.getElementById('cancel-btn').disabled = false;
+  document.getElementById('countdown-display').textContent = '';
+}
+
+async function armRecording() {
+  if (isRecording || isArmed) return;
+
+  // Get mic access on first ARM
+  if (!stream) {
+    try {
+      stream = await navigator.mediaDevices.getUserMedia({
+        audio: { sampleRate: 44100, channelCount: 1, echoCancellation: false }
+      });
+    } catch(e) {
+      document.getElementById('status-line').textContent = 'Microphone access denied';
+      return;
+    }
+  }
+
+  isArmed = true;
+  const armBtn = document.getElementById('arm-btn');
+  armBtn.style.display = 'none';
+  document.getElementById('start-btn').style.display = '';
+  document.getElementById('cancel-btn').style.display = '';
+  document.getElementById('status-line').textContent = `Ready for "${CHORDS[currentIdx].name}" — press START to record`;
+}
+
+async function startRecording() {
+  if (!isArmed || isRecording) return;
+
+  const startBtn = document.getElementById('start-btn');
+  const cancelBtn = document.getElementById('cancel-btn');
+  const cd = document.getElementById('countdown-display');
+
+  startBtn.disabled = true;
+  cancelBtn.disabled = true;
+
+  // 3-2-1 countdown
+  for (let i = 3; i >= 1; i--) {
+    cd.textContent = i;
+    cd.style.color = 'rgba(255,200,100,0.8)';
+    await new Promise(r => setTimeout(r, 1000));
+  }
+
+  // Recording
+  cd.textContent = 'REC';
+  cd.style.color = 'rgba(255,50,50,0.9)';
+  startBtn.classList.add('recording');
+  startBtn.textContent = '⏺';
+  document.getElementById('status-line').textContent = 'Recording... strum now!';
+
+  const chunks = [];
+  mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/webm' });
+  mediaRecorder.ondataavailable = e => { if (e.data.size > 0) chunks.push(e.data); };
+
+  mediaRecorder.onstop = async () => {
+    const blob = new Blob(chunks, { type: 'audio/webm' });
+    recorded[currentIdx] = blob;
+    cd.textContent = '';
+    cd.style.color = 'rgba(255,150,100,0.7)';
+    isRecording = false;
+    isArmed = false;
+    resetButtons();
+
+    // Auto-send to local server
+    await saveToDisk(CHORDS[currentIdx].name, blob);
+
+    updateUI();
+  };
+
+  mediaRecorder.start(100);
+  isRecording = true;
+
+  // Auto-stop after 2.5 seconds
+  setTimeout(() => {
+    if (isRecording && mediaRecorder.state === 'recording') {
+      mediaRecorder.stop();
+    }
+  }, 2500);
+}
+
+function cancelRecording() {
+  if (isRecording) {
+    mediaRecorder.stop();
+    isRecording = false;
+  }
+  isArmed = false;
+  document.getElementById('countdown-display').textContent = '';
+  document.getElementById('countdown-display').style.color = 'rgba(255,150,100,0.7)';
+  resetButtons();
+  updateUI();
+}
+
+// Build progress dots
+const progressDiv = document.getElementById('progress');
+CHORDS.forEach((ch, idx) => {
+  const dot = document.createElement('div');
+  dot.className = 'chord-dot';
+  dot.id = `dot-${idx}`;
+  dot.textContent = ch.name;
+  dot.title = `${idx+1}/${CHORDS.length}: ${ch.name}`;
+  dot.onclick = () => goToChord(idx);
+  progressDiv.appendChild(dot);
+});
+
+// ============ SAVE TO DISK ============
+async function saveToDisk(name, blob) {
+  try {
+    const resp = await fetch('http://localhost:9876/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'audio/webm', 'X-Chord-Name': name },
+      body: blob,
+    });
+    const result = await resp.json();
+    if (result.ok) {
+      document.getElementById('status-line').textContent = `✅ ${name} saved (${result.size_kb} KB)`;
+    } else {
+      document.getElementById('status-line').textContent = `⚠️ Server error for ${name}`;
+    }
+  } catch(e) {
+    document.getElementById('status-line').textContent = `⚠️ Local server not running — start sample_server.py`;
+  }
+}
+
+function updateUI() {
+  const ch = CHORDS[currentIdx];
+  document.getElementById('chord-name').textContent = ch.name;
+  drawDiagram(ch.name);
+  document.getElementById('status-line').textContent = recorded[currentIdx]
+    ? `✅ Recorded — click ARM to re-record`
+    : `Click ARM to prepare`;
+
+  // Progress dots
+  document.querySelectorAll('.chord-dot').forEach(d => d.classList.remove('current'));
+  const dot = document.getElementById(`dot-${currentIdx}`);
+  if (dot) dot.classList.add('current');
+
+  CHORDS.forEach((c, i) => {
+    const d = document.getElementById(`dot-${i}`);
+    if (recorded[i]) d.classList.add('done');
+    else d.classList.remove('done');
+  });
+
+  const count = Object.keys(recorded).length;
+  document.getElementById('counter').textContent = `${count} / ${CHORDS.length} recorded`;
+
+  document.getElementById('prev-btn').disabled = currentIdx === 0;
+  document.getElementById('next-btn').disabled = currentIdx >= CHORDS.length - 1;
+  document.getElementById('rerecord-btn').disabled = !recorded[currentIdx];
+
+  document.getElementById('download-section').style.display = count === CHORDS.length ? 'block' : 'none';
+}
+
+function goToChord(idx) {
+  if (isRecording || isArmed) return;
+  currentIdx = Math.max(0, Math.min(CHORDS.length - 1, idx));
+  updateUI();
+}
+
+function prevChord() { goToChord(currentIdx - 1); }
+function nextChord() { goToChord(currentIdx + 1); }
+function skipChord() { goToChord(currentIdx + 1); }
+
+function reRecord() {
+  if (isRecording || isArmed) return;
+  delete recorded[currentIdx];
+  updateUI();
+}
+
+async function downloadAll() {
+  let count = 0;
+  for (let i = 0; i < CHORDS.length; i++) {
+    const blob = recorded[i];
+    if (!blob) continue;
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${CHORDS[i].name}.webm`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    count++;
+    await new Promise(r => setTimeout(r, 200));
+  }
+  document.getElementById('status-line').textContent = `${count} files downloading...`;
+}
+
+// Init
+updateUI();
+</script>
+</body>
+</html>

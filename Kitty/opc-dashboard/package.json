@@ -1,0 +1,13 @@
+{
+  "name": "opc-dashboard",
+  "version": "2.0.0",
+  "description": "OPC Dashboard - Agent status, tasks, artifacts, workflow visualization",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

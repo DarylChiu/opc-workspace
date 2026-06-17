@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gosh Team Dashboard</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a14;color:rgba(255,255,255,.85);font:13px/1.5 system-ui;padding:24px;min-height:100vh}
+h2{font-size:13px;font-weight:500;color:rgba(255,255,255,.35);letter-spacing:2px;margin:28px 0 14px;text-transform:uppercase}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:18px}
+.agent-name{font-size:16px;font-weight:500;margin-bottom:2px}
+.agent-role{font-size:11px;color:rgba(255,255,255,.3);margin-bottom:10px}
+.status{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:500;letter-spacing:1px}
+.status.ready{background:rgba(100,200,150,.12);color:rgba(100,200,150,.8);border:1px solid rgba(100,200,150,.2)}
+.status.working{background:rgba(80,160,255,.12);color:rgba(100,180,255,.8);border:1px solid rgba(80,160,255,.2)}
+.status.blocked{background:rgba(255,100,80,.12);color:rgba(255,120,100,.8);border:1px solid rgba(255,100,80,.2)}
+.status.done{background:rgba(100,220,180,.12);color:rgba(100,220,180,.8);border:1px solid rgba(100,220,180,.2)}
+.status.idle{background:rgba(255,255,255,.04);color:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.08)}
+.status.pending{background:rgba(255,200,60,.1);color:rgba(255,200,60,.7);border:1px solid rgba(255,200,60,.15)}
+.progress-bar{height:4px;background:rgba(255,255,255,.06);border-radius:2px;margin:10px 0;overflow:hidden}
+.progress-fill{height:100%;border-radius:2px;transition:width .5s}
+.pf-green{background:rgba(100,220,200,.6)}
+.pf-blue{background:rgba(80,160,255,.6)}
+.pf-amber{background:rgba(255,170,80,.6)}
+.pf-pink{background:rgba(220,100,180,.6)}
+.metric{display:flex;justify-content:space-between;margin-top:6px;font-size:11px}
+.metric .label{color:rgba(255,255,255,.25)}
+.metric .value{color:rgba(255,255,255,.55)}
+.table-wrap{margin-top:12px}
+.row{display:grid;grid-template-columns:2fr 1fr 1fr 80px;gap:8px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:12px;align-items:center}
+.row.header{color:rgba(255,255,255,.25);font-size:10px;text-transform:uppercase;letter-spacing:1px}
+.task-name{color:rgba(255,255,255,.7)}
+.task-agent{color:rgba(255,255,255,.35);font-size:11px}
+.alert-item{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:12px}
+.alert-dot{width:8px;height:8px;border-radius:50%;margin-top:4px;flex-shrink:0}
+.alert-dot.high{background:rgba(255,100,80,.7)}
+.alert-dot.medium{background:rgba(255,200,60,.6)}
+.alert-agent{font-size:10px;color:rgba(255,255,255,.25);text-transform:uppercase;letter-spacing:1px}
+.alert-msg{color:rgba(255,255,255,.65);flex:1}
+.last-update{text-align:right;font-size:10px;color:rgba(255,255,255,.15);padding:8px 0}
+.cost-table{display:grid;grid-template-columns:auto 1fr 1fr;gap:8px 16px;font-size:12px;margin-top:12px;align-items:center}
+.cost-label{font-size:10px;color:rgba(255,255,255,.2);text-transform:uppercase}
+.cost-value{color:rgba(255,255,255,.5);text-align:right}
+.cost-note{font-size:10px;color:rgba(255,200,60,.4)}
+</style>
+</head>
+<body>
+
+<h2>Agent Status</h2>
+<div class="grid" id="agent-cards"></div>
+
+<h2>Task Pipeline</h2>
+<div class="table-wrap" id="task-table"></div>
+
+<h2>Alerts &amp; Decisions</h2>
+<div id="alerts-panel"></div>
+
+<h2>Cost Estimate <span style="font-size:10px;color:rgba(255,200,60,.4);font-weight:400">[static — no live API]</span></h2>
+<div class="cost-table">
+  <span class="cost-label">Model</span><span class="cost-label">Credit coef</span><span class="cost-label">Est. / session</span>
+  <span style="color:rgba(255,255,255,.6)">Gosh (M2.5)</span><span class="cost-value">0.18</span><span class="cost-value">~3 credits</span>
+  <span style="color:rgba(255,255,255,.6)">Balance</span><span class="cost-value" id="cost-balance">—</span><span class="cost-value">—</span>
+  <span style="color:rgba(255,255,255,.6)">Self</span><span class="cost-value" id="cost-self">—</span><span class="cost-value">—</span>
+  <span style="color:rgba(255,255,255,.6)">乐语</span><span class="cost-value" id="cost-yueyu">—</span><span class="cost-value">—</span>
+  <span class="cost-note" style="grid-column:1/-1">查看实时消耗: codebuddy.cn/profile/usage</span>
+</div>
+
+<div class="last-update" id="last-update">—</div>
+
+<script>
+const API = '/api/status';
+
+function statusClass(s) {
+  const map = {ready:'ready',working:'working',blocked:'blocked',done:'done',idle:'idle',pending:'pending'};
+  return map[s]||'idle';
+}
+
+async function refresh() {
+  try {
+    const resp = await fetch(API);
+    const data = await resp.json();
+    renderAgents(data.agents);
+    renderTasks(data.tasks);
+    renderAlerts(data.alerts);
+    document.getElementById('last-update').textContent = 'Last update: ' + new Date().toLocaleTimeString();
+  } catch(e) {
+    // API unavailable (static deployment) — show fallback
+    renderAgents([
+      {name:'算点小账',role:'跨境财务分析师 | ACCA/CPA/CFA',color:'blue',status:'ready',configured:true,progress:100,last_updated:'已配置'},
+      {name:'恨点小己',role:'知识管理专家 | 中大+港中文',color:'amber',status:'ready',configured:true,progress:100,last_updated:'已配置'},
+      {name:'乐语',role:'音乐创作人',color:'pink',status:'pending',configured:false,progress:0,last_updated:'待配置'},
+    ]);
+    renderTasks([{task:'需要本地 Flak 后端',agent:'Gosh',milestone:'cloudflare 仅支持静态文件',status:'idle'}]);
+    renderAlerts([]);
+    document.getElementById('last-update').textContent = '[static snapshot — local:8765 for live data]';
+  }
+}
+
+function renderAgents(agents) {
+  const container = document.getElementById('agent-cards');
+  const colors = {blue:'pf-blue',amber:'pf-amber',pink:'pf-pink'};
+  container.innerHTML = agents.map(a => `
+    <div class="card">
+      <div class="agent-name" style="color: var(--c)">${a.name}</div>
+      <div class="agent-role">${a.role}</div>
+      <span class="status ${statusClass(a.status)}">${a.status.toUpperCase()}</span>
+      <div class="progress-bar"><div class="progress-fill ${colors[a.color]||'pf-green'}" style="width:${a.progress||(a.configured?100:0)}%"></div></div>
+      ${a.current_task ? `<div class="metric"><span class="label">Task</span><span class="value">${a.current_task}</span></div>` : ''}
+      ${a.blockers && a.blockers.length ? `<div class="metric"><span class="label">Blockers</span><span class="value" style="color:rgba(255,100,80,.7)">${a.blockers.length}</span></div>` : ''}
+      ${a.decisions_needed && a.decisions_needed.length ? `<div class="metric"><span class="label">Decisions</span><span class="value" style="color:rgba(255,200,60,.7)">${a.decisions_needed.length}</span></div>` : ''}
+      <div class="metric"><span class="label">Updated</span><span class="value">${a.last_updated||(a.configured?'ready':'pending')}</span></div>
+    </div>
+  `).join('');
+}
+
+function renderTasks(tasks) {
+  const container = document.getElementById('task-table');
+  const statusMap = {done:'done',in_progress:'working',blocked:'blocked',idle:'idle'};
+  const textMap = {done:'DONE',in_progress:'IN PROGRESS',blocked:'BLOCKED',idle:'IDLE'};
+  container.innerHTML = `
+    <div class="row header"><span>Task</span><span>Agent</span><span>Milestone</span><span>Status</span></div>
+    ${tasks.map(t => `
+      <div class="row">
+        <span class="task-name">${t.task}</span>
+        <span class="task-agent">${t.agent}</span>
+        <span>${t.milestone}</span>
+        <span class="status ${statusClass(statusMap[t.status]||'idle')}">${textMap[t.status]||t.status}</span>
+      </div>
+    `).join('')}
+  `;
+}
+
+function renderAlerts(alerts) {
+  const panel = document.getElementById('alerts-panel');
+  if (!alerts.length) {
+    panel.innerHTML = '<div style="padding:16px;color:rgba(255,255,255,.2);font-size:12px">No active alerts or pending decisions.</div>';
+    return;
+  }
+  panel.innerHTML = alerts.map(a => `
+    <div class="alert-item">
+      <div class="alert-dot ${a.urgency||'medium'}"></div>
+      <div>
+        <div class="alert-agent">${a.agent} · ${a.type}</div>
+        <div class="alert-msg">${a.message}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+refresh();
+setInterval(refresh, 10000);
+</script>
+</body>
+</html>
