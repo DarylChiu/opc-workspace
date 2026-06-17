@@ -1,0 +1,31 @@
+name: Block File Deletions
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  block-deletions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check for deleted files
+        id: check
+        run: |
+          DELETED=$(git diff --diff-filter=D --name-only ${{ github.event.before }} ${{ github.event.after }})
+          if [ -n "$DELETED" ]; then
+            echo "❌ 检测到文件删除操作："
+            echo "$DELETED"
+            echo ""
+            echo "只有 Bryson（吹点小风）有权删除仓库文件。"
+            echo "如果你需要删除某个文件，请联系 Daryl。"
+            echo "DETAILS<<EOF" >> $GITHUB_OUTPUT
+            echo "$DELETED" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+            exit 1
+          fi
+          echo "✅ 无文件删除，通过"

@@ -1,0 +1,10 @@
+#!/bin/bash
+# Kitty 专用 git 包装 — 确保提交标记为 Kitty 身份
+# 用法: kitty-git commit -m "message"  或  kitty-git push
+
+export GIT_AUTHOR_NAME="Kitty (OPC Main Agent)"
+export GIT_AUTHOR_EMAIL="darylchiu1996@hotmail.com"
+export GIT_COMMITTER_NAME="Kitty (OPC Main Agent)"
+export GIT_COMMITTER_EMAIL="darylchiu1996@hotmail.com"
+
+cd /Users/zhaoyuzhao/opc-workspace && git "$@"
