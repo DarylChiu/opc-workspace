@@ -117,6 +117,37 @@ if [ -f "MEMORY.md" ]; then
     fi
 fi
 
+# --- 6. Git 备份到 opc-workspace ---
+echo ""
+echo "6/6 Git 备份"
+REPO_DIR="$HOME/.opc-workspace-cache"
+if [ -d "$REPO_DIR/.git" ]; then
+    cd "$REPO_DIR" || exit 1
+    git pull --rebase origin main 2>/dev/null && log_ok "repo pull 成功" || log_issue "repo pull 失败"
+else
+    git clone git@github.com:DarylChiu/opc-workspace.git "$REPO_DIR" 2>/dev/null && log_fix "首次 clone repo" || log_issue "repo clone 失败"
+fi
+
+if [ -d "$REPO_DIR/.git" ]; then
+    # 同步 memory/ 到 Balance 目录
+    rsync -a --delete "$WORKSPACE/memory/" "$REPO_DIR/Balance/memory/" 2>/dev/null
+    # 同步合规脚本
+    rsync -a "$WORKSPACE/scripts/" "$REPO_DIR/Balance/scripts/" 2>/dev/null
+    # 同步核心文档（如已更新）
+    for f in AGENTS.md SOUL.md IDENTITY.md MEMORY.md USER.md TOOLS.md HEARTBEAT.md; do
+        [ -f "$WORKSPACE/$f" ] && cp "$WORKSPACE/$f" "$REPO_DIR/Balance/" 2>/dev/null
+    done
+
+    cd "$REPO_DIR" || exit 1
+    if ! git diff --quiet 2>/dev/null || ! git diff --cached --quiet 2>/dev/null; then
+        git add Balance/ 2>/dev/null
+        git commit -m "Balance: 每日记忆审计备份 $TODAY" 2>/dev/null
+        git push origin main 2>/dev/null && log_fix "Git push 成功" || log_issue "Git push 失败"
+    else
+        log_ok "无变更，跳过 push"
+    fi
+fi
+
 # --- 总结 ---
 echo ""
 echo "================================"
