@@ -45,3 +45,4 @@ simple_test/
 # Temp
 tmp/
 temp/
+.pid
