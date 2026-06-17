@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Gosh Dispatch</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: #0a0a14; color: #ddd; font-family: -apple-system, sans-serif;
+    max-width: 480px; margin: 0 auto; padding: 16px; min-height: 100vh;
+  }
+  h1 { font-size:22px; color:#fff; margin-bottom:4px; letter-spacing:1px; }
+  .sub { font-size:12px; color:#666; margin-bottom:20px; }
+
+  .agents { display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
+  .agent-btn {
+    flex:1; min-width:70px; padding:10px 8px; border:1px solid rgba(255,255,255,0.08);
+    border-radius:12px; background:rgba(255,255,255,0.02); color:#aaa;
+    font-size:13px; cursor:pointer; text-align:center; transition:all 0.2s;
+  }
+  .agent-btn:hover { border-color:rgba(255,255,255,0.2); color:#fff; }
+  .agent-btn.sel { border-color:var(--accent); background:var(--accent-bg); color:#fff; }
+  .agent-btn .badge { display:block; font-size:10px; color:var(--accent); margin-top:2px; }
+
+  textarea {
+    width:100%; height:80px; background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.1); border-radius:12px;
+    color:#fff; padding:12px; font-size:14px; resize:vertical;
+    margin-bottom:12px; outline:none;
+  }
+  textarea:focus { border-color:rgba(100,200,255,0.3); }
+
+  button.send {
+    width:100%; padding:14px; border:none; border-radius:12px;
+    background:rgba(100,200,255,0.15); color:rgba(100,200,255,0.9);
+    font-size:16px; font-weight:700; cursor:pointer; letter-spacing:1px;
+    transition:all 0.2s; margin-bottom:24px;
+  }
+  button.send:hover { background:rgba(100,200,255,0.25); }
+  button.send:active { transform:scale(0.98); }
+  button.send:disabled { opacity:0.3; cursor:default; }
+
+  .queue-title { font-size:14px; color:#888; margin-bottom:8px; letter-spacing:1px; }
+  .task-card {
+    background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);
+    border-radius:10px; padding:12px; margin-bottom:8px; position:relative;
+  }
+  .task-card .meta { font-size:11px; color:#555; margin-bottom:4px; }
+  .task-card .meta .agent-tag { color:var(--accent); font-weight:600; }
+  .task-card .content { font-size:13px; color:#ccc; line-height:1.5; white-space:pre-wrap; }
+  .task-card .time { font-size:10px; color:#444; margin-top:6px; }
+
+  .toast {
+    position:fixed; bottom:20px; left:50%; transform:translateX(-50%);
+    background:rgba(100,200,100,0.15); color:rgba(100,200,100,0.9);
+    padding:10px 24px; border-radius:20px; font-size:13px; opacity:0;
+    transition:opacity 0.3s; pointer-events:none; z-index:100;
+  }
+  .toast.show { opacity:1; }
+  .toast.err { background:rgba(255,100,100,0.15); color:rgba(255,100,100,0.9); }
+
+  .empty { text-align:center; color:#444; padding:40px 0; font-size:13px; }
+
+  .loading { text-align:center; color:#555; padding:20px 0; }
+</style>
+</head>
+<body>
+
+<h1>Gosh Dispatch</h1>
+<div class="sub">远程指令调度台 — 选择 Agent, 下指令, 到家即可执行</div>
+
+<!-- Agent selector -->
+<div class="agents" id="agents"></div>
+
+<!-- Input -->
+<textarea id="input" placeholder="输入指令...&#10;例如: 分析 Q2 纺织原材料成本差异，重点关注染色材料部分"></textarea>
+<button class="send" onclick="dispatch()">下发指令</button>
+<div class="toast" id="toast"></div>
+
+<!-- Queue -->
+<div class="queue-title">待处理任务</div>
+<div id="queue"></div>
+
+<script>
+const API = '/api';
+let selectedAgent = null;
+
+function $(id) { return document.getElementById(id); }
+
+async function load() {
+  const resp = await fetch(API + '/agents');
+  const data = await resp.json();
+
+  const agentsDiv = $('agents');
+  agentsDiv.innerHTML = data.agents.map(a =>
+    `<button class="agent-btn" data-agent="${a.key}" style="--accent:${a.color};--accent-bg:${a.color}15"
+       onclick="selectAgent('${a.key}')">
+      ${a.name}
+      ${a.pending ? `<span class="badge">${a.pending} 待处理</span>` : ''}
+    </button>`
+  ).join('');
+
+  // Restore selection
+  if (selectedAgent) {
+    const btn = document.querySelector(`[data-agent="${selectedAgent}"]`);
+    if (btn) btn.classList.add('sel');
+  }
+
+  // Load queue
+  const qResp = await fetch(API + '/queue');
+  const qData = await qResp.json();
+  renderQueue(qData.tasks);
+}
+
+function selectAgent(key) {
+  document.querySelectorAll('.agent-btn').forEach(b => b.classList.remove('sel'));
+  const btn = document.querySelector(`[data-agent="${key}"]`);
+  if (btn) btn.classList.add('sel');
+  selectedAgent = key;
+}
+
+async function dispatch() {
+  if (!selectedAgent) {
+    showToast('请先选择一个 Agent', true);
+    return;
+  }
+  const content = $('input').value.trim();
+  if (!content) {
+    showToast('指令内容不能为空', true);
+    return;
+  }
+
+  const btn = document.querySelector('button.send');
+  btn.disabled = true;
+  btn.textContent = '下发中...';
+
+  const resp = await fetch(API + '/dispatch', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({agent: selectedAgent, content}),
+  });
+  const data = await resp.json();
+
+  btn.disabled = false;
+  btn.textContent = '下发指令';
+
+  if (data.ok) {
+    $('input').value = '';
+    showToast('✓ 指令已下发');
+    load(); // refresh
+  } else {
+    showToast('✕ ' + (data.error || '失败'), true);
+  }
+}
+
+function renderQueue(tasks) {
+  const div = $('queue');
+  if (!tasks.length) {
+    div.innerHTML = '<div class="empty">暂无待处理任务</div>';
+    return;
+  }
+
+  div.innerHTML = tasks.map(t => {
+    const color = {'balance':'#50a0ff','self':'#ffaa50','yueyu':'#dc64b4','gosh':'#888'}[t.agent_key] || '#888';
+    const time = new Date(t.dispatched_at);
+    const timeStr = time.toLocaleString('zh-CN', {month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
+    return `<div class="task-card" style="--accent:${color}">
+      <div class="meta"><span class="agent-tag">${t.agent_name}</span></div>
+      <div class="content">${t.content}</div>
+      <div class="time">${timeStr}</div>
+    </div>`;
+  }).join('');
+}
+
+function showToast(msg, isErr) {
+  const t = $('toast');
+  t.textContent = msg;
+  t.className = 'toast show' + (isErr ? ' err' : '');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+load();
+// Auto-refresh every 30s
+setInterval(load, 30000);
+</script>
+</body>
+</html>

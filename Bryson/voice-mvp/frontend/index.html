@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎤 Bryson 实时语音练习室</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-microphone-alt fa-2x"></i>
+                <h1>Bryson 实时语音练习室</h1>
+            </div>
+            <div class="status-indicator" id="statusIndicator">
+                <span class="status-dot"></span>
+                <span class="status-text">连接中...</span>
+            </div>
+        </header>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <!-- 左侧：语音控制区 -->
+            <section class="voice-control-section">
+                <div class="card">
+                    <h2><i class="fas fa-headset"></i> 语音控制</h2>
+                    
+                    <!-- 设备选择 -->
+                    <div class="device-selector">
+                        <label for="audioInput"><i class="fas fa-microphone"></i> 麦克风</label>
+                        <select id="audioInput" class="device-select">
+                            <option value="">正在检测设备...</option>
+                        </select>
+                        
+                        <label for="audioOutput"><i class="fas fa-volume-up"></i> 扬声器</label>
+                        <select id="audioOutput" class="device-select">
+                            <option value="">正在检测设备...</option>
+                        </select>
+                    </div>
+
+                    <!-- 语音控制按钮 -->
+                    <div class="voice-buttons">
+                        <button id="startVoiceBtn" class="btn btn-primary btn-large">
+                            <i class="fas fa-play-circle"></i> 开始语音对话
+                        </button>
+                        <button id="stopVoiceBtn" class="btn btn-secondary btn-large" disabled>
+                            <i class="fas fa-stop-circle"></i> 停止语音
+                        </button>
+                        <button id="testAudioBtn" class="btn btn-outline">
+                            <i class="fas fa-volume-up"></i> 测试音频
+                        </button>
+                    </div>
+
+                    <!-- 音量指示器 -->
+                    <div class="volume-meter">
+                        <div class="volume-label">
+                            <i class="fas fa-wave-square"></i> 麦克风音量
+                        </div>
+                        <div class="meter-container">
+                            <div class="meter-bar" id="volumeBar"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 会话信息 -->
+                <div class="card">
+                    <h2><i class="fas fa-info-circle"></i> 会话信息</h2>
+                    <div class="session-info">
+                        <div class="info-item">
+                            <span class="info-label">会话ID:</span>
+                            <code id="sessionId">正在获取...</code>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">连接状态:</span>
+                            <span id="connectionStatus">初始化中</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">持续时间:</span>
+                            <span id="sessionDuration">00:00</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">音频状态:</span>
+                            <span id="audioStatus">未激活</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 右侧：聊天和状态区 -->
+            <section class="chat-section">
+                <!-- 聊天显示 -->
+                <div class="card chat-card">
+                    <h2><i class="fas fa-comments"></i> 对话记录</h2>
+                    <div class="chat-display" id="chatDisplay">
+                        <div class="system-message">
+                            <i class="fas fa-robot"></i>
+                            <div class="message-content">
+                                <strong>Bryson:</strong> 欢迎来到实时语音练习室！点击"开始语音对话"按钮，我们可以进行英语口语练习。
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 消息输入 -->
+                    <div class="message-input">
+                        <input 
+                            type="text" 
+                            id="messageInput" 
+                            placeholder="输入文本消息（或直接语音对话）..."
+                            disabled
+                        >
+                        <button id="sendMessageBtn" class="btn btn-outline" disabled>
+                            <i class="fas fa-paper-plane"></i> 发送
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 系统状态 -->
+                <div class="card status-card">
+                    <h2><i class="fas fa-chart-line"></i> 系统状态</h2>
+                    <div class="status-grid">
+                        <div class="status-item">
+                            <div class="status-icon success">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <div class="status-details">
+                                <div class="status-title">后端服务器</div>
+                                <div class="status-value" id="serverStatus">检查中...</div>
+                            </div>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-icon warning">
+                                <i class="fas fa-microphone"></i>
+                            </div>
+                            <div class="status-details">
+                                <div class="status-title">WebRTC连接</div>
+                                <div class="status-value" id="webrtcStatus">未建立</div>
+                            </div>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-icon info">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <div class="status-details">
+                                <div class="status-title">延迟</div>
+                                <div class="status-value" id="latencyValue">-- ms</div>
+                            </div>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="status-details">
+                                <div class="status-title">运行时间</div>
+                                <div class="status-value" id="uptimeValue">00:00</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- 底部信息 -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <strong>提示:</strong> 这是Bryson语音MVP测试版。确保允许浏览器访问麦克风和扬声器。
+                </p>
+                <p class="version-info">
+                    <i class="fas fa-code-branch"></i>
+                    Version: 0.1.0-beta | Session: <span id="footerSessionId">--</span>
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- 模态框：连接状态 -->
+    <div id="connectionModal" class="modal">
+        <div class="modal-content">
+            <h3><i class="fas fa-plug"></i> 连接状态</h3>
+            <div class="modal-body">
+                <p id="modalMessage">正在建立连接...</p>
+                <div class="progress-container">
+                    <div class="progress-bar" id="connectionProgress"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="retryBtn" class="btn btn-secondary">重试</button>
+                <button id="closeModalBtn" class="btn btn-primary" disabled>确定</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="app.js"></script>
+</body>
+</html>

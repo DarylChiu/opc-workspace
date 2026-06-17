@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OPC Workflow Editor</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0e0e1a;color:#e8e8ee;font:13px/1.5 -apple-system,sans-serif;height:100vh;overflow:hidden}
+#root{height:100vh;display:flex;flex-direction:column}
+
+/* Shared */
+button{cursor:pointer;font:inherit}
+input,select,textarea{font:inherit;outline:none}
+.btn{padding:6px 14px;border-radius:8px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:rgba(255,255,255,.6);font-size:11px;transition:all .15s}
+.btn:hover{background:rgba(255,255,255,.08);color:#fff}
+.btn-primary{background:rgba(120,200,255,.12);border-color:rgba(120,200,255,.25);color:rgba(120,200,255,.9)}
+.btn-primary:hover{background:rgba(120,200,255,.2)}
+.btn-danger{background:rgba(255,80,80,.08);border-color:rgba(255,80,80,.15);color:rgba(255,80,80,.7)}
+.btn-danger:hover{background:rgba(255,80,80,.15);color:rgba(255,90,90,.9)}
+
+/* Top Bar */
+.topbar{display:flex;align-items:center;gap:12px;padding:10px 20px;background:rgba(255,255,255,.02);border-bottom:1px solid rgba(255,255,255,.05);flex-shrink:0}
+.topbar .logo{font:bold 14px "Times New Roman",serif;color:#fff;letter-spacing:1px}
+.topbar .divider{width:1px;height:20px;background:rgba(255,255,255,.06)}
+.topbar .breadcrumb{font-size:11px;color:rgba(255,255,255,.3);display:flex;align-items:center;gap:6px}
+.topbar .breadcrumb span{color:rgba(255,255,255,.6)}
+.topbar .spacer{flex:1}
+
+/* Main area */
+.main-area{flex:1;display:flex;overflow:hidden}
+
+/* Project List View */
+.project-list{padding:24px;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;align-content:start;overflow-y:auto;width:100%}
+.project-card{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:20px;cursor:pointer;transition:all .2s}
+.project-card:hover{background:rgba(255,255,255,.04);border-color:rgba(120,200,255,.2);transform:translateY(-1px)}
+.project-card .pj-name{font:bold 16px "Times New Roman",serif;color:#fff;margin-bottom:6px}
+.project-card .pj-lead{font-size:10px;color:rgba(255,255,255,.3);margin-bottom:12px}
+.project-card .pj-meta{display:flex;gap:16px;font-size:10px;color:rgba(255,255,255,.25)}
+.project-card .pj-meta span{display:flex;align-items:center;gap:4px}
+.project-card .pj-desc{font-size:11px;color:rgba(255,255,255,.35);margin-top:10px;line-height:1.5}
+
+/* Editor Layout */
+.editor-layout{flex:1;display:flex;flex-direction:column;overflow:hidden}
+
+/* Toolbar */
+.toolbar{display:flex;align-items:center;gap:8px;padding:8px 16px;background:rgba(255,255,255,.015);border-bottom:1px solid rgba(255,255,255,.03);flex-shrink:0}
+.toolbar .save-indicator{font-size:10px;padding:2px 8px;border-radius:6px;margin-left:8px}
+.saved{color:rgba(100,220,160,.5)}
+.unsaved{color:rgba(255,210,60,.6);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* Canvas + Sidebar */
+.editor-body{flex:1;display:flex;overflow:hidden;position:relative}
+.flow-container{flex:1;position:relative}
+
+/* React Flow overrides */
+.react-flow__node{cursor:pointer!important}
+.react-flow__node-taskNode{background:rgba(20,20,40,.95)!important;border:1px solid rgba(255,255,255,.12)!important;border-radius:10px!important;padding:0!important;min-width:180px!important;backdrop-filter:blur(8px);font-size:12px!important}
+.react-flow__node-taskNode .node-inner{padding:12px 14px}
+.react-flow__node-taskNode .node-agent{font-size:9px;color:rgba(255,255,255,.25);margin-bottom:4px}
+.react-flow__node-taskNode .node-label{font-size:13px;color:#fff;font-weight:600;max-width:160px}
+.react-flow__node-taskNode .node-expand{font-size:9px;color:rgba(255,255,255,.2);margin-top:2px;cursor:pointer}
+.react-flow__node-taskNode .node-expand:hover{color:rgba(120,200,255,.6)}
+.react-flow__node-taskNode .node-details{display:none;margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.04)}
+.react-flow__node-taskNode .node-details.show{display:block}
+.react-flow__node-taskNode .node-detail-row{display:flex;gap:8px;font-size:10px;margin-bottom:3px}
+.react-flow__node-taskNode .node-detail-row .nd-label{color:rgba(255,255,255,.15);flex-shrink:0;width:40px}
+.react-flow__node-taskNode .node-detail-row .nd-val{color:rgba(255,255,255,.4)}
+.react-flow__edge-path{stroke:rgba(255,255,255,.15)!important;stroke-width:1.5!important}
+.react-flow__handle{width:8px!important;height:8px!important;background:rgba(255,255,255,.3)!important;border:1px solid rgba(255,255,255,.1)!important}
+.react-flow__edge.selected .react-flow__edge-path{stroke:rgba(120,200,255,.6)!important;stroke-width:2.5!important}
+.react-flow__controls button{background:rgba(0,0,0,.6)!important;border-color:rgba(255,255,255,.1)!important;fill:rgba(255,255,255,.5)!important}
+.react-flow__minimap{background:rgba(0,0,0,.4)!important}
+.react-flow__attribution{display:none!important}
+
+/* Edge label */
+.edge-label{position:absolute;font-size:9px;padding:1px 6px;border-radius:4px;background:rgba(0,0,0,.7);color:rgba(255,255,255,.5);pointer-events:none;backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.04)}
+
+/* Node Config Sidebar */
+.node-config{width:280px;flex-shrink:0;background:rgba(0,0,0,.5);border-left:1px solid rgba(255,255,255,.05);padding:16px;overflow-y:auto;backdrop-filter:blur(8px)}
+.node-config h3{font-size:10px;color:rgba(255,255,255,.15);letter-spacing:1px;margin-bottom:14px;text-transform:uppercase}
+.node-config label{display:block;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:.5px;margin-bottom:3px}
+.node-config input,.node-config select,.node-config textarea{width:100%;padding:7px 10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:8px;color:#fff;font-size:11px;margin-bottom:12px;resize:vertical}
+.node-config input:focus,.node-config select:focus,.node-config textarea:focus{border-color:rgba(120,200,255,.3)}
+.node-config textarea{min-height:60px}
+.node-config .readonly{opacity:.5;pointer-events:none}
+.node-config .section-title{font-size:9px;color:rgba(255,255,255,.15);letter-spacing:1px;margin:16px 0 8px;padding-top:12px;border-top:1px solid rgba(255,255,255,.04)}
+
+/* Modals */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;z-index:100}
+.modal{background:#1a1a2e;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:24px;width:400px;max-height:80vh;overflow-y:auto;backdrop-filter:blur(16px)}
+.modal h2{font:bold 16px "Times New Roman",serif;color:#fff;margin-bottom:16px}
+.modal label{display:block;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:.5px;margin-bottom:3px}
+.modal input,.modal select,.modal textarea{width:100%;padding:8px 10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:8px;color:#fff;font-size:11px;margin-bottom:10px}
+.modal input:focus,.modal select:focus,.modal textarea:focus{border-color:rgba(120,200,255,.3)}
+.modal textarea{min-height:50px;resize:vertical}
+.modal .required::after{content:' *';color:rgba(255,80,80,.6)}
+.modal .modal-btns{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}
+.modal .hint{font-size:10px;color:rgba(255,255,255,.15);margin-bottom:12px}
+
+/* Connection selector in modal */
+.conn-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;padding:6px 8px;background:rgba(255,255,255,.02);border-radius:8px}
+.conn-row select{flex:1;margin-bottom:0}
+.conn-row .conn-remove{color:rgba(255,80,80,.4);cursor:pointer;padding:4px}
+.conn-row .conn-remove:hover{color:rgba(255,80,80,.8)}
+.add-conn-btn{font-size:10px;color:rgba(255,255,255,.2);padding:6px;cursor:pointer;border-radius:6px;border:1px dashed rgba(255,255,255,.06);text-align:center;margin-top:4px}
+.add-conn-btn:hover{color:rgba(120,200,255,.6);border-color:rgba(120,200,255,.2)}
+
+/* Toast */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);padding:8px 20px;border-radius:10px;font-size:12px;z-index:200;pointer-events:none;opacity:0;transition:opacity .3s;background:rgba(0,0,0,.8);border:1px solid rgba(255,255,255,.1)}
+.toast.show{opacity:1}
+.toast.ok{color:rgba(100,220,160,.9)}
+.toast.err{color:rgba(255,100,100,.9)}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@18.2.0",
+    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+    "@xyflow/react": "https://esm.sh/@xyflow/react@12.3.0"
+  }
+}
+</script>
+<script type="module">
+import React,{useState,useEffect,useCallback,useRef}from'react';
+import{createRoot}from'react-dom/client';
+import{ReactFlow,Controls,Background,useNodesState,useEdgesState,addEdge,MarkerType,Panel,useReactFlow}from'@xyflow/react';
+
+const API_BASE='';
+const TRIGGER_MODES=[{v:'completion',l:'完成上一步'},{v:'parallel',l:'可与上一步并行'},{v:'fallback',l:'作为备用方案'}];
+const LOGIC_TYPES=[{v:'THEN',l:'THEN (顺序)'},{v:'AND',l:'AND (并行汇合)'},{v:'OR',l:'OR (任一完成)'},{v:'XOR',l:'XOR (仅一分支)'}];
+const AGENT_NAMES={kitty:'Kitty',xiaofeng:'Bryson',balance:'Balance',self:'Self'};
+const AGENT_COLORS={kitty:'#9999dd',xiaofeng:'#66ccaa',balance:'#50a0ff',self:'#ffaa50'};
+
+function toast(msg,type='ok'){const t=document.getElementById('toast');t.textContent=msg;t.className=`toast ${type} show`;clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2500);}
+
+// --- Main App ---
+function App(){
+  const [view,setView]=useState('projects');
+  const [workflows,setWorkflows]=useState([]);
+  const [currentProject,setCurrentProject]=useState(null);
+  const [currentWf,setCurrentWf]=useState(null);
+  const [savedState,setSavedState]=useState(true);
+
+  useEffect(()=>{loadWorkflows();},[]);
+
+  function loadWorkflows(){
+    fetch(API_BASE+'/api/workflows').then(r=>r.json()).then(d=>{
+      // Normalize data model
+      const wfs=(d.workflows||[]).map(w=>{
+        const nodes=(w.nodes||[]).map(n=>({...n,data:{...n.data,description:n.data?.description||'',triggerMode:n.data?.triggerMode||'completion'}}));
+        const edges=(w.edges||[]).map(e=>({...e,data:e.data||{logic:'THEN'}}));
+        return{...w,nodes,edges};
+      });
+      setWorkflows(wfs);
+      setCurrentWf(wfs.find(w=>w.id===d.currentWfId)||null);
+    }).catch(e=>console.warn('API error',e));
+  }
+
+  async function saveWorkflows(){
+    try{
+      await fetch(API_BASE+'/api/workflows',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({workflows})});
+      setSavedState(true);
+      toast('✓ 已保存','ok');
+    }catch(e){toast('✕ 保存失败','err');}
+  }
+
+  function openProject(wf){
+    setCurrentWf(wf);
+    setView('editor');
+  }
+
+  function handleWfUpdate(updatedWf){
+    setWorkflows(prev=>prev.map(w=>w.id===updatedWf.id?updatedWf:w));
+    setCurrentWf(updatedWf);
+    setSavedState(false);
+  }
+
+  return(<>
+    <Topbar view={view} projectName={currentWf?.name||''} saved={savedState}
+      onBack={()=>{setView('projects');setCurrentWf(null);}}
+      onSave={saveWorkflows}/>
+    <div className="main-area">
+      {view==='projects'&&<ProjectListView workflows={workflows} onSelect={openProject}/>}
+      {view==='editor'&&currentWf&&<WorkflowEditorView wf={currentWf} onUpdate={handleWfUpdate}/>}
+    </div>
+  </>);
+}
+
+// --- Top Bar ---
+function Topbar({view,projectName,saved,onBack,onSave}){
+  return(<div className="topbar">
+    <div className="logo">OPC Workflow</div>
+    <div className="divider"/>
+    <div className="breadcrumb">
+      {view==='editor'&&<button className="btn" onClick={onBack} style={{fontSize:10}}>← 项目列表</button>}
+      {view==='editor'&&<span>{projectName}</span>}
+      {view==='projects'&&<span style={{color:'rgba(255,255,255,.3)'}}>选择项目</span>}
+    </div>
+    <div className="spacer"/>
+    {view==='editor'&&<>
+      <span className={`save-indicator ${saved?'saved':'unsaved'}`}>{saved?'✓ 已保存':'⚠ 未保存'}</span>
+      <button className="btn btn-primary" onClick={onSave}>💾 保存修改</button>
+    </>}
+  </div>);
+}
+
+// --- Project List ---
+function ProjectListView({workflows,onSelect}){
+  if(!workflows.length) return(<div className="project-list"><div style={{gridColumn:'1/-1',textAlign:'center',color:'rgba(255,255,255,.1)',padding:60}}>暂无项目 Workflow</div></div>);
+  return(<div className="project-list">
+    {workflows.map(w=>(<div key={w.id} className="project-card" onClick={()=>onSelect(w)}>
+      <div className="pj-name">{w.name}</div>
+      <div className="pj-lead">{w.lead||'Unassigned'} · {w.status==='in_progress'?'🔄 进行中':w.status==='done'?'✅ 已完成':'📋 规划中'}</div>
+      <div className="pj-meta">
+        <span>📦 {w.nodes?.length||0} 节点</span>
+        <span>🔗 {w.edges?.length||0} 连线</span>
+        <span>⏱ {w.totalEstimatedHours||'—'}h</span>
+      </div>
+      {w.description&&<div className="pj-desc">{w.description.substring(0,120)}{w.description.length>120?'...':''}</div>}
+    </div>))}
+  </div>);
+}
+
+// --- Workflow Editor ---
+function WorkflowEditorView({wf,onUpdate}){
+  const [nodes,setNodes,onNodesChange]=useNodesState(wf.nodes||[]);
+  const [edges,setEdges,onEdgesChange]=useEdgesState(wf.edges||[]);
+  const [selectedNode,setSelectedNode]=useState(null);
+  const [showAddModal,setShowAddModal]=useState(false);
+  const [expandedNodes,setExpandedNodes]=useState({});
+  const rf=useRef(null);
+  const rfInstance=useReactFlow();
+
+  // Sync nodes/edges changes up
+  useEffect(()=>{
+    if(!rf.current) return;
+    const tid=setTimeout(()=>{
+      const updated={...wf,nodes,edges,updatedAt:new Date().toISOString()};
+      onUpdate(updated);
+    },100);
+    return ()=>clearTimeout(tid);
+  },[nodes,edges]);
+
+  function onConnect(params){
+    const edge={...params,id:`e_${Date.now()}`,data:{logic:'THEN'},markerEnd:{type:MarkerType.ArrowClosed,color:'rgba(255,255,255,.15)'}};
+    setEdges(eds=>addEdge(edge,eds));
+  }
+
+  function toggleExpand(nodeId){
+    setExpandedNodes(prev=>({...prev,[nodeId]:!prev[nodeId]}));
+  }
+
+  function onNodeClick(e,node){
+    setSelectedNode(node);
+    // Auto-expand
+    setExpandedNodes(prev=>({...prev,[node.id]:true}));
+  }
+
+  function updateNodeField(field,value){
+    setNodes(nds=>nds.map(n=>n.id===selectedNode.id?{...n,data:{...n.data,[field]:value}}:n));
+    setSelectedNode(prev=>prev?{...prev,data:{...prev.data,[field]:value}}:null);
+  }
+
+  function addNode(data){
+    const id=`n_${Date.now()}`;
+    const pos={x:100+nodes.length*30,y:80+nodes.length*60};
+    const newNode={id,type:'taskNode',position:pos,data:{...data,actualHours:0,status:'pending'}};
+    setNodes(prev=>[...prev,newNode]);
+    setShowAddModal(false);
+  }
+
+  function deleteSelectedNode(){
+    if(!selectedNode) return;
+    setNodes(prev=>prev.filter(n=>n.id!==selectedNode.id));
+    setEdges(prev=>prev.filter(e=>e.source!==selectedNode.id&&e.target!==selectedNode.id));
+    setSelectedNode(null);
+  }
+
+  // Custom node component
+  const nodeTypes=React.useMemo(()=>({
+    taskNode:({data,id})=>{
+      const expanded=expandedNodes[id];
+      const color=AGENT_COLORS[data.agent]||'#888';
+      const triggerLabel=TRIGGER_MODES.find(t=>t.v===data.triggerMode)?.l||'';
+      return(<div className="node-inner" style={{borderLeft:`3px solid ${color}`}} onClick={(e)=>{e.stopPropagation();toggleExpand(id);}}>
+        <div className="node-agent">{AGENT_NAMES[data.agent]||'Unassigned'}</div>
+        <div className="node-label">{data.label||'Untitled'}</div>
+        <div className="node-expand">{expanded?'▲ 收起':'▼ 展开'}</div>
+        {expanded&&<div className="node-details show">
+          {data.description&&<div className="node-detail-row"><span className="nd-label">描述</span><span className="nd-val">{data.description.substring(0,60)}{data.description.length>60?'...':''}</span></div>}
+          <div className="node-detail-row"><span className="nd-label">触发</span><span className="nd-val">{triggerLabel}</span></div>
+          <div className="node-detail-row"><span className="nd-label">预估</span><span className="nd-val">{data.estimatedHours||'—'}h</span></div>
+          <div className="node-detail-row"><span className="nd-label">实际</span><span className="nd-val">{data.actualHours||'—'}h</span></div>
+        </div>}
+      </div>);
+    }
+  }),[expandedNodes]);
+
+  // Custom edge with logic label
+  const edgeTypes=React.useMemo(()=>({
+    default:({id,source,target,data,sourceX,sourceY,targetX,targetY})=>{
+      const mx=(sourceX+targetX)/2,my=(sourceY+targetY)/2;
+      return(<>
+        <path id={id} className="react-flow__edge-path" d={`M${sourceX},${sourceY}L${targetX},${targetY}`} style={{stroke:'rgba(255,255,255,.15)',strokeWidth:1.5,fill:'none'}}/>
+        <foreignObject x={mx-20} y={my-10} width={40} height={20} style={{overflow:'visible'}}>
+          <div style={{fontSize:8,color:'rgba(255,255,255,.35)',textAlign:'center',lineHeight:'20px',pointerEvents:'none'}}>{data?.logic||'THEN'}</div>
+        </foreignObject>
+      </>);
+    }
+  }),[]);
+
+  return(<div className="editor-layout">
+    <div className="toolbar">
+      <button className="btn" onClick={()=>setShowAddModal(true)}>➕ 添加节点</button>
+      <button className="btn" onClick={()=>{setNodes([]);setEdges([]);}}>🔄 重置画布</button>
+      <div style={{flex:1}}/>
+      <span style={{fontSize:10,color:'rgba(255,255,255,.15)'}}>节点: {nodes.length} | 连线: {edges.length}</span>
+    </div>
+    <div className="editor-body">
+      <div className="flow-container">
+        <ReactFlow ref={rf}
+          nodes={nodes.map(n=>({...n,selected:n.id===selectedNode?.id}))}
+          edges={edges}
+          onNodesChange={onNodesChange}
+          onEdgesChange={onEdgesChange}
+          onConnect={onConnect}
+          onNodeClick={onNodeClick}
+          nodeTypes={nodeTypes}
+          edgeTypes={edgeTypes}
+          defaultEdgeOptions={{markerEnd:{type:MarkerType.ArrowClosed,color:'rgba(255,255,255,.15)'}}}
+          fitView
+          deleteKeyCode="Backspace"
+          onPaste={(e)=>{e.preventDefault();}}
+          style={{background:'rgba(255,255,255,.01)'}}
+        >
+          <Controls/>
+          <Background color="rgba(255,255,255,.03)" gap={20}/>
+          <Panel position="top-right">
+            <div style={{display:'flex',gap:6}}>
+              <button className="btn" onClick={()=>setNodes(prev=>{
+                // Auto-layout: simple horizontal stagger
+                const cols=Math.ceil(Math.sqrt(prev.length));
+                return prev.map((n,i)=>({...n,position:{x:40+(i%cols)*280,y:60+Math.floor(i/cols)*140}}));
+              })}>📐 自动排列</button>
+            </div>
+          </Panel>
+        </ReactFlow>
+      </div>
+      {/* Node Config Sidebar */}
+      {selectedNode&&<NodeConfigPanel
+        node={selectedNode}
+        nodes={nodes}
+        edges={edges}
+        onChange={updateNodeField}
+        onEdgeLogicChange={(edgeId,logic)=>{setEdges(prev=>prev.map(e=>e.id===edgeId?{...e,data:{...e.data,logic}}:e));}}
+        onDelete={deleteSelectedNode}
+        onClose={()=>setSelectedNode(null)}
+      />}
+    </div>
+    {showAddModal&&<AddNodeModal
+      existingNodes={nodes}
+      onConfirm={addNode}
+      onCancel={()=>setShowAddModal(false)}
+    />}
+  </div>);
+}
+
+// --- Node Config Panel ---
+function NodeConfigPanel({node,nodes,edges,onChange,onEdgeLogicChange,onDelete,onClose}){
+  const agentColor=AGENT_COLORS[node.data?.agent]||'#888';
+  const incomingEdges=edges.filter(e=>e.target===node.id);
+  const outgoingEdges=edges.filter(e=>e.source===node.id);
+
+  return(<div className="node-config">
+    <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:14}}>
+      <h3 style={{margin:0}}>节点配置</h3>
+      <button className="btn" onClick={onClose} style={{fontSize:10,padding:'2px 8px'}}>✕</button>
+    </div>
+
+    <label style={{color:agentColor}}>{AGENT_NAMES[node.data?.agent]||'Unassigned'}</label>
+
+    <label>节点标题</label>
+    <input value={node.data?.label||''} onChange={e=>onChange('label',e.target.value)}/>
+
+    <label>流程描述</label>
+    <textarea value={node.data?.description||''} onChange={e=>onChange('description',e.target.value)} placeholder="描述这个环节做什么..."/>
+
+    <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:8}}>
+      <div>
+        <label>负责 Agent</label>
+        <select value={node.data?.agent||'kitty'} onChange={e=>onChange('agent',e.target.value)}>
+          {Object.entries(AGENT_NAMES).map(([k,v])=><option key={k} value={k}>{v}</option>)}
+        </select>
+      </div>
+      <div>
+        <label>触发方式</label>
+        <select value={node.data?.triggerMode||'completion'} onChange={e=>onChange('triggerMode',e.target.value)}>
+          {TRIGGER_MODES.map(t=><option key={t.v} value={t.v}>{t.l}</option>)}
+        </select>
+      </div>
+    </div>
+
+    <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:8}}>
+      <div>
+        <label>预估耗时 (h)</label>
+        <input type="number" value={node.data?.estimatedHours||0} onChange={e=>onChange('estimatedHours',parseInt(e.target.value)||0)} min={0}/>
+      </div>
+      <div>
+        <label>实际耗时 (h)</label>
+        <input type="number" value={node.data?.actualHours||0} onChange={e=>onChange('actualHours',parseInt(e.target.value)||0)} min={0}/>
+      </div>
+    </div>
+
+    <label>状态 <span style={{color:'rgba(255,255,255,.1)'}}>(只读)</span></label>
+    <select className="readonly" value={node.data?.status||'pending'} disabled>
+      <option value="pending">📋 待开始</option>
+      <option value="in_progress">🔄 进行中</option>
+      <option value="done">✅ 已完成</option>
+    </select>
+
+    {/* Incoming connections */}
+    {incomingEdges.length>0&&<>
+      <div className="section-title">上游连线逻辑</div>
+      {incomingEdges.map(e=>{
+        const src=nodes.find(n=>n.id===e.source);
+        return(<div key={e.id} className="conn-row">
+          <span style={{fontSize:10,color:'rgba(255,255,255,.25)',flexShrink:0}}>← {src?.data?.label||e.source}</span>
+          <select value={e.data?.logic||'THEN'} onChange={ev=>onEdgeLogicChange(e.id,ev.target.value)}>
+            {LOGIC_TYPES.map(l=><option key={l.v} value={l.v}>{l.l}</option>)}
+          </select>
+        </div>);
+      })}
+    </>}
+
+    {/* Outgoing connections */}
+    {outgoingEdges.length>0&&<>
+      <div className="section-title">下游连线逻辑</div>
+      {outgoingEdges.map(e=>{
+        const tgt=nodes.find(n=>n.id===e.target);
+        return(<div key={e.id} className="conn-row">
+          <span style={{fontSize:10,color:'rgba(255,255,255,.25)',flexShrink:0}}>→ {tgt?.data?.label||e.target}</span>
+          <select value={e.data?.logic||'THEN'} onChange={ev=>onEdgeLogicChange(e.id,ev.target.value)}>
+            {LOGIC_TYPES.map(l=><option key={l.v} value={l.v}>{l.l}</option>)}
+          </select>
+        </div>);
+      })}
+    </>}
+
+    <div style={{marginTop:20,display:'flex',gap:8}}>
+      <button className="btn btn-danger" onClick={onDelete} style={{flex:1}}>🗑 删除节点</button>
+    </div>
+  </div>);
+}
+
+// --- Add Node Modal ---
+function AddNodeModal({existingNodes,onConfirm,onCancel}){
+  const[title,setTitle]=useState('');
+  const[desc,setDesc]=useState('');
+  const[agent,setAgent]=useState('xiaofeng');
+  const[trigger,setTrigger]=useState('completion');
+  const[hours,setHours]=useState(4);
+  const[predecessors,setPredecessors]=useState([]);
+
+  function handleAddPred(){
+    setPredecessors(prev=>[...prev,{nodeId:'',logic:'THEN'}]);
+  }
+  function removePred(i){setPredecessors(prev=>prev.filter((_,idx)=>idx!==i));}
+  function updatePred(i,field,val){setPredecessors(prev=>prev.map((p,idx)=>idx===i?{...p,[field]:val}:p));}
+
+  function handleSubmit(){
+    if(!title.trim()){toast('标题必填','err');return;}
+    onConfirm({label:title,description:desc,agent,triggerMode:trigger,estimatedHours:hours});
+    // Connections will be created by the user on the canvas
+    // Predecessors info can be used to auto-create edges
+    predecessors.forEach(p=>{
+      if(p.nodeId) {
+        // We'll need to defer this to after the node is added
+      }
+    });
+  }
+
+  return(<div className="modal-overlay" onClick={e=>{if(e.target===e.currentTarget)onCancel();}}>
+    <div className="modal">
+      <h2>➕ 添加节点</h2>
+      <label className="required">节点标题</label>
+      <input placeholder="输入环节名称" value={title} onChange={e=>setTitle(e.target.value)} autoFocus/>
+
+      <label>流程描述</label>
+      <textarea placeholder="描述这个环节的具体工作..." value={desc} onChange={e=>setDesc(e.target.value)}/>
+
+      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:8}}>
+        <div><label>负责 Agent</label>
+          <select value={agent} onChange={e=>setAgent(e.target.value)}>
+            {Object.entries(AGENT_NAMES).map(([k,v])=><option key={k} value={k}>{v}</option>)}
+          </select>
+        </div>
+        <div><label>触发方式</label>
+          <select value={trigger} onChange={e=>setTrigger(e.target.value)}>
+            {TRIGGER_MODES.map(t=><option key={t.v} value={t.v}>{t.l}</option>)}
+          </select>
+        </div>
+      </div>
+
+      <label>预估耗时 (小时)</label>
+      <input type="number" value={hours} onChange={e=>setHours(parseInt(e.target.value)||0)} min={0}/>
+
+      {/* Connection configuration */}
+      <div style={{marginTop:12,borderTop:'1px solid rgba(255,255,255,.04)',paddingTop:12}}>
+        <label style={{marginBottom:6}}>上游节点与连线逻辑 (可选，可在画布上手动连线)</label>
+        <div className="hint">选择此节点依赖的前置节点及连接方式</div>
+        {predecessors.map((p,i)=>(<div key={i} className="conn-row">
+          <select value={p.nodeId} onChange={e=>updatePred(i,'nodeId',e.target.value)} style={{flex:1}}>
+            <option value="">-- 选择上游节点 --</option>
+            {existingNodes.map(n=><option key={n.id} value={n.id}>{n.data?.label||n.id}</option>)}
+          </select>
+          <select value={p.logic} onChange={e=>updatePred(i,'logic',e.target.value)} style={{width:120}}>
+            {LOGIC_TYPES.map(l=><option key={l.v} value={l.v}>{l.l}</option>)}
+          </select>
+          <span className="conn-remove" onClick={()=>removePred(i)}>✕</span>
+        </div>))}
+        <div className="add-conn-btn" onClick={handleAddPred}>+ 添加上游节点</div>
+      </div>
+
+      <div className="modal-btns">
+        <button className="btn" onClick={onCancel}>取消</button>
+        <button className="btn btn-primary" onClick={handleSubmit} disabled={!title.trim()}>确认添加</button>
+      </div>
+    </div>
+  </div>);
+}
+
+// --- Init ---
+const root=createRoot(document.getElementById('root'));
+root.render(React.createElement(App));
+
+// Toast element
+const t=document.createElement('div');t.id='toast';t.className='toast';document.body.appendChild(t);
+</script>
+</body>
+</html>

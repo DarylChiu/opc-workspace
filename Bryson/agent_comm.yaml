@@ -1,0 +1,13 @@
+inter_agent_communication:
+  routes:
+    - from: xiaofeng
+      to: main
+      protocol: internal_grpc
+      port: 50051
+    - from: main
+      to: xiaofeng
+      protocol: internal_grpc
+      port: 50052
+security:
+  mutual_tls: true
+  cert_path: /Users/zhaoyuzhao/.openclaw/certs/

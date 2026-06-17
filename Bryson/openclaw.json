@@ -1,0 +1,169 @@
+{
+  "meta": {
+    "lastTouchedVersion": "2026.3.13",
+    "lastTouchedAt": "2026-03-28T10:50:21.682Z"
+  },
+  "wizard": {
+    "lastRunAt": "2026-03-24T02:09:55.842Z",
+    "lastRunVersion": "2026.3.13",
+    "lastRunCommand": "doctor",
+    "lastRunMode": "local"
+  },
+  "auth": {
+    "profiles": {
+      "deepseek_bryson": {
+        "type": "apiKey",
+        "provider": "deepseek",
+        "apiKey": "sk-b17158118e594c5fb4e40f22c692c4be"
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "deepseek/deepseek-r1",
+        "fallbacks": [
+          "deepseek/deepseek-chat",
+          "openrouter/anthropic/claude-3-5-sonnet-20241022"
+        ]
+      },
+      "models": {
+        "deepseek/deepseek-chat": {
+          "provider": "deepseek",
+          "apiKey": "sk-b17158118e594c5fb4e40f22c692c4be"
+        },
+        "deepseek/deepseek-r1": {
+          "provider": "deepseek",
+          "apiKey": "sk-b17158118e594c5fb4e40f22c692c4be"
+        },
+        "openrouter/anthropic/claude-3-5-sonnet-20241022": {
+          "provider": "openrouter",
+          "apiKey": "${OPENROUTER_API_KEY}"
+        }
+      },
+      "workspace": "/Users/zhaoyuzhao/.openclaw/workspace"
+    },
+    "list": [
+      {
+        "id": "main"
+      },
+      {
+        "id": "xiaofeng",
+        "name": "xiaofeng",
+        "workspace": "/Users/zhaoyuzhao/.openclaw/xiaofeng_workspace",
+        "agentDir": "/Users/zhaoyuzhao/.openclaw/agents/xiaofeng/agent",
+        "model": "deepseek/deepseek-r1",
+        "identity": {
+          "name": "\u5439\u70b9\u5c0f\u98ce",
+          "emoji": "\ud83c\udf2c\ufe0f"
+        }
+      }
+    ]
+  },
+  "tools": {
+    "profile": "coding",
+    "web": {
+      "search": {
+        "enabled": true,
+        "provider": "kimi",
+        "kimi": {
+          "apiKey": "sk-RHLi8sAXv73YGGY1hObOowX8m3ktfZFOSlVxSGwBxjaLuc4o",
+          "baseUrl": "http://localhost:8989"
+        }
+      }
+    },
+    "sessions": {
+      "visibility": "all"
+    },
+    "agentToAgent": {
+      "enabled": true
+    }
+  },
+  "bindings": [
+    {
+      "agentId": "main",
+      "match": {
+        "channel": "feishu",
+        "accountId": "default"
+      }
+    },
+    {
+      "agentId": "xiaofeng",
+      "match": {
+        "channel": "feishu",
+        "accountId": "xiaofeng"
+      }
+    }
+  ],
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto",
+    "restart": true,
+    "ownerDisplay": "raw"
+  },
+  "session": {
+    "dmScope": "per-account-channel-peer"
+  },
+  "hooks": {
+    "internal": {
+      "enabled": true,
+      "entries": {
+        "session-memory": {
+          "enabled": true
+        },
+        "command-logger": {
+          "enabled": true
+        }
+      }
+    }
+  },
+  "channels": {
+    "feishu": {
+      "enabled": true,
+      "connectionMode": "websocket",
+      "accounts": {
+        "xiaofeng": {
+          "appId": "cli_a94a032b6d385bd8",
+          "appSecret": "3htUPMLBansvBV23hXN6MgaO615kKa28",
+          "botName": "\u5439\u70b9\u5c0f\u98ce"
+        },
+        "default": {
+          "appId": "cli_a9307c22ddb8dcd1",
+          "botName": "\u5fe7\u90c1\u5c0f\u732b",
+          "appSecret": "eWDmRnMYFRCHLRuvqDrIlhzTtdZ8Elad"
+        }
+      }
+    }
+  },
+  "gateway": {
+    "port": 18789,
+    "mode": "local",
+    "bind": "loopback",
+    "auth": {
+      "mode": "token",
+      "token": "6e5d999bed68044c05b54df1fe9cf2c1b76cac6a822d8bd9"
+    },
+    "tailscale": {
+      "mode": "off",
+      "resetOnExit": false
+    },
+    "nodes": {
+      "denyCommands": [
+        "camera.snap",
+        "camera.clip",
+        "screen.record",
+        "contacts.add",
+        "calendar.add",
+        "reminders.add",
+        "sms.send"
+      ]
+    }
+  },
+  "plugins": {
+    "entries": {
+      "feishu": {
+        "enabled": true
+      }
+    }
+  }
+}

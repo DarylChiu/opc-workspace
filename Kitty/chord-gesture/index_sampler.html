@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chord Sampler</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: #0a0a14;
+    color: #fff;
+    font-family: 'SF Pro Display', -apple-system, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+  }
+  h1 { font-size: 24px; font-weight: 700; margin-bottom: 6px; letter-spacing: 1px; }
+  .sub { color: rgba(255,255,255,0.3); font-size: 13px; margin-bottom: 30px; }
+
+  #current-chord {
+    font-size: 100px;
+    font-weight: 900;
+    color: rgba(150,255,200,0.9);
+    text-shadow: 0 0 40px rgba(150,255,200,0.4);
+    margin: 30px 0;
+  }
+
+  #progress {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    max-width: 600px;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  .chord-dot {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+    font-size: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.2);
+    transition: all 0.3s;
+  }
+  .chord-dot.done { background: rgba(100,220,150,0.3); color: rgba(255,255,255,0.7); }
+  .chord-dot.current { background: rgba(150,255,200,0.6); color: #000; transform: scale(1.3); animation: pulse 1s infinite; }
+  .chord-dot.failed { background: rgba(255,100,100,0.3); }
+
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 10px rgba(150,255,200,0.3); }
+    50% { box-shadow: 0 0 25px rgba(150,255,200,0.6); }
+  }
+
+  #status-bar {
+    font-size: 14px;
+    color: rgba(255,255,255,0.4);
+    margin: 20px 0;
+  }
+
+  .btn {
+    padding: 14px 40px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.06);
+    color: rgba(255,255,255,0.7);
+    border-radius: 28px;
+    font-size: 15px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+    margin: 10px;
+  }
+  .btn:hover {
+    border-color: rgba(150,255,200,0.4);
+    color: rgba(150,255,200,0.9);
+    background: rgba(150,255,200,0.1);
+  }
+  .btn.primary {
+    background: rgba(150,255,200,0.15);
+    border-color: rgba(150,255,200,0.35);
+    color: rgba(150,255,200,0.9);
+  }
+  .btn.primary:hover {
+    background: rgba(150,255,200,0.25);
+  }
+  .btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  #countdown {
+    font-size: 60px;
+    font-weight: 900;
+    color: rgba(255,150,100,0.8);
+    margin: 20px 0;
+  }
+
+  #meter {
+    width: 300px;
+    height: 4px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 2px;
+    margin: 15px 0;
+    overflow: hidden;
+  }
+  #meter-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #44ff88, #88ffbb);
+    width: 0%;
+    border-radius: 2px;
+    transition: width 0.1s;
+  }
+
+  #download-section {
+    margin-top: 30px;
+    display: none;
+  }
+
+  .info {
+    color: rgba(255,255,255,0.25);
+    font-size: 12px;
+    margin-top: 10px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Chord Sampling Tool</h1>
+<div class="sub">42 chords — 7 roots × 6 types — ~2 min</div>
+
+<div id="current-chord">—</div>
+
+<div id="countdown"></div>
+<div id="meter"><div id="meter-fill"></div></div>
+
+<div id="status-bar">Click "Start" to begin recording</div>
+
+<div id="progress"></div>
+
+<button class="btn primary" id="start-btn" onclick="startSession()">Start Recording</button>
+<button class="btn" id="retry-btn" onclick="retryChord()" disabled>Retry Last</button>
+
+<div id="download-section">
+  <button class="btn primary" onclick="downloadAll()">Download All Samples</button>
+  <div class="info">Download and place in chord-gesture/samples/</div>
+</div>
+
+<script>
+// All 42 chords: [root × type]
+const ROOTS = ['C','D','E','F','G','A','B'];
+const TYPES = ['maj','m','7','maj7','sus4','dim'];
+
+const CHORDS = [];
+ROOTS.forEach(root => {
+  TYPES.forEach(type => {
+    let name = root;
+    if (type === 'm') name += 'm';
+    else if (type === '7') name += '7';
+    else if (type === 'maj7') name += 'maj7';
+    else if (type === 'sus4') name += 'sus4';
+    else if (type === 'dim') name += 'dim';
+    CHORDS.push({ root, type, name });
+  });
+});
+
+let currentIdx = 0;
+let audioChunks = [];
+let mediaRecorder = null;
+let stream = null;
+let isRecording = false;
+
+// Build progress dots
+const progressDiv = document.getElementById('progress');
+CHORDS.forEach((chord, idx) => {
+  const dot = document.createElement('div');
+  dot.className = 'chord-dot';
+  dot.id = `dot-${idx}`;
+  dot.textContent = chord.name;
+  dot.title = `${idx+1}/${CHORDS.length}: ${chord.name}`;
+  progressDiv.appendChild(dot);
+});
+
+async function startSession() {
+  document.getElementById('start-btn').disabled = true;
+  document.getElementById('retry-btn').disabled = false;
+
+  try {
+    stream = await navigator.mediaDevices.getUserMedia({
+      audio: { sampleRate: 44100, channelCount: 1, echoCancellation: false }
+    });
+    document.getElementById('status-bar').textContent = 'Mic ready — getting ready...';
+    currentIdx = 0;
+    setTimeout(() => recordChord(), 1000);
+  } catch(e) {
+    document.getElementById('status-bar').textContent = `Mic error: ${e.message}. Check permissions.`;
+    document.getElementById('start-btn').disabled = false;
+  }
+}
+
+function recordChord() {
+  if (currentIdx >= CHORDS.length) {
+    finishRecording();
+    return;
+  }
+
+  const chord = CHORDS[currentIdx];
+  document.getElementById('current-chord').textContent = chord.name;
+
+  // Update progress dots
+  document.querySelectorAll('.chord-dot').forEach(d => d.classList.remove('current'));
+  const dot = document.getElementById(`dot-${currentIdx}`);
+  if (dot) dot.classList.add('current');
+
+  // Countdown: 3, 2, 1, RECORD
+  const countdownEl = document.getElementById('countdown');
+  countdownEl.textContent = '3';
+  document.getElementById('status-bar').textContent = 'Get ready...';
+
+  setTimeout(() => { countdownEl.textContent = '2'; }, 1000);
+  setTimeout(() => { countdownEl.textContent = '1'; }, 2000);
+  setTimeout(() => {
+    countdownEl.textContent = 'REC';
+    countdownEl.style.color = 'rgba(255,80,80,0.9)';
+    document.getElementById('status-bar').textContent = `Recording "${chord.name}" — strum once clearly`;
+
+    startRecording(chord);
+  }, 3000);
+}
+
+function startRecording(chord) {
+  audioChunks = [];
+  mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/webm' });
+
+  // Record for 2 seconds (one clear strum)
+  const RECORD_DURATION = 2500;
+
+  mediaRecorder.ondataavailable = (e) => {
+    if (e.data.size > 0) audioChunks.push(e.data);
+  };
+
+  mediaRecorder.onstop = () => {
+    const blob = new Blob(audioChunks, { type: 'audio/webm' });
+    saveSample(chord, blob);
+  };
+
+  mediaRecorder.start(100);
+  isRecording = true;
+
+  // Progress meter
+  const meterFill = document.getElementById('meter-fill');
+  const startTime = Date.now();
+  const meterInterval = setInterval(() => {
+    const elapsed = Date.now() - startTime;
+    meterFill.style.width = Math.min(100, (elapsed / RECORD_DURATION) * 100) + '%';
+  }, 30);
+
+  setTimeout(() => {
+    clearInterval(meterInterval);
+    meterFill.style.width = '100%';
+    mediaRecorder.stop();
+    isRecording = false;
+
+    const dot = document.getElementById(`dot-${currentIdx}`);
+    if (dot) dot.classList.add('done');
+
+    document.getElementById('countdown').textContent = '';
+    document.getElementById('countdown').style.color = 'rgba(255,150,100,0.8)';
+    document.getElementById('status-bar').textContent = `Saved: ${chord.name} (${currentIdx + 1}/${CHORDS.length})`;
+    meterFill.style.width = '0%';
+
+    currentIdx++;
+    setTimeout(() => recordChord(), 800);
+  }, RECORD_DURATION);
+}
+
+function saveSample(chord, blob) {
+  // Store in memory for download
+  if (!window.sampleBlobs) window.sampleBlobs = {};
+  window.sampleBlobs[chord.name] = blob;
+}
+
+function retryChord() {
+  if (isRecording) {
+    mediaRecorder.stop();
+    isRecording = false;
+  }
+  // Mark previous as failed
+  const prevDot = document.getElementById(`dot-${currentIdx - 1}`);
+  if (prevDot) {
+    prevDot.classList.remove('done');
+    prevDot.classList.add('failed');
+  }
+  currentIdx = Math.max(0, currentIdx - 1);
+  document.getElementById('countdown').textContent = '';
+  document.getElementById('countdown').style.color = 'rgba(255,150,100,0.8)';
+  setTimeout(() => recordChord(), 500);
+}
+
+function finishRecording() {
+  if (stream) stream.getTracks().forEach(t => t.stop());
+  document.getElementById('current-chord').textContent = 'DONE';
+  document.getElementById('status-bar').textContent = `All ${CHORDS.length} chords recorded!`;
+  document.getElementById('download-section').style.display = 'block';
+  document.getElementById('retry-btn').disabled = true;
+}
+
+async function downloadAll() {
+  if (!window.sampleBlobs || Object.keys(window.sampleBlobs).length === 0) {
+    alert('No samples recorded yet');
+    return;
+  }
+
+  // Convert all webm blobs to WAV and download individually
+  // Since we can't easily zip in browser, download one by one or create a JSON blob
+  // Actually, let's just download each chord as a separate file
+
+  for (const [name, blob] of Object.entries(window.sampleBlobs)) {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${name}.webm`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    // Small delay between downloads
+    await new Promise(r => setTimeout(r, 150));
+  }
+
+  document.getElementById('status-bar').textContent = 'Download complete! Place files in chord-gesture/samples/';
+}
+
+// Alternative: record in one long session then split later
+// For now, the sequential approach works
+</script>
+</body>
+</html>

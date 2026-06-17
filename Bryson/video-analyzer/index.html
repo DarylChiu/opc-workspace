@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>视频分析交互Workflow</title>
+<style>
+:root {
+  --bg: #0f0f0f;
+  --panel-bg: #1a1a1a;
+  --border: #2a2a2a;
+  --text: #e0e0e0;
+  --text-dim: #888;
+  --accent: #3b82f6;
+  --accent-dim: #1e3a5f;
+  --green: #22c55e;
+  --yellow: #eab308;
+  --red: #ef4444;
+  --card-bg: #222;
+  --card-hover: #2a2a2a;
+  --card-active: #1a2740;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { 
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg); color: var(--text); height: 100vh; overflow: hidden;
+}
+.app { display: flex; height: calc(100vh - 44px); }
+
+/* ── 左侧 Sidebar ── */
+.sidebar {
+  width: 56px; min-width: 56px; background: #111;
+  border-right: 1px solid var(--border); display: flex; flex-direction: column;
+  padding-top: 8px; transition: width 0.2s; overflow: hidden;
+  z-index: 10;
+}
+.sidebar:hover { width: 180px; }
+.sidebar-item {
+  display: flex; align-items: center; gap: 10px; padding: 12px 14px;
+  cursor: pointer; color: var(--text-dim); font-size: 13px; white-space: nowrap;
+  transition: all 0.15s; border-left: 2px solid transparent;
+}
+.sidebar-item:hover { background: #1a1a1a; color: var(--text); }
+.sidebar-item.active { color: var(--accent); border-left-color: var(--accent); background: #161616; }
+.sidebar-item .si-icon { font-size: 18px; min-width: 24px; text-align: center; }
+.sidebar-item .si-label { opacity: 0; transition: opacity 0.2s; }
+.sidebar:hover .sidebar-item .si-label { opacity: 1; }
+.sidebar-item .si-badge {
+  display: inline-block; background: var(--accent-dim); color: var(--accent);
+  font-size: 10px; padding: 1px 5px; border-radius: 8px; margin-left: auto;
+}
+
+/* ── 素材库表格 ── */
+.material-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.material-table th {
+  text-align: left; padding: 8px 12px; color: var(--text-dim);
+  font-size: 11px; font-weight: 600; border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; background: var(--panel-bg); z-index: 1;
+}
+.material-table td {
+  padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04);
+  max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.material-table tr { cursor: pointer; transition: background 0.1s; }
+.material-table tr:hover { background: var(--card-hover); }
+.material-table tr.loaded { background: var(--card-active); }
+.material-table .platform-tag {
+  display: inline-block; padding: 1px 6px; border-radius: 4px;
+  font-size: 10px; background: #1a2740; color: var(--accent);
+}
+
+/* ── 左侧：视频+对白卡片 ── */
+.panel-left { 
+  width: 380px; min-width: 380px; background: var(--panel-bg);
+  border-right: 1px solid var(--border); display: flex; flex-direction: column;
+  transition: width 0.3s, min-width 0.3s;
+}
+/* 横屏模式：视频在上，对白在下（默认） */
+.panel-left.layout-side {
+  width: 560px; min-width: 560px;
+}
+.panel-left .video-transcript-row {
+  display: flex; flex-direction: column; flex: 1; min-height: 0;
+}
+.panel-left.layout-side .video-transcript-row {
+  display: flex; flex-direction: row; flex: 1; min-height: 0;
+}
+.panel-left.layout-side .video-container {
+  width: 55%; flex-shrink: 0; aspect-ratio: auto !important;
+  display: flex; align-items: center; justify-content: center;
+}
+.panel-left.layout-side .video-container video {
+  max-width: 100%; max-height: 100%; object-fit: contain;
+}
+.panel-left.layout-side .transcript-col {
+  width: 45%; flex-shrink: 0; display: flex; flex-direction: column;
+  border-left: 1px solid var(--border);
+}
+.video-container { position: relative; background: #000; aspect-ratio: 16/9; }
+.video-container video { width: 100%; height: 100%; object-fit: contain; }
+.video-placeholder {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 12px; color: var(--text-dim);
+}
+.video-placeholder svg { width: 48px; height: 48px; opacity: 0.3; }
+
+.section-header {
+  padding: 10px 14px; font-size: 13px; font-weight: 600; color: var(--text-dim);
+  border-bottom: 1px solid var(--border); display: flex; justify-content: space-between;
+  align-items: center; background: #161616;
+}
+.transcript-list { flex: 1; overflow-y: auto; }
+
+.transcript-card {
+  padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.04);
+  cursor: pointer; transition: all 0.15s; display: flex; gap: 10px; align-items: flex-start;
+  border-left: 3px solid transparent;
+}
+.transcript-card:hover { background: var(--card-hover); }
+.transcript-card.active { 
+  background: var(--card-active); border-left-color: var(--accent);
+}
+.transcript-card.marked-hook { border-left-color: var(--green); background: #0a2a0a; }
+.transcript-card.marked-gold { border-left-color: var(--yellow); background: #2a2400; }
+.transcript-card.marked-turn { border-left-color: var(--red); background: #2a0a0a; }
+
+.card-timestamp { 
+  font-size: 11px; color: var(--accent); min-width: 40px; font-variant-numeric: tabular-nums;
+  font-family: 'SF Mono', Monaco, monospace; padding-top: 2px;
+}
+.card-content { flex: 1; }
+.card-tag { 
+  font-size: 10px; color: var(--text-dim); margin-bottom: 3px; 
+}
+.card-text { font-size: 13px; line-height: 1.5; }
+.card-actions {
+  display: flex; gap: 4px; opacity: 0; transition: opacity 0.15s;
+}
+.transcript-card:hover .card-actions { opacity: 1; }
+
+.mark-btn {
+  width: 22px; height: 22px; border-radius: 4px; border: 1px solid var(--border);
+  background: transparent; cursor: pointer; font-size: 11px; display: flex;
+  align-items: center; justify-content: center; color: var(--text-dim);
+}
+.mark-btn:hover { border-color: var(--text); }
+.mark-btn.hook:hover, .mark-btn.hook.active { background: var(--green); border-color: var(--green); color: #000; }
+.mark-btn.gold:hover, .mark-btn.gold.active { background: var(--yellow); border-color: var(--yellow); color: #000; }
+.mark-btn.turn:hover, .mark-btn.turn.active { background: var(--red); border-color: var(--red); color: #fff; }
+
+/* ── 中间：分析面板 ── */
+.panel-center { 
+  flex: 1; display: flex; flex-direction: column; overflow: hidden;
+}
+.tabs { 
+  display: flex; border-bottom: 1px solid var(--border); background: #161616;
+  flex-shrink: 0;
+}
+.tab { 
+  padding: 10px 18px; font-size: 13px; cursor: pointer; color: var(--text-dim);
+  border-bottom: 2px solid transparent; transition: all 0.15s;
+}
+.tab:hover { color: var(--text); }
+.tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+.tab .badge {
+  display: inline-block; background: var(--accent-dim); color: var(--accent);
+  font-size: 10px; padding: 1px 6px; border-radius: 8px; margin-left: 6px;
+}
+
+.analysis-content { flex: 1; overflow-y: auto; padding: 20px; }
+
+.analysis-section { margin-bottom: 24px; }
+.analysis-section h3 { 
+  font-size: 14px; font-weight: 600; margin-bottom: 10px; 
+  display: flex; align-items: center; gap: 8px;
+}
+.analysis-section h3 .icon { font-size: 16px; }
+
+.template-card {
+  background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+  padding: 16px; margin-bottom: 12px;
+}
+.template-card h4 { font-size: 13px; color: var(--accent); margin-bottom: 8px; }
+.template-card .desc { font-size: 12px; color: var(--text-dim); margin-bottom: 10px; }
+.template-card .formula {
+  background: #111; border: 1px solid var(--border); border-radius: 6px;
+  padding: 12px; font-size: 13px; line-height: 1.6; font-family: 'SF Mono', Monaco, monospace;
+  white-space: pre-wrap;
+}
+.template-card .placeholder { 
+  background: var(--accent-dim); color: var(--accent); 
+  padding: 1px 4px; border-radius: 3px; font-size: 12px;
+}
+
+.score-row {
+  display: flex; gap: 16px; margin-bottom: 16px;
+}
+.score-card {
+  flex: 1; background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: 8px; padding: 14px; text-align: center;
+}
+.score-card .label { font-size: 11px; color: var(--text-dim); margin-bottom: 6px; }
+.score-card .value { font-size: 28px; font-weight: 700; }
+.score-card .value.high { color: var(--green); }
+.score-card .value.mid { color: var(--yellow); }
+.score-card .value.low { color: var(--red); }
+.score-card .reason { font-size: 11px; color: var(--text-dim); margin-top: 6px; }
+
+.knowledge-card {
+  background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+  padding: 16px; margin-bottom: 12px;
+}
+.knowledge-card h4 { font-size: 13px; margin-bottom: 10px; }
+.knowledge-card .field { margin-bottom: 8px; }
+.knowledge-card .field-label { 
+  font-size: 10px; color: var(--accent); text-transform: uppercase; margin-bottom: 2px;
+}
+.knowledge-card .field-value { font-size: 13px; line-height: 1.5; }
+.knowledge-card .jump-btn {
+  display: inline-block; margin-top: 8px; padding: 4px 10px;
+  background: var(--accent-dim); color: var(--accent); border-radius: 4px;
+  font-size: 11px; cursor: pointer; border: none;
+}
+.knowledge-card .jump-btn:hover { background: var(--accent); color: #fff; }
+
+.empty-state {
+  display: flex; align-items: center; justify-content: center; height: 100%;
+  color: var(--text-dim); font-size: 14px; flex-direction: column; gap: 8px;
+}
+
+/* ── 右侧：已废弃，标记功能整合进分析面板 Tab ── */
+.panel-right { display: none; }
+.mark-summary { padding: 14px; border-bottom: 1px solid var(--border); }
+.mark-summary .count-row {
+  display: flex; gap: 12px; margin-top: 8px;
+}
+.mark-summary .count-item {
+  display: flex; align-items: center; gap: 4px; font-size: 12px;
+}
+.mark-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.mark-dot.hook { background: var(--green); }
+.mark-dot.gold { background: var(--yellow); }
+.mark-dot.turn { background: var(--red); }
+
+.marked-list { flex: 1; overflow-y: auto; }
+.marked-item {
+  padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.04);
+  font-size: 12px; cursor: pointer;
+}
+.marked-item:hover { background: var(--card-hover); }
+.marked-item .ts { color: var(--accent); font-family: monospace; }
+.marked-item .text { margin-top: 4px; line-height: 1.4; }
+
+.export-bar {
+  padding: 12px 14px; border-top: 1px solid var(--border);
+  display: flex; gap: 8px;
+}
+.btn {
+  padding: 6px 14px; border-radius: 6px; font-size: 12px; cursor: pointer;
+  border: 1px solid var(--border); background: var(--card-bg); color: var(--text);
+  transition: all 0.15s;
+}
+.btn:hover { background: var(--card-hover); border-color: var(--text-dim); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn.primary:hover { background: #2563eb; }
+.btn.small { padding: 3px 8px; font-size: 11px; }
+
+/* ── 顶部栏 ── */
+.topbar {
+  height: 44px; background: #161616; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; padding: 0 16px; gap: 12px;
+  flex-shrink: 0;
+}
+.topbar .logo { font-weight: 700; font-size: 14px; color: var(--accent); }
+.topbar input {
+  flex: 1; max-width: 400px; padding: 6px 12px; border-radius: 6px;
+  border: 1px solid var(--border); background: var(--card-bg); color: var(--text);
+  font-size: 12px; outline: none;
+}
+.topbar input:focus { border-color: var(--accent); }
+.topbar .status { font-size: 11px; color: var(--text-dim); margin-left: auto; }
+.topbar .status .dot { 
+  width: 6px; height: 6px; border-radius: 50%; display: inline-block; margin-right: 4px;
+}
+.topbar .status .dot.idle { background: var(--text-dim); }
+.topbar .status .dot.running { background: var(--yellow); animation: pulse 1s infinite; }
+.topbar .status .dot.done { background: var(--green); }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+/* 滚动条 */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="logo">🎬 视频深度分析</span>
+  <input type="text" placeholder="粘贴抖音/B站/YouTube链接后回车..." id="urlInput" 
+    onkeydown="if(event.key==='Enter')analyzeFromUrl()">
+  <button class="btn primary small" onclick="analyzeFromUrl()">🔗 分析链接</button>
+  <button class="btn primary small" onclick="analyzeWithDeepSeek()" style="background:#1a3a1a;border-color:#22c55e">🧠 Demo 深度分析</button>
+  <span class="status" id="statusBar">
+    <span class="dot idle"></span> 就绪
+  </span>
+</div>
+
+<!-- 左侧 Sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item active" onclick="switchView('workbench')">
+    <span class="si-icon">🖥️</span>
+    <span class="si-label">操作台</span>
+  </div>
+  <div class="sidebar-item" onclick="switchView('library')">
+    <span class="si-icon">📚</span>
+    <span class="si-label">素材库</span>
+    <span class="si-badge" id="libBadge">0</span>
+  </div>
+</div>
+
+<div class="app" id="mainApp">
+  <!-- 左侧：视频+对白 -->
+  <div class="panel-left" id="panelLeft">
+    <div class="video-transcript-row">
+      <div class="video-container" id="videoContainer">
+        <div class="video-placeholder">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          <span>粘贴链接或拖入视频</span>
+        </div>
+        <video id="videoPlayer" style="display:none" controls 
+          ontimeupdate="onVideoTimeUpdate()" onloadedmetadata="onVideoLoaded()">
+        </video>
+      </div>
+      <div class="transcript-col">
+        <div class="section-header">
+          <span>📝 原文时间轴</span>
+          <span id="cardCount" style="font-size:11px;color:var(--text-dim)">0 条</span>
+        </div>
+        <div class="transcript-list" id="transcriptList">
+          <div class="empty-state" style="padding:40px">上传视频后自动转写</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 中间：分析面板 -->
+  <div class="panel-center">
+    <div class="tabs">
+      <div class="tab active" onclick="switchTab('overview')">📊 内容总览</div>
+      <div class="tab" onclick="switchTab('script')">🎬 脚本解析</div>
+      <div class="tab" onclick="switchTab('template')">📋 复刻模板</div>
+      <div class="tab" onclick="switchTab('cinematography')">🎥 镜头&声音</div>
+      <div class="tab" onclick="switchTab('score')">⭐ 三项评分</div>
+      <div class="tab" onclick="switchTab('marks')">🏷️ 标记 <span class="badge" id="marksBadge">0</span></div>
+    </div>
+    <div class="analysis-content" id="analysisContent">
+      <div class="empty-state">
+        <span style="font-size:32px">🔍</span>
+        <span>输入视频链接开始深度分析</span>
+        <span style="font-size:11px;color:var(--text-dim)">支持：画面分析 + 对白转写 + 结构拆解 + 知识提取</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 素材库视图（默认隐藏） -->
+<div class="panel-center" id="libraryView" style="display:none">
+  <div class="section-header">
+    <span>📚 素材库</span>
+    <span style="font-size:11px;color:var(--text-dim)" id="libCount">0 条素材</span>
+  </div>
+  <div style="flex:1;overflow-y:auto;padding:0">
+    <table class="material-table">
+      <thead><tr>
+        <th style="width:30px">#</th>
+        <th>视频链接</th>
+        <th>博主名称</th>
+        <th style="width:70px">平台</th>
+        <th style="width:80px">类型</th>
+        <th style="width:120px">收录时间</th>
+      </tr></thead>
+      <tbody id="materialTableBody">
+        <tr><td colspan="6" style="text-align:center;color:var(--text-dim);padding:40px">
+          暂无素材，在「操作台」分析视频后自动收录
+        </td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+// ── 数据存储 ──
+let transcriptData = [];
+let analysisData = {};
+let marks = []; // {id, timestamp, text, type: 'hook'|'gold'|'turn'}
+let activeCardIdx = -1;
+let videoServingUrl = '';
+let currentVideoUrl = '';  // 当前分析的视频链接
+let currentVideoTitle = '';
+let savedMarksHistory = {}; // {videoUrl: {marks, transcript, analysis}}
+let materialLibrary = []; // [{url, title, platform, type, date, marks, transcript, analysis, videoUrl}]
+
+// 加载本地存储
+function loadLibrary() {
+  try {
+    const saved = localStorage.getItem('video_analyzer_library');
+    if (saved) materialLibrary = JSON.parse(saved);
+    document.getElementById('libBadge').textContent = materialLibrary.length;
+    document.getElementById('libCount').textContent = materialLibrary.length + ' 条素材';
+  } catch(e) {}
+}
+function saveLibrary() {
+  try {
+    localStorage.setItem('video_analyzer_library', JSON.stringify(materialLibrary));
+    document.getElementById('libBadge').textContent = materialLibrary.length;
+    document.getElementById('libCount').textContent = materialLibrary.length + ' 条素材';
+  } catch(e) {}
+}
+
+// ── Sidebar 视图切换 ──
+function switchView(view) {
+  document.querySelectorAll('.sidebar-item').forEach(el => el.classList.remove('active'));
+  const mainApp = document.getElementById('mainApp');
+  const libView = document.getElementById('libraryView');
+  
+  if (view === 'library') {
+    mainApp.style.display = 'none';
+    libView.style.display = 'flex';
+    document.querySelectorAll('.sidebar-item')[1].classList.add('active');
+    renderLibraryTable();
+  } else {
+    mainApp.style.display = 'flex';
+    libView.style.display = 'none';
+    document.querySelectorAll('.sidebar-item')[0].classList.add('active');
+  }
+}
+
+function renderLibraryTable() {
+  const tbody = document.getElementById('materialTableBody');
+  if (materialLibrary.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--text-dim);padding:40px">暂无素材，在「操作台」分析视频后自动收录</td></tr>';
+    return;
+  }
+  tbody.innerHTML = materialLibrary.map((m, i) => `
+    <tr onclick="loadMaterial(${i})" class="${m.url === currentVideoUrl ? 'loaded' : ''}">
+      <td style="color:var(--text-dim)">${i+1}</td>
+      <td title="${m.url}">${m.url.substring(0, 50)}...</td>
+      <td>${m.title || '-'}</td>
+      <td><span class="platform-tag">${m.platform || '-'}</span></td>
+      <td style="color:var(--text-dim)">${m.type || '-'}</td>
+      <td style="color:var(--text-dim)">${m.date || '-'}</td>
+    </tr>
+  `).join('');
+}
+
+function loadMaterial(idx) {
+  const m = materialLibrary[idx];
+  if (!m) return;
+  
+  // 恢复数据
+  transcriptData = m.transcript || [];
+  analysisData = normalizeAnalysis(m.analysis || {});
+  marks = m.marks || [];
+  currentVideoUrl = m.url;
+  currentVideoTitle = m.title || '';
+  videoServingUrl = m.videoUrl || '';
+  
+  // 如果有视频，设置 src
+  const vp = document.getElementById('videoPlayer');
+  if (videoServingUrl) {
+    vp.src = videoServingUrl;
+    vp.style.display = 'block';
+    document.querySelector('.video-placeholder').style.display = 'none';
+  }
+  
+  // 回到操作台
+  switchView('workbench');
+  
+  // 渲染
+  renderTranscript();
+  updateCardCount();
+  renderMarks();
+  renderTabContent('overview');
+}
+
+// ── 归一化 API 返回的 key 名称 ──
+function normalizeAnalysis(data) {
+  if (!data) return data;
+  // API返回 key → 前端期望 key
+  if (data.script_analysis && !data.scriptAnalysis) data.scriptAnalysis = data.script_analysis;
+  if (data.cinematography && !data.cinematography) data.cinematography = data.cinematography;
+  if (data.scoring && !data.scores) data.scores = data.scoring;
+  // 模板：兼容新旧格式
+  if (data.template && typeof data.template === 'object' && !Array.isArray(data.template)) {
+    data.template = data.template; // 新格式：{templates:[], reusableElements:{}}
+  } else if (Array.isArray(data.template)) {
+    data.template = { templates: data.template, reusableElements: {} };
+  } else if (Array.isArray(data.templates)) {
+    data.template = { templates: data.templates, reusableElements: {} };
+  }
+  // 兼容旧格式
+  if (data.structure && !data.scriptAnalysis) data.scriptAnalysis = { acts: data.structure.map(s => ({act:s.start, name:s.name, timeRange:s.start+'-'+s.end, narrativeFunction:s.desc, characterDynamics:'', dramaticTension:5, keyMoments:[]})), techniques:[] };
+  if (data.knowledge_card && !data.cinematography) data.cinematography = { disclaimer: '⚠️ 旧版数据，镜头语言分析不可用。请用新版分析。' };
+  return data;
+}
+
+// ── 模拟数据（开发用） ──
+const DEMO_TRANSCRIPT = [
+  {ts:"00:00", tag:"开场", text:"下班后不知道吃什么？今天分享三个十分钟搞定的快手菜"},
+  {ts:"00:04", tag:"推荐", text:"第一个是蒜蓉西兰花，简单到离谱但好吃到舔盘"},
+  {ts:"00:09", tag:"步骤", text:"西兰花切小朵焯水一分钟，蒜切末，热油爆香"},
+  {ts:"00:15", tag:"技巧", text:"关键一步：焯水的时候加一点盐和油，颜色会特别翠绿"},
+  {ts:"00:21", tag:"步骤", text:"倒入西兰花翻炒两分钟，加生抽和蚝油，出锅"},
+  {ts:"00:26", tag:"推荐", text:"第二个是番茄炒蛋——虽然是家常菜，但很多人做错了"},
+  {ts:"00:31", tag:"技巧", text:"鸡蛋要先炒到七分熟盛出来，不要跟番茄一起炒"},
+  {ts:"00:36", tag:"步骤", text:"番茄单独炒出汁，加点糖中和酸味，再把鸡蛋倒回去"},
+  {ts:"00:41", tag:"强调", text:"这样鸡蛋嫩滑、番茄浓郁，完全不是一个级别的"},
+  {ts:"00:46", tag:"推荐", text:"第三个是懒人版酸汤肥牛，五分钟就能上桌"},
+  {ts:"00:50", tag:"步骤", text:"水烧开下肥牛片烫三十秒捞出，金针菇焯水铺底"},
+  {ts:"00:55", tag:"技巧", text:"灵魂在汤底：黄灯笼辣椒酱两勺加白醋，酸辣开胃"},
+  {ts:"01:00", tag:"步骤", text:"把肥牛铺在金针菇上，浇上热汤，撒葱花小米辣"},
+  {ts:"01:05", tag:"总结", text:"三个菜从备菜到上桌不超过半小时，比点外卖还快"},
+  {ts:"01:10", tag:"互动", text:"你们下班最喜欢做什么快手菜？评论区告诉我"},
+  {ts:"01:14", tag:"结尾", text:"喜欢的话点个关注，下期教你们做不用开火的凉拌菜"}
+];
+
+const DEMO_ANALYSIS = {
+  overview: {
+    oneLiner: "一个AI驱动的自媒体内容创作中台，通过视频转写+语义分析+知识管理+一键成稿，实现从素材到脚本的全流程自动化",
+    audience: "自媒体创作者、非技术背景的内容运营、想提升内容效率的个人创作者",
+    painPoints: "看到好内容不知道怎么拆解结构、写脚本耗时长、灵感碎片难以积累和复用",
+    viewpoint: "AI不是替代创作者，而是把「分析-拆解-复用」的循环压缩到分钟级",
+    cognition: "从「凭感觉创作」到「结构化拆解+模板化复刻」，让优质内容的生产变得可复制"
+  },
+  scriptAnalysis: {
+    acts: [
+      {act:1, name:"第一幕：Hook · 问题引入", timeRange:"00:00-00:24", narrativeFunction:"用自媒体人的真实痛点开场，快速建立共鸣后抛出工具推荐，建立强期待", characterDynamics:"创作者从迷茫到好奇——「真的有那么好用？」", dramaticTension:3, keyMoments:[{ts:"00:03", desc:"抛出核心痛点：好内容不知道怎么拆解"},{ts:"00:07", desc:"直接亮出工具名，制造期待"},{ts:"00:15", desc:"演示导入功能，眼见为实"}]},
+      {act:2, name:"第二幕：功能展示 · 从 What 到 How", timeRange:"00:25-00:42", narrativeFunction:"展示AI的语义分析能力，从表层的转写到深层的结构提取，让观众理解工具的核心价值", characterDynamics:"观众从好奇到惊讶——AI不只是转录，而是理解内容", dramaticTension:5, keyMoments:[{ts:"00:28", desc:"AI自动识别段落结构和关键信息"},{ts:"00:35", desc:"展示语义分析结果，结构化的信息提取"}]},
+      {act:3, name:"第三幕：方法论 · 授人以渔", timeRange:"00:43-01:04", narrativeFunction:"揭露工具的底层逻辑——公式化提取内容结构，把「灵感和直觉」变成「可复用的模板」", characterDynamics:"观众从理解到兴奋——原来爆款的底层逻辑是可以复制", dramaticTension:6, keyMoments:[{ts:"00:48", desc:"解释内容公式化的原理"},{ts:"00:55", desc:"用具体例子演示模板提取"}]},
+      {act:4, name:"第四幕：生态闭环 · 终极价值", timeRange:"01:05-01:58", narrativeFunction:"展示工具不只是分析工具，而是完整的创作生态系统——知识库+选题库+一键成稿", characterDynamics:"观众从认可到向往——这个东西可以改变我的创作方式", dramaticTension:8, keyMoments:[{ts:"01:10", desc:"知识库的长期积累价值"},{ts:"01:25", desc:"选题库帮助解决创作枯竭"},{ts:"01:35", desc:"一键成稿的端到端能力"}]},
+      {act:5, name:"第五幕：CTA · 价值锚定", timeRange:"01:59-02:10", narrativeFunction:"用2天开发+Codex的对比制造强烈反差，建立社交证明，推动转化", characterDynamics:"观众从向往到行动——我也想要这个工具", dramaticTension:4, keyMoments:[{ts:"02:02", desc:"2天开发的震撼对比"},{ts:"02:07", desc:"Codex技术背景增强可信度"}]}
+    ],
+    emotionCurve:"开场低（迷茫/痛点）→ 第二幕爬升（好奇/惊讶）→ 第三幕加速爬升（兴奋/理解）→ 第四幕达到峰值（向往/冲动）→ 第五幕温和回落（信任/行动意愿）→ 整体呈S型曲线，在功能展示和方法论段持续升温",
+    techniques: [
+      {name:"问题+推荐模式", usage:"第一幕开场，先用痛点建立共鸣再立即给出解决方案", effect:"观众在第一句话就产生「对，这就是我的问题」的认同感，然后自然接受推荐"},
+      {name:"全景→特写递进", usage:"先从整体功能展示→到具体功能深挖→再到方法论原理", effect:"类似「洋葱剥皮法」，每一层都比上一层更深，持续制造新惊喜"},
+      {name:"时间锚定策略", usage:"第五幕用「2天开发」作为社交证明", effect:"制造「FOMO感」——2天做出来的东西这么强，我不能再等了"}
+    ]
+  },
+  templates: [
+    {
+      name:"开头公式：问题+推荐",
+      desc:"用目标受众的痛点问题开头，快速给出推荐，建立期待",
+      formula:"有没有【痛点描述】的【工具类型】？\n我推荐【工具名称】。\n它可以把【核心功能1】、【核心功能2】和【核心功能3】全部搞定。"
+    },
+    {
+      name:"正文公式：对比论证+个人体验",
+      desc:"通过对比旧方法/旧工具，用亲身经历论证推荐理由",
+      formula:"以前我做【场景】的时候，需要【繁琐过程】。\n用了【工具名】之后，我只需要【简化过程】。\n最大的区别是【核心差异点】。\n就像【比喻A】和【比喻B】的区别——一个让你【负面感受】，一个让你【正面感受】。"
+    },
+    {
+      name:"案例公式：功能演示→方法论→生态",
+      desc:"从具体功能切入，逐渐揭示工具的底层逻辑和完整生态",
+      formula:"①先展示一个具体功能的操作（眼见为实）\n→「你看，我只需要【操作】，它就能【结果】」\n②再解释背后的方法论（授人以渔）\n→「它的原理是【底层逻辑】，相当于帮你【价值】」\n③最后拉出完整生态（制造向往）\n→「而且不只【单一功能】，你还会有【生态全景】」"
+    }
+  ],
+  cinematography: {
+    cinematography: {
+      shotTypes:"口播模式为主，预计使用中近景（腰部以上）构图。功能演示段落可能切入屏幕录制画面。结构化讲解段预计切换至特写强化重点信息。整体景别变化较少，依赖内容节奏而非视觉变化驱动",
+      composition:"单人正面居中构图，符合口播视频的「直面观众」表达策略。屏幕录制段采用画中画或全屏切换，保持信息清晰度",
+      cameraMovement:"固定机位为主，无大幅度运动。可能的轻微手持微动增加真实感而非演播室感"
+    },
+    lightingColor: {
+      lightingMood:"柔光正面打光（环形灯或柔光箱），面部均匀明亮，背景适度虚化。符合自媒体口播的「友好专业」调性",
+      colorPalette:"暖色调为主（肤色还原+暖色背景），营造亲切感。功能演示段切至冷色调（深色UI界面），形成冷暖对比强化工具的专业感",
+      visualRhythm:"讲话段节奏平稳（8-15秒/镜头），功能演示段加速（3-5秒切换），形成「讲解→演示」的呼吸节奏"
+    },
+    soundDesign: {
+      bgm:"轻微背景音乐在 00:00-00:24（Hook段）和CTA段（01:59-02:10）使用，功能讲解段无BGM以保持信息清晰。风格推测为轻电子/科技感配乐",
+      ambient:"室内录制，无明显环境噪音。可能在功能演示段加入微弱的键盘/鼠标点击音效增强操作感",
+      dialogueStyle:"口语化程度高，使用「你看」「对吧」「就」等口语填充词。语速中快（约200字/分钟），节奏紧凑。信息密度在方法论段（00:43-01:04）达到峰值",
+      subtitleDesign:"预计使用底部居中字幕，关键词（工具名、功能名）使用高亮色。屏幕录制段可能需要额外标注框引导视线"
+    },
+    directorStyle: {
+      aesthetic:"实用主义美学——不追求视觉华丽，追求信息传递效率。属于典型的「价值驱动型」口播风格",
+      narrativeSignature:"核心叙事手法：「建立共鸣→展示功能→揭示原理→拉出生态→推动行动」。这是一个高度结构化的说服弧线，每段都有明确的认知目标",
+      culturalEncoding:"使用「2天开发」「Codex」等技术圈层符号建立专业可信度，同时用「搞定」「对的」等口语保持亲和力。在专业和可接近之间找到平衡"
+    },
+    disclaimer:"⚠️ Demo 数据：基于对白文本推断，未使用实际画面分析。真实分析需提供视频文件"
+  },
+  scores: {
+    hook: { value:85, reason:"痛点精准、场景感强、问题→推荐转换自然"},
+    structure: { value:82, reason:"从功能展示→方法论→生态展示→CTA，层层递进"},
+    expression: { value:78, reason:"口语化好但信息密度略高，部分段落可精简"}
+  }
+};
+
+// ── 初始化 ──
+function loadDemo() {
+  transcriptData = DEMO_TRANSCRIPT;
+  analysisData = DEMO_ANALYSIS;
+  renderTranscript();
+  updateCardCount();
+}
+
+function renderTranscript() {
+  const list = document.getElementById('transcriptList');
+  list.innerHTML = transcriptData.map((card, i) => {
+    const mark = marks.find(m => m.id === i);
+    let markClass = '';
+    if (mark) markClass = 'marked-' + mark.type;
+    if (i === activeCardIdx && !mark) markClass += ' active';
+    if (i === activeCardIdx && mark) markClass += ' active';
+    
+    return `
+    <div class="transcript-card ${markClass}" id="card-${i}" onclick="seekTo(${i})">
+      <div class="card-timestamp">${card.ts}</div>
+      <div class="card-content">
+        <div class="card-tag">${card.tag}</div>
+        <div class="card-text">${card.text}</div>
+      </div>
+      <div class="card-actions" onclick="event.stopPropagation()">
+        ${mark ? `<button class="mark-btn ${mark.type} active" title="删除标记" onclick="removeMark(${i})" style="background:var(--${mark.type==='hook'?'green':mark.type==='gold'?'yellow':'red'});color:#000">✕</button>` : ''}
+        <button class="mark-btn hook ${mark?.type==='hook'?'active':''}" 
+          title="好钩子" onclick="toggleMark(${i},'hook')">🪝</button>
+        <button class="mark-btn gold ${mark?.type==='gold'?'active':''}" 
+          title="金句" onclick="toggleMark(${i},'gold')">⭐</button>
+        <button class="mark-btn turn ${mark?.type==='turn'?'active':''}" 
+          title="转折点" onclick="toggleMark(${i},'turn')">↗</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function updateCardCount() {
+  document.getElementById('cardCount').textContent = transcriptData.length + ' 条';
+}
+
+// ── 视频联动 ──
+function seekTo(idx) {
+  activeCardIdx = idx;
+  const card = transcriptData[idx];
+  // 解析时间戳 MM:SS → seconds
+  const [m, s] = card.ts.split(':').map(Number);
+  const seconds = m * 60 + s;
+  
+  const video = document.getElementById('videoPlayer');
+  if (video.src) {
+    video.currentTime = seconds;
+    video.play().catch(()=>{});
+  }
+  
+  renderTranscript();
+  document.getElementById(`card-${idx}`)?.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function onVideoTimeUpdate() {
+  const video = document.getElementById('videoPlayer');
+  const currentSec = video.currentTime;
+  // 找到当前播放位置对应的卡片
+  let newActive = -1;
+  for (let i = 0; i < transcriptData.length; i++) {
+    const [m, s] = transcriptData[i].ts.split(':').map(Number);
+    const cardSec = m * 60 + s;
+    if (currentSec >= cardSec - 0.5) newActive = i;
+  }
+  if (newActive !== activeCardIdx) {
+    activeCardIdx = newActive;
+    renderTranscript();
+    document.getElementById(`card-${newActive}`)?.scrollIntoView({behavior:'smooth',block:'center'});
+  }
+}
+
+function onVideoLoaded() {
+  const vp = document.getElementById('videoPlayer');
+  vp.style.display = 'block';
+  document.querySelector('.video-placeholder').style.display = 'none';
+  
+  // 检测视频比例，切换布局
+  const ratio = vp.videoWidth / vp.videoHeight;
+  const panelLeft = document.getElementById('panelLeft');
+  if (ratio < 1) {
+    // 竖屏视频：视频在左，对白在右
+    panelLeft.classList.add('layout-side');
+    vp.parentElement.style.aspectRatio = 'auto';
+    vp.parentElement.style.height = '100%';
+  } else {
+    // 横屏视频：视频在上，对白在下
+    panelLeft.classList.remove('layout-side');
+    vp.parentElement.style.aspectRatio = '16/9';
+    vp.parentElement.style.height = 'auto';
+  }
+}
+
+// ── 标记系统 ──
+function toggleMark(idx, type) {
+  const existing = marks.findIndex(m => m.id === idx);
+  if (existing >= 0) {
+    if (marks[existing].type === type) {
+      marks.splice(existing, 1); // 取消标记
+    } else {
+      marks[existing].type = type; // 切换标记类型
+    }
+  } else {
+    marks.push({ id:idx, timestamp:transcriptData[idx].ts, text:transcriptData[idx].text, type });
+  }
+  renderTranscript();
+  renderMarks();
+}
+
+function clearMarks() { marks = []; renderTranscript(); renderMarks(); }
+
+function removeMark(idx) {
+  marks = marks.filter(m => m.id !== idx);
+  renderTranscript();
+  renderMarks();
+}
+
+function saveMarksToLibrary() {
+  // 更新当前视频在素材库中的标记
+  const existing = materialLibrary.findIndex(m => m.url === currentVideoUrl);
+  if (existing >= 0) {
+    materialLibrary[existing].marks = [...marks];
+    materialLibrary[existing].analysis = analysisData;
+    materialLibrary[existing].transcript = transcriptData;
+    saveLibrary();
+    alert('标记已保存到素材库');
+  } else if (currentVideoUrl) {
+    saveCurrentToLibrary();
+    alert('已保存到素材库');
+  } else {
+    alert('请先分析视频');
+  }
+}
+
+function saveCurrentToLibrary() {
+  if (!currentVideoUrl) return;
+  const existing = materialLibrary.findIndex(m => m.url === currentVideoUrl);
+  const entry = {
+    url: currentVideoUrl,
+    title: currentVideoTitle || '未命名',
+    platform: detectPlatform(currentVideoUrl),
+    type: '视频分析',
+    date: new Date().toISOString().slice(0, 10),
+    marks: [...marks],
+    transcript: transcriptData,
+    analysis: analysisData,
+    videoUrl: videoServingUrl
+  };
+  if (existing >= 0) {
+    materialLibrary[existing] = entry;
+  } else {
+    materialLibrary.unshift(entry);
+  }
+  saveLibrary();
+}
+
+function addToLibrary(url, data) {
+  const existing = materialLibrary.findIndex(m => m.url === url);
+  const entry = {
+    url: url,
+    title: currentVideoTitle || (data.transcript && data.transcript[0] ? data.transcript[0].text.substring(0, 30) : '未命名'),
+    platform: detectPlatform(url),
+    type: '视频分析',
+    date: new Date().toISOString().slice(0, 10),
+    marks: [],
+    transcript: data.transcript || [],
+    analysis: data.analysis || {},
+    videoUrl: videoServingUrl
+  };
+  if (existing >= 0) {
+    materialLibrary[existing] = entry;
+  } else {
+    materialLibrary.unshift(entry);
+  }
+  saveLibrary();
+}
+
+function detectPlatform(url) {
+  if (url.includes('douyin.com')) return '抖音';
+  if (url.includes('bilibili.com') || url.includes('b23.tv')) return 'B站';
+  if (url.includes('youtube.com') || url.includes('youtu.be')) return 'YouTube';
+  if (url.includes('xiaohongshu.com') || url.includes('xhslink.com')) return '小红书';
+  return '其他';
+}
+
+function renderMarks() {
+  // 更新标记 badge
+  document.getElementById('marksBadge').textContent = marks.length;
+  
+  // 如果当前在标记 tab，刷新内容
+  const activeTab = document.querySelector('.tab.active');
+  if (activeTab && activeTab.textContent.includes('标记')) {
+    renderMarkTab();
+  }
+}
+
+function renderMarkTab() {
+  const container = document.getElementById('analysisContent');
+  if (marks.length === 0) {
+    container.innerHTML = `
+      <div class="empty-state">
+        <span style="font-size:32px">🏷️</span>
+        <span>还没有标记</span>
+        <span style="font-size:11px;color:var(--text-dim)">在左侧对白卡片上悬停，点击 🪝 ⭐ ↗ 按钮标记</span>
+      </div>`;
+    return;
+  }
+  
+  const typeLabel = { hook:'🪝 好钩子', gold:'⭐ 金句', turn:'↗ 转折点' };
+  const hookMarks = marks.filter(m=>m.type==='hook');
+  const goldMarks = marks.filter(m=>m.type==='gold');
+  const turnMarks = marks.filter(m=>m.type==='turn');
+  
+  container.innerHTML = `
+    <div class="analysis-section">
+      <div class="mark-summary" style="margin-bottom:16px">
+        <span style="font-size:12px;color:var(--text-dim)">已标记 <b>${marks.length}</b> 条</span>
+        <div class="count-row">
+          <span class="count-item"><span class="mark-dot hook"></span> 好钩子 <b>${hookMarks.length}</b></span>
+          <span class="count-item"><span class="mark-dot gold"></span> 金句 <b>${goldMarks.length}</b></span>
+          <span class="count-item"><span class="mark-dot turn"></span> 转折点 <b>${turnMarks.length}</b></span>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;margin-bottom:12px">
+        <button class="btn primary small" onclick="saveMarksToLibrary()">💾 保存</button>
+        <button class="btn small" onclick="clearMarks()">🗑️ 清空</button>
+        <button class="btn small" onclick="exportMarks()">📋 导出</button>
+        <button class="btn small" onclick="exportFullReport()">📄 导出完整报告</button>
+      </div>
+      ${marks.map(m => `
+        <div class="marked-item" style="background:var(--card-bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:6px;cursor:pointer;display:flex;gap:10px;align-items:flex-start">
+          <div style="flex:1" onclick="seekTo(${m.id})">
+            <span class="ts" style="color:var(--accent);font-family:monospace;font-size:12px">${m.timestamp}</span>
+            <span style="margin-left:8px;font-size:11px;color:var(--${m.type==='hook'?'green':m.type==='gold'?'yellow':'red'})">${typeLabel[m.type]}</span>
+            <div style="margin-top:4px;font-size:13px;line-height:1.4">${m.text}</div>
+          </div>
+          <button onclick="event.stopPropagation();removeMark(${m.id})" style="background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:14px;padding:2px 6px" title="删除">✕</button>
+        </div>
+      `).join('')}
+    </div>`;
+}
+
+// ── 导出 ──
+function exportMarks() {
+  if (marks.length === 0) { alert('还没有标记内容'); return; }
+  const typeLabel = { hook:'好钩子', gold:'金句', turn:'转折点' };
+  const text = marks.map(m => `[${m.timestamp}] [${typeLabel[m.type]}] ${m.text}`).join('\n');
+  const blob = new Blob([text], {type:'text/plain'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = `marks_${new Date().toISOString().slice(0,10)}.txt`;
+  a.click();
+}
+
+function exportFullReport() {
+  if (!analysisData.overview) { alert('还没有分析数据'); return; }
+  const ad = analysisData;
+  const sa = ad.scriptAnalysis || {};
+  const cm = ad.cinematography || {};
+  
+  let text = `# 视频分析报告\n\n> 生成时间：${new Date().toLocaleString()}\n\n---\n\n## 📊 内容总览\n\n**一句话总结：**${ad.overview.oneLiner}\n\n**目标受众：**${ad.overview.audience}\n\n**核心痛点：**${ad.overview.painPoints}\n\n**核心观点：**${ad.overview.viewpoint}\n\n**认知转化：**${ad.overview.cognition}\n\n---\n\n## 🎬 脚本解析\n\n`;
+  (sa.acts||[]).forEach(a => text += `### ${a.name} (${a.timeRange})\n\n- **叙事功能：**${a.narrativeFunction}\n- **人物动态：**${a.characterDynamics}\n- **戏剧张力：**${a.dramaticTension}/10\n${(a.keyMoments||[]).map(m => `- [${m.ts}] ${m.desc}`).join('\n')}\n\n`);
+  if (sa.emotionCurve) text += `**情绪曲线：**${sa.emotionCurve}\n\n`;
+  
+  text += `---\n\n## 📋 复刻模板\n\n`;
+  const tp = ad.template || {};
+  (tp.templates||ad.templates||[]).forEach(t => text += `### ${t.name}\n${t.desc}\n\n**公式：**${(t.formula||'').replace(/【(.*?)】/g,'【$1】')}\n\n`);
+  
+  text += `---\n\n## 🎥 镜头&声音\n\n`;
+  if (cm.disclaimer) text += `> ${cm.disclaimer}\n\n`;
+  const c = cm.cinematography||{}; const lc=cm.lightingColor||{}; const sd=cm.soundDesign||{}; const ds=cm.directorStyle||{};
+  text += `**景别策略：**${c.shotTypes}\n**构图策略：**${c.composition}\n**摄影机运动：**${c.cameraMovement}\n\n**光线风格：**${lc.lightingMood}\n**色彩策略：**${lc.colorPalette}\n**视觉节奏：**${lc.visualRhythm}\n\n**BGM：**${sd.bgm}\n**环境音：**${sd.ambient}\n**对白风格：**${sd.dialogueStyle}\n\n**美学取向：**${ds.aesthetic}\n**叙事签名：**${ds.narrativeSignature}\n`;
+  
+  text += `\n---\n\n## ⭐ 三项评分\n\n- Hook设计：${ad.scores.hook.value}/100 — ${ad.scores.hook.reason}\n- 结构设计：${ad.scores.structure.value}/100 — ${ad.scores.structure.reason}\n- 表达效果：${ad.scores.expression.value}/100 — ${ad.scores.expression.reason}\n`;
+  
+  const blob = new Blob([text], {type:'text/markdown'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = `video_report_${new Date().toISOString().slice(0,10)}.md`;
+  a.click();
+}
+
+// ── 分析面板切换 ──
+function switchTab(tab) {
+  const tabNames = ['overview','script','template','cinematography','score','marks'];
+  document.querySelectorAll('.tab').forEach((t,i) => {
+    t.classList.toggle('active', tabNames[i] === tab);
+  });
+  if (tab === 'marks') {
+    renderMarkTab();
+  } else {
+    renderTabContent(tab);
+  }
+}
+
+function renderTabContent(tab) {
+  const container = document.getElementById('analysisContent');
+  const ad = analysisData;
+  
+  if (!ad.overview) {
+    container.innerHTML = '<div class="empty-state"><span>请先加载分析数据</span></div>';
+    return;
+  }
+  
+  switch(tab) {
+    case 'overview':
+      container.innerHTML = `
+        <div class="analysis-section">
+          <h3>📌 一句话总结</h3>
+          <p style="font-size:14px;line-height:1.6">${ad.overview.oneLiner}</p>
+        </div>
+        <div class="analysis-section">
+          <h3>🎯 目标受众</h3>
+          <p style="font-size:14px;line-height:1.6">${ad.overview.audience}</p>
+        </div>
+        <div class="analysis-section">
+          <h3>💢 核心痛点</h3>
+          <p style="font-size:14px;line-height:1.6">${ad.overview.painPoints}</p>
+        </div>
+        <div class="analysis-section">
+          <h3>💡 核心观点</h3>
+          <p style="font-size:14px;line-height:1.6">${ad.overview.viewpoint}</p>
+        </div>
+        <div class="analysis-section">
+          <h3>🧠 认知转化</h3>
+          <p style="font-size:14px;line-height:1.6">${ad.overview.cognition}</p>
+        </div>`;
+      break;
+      
+    case 'script': {
+      const sa = ad.scriptAnalysis || {};
+      const acts = sa.acts || [];
+      const tensionBar = (v) => `<span style="display:inline-block;width:${v*10}px;height:8px;border-radius:4px;background:linear-gradient(90deg,var(--green),var(--yellow),var(--red));opacity:${0.3+v*0.07}"></span>`;
+      container.innerHTML = `
+        <div class="analysis-section">
+          <h3>🎬 脚本解析 · 叙事结构</h3>
+          ${acts.map(a => `
+            <div class="template-card" style="border-left:3px solid var(--accent)">
+              <h4>${a.name} <span style="font-weight:normal;font-size:11px;color:var(--accent)">${a.timeRange||''}</span></h4>
+              <div class="desc" style="margin:6px 0"><b>叙事功能：</b>${a.narrativeFunction||''}</div>
+              <div style="font-size:12px;color:var(--text-dim);margin:4px 0"><b>人物动态：</b>${a.characterDynamics||''}</div>
+              <div style="font-size:11px;margin:6px 0">戏剧张力：${tensionBar(a.dramaticTension||5)} <span style="color:var(--text-dim)">${a.dramaticTension||5}/10</span></div>
+              ${(a.keyMoments||[]).map(m => `<div style="font-size:12px;margin:3px 0;padding-left:12px"><span style="color:var(--accent);font-family:monospace">${m.ts||''}</span> ${m.desc||''}</div>`).join('')}
+            </div>
+          `).join('')}
+          ${sa.emotionCurve ? `<div class="analysis-section"><h3>📈 情绪曲线</h3><p style="font-size:14px;line-height:1.6">${sa.emotionCurve}</p></div>` : ''}
+          ${(sa.techniques||[]).length ? `
+            <div class="analysis-section"><h3>🎯 叙事技巧</h3>
+              ${sa.techniques.map(t => `<div class="template-card"><h4>${t.name||''}</h4><div class="desc">📍 ${t.usage||''}</div><div style="font-size:12px;color:var(--accent);margin-top:4px">✨ ${t.effect||''}</div></div>`).join('')}
+            </div>` : ''}
+        </div>`;
+      break;
+    }
+      
+    case 'template': {
+      const tp = ad.template || {};
+      const templates = tp.templates || ad.templates || [];
+      const re = tp.reusableElements || {};
+      container.innerHTML = `
+        <div class="analysis-section">
+          <h3>📋 可复刻模板</h3>
+          ${templates.map(t => `
+            <div class="template-card">
+              <h4>${t.name}</h4>
+              <div class="desc">${t.desc}</div>
+              ${t.formula ? `<div class="formula">${t.formula.replace(/【(.*?)】/g, '<span class="placeholder">【$1】</span>')}</div>` : ''}
+            </div>
+          `).join('')}
+          ${re.scriptPattern ? `<div class="analysis-section"><h3>📝 脚本模式</h3><p style="font-size:14px;line-height:1.6">${re.scriptPattern}</p></div>` : ''}
+          ${re.hookTechnique ? `<div class="analysis-section"><h3>🪝 Hook 技巧</h3><p style="font-size:14px;line-height:1.6">${re.hookTechnique}</p></div>` : ''}
+          ${re.topicAngle ? `<div class="analysis-section"><h3>🎯 话题切入点</h3><p style="font-size:14px;line-height:1.6">${re.topicAngle}</p></div>` : ''}
+          ${(re.viralFactors||[]).length ? `<div class="analysis-section"><h3>🔥 爆款因素</h3>${re.viralFactors.map(v=>`<div style="font-size:13px;padding:4px 0">• ${v}</div>`).join('')}</div>` : ''}
+        </div>`;
+      break;
+    }
+      
+    case 'cinematography': {
+      const cm = ad.cinematography || {};
+      const c = cm.cinematography || {};
+      const lc = cm.lightingColor || {};
+      const sd = cm.soundDesign || {};
+      const ds = cm.directorStyle || {};
+      container.innerHTML = `
+        <div class="analysis-section">
+          ${cm.disclaimer ? `<div style="background:#1a1a0a;border:1px solid var(--yellow);border-radius:6px;padding:8px 14px;margin-bottom:12px;font-size:12px;color:var(--yellow)">${cm.disclaimer}</div>` : ''}
+          
+          <h3>🎥 镜头语言推断</h3>
+          <div class="template-card"><div class="field"><div class="field-label">景别策略</div><div class="field-value">${c.shotTypes||'—'}</div></div></div>
+          <div class="template-card"><div class="field"><div class="field-label">构图策略</div><div class="field-value">${c.composition||'—'}</div></div></div>
+          <div class="template-card"><div class="field"><div class="field-label">摄影机运动</div><div class="field-value">${c.cameraMovement||'—'}</div></div></div>
+          
+          <h3 style="margin-top:16px">🎨 光线与色彩</h3>
+          <div class="template-card"><div class="field"><div class="field-label">光线风格</div><div class="field-value">${lc.lightingMood||'—'}</div></div></div>
+          <div class="template-card"><div class="field"><div class="field-label">色彩策略</div><div class="field-value">${lc.colorPalette||'—'}</div></div></div>
+          <div class="template-card"><div class="field"><div class="field-label">视觉节奏</div><div class="field-value">${lc.visualRhythm||'—'}</div></div></div>
+          
+          <h3 style="margin-top:16px">🔊 声音设计</h3>
+          <div class="template-card"><div class="field"><div class="field-label">BGM</div><div class="field-value">${sd.bgm||'—'}</div></div></div>
+          <div class="template-card"><div class="field"><div class="field-label">环境音</div><div class="field-value">${sd.ambient||'—'}</div></div></div>
+          <div class="template-card"><div class="field"><div class="field-label">对白风格</div><div class="field-value">${sd.dialogueStyle||'—'}</div></div></div>
+          <div class="template-card"><div class="field"><div class="field-label">字幕设计</div><div class="field-value">${sd.subtitleDesign||'—'}</div></div></div>
+          
+          <h3 style="margin-top:16px">🎬 导演风格</h3>
+          <div class="template-card"><div class="field"><div class="field-label">美学取向</div><div class="field-value">${ds.aesthetic||'—'}</div></div></div>
+          <div class="template-card"><div class="field"><div class="field-label">叙事签名</div><div class="field-value">${ds.narrativeSignature||'—'}</div></div></div>
+          <div class="template-card"><div class="field"><div class="field-label">文化编码</div><div class="field-value">${ds.culturalEncoding||'—'}</div></div></div>
+        </div>`;
+      break;
+    }
+      
+    case 'score':
+      container.innerHTML = `
+        <div class="analysis-section">
+          <h3>⭐ 三项评分</h3>
+          <div class="score-row">
+            <div class="score-card">
+              <div class="label">🪝 Hook 设计</div>
+              <div class="value high">${ad.scores.hook.value}</div>
+              <div class="reason">${ad.scores.hook.reason}</div>
+            </div>
+            <div class="score-card">
+              <div class="label">🏗️ 结构设计</div>
+              <div class="value high">${ad.scores.structure.value}</div>
+              <div class="reason">${ad.scores.structure.reason}</div>
+            </div>
+            <div class="score-card">
+              <div class="label">💬 表达效果</div>
+              <div class="value mid">${ad.scores.expression.value}</div>
+              <div class="reason">${ad.scores.expression.reason}</div>
+            </div>
+          </div>
+        </div>`;
+      break;
+  }
+}
+
+// ── 从 URL 分析 ──
+async function analyzeFromUrl() {
+  const url = document.getElementById('urlInput').value.trim();
+  if (!url) { alert('请粘贴视频链接'); return; }
+  
+  // 自动保存上一条视频的标记和结果
+  if (currentVideoUrl && currentVideoUrl !== url && (marks.length > 0 || transcriptData.length > 0)) {
+    saveCurrentToLibrary();
+  }
+  
+  setStatus('running', '下载视频并转写中...');
+  switchTab('overview');
+  document.getElementById('analysisContent').innerHTML = `
+    <div class="empty-state">
+      <span style="font-size:32px">📥</span>
+      <span>正在处理视频...</span>
+      <span style="font-size:11px;color:var(--text-dim)">${url}</span>
+    </div>`;
+  
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 60000); // 60s 超时
+  
+  try {
+    const resp = await fetch('/api/analyze', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({url: url}),
+      signal: controller.signal
+    });
+    clearTimeout(timeoutId);
+    
+    const data = await resp.json();
+    
+    if (data.error) {
+      setStatus('done', '⚠️ 处理失败');
+      document.getElementById('analysisContent').innerHTML = `
+        <div class="empty-state">
+          <span style="font-size:32px">⚠️</span>
+          <span>${data.error}</span>
+          <span style="font-size:11px;color:var(--text-dim)">小提示：用右边「🧠 Demo 深度分析」体验完整功能</span>
+        </div>`;
+      return;
+    }
+    
+    if (data.transcript && data.transcript.length > 0) {
+      transcriptData = data.transcript;
+      renderTranscript();
+      updateCardCount();
+    }
+    
+    if (data.analysis && data.analysis.overview) {
+      analysisData = normalizeAnalysis(data.analysis);
+      // 设置视频播放源
+      if (data.video_url) {
+        videoServingUrl = data.video_url;
+        const vp = document.getElementById('videoPlayer');
+        vp.src = data.video_url;
+        vp.style.display = 'block';
+        document.querySelector('.video-placeholder').style.display = 'none';
+      }
+      // 清空旧视频的标记
+      marks = [];
+      currentVideoUrl = url;
+      
+      // 自动收录到素材库
+      addToLibrary(url, data);
+      
+      setStatus('done', '✅ 分析完成');
+    } else {
+      setStatus('done', '⚠️ 转写成功但分析未完成');
+    }
+    
+  } catch(e) {
+    clearTimeout(timeoutId);
+    const isTimeout = e.name === 'AbortError';
+    const msg = isTimeout ? '请求超时（>60秒）。视频下载或转写耗时过长，请用「🧠 Demo 深度分析」体验' : e.message;
+    setStatus('done', '⚠️ ' + (isTimeout ? '请求超时' : '处理失败'));
+    document.getElementById('analysisContent').innerHTML = `
+      <div class="empty-state">
+        <span style="font-size:32px">${isTimeout ? '⏱️' : '🔌'}</span>
+        <span>${isTimeout ? '请求超时' : '连接失败'}</span>
+        <span style="font-size:13px;color:var(--text-dim);margin-top:8px">${msg}</span>
+        <span style="font-size:11px;color:var(--text-dim);margin-top:12px">💡 点击「🧠 Demo 深度分析」用演示数据测试完整功能</span>
+      </div>`;
+  }
+}
+
+// ── DeepSeek 分析（Demo 数据）──
+async function analyzeWithDeepSeek() {
+  setStatus('running', 'DeepSeek 分析中...');
+  
+  // 切换到 overview tab 显示加载状态
+  switchTab('overview');
+  document.getElementById('analysisContent').innerHTML = `
+    <div class="empty-state">
+      <span style="font-size:32px">🧠</span>
+      <span>DeepSeek V4 Pro 正在分析...</span>
+      <span style="font-size:11px;color:var(--text-dim)">总览 → 脚本解析 → 复刻模板 → 镜头&声音 → 评分</span>
+    </div>`;
+  
+  try {
+    const resp = await fetch('/api/analyze', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({transcript: transcriptData})
+    });
+    
+    if (!resp.ok) {
+      const err = await resp.json();
+      throw new Error(err.error || 'API error');
+    }
+    
+    const data = await resp.json();
+    
+    // 用真实分析结果更新数据
+    if (data.analysis && data.analysis.overview) {
+      analysisData = normalizeAnalysis(data.analysis);
+      setStatus('done', '✅ DeepSeek 分析完成');
+    } else {
+      setStatus('done', '⚠️ 分析返回为空，使用 Demo 数据');
+    }
+    
+    // 更新转录数据（如果有新的）
+    if (data.transcript && data.transcript.length > 0) {
+      transcriptData = data.transcript;
+      renderTranscript();
+      updateCardCount();
+    }
+    
+    renderTabContent('overview');
+    
+  } catch(e) {
+    console.error('DeepSeek analysis failed:', e);
+    setStatus('done', '⚠️ API 不可用，显示 Demo 数据');
+    renderTabContent('overview');
+  }
+}
+
+function setStatus(state, msg) {
+  const icons = { idle:'idle', running:'running', done:'done' };
+  document.getElementById('statusBar').innerHTML = 
+    `<span class="dot ${icons[state]}"></span> ${msg}`;
+}
+
+// 启动
+loadLibrary();
+loadDemo();
+renderTabContent('overview');
+</script>
+</body>
+</html>

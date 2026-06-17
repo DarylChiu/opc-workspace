@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chord Builder - Hand Gesture V3</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: #080810;
+    font-family: 'SF Pro Display', -apple-system, sans-serif;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    user-select: none;
+  }
+
+  #video-bg {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scaleX(-1);
+    opacity: 1;
+    z-index: 0;
+  }
+
+  #overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+
+  /* Chord chart top bar */
+  #chord-chart {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 55px;
+    background: rgba(8,8,16,0.92);
+    backdrop-filter: blur(20px);
+    display: flex;
+    align-items: center;
+    padding: 0 40px;
+    z-index: 20;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    gap: 25px;
+  }
+  #chord-chart .label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.25);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  #chord-chart .chords-line {
+    font-size: 18px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.15);
+    letter-spacing: 1px;
+  }
+
+  /* Combined chord display */
+  #chord-display {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, calc(-50% - 250px));
+    font-size: 180px;
+    font-weight: 900;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 2px;
+    transition: all 0.35s ease;
+    pointer-events: none;
+    text-shadow: 0 0 30px rgba(255,255,255,0.05);
+    text-align: center;
+    line-height: 1;
+    z-index: 15;
+  }
+  #chord-display.active {
+    color: rgba(150,255,200,0.95);
+    text-shadow: 0 0 80px rgba(150,255,200,0.6), 0 0 180px rgba(150,255,200,0.2);
+  }
+
+  /* Circle zones */
+  #circles-container {
+    display: flex;
+    gap: 600px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .circle-wrapper {
+    position: relative;
+    width: 450px;
+    height: 450px;
+  }
+  .circle-wrapper canvas {
+    width: 450px;
+    height: 450px;
+  }
+  .circle-wrapper .label {
+    position: absolute;
+    bottom: -38px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 13px;
+    color: rgba(255,255,255,0.28);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+  .circle-wrapper .hint {
+    position: absolute;
+    top: -33px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    color: rgba(255,255,255,0.18);
+    letter-spacing: 2px;
+    white-space: nowrap;
+  }
+
+  /* Status */
+  #status {
+    position: fixed;
+    top: 68px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    color: rgba(255,255,255,0.25);
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  #status-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #ff4444;
+    transition: all 0.5s;
+  }
+  #status-dot.ready { background: #44ff88; box-shadow: 0 0 12px rgba(68,255,136,0.5); }
+
+  /* Camera selector */
+  #cam-selector {
+    position: fixed;
+    top: 70px;
+    right: 30px;
+    z-index: 25;
+    padding: 6px 14px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.5);
+    border-radius: 18px;
+    font-size: 11px;
+    outline: none;
+    cursor: pointer;
+  }
+  #cam-selector option { background: #1a1a2e; color: #fff; }
+
+  /* Bottom controls */
+  #controls {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 14px;
+    z-index: 20;
+  }
+  .ctrl-btn {
+    padding: 9px 22px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.04);
+    color: rgba(255,255,255,0.5);
+    border-radius: 22px;
+    font-size: 12px;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s;
+    letter-spacing: 1px;
+  }
+  .ctrl-btn:hover {
+    border-color: rgba(255,255,255,0.25);
+    color: #fff;
+    background: rgba(255,255,255,0.08);
+  }
+
+  #strum-indicator {
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px;
+    color: rgba(100,255,200,0.4);
+    z-index: 15;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+
+  #tip {
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    color: rgba(255,255,255,0.15);
+    z-index: 15;
+    pointer-events: none;
+  }
+
+  @media (max-width: 900px) {
+    .circle-wrapper { width: 220px; height: 220px; }
+    .circle-wrapper canvas { width: 220px; height: 220px; }
+    #circles-container { gap: 40px; }
+    #chord-display { font-size: 80px; }
+  }
+
+  /* Chord diagram panel */
+  #chord-diagram-panel {
+    position: fixed;
+    bottom: 90px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 25;
+    background: rgba(8,8,16,0.85);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 16px;
+    width: 180px;
+    display: none;
+    transition: opacity 0.3s;
+  }
+  #chord-diagram-panel.show { display: block; }
+  #chord-diagram-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.7);
+    text-align: center;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  }
+  #chord-diagram-svg { width: 100%; height: auto; }
+</style>
+</head>
+<body>
+
+<video id="video-bg" autoplay playsinline></video>
+
+<div id="chord-chart">
+  <span class="label">Fly Me To The Moon</span>
+  <span class="chords-line" id="chord-line">[ 待加载和弦谱 ]</span>
+</div>
+
+<select id="cam-selector"><option value="">Detecting cameras...</option></select>
+
+<div id="status">
+  <div id="status-dot"></div>
+  <span id="status-text">Initializing...</span>
+</div>
+
+<div id="overlay">
+  <div id="chord-display">—</div>
+  <div id="circles-container">
+    <div class="circle-wrapper">
+      <div class="hint">&#9679; 和弦类型</div>
+      <canvas id="circle-type"></canvas>
+      <div class="label">Chord Type</div>
+    </div>
+    <div class="circle-wrapper">
+      <div class="hint">&#9679; 根音</div>
+      <canvas id="circle-root"></canvas>
+      <div class="label">Root Note</div>
+    </div>
+  </div>
+</div>
+
+<div id="strum-indicator"></div>
+<div id="tip">
+  左手和弦类型 + 右手根音 = 完整和弦 ✦ 离开圆盘停止
+</div>
+
+<div id="controls">
+  <button class="ctrl-btn" onclick="startCamera()">&#8635; Refresh Camera</button>
+</div>
+
+<!-- Chord diagram panel -->
+<div id="chord-diagram-panel">
+  <div id="chord-diagram-title"></div>
+  <svg id="chord-diagram-svg" viewBox="0 0 200 240"></svg>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.3/camera_utils.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4/hands.js"></script>
+
+<script>
+// ============ CHORD DEFINITIONS ============
+const CHORD_TYPES = ['maj', 'm', '7', 'm7', 'sus4'];
+const ROOT_NOTES = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
+const NUM_TYPES = CHORD_TYPES.length;
+const NUM_ROOTS = ROOT_NOTES.length;
+const START_OFFSET = -Math.PI / 2;
+
+// ============ AUDIO ENGINE ============
+// Priority: load real samples → fallback to synthesis
+
+let audioCtx = null;
+const STRUM_DURATION = 1500;
+
+// Sample cache: chordName → AudioBuffer
+const sampleCache = {};
+let samplesLoaded = false;
+
+function getAC() {
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+  return audioCtx;
+}
+
+// Preload all samples
+async function preloadSamples() {
+  const ctx = getAC();
+  let loaded = 0, total = 0;
+
+  for (const root of ROOT_NOTES) {
+    for (const type of CHORD_TYPES) {
+      const name = buildChordName(root, type);
+      total++;
+      try {
+        const resp = await fetch(`samples/${name}.wav`);
+        if (resp.ok) {
+          const arrayBuf = await resp.arrayBuffer();
+          const audioBuf = await ctx.decodeAudioData(arrayBuf);
+          sampleCache[name] = audioBuf;
+          loaded++;
+        }
+      } catch(e) {
+        // Sample not found — will use synthesis
+      }
+    }
+  }
+  samplesLoaded = true;
+  console.log(`Loaded ${loaded}/${total} chord samples`);
+}
+
+function playStrum(root, type) {
+  const ctx = getAC();
+  const name = buildChordName(root, type);
+
+  // Try real sample first
+  if (sampleCache[name]) {
+    const source = ctx.createBufferSource();
+    source.buffer = sampleCache[name];
+    const gain = ctx.createGain();
+    gain.gain.setValueAtTime(0.8, ctx.currentTime);
+    source.connect(gain);
+    gain.connect(ctx.destination);
+    source.start(ctx.currentTime);
+    return;
+  }
+
+  // Fallback: simple synth strum
+  playSynthStrum(ctx, root, type);
+}
+
+// Minimal fallback synth — electronic piano / organ style
+function playSynthStrum(ctx, root, type) {
+  const noteMap = { C:261.63, D:293.66, E:329.63, F:349.23, G:392.00, A:440.00, B:493.88 };
+  const base = noteMap[root];
+  const intervals = {
+    'maj':[1,5/4,3/2,2],'m':[1,6/5,3/2,2],'7':[1,5/4,3/2,7/4],
+    'm7':[1,6/5,3/2,7/4],'sus4':[1,4/3,3/2,2]
+  };
+  const notes = intervals[type] || intervals['maj'];
+  const now = ctx.currentTime;
+  const dur = 1.5;
+
+  const master = ctx.createGain();
+  master.gain.setValueAtTime(0.35, now);
+  master.gain.linearRampToValueAtTime(0.25, now + 0.4);
+  master.gain.exponentialRampToValueAtTime(0.001, now + dur);
+  master.connect(ctx.destination);
+
+  // Subtle stereo spread
+  const merger = ctx.createChannelMerger(2);
+  merger.connect(master);
+  const lGain = ctx.createGain();
+  const rGain = ctx.createGain();
+  lGain.gain.value = 0.6;
+  rGain.gain.value = 0.6;
+
+  notes.forEach((int, i) => {
+    const freq = base * int;
+    const pan = (i / (notes.length - 1)) * 2 - 1; // Spread across stereo
+    const t = now + i * 0.02;
+
+    // Main tone: triangle wave (warm, organ-like)
+    addVoice(ctx, freq, t, dur, 'triangle', pan, 0.11);
+
+    // Organ overtone: octave up, softer
+    addVoice(ctx, freq * 2, t, dur, 'sine', pan, 0.04);
+
+    // Subtle fifth overtone for richness
+    addVoice(ctx, freq * 3.01, t, dur, 'sine', pan, 0.015);
+
+    // Sub-bass for body
+    if (freq < 300) {
+      addVoice(ctx, freq * 0.5, t, dur, 'sine', pan, 0.06);
+    }
+  });
+}
+
+function addVoice(ctx, freq, start, dur, waveform, pan, vol) {
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  const panner = ctx.createStereoPanner();
+
+  osc.type = waveform;
+  osc.frequency.value = freq + (Math.random() - 0.5) * 0.8;
+  panner.pan.value = pan;
+
+  // ADSR envelope
+  gain.gain.setValueAtTime(0, start);
+  gain.gain.linearRampToValueAtTime(vol * 1.1, start + 0.02);  // Attack
+  gain.gain.linearRampToValueAtTime(vol * 0.7, start + 0.3);    // Decay
+  gain.gain.setValueAtTime(vol * 0.5, start + 0.5);              // Sustain
+  gain.gain.exponentialRampToValueAtTime(0.001, start + dur);     // Release
+
+  osc.connect(gain);
+  gain.connect(panner);
+  panner.connect(ctx.destination);
+  osc.start(start);
+  osc.stop(start + dur + 0.1);
+}
+
+// ============ STRUM LOGIC ============
+let activeChordKey = null;
+let fingerLockedUntil = 0; // Timestamp when current strum ends, don't accept new input before this
+const STRUM_COOLDOWN = 1800; // ms between chord changes
+
+function scheduleStrum(root, type) {
+  const key = `${root}:${type}`;
+  const now = Date.now();
+
+  // Cooldown: don't accept new input during strum
+  if (now < fingerLockedUntil) return;
+
+  // Same chord, skip
+  if (key === activeChordKey) return;
+
+  // New chord — lock input, play strum
+  activeChordKey = key;
+  fingerLockedUntil = now + STRUM_COOLDOWN;
+  playStrum(root, type);
+
+  // Update indicator
+  const indicator = document.getElementById('strum-indicator');
+  indicator.textContent = `♫ ${buildChordName(root, type)}  strumming...`;
+  indicator.style.opacity = '1';
+  setTimeout(() => { indicator.style.opacity = '0.3'; }, 1200);
+
+  // After strum duration, if no new chord triggered, allow re-trigger
+  // (but don't auto-repeat — only trigger on new detection)
+}
+
+function buildChordName(root, type) {
+  if (type === 'maj') return root;
+  if (type === 'm') return root + 'm';
+  if (type === '7') return root + '7';
+  if (type === 'm7') return root + 'm7';
+  if (type === 'sus4') return root + 'sus4';
+  return root;
+}
+
+// ============ CHORD DIAGRAM DATABASE ============
+// frets: [E, A, D, G, B, e], 0=open, -1=muted, 1-15=fret
+// barres: [{fret, from, to}] where from/to are 0-based string indices (0=E, 5=e)
+const CHORD_DIAGRAMS = {
+  // C shapes
+  'C':     { frets:[-1,3,2,0,1,0] },
+  'Cm':    { frets:[-1,3,5,5,4,3], barres:[{fret:3,from:5,to:1}] },
+  'C7':    { frets:[-1,3,2,3,1,0] },
+  'Cm7':   { frets:[-1,3,5,3,4,3], barres:[{fret:3,from:5,to:1}] },
+  'Csus4': { frets:[-1,3,3,0,1,1] },
+  // D shapes
+  'D':     { frets:[-1,-1,0,2,3,2] },
+  'Dm':    { frets:[-1,-1,0,2,3,1] },
+  'D7':    { frets:[-1,-1,0,2,1,2] },
+  'Dm7':   { frets:[-1,-1,0,2,1,1] },
+  'Dsus4': { frets:[-1,-1,0,2,3,3] },
+  // E shapes
+  'E':     { frets:[0,2,2,1,0,0] },
+  'Em':    { frets:[0,2,2,0,0,0] },
+  'E7':    { frets:[0,2,0,1,0,0] },
+  'Em7':   { frets:[0,2,0,0,0,0] },
+  'Esus4': { frets:[0,2,2,2,0,0] },
+  // F shapes (barre 1st fret)
+  'F':     { frets:[1,3,3,2,1,1], barres:[{fret:1,from:5,to:0}] },
+  'Fm':    { frets:[1,3,3,1,1,1], barres:[{fret:1,from:5,to:0}] },
+  'F7':    { frets:[1,3,1,2,1,1], barres:[{fret:1,from:5,to:4}] },
+  'Fm7':   { frets:[1,3,1,1,1,1], barres:[{fret:1,from:5,to:0}] },
+  'Fsus4': { frets:[1,3,3,3,1,1], barres:[{fret:1,from:5,to:0}] },
+  // G shapes
+  'G':     { frets:[3,2,0,0,0,3] },
+  'Gm':    { frets:[3,5,5,3,3,3], barres:[{fret:3,from:5,to:3}] },
+  'G7':    { frets:[3,2,0,0,0,1] },
+  'Gm7':   { frets:[3,5,3,3,3,3], barres:[{fret:3,from:5,to:3}] },
+  'Gsus4': { frets:[3,3,0,0,1,3] },
+  // A shapes
+  'A':     { frets:[-1,0,2,2,2,0] },
+  'Am':    { frets:[-1,0,2,2,1,0] },
+  'A7':    { frets:[-1,0,2,0,2,0] },
+  'Am7':   { frets:[-1,0,2,0,1,0] },
+  'Asus4': { frets:[-1,0,2,2,3,0] },
+  // B shapes (barre 2nd fret)
+  'B':     { frets:[-1,2,4,4,4,2], barres:[{fret:2,from:5,to:2}] },
+  'Bm':    { frets:[-1,2,4,4,3,2], barres:[{fret:2,from:5,to:2}] },
+  'B7':    { frets:[-1,2,1,2,0,2] },
+  'Bm7':   { frets:[-1,2,4,2,3,2], barres:[{fret:2,from:5,to:2}] },
+  'Bsus4': { frets:[-1,2,2,4,5,2] },
+};
+
+function drawChordDiagram(chordName) {
+  const data = CHORD_DIAGRAMS[chordName];
+  const panel = document.getElementById('chord-diagram-panel');
+  const title = document.getElementById('chord-diagram-title');
+  const svg = document.getElementById('chord-diagram-svg');
+
+  if (!data) { panel.classList.remove('show'); return; }
+
+  title.textContent = chordName;
+  renderChordSVG(svg, data);
+  panel.classList.add('show');
+}
+
+function hideChordDiagram() {
+  document.getElementById('chord-diagram-panel').classList.remove('show');
+}
+
+function renderChordSVG(svg, data) {
+  const frets = data.frets;
+  const barres = data.barres || [];
+  // Find the range of frets to display
+  const usedFrets = frets.filter(f => f > 0);
+  const minFret = Math.min(...usedFrets, 1);
+  const maxFret = Math.max(...usedFrets, 3);
+  // Show 4 frets from minFret
+  let startFret = minFret;
+  if (maxFret - minFret > 3) startFret = Math.max(1, maxFret - 3);
+  if (minFret === 1 && maxFret <= 4) startFret = 1;
+
+  const padding = { top:30, bottom:20, left:25, right:15 };
+  const w = 200, h = 240;
+  const fretCount = 4;
+  const stringSpacing = (w - padding.left - padding.right) / 5;
+  const fretSpacing = (h - padding.top - padding.bottom) / fretCount;
+
+  // Offset strings inward slightly (high strings are thinner in real guitar)
+  let html = '';
+
+  // Background
+  html += `<rect x="0" y="0" width="${w}" height="${h}" fill="none"/>`;
+
+  // Frets (horizontal lines)
+  for (let i = 0; i <= fretCount; i++) {
+    const y = padding.top + i * fretSpacing;
+    html += `<line x1="${padding.left}" y1="${y}" x2="${w-padding.right}" y2="${y}" stroke="rgba(255,255,255,0.15)" stroke-width="${i===0?2:1}"/>`;
+  }
+
+  // Fret number (only if startFret > 1)
+  if (startFret > 1) {
+    html += `<text x="${padding.left-8}" y="${padding.top+fretSpacing/2+5}" text-anchor="end" fill="rgba(255,255,255,0.3)" font-size="11">${startFret}fr</text>`;
+  }
+
+  // Strings (vertical lines)
+  for (let s = 0; s < 6; s++) {
+    const x = padding.left + s * stringSpacing;
+    // Thicker bass strings
+    const sw = s <= 2 ? 2.2 : 1.4;
+    html += `<line x1="${x}" y1="${padding.top}" x2="${x}" y2="${padding.top+fretCount*fretSpacing}" stroke="rgba(255,255,255,0.25)" stroke-width="${sw}"/>`;
+    // String labels at top
+    html += `<text x="${x}" y="${padding.top-12}" text-anchor="middle" fill="rgba(255,255,255,0.15)" font-size="10" letter-spacing="1">${['E','A','D','G','B','e'][s]}</text>`;
+  }
+
+  // Muted/Open indicators at top
+  for (let s = 0; s < 6; s++) {
+    const x = padding.left + s * stringSpacing;
+    const y = padding.top;
+    if (frets[s] === -1) {
+      // Muted: X
+      html += `<text x="${x}" y="${y-18}" text-anchor="middle" fill="rgba(255,80,80,0.5)" font-size="11" font-weight="bold">X</text>`;
+    } else if (frets[s] === 0) {
+      // Open: O
+      html += `<circle cx="${x}" cy="${y-18}" r="5" fill="none" stroke="rgba(100,220,150,0.4)" stroke-width="1.5"/>`;
+    }
+  }
+
+  // Barre indicators
+  for (const barre of barres) {
+    const fy = padding.top + (barre.fret - startFret + 0.5) * fretSpacing;
+    const x1 = padding.left + Math.max(0, barre.from - 0.3) * stringSpacing;
+    const x2 = padding.left + Math.min(5, barre.to + 0.3) * stringSpacing;
+    html += `<line x1="${x1}" y1="${fy}" x2="${x2}" y2="${fy}" stroke="rgba(255,255,255,0.45)" stroke-width="8" stroke-linecap="round"/>`;
+  }
+
+  // Finger position dots
+  for (let s = 0; s < 6; s++) {
+    const fret = frets[s];
+    if (fret <= 0) continue;
+    const x = padding.left + s * stringSpacing;
+    const y = padding.top + (fret - startFret + 0.5) * fretSpacing;
+    const r = 7;
+    html += `<circle cx="${x}" cy="${y}" r="${r}" fill="rgba(150,255,200,0.7)" stroke="rgba(150,255,200,0.4)" stroke-width="1"/>`;
+  }
+
+  svg.innerHTML = html;
+}
+
+function triggerChord(root, type) {
+  const key = `${root}:${type}`;
+
+  // If same chord, skip
+  if (key === activeChordKey) return;
+
+  // Update display
+  const display = document.getElementById('chord-display');
+  const name = buildChordName(root, type);
+  display.textContent = name;
+  display.classList.remove('active');
+  void display.offsetWidth;
+  display.classList.add('active');
+
+  // Show chord diagram
+  drawChordDiagram(name);
+
+  // Schedule strum
+  scheduleStrum(root, type);
+}
+
+// ============ CAMERA ============
+let videoStream = null;
+
+async function listCameras() {
+  const select = document.getElementById('cam-selector');
+  try {
+    const tempStream = await navigator.mediaDevices.getUserMedia({ video: true });
+    tempStream.getTracks().forEach(t => t.stop());
+    const devices = await navigator.mediaDevices.enumerateDevices();
+    const cameras = devices.filter(d => d.kind === 'videoinput');
+    select.innerHTML = '';
+    if (cameras.length === 0) {
+      select.innerHTML = '<option>No cameras found</option>';
+      return null;
+    }
+    cameras.forEach((cam, idx) => {
+      const opt = document.createElement('option');
+      opt.value = cam.deviceId;
+      opt.text = cam.label || `Camera ${idx + 1}`;
+      select.appendChild(opt);
+    });
+    const insta = cameras.find(c => c.label.toLowerCase().includes('insta360'));
+    if (insta) select.value = insta.deviceId;
+    return cameras[0].deviceId;
+  } catch(e) {
+    select.innerHTML = '<option>Camera access denied</option>';
+    return null;
+  }
+}
+
+async function startCamera() {
+  if (videoStream) {
+    videoStream.getTracks().forEach(t => t.stop());
+    videoStream = null;
+  }
+  const select = document.getElementById('cam-selector');
+  const deviceId = select.value;
+  const video = document.getElementById('video-bg');
+
+  try {
+    const constraints = {
+      video: deviceId
+        ? { deviceId: { exact: deviceId }, width: 1280, height: 720 }
+        : { width: 1280, height: 720, facingMode: 'user' }
+    };
+    videoStream = await navigator.mediaDevices.getUserMedia(constraints);
+    video.srcObject = videoStream;
+    await video.play();
+    document.getElementById('status-dot').classList.add('ready');
+    document.getElementById('status-text').textContent = 'Camera ready';
+    return true;
+  } catch(e) {
+    document.getElementById('status-text').textContent = `Camera error: ${e.message}`;
+    return false;
+  }
+}
+
+document.getElementById('cam-selector').addEventListener('change', () => startCamera());
+
+// ============ CIRCLE DRAWING ============
+function drawCircle(canvasId, labels, numSectors, activeIdx) {
+  const canvas = document.getElementById(canvasId);
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const size = canvas.clientWidth;
+  canvas.width = size * dpr;
+  canvas.height = size * dpr;
+  ctx.scale(dpr, dpr);
+  ctx.clearRect(0, 0, size, size);
+
+  const cx = size / 2, cy = size / 2;
+  const outerR = size / 2 - 3;
+  const innerR = outerR * 0.15;
+  const sectorAngle = (2 * Math.PI) / numSectors;
+
+  const palette = [
+    [255, 110, 140], [255, 170, 90], [255, 220, 70],
+    [110, 220, 160], [80, 180, 255], [140, 120, 255],
+    [220, 110, 220],
+  ];
+
+  for (let i = 0; i < numSectors; i++) {
+    const startAngle = START_OFFSET + i * sectorAngle;
+    const endAngle = startAngle + sectorAngle;
+    const [r, g, b] = palette[i % palette.length];
+
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, outerR, startAngle, endAngle);
+    ctx.closePath();
+
+    const alpha = i === activeIdx ? 0.90 : 0.70;
+    ctx.fillStyle = `rgba(${r},${g},${b},${alpha})`;
+    ctx.fill();
+
+    ctx.strokeStyle = i === activeIdx
+      ? `rgba(${r},${g},${b},0.6)`
+      : 'rgba(255,255,255,0.05)';
+    ctx.lineWidth = i === activeIdx ? 3 : 1;
+    ctx.stroke();
+
+    const midAngle = startAngle + sectorAngle / 2;
+    const labelR = outerR * 0.6;
+    const lx = cx + Math.cos(midAngle) * labelR;
+    const ly = cy + Math.sin(midAngle) * labelR;
+    ctx.save();
+    ctx.translate(lx, ly);
+    ctx.fillStyle = i === activeIdx
+      ? 'rgba(255,255,255,0.95)'
+      : 'rgba(255,255,255,0.3)';
+    ctx.font = `bold ${i === activeIdx ? 19 : 17}px "SF Pro Display", sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(labels[i], 0, 0);
+    ctx.restore();
+  }
+
+  // Inner circle
+  ctx.beginPath();
+  ctx.arc(cx, cy, innerR, 0, 2 * Math.PI);
+  ctx.fillStyle = 'rgba(8,8,16,0.7)';
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  // Outer ring
+  ctx.beginPath();
+  ctx.arc(cx, cy, outerR, 0, 2 * Math.PI);
+  ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Center dot
+  ctx.beginPath();
+  ctx.arc(cx, cy, 4, 0, 2 * Math.PI);
+  ctx.fillStyle = 'rgba(255,255,255,0.2)';
+  ctx.fill();
+}
+
+// ============ SECTOR DETECTION ============
+function getSector(x, y, canvasId, numSectors) {
+  const canvas = document.getElementById(canvasId);
+  const rect = canvas.getBoundingClientRect();
+  const cx = rect.left + rect.width / 2;
+  const cy = rect.top + rect.height / 2;
+  const outerR = rect.width / 2;
+  const innerR = outerR * 0.15;
+
+  const dx = x - cx;
+  const dy = y - cy;
+  const dist = Math.sqrt(dx * dx + dy * dy);
+
+  if (dist < innerR || dist > outerR) return -1;
+
+  let angle = Math.atan2(dy, dx) - START_OFFSET;
+  if (angle < 0) angle += 2 * Math.PI;
+  return Math.floor(angle / (2 * Math.PI / numSectors)) % numSectors;
+}
+
+// ============ HAND TRACKING ============
+let prevRoot = -1, prevType = -1;
+let stableFrames = 0;
+const STABILITY_THRESHOLD = 5;
+
+function onHandResults(results) {
+  let activeRoot = -1, activeType = -1;
+  let anyHandInCircle = false;
+
+  if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
+    for (let h = 0; h < results.multiHandLandmarks.length; h++) {
+      const landmarks = results.multiHandLandmarks[h];
+      const handedness = results.multiHandedness[h];
+      const isLeft = handedness.label === 'Left';
+      const tip = landmarks[8];
+      const sx = (1 - tip.x) * window.innerWidth;
+      const sy = tip.y * window.innerHeight;
+
+      if (isLeft) {
+        const t = getSector(sx, sy, 'circle-type', NUM_TYPES);
+        if (t >= 0) { activeType = t; anyHandInCircle = true; }
+      } else {
+        const r = getSector(sx, sy, 'circle-root', NUM_ROOTS);
+        if (r >= 0) { activeRoot = r; anyHandInCircle = true; }
+      }
+
+      // Fallback: check both circles
+      if (activeType < 0) { const t2 = getSector(sx, sy, 'circle-type', NUM_TYPES); if (t2 >= 0) { activeType = t2; anyHandInCircle = true; } }
+      if (activeRoot < 0) { const r2 = getSector(sx, sy, 'circle-root', NUM_ROOTS); if (r2 >= 0) { activeRoot = r2; anyHandInCircle = true; } }
+    }
+  }
+
+  // Stop when no hand in any circle
+  if (!anyHandInCircle) {
+    activeChordKey = null;
+    stableFrames = 0;
+    hideChordDiagram();
+  }
+
+  // Stability check
+  if (activeRoot === prevRoot && activeType === prevType && activeRoot >= 0 && activeType >= 0) {
+    stableFrames++;
+  } else {
+    stableFrames = 0;
+  }
+  prevRoot = activeRoot;
+  prevType = activeType;
+
+  if (activeRoot >= 0 && activeType >= 0 && stableFrames >= STABILITY_THRESHOLD) {
+    triggerChord(ROOT_NOTES[activeRoot], CHORD_TYPES[activeType]);
+  }
+
+  drawCircle('circle-type', CHORD_TYPES, NUM_TYPES, activeType);
+  drawCircle('circle-root', ROOT_NOTES, NUM_ROOTS, activeRoot);
+}
+
+// ============ INIT ============
+async function init() {
+  // Preload guitar samples (async, doesn't block)
+  preloadSamples();
+
+  const camId = await listCameras();
+  if (camId) {
+    const ok = await startCamera();
+    if (!ok) return;
+  } else {
+    document.getElementById('status-text').textContent = 'No camera found';
+    return;
+  }
+
+  const hands = new Hands({
+    locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4/${file}`
+  });
+  hands.setOptions({
+    maxNumHands: 2,
+    modelComplexity: 1,
+    minDetectionConfidence: 0.6,
+    minTrackingConfidence: 0.5,
+  });
+  hands.onResults(onHandResults);
+
+  const video = document.getElementById('video-bg');
+  const camera = new Camera(video, {
+    onFrame: async () => { await hands.send({ image: video }); },
+    width: 640, height: 480,
+  });
+  camera.start();
+
+  document.getElementById('status-dot').classList.add('ready');
+  document.getElementById('status-text').textContent = 'Gesture tracking active';
+
+  drawCircle('circle-type', CHORD_TYPES, NUM_TYPES, -1);
+  drawCircle('circle-root', ROOT_NOTES, NUM_ROOTS, -1);
+}
+
+window.addEventListener('resize', () => {
+  drawCircle('circle-type', CHORD_TYPES, NUM_TYPES, -1);
+  drawCircle('circle-root', ROOT_NOTES, NUM_ROOTS, -1);
+});
+
+// Click anywhere to init audio context
+document.addEventListener('click', () => getAC(), { once: true });
+
+init();
+</script>
+</body>
+</html>

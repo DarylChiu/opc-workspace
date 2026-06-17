@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<title>Gosh Console</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a14;color:#ddd;font:13px/1.5 -apple-system,sans-serif;min-height:100vh}
+header{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 0;max-width:900px;margin:0 auto}
+h1{font-size:20px;color:#fff;letter-spacing:1px}
+.refresh{font-size:11px;color:rgba(255,255,255,.2)}
+
+nav{display:flex;gap:0;max-width:900px;margin:12px auto 0;padding:0 16px;border-bottom:1px solid rgba(255,255,255,.06)}
+.tab{flex:1;padding:12px 0;text-align:center;font-size:13px;color:rgba(255,255,255,.3);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;letter-spacing:1px;background:none;border-left:none;border-right:none;border-top:none}
+.tab:hover{color:rgba(255,255,255,.6)}
+.tab.sel{color:#fff;border-bottom-color:rgba(100,200,255,.6)}
+.tab .count{font-size:10px;color:rgba(100,200,255,.6);margin-left:4px}
+
+main{max-width:900px;margin:0 auto;padding:16px}
+.page{display:none}
+.page.show{display:block}
+
+/* Dashboard */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-bottom:20px}
+.card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:16px}
+.agent-name{font-size:15px;font-weight:600;margin-bottom:2px}
+.agent-role{font-size:10px;color:rgba(255,255,255,.25);margin-bottom:8px}
+.status{display:inline-block;padding:2px 8px;border-radius:12px;font-size:10px;font-weight:500;letter-spacing:.5px}
+.status.active,.status.ready{background:rgba(100,200,150,.1);color:rgba(100,200,150,.8);border:1px solid rgba(100,200,150,.2)}
+.status.working{background:rgba(80,160,255,.1);color:rgba(100,180,255,.8);border:1px solid rgba(80,160,255,.2)}
+.status.blocked{background:rgba(255,100,80,.1);color:rgba(255,120,100,.8);border:1px solid rgba(255,100,80,.2)}
+.status.pending{background:rgba(255,200,60,.08);color:rgba(255,200,60,.7);border:1px solid rgba(255,200,60,.15)}
+.progress-bar{height:3px;background:rgba(255,255,255,.05);border-radius:2px;margin:8px 0;overflow:hidden}
+.progress-fill{height:100%;border-radius:2px;transition:width .5s}
+.metric{display:flex;justify-content:space-between;font-size:10px;margin-top:4px}
+.metric .l{color:rgba(255,255,255,.2)}.metric .v{color:rgba(255,255,255,.45)}
+
+.section-title{font-size:12px;color:rgba(255,255,255,.25);letter-spacing:2px;margin:20px 0 10px;text-transform:uppercase}
+.task-row{display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(255,255,255,.02);border-radius:8px;margin-bottom:6px;font-size:12px}
+.task-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.task-dot.in_progress{background:rgba(80,160,255,.6)}
+.task-dot.pending{background:rgba(255,200,60,.5)}
+.task-dot.done{background:rgba(100,220,180,.5)}
+.task-dot.idle{background:rgba(255,255,255,.15)}
+.task-info{flex:1;min-width:0}
+.task-name{color:rgba(255,255,255,.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.task-meta{font-size:10px;color:rgba(255,255,255,.15);margin-top:1px}
+.alert-row{display:flex;align-items:flex-start;gap:8px;padding:8px 10px;margin-bottom:4px;border-radius:6px;font-size:11px}
+.alert-high{background:rgba(255,100,80,.06);border-left:2px solid rgba(255,100,80,.3)}
+.alert-med{background:rgba(255,200,60,.04);border-left:2px solid rgba(255,200,60,.2)}
+.alert-icon{font-size:14px;flex-shrink:0}
+.resolve-btn{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.25);font-size:10px;padding:3px 8px;border-radius:6px;cursor:pointer;white-space:nowrap;transition:all .2s}
+.resolve-btn:hover{background:rgba(100,255,150,.08);border-color:rgba(100,255,150,.2);color:rgba(100,255,150,.6)}
+
+.cost-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.cost-card{text-align:center;padding:14px;background:rgba(255,255,255,.02);border-radius:10px}
+.cost-card .amount{font-size:22px;font-weight:700;color:rgba(255,255,255,.5);margin-bottom:4px}
+.cost-card .label{font-size:10px;color:rgba(255,255,255,.15)}
+
+/* Dispatch */
+.disp-select{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.disp-agent{flex:1;min-width:80px;padding:12px 8px;border:1px solid rgba(255,255,255,.08);border-radius:12px;background:rgba(255,255,255,.02);color:#aaa;font-size:13px;cursor:pointer;text-align:center;transition:all .2s}
+.disp-agent:hover{border-color:rgba(255,255,255,.15);color:#fff}
+.disp-agent.sel{border-color:var(--accent);background:var(--accent-bg)}
+.disp-agent .badge{display:block;font-size:10px;margin-top:2px;color:var(--accent)}
+.disp-input{width:100%;height:90px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:12px;color:#fff;padding:12px;font-size:14px;resize:vertical;margin-bottom:12px;outline:none}
+.disp-input:focus{border-color:rgba(100,200,255,.3)}
+.disp-send{width:100%;padding:14px;border:none;border-radius:12px;background:rgba(100,200,255,.12);color:rgba(100,200,255,.85);font-size:15px;font-weight:700;cursor:pointer;letter-spacing:1px;transition:all .2s}
+.disp-send:hover{background:rgba(100,200,255,.2)}
+.disp-send:active{transform:scale(.98)}
+.disp-send:disabled{opacity:.3;cursor:default}
+
+/* Queue */
+.queue-item{display:flex;align-items:center;gap:12px;padding:12px;background:rgba(255,255,255,.02);border-radius:10px;margin-bottom:8px}
+.queue-item .tag{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:600;white-space:nowrap}
+.queue-item .content{flex:1;font-size:12px;color:rgba(255,255,255,.6);line-height:1.4}
+.queue-item .time{font-size:10px;color:rgba(255,255,255,.12);white-space:nowrap}
+.queue-done-btn{background:none;border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.15);padding:4px 10px;border-radius:8px;font-size:10px;cursor:pointer;transition:all .2s}
+.queue-done-btn:hover{border-color:rgba(100,200,100,.3);color:rgba(100,200,100,.7)}
+
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);padding:10px 24px;border-radius:20px;font-size:13px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:100}
+.toast.show{opacity:1}.toast.ok{background:rgba(100,200,100,.12);color:rgba(100,200,100,.85)}.toast.err{background:rgba(255,100,100,.12);color:rgba(255,100,100,.85)}
+
+.empty{text-align:center;color:rgba(255,255,255,.1);padding:40px 0;font-size:13px}
+
+/* Report modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:200;display:none;justify-content:center;align-items:center;padding:16px}
+.modal-overlay.show{display:flex}
+.modal-box{background:#111122;border:1px solid rgba(255,255,255,.08);border-radius:16px;max-width:700px;width:100%;max-height:85vh;overflow-y:auto;padding:24px}
+.modal-box h2{font-size:16px;color:#fff;margin-bottom:4px}
+.modal-box .sub{font-size:11px;color:rgba(255,255,255,.25);margin-bottom:16px}
+.modal-box .body{font-size:13px;color:rgba(255,255,255,.7);line-height:1.8}
+.modal-box .body table{width:100%!important;border-collapse:collapse;margin:8px 0}
+.modal-box .body th,.modal-box .body td{padding:5px 8px;border:1px solid rgba(255,255,255,.08);text-align:left;font-size:11px}
+.modal-box .body th{background:rgba(255,255,255,.04);font-weight:700;color:rgba(255,255,255,.5)}
+.modal-box .body hr{border:none;border-top:1px solid rgba(255,255,255,.06);margin:12px 0}
+.modal-box .body strong{color:rgba(255,255,255,.85)}
+.modal-box .body h3,.modal-box .body h4{margin:16px 0 6px; color:rgba(255,255,255,.85)}
+.modal-close{float:right;background:none;border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.4);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:12px}
+.modal-close:hover{color:#fff;border-color:rgba(255,255,255,.3)}
+.view-report{display:inline-block;margin-top:8px;font-size:10px;color:rgba(100,200,255,.5);cursor:pointer;text-decoration:underline}
+
+@media(max-width:600px){
+  header,main,nav{padding-left:10px;padding-right:10px}
+  .grid{grid-template-columns:1fr 1fr}
+  .cost-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Gosh Console</h1>
+  <span class="refresh" id="refresh-stamp">—</span>
+</header>
+
+<nav>
+  <button class="tab sel" onclick="switchTab('dashboard')">看板</button>
+  <button class="tab" onclick="switchTab('dispatch')">下发指令 <span class="count" id="disp-count"></span></button>
+  <button class="tab" onclick="switchTab('queue')">任务队列</button>
+</nav>
+
+<main>
+  <!-- Dashboard Page -->
+  <div class="page show" id="page-dashboard">
+    <div class="grid" id="agent-grid"></div>
+    <div class="section-title">任务管线</div>
+    <div id="task-list"></div>
+    <div class="section-title">待处理</div>
+    <div id="alert-list"></div>
+    <div class="section-title">成本估算 <span style="font-size:10px;color:rgba(255,255,255,.1)">[static]</span></div>
+    <div class="cost-grid" id="cost-grid"></div>
+  </div>
+
+  <!-- Dispatch Page -->
+  <div class="page" id="page-dispatch">
+    <div class="disp-select" id="disp-agents"></div>
+    <textarea class="disp-input" id="disp-input" placeholder="输入指令...&#10;例如: 分析 Q2 纺织原材料成本差异，重点关注染色材料部分"></textarea>
+    <button class="disp-send" onclick="doDispatch()">下发指令</button>
+  </div>
+
+  <!-- Queue Page -->
+  <div class="page" id="page-queue">
+    <div id="queue-list"></div>
+  </div>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<!-- Report Modal -->
+<div class="modal-overlay" id="report-modal" onclick="closeModal(event)">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal()">✕ 关闭</button>
+    <h2 id="modal-title"></h2>
+    <div class="sub" id="modal-sub"></div>
+    <select id="report-history-select" onchange="switchReport()" style="width:100%;margin:8px 0;background:#1a1a2e;border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.5);padding:6px 10px;border-radius:8px;font-size:11px;display:none">
+      <option value="">— 选择历史报告 —</option>
+    </select>
+    <div class="body" id="modal-body" style="font-size:13px;color:rgba(255,255,255,.7);line-height:1.8"></div>
+  </div>
+</div>
+
+<script>
+let selAgent = null, selTab = 'dashboard';
+
+function $(id){return document.getElementById(id)}
+
+function switchTab(tab){
+  selTab = tab;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('sel'));
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('show'));
+  $(`page-${tab}`).classList.add('show');
+  if(tab==='dispatch') buildDispatchAgents();
+}
+
+function buildDispatchAgents(){
+  fetch('/api/status').then(r=>r.json()).then(d=>{
+    $('disp-agents').innerHTML = d.agents.filter(a=>a.key!=='gosh').map(a=>
+      `<button class="disp-agent" data-agent="${a.key}" style="--accent:${a.color};--accent-bg:${a.color}15"
+         onclick="selDispAgent('${a.key}')">
+        ${a.name}
+        <span class="badge">${a.configured?'就绪':'待配置'}</span>
+      </button>`
+    ).join('');
+    if(selAgent){const b=document.querySelector(`[data-agent="${selAgent}"]`);if(b)b.classList.add('sel')}
+  });
+}
+
+function selDispAgent(key){
+  document.querySelectorAll('.disp-agent').forEach(b=>b.classList.remove('sel'));
+  const b=document.querySelector(`[data-agent="${key}"]`);
+  if(b)b.classList.add('sel');
+  selAgent=key;
+}
+
+async function doDispatch(){
+  if(!selAgent){toast('请先选择一个 Agent','err');return}
+  const c=$('disp-input').value.trim();
+  if(!c){toast('指令内容不能为空','err');return}
+  const btn=document.querySelector('.disp-send');
+  btn.disabled=true; btn.textContent='下发中...';
+  const r=await fetch('/api/dispatch',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({agent:selAgent,content:c})});
+  const d=await r.json();
+  btn.disabled=false; btn.textContent='下发指令';
+  if(d.ok){$('disp-input').value='';toast(`✓ 已发给 ${d.sent_to}`,'ok');refreshAll()}
+  else toast('✕ '+(d.error||'失败'),'err');
+}
+
+async function refreshAll(){
+  try{
+    const r=await fetch('/api/status');
+    const d=await r.json();
+    renderDashboard(d);
+    renderQueue(d);
+    renderTime();
+    const q = d.dispatch_queue||0;
+    $('disp-count').textContent = q>0 ? `(${q})` : '';
+  }catch(e){console.warn(e)}
+}
+
+let agentCache = {};
+
+function renderDashboard(d){
+  // Cache agents for viewReport
+  agentCache = {};
+  // Agent cards
+  $('agent-grid').innerHTML = d.agents.map(a=>{
+    agentCache[a.key] = a;
+    const sc = a.status==='active'?'active':a.status==='ready'?'ready':a.status==='working'?'working':a.status==='blocked'?'blocked':'pending';
+    const fill = a.key==='balance'?'rgba(80,160,255,.5)':a.key==='self'?'rgba(255,170,80,.5)':a.key==='yueyu'?'rgba(220,100,180,.5)':'rgba(200,200,200,.3)';
+    const hasNotes = a.notes && a.notes.length > 10;
+    return `<div class="card">
+      <div class="agent-name" style="color:${a.color}">${a.name}</div>
+      <div class="agent-role">${a.role}</div>
+      <span class="status ${sc}">${a.status.toUpperCase()}</span>
+      <div class="progress-bar"><div class="progress-fill" style="width:${a.progress||0}%;background:${fill}"></div></div>
+      <div class="metric"><span class="l">当前</span><span class="v">${a.current_task||'—'}</span></div>
+      <div class="metric"><span class="l">更新</span><span class="v">${(a.last_updated||'').slice(0,16)}</span></div>
+      ${hasNotes ? `<div class="view-report" onclick="viewReport('${a.key}')">📄 查看完整产物 ▸</div>` : ''}
+    </div>`;
+  }).join('');
+
+  // Tasks
+  $('task-list').innerHTML = d.tasks.map(t=>{
+    const dc = t.status==='in_progress'?'in_progress':t.status==='pending'?'pending':t.status==='done'?'done':'idle';
+    return `<div class="task-row">
+      <span class="task-dot ${dc}"></span>
+      <div class="task-info">
+        <div class="task-name">${t.task}</div>
+        <div class="task-meta">${t.agent} · ${t.milestone}</div>
+      </div>
+    </div>`;
+  }).join('')||'<div class="empty">无活跃任务</div>';
+
+  // Alerts
+// Resolved decisions — user-managed, stored in localStorage
+function getResolved(){ try{ return JSON.parse(localStorage.getItem('gosh_resolved')||'[]'); }catch(e){ return []; } }
+function markResolved(id){ const r=getResolved(); r.push(id); localStorage.setItem('gosh_resolved',JSON.stringify(r)); refreshAll(); }
+
+  const resolved = getResolved();
+  const visible = d.alerts.filter(a=>{
+    const id = a.id || (a.agent + '::' + a.message.slice(0,30));
+    return !resolved.includes(id);
+  });
+  $('alert-list').innerHTML = visible.map(a=>{
+    const id = a.id || (a.agent + '::' + a.message.slice(0,30));
+    const cls = a.urgency==='high'?'alert-high':'alert-med';
+    const ico = a.type==='blocked'?'🔴':a.type==='decision'?'🟡':'⚪';
+    return `<div class="alert-row ${cls}">
+      <span class="alert-icon">${ico}</span>
+      <div style="flex:1"><strong>${a.agent}</strong>: ${a.message}</div>
+      <button class="resolve-btn" onclick="markResolved('${id}')" title="标记已解决">✓ 已解决</button>
+    </div>`;
+  }).join('')||'<div class="empty">无待处理事项</div>';
+
+  // Cost (static)
+  $('cost-grid').innerHTML = `
+    <div class="cost-card"><div class="amount">~0.18</div><div class="label">M2.5 系数</div></div>
+    <div class="cost-card"><div class="amount">~380</div><div class="label">今日预估 Credits</div></div>
+    <div class="cost-card"><div class="amount">~¥0.26</div><div class="label">今日预估金额</div></div>
+    <div class="cost-card"><div class="amount">¥38/1000</div><div class="label">充值价格</div></div>
+  `;
+}
+
+function renderQueue(d){
+  fetch('/api/queue').then(r=>r.json()).then(qd=>{
+    $('queue-list').innerHTML = qd.tasks.length ? qd.tasks.map(t=>{
+      const c = {'balance':'#50a0ff','self':'#ffaa50','yueyu':'#dc64b4','gosh':'#888'}[t.agent_key]||'#888';
+      const ts = new Date(t.dispatched_at);
+      const timeStr = ts.toLocaleString('zh-CN',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
+      return `<div class="queue-item">
+        <span class="tag" style="background:${c}20;color:${c}">${t.agent_name}</span>
+        <span class="content">${t.content}</span>
+        <span class="time">${timeStr}</span>
+        <button class="queue-done-btn" onclick="delTask('${t.agent_key}','${t.file.replace('.json','')}')">完成</button>
+      </div>`;
+    }).join('') : '<div class="empty">队列为空</div>';
+  });
+}
+
+async function delTask(agent,taskId){
+  await fetch(`/api/task/${agent}/${taskId}`,{method:'DELETE'});
+  refreshAll();
+}
+
+function renderTime(){ $('refresh-stamp').textContent = '更新: '+new Date().toLocaleTimeString(); }
+
+function toast(msg,type){const t=$('toast');t.textContent=msg;t.className='toast show '+(type||'ok');setTimeout(()=>t.classList.remove('show'),2000)}
+
+// === Markdown renderer (tables, bold, headers) ===
+function renderMD(text){
+  if(!text) return '(无内容)';
+  let html = text;
+  // Escape HTML
+  html = html.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  // Tables: detect |...|...| lines
+  html = html.replace(/((?:^\|.+\|\n?)+)/gm, function(m){
+    const lines = m.trim().split('\n').filter(l=>l.includes('|'));
+    if(lines.length < 2) return m;
+    let table = '<table style="width:100%;border-collapse:collapse;margin:12px 0;font-size:12px">';
+    lines.forEach((line,i)=>{
+      const cells = line.split('|').filter(c=>c.trim()!=='');
+      // Skip separator line like |---|---|
+      if(cells.every(c=>/^[-:]+$/.test(c.trim()))) return;
+      const tag = i===0 ? 'th' : 'td';
+      table += '<tr>';
+      cells.forEach(c=>{
+        const style = i===0 ? 'padding:6px 8px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);font-weight:700;text-align:left' : 'padding:6px 8px;border:1px solid rgba(255,255,255,.06);text-align:left';
+        table += `<${tag} style="${style}">${c.trim()}</${tag}>`;
+      });
+      table += '</tr>';
+    });
+    table += '</table>';
+    return table;
+  });
+  // Bold
+  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  // Code blocks
+  html = html.replace(/```(\w*)\n?([\s\S]*?)```/g, '<pre style="background:rgba(255,255,255,.04);padding:12px;border-radius:8px;overflow-x:auto;font-size:11px;line-height:1.6;margin:8px 0">$2</pre>');
+  // Headers (##)
+  html = html.replace(/^### (.+)$/gm, '<h4 style="color:rgba(255,255,255,.8);margin:16px 0 8px;font-size:14px">$1</h4>');
+  html = html.replace(/^## (.+)$/gm, '<h3 style="color:rgba(255,255,255,.9);margin:20px 0 10px;font-size:15px;border-bottom:1px solid rgba(255,255,255,.08);padding-bottom:4px">$1</h4>');
+  // Horizontal rules
+  html = html.replace(/^---$/gm, '<hr style="border:none;border-top:1px solid rgba(255,255,255,.06);margin:16px 0">');
+  // Lists
+  html = html.replace(/^- (.+)$/gm, '<li style="margin:2px 0 2px 16px;list-style:disc">$1</li>');
+  // Line breaks
+  html = html.replace(/\n\n/g, '<br><br>');
+  html = html.replace(/\n/g, '<br>');
+  return html;
+}
+
+let currentReportAgent = null;
+let currentReportHistory = [];
+
+async function viewReport(agentKey, reportFile){
+  const ad = agentCache[agentKey];
+  if (!ad) return;
+
+  // If reportFile specified, try to fetch specific report
+  if (reportFile){
+    try {
+      const r = await fetch(`/api/report/${agentKey}/${reportFile}`);
+      const d = await r.json();
+      if (d.ok){
+        $('modal-title').textContent = d.agent_name + ' · 产物';
+        $('modal-sub').textContent = (d.report.current_task||'') + ' · ' + (d.report.timestamp||'').slice(0,16);
+        $('modal-body').innerHTML = renderMD(d.report.notes);
+        $('report-modal').classList.add('show');
+        return;
+      }
+    } catch(e){ /* fall through to cached version */ }
+  }
+
+  // Default: show latest from cache
+  if (!ad.notes || ad.notes.length < 10) return toast('暂无产物','err');
+  currentReportAgent = agentKey;
+  currentReportHistory = ad.report_history || [];
+
+  $('modal-title').textContent = ad.name + ' · 产物';
+  $('modal-sub').textContent = (ad.current_task || '') + ' · ' + (ad.last_updated||'').slice(0,16);
+  $('modal-body').innerHTML = renderMD(ad.notes);
+
+  // Build history selector
+  const sel = $('report-history-select');
+  if (currentReportHistory.length > 1){
+    sel.style.display = '';
+    sel.innerHTML = '<option value="">— 选择历史报告 (' + currentReportHistory.length + ' 份) —</option>' +
+      currentReportHistory.map(r=>`<option value="${r.file}" ${r.file===ad.report_file?'selected':''}>${r.date} — ${r.task}</option>`).join('');
+  } else {
+    sel.style.display = 'none';
+  }
+
+  $('report-modal').classList.add('show');
+}
+
+async function switchReport(){
+  const sel = $('report-history-select');
+  const file = sel.value;
+  if (!file || !currentReportAgent) return;
+  await viewReport(currentReportAgent, file);
+}
+function closeModal(e){
+  if(e && e.target !== $('report-modal')) return;
+  $('report-modal').classList.remove('show');
+  $('report-history-select').style.display = 'none';
+  currentReportAgent = null;
+  currentReportHistory = [];
+}
+
+refreshAll();
+setInterval(refreshAll, 15000);
+</script>
+</body>
+</html>
