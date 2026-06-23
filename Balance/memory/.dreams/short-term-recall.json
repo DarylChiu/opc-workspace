@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-06-12T08:18:30.994Z",
+  "updatedAt": "2026-06-23T17:00:35.351Z",
   "entries": {
     "memory:memory/2026-06-10.md:1:29": {
       "key": "memory:memory/2026-06-10.md:1:29",
@@ -251,6 +251,130 @@
         "很多",
         "底稿",
         "孤岛"
+      ]
+    },
+    "memory:memory/2026-06-21.md:1:12": {
+      "key": "memory:memory/2026-06-21.md:1:12",
+      "path": "memory/2026-06-21.md",
+      "startLine": 1,
+      "endLine": 12,
+      "source": "memory",
+      "snippet": "# 2026-06-21 (周日) ## 记忆Cron - 23:59 每日审计：补建今日日记，更新active.md，审计通过 ## 当日概况 - 周日，无活跃任务 - 等待Daryl反馈： - 影刀RPA调研方案（方案C推荐） - 多文件批量处理方案ZIP试跑 - OPC Workflow执行引擎是否启动开发",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3955543220043182,
+      "maxScore": 0.3955543220043182,
+      "firstRecalledAt": "2026-06-23T17:00:35.351Z",
+      "lastRecalledAt": "2026-06-23T17:00:35.351Z",
+      "queryHashes": [
+        "2ff54d35b086"
+      ],
+      "recallDays": [
+        "2026-06-24"
+      ],
+      "conceptTags": [
+        "更新active.md",
+        "周日",
+        "记忆",
+        "cron",
+        "每日",
+        "审计",
+        "今日",
+        "日记"
+      ]
+    },
+    "memory:memory/2026-06-12.md:1:14": {
+      "key": "memory:memory/2026-06-12.md:1:14",
+      "path": "memory/2026-06-12.md",
+      "startLine": 1,
+      "endLine": 14,
+      "source": "memory",
+      "snippet": "# 2026-06-12 日记 > ⚠️ 补记日记 | 置信度：中等（基于active.md记录和前后日记反推） ## 事件 - 14:00 视频分析MVP项目成本监控启动（Balance监督角色） - 18:15 Daryl指令暂停视频MVP成本监控 - 无财务分析类新任务 - active.md 最后更新于本日 14:15 ## 备注 - 视频MVP监控为小枫（Bryson/Balance交叉监督）任务 - 本日无Daryl财务方向直接交互",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3903927385807037,
+      "maxScore": 0.3903927385807037,
+      "firstRecalledAt": "2026-06-23T17:00:35.351Z",
+      "lastRecalledAt": "2026-06-23T17:00:35.351Z",
+      "queryHashes": [
+        "2ff54d35b086"
+      ],
+      "recallDays": [
+        "2026-06-24"
+      ],
+      "conceptTags": [
+        "基于active.md记录和前后日记反推",
+        "active.md",
+        "bryson/balance交叉监督",
+        "日记",
+        "置信",
+        "中等",
+        "基于",
+        "记录"
+      ]
+    },
+    "memory:memory/2026-06-13.md:1:13": {
+      "key": "memory:memory/2026-06-13.md:1:13",
+      "path": "memory/2026-06-13.md",
+      "startLine": 1,
+      "endLine": 13,
+      "source": "memory",
+      "snippet": "# 2026-06-13 日记 > ⚠️ 补记日记 | 置信度：中等（基于前后日记反推，无session记录佐证） ## 事件 - 无主动任务触发 - 汇率监控：VND/USD市场平稳，未触发通知 - OpenClaw cron 每日记忆归档正常运行 ## 备注 - 本日无Daryl直接交互 - 静默日，无产出",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.36009556651115415,
+      "maxScore": 0.36009556651115415,
+      "firstRecalledAt": "2026-06-23T17:00:35.351Z",
+      "lastRecalledAt": "2026-06-23T17:00:35.351Z",
+      "queryHashes": [
+        "2ff54d35b086"
+      ],
+      "recallDays": [
+        "2026-06-24"
+      ],
+      "conceptTags": [
+        "vnd/usd市场平稳",
+        "日记",
+        "置信",
+        "中等",
+        "基于",
+        "前后",
+        "反推",
+        "记录"
+      ]
+    },
+    "memory:memory/2026-06-16.md:1:13": {
+      "key": "memory:memory/2026-06-16.md:1:13",
+      "path": "memory/2026-06-16.md",
+      "startLine": 1,
+      "endLine": 13,
+      "source": "memory",
+      "snippet": "# 2026-06-16 记忆 ## 关键事件 ### 每日记忆归档审计 - 00:06 Cron触发每日审计 - 修复：创建今日日记（审计前缺失） - 状态：✅ 审计通过 ## 状态 - 合规系统: ✅ 运行中 - Cron审计: ✅ 已执行",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.35888323485851287,
+      "maxScore": 0.35888323485851287,
+      "firstRecalledAt": "2026-06-23T17:00:35.351Z",
+      "lastRecalledAt": "2026-06-23T17:00:35.351Z",
+      "queryHashes": [
+        "2ff54d35b086"
+      ],
+      "recallDays": [
+        "2026-06-24"
+      ],
+      "conceptTags": [
+        "记忆",
+        "关键",
+        "事件",
+        "每日",
+        "归档",
+        "审计",
+        "cron",
+        "触发"
       ]
     }
   }
