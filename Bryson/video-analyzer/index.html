@@ -299,6 +299,7 @@ body {
   <span class="logo">🎬 视频深度分析</span>
   <input type="text" placeholder="粘贴抖音/B站/YouTube链接后回车..." id="urlInput" 
     onkeydown="if(event.key==='Enter')analyzeFromUrl()">
+  <input type="text" placeholder="视频标签（可选，如comedy_drunk）" id="videoLabel" style="width:180px;font-size:12px">
   <button class="btn primary small" onclick="analyzeFromUrl()">🔗 分析链接</button>
   <button class="btn primary small" onclick="analyzeWithDeepSeek()" style="background:#1a3a1a;border-color:#22c55e">🧠 Demo 深度分析</button>
   <span class="status" id="statusBar">
@@ -351,8 +352,8 @@ body {
       <div class="tab" onclick="switchTab('script')">🎬 脚本解析</div>
       <div class="tab" onclick="switchTab('template')">📋 复刻模板</div>
       <div class="tab" onclick="switchTab('cinematography')">🎥 镜头&声音</div>
-      <div class="tab" onclick="switchTab('score')">⭐ 三项评分</div>
       <div class="tab" onclick="switchTab('marks')">🏷️ 标记 <span class="badge" id="marksBadge">0</span></div>
+      <div class="tab" onclick="switchTab('notes')">📝 标记及笔记</div>
     </div>
     <div class="analysis-content" id="analysisContent">
       <div class="empty-state">
@@ -487,21 +488,10 @@ function loadMaterial(idx) {
 // ── 归一化 API 返回的 key 名称 ──
 function normalizeAnalysis(data) {
   if (!data) return data;
-  // API返回 key → 前端期望 key
   if (data.script_analysis && !data.scriptAnalysis) data.scriptAnalysis = data.script_analysis;
-  if (data.cinematography && !data.cinematography) data.cinematography = data.cinematography;
   if (data.scoring && !data.scores) data.scores = data.scoring;
-  // 模板：兼容新旧格式
-  if (data.template && typeof data.template === 'object' && !Array.isArray(data.template)) {
-    data.template = data.template; // 新格式：{templates:[], reusableElements:{}}
-  } else if (Array.isArray(data.template)) {
-    data.template = { templates: data.template, reusableElements: {} };
-  } else if (Array.isArray(data.templates)) {
-    data.template = { templates: data.templates, reusableElements: {} };
-  }
-  // 兼容旧格式
   if (data.structure && !data.scriptAnalysis) data.scriptAnalysis = { acts: data.structure.map(s => ({act:s.start, name:s.name, timeRange:s.start+'-'+s.end, narrativeFunction:s.desc, characterDynamics:'', dramaticTension:5, keyMoments:[]})), techniques:[] };
-  if (data.knowledge_card && !data.cinematography) data.cinematography = { disclaimer: '⚠️ 旧版数据，镜头语言分析不可用。请用新版分析。' };
+  if (data.knowledge_card && !data.cinematography) data.cinematography = { disclaimer: '⚠️ 旧版数据' };
   return data;
 }
 
@@ -698,15 +688,31 @@ function toggleMark(idx, type) {
   const existing = marks.findIndex(m => m.id === idx);
   if (existing >= 0) {
     if (marks[existing].type === type) {
-      marks.splice(existing, 1); // 取消标记
+      marks.splice(existing, 1);
     } else {
-      marks[existing].type = type; // 切换标记类型
+      marks[existing].type = type;
     }
   } else {
-    marks.push({ id:idx, timestamp:transcriptData[idx].ts, text:transcriptData[idx].text, type });
+    marks.push({ id:idx, timestamp:transcriptData[idx].ts, text:transcriptData[idx].text, type, note:'' });
   }
   renderTranscript();
   renderMarks();
+}
+
+function updateMarkNote(idx) {
+  const textarea = document.getElementById('note-input-' + idx);
+  if (!textarea) return;
+  const m = marks.find(m => m.id === idx);
+  if (m) { m.note = textarea.value; }
+}
+
+function saveMarkNotes() {
+  // Persist all notes currently in DOM back to marks array
+  marks.forEach(m => {
+    const ta = document.getElementById('note-input-' + m.id);
+    if (ta) m.note = ta.value;
+  });
+  alert('笔记已保存');
 }
 
 function clearMarks() { marks = []; renderTranscript(); renderMarks(); }
@@ -760,14 +766,14 @@ function addToLibrary(url, data) {
   const existing = materialLibrary.findIndex(m => m.url === url);
   const entry = {
     url: url,
-    title: currentVideoTitle || (data.transcript && data.transcript[0] ? data.transcript[0].text.substring(0, 30) : '未命名'),
+    title: currentVideoTitle || (transcriptData && transcriptData[0] ? transcriptData[0].text.substring(0, 30) : '未命名'),
     platform: detectPlatform(url),
     type: '视频分析',
     date: new Date().toISOString().slice(0, 10),
-    marks: [],
-    transcript: data.transcript || [],
+    marks: [...marks],
+    transcript: transcriptData || data.transcript || [],
     analysis: data.analysis || {},
-    videoUrl: videoServingUrl
+    videoUrl: videoServingUrl || data.video_url || ''
   };
   if (existing >= 0) {
     materialLibrary[existing] = entry;
@@ -798,10 +804,13 @@ function renderMarks() {
 
 function renderMarkTab() {
   const container = document.getElementById('analysisContent');
+  const activeTab = document.querySelector('.tab.active');
+  const isNotesTab = activeTab && activeTab.textContent.includes('笔记');
+  
   if (marks.length === 0) {
     container.innerHTML = `
       <div class="empty-state">
-        <span style="font-size:32px">🏷️</span>
+        <span style="font-size:32px">${isNotesTab?'📝':'🏷️'}</span>
         <span>还没有标记</span>
         <span style="font-size:11px;color:var(--text-dim)">在左侧对白卡片上悬停，点击 🪝 ⭐ ↗ 按钮标记</span>
       </div>`;
@@ -813,7 +822,7 @@ function renderMarkTab() {
   const goldMarks = marks.filter(m=>m.type==='gold');
   const turnMarks = marks.filter(m=>m.type==='turn');
   
-  container.innerHTML = `
+  let html = `
     <div class="analysis-section">
       <div class="mark-summary" style="margin-bottom:16px">
         <span style="font-size:12px;color:var(--text-dim)">已标记 <b>${marks.length}</b> 条</span>
@@ -823,70 +832,130 @@ function renderMarkTab() {
           <span class="count-item"><span class="mark-dot turn"></span> 转折点 <b>${turnMarks.length}</b></span>
         </div>
       </div>
-      <div style="display:flex;gap:8px;margin-bottom:12px">
+      <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
         <button class="btn primary small" onclick="saveMarksToLibrary()">💾 保存</button>
+        ${isNotesTab ? '<button class="btn primary small" onclick="saveMarkNotes()">💾 保存笔记</button>' : ''}
         <button class="btn small" onclick="clearMarks()">🗑️ 清空</button>
         <button class="btn small" onclick="exportMarks()">📋 导出</button>
-        <button class="btn small" onclick="exportFullReport()">📄 导出完整报告</button>
+        <button class="btn small export-full-btn" onclick="exportFullReport()">📄 导出完整报告</button>
       </div>
-      ${marks.map(m => `
-        <div class="marked-item" style="background:var(--card-bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:6px;cursor:pointer;display:flex;gap:10px;align-items:flex-start">
-          <div style="flex:1" onclick="seekTo(${m.id})">
+  `;
+  
+  if (isNotesTab) {
+    // Notes mode: editable note cards
+    html += marks.map(m => `
+      <div class="marked-item" style="background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:0;margin-bottom:10px;overflow:hidden">
+        <div style="padding:10px 14px;cursor:pointer;display:flex;gap:10px;align-items:flex-start;border-bottom:1px solid var(--border)" onclick="seekTo(${m.id})">
+          <div style="flex:1">
             <span class="ts" style="color:var(--accent);font-family:monospace;font-size:12px">${m.timestamp}</span>
             <span style="margin-left:8px;font-size:11px;color:var(--${m.type==='hook'?'green':m.type==='gold'?'yellow':'red'})">${typeLabel[m.type]}</span>
             <div style="margin-top:4px;font-size:13px;line-height:1.4">${m.text}</div>
           </div>
           <button onclick="event.stopPropagation();removeMark(${m.id})" style="background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:14px;padding:2px 6px" title="删除">✕</button>
         </div>
-      `).join('')}
-    </div>`;
+        <div style="padding:8px 14px" onclick="event.stopPropagation()">
+          <div style="font-size:11px;color:var(--text-dim);margin-bottom:4px">📝 笔记：</div>
+          <textarea id="note-input-${m.id}" oninput="updateMarkNote(${m.id})" 
+            style="width:100%;min-height:60px;background:var(--panel-bg);color:var(--text);border:1px solid var(--border);border-radius:4px;padding:8px;font-size:12px;resize:vertical;line-height:1.5;font-family:inherit"
+            placeholder="在此输入笔记...">${m.note||''}</textarea>
+        </div>
+      </div>
+    `).join('');
+  } else {
+    // Simple mark view
+    html += marks.map(m => `
+      <div class="marked-item" style="background:var(--card-bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:6px;cursor:pointer;display:flex;gap:10px;align-items:flex-start">
+        <div style="flex:1" onclick="seekTo(${m.id})">
+          <span class="ts" style="color:var(--accent);font-family:monospace;font-size:12px">${m.timestamp}</span>
+          <span style="margin-left:8px;font-size:11px;color:var(--${m.type==='hook'?'green':m.type==='gold'?'yellow':'red'})">${typeLabel[m.type]}</span>
+          <div style="margin-top:4px;font-size:13px;line-height:1.4">${m.text}</div>
+          ${m.note ? `<div style="margin-top:4px;font-size:11px;color:var(--text-dim);font-style:italic">📝 ${m.note.substring(0,60)}${m.note.length>60?'...':''}</div>` : ''}
+        </div>
+        <button onclick="event.stopPropagation();removeMark(${m.id})" style="background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:14px;padding:2px 6px" title="删除">✕</button>
+      </div>
+    `).join('');
+  }
+  
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+// ── 版本号 ──
+let appVersion = '1.0.0';
+async function loadVersion() {
+  try {
+    const resp = await fetch('/api/health');
+    const data = await resp.json();
+    if (data.version) appVersion = data.version;
+  } catch(e) {}
+  const el = document.getElementById('appVersion');
+  if (el) el.textContent = 'v' + appVersion;
 }
 
 // ── 导出 ──
 function exportMarks() {
   if (marks.length === 0) { alert('还没有标记内容'); return; }
   const typeLabel = { hook:'好钩子', gold:'金句', turn:'转折点' };
-  const text = marks.map(m => `[${m.timestamp}] [${typeLabel[m.type]}] ${m.text}`).join('\n');
+  const text = marks.map(m => `[${m.timestamp}] [${typeLabel[m.type]}] ${m.text}${m.note ? '\n  笔记：'+m.note : ''}`).join('\n');
   const blob = new Blob([text], {type:'text/plain'});
   const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
   a.download = `marks_${new Date().toISOString().slice(0,10)}.txt`;
   a.click();
 }
 
-function exportFullReport() {
+async function exportFullReport() {
   if (!analysisData.overview) { alert('还没有分析数据'); return; }
-  const ad = analysisData;
-  const sa = ad.scriptAnalysis || {};
-  const cm = ad.cinematography || {};
   
-  let text = `# 视频分析报告\n\n> 生成时间：${new Date().toLocaleString()}\n\n---\n\n## 📊 内容总览\n\n**一句话总结：**${ad.overview.oneLiner}\n\n**目标受众：**${ad.overview.audience}\n\n**核心痛点：**${ad.overview.painPoints}\n\n**核心观点：**${ad.overview.viewpoint}\n\n**认知转化：**${ad.overview.cognition}\n\n---\n\n## 🎬 脚本解析\n\n`;
-  (sa.acts||[]).forEach(a => text += `### ${a.name} (${a.timeRange})\n\n- **叙事功能：**${a.narrativeFunction}\n- **人物动态：**${a.characterDynamics}\n- **戏剧张力：**${a.dramaticTension}/10\n${(a.keyMoments||[]).map(m => `- [${m.ts}] ${m.desc}`).join('\n')}\n\n`);
-  if (sa.emotionCurve) text += `**情绪曲线：**${sa.emotionCurve}\n\n`;
+  const exportBtn = document.querySelector('.export-full-btn');
+  if (exportBtn) { exportBtn.textContent = '⏳ 生成中...'; exportBtn.disabled = true; }
   
-  text += `---\n\n## 📋 复刻模板\n\n`;
-  const tp = ad.template || {};
-  (tp.templates||ad.templates||[]).forEach(t => text += `### ${t.name}\n${t.desc}\n\n**公式：**${(t.formula||'').replace(/【(.*?)】/g,'【$1】')}\n\n`);
-  
-  text += `---\n\n## 🎥 镜头&声音\n\n`;
-  if (cm.disclaimer) text += `> ${cm.disclaimer}\n\n`;
-  const c = cm.cinematography||{}; const lc=cm.lightingColor||{}; const sd=cm.soundDesign||{}; const ds=cm.directorStyle||{};
-  text += `**景别策略：**${c.shotTypes}\n**构图策略：**${c.composition}\n**摄影机运动：**${c.cameraMovement}\n\n**光线风格：**${lc.lightingMood}\n**色彩策略：**${lc.colorPalette}\n**视觉节奏：**${lc.visualRhythm}\n\n**BGM：**${sd.bgm}\n**环境音：**${sd.ambient}\n**对白风格：**${sd.dialogueStyle}\n\n**美学取向：**${ds.aesthetic}\n**叙事签名：**${ds.narrativeSignature}\n`;
-  
-  text += `\n---\n\n## ⭐ 三项评分\n\n- Hook设计：${ad.scores.hook.value}/100 — ${ad.scores.hook.reason}\n- 结构设计：${ad.scores.structure.value}/100 — ${ad.scores.structure.reason}\n- 表达效果：${ad.scores.expression.value}/100 — ${ad.scores.expression.reason}\n`;
-  
-  const blob = new Blob([text], {type:'text/markdown'});
-  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
-  a.download = `video_report_${new Date().toISOString().slice(0,10)}.md`;
-  a.click();
+  try {
+    const body = {
+      video_meta: {
+        filename: currentVideoTitle || videoServingUrl?.split('/').pop() || '未命名',
+        duration: analysisData.videoMeta?.duration || '',
+        platform: analysisData.videoMeta?.platform || '',
+        source: currentVideoUrl ? 'url' : 'local',
+        path: videoServingUrl || ''
+      },
+      transcript: transcriptData,
+      analysis: analysisData,
+      token_stats: analysisData._tokenStats || {},
+      marks: marks,
+      run_id: analysisData._runId || '',
+      video_url: currentVideoUrl
+    };
+    
+    const resp = await fetch('/api/export-html', {
+      method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(body)
+    });
+    const data = await resp.json();
+    
+    if (data.error) { alert('导出失败: ' + data.error); return; }
+    
+    // 下载到浏览器
+    const blob = new Blob([data.html], {type: 'text/html'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `report_${new Date().toISOString().slice(0,10)}.html`;
+    a.click();
+    
+    if (exportBtn) { exportBtn.textContent = '📄 导出完整报告'; exportBtn.disabled = false; }
+    alert(`✅ 报告已导出并保存到 Mac mini\n📁 ${data.saved_to}`);
+  } catch(e) {
+    if (exportBtn) { exportBtn.textContent = '📄 导出完整报告'; exportBtn.disabled = false; }
+    alert('导出失败: ' + e.message);
+  }
 }
 
 // ── 分析面板切换 ──
 function switchTab(tab) {
-  const tabNames = ['overview','script','template','cinematography','score','marks'];
+  const tabNames = ['overview','script','template','cinematography','marks','notes'];
   document.querySelectorAll('.tab').forEach((t,i) => {
     t.classList.toggle('active', tabNames[i] === tab);
   });
-  if (tab === 'marks') {
+  if (tab === 'marks' || tab === 'notes') {
     renderMarkTab();
   } else {
     renderTabContent(tab);
@@ -903,29 +972,58 @@ function renderTabContent(tab) {
   }
   
   switch(tab) {
-    case 'overview':
-      container.innerHTML = `
-        <div class="analysis-section">
-          <h3>📌 一句话总结</h3>
-          <p style="font-size:14px;line-height:1.6">${ad.overview.oneLiner}</p>
-        </div>
-        <div class="analysis-section">
-          <h3>🎯 目标受众</h3>
-          <p style="font-size:14px;line-height:1.6">${ad.overview.audience}</p>
-        </div>
-        <div class="analysis-section">
-          <h3>💢 核心痛点</h3>
-          <p style="font-size:14px;line-height:1.6">${ad.overview.painPoints}</p>
-        </div>
-        <div class="analysis-section">
-          <h3>💡 核心观点</h3>
-          <p style="font-size:14px;line-height:1.6">${ad.overview.viewpoint}</p>
-        </div>
-        <div class="analysis-section">
-          <h3>🧠 认知转化</h3>
-          <p style="font-size:14px;line-height:1.6">${ad.overview.cognition}</p>
-        </div>`;
+    case 'overview': {
+      const story = ad.story || {};
+      const meta = ad.videoMeta || {};
+      const commerce = ad.commerce || {};
+      
+      // Section A: Basic Info
+      let basicHtml = '<div class="analysis-section"><h3>📋 基本信息</h3>';
+      basicHtml += `<div class="template-card"><div class="field"><div class="field-label">视频概要</div><div class="field-value">${ad.overview.oneLiner||story.synopsis||'—'}</div></div></div>`;
+      basicHtml += `<div class="template-card"><div class="field"><div class="field-label">类型/风格</div><div class="field-value">${(story.genre||[]).join(' / ')||'—'}</div></div></div>`;
+      if (meta.format) basicHtml += `<div class="template-card"><div class="field"><div class="field-label">格式</div><div class="field-value">${meta.format}</div></div></div>`;
+      if (meta.duration) basicHtml += `<div class="template-card"><div class="field"><div class="field-label">时长</div><div class="field-value">${meta.duration}</div></div></div>`;
+      if (meta.resolution) basicHtml += `<div class="template-card"><div class="field"><div class="field-label">分辨率</div><div class="field-value">${meta.resolution}</div></div></div>`;
+      if (meta.platform) basicHtml += `<div class="template-card"><div class="field"><div class="field-label">平台</div><div class="field-value">${meta.platform}</div></div></div>`;
+      basicHtml += '</div>';
+      
+      // Section B: Commercial Metrics
+      let commerceHtml = '<div class="analysis-section"><h3>📈 商业数据</h3>';
+      const hasCommerce = commerce.views || commerce.likes || commerce.saves || commerce.shares;
+      if (hasCommerce) {
+        commerceHtml += '<div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px">';
+        if (commerce.views) commerceHtml += `<div class="score-card" style="flex:1;min-width:80px"><div class="label">👁 播放量</div><div class="value" style="color:var(--accent)">${commerce.views}</div></div>`;
+        if (commerce.likes) commerceHtml += `<div class="score-card" style="flex:1;min-width:80px"><div class="label">👍 点赞</div><div class="value" style="color:var(--green)">${commerce.likes}</div></div>`;
+        if (commerce.saves) commerceHtml += `<div class="score-card" style="flex:1;min-width:80px"><div class="label">⭐ 收藏</div><div class="value" style="color:var(--yellow)">${commerce.saves}</div></div>`;
+        if (commerce.shares) commerceHtml += `<div class="score-card" style="flex:1;min-width:80px"><div class="label">↗ 转发</div><div class="value" style="color:var(--red)">${commerce.shares}</div></div>`;
+        commerceHtml += '</div>';
+      } else {
+        commerceHtml += '<div class="template-card"><div class="field"><div class="field-value" style="color:var(--text-dim);font-style:italic">⚠️ 暂无商业数据。请通过视频 URL 抓取或手动填入播放/点赞/收藏/转发量。</div></div></div>';
+      }
+      if (commerce.topComments && commerce.topComments.length) {
+        commerceHtml += '<div style="margin-top:8px"><span style="font-size:12px;color:var(--text-dim)">💬 高频评论：</span>';
+        commerce.topComments.forEach(c => { commerceHtml += `<div style="font-size:12px;padding:4px 8px;margin:2px 0;background:var(--card-bg);border-radius:4px;border-left:2px solid var(--accent)">${c}</div>`; });
+        commerceHtml += '</div>';
+      }
+      if (commerce.insight) commerceHtml += `<div class="template-card" style="margin-top:8px"><div class="field"><div class="field-label">📊 精简指标分析</div><div class="field-value">${commerce.insight}</div></div></div>`;
+      commerceHtml += '</div>';
+      
+      // Section C: Scoring
+      let scoreHtml = '<div class="analysis-section"><h3>⭐ 三项评分</h3>';
+      if (ad.scores && ad.scores.hook) {
+        scoreHtml += '<div class="score-row">';
+        scoreHtml += `<div class="score-card"><div class="label">🪝 Hook 设计</div><div class="value high">${ad.scores.hook.value}</div><div class="reason">${ad.scores.hook.reason}</div></div>`;
+        scoreHtml += `<div class="score-card"><div class="label">🏗️ 结构设计</div><div class="value high">${ad.scores.structure.value}</div><div class="reason">${ad.scores.structure.reason}</div></div>`;
+        scoreHtml += `<div class="score-card"><div class="label">💬 表达效果</div><div class="value mid">${ad.scores.expression.value}</div><div class="reason">${ad.scores.expression.reason}</div></div>`;
+        scoreHtml += '</div>';
+      } else {
+        scoreHtml += '<div style="color:var(--text-dim);font-style:italic;font-size:13px">⚠️ 暂无评分数据</div>';
+      }
+      scoreHtml += '</div>';
+      
+      container.innerHTML = basicHtml + commerceHtml + scoreHtml;
       break;
+    }
       
     case 'script': {
       const sa = ad.scriptAnalysis || {};
@@ -980,11 +1078,29 @@ function renderTabContent(tab) {
       const lc = cm.lightingColor || {};
       const sd = cm.soundDesign || {};
       const ds = cm.directorStyle || {};
+      const isVision = cm._source === 'gemini_vision';
+      const fs = cm.frameStats || {};
+      
+      // Source badge
+      const isReanalysis = cm._source === 'gemini_vision_reanalysis';
+      const sourceBadge = isVision 
+        ? `<div style="background:${isReanalysis?'#1a0a0a':'#0a1a0a'};border:1px solid ${isReanalysis?'var(--red)':'var(--green)'};border-radius:6px;padding:8px 14px;margin-bottom:12px;font-size:12px"><span style="color:${isReanalysis?'var(--red)':'var(--green)'};font-weight:600">🤖 Gemini Vision ${isReanalysis?'重分析 (50帧)':'逐帧分析'}</span><span style="color:var(--text-dim)"> — 基于实际画面，非文本推断</span>${isReanalysis && cm._reanalysis_reason ? `<br><span style="color:var(--yellow);font-size:11px">触发原因：${cm._reanalysis_reason}</span>` : ''}</div>`
+        : (cm.disclaimer ? `<div style="background:#1a1a0a;border:1px solid var(--yellow);border-radius:6px;padding:8px 14px;margin-bottom:12px;font-size:12px;color:var(--yellow)">${cm.disclaimer}</div>` : '');
+      
+      // Frame stats
+      const frameStatsHtml = fs.totalFramesAnalyzed 
+        ? `<div style="background:var(--card-bg);border-radius:8px;padding:10px 14px;margin-bottom:12px;display:flex;gap:16px;align-items:center;font-size:12px">
+            <span>📷 <b>${fs.totalFramesAnalyzed}</b> 个关键帧</span>
+            ${fs.shotTypeDistribution && Object.keys(fs.shotTypeDistribution).length ? `<span style="color:var(--text-dim)">景别分布：${Object.entries(fs.shotTypeDistribution).map(([k,v])=>k+v).join('·')}</span>` : ''}
+          </div>`
+        : '';
+      
       container.innerHTML = `
         <div class="analysis-section">
-          ${cm.disclaimer ? `<div style="background:#1a1a0a;border:1px solid var(--yellow);border-radius:6px;padding:8px 14px;margin-bottom:12px;font-size:12px;color:var(--yellow)">${cm.disclaimer}</div>` : ''}
+          ${sourceBadge}
+          ${frameStatsHtml}
           
-          <h3>🎥 镜头语言推断</h3>
+          <h3>🎥 镜头语言${isVision?'分析':'推断'}</h3>
           <div class="template-card"><div class="field"><div class="field-label">景别策略</div><div class="field-value">${c.shotTypes||'—'}</div></div></div>
           <div class="template-card"><div class="field"><div class="field-label">构图策略</div><div class="field-value">${c.composition||'—'}</div></div></div>
           <div class="template-card"><div class="field"><div class="field-label">摄影机运动</div><div class="field-value">${c.cameraMovement||'—'}</div></div></div>
@@ -1007,168 +1123,233 @@ function renderTabContent(tab) {
         </div>`;
       break;
     }
-      
-    case 'score':
-      container.innerHTML = `
-        <div class="analysis-section">
-          <h3>⭐ 三项评分</h3>
-          <div class="score-row">
-            <div class="score-card">
-              <div class="label">🪝 Hook 设计</div>
-              <div class="value high">${ad.scores.hook.value}</div>
-              <div class="reason">${ad.scores.hook.reason}</div>
-            </div>
-            <div class="score-card">
-              <div class="label">🏗️ 结构设计</div>
-              <div class="value high">${ad.scores.structure.value}</div>
-              <div class="reason">${ad.scores.structure.reason}</div>
-            </div>
-            <div class="score-card">
-              <div class="label">💬 表达效果</div>
-              <div class="value mid">${ad.scores.expression.value}</div>
-              <div class="reason">${ad.scores.expression.reason}</div>
-            </div>
-          </div>
-        </div>`;
-      break;
   }
 }
 
-// ── 从 URL 分析 ──
+// ── b23.tv 短链解析（利用用户浏览器的国内IP访问B站API）──
+async function resolveB23Url(b23Url) {
+  const match = b23Url.match(/b23\.tv\/([a-zA-Z0-9]+)/);
+  if (!match) return b23Url;
+  const shareId = match[1];
+  console.log('[B23] 解析短链:', shareId);
+  
+  // 方法1: B站分享频道 API（用户浏览器国内IP可直接访问）
+  const apis = [
+    `https://api.bilibili.com/x/share/channel/get?share_channel=COPY&share_id=${shareId}`,
+    `https://api.bilibili.com/x/share/video?share_id=${shareId}`,
+  ];
+  for (const api of apis) {
+    try {
+      const resp = await fetch(api, { signal: AbortSignal.timeout(6000) });
+      const text = await resp.text();
+      try {
+        const data = JSON.parse(text);
+        if (data.code === 0 && data.data) {
+          const bvid = data.data.bvid || data.data.short_link || '';
+          const aid = data.data.aid || '';
+          if (bvid) { console.log('[B23] API解析成功 →', bvid); return `https://www.bilibili.com/video/${bvid}`; }
+          if (aid) { console.log('[B23] API解析成功 → av'+aid); return `https://www.bilibili.com/video/av${aid}`; }
+          // 检查 data.data 中是否直接包含 URL
+          const urlField = data.data.url || data.data.content || data.data.link || '';
+          if (urlField && urlField.includes('bilibili.com')) { console.log('[B23] API返回URL'); return urlField; }
+        }
+        console.log('[B23] API code:', data.code, data.message);
+      } catch(e) {
+        // HTML 响应，尝试提取 URL
+        const metaMatch = text.match(/url=([^"'\s>]+)/i);
+        if (metaMatch) { console.log('[B23] HTML meta redirect'); return metaMatch[1]; }
+      }
+    } catch(e) {
+      console.log('[B23] API', api, '失败:', e.message);
+    }
+  }
+  
+  // 方法2: 直接 fetch b23.tv 看能否拿到最终跳转 URL
+  try {
+    const resp = await fetch(b23Url, { redirect: 'follow', signal: AbortSignal.timeout(5000) });
+    if (resp.url && resp.url !== b23Url && !resp.url.includes('b23.tv')) {
+      console.log('[B23] HTTP重定向 →', resp.url);
+      return resp.url;
+    }
+    // 尝试读 body 看有没有 meta refresh
+    const html = await resp.text();
+    const refreshMatch = html.match(/content="\d+;\s*url=([^"']+)"/i);
+    if (refreshMatch) { console.log('[B23] meta refresh →', refreshMatch[1]); return refreshMatch[1]; }
+  } catch(e) {
+    console.log('[B23] HTTP方法失败:', e.message);
+  }
+  
+  console.log('[B23] 客户端解析失败，使用原始链接');
+  return b23Url; // 回退：直接尝试下载
+}
+
+// ── 标记及笔记：切换 note 编辑模式 ──
 async function analyzeFromUrl() {
-  const url = document.getElementById('urlInput').value.trim();
+  let url = document.getElementById('urlInput').value.trim();
   if (!url) { alert('请粘贴视频链接'); return; }
   
-  // 自动保存上一条视频的标记和结果
+  // 自动保存上一条视频
   if (currentVideoUrl && currentVideoUrl !== url && (marks.length > 0 || transcriptData.length > 0)) {
     saveCurrentToLibrary();
   }
   
-  setStatus('running', '下载视频并转写中...');
+  const contentEl = document.getElementById('analysisContent');
+  
+  // 解析 b23.tv 短链
+  if (url.includes('b23.tv')) {
+    setStatus('running', '🔗 解析B站短链接...');
+    switchTab('overview');
+    contentEl.innerHTML = `<div class="empty-state"><span style="font-size:32px">🔗</span><span>正在解析B站短链接...</span><span style="font-size:11px;color:var(--text-dim);margin-top:4px">${url}</span></div>`;
+    const resolved = await resolveB23Url(url);
+    if (resolved !== url) {
+      url = resolved;
+      document.getElementById('urlInput').value = url;
+      console.log('[B23] 解析完成:', url);
+    } else {
+      console.log('[B23] 无法解析，直接尝试下载');
+    }
+  }
+  
+  // ═══ V3 统一流程: 提交 → 后台(Gemini视频+DeepSeek文本) → 全部产出 ═══
+  setStatus('running', '🎬 提交分析任务...');
   switchTab('overview');
-  document.getElementById('analysisContent').innerHTML = `
-    <div class="empty-state">
-      <span style="font-size:32px">📥</span>
-      <span>正在处理视频...</span>
-      <span style="font-size:11px;color:var(--text-dim)">${url}</span>
-    </div>`;
+  contentEl.innerHTML = `<div class="empty-state"><span style="font-size:32px">🎬</span><span>正在提交视频分析...</span><span style="font-size:11px;color:var(--text-dim);margin-top:4px">Gemini 原生视频理解 + DeepSeek 文本分析</span></div>`;
   
-  const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 60000); // 60s 超时
-  
+  let result = null;
   try {
-    const resp = await fetch('/api/analyze', {
+    // 1) 启动异步分析任务
+    const resp1 = await fetch('/api/transcribe', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({url: url}),
-      signal: controller.signal
+      body: JSON.stringify({url: url})
     });
-    clearTimeout(timeoutId);
-    
-    const data = await resp.json();
-    
-    if (data.error) {
-      setStatus('done', '⚠️ 处理失败');
-      document.getElementById('analysisContent').innerHTML = `
-        <div class="empty-state">
-          <span style="font-size:32px">⚠️</span>
-          <span>${data.error}</span>
-          <span style="font-size:11px;color:var(--text-dim)">小提示：用右边「🧠 Demo 深度分析」体验完整功能</span>
-        </div>`;
+    const startResult = await resp1.json();
+    if (startResult.error) {
+      setStatus('done', '⚠️ 提交失败');
+      contentEl.innerHTML = `<div class="empty-state"><span style="font-size:32px">⚠️</span><span>${startResult.error}</span></div>`;
       return;
     }
+    const taskId = startResult.task_id;
+    console.log('[V3] task_id:', taskId);
     
-    if (data.transcript && data.transcript.length > 0) {
-      transcriptData = data.transcript;
-      renderTranscript();
-      updateCardCount();
+    // 2) 轮询直到完成（最长 5 分钟）
+    let pollCount = 0;
+    const maxPolls = 150;
+    while (pollCount < maxPolls) {
+      await new Promise(r => setTimeout(r, 2000));
+      pollCount++;
+      const pollResp = await fetch('/api/task', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({task_id: taskId})
+      });
+      const task = await pollResp.json();
+      
+      if (task.status === 'done') { result = task.result; break; }
+      if (task.status === 'error') throw new Error(task.error || '分析失败');
+      
+      // 进度提示
+      const stage = task.stage || 'processing';
+      const stageText = { gemini: 'Gemini 正在分析视频画面和音频...',
+                          deepseek: 'DeepSeek 正在生成分析报告...',
+                          processing: '正在处理...' }[stage] || '正在处理...';
+      const dots = '.'.repeat((pollCount % 3) + 1);
+      contentEl.innerHTML = `<div class="empty-state"><span style="font-size:32px">${stage==='gemini'?'🎬':'🧠'}</span><span>${stageText}${dots}</span><span style="font-size:11px;color:var(--text-dim);margin-top:4px">${pollCount * 2}s</span></div>`;
+    }
+    if (!result) throw new Error('分析超时（5分钟），请重试');
+    
+    // ✅ 一次性获得全部结果
+    transcriptData = result.transcript || [];
+    videoServingUrl = result.video_url || '';
+    currentVideoUrl = url;
+    marks = [];
+    
+    // 渲染转写
+    renderTranscript();
+    updateCardCount();
+    if (videoServingUrl) {
+      const vp = document.getElementById('videoPlayer');
+      vp.src = videoServingUrl;
+      vp.style.display = 'block';
+      document.querySelector('.video-placeholder').style.display = 'none';
     }
     
-    if (data.analysis && data.analysis.overview) {
-      analysisData = normalizeAnalysis(data.analysis);
-      // 设置视频播放源
-      if (data.video_url) {
-        videoServingUrl = data.video_url;
-        const vp = document.getElementById('videoPlayer');
-        vp.src = data.video_url;
-        vp.style.display = 'block';
-        document.querySelector('.video-placeholder').style.display = 'none';
-      }
-      // 清空旧视频的标记
-      marks = [];
-      currentVideoUrl = url;
+    // 渲染分析结果
+    if (result.analysis && result.analysis.overview) {
+      analysisData = normalizeAnalysis(result.analysis);
+      const ts = result.token_stats || {};
+      analysisData._tokenStats = ts;
+      analysisData._runId = result.run_id || '';
+      setStatus('done', `✅ 分析完成 (${ts.elapsed || '?'}s · ${ts.total_tokens || 0}t)`);
+      renderTabContent('overview');
       
-      // 自动收录到素材库
-      addToLibrary(url, data);
-      
-      setStatus('done', '✅ 分析完成');
+      // 收录到素材库
+      addToLibrary(url, {transcript: transcriptData, analysis: analysisData,
+                         video_url: videoServingUrl, token_stats: ts});
     } else {
-      setStatus('done', '⚠️ 转写成功但分析未完成');
+      setStatus('done', `✅ 转写完成 · ${transcriptData.length} 条对白`);
+      contentEl.innerHTML = `<div class="empty-state"><span style="font-size:32px">✅</span><span>转写完成，${transcriptData.length} 条对白</span><span style="font-size:11px;color:var(--text-dim);margin-top:4px">点击「DeepSeek 分析」生成报告</span></div>`;
     }
     
   } catch(e) {
-    clearTimeout(timeoutId);
-    const isTimeout = e.name === 'AbortError';
-    const msg = isTimeout ? '请求超时（>60秒）。视频下载或转写耗时过长，请用「🧠 Demo 深度分析」体验' : e.message;
-    setStatus('done', '⚠️ ' + (isTimeout ? '请求超时' : '处理失败'));
-    document.getElementById('analysisContent').innerHTML = `
-      <div class="empty-state">
-        <span style="font-size:32px">${isTimeout ? '⏱️' : '🔌'}</span>
-        <span>${isTimeout ? '请求超时' : '连接失败'}</span>
-        <span style="font-size:13px;color:var(--text-dim);margin-top:8px">${msg}</span>
-        <span style="font-size:11px;color:var(--text-dim);margin-top:12px">💡 点击「🧠 Demo 深度分析」用演示数据测试完整功能</span>
-      </div>`;
+    const msg = e.name === 'AbortError' ? '分析超时' : e.message;
+    setStatus('done', '⚠️ 分析失败');
+    contentEl.innerHTML = `<div class="empty-state"><span style="font-size:32px">⚠️</span><span>${msg}</span><span style="font-size:11px;color:var(--text-dim);margin-top:8px">请检查链接是否有效，或尝试其他视频</span></div>`;
   }
 }
 
-// ── DeepSeek 分析（Demo 数据）──
+// ── DeepSeek 分析（Demo 数据 / 已有转写重新分析）──
 async function analyzeWithDeepSeek() {
-  setStatus('running', 'DeepSeek 分析中...');
+  if (transcriptData.length === 0) {
+    alert('请先加载转写数据（粘贴链接分析或加载 Demo）');
+    return;
+  }
   
-  // 切换到 overview tab 显示加载状态
+  setStatus('running', '🧠 DeepSeek 分析中...');
   switchTab('overview');
   document.getElementById('analysisContent').innerHTML = `
     <div class="empty-state">
       <span style="font-size:32px">🧠</span>
-      <span>DeepSeek V4 Pro 正在分析...</span>
-      <span style="font-size:11px;color:var(--text-dim)">总览 → 脚本解析 → 复刻模板 → 镜头&声音 → 评分</span>
+      <span>DeepSeek 深度分析中...</span>
+      <span style="font-size:11px;color:var(--text-dim);margin-top:4px">Gemini 视觉 + DeepSeek 文本</span>
     </div>`;
+  
+  const controller = new AbortController();
+  const t = setTimeout(() => controller.abort(), 180000);
   
   try {
     const resp = await fetch('/api/analyze', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({transcript: transcriptData})
+      body: JSON.stringify({
+        transcript: transcriptData,
+        video_path: videoServingUrl ? videoServingUrl.replace('/video/', 'videos/') : '',
+        gemini_analysis: analysisData?.gemini_analysis || null
+      }),
+      signal: controller.signal
     });
-    
-    if (!resp.ok) {
-      const err = await resp.json();
-      throw new Error(err.error || 'API error');
-    }
+    clearTimeout(t);
     
     const data = await resp.json();
     
-    // 用真实分析结果更新数据
     if (data.analysis && data.analysis.overview) {
       analysisData = normalizeAnalysis(data.analysis);
-      setStatus('done', '✅ DeepSeek 分析完成');
+      const ts = data.token_stats || {};
+      analysisData._tokenStats = ts;
+      analysisData._runId = data.run_id || '';
+      setStatus('done', `✅ 分析完成 (${data.elapsed || '?'}s · ${ts.total_tokens || 0}t)`);
     } else {
-      setStatus('done', '⚠️ 分析返回为空，使用 Demo 数据');
+      setStatus('done', '⚠️ 分析返回为空');
     }
-    
-    // 更新转录数据（如果有新的）
-    if (data.transcript && data.transcript.length > 0) {
-      transcriptData = data.transcript;
-      renderTranscript();
-      updateCardCount();
-    }
-    
     renderTabContent('overview');
-    
   } catch(e) {
-    console.error('DeepSeek analysis failed:', e);
-    setStatus('done', '⚠️ API 不可用，显示 Demo 数据');
-    renderTabContent('overview');
+    clearTimeout(t);
+    const isTimeout = e.name === 'AbortError';
+    setStatus('done', '⚠️ ' + (isTimeout ? '分析超时' : '分析失败'));
+    document.getElementById('analysisContent').innerHTML = `
+      <div class="empty-state">
+        <span>${isTimeout ? '⏱️ 分析超时（>180s）' : '🔌 连接失败'}</span>
+      </div>`;
   }
 }
 
@@ -1179,6 +1360,7 @@ function setStatus(state, msg) {
 }
 
 // 启动
+loadVersion();
 loadLibrary();
 loadDemo();
 renderTabContent('overview');

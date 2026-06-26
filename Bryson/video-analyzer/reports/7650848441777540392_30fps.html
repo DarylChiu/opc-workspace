@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>10fps 深度分析 — jVwFmaqkUJA 醉酒喜剧</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background:#0f0f0f; color:#e0e0e0; line-height:1.6; }
+.container { max-width:900px; margin:0 auto; padding:20px; }
+.header { text-align:center; padding:40px 20px; background:linear-gradient(135deg,#1a1a2e,#16213e); border-radius:16px; margin-bottom:24px; }
+.header h1 { font-size:2em; color:#fff; margin-bottom:8px; }
+.header .badge { display:inline-block; background:#e94560; color:#fff; padding:4px 12px; border-radius:20px; font-size:0.85em; margin:4px; }
+.header .subtitle { color:#888; font-size:0.9em; margin-top:8px; }
+.section { background:#1a1a1a; border-radius:12px; padding:24px; margin-bottom:20px; border:1px solid #2a2a2a; }
+.section h2 { color:#e94560; font-size:1.3em; margin-bottom:16px; padding-bottom:8px; border-bottom:1px solid #2a2a2a; }
+.tag { display:inline-block; background:#2a2a4a; color:#a0a0ff; padding:2px 10px; border-radius:12px; font-size:0.85em; margin:2px; }
+.stat-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; }
+.stat-card { background:#0d0d0d; padding:16px; border-radius:8px; text-align:center; }
+.stat-card .value { font-size:1.5em; font-weight:bold; color:#e94560; }
+.stat-card .label { font-size:0.8em; color:#888; }
+.causal-step { background:#0d0d0d; padding:12px; border-radius:8px; margin-bottom:8px; border-left:3px solid #e94560; }
+.step-num { font-weight:bold; color:#e94560; }
+.step-body { margin-top:4px; }
+.step-body .cause { color:#ff6b6b; }
+.step-body .behavior { color:#ffd93d; }
+.step-body .effect { color:#6bff6b; }
+.evidence { font-size:0.8em; color:#666; margin-top:4px; }
+.turning-point { background:#0d0d0d; padding:12px; border-radius:8px; margin-bottom:8px; border-left:3px solid #ffd93d; }
+.tp-time { color:#ffd93d; font-size:0.85em; }
+.character-card { background:#0d0d0d; padding:12px; border-radius:8px; margin-bottom:8px; }
+.character-card h4 { color:#a0a0ff; }
+.act-card { background:#0d0d0d; padding:12px; border-radius:8px; margin-bottom:8px; }
+.act-time { color:#888; font-size:0.85em; }
+.score-bar { display:flex; align-items:center; margin:12px 0; }
+.score-label { width:100px; font-size:0.9em; }
+.score-fill { height:24px; border-radius:12px; background:linear-gradient(90deg,#e94560,#ffd93d); transition:width 0.5s; }
+.score-value { margin-left:12px; font-weight:bold; }
+.template-card { background:#0d0d0d; padding:12px; border-radius:8px; margin-bottom:8px; }
+.template-card h4 { color:#ffd93d; }
+.formula { background:#000; padding:8px 12px; border-radius:6px; font-family:monospace; margin:8px 0; color:#6bff6b; }
+.transcript { max-height:300px; overflow-y:auto; background:#0d0d0d; padding:12px; border-radius:8px; font-family:monospace; font-size:0.85em; }
+.transcript .ts { color:#e94560; }
+.frame-stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:8px; margin-top:8px; }
+.frame-stat-card { background:#0d0d0d; padding:8px; border-radius:6px; text-align:center; }
+.frame-stat-card .count { font-size:1.2em; font-weight:bold; color:#a0a0ff; }
+.frame-stat-card .name { font-size:0.75em; color:#888; }
+@media (max-width:600px) { .score-bar { flex-direction:column; align-items:flex-start; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+    <h1>🎬 10fps 深度影像分析报告</h1>
+    <div class="badge">⚡ 10fps Vision Pipeline</div>
+    <div class="badge">🔬 不修补 · 纯上限验证</div>
+    <p class="subtitle">jVwFmaqkUJA 醉酒喜剧 | 2026-06-19 22:11 | 帧密度：每0.1秒/帧</p>
+</div>
+
+<!-- 技术指标 -->
+<div class="section">
+    <h2>📊 技术指标</h2>
+    <div class="stat-grid">
+        <div class="stat-card"><div class="value">1317帧</div><div class="label">Vision 分析帧</div></div>
+        <div class="stat-card"><div class="value">10fps</div><div class="label">采样密度</div></div>
+        <div class="stat-card"><div class="value">618,540</div><div class="label">总 Token</div></div>
+        <div class="stat-card"><div class="value">$0.6334</div><div class="label">总成本</div></div>
+    </div>
+    <div class="frame-stats">
+        <div class="frame-stat-card"><div class="count">673</div><div class="name">醉酒</div></div><div class="frame-stat-card"><div class="count">334</div><div class="name">正常</div></div><div class="frame-stat-card"><div class="count">175</div><div class="name">微醺</div></div><div class="frame-stat-card"><div class="count">51</div><div class="name">困惑</div></div><div class="frame-stat-card"><div class="count">24</div><div class="name">困惑/挣扎</div></div><div class="frame-stat-card"><div class="count">12</div><div class="name">困惑/微醺</div></div><div class="frame-stat-card"><div class="count">12</div><div class="name">近景男子：正常；背景男子：正常，略显困惑或不耐烦。</div></div><div class="frame-stat-card"><div class="count">12</div><div class="name">前景男子：正常；背景男子：微醺</div></div>
+    </div>
+</div>
+
+<!-- 故事理解 -->
+<div class="section">
+    <h2>📖 故事理解（Vision + 因果推理一体）</h2>
+    <p style="margin-bottom:12px;">
+        <span class="tag">经典叙事型</span>
+        <span class="tag">喜剧</span> <span class="tag">生活切片</span>
+        <span style="margin-left:8px;color:#888;">信心：90%</span>
+    </p>
+    <p style="font-size:1.1em;line-height:1.8;background:#0d0d0d;padding:16px;border-radius:8px;">
+        一名男子在酒局中逐渐醉酒，行为从正常倒酒演变为将酒倒在桌上、误将生蚝壳当手机滑动、试图食用生蚝壳等荒谬行为，最终在意识模糊中结束。视频通过高密度行为链记录了其从微醺到深度醉酒的完整过程，核心笑点源于醉酒导致的认知错乱和物品误认。
+    </p>
+</div>
+
+<!-- 因果链 -->
+<div class="section">
+    <h2>🔗 完整因果链</h2>
+    
+        <div class="causal-step">
+            <span class="step-num">Step 1</span>
+            <div class="step-body">
+                <span class="cause">起因：男子处于酒局中，初始状态正常</span> →
+                <span class="behavior">行为：男子坐在圆桌旁，右手持啤酒瓶准备倒酒，头部微抬，目光向前</span> →
+                <span class="effect">结果：建立正常饮酒场景，为后续醉酒行为做铺垫</span>
+                <div class="evidence">📷 画面证据：男子右手持啤酒瓶，瓶口朝上，头部微抬，目光看向前方偏右 | ⏱ 0.0s-0.5s</div>
+            </div>
+        </div>
+        <div class="causal-step">
+            <span class="step-num">Step 2</span>
+            <div class="step-body">
+                <span class="cause">起因：男子开始尝试倒酒，但手眼协调能力下降</span> →
+                <span class="behavior">行为：蓝衣男子左手握啤酒瓶，瓶口朝下，瓶身倾斜角度增大，但未对准酒杯</span> →
+                <span class="effect">结果：酒液开始洒在桌面上，而非杯中，显示醉酒初期症状</span>
+                <div class="evidence">📷 画面证据：瓶身倾斜角度增大，瓶口未对准酒杯，酒液流出洒在桌面 | ⏱ 0.5s-1.5s</div>
+            </div>
+        </div>
+        <div class="causal-step">
+            <span class="step-num">Step 3</span>
+            <div class="step-body">
+                <span class="cause">起因：醉酒程度加深，判断力受损</span> →
+                <span class="behavior">行为：男子持续倾斜酒瓶，酒液洒在桌面上，头部低垂，眼睛半闭</span> →
+                <span class="effect">结果：无法完成简单倒酒动作，显示醉酒导致的身体控制力下降</span>
+                <div class="evidence">📷 画面证据：酒液持续洒在桌面，男子头部低垂，眼睛半闭，动作迟缓 | ⏱ 1.5s-2.5s</div>
+            </div>
+        </div>
+        <div class="causal-step">
+            <span class="step-num">Step 4</span>
+            <div class="step-body">
+                <span class="cause">起因：醉酒导致认知错乱，误将瓜子壳当食物</span> →
+                <span class="behavior">行为：男子左手拿起空玻璃杯，右手将瓜子放入杯中，试图饮用</span> →
+                <span class="effect">结果：行为荒谬，显示醉酒后判断力严重下降</span>
+                <div class="evidence">📷 画面证据：男子将瓜子放入空杯，试图从杯中‘喝’掉瓜子 | ⏱ 6.5s-7.0s</div>
+            </div>
+        </div>
+        <div class="causal-step">
+            <span class="step-num">Step 5</span>
+            <div class="step-body">
+                <span class="cause">起因：醉酒导致行为重复和迟钝</span> →
+                <span class="behavior">行为：男子身体摇晃，右手紧按烟灰缸，试图保持平衡</span> →
+                <span class="effect">结果：显示醉酒程度加深，身体控制力严重下降</span>
+                <div class="evidence">📷 画面证据：角色身体摇晃剧烈，右手紧按烟灰缸，头部晃动幅度增大 | ⏱ 8.5s-9.5s</div>
+            </div>
+        </div>
+        <div class="causal-step">
+            <span class="step-num">Step 6</span>
+            <div class="step-body">
+                <span class="cause">起因：醉酒导致物品误认，将生蚝壳当手机</span> →
+                <span class="behavior">行为：男子右手握住生蚝壳，在桌面上向左滑动，如同操作手机</span> →
+                <span class="effect">结果：行为荒谬，显示醉酒后认知和判断能力严重下降</span>
+                <div class="evidence">📷 画面证据：角色右手握着生蚝壳，在桌面上向左滑动，身体随之移动 | ⏱ 16.0s-16.5s</div>
+            </div>
+        </div>
+        <div class="causal-step">
+            <span class="step-num">Step 7</span>
+            <div class="step-body">
+                <span class="cause">起因：醉酒导致行为错乱，试图食用生蚝壳</span> →
+                <span class="behavior">行为：男子右手举着生蚝壳，头部向后仰，生蚝壳贴近嘴唇，嘴巴微张</span> →
+                <span class="effect">结果：行为极度荒谬，显示醉酒程度已达顶点</span>
+                <div class="evidence">📷 画面证据：生蚝壳触碰到嘴唇，男子头部后仰，嘴巴张开 | ⏱ 17.0s-17.5s</div>
+            </div>
+        </div>
+</div>
+
+<!-- 戏剧机制 -->
+<div class="section">
+    <h2>🎭 戏剧机制</h2>
+    <p><strong>喜剧机制：</strong>喜剧源于醉酒导致的认知错乱和物品误认，通过高密度行为链展示角色从正常到荒谬的渐进过程，每个笑点都是预期违背（如倒酒洒桌、喝瓜子、滑生蚝壳）和行为错乱（如试图食用生蚝壳）的叠加。</p>
+    <p style="margin-top:8px;"><strong>广义戏剧机制：</strong>戏剧机制是‘醉酒弧线’，通过视觉行为链完整展示角色从清醒到深度醉酒的渐进过程，每个转折点都强化了醉酒状态的不可逆性，最终以荒谬行为达到高潮。</p>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:12px;">
+        <div style="background:#0d0d0d;padding:12px;border-radius:8px;">
+            <h4 style="color:#ff6b6b;">📐 客观现实线</h4>
+            <p>一名男子在酒局中逐渐醉酒，从正常倒酒演变为将酒倒在桌上、误将瓜子当饮料、身体摇晃、误将生蚝壳当手机滑动、试图食用生蚝壳，最终在意识模糊中结束。</p>
+        </div>
+        <div style="background:#0d0d0d;padding:12px;border-radius:8px;">
+            <h4 style="color:#a0a0ff;">🎭 主观视角线</h4>
+            <p>['角色以为自己在倒酒入杯，实际将酒倒在桌上', '角色以为杯中有酒，实际是瓜子', '角色以为自己在操作手机，实际握着生蚝壳', '角色以为生蚝壳是可食用物品，实际是废弃物']</p>
+        </div>
+    </div>
+</div>
+
+<!-- 关键转折点 -->
+<div class="section">
+    <h2>⚡ 关键转折点</h2>
+    
+        <div class="turning-point">
+            <span class="tp-time">⏱ 1.0ss</span>
+            <strong>男子将酒倒在桌面上而非杯中</strong>
+            <p>首次显示醉酒导致的协调能力下降，是醉酒行为的开端</p>
+            <p class="evidence">📷 酒液洒在桌面，男子眼睛半睁，视线涣散</p>
+        </div>
+        <div class="turning-point">
+            <span class="tp-time">⏱ 6.5ss</span>
+            <strong>男子试图将瓜子从杯中‘喝’掉</strong>
+            <p>显示醉酒导致的认知错乱，行为开始荒谬</p>
+            <p class="evidence">📷 空玻璃杯中有瓜子，男子将其举到嘴边</p>
+        </div>
+        <div class="turning-point">
+            <span class="tp-time">⏱ 16.0ss</span>
+            <strong>男子将生蚝壳当成手机滑动</strong>
+            <p>醉酒导致的物品误认达到顶峰，行为极度荒谬</p>
+            <p class="evidence">📷 生蚝壳被握在手中，在桌面上滑动</p>
+        </div>
+</div>
+
+<!-- 角色分析 -->
+<div class="section">
+    <h2>👤 角色分析</h2>
+    
+        <div class="character-card">
+            <h4>蓝衣男子</h4>
+            <p>身份：酒局参与者，可能为朋友或同事</p>
+            <p>状态：从清醒逐渐醉酒，最终意识模糊</p>
+            <p>情绪弧线：从正常社交状态→微醺→醉酒→行为错乱→昏睡</p>
+        </div>
+</div>
+
+<!-- 内容总览 -->
+<div class="section">
+    <h2>📌 内容总览</h2>
+    <p><strong>一句话总结：</strong>男子醉酒后误认生蚝壳为手机，行为荒诞搞笑。</p>
+    <p><strong>目标受众：</strong>喜欢搞笑、生活切片类短视频的年轻观众，尤其是对醉酒行为感兴趣的群体。</p>
+    <p><strong>核心观点：</strong>醉酒会导致认知错乱和荒谬行为，但以喜剧方式呈现。</p>
+    <p><strong>认知转化：</strong>从认为醉酒只是简单失态，变成意识到醉酒可能引发极端物品误认和搞笑行为。</p>
+</div>
+
+<!-- 叙事结构 -->
+<div class="section">
+    <h2>🎬 叙事结构分离</h2>
+    <p style="margin-bottom:12px;color:#888;">情绪曲线：情绪从平静（0-15s）逐渐上升至困惑和荒谬（15-35s），在35-45s达到混乱和失控的高峰，最终在意识模糊中结束</p>
+    
+        <div class="act-card">
+            <h4>第一幕：微醺开端 <span class="act-time">⏱ 00:00-00:15</span></h4>
+            <p>叙事功能：建立正常饮酒场景，展示男子初始清醒状态，为后续醉酒行为做铺垫</p>
+            <p>人物动态：男子处于社交状态，情绪正常，与酒局同伴互动</p>
+            <p>戏剧张力：★★☆☆☆☆☆☆☆☆ 2/10</p>
+            <ul><li>[00:00] 男子说'好的完这杯就车了'，显示清醒意图</li><li>[00:17] 男子说'矩了'，开始出现醉酒迹象</li></ul>
+        </div>
+        <div class="act-card">
+            <h4>第二幕：醉酒升级 <span class="act-time">⏱ 00:15-00:35</span></h4>
+            <p>叙事功能：展示醉酒导致的行为错乱，从倒酒失误到认知错乱</p>
+            <p>人物动态：男子从微醺进入醉酒状态，行为逐渐荒谬，同伴反应未明</p>
+            <p>戏剧张力：★★★★★☆☆☆☆☆ 5/10</p>
+            <ul><li>[00:23] 男子说'一位这样的车'，语言混乱</li><li>[00:30] 男子说'我给你吃'，试图分享食物</li><li>[00:32] 男子说'我'，意识模糊</li><li>[00:34] 男子说'满了'，误判酒杯状态</li></ul>
+        </div>
+        <div class="act-card">
+            <h4>第三幕：荒谬顶峰 <span class="act-time">⏱ 00:35-00:45</span></h4>
+            <p>叙事功能：展示醉酒导致的物品误认和荒谬行为达到高潮</p>
+            <p>人物动态：男子完全醉酒，行为极度荒谬，与外界互动错乱</p>
+            <p>戏剧张力：★★★★★★★★☆☆ 8/10</p>
+            <ul><li>[00:36] 男子说'我叫下一辆'，试图叫车</li><li>[00:40] 男子说'师傅 关下公条 开开窗'，语言完全混乱</li><li>[00:44] 男子说'练过烤奶一起'，无意义语言</li></ul>
+        </div>
+    <h3 style="margin-top:16px;color:#ffd93d;">叙事技巧</h3>
+    <div class="causal-step"><strong>行为错乱</strong>：在00:15-00:35秒，男子倒酒失误、语言混乱 → 制造喜剧效果，展示醉酒导致的协调能力下降</div><div class="causal-step"><strong>预期违背</strong>：在00:34秒，男子说'满了'但实际酒杯可能空或未满 → 通过观众预期与实际情况的差异产生笑点</div><div class="causal-step"><strong>物品误认</strong>：在00:36-00:44秒，男子将生蚝壳当手机滑动、试图食用 → 强化荒谬感，突出醉酒导致的认知错乱</div><div class="causal-step"><strong>语言混乱</strong>：在00:40-00:44秒，男子说'关下公条'、'练过烤奶一起'等无意义语言 → 通过语言错乱增强醉酒真实感，增加喜剧效果</div>
+</div>
+
+<!-- 评分 -->
+<div class="section">
+    <h2>⭐ 三项评分</h2>
+    <div class="score-bar">
+        <span class="score-label">Hook 设计</span>
+        <div class="score-fill" style="width:70%"></div>
+        <span class="score-value">70</span>
+    </div>
+    <p style="font-size:0.85em;color:#888;margin-bottom:12px;">开头对白‘好的完这杯就车了’暗示醉酒主题，但缺乏视觉或听觉上的强吸引力；后续行为如倒酒洒桌虽有趣，但初始场景平淡，未能迅速抓住观众注意力。</p>
+    <div class="score-bar">
+        <span class="score-label">结构设计</span>
+        <div class="score-fill" style="width:75%"></div>
+        <span class="score-value">75</span>
+    </div>
+    <p style="font-size:0.85em;color:#888;margin-bottom:12px;">故事遵循经典弧线，从正常到醉酒的行为链清晰，但因果链中部分步骤（如瓜子壳误认）与对白时间戳不匹配，结构连贯性略受影响。</p>
+    <div class="score-bar">
+        <span class="score-label">表达效果</span>
+        <div class="score-fill" style="width:80%"></div>
+        <span class="score-value">80</span>
+    </div>
+    <p style="font-size:0.85em;color:#888;">对白简短且口语化，配合醉酒行为增强了真实感；但部分对白（如‘练过烤奶一起’）语义模糊，削弱了表达清晰度，整体喜剧效果通过行为而非语言充分传达。</p>
+</div>
+
+<!-- 复刻模板 -->
+<div class="section">
+    <h2>📋 复刻模板</h2>
+    <div class="template-card"><h4>醉酒行为错乱链</h4><p>适用于记录人物从正常状态逐渐失控的过程，通过一系列递增的荒谬行为制造笑点，适合酒局、派对等社交场景。</p><div class="formula">【初始状态】→【首次失误】→【认知错乱】→【物品误认】→【最终失控】</div></div><div class="template-card"><h4>物品误认喜剧</h4><p>利用醉酒或迷糊状态下对日常物品的误认（如生蚝壳当手机）制造反差笑点，适用于任何需要荒诞幽默的短剧。</p><div class="formula">【正常物品A】→【人物状态异常】→【误认物品A为B】→【执行B的典型动作】→【荒谬结果】</div></div><div class="template-card"><h4>酒局金句反转</h4><p>以醉酒后的胡言乱语或逻辑断裂的对白（如“好的完这杯就车了”）作为笑点，结合行为反差增强喜剧效果。</p><div class="formula">【清醒宣言】→【行为与宣言矛盾】→【对白模糊化】→【动作升级】→【金句收尾】</div></div>
+    <h3 style="margin-top:12px;color:#ffd93d;">可复用元素</h3>
+    <p><strong>脚本模式：</strong>高密度行为链：从正常到失控的渐进式行为记录，每个步骤包含一个明确的失误或错乱动作，对白作为辅助强化氛围。</p>
+    <p><strong>Hook技巧：</strong>反差钩子：开头建立正常场景（如倒酒），迅速引入第一个失误（酒倒桌上），利用预期违背吸引观众。</p>
+    <p><strong>话题切入：</strong>酒局众生相：以醉酒后的真实反应为切入点，聚焦认知错乱和物品误认的荒诞性，引发共鸣或嘲笑。</p>
+    <p><strong>爆款因素：</strong>高密度笑点：每几秒一个行为失误或错乱，节奏紧凑，适合短视频传播, 共鸣感：醉酒经历普遍，观众容易代入或回忆类似场景，增强分享欲</p>
+</div>
+
+<!-- 对白转录 -->
+<div class="section">
+    <h2>🎙️ 对白转录（仅供参考）</h2>
+    <div class="transcript">
+        <div><span class="ts">[00:00]</span> 好的完这杯就车了</div><div><span class="ts">[00:17]</span> 矩了</div><div><span class="ts">[00:23]</span> 一位这样的车</div><div><span class="ts">[00:30]</span> 我给你吃</div><div><span class="ts">[00:32]</span> 我</div><div><span class="ts">[00:34]</span> 满了</div><div><span class="ts">[00:36]</span> 我叫下一辆</div><div><span class="ts">[00:40]</span> 师傅 关下公条 开开窗</div><div><span class="ts">[00:44]</span> 练过烤奶一起</div>
+    </div>
+</div>
+
+<div style="text-align:center;padding:40px;color:#444;font-size:0.85em;">
+    <p>🔬 10fps Vision Pipeline · 不修补 · 上限验证</p>
+    <p>分析引擎：Gemini 2.5 Flash Vision (逐帧) + DeepSeek V4 Pro (故事合成+文本分析)</p>
+</div>
+
+</div>
+</body>
+</html>
