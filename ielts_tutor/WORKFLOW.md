@@ -233,13 +233,15 @@ ielts_tutor/
 - [ ] 项目目录初始化
 
 ### Phase 1 · 管线1 重构（链式流式）
-- [ ] FastAPI Server 路由层重构
-- [ ] Google STT 流式集成（StreamingRecognize）
-- [ ] DeepSeek 对话引擎（考官角色 prompt + 流式输出）
-- [ ] Google TTS 流式合成
-- [ ] WebRTC 音频通道搭建
-- [ ] 前端重构（模式选择 + 实时字幕 + 纠错显示）
-- [ ] 异步评估报告生成
+- [x] FastAPI Server 路由层重构
+- [x] Google STT 集成
+- [x] DeepSeek 对话引擎（考官角色 prompt + 流式输出）
+- [x] Google TTS 合成
+- [x] 前端 SPA（模式选择 + 实时字幕 + 音频播放）
+- [x] 开场问候
+- [x] 多轮对话（需 Daryl 浏览器验收）
+- [x] 3模式自测通过 (ielts_part1/business_pitch/free_talk)
+- [ ] Daryl 浏览器验收
 
 ### Phase 2 · 管线2 接入（Qwen-Omni）
 - [ ] Qwen-Omni Realtime API 对接
@@ -260,4 +262,4 @@ ielts_tutor/
 
 | 版号 | 日期 | 变更 |
 |------|------|------|
-| 0.1.0 | 06-28 | 双管线架构设计 + 已有资产整合 |
+| 0.3.0 | 06-28 | 多轮对话+开场问候+3种模式全通过+延迟优化(1.3-2.0s) |
