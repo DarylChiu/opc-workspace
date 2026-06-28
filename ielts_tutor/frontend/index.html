@@ -9,67 +9,76 @@
             --bg: #0f0f1a; --card: #1a1a2e; --border: #2a2a4a;
             --accent: #6c63ff; --accent2: #00d4aa; --text: #e0e0f0;
             --muted: #888; --user-bubble: #1e3a5f; --tutor-bubble: #2d1f4e;
-            --danger: #ff6b6b; --warn: #ffa500;
+            --danger: #ff6b6b; --warn: #ffa500; --gold: #ffd700;
         }
         * { margin:0; padding:0; box-sizing:border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: var(--bg); color: var(--text);
-            min-height: 100vh; display: flex; justify-content: center;
-            padding: 16px;
+            min-height: 100vh; padding: 16px;
+            display: flex; justify-content: center;
         }
-        .app { max-width: 600px; width: 100%; display: flex; flex-direction: column; gap: 12px; }
+        .app {
+            width: 100%; max-width: 1100px;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            grid-template-rows: auto auto 1fr;
+            gap: 12px;
+        }
         .header {
+            grid-column: 1/-1;
             display: flex; align-items: center; justify-content: space-between;
             padding: 12px 16px; background: var(--card);
             border-radius: 12px; border: 1px solid var(--border);
         }
-        .header h1 { font-size: 18px; font-weight: 700; }
-        .pipeline-badge {
-            padding: 4px 10px; border-radius: 20px; font-size: 12px;
-            background: var(--accent); color: #fff; font-weight: 600;
-        }
+        .header h1 { font-size: 18px; }
         .controls {
-            display: flex; gap: 8px; flex-wrap: wrap;
-            padding: 12px; background: var(--card);
+            grid-column: 1;
+            display: flex; gap: 8px; align-items: center;
+            padding: 10px 16px; background: var(--card);
             border-radius: 12px; border: 1px solid var(--border);
+            flex-wrap: wrap;
         }
-        .controls label { font-size: 11px; color: var(--muted); margin-bottom: 2px; display: block; }
-        .controls select, .controls button {
-            padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border);
+        .controls label, .controls span { font-size: 12px; color: var(--muted); }
+        .controls select {
+            padding: 6px 10px; border-radius: 8px; border: 1px solid var(--border);
             background: var(--bg); color: var(--text); font-size: 13px; cursor: pointer;
         }
-        .btn-record {
-            flex: 1; min-width: 100px; padding: 12px; font-size: 16px; font-weight: 700;
-            border: none; border-radius: 12px; cursor: pointer; transition: all .2s;
+        .btn {
+            padding: 10px 20px; border-radius: 10px; font-size: 14px; font-weight: 700;
+            border: none; cursor: pointer; transition: all .2s;
         }
         .btn-start { background: var(--accent); color: #fff; }
         .btn-start:hover { background: #7b73ff; }
-        .btn-stop { background: var(--danger); color: #fff; }
-        .btn-stop:hover { background: #ff4b4b; }
-        .btn-abort {
-            background: var(--warn); color: #000; font-size: 13px;
-            padding: 8px 16px; border: none; border-radius: 8px; cursor: pointer;
-            font-weight: 600; display: none;
+        .btn-start:disabled { opacity: 0.4; cursor: not-allowed; }
+        .btn-end { background: var(--danger); color: #fff; font-size: 12px; padding: 6px 14px; border-radius: 8px; border: none; cursor: pointer; }
+
+        .mic-bar {
+            display: flex; align-items: center; gap: 8px; flex: 1; min-width: 120px;
         }
-        .btn-abort.visible { display: inline-block; }
-        .btn-record:disabled, .btn-abort:disabled { opacity: 0.5; cursor: not-allowed; }
+        .mic-meter { flex:1; height:6px; background:var(--border); border-radius:3px; overflow:hidden; }
+        .mic-fill { height:100%; background:var(--accent2); border-radius:3px; transition:width .15s; width:0; }
+
         .status-bar {
+            grid-column: 1;
             display: flex; align-items: center; gap: 8px;
-            padding: 8px 16px; background: var(--card);
-            border-radius: 12px; border: 1px solid var(--border); font-size: 13px;
+            padding: 6px 16px; background: var(--card); border-radius: 12px;
+            border: 1px solid var(--border); font-size: 13px;
         }
-        .status-dot {
-            width: 8px; height: 8px; border-radius: 50%; background: var(--muted); flex-shrink: 0;
+        .status-dot { width:8px;height:8px;border-radius:50%;background:var(--muted);flex-shrink:0; }
+        .status-dot.on { background:var(--accent2); animation:pulse 1.5s infinite; }
+        .status-dot.thinking { background:#ffa500; animation:pulse 1s infinite; }
+        .status-dot.speaking { background:var(--accent); animation:pulse .5s infinite; }
+        @keyframes pulse { 50%{opacity:.4} }
+
+        .main-area {
+            grid-column: 1; display: flex; flex-direction: column; gap: 0;
+            background: var(--card); border-radius: 12px; border: 1px solid var(--border);
+            overflow: hidden; min-height: 60vh; max-height: 65vh;
         }
-        .status-dot.active { background: #00d4aa; animation: pulse 1.5s infinite; }
-        .status-dot.thinking { background: #ffa500; animation: pulse 1s infinite; }
-        .status-dot.speaking { background: var(--accent); animation: pulse 0.5s infinite; }
-        @keyframes pulse { 50% { opacity: 0.4; } }
         .transcript {
-            flex:1; min-height:0; overflow-y:auto; display:flex; flex-direction:column; gap:8px;
-            padding:12px; background:var(--card); border-radius:12px; border:1px solid var(--border);
-            max-height:50vh;
+            flex:1; overflow-y:auto; padding:16px; display:flex; flex-direction:column; gap:8px;
+            min-height:0;
         }
         .msg {
             max-width:85%; padding:8px 14px; border-radius:14px;
@@ -78,22 +87,41 @@
         @keyframes fadeIn { from{opacity:0;transform:translateY(6px)} }
         .msg.user { align-self:flex-end; background:var(--user-bubble); }
         .msg.tutor { align-self:flex-start; background:var(--tutor-bubble); }
-        .msg.system { align-self:center; background:transparent; color:var(--muted); font-size:12px; text-align:center; }
+        .msg.system { align-self:center; color:var(--muted); font-size:12px; text-align:center; background:transparent; }
         .msg.error { align-self:center; background:#3a1a1a; color:var(--danger); border:1px solid var(--danger); }
         .msg .speaker { font-size:11px; color:var(--muted); margin-bottom:2px; display:block; }
-        .msg .time { font-size:10px; color:var(--muted); margin-top:4px; }
-        .mic-test {
-            padding: 12px; background: var(--card); border-radius: 12px;
-            border: 1px solid var(--border); display: flex; align-items: center; gap: 12px;
+        .msg .time { font-size:10px; color:var(--muted); margin-top:4px; text-align:right; }
+        .empty-state { text-align:center; color:var(--muted); padding:60px 20px; font-size:15px; line-height:1.6; }
+
+        /* Score panel */
+        .score-panel {
+            grid-column: 2; grid-row: 2/5;
+            background: var(--card); border-radius: 12px; border: 1px solid var(--border);
+            padding: 16px; display: flex; flex-direction: column; gap: 16px;
+            max-height: 80vh; overflow-y: auto;
         }
-        .mic-meter {
-            flex: 1; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden;
+        .score-panel h2 { font-size: 15px; text-align: center; color: var(--accent2); }
+        .score-dim {
+            display: flex; flex-direction: column; gap: 4px;
         }
-        .mic-meter .fill {
-            height: 100%; background: var(--accent2); border-radius: 4px; transition: width .1s;
-            width: 0%;
+        .score-dim .label { font-size: 12px; color: var(--muted); display: flex; justify-content: space-between; }
+        .score-dim .bar-bg {
+            height: 6px; background: var(--border); border-radius: 3px; overflow: hidden;
         }
-        .mic-label { font-size: 12px; color: var(--muted); white-space: nowrap; }
+        .score-dim .bar-fill { height: 100%; border-radius: 3px; transition: width .5s; }
+        .bar-fill.f { background: var(--accent2); }
+        .bar-fill.v { background: #4dc9f6; }
+        .bar-fill.g { background: #f39c12; }
+        .bar-fill.p { background: #e74c8b; }
+        .overall-score {
+            text-align: center; padding: 12px; background: var(--bg); border-radius: 12px;
+        }
+        .overall-score .number { font-size: 36px; font-weight: 800; color: var(--gold); }
+        .overall-score .label { font-size: 11px; color: var(--muted); }
+        .score-empty { text-align:center; color:var(--muted); font-size:12px; padding:20px 0; }
+        .score-turn { font-size: 11px; color: var(--muted); padding: 4px 8px; border-radius: 6px; background: var(--bg); }
+        .score-note { font-size: 12px; color: var(--text); line-height: 1.6; padding: 8px; background: var(--bg); border-radius: 8px; border-left: 3px solid var(--accent); }
+
         audio { display: none; }
     </style>
 </head>
@@ -101,112 +129,103 @@
 <div class="app">
     <div class="header">
         <h1>🎤 IELTS Tutor v2.0</h1>
-        <span class="pipeline-badge" id="pipelineBadge">管线1</span>
-    </div>
-
-    <!-- Mic test -->
-    <div class="mic-test" id="micTest" style="display:none">
-        <span class="mic-label">🎤 麦克风</span>
-        <div class="mic-meter"><div class="fill" id="micFill"></div></div>
-        <span class="mic-label" id="micStatus">检测中...</span>
+        <span style="padding:4px 10px;border-radius:20px;font-size:12px;background:var(--accent);color:#fff;font-weight:600">管线1</span>
     </div>
 
     <!-- Controls -->
     <div class="controls">
-        <div>
-            <label>模式</label>
-            <select id="modeSelect" onchange="onModeChange()">
-                <option value="ielts_part1">IELTS Part 1</option>
-                <option value="ielts_part2">IELTS Part 2</option>
-                <option value="ielts_part3">IELTS Part 3</option>
-                <option value="business_pitch">商业英语 Pitch</option>
-                <option value="free_talk">自由对话</option>
-            </select>
+        <label>模式</label>
+        <select id="modeSelect">
+            <option value="ielts_part1">IELTS Part 1</option>
+            <option value="ielts_part2">IELTS Part 2</option>
+            <option value="ielts_part3">IELTS Part 3</option>
+            <option value="business_pitch">商业英语 Pitch</option>
+            <option value="free_talk">自由对话</option>
+        </select>
+        <button class="btn btn-start" id="startBtn" onclick="startSession()" disabled>🎙️ 开始对话</button>
+        <button class="btn-end" id="endBtn" onclick="endSession()" style="display:none">⏹ 结束</button>
+        <div class="mic-bar">
+            <span style="font-size:12px">🎤</span>
+            <div class="mic-meter"><div class="mic-fill" id="micFill"></div></div>
         </div>
-        <button class="btn-record btn-start" id="recordBtn" onclick="toggleRecording()">
-            🎙️ 开始练习
-        </button>
-        <button class="btn-abort" id="abortBtn" onclick="forceStop()">
-            ⛔ 终止
-        </button>
     </div>
 
     <div class="status-bar">
         <div class="status-dot" id="statusDot"></div>
-        <span id="statusText">就绪 · 选择模式后点击开始</span>
+        <span id="statusText">正在检测麦克风...</span>
     </div>
 
-    <div class="transcript" id="transcript">
-        <div class="empty-state" style="text-align:center;color:var(--muted);padding:60px 20px;font-size:15px;line-height:1.6">
-            👋 选择练习模式<br>
-            <span style="font-size:13px">点击「开始练习」启动语音对话</span>
+    <!-- Transcript -->
+    <div class="main-area">
+        <div class="transcript" id="transcript">
+            <div class="empty-state">👋 选择模式 → 点击「开始对话」</div>
         </div>
     </div>
-    <audio id="audioPlayer" controls></audio>
+
+    <!-- Score panel -->
+    <div class="score-panel" id="scorePanel">
+        <h2>📊 实时评分</h2>
+        <div class="score-empty" id="scoreEmpty">开始对话后显示评分</div>
+        <div id="scoreContent" style="display:none">
+            <div class="overall-score">
+                <div class="number" id="overallScore">-</div>
+                <div class="label">综合评分 / 9.0</div>
+            </div>
+            <div class="score-dim"><div class="label"><span>流利度 Fluency</span><span id="scoreF">-</span></div><div class="bar-bg"><div class="bar-fill f" id="barF"></div></div></div>
+            <div class="score-dim"><div class="label"><span>词汇 Vocabulary</span><span id="scoreV">-</span></div><div class="bar-bg"><div class="bar-fill v" id="barV"></div></div></div>
+            <div class="score-dim"><div class="label"><span>语法 Grammar</span><span id="scoreG">-</span></div><div class="bar-bg"><div class="bar-fill g" id="barG"></div></div></div>
+            <div class="score-dim"><div class="label"><span>发音 Pronunciation</span><span id="scoreP">-</span></div><div class="bar-bg"><div class="bar-fill p" id="barP"></div></div></div>
+            <div class="score-note" id="scoreNote"></div>
+            <div class="score-turn" id="scoreTurn"></div>
+        </div>
+    </div>
+
+    <audio id="audioPlayer"></audio>
 </div>
 
 <script>
 // ─── State ───
-let ws = null, sessionId = null, isRecording = false;
-let audioContext = null, micStream = null;
+let ws = null, sessionId = null, isActive = false;
+let audioContext = null, micStream = null, micAnalyser = null;
 let audioQueue = [], isPlaying = false;
-let statusTimeout = null;
+let scores = {f:0,v:0,g:0,p:0, overall:'-'};
 
 async function api(method, path, body) {
     const r = await fetch(`http://${location.hostname}:8767${path}`, {
-        method, headers: body ? {'Content-Type':'application/json'} : {},
-        body: body ? JSON.stringify(body) : undefined
+        method, headers: body?{'Content-Type':'application/json'}:{},
+        body: body?JSON.stringify(body):undefined
     });
     return r.json();
 }
 
-// ─── Mic test ───
-async function testMicrophone() {
-    const el = document.getElementById('micTest');
-    const fill = document.getElementById('micFill');
-    const status = document.getElementById('micStatus');
-    el.style.display = 'flex';
-
+// ─── Mic ───
+async function checkMic() {
     try {
-        status.textContent = '请求权限...';
         micStream = await navigator.mediaDevices.getUserMedia({
             audio: { sampleRate: 16000, channelCount: 1, echoCancellation: true }
         });
-        status.textContent = '✅ 就绪';
-        status.style.color = 'var(--accent2)';
-
-        // Show live level
         const ctx = new AudioContext({sampleRate: 16000});
         const src = ctx.createMediaStreamSource(micStream);
-        const analyser = ctx.createAnalyser();
-        analyser.fftSize = 256;
-        src.connect(analyser);
-        const data = new Uint8Array(analyser.frequencyBinCount);
-        const ivl = setInterval(() => {
-            if (!isRecording) {
-                analyser.getByteFrequencyData(data);
-                const avg = data.reduce((a,b)=>a+b,0)/data.length;
-                fill.style.width = Math.min(100, avg*2)+'%';
-            }
+        micAnalyser = ctx.createAnalyser(); micAnalyser.fftSize = 256;
+        src.connect(micAnalyser);
+        const data = new Uint8Array(micAnalyser.frequencyBinCount);
+        setInterval(() => {
+            micAnalyser.getByteFrequencyData(data);
+            const v = Math.min(100, data.reduce((a,b)=>a+b,0)/data.length*2);
+            document.getElementById('micFill').style.width = v+'%';
         }, 100);
-
-        document.getElementById('recordBtn').disabled = false;
-        document.getElementById('recordBtn').title = '';
-        status.style.color = '';
-
-        return { ctx, analyser, ivl };
-    } catch (e) {
-        status.textContent = '❌ 麦克风未授权或不可用';
-        status.style.color = 'var(--danger)';
-        document.getElementById('recordBtn').disabled = true;
-        document.getElementById('recordBtn').title = '请先允许麦克风权限';
-        addSystemMsg('error', '⚠️ 麦克风不可用，请检查浏览器权限设置后刷新页面');
-        return null;
+        document.getElementById('startBtn').disabled = false;
+        setStatus('ready', '✅ 麦克风就绪');
+        return true;
+    } catch(e) {
+        document.getElementById('startBtn').disabled = true;
+        setStatus('error', '❌ 麦克风不可用，请检查权限');
+        return false;
     }
 }
 
-// ─── WebSocket ───
-async function connectSession() {
+// ─── Session ───
+async function startSession() {
     const mode = document.getElementById('modeSelect').value;
     const data = await api('POST', '/api/session/start', {mode, pipeline:'cascade'});
     sessionId = data.session_id;
@@ -216,52 +235,70 @@ async function connectSession() {
         const m = JSON.parse(e.data);
         switch(m.type) {
             case 'response_text':
-                addMessage('tutor', m.text);
+                addMsg('tutor', m.text);
+                // After tutor message, trigger evaluation
+                if (m.text && !m.text.startsWith('Good morning') && !m.text.startsWith('Now I\'m') && !m.text.startsWith('Now let\'s') && !m.text.startsWith('Welcome') && !m.text.startsWith('Hi there')) {
+                    requestScore();
+                }
                 break;
             case 'final_transcript':
-                addMessage('user', m.text);
+                addMsg('user', m.text);
                 break;
             case 'audio':
                 playAudio(m.data);
                 break;
             case 'status':
-                setStatus(m.state);
+                if (m.state === 'listening') {
+                    setStatus('on', '正在听...');
+                    resumeMic();
+                } else if (m.state === 'thinking') {
+                    setStatus('thinking', '思考中...');
+                } else if (m.state === 'speaking') {
+                    setStatus('speaking', '正在说...');
+                    pauseMic();
+                }
+                break;
+            case 'score':
+                updateScores(m);
                 break;
             case 'error':
-                addSystemMsg('error', '错误: '+m.msg);
-                forceStop();
+                addMsg('system', '错误: '+m.msg, 'error');
                 break;
         }
     };
-    ws.onclose = () => { setStatus('disconnected'); addSystemMsg('system', '会话已结束'); };
-    ws.onerror = () => { setStatus('disconnected'); addSystemMsg('error', '连接失败，请刷新重试'); };
+    ws.onclose = () => { setStatus('ready', '对话已结束'); endSession(); };
+    ws.onerror = () => { setStatus('error', '连接失败'); addMsg('system', '连接失败，请刷新重试', 'error'); };
+
     await new Promise(r => { ws.onopen = r; });
-    setStatus('active');
+
+    // Start continuous mic
+    startMicStream();
+    isActive = true;
+    document.getElementById('startBtn').style.display = 'none';
+    document.getElementById('endBtn').style.display = 'inline-block';
+    document.getElementById('modeSelect').disabled = true;
+    document.getElementById('scoreEmpty').style.display = 'none';
+    document.getElementById('scoreContent').style.display = 'block';
+    setStatus('on', '已连接 · 开始说话');
 }
 
-// ─── Recording ───
-async function toggleRecording() {
-    if (isRecording) {
-        stopMic(); return;
+function endSession() {
+    isActive = false;
+    if (audioContext) { audioContext.close().catch(()=>{}); audioContext = null; }
+    if (micStream) { micStream.getTracks().forEach(t => t.stop()); micStream = null; }
+    if (ws && ws.readyState === WebSocket.OPEN) {
+        ws.send(JSON.stringify({type:'stop'}));
+        ws.close();
     }
+    ws = null;
+    document.getElementById('startBtn').style.display = 'inline-block';
+    document.getElementById('endBtn').style.display = 'none';
+    document.getElementById('modeSelect').disabled = false;
+    setStatus('ready', '对话已结束');
+}
 
-    // First time: test mic
-    if (!micStream) {
-        const ok = await testMicrophone();
-        if (!ok) return;
-    }
-
-    // Connect if needed
-    if (!ws || ws.readyState !== WebSocket.OPEN) {
-        try {
-            await connectSession();
-        } catch(e) {
-            addSystemMsg('error', '连接服务器失败，请确认服务已启动');
-            return;
-        }
-    }
-
-    // Start recording
+// ─── Continuous mic ───
+function startMicStream() {
     audioContext = new AudioContext({sampleRate: 16000});
     const source = audioContext.createMediaStreamSource(micStream);
     const processor = audioContext.createScriptProcessor(4096, 1, 1);
@@ -269,118 +306,82 @@ async function toggleRecording() {
     processor.connect(audioContext.destination);
 
     processor.onaudioprocess = (e) => {
-        if (!isRecording || !ws || ws.readyState !== WebSocket.OPEN) return;
+        if (!isActive || !ws || ws.readyState !== WebSocket.OPEN) return;
         const input = e.inputBuffer.getChannelData(0);
         const pcm = new Int16Array(input.length);
         for (let i = 0; i < input.length; i++)
             pcm[i] = Math.max(-32768, Math.min(32767, input[i] * 32768));
         ws.send(JSON.stringify({type:'audio', data: btoa(String.fromCharCode(...new Uint8Array(pcm.buffer)))}));
     };
-
-    isRecording = true;
-    document.getElementById('recordBtn').textContent = '⏹️ 停止';
-    document.getElementById('recordBtn').className = 'btn-record btn-stop';
-    document.getElementById('abortBtn').classList.add('visible');
-    setStatus('active', '正在听...');
-
-    // Safety timeout: auto-stop after 60s if stuck
-    clearTimeout(statusTimeout);
-    statusTimeout = setTimeout(() => {
-        if (isRecording) {
-            addSystemMsg('system', '⏰ 60秒自动停止');
-            stopMic();
-        }
-    }, 60000);
 }
 
-function stopMic() {
-    isRecording = false;
-    clearTimeout(statusTimeout);
-    if (audioContext) {
-        audioContext.close().catch(()=>{});
-        audioContext = null;
-    }
-
-    document.getElementById('recordBtn').textContent = '🎙️ 开始练习';
-    document.getElementById('recordBtn').className = 'btn-record btn-start';
-    document.getElementById('abortBtn').classList.remove('visible');
-
-    // Ask server to flush remaining audio
-    if (ws && ws.readyState === WebSocket.OPEN) {
-        ws.send(JSON.stringify({type:'flush'}));
-    }
+function pauseMic() {
+    // Stop sending audio while AI is speaking (processor handles this via isActive check)
+    // The server continues receiving silence and won't auto-flush
 }
 
-function forceStop() {
-    addSystemMsg('system', '⛔ 已终止');
-    stopMic();
-    if (ws && ws.readyState === WebSocket.OPEN) {
-        ws.send(JSON.stringify({type:'stop'}));
-    }
-    setStatus('disconnected', '已终止');
+function resumeMic() {
+    // Audio sending resumes automatically via isActive=true
+    // Server's silence watcher resets on new audio
 }
 
-function onModeChange() {
-    if (ws && ws.readyState === WebSocket.OPEN) {
-        const mode = document.getElementById('modeSelect').value;
-        ws.send(JSON.stringify({type:'mode', mode}));
-    }
+// ─── Scores ───
+async function requestScore() {
+    // Called after each tutor response - request evaluation
+    if (!sessionId || !ws) return;
+    ws.send(JSON.stringify({type:'evaluate'}));
+}
+
+function updateScores(m) {
+    const s = m.scores || {};
+    if (s.f) { scores.f = s.f; document.getElementById('scoreF').textContent = s.f.toFixed(1); document.getElementById('barF').style.width = (s.f/9*100)+'%'; }
+    if (s.v) { scores.v = s.v; document.getElementById('scoreV').textContent = s.v.toFixed(1); document.getElementById('barV').style.width = (s.v/9*100)+'%'; }
+    if (s.g) { scores.g = s.g; document.getElementById('scoreG').textContent = s.g.toFixed(1); document.getElementById('barG').style.width = (s.g/9*100)+'%'; }
+    if (s.p) { scores.p = s.p; document.getElementById('scoreP').textContent = s.p.toFixed(1); document.getElementById('barP').style.width = (s.p/9*100)+'%'; }
+    
+    const avg = (scores.f + scores.v + scores.g + scores.p) / 4;
+    document.getElementById('overallScore').textContent = avg > 0 ? avg.toFixed(1) : '-';
+    document.getElementById('scoreNote').textContent = m.note || '';
+    document.getElementById('scoreTurn').textContent = '📍 本轮评分';
 }
 
 // ─── UI ───
 function setStatus(cls, text) {
     const dot = document.getElementById('statusDot');
     dot.className = 'status-dot';
-    if (cls !== 'disconnected') dot.classList.add(cls);
-    if (text) document.getElementById('statusText').textContent = text;
+    if (cls === 'on' || cls === 'active') dot.classList.add('on');
+    else if (cls !== 'ready' && cls !== 'error') dot.classList.add(cls);
+    document.getElementById('statusText').textContent = text;
 }
 
-function addMessage(role, text) {
+function addMsg(role, text, cls) {
     const t = document.getElementById('transcript');
     const empty = t.querySelector('.empty-state');
     if (empty) empty.remove();
     const div = document.createElement('div');
-    div.className = `msg ${role}`;
+    div.className = 'msg '+(cls||role);
     const now = new Date();
-    div.innerHTML = `<span class="speaker">${role==='user'?'🧑 你':'🎓 考官'}</span>${esc(text)}<div class="time">${now.toLocaleTimeString()}</div>`;
+    const speaker = role==='user' ? '🧑 你' : role==='tutor' ? '🎓 考官' : '';
+    const safeText = text.replace(/</g,'&lt;');
+    div.innerHTML = `<span class="speaker">${speaker}</span>${safeText}<div class="time">${now.toLocaleTimeString()}</div>`;
     t.appendChild(div);
     t.scrollTop = t.scrollHeight;
 }
-
-function addSystemMsg(type, text) {
-    const t = document.getElementById('transcript');
-    const empty = t.querySelector('.empty-state');
-    if (empty) empty.remove();
-    const div = document.createElement('div');
-    div.className = `msg ${type === 'error' ? 'error' : 'system'}`;
-    div.textContent = text;
-    t.appendChild(div);
-    t.scrollTop = t.scrollHeight;
-}
-
-function esc(s) { return s.replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
 // ─── Audio ───
-function playAudio(b64) {
-    audioQueue.push(b64);
-    if (!isPlaying) playNext();
-}
+function playAudio(b64) { audioQueue.push(b64); if(!isPlaying) playNext(); }
 function playNext() {
-    if (!audioQueue.length) { isPlaying=false; return; }
+    if(!audioQueue.length) { isPlaying=false; return; }
     isPlaying=true;
-    const b64 = audioQueue.shift();
-    const bytes = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
-    const url = URL.createObjectURL(new Blob([bytes], {type:'audio/mp3'}));
+    const bytes = Uint8Array.from(atob(audioQueue.shift()), c=>c.charCodeAt(0));
+    const url = URL.createObjectURL(new Blob([bytes],{type:'audio/mp3'}));
     const p = document.getElementById('audioPlayer');
-    p.src = url;
-    p.onended = () => { URL.revokeObjectURL(url); playNext(); };
-    p.play().catch(() => playNext());
+    p.src=url; p.onended=()=>{URL.revokeObjectURL(url);playNext()};
+    p.play().catch(()=>playNext());
 }
 
 // ─── Init ───
-document.getElementById('recordBtn').disabled = true;
-document.getElementById('recordBtn').title = '正在检测麦克风...';
-testMicrophone();
+checkMic();
 </script>
 </body>
 </html>
