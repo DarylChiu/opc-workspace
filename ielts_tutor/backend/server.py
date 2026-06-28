@@ -13,6 +13,7 @@ logger = logging.getLogger("ielts-tutor")
 
 from config import GOOGLE_STT_KEY, GOOGLE_TTS_KEY, DEEPSEEK_KEY, DEEPSEEK_BASE
 from session_manager import SessionManager
+from report_generator import generate_report
 sessions = SessionManager()
 FRONTEND = os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend", "index.html")
 
@@ -126,6 +127,18 @@ async def start(req: Request):
     sessions.create(sid, mode=body.get("mode", "ielts_part1"))
     return {"session_id": sid, "mode": body.get("mode", "ielts_part1")}
 
+@app.get("/api/reports")
+async def list_reports():
+    reports_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "reports")
+    if not os.path.exists(reports_dir): return {"reports": []}
+    files = sorted([f for f in os.listdir(reports_dir) if f.endswith('.html')], reverse=True)[:20]
+    return {"reports": [{"name": f, "url": f"/reports/{f}"} for f in files]}
+
+from fastapi.staticfiles import StaticFiles
+reports_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "reports")
+os.makedirs(reports_dir, exist_ok=True)
+app.mount("/reports", StaticFiles(directory=reports_dir), name="reports")
+
 # ── WebSocket ──
 @app.websocket("/ws/chat/{sid}")
 async def ws_chat(ws: WebSocket, sid: str):
@@ -216,6 +229,20 @@ FORMAT RULES:
                                   max_tokens=400, temp=0.3)
                 try:
                     sc = json.loads(r)
+                    # Generate HTML report
+                    report_data = {
+                        "session_id": sid,
+                        "mode": mode,
+                        "transcripts": [{"speaker": "user", "text": t, "time": ""} for t in user_texts] + \
+                                      [{"speaker": "tutor", "text": m["content"], "time": ""} for m in history if m["role"] == "assistant"],
+                        "created": datetime.now()
+                    }
+                    try:
+                        report_path = generate_report(report_data, sc)
+                        sc["report_path"] = report_path
+                    except Exception as e:
+                        logger.error(f"Report gen failed: {e}")
+                    
                     await ws.send_json({"type": "score", "scores": sc})
                     logger.info(f"Final: overall={sc.get('overall')}")
                 except:
