@@ -14,61 +14,47 @@
 * { margin:0; padding:0; box-sizing:border-box; }
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background:var(--bg); color:var(--text); min-height:100vh;
-    padding:12px 20px; display:flex; justify-content:center;
+    background:var(--bg); color:var(--text); height:100vh; overflow:hidden;
+    padding:10px 16px; display:flex; justify-content:center;
 }
-.app {
-    width:100%; max-width:1100px;
-    display:grid;
-    grid-template-columns:1fr 320px;
-    grid-template-rows:auto auto 1fr;
-    gap:10px; height:calc(100vh - 24px);
-}
-.header {
-    grid-column:1/-1;
-    display:flex; align-items:center; justify-content:space-between;
-    padding:10px 16px; background:var(--card); border-radius:10px; border:1px solid var(--border);
-}
-.header h1 { font-size:17px; }
+.app { width:100%; max-width:1100px; display:flex; flex-direction:column; gap:8px; height:100%; }
 
-/* Status row — one line */
-.status-row {
-    grid-column:1/-1;
-    display:flex; align-items:center; gap:10px;
-    padding:6px 14px; background:var(--card); border-radius:10px; border:1px solid var(--border);
-    font-size:12px; height:32px;
+.header {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:8px 14px; background:var(--card); border-radius:10px; border:1px solid var(--border);
+    flex-shrink:0;
 }
-.status-dot { width:7px;height:7px;border-radius:50%;background:var(--muted);flex-shrink:0; }
+.header h1 { font-size:16px; }
+
+/* Status — one thin line */
+.status-row {
+    display:flex; align-items:center; gap:8px; flex-shrink:0;
+    padding:4px 14px; background:var(--card); border-radius:8px; border:1px solid var(--border);
+    font-size:11px; height:28px;
+}
+.status-dot { width:6px;height:6px;border-radius:50%;background:var(--muted);flex-shrink:0; }
 .status-dot.on { background:var(--accent2); animation:pulse 1.5s infinite; }
 .status-dot.thinking { background:#ffa500; animation:pulse 1s infinite; }
 .status-dot.speaking { background:var(--accent); animation:pulse .5s infinite; }
-.status-dot.ready { background:var(--accent2); }
 @keyframes pulse { 50%{opacity:.4} }
-.mic-level {
-    display:flex; align-items:center; gap:4px; width:80px; flex-shrink:0;
-}
-.mic-level .bar { flex:1; height:4px; background:var(--border); border-radius:2px; overflow:hidden; }
-.mic-level .fill { height:100%; background:var(--accent2); border-radius:2px; transition:width .15s; width:0; }
-.device-info { color:var(--muted); flex-shrink:0; }
-.device-info select {
-    background:var(--bg); color:var(--text); border:1px solid var(--border);
-    border-radius:4px; font-size:11px; padding:2px 4px; margin-left:4px; max-width:140px;
-}
-.status-text { flex:1; color:var(--text); }
+.mic-lvl { display:flex;align-items:center;gap:3px; width:60px;flex-shrink:0; }
+.mic-lvl .bar { flex:1;height:3px;background:var(--border);border-radius:2px;overflow:hidden; }
+.mic-lvl .fill { height:100%;background:var(--accent2);border-radius:2px;transition:width .15s;width:0; }
+.dev-info { color:var(--muted);flex-shrink:0;font-size:10px;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
+.dev-info select { background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:3px;font-size:10px;padding:1px 3px;margin-left:3px;max-width:130px; }
 
-/* Controls row */
-.controls {
-    grid-column:1;
-    display:flex; align-items:center; gap:8px;
-    padding:8px 12px; background:var(--card); border-radius:10px; border:1px solid var(--border);
+/* Controls */
+.ctrls {
+    display:flex; align-items:center; gap:8px; flex-shrink:0;
+    padding:6px 12px; background:var(--card); border-radius:8px; border:1px solid var(--border);
 }
-.controls label { font-size:11px; color:var(--muted); margin-right:2px; }
-.controls select {
-    padding:6px 8px; border-radius:6px; border:1px solid var(--border);
-    background:var(--bg); color:var(--text); font-size:13px; cursor:pointer;
+.ctrls label { font-size:11px; color:var(--muted); }
+.ctrls select {
+    padding:5px 8px; border-radius:6px; border:1px solid var(--border);
+    background:var(--bg); color:var(--text); font-size:12px; cursor:pointer;
 }
 .btn {
-    padding:8px 16px; border-radius:8px; font-size:13px; font-weight:700;
+    padding:6px 14px; border-radius:7px; font-size:12px; font-weight:700;
     border:none; cursor:pointer; transition:all .2s; white-space:nowrap;
 }
 .btn-start { background:var(--accent); color:#fff; }
@@ -77,65 +63,62 @@ body {
 .btn-end { background:var(--danger); color:#fff; }
 .btn-end:hover { background:#ff4b4b; }
 
-/* Dialogue area */
-.main-area {
-    grid-column:1; display:flex; flex-direction:column;
+/* Main area: two columns, bottoms aligned */
+.main {
+    display:flex; gap:10px; flex:1; min-height:0;
+}
+.dialogue-col {
+    flex:1; display:flex; flex-direction:column; min-width:0;
     background:var(--card); border-radius:10px; border:1px solid var(--border);
-    overflow:hidden; min-height:0;
 }
 .transcript {
-    flex:1; overflow-y:auto; padding:14px; display:flex; flex-direction:column; gap:6px;
+    flex:1; overflow-y:auto; padding:12px; display:flex; flex-direction:column; gap:5px;
     min-height:0;
 }
 .transcript::-webkit-scrollbar { width:5px; }
 .transcript::-webkit-scrollbar-track { background:transparent; }
 .transcript::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
-.msg {
-    max-width:85%; padding:8px 12px; border-radius:12px;
-    font-size:14px; line-height:1.5; animation:fadeIn .3s;
-}
-@keyframes fadeIn { from{opacity:0;transform:translateY(6px)} }
-.msg.user { align-self:flex-end; background:var(--user-bubble); }
-.msg.tutor { align-self:flex-start; background:var(--tutor-bubble); }
-.msg .speaker { font-size:10px; color:var(--muted); margin-bottom:2px; display:block; }
-.msg .time { font-size:9px; color:var(--muted); margin-top:3px; text-align:right; }
-.empty-state {
-    text-align:center; color:var(--muted); padding:60px 20px; font-size:15px; line-height:1.6;
-}
 
-/* Score panel — aligned to bottom */
 .score-panel {
-    grid-column:2; grid-row:3/4;
+    width:310px; flex-shrink:0;
     background:var(--card); border-radius:10px; border:1px solid var(--border);
-    padding:14px; display:flex; flex-direction:column; gap:12px;
-    overflow-y:auto; overflow-x:hidden;
+    padding:12px; display:flex; flex-direction:column; gap:8px;
+    overflow-y:auto;
 }
 .score-panel::-webkit-scrollbar { width:5px; }
 .score-panel::-webkit-scrollbar-track { background:transparent; }
 .score-panel::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
-.score-panel h2 { font-size:14px; text-align:center; color:var(--accent2); }
-.overall {
-    text-align:center; padding:10px; background:var(--bg); border-radius:10px;
+.score-panel h2 { font-size:13px; text-align:center; color:var(--accent2); }
+
+.msg {
+    max-width:85%; padding:7px 11px; border-radius:10px;
+    font-size:13px; line-height:1.5; animation:fadeIn .3s;
 }
-.overall .num { font-size:32px; font-weight:800; color:var(--gold); }
+@keyframes fadeIn { from{opacity:0;transform:translateY(5px)} }
+.msg.user { align-self:flex-end; background:var(--user-bubble); }
+.msg.tutor { align-self:flex-start; background:var(--tutor-bubble); }
+.msg .speaker { font-size:10px; color:var(--muted); display:block; }
+.msg .time { font-size:9px; color:var(--muted); margin-top:2px; text-align:right; }
+.empty-state { text-align:center; color:var(--muted); padding:60px 20px; font-size:14px; line-height:1.6; }
+
+.overall { text-align:center; padding:8px; background:var(--bg); border-radius:8px; }
+.overall .num { font-size:28px; font-weight:800; color:var(--gold); }
 .overall .lbl { font-size:10px; color:var(--muted); }
-.score-dim { display:flex; flex-direction:column; gap:3px; }
-.score-dim .lbl { font-size:11px; color:var(--muted); display:flex; justify-content:space-between; }
-.score-dim .bar-bg { height:5px; background:var(--border); border-radius:3px; overflow:hidden; }
-.score-dim .bar-fill { height:100%; border-radius:3px; transition:width .5s; }
+.sdim { display:flex; flex-direction:column; gap:2px; }
+.sdim .lbl { font-size:10px; color:var(--muted); display:flex; justify-content:space-between; }
+.sdim .bar-bg { height:4px; background:var(--border); border-radius:2px; overflow:hidden; }
+.sdim .bar-fill { height:100%; border-radius:2px; transition:width .5s; }
 .bar-f.f { background:var(--accent2); } .bar-f.v { background:#4dc9f6; }
 .bar-f.g { background:#f39c12; } .bar-f.p { background:#e74c8b; }
-.score-section { margin-top:4px; }
-.score-section h3 { font-size:12px; color:var(--accent2); margin-bottom:6px; }
+.score-sect h3 { font-size:11px; color:var(--accent2); margin:4px 0; }
 .score-item {
-    font-size:11px; padding:4px 6px; margin-bottom:4px;
+    font-size:10px; padding:3px 6px; margin-bottom:3px;
     background:var(--bg); border-radius:4px; line-height:1.4;
 }
 .score-item.improve { border-left:3px solid var(--danger); }
 .score-item.good { border-left:3px solid var(--accent2); }
-.score-empty { text-align:center; color:var(--muted); font-size:12px; padding:30px 0; }
-.score-summary { font-size:11px; color:var(--text); padding:6px; background:var(--bg); border-radius:6px; line-height:1.5; }
-
+.score-summary { font-size:10px; color:var(--text); padding:5px; background:var(--bg); border-radius:6px; line-height:1.5; }
+.score-empty { text-align:center; color:var(--muted); font-size:11px; padding:20px 0; }
 audio { display:none; }
 </style>
 </head>
@@ -143,19 +126,17 @@ audio { display:none; }
 <div class="app">
     <div class="header">
         <h1>🎤 IELTS Tutor v2.0</h1>
-        <span style="padding:3px 10px;border-radius:20px;font-size:11px;background:var(--accent);color:#fff;font-weight:600">管线1</span>
+        <span style="padding:2px 10px;border-radius:20px;font-size:11px;background:var(--accent);color:#fff;font-weight:600">管线1</span>
     </div>
 
-    <!-- Status row — one line -->
     <div class="status-row">
-        <div class="mic-level"><div class="bar"><div class="fill" id="micFill"></div></div></div>
+        <div class="mic-lvl"><div class="bar"><div class="fill" id="micFill"></div></div></div>
         <div class="status-dot" id="statusDot"></div>
-        <span style="font-size:12px" id="statusText">正在检测麦克风...</span>
-        <div class="device-info" id="deviceInfo"></div>
+        <span id="statusText">检测麦克风...</span>
+        <div class="dev-info" id="deviceInfo"></div>
     </div>
 
-    <!-- Controls -->
-    <div class="controls">
+    <div class="ctrls">
         <label>模式</label>
         <select id="modeSelect">
             <option value="ielts_part1">IELTS Part 1</option>
@@ -169,34 +150,25 @@ audio { display:none; }
         <button class="btn btn-end" id="endBtn" onclick="endSession()" style="display:none">⛔ 终止</button>
     </div>
 
-    <!-- Dialogue -->
-    <div class="main-area">
-        <div class="transcript" id="transcript">
-            <div class="empty-state">👋 选择模式，点击「开始练习」</div>
+    <div class="main">
+        <div class="dialogue-col">
+            <div class="transcript" id="transcript">
+                <div class="empty-state">👋 选择模式，点击「开始练习」</div>
+            </div>
         </div>
-    </div>
 
-    <!-- Score panel -->
-    <div class="score-panel" id="scorePanel">
-        <h2>📊 Assessment</h2>
-        <div class="score-empty" id="scoreEmpty">Scores will appear after the conversation ends</div>
-        <div id="scoreContent" style="display:none;display:flex;flex-direction:column;gap:12px">
-            <div class="overall">
-                <div class="num" id="overallScore">-</div>
-                <div class="lbl">Overall Band Score</div>
-            </div>
-            <div class="score-dim"><div class="lbl"><span>Fluency</span><span id="scoreF">-</span></div><div class="bar-bg"><div class="bar-fill bar-f f" id="barF"></div></div></div>
-            <div class="score-dim"><div class="lbl"><span>Vocabulary</span><span id="scoreV">-</span></div><div class="bar-bg"><div class="bar-fill bar-f v" id="barV"></div></div></div>
-            <div class="score-dim"><div class="lbl"><span>Grammar</span><span id="scoreG">-</span></div><div class="bar-bg"><div class="bar-fill bar-f g" id="barG"></div></div></div>
-            <div class="score-dim"><div class="lbl"><span>Pronunciation</span><span id="scoreP">-</span></div><div class="bar-bg"><div class="bar-fill bar-f p" id="barP"></div></div></div>
-            <div class="score-summary" id="scoreSummary"></div>
-            <div class="score-section" id="improveSection" style="display:none">
-                <h3>🔧 Grammar & Phrasing to Improve</h3>
-                <div id="improveList"></div>
-            </div>
-            <div class="score-section" id="highlightSection" style="display:none">
-                <h3>⭐ Strong Examples</h3>
-                <div id="highlightList"></div>
+        <div class="score-panel" id="scorePanel">
+            <h2>📊 Assessment</h2>
+            <div class="score-empty" id="scoreEmpty">Scores appear after conversation ends</div>
+            <div id="scoreContent" style="display:none">
+                <div class="overall"><div class="num" id="overallScore">-</div><div class="lbl">Overall Band Score</div></div>
+                <div class="sdim"><div class="lbl"><span>Fluency</span><span id="scoreF">-</span></div><div class="bar-bg"><div class="bar-fill bar-f f" id="barF"></div></div></div>
+                <div class="sdim"><div class="lbl"><span>Vocabulary</span><span id="scoreV">-</span></div><div class="bar-bg"><div class="bar-fill bar-f v" id="barV"></div></div></div>
+                <div class="sdim"><div class="lbl"><span>Grammar</span><span id="scoreG">-</span></div><div class="bar-bg"><div class="bar-fill bar-f g" id="barG"></div></div></div>
+                <div class="sdim"><div class="lbl"><span>Pronunciation</span><span id="scoreP">-</span></div><div class="bar-bg"><div class="bar-fill bar-f p" id="barP"></div></div></div>
+                <div class="score-summary" id="scoreSummary"></div>
+                <div class="score-sect" id="improveSection" style="display:none"><h3>🔧 To Improve</h3><div id="improveList"></div></div>
+                <div class="score-sect" id="highlightSection" style="display:none"><h3>⭐ Strong Points</h3><div id="highlightList"></div></div>
             </div>
         </div>
     </div>
@@ -205,32 +177,29 @@ audio { display:none; }
 </div>
 
 <script>
-// ─── State ───
 let ws=null, sid=null, active=false, muted=false;
-let audioCtx=null, micStream=null, micAnalyser=null;
+let audioCtx=null, micStream=null;
 let audioQ=[], playing=false;
-let userTexts=[], history=[], mode='ielts_part1';
-let availableDevices=[], currentDevice=null;
+let userTexts=[], availableDevices=[], currentDevice=null;
 
-const SERVER=`http://${location.hostname}:8767`;
+const SRV=`http://${location.hostname}:8767`;
 
 async function api(m,p,b){
-    const r=await fetch(`${SERVER}${p}`,{method:m,headers:b?{'Content-Type':'application/json'}:{},body:b?JSON.stringify(b):undefined});
+    const r=await fetch(`${SRV}${p}`,{method:m,headers:b?{'Content-Type':'application/json'}:{},body:b?JSON.stringify(b):undefined});
     return r.json();
 }
 
-// ─── Device detection ───
+// ─── Device + Mic (single AudioContext) ───
 async function detectDevices(){
     try{
         const devs=await navigator.mediaDevices.enumerateDevices();
         availableDevices=devs.filter(d=>d.kind==='audioinput'&&d.deviceId&&d.label);
         if(availableDevices.length>1){
             const sel=document.createElement('select');
-            sel.id='deviceSelect';
             sel.onchange=switchDevice;
             availableDevices.forEach((d,i)=>{
                 const o=document.createElement('option');
-                o.value=d.deviceId; o.textContent=d.label||`Mic ${i+1}`;
+                o.value=d.deviceId;o.textContent=d.label||`Mic ${i+1}`;
                 sel.appendChild(o);
             });
             document.getElementById('deviceInfo').appendChild(sel);
@@ -239,33 +208,37 @@ async function detectDevices(){
             document.getElementById('deviceInfo').textContent=`🎤 ${availableDevices[0].label||'Microphone'}`;
             currentDevice=availableDevices[0];
         }
-        await openMic();
-    }catch(e){ setStatus('error','麦克风权限未授权'); }
+        await setupMic();
+    }catch(e){ setStatus('error','麦克风权限未授权'); document.getElementById('startBtn').disabled=true; }
 }
 
 async function switchDevice(){
-    const sel=document.getElementById('deviceSelect');
-    const id=sel.value;
-    currentDevice=availableDevices.find(d=>d.deviceId===id);
+    const sel=document.querySelector('#deviceInfo select');
+    if(!sel) return;
+    currentDevice=availableDevices.find(d=>d.deviceId===sel.value);
     if(micStream){ micStream.getTracks().forEach(t=>t.stop()); }
-    await openMic();
+    await setupMic();
 }
 
-async function openMic(){
+async function setupMic(){
     try{
         const cid=currentDevice?{deviceId:{exact:currentDevice.deviceId}}:undefined;
         micStream=await navigator.mediaDevices.getUserMedia({
             audio:{...cid, sampleRate:16000, channelCount:1, echoCancellation:true}
         });
-        const ctx=new AudioContext({sampleRate:16000});
-        const src=ctx.createMediaStreamSource(micStream);
-        micAnalyser=ctx.createAnalyser(); micAnalyser.fftSize=256;
-        src.connect(micAnalyser);
-        const data=new Uint8Array(micAnalyser.frequencyBinCount);
-        setInterval(()=>{
-            micAnalyser.getByteFrequencyData(data);
-            document.getElementById('micFill').style.width=Math.min(100,data.reduce((a,b)=>a+b,0)/data.length*2)+'%';
-        },100);
+        if(!active){
+            // Preview mode: show level meter via temporary context
+            const tmpCtx=new AudioContext({sampleRate:16000});
+            const src=tmpCtx.createMediaStreamSource(micStream);
+            const analyser=tmpCtx.createAnalyser(); analyser.fftSize=256;
+            src.connect(analyser);
+            const data=new Uint8Array(analyser.frequencyBinCount);
+            const ivl=setInterval(()=>{
+                if(active){ clearInterval(ivl); tmpCtx.close(); return; }
+                analyser.getByteFrequencyData(data);
+                document.getElementById('micFill').style.width=Math.min(100,data.reduce((a,b)=>a+b,0)/data.length*2)+'%';
+            },100);
+        }
         document.getElementById('startBtn').disabled=false;
         setStatus('ready','麦克风就绪');
     }catch(e){ document.getElementById('startBtn').disabled=true; setStatus('error','麦克风不可用'); }
@@ -273,7 +246,7 @@ async function openMic(){
 
 // ─── Session ───
 async function startSession(){
-    mode=document.getElementById('modeSelect').value;
+    const mode=document.getElementById('modeSelect').value;
     const d=await api('POST','/api/session/start',{mode,pipeline:'cascade'});
     sid=d.session_id;
 
@@ -289,12 +262,35 @@ async function startSession(){
             else if(m.state==='speaking'){ setStatus('speaking','正在说...'); muted=true; }
         }
         if(m.type==='score') showScores(m);
-        if(m.type==='error'){ addMsg('system',`Error: ${m.msg}`,'error'); }
+        if(m.type==='error') addMsg('system',`Error: ${m.msg}`,'error');
     };
     ws.onclose=()=>{ stopSession(); };
     await new Promise(r=>{ws.onopen=r;});
 
-    startStream();
+    // ONE AudioContext for both level + streaming
+    audioCtx=new AudioContext({sampleRate:16000});
+    const src=audioCtx.createMediaStreamSource(micStream);
+    // Level meter
+    const analyser=audioCtx.createAnalyser(); analyser.fftSize=256;
+    src.connect(analyser);
+    const data=new Uint8Array(analyser.frequencyBinCount);
+    const ivl=setInterval(()=>{
+        if(!active){ clearInterval(ivl); return; }
+        analyser.getByteFrequencyData(data);
+        document.getElementById('micFill').style.width=Math.min(100,data.reduce((a,b)=>a+b,0)/data.length*2)+'%';
+    },100);
+    // Streaming processor
+    const proc=audioCtx.createScriptProcessor(4096,1,1);
+    src.connect(proc);
+    proc.connect(audioCtx.destination);
+    proc.onaudioprocess=e=>{
+        if(!active||muted||!ws||ws.readyState!==WebSocket.OPEN) return;
+        const input=e.inputBuffer.getChannelData(0);
+        const pcm=new Int16Array(input.length);
+        for(let i=0;i<input.length;i++) pcm[i]=Math.max(-32768,Math.min(32767,input[i]*32768));
+        ws.send(JSON.stringify({type:'audio',data:btoa(String.fromCharCode(...new Uint8Array(pcm.buffer)))}));
+    };
+
     active=true;
     document.getElementById('startBtn').style.display='none';
     document.getElementById('stopBtn').style.display='inline-block';
@@ -303,9 +299,11 @@ async function startSession(){
     setStatus('on','已连接 · 开始说话');
 }
 
-function stopSession(){
+async function stopSession(){
     active=false; muted=true;
     if(audioCtx){ audioCtx.close().catch(()=>{}); audioCtx=null; }
+    // Re-setup mic for preview level
+    setupMic();
     if(ws&&ws.readyState===WebSocket.OPEN){
         ws.send(JSON.stringify({type:'stop'}));
         ws.close();
@@ -319,27 +317,11 @@ function stopSession(){
 }
 
 async function endSession(){
-    // Request final evaluation
     if(ws&&ws.readyState===WebSocket.OPEN){
         ws.send(JSON.stringify({type:'evaluate_final'}));
         await new Promise(r=>setTimeout(r,3000));
     }
     stopSession();
-}
-
-// ─── Stream ───
-function startStream(){
-    audioCtx=new AudioContext({sampleRate:16000});
-    const src=audioCtx.createMediaStreamSource(micStream);
-    const proc=audioCtx.createScriptProcessor(4096,1,1);
-    src.connect(proc); proc.connect(audioCtx.destination);
-    proc.onaudioprocess=e=>{
-        if(!active||muted||!ws||ws.readyState!==WebSocket.OPEN) return;
-        const input=e.inputBuffer.getChannelData(0);
-        const pcm=new Int16Array(input.length);
-        for(let i=0;i<input.length;i++) pcm[i]=Math.max(-32768,Math.min(32767,input[i]*32768));
-        ws.send(JSON.stringify({type:'audio',data:btoa(String.fromCharCode(...new Uint8Array(pcm.buffer)))}));
-    };
 }
 
 // ─── UI ───
@@ -361,12 +343,11 @@ function addMsg(role,text,err){
     t.appendChild(d); t.scrollTop=t.scrollHeight;
 }
 
-// ─── Scores ───
 function showScores(m){
     document.getElementById('scoreEmpty').style.display='none';
-    document.getElementById('scoreContent').style.display='flex';
+    document.getElementById('scoreContent').style.display='block';
     const s=m.scores||{};
-    const set=(id,bar,v)=>{ document.getElementById(id).textContent=v.toFixed(1); document.getElementById(bar).style.width=(v/9*100)+'%'; };
+    const set=(id,bar,v)=>{document.getElementById(id).textContent=v.toFixed(1);document.getElementById(bar).style.width=(v/9*100)+'%';};
     if(s.fluency) set('scoreF','barF',s.fluency);
     if(s.vocabulary) set('scoreV','barV',s.vocabulary);
     if(s.grammar) set('scoreG','barG',s.grammar);
@@ -383,7 +364,6 @@ function showScores(m){
     }
 }
 
-// ─── Audio ───
 function playAudio(b64){ audioQ.push(b64); if(!playing) next(); }
 function next(){
     if(!audioQ.length){ playing=false; return; }
@@ -395,7 +375,6 @@ function next(){
     p.play().catch(()=>next());
 }
 
-// ─── Init ───
 detectDevices();
 </script>
 </body>
