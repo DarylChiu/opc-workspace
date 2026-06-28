@@ -1,0 +1,1583 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>视频分析交互Workflow v1.1.2</title>
+<style>
+:root {
+  --bg: #0f0f0f;
+  --panel-bg: #1a1a1a;
+  --border: #2a2a2a;
+  --text: #e0e0e0;
+  --text-dim: #888;
+  --accent: #3b82f6;
+  --accent-dim: #1e3a5f;
+  --green: #22c55e;
+  --yellow: #eab308;
+  --red: #ef4444;
+  --card-bg: #222;
+  --card-hover: #2a2a2a;
+  --card-active: #1a2740;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { 
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg); color: var(--text); height: 100vh; overflow: hidden;
+  display: flex; flex-direction: row;
+  color-scheme: dark;
+}
+
+/* ═══ 左侧常驻 Sidebar ═══ */
+.sidebar {
+  width: 56px; min-width: 56px; background: #111;
+  border-right: 1px solid var(--border); display: flex; flex-direction: column;
+  padding-top: 8px; transition: width 0.2s; overflow: hidden;
+  z-index: 20; height: 100vh; flex-shrink: 0;
+}
+.sidebar:hover { width: 180px; }
+.sidebar-item {
+  display: flex; align-items: center; gap: 10px; padding: 12px 14px;
+  cursor: pointer; color: var(--text-dim); font-size: 13px; white-space: nowrap;
+  transition: all 0.15s; border-left: 2px solid transparent;
+}
+.sidebar-item:hover { background: #1a1a1a; color: var(--text); }
+.sidebar-item.active { color: var(--accent); border-left-color: var(--accent); background: #161616; }
+.sidebar-item .si-icon { font-size: 18px; min-width: 24px; text-align: center; }
+.sidebar-item .si-label { opacity: 0; transition: opacity 0.2s; }
+.sidebar:hover .sidebar-item .si-label { opacity: 1; }
+.sidebar-item .si-badge {
+  display: inline-block; background: var(--accent-dim); color: var(--accent);
+  font-size: 10px; padding: 1px 5px; border-radius: 8px; margin-left: auto;
+}
+.sidebar-divider {
+  height: 1px; background: var(--border); margin: 8px 12px;
+  opacity: 0; transition: opacity 0.2s;
+}
+.sidebar:hover .sidebar-divider { opacity: 1; }
+.sidebar-section-label {
+  font-size: 9px; color: var(--text-dim); text-transform: uppercase;
+  letter-spacing: 1px; padding: 8px 14px 4px; opacity: 0; transition: opacity 0.2s;
+}
+.sidebar:hover .sidebar-section-label { opacity: 1; }
+
+/* ═══ 右侧主区域 ═══ */
+.main-area { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+
+/* ── 顶部栏 ── */
+.topbar {
+  height: 44px; background: #161616; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; padding: 0 16px; gap: 12px;
+  flex-shrink: 0; position: relative;
+}
+.topbar .logo { font-weight: 700; font-size: 14px; color: var(--accent); white-space: nowrap; }
+.topbar .version { font-size: 10px; color: var(--text-dim); margin-left: -8px; }
+.topbar input {
+  flex: 1; max-width: 420px; padding: 6px 12px; border-radius: 6px;
+  border: 1px solid var(--border); background: var(--card-bg); color: var(--text);
+  font-size: 12px; outline: none;
+}
+.topbar input:focus { border-color: var(--accent); }
+.topbar .status { font-size: 11px; color: var(--text-dim); margin-left: auto; white-space: nowrap; }
+.topbar .status .dot { 
+  width: 6px; height: 6px; border-radius: 50%; display: inline-block; margin-right: 4px;
+}
+.topbar .status .dot.idle { background: var(--text-dim); }
+.topbar .status .dot.running { background: var(--yellow); animation: pulse 1s infinite; }
+.topbar .status .dot.done { background: var(--green); }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+/* ── 进度条 ── */
+.progress-wrap {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+  background: rgba(255,255,255,0.06); opacity: 0; transition: opacity 0.2s;
+}
+.progress-wrap.active { opacity: 1; }
+.progress-bar {
+  height: 100%; background: linear-gradient(90deg, var(--accent), var(--green));
+  width: 0%; transition: width 0.5s ease;
+  border-radius: 0 2px 2px 0;
+}
+.progress-bar.done-flash {
+  width: 100% !important;
+  background: var(--green);
+}
+
+/* ── 应用区 ── */
+.app { display: flex; flex: 1; min-height: 0; }
+
+/* ── 素材库表格 ── */
+.material-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.material-table th {
+  text-align: left; padding: 8px 12px; color: var(--text-dim);
+  font-size: 11px; font-weight: 600; border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; background: var(--panel-bg); z-index: 1;
+}
+.material-table td {
+  padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04);
+  max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.material-table tr { cursor: pointer; transition: background 0.1s; }
+.material-table tr:hover { background: var(--card-hover); }
+.material-table tr.loaded { background: var(--card-active); }
+.material-table .platform-tag {
+  display: inline-block; padding: 1px 6px; border-radius: 4px;
+  font-size: 10px; background: #1a2740; color: var(--accent);
+}
+
+/* ── 左侧：视频+对白卡片 ── */
+.panel-left { 
+  width: 380px; min-width: 380px; background: var(--panel-bg);
+  border-right: 1px solid var(--border); display: flex; flex-direction: column;
+  transition: width 0.3s, min-width 0.3s;
+}
+.panel-left.layout-side { width: 560px; min-width: 560px; }
+.panel-left .video-transcript-row {
+  display: flex; flex-direction: column; flex: 1; min-height: 0;
+}
+.panel-left.layout-side .video-transcript-row {
+  display: flex; flex-direction: row; flex: 1; min-height: 0;
+}
+.panel-left.layout-side .video-container {
+  width: 55%; flex-shrink: 0; aspect-ratio: auto !important;
+  display: flex; align-items: center; justify-content: center;
+}
+.panel-left.layout-side .video-container video {
+  max-width: 100%; max-height: 100%; object-fit: contain;
+}
+.panel-left.layout-side .transcript-col {
+  width: 45%; flex-shrink: 0; display: flex; flex-direction: column;
+  border-left: 1px solid var(--border);
+}
+.video-container { position: relative; background: #000; aspect-ratio: 16/9; }
+.video-container video { width: 100%; height: 100%; object-fit: contain; }
+.video-placeholder {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 12px; color: var(--text-dim);
+}
+.video-placeholder svg { width: 48px; height: 48px; opacity: 0.3; }
+
+.section-header {
+  padding: 10px 14px; font-size: 13px; font-weight: 600; color: var(--text-dim);
+  border-bottom: 1px solid var(--border); display: flex; justify-content: space-between;
+  align-items: center; background: #161616;
+}
+
+/* ── 对白滚动列表 ── */
+.transcript-col { overflow: hidden; flex: 1; min-height: 0; display: flex; flex-direction: column; }
+.transcript-list {
+  flex: 1; overflow-y: scroll;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable both-edges;
+  color-scheme: dark;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.08) transparent;
+}
+.transcript-list::-webkit-scrollbar {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 6px;
+  background: transparent;
+}
+.transcript-list::-webkit-scrollbar-track {
+  -webkit-appearance: none;
+  background: transparent;
+  margin: 4px 0;
+}
+.transcript-list::-webkit-scrollbar-thumb {
+  -webkit-appearance: none;
+  border-radius: 3px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.03);
+  min-height: 30px;
+}
+.transcript-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.18);
+}
+.transcript-list::-webkit-scrollbar-thumb:active {
+  background: rgba(255,255,255,0.25);
+}
+.transcript-list::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+.transcript-card {
+  padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.04);
+  cursor: pointer; transition: all 0.15s; display: flex; gap: 10px; align-items: flex-start;
+  border-left: 3px solid transparent;
+}
+.transcript-card:hover { background: var(--card-hover); }
+.transcript-card.active { 
+  background: var(--card-active); border-left-color: var(--accent);
+}
+.transcript-card.marked-hook { border-left-color: var(--green); background: #0a2a0a; }
+.transcript-card.marked-gold { border-left-color: var(--yellow); background: #2a2400; }
+.transcript-card.marked-turn { border-left-color: var(--red); background: #2a0a0a; }
+
+.card-timestamp { 
+  font-size: 11px; color: var(--accent); min-width: 40px; font-variant-numeric: tabular-nums;
+  font-family: 'SF Mono', Monaco, monospace; padding-top: 2px;
+}
+.card-content { flex: 1; }
+.card-tag { font-size: 10px; color: var(--text-dim); margin-bottom: 3px; }
+.card-text { font-size: 13px; line-height: 1.5; }
+.card-actions {
+  display: flex; gap: 4px; opacity: 0; transition: opacity 0.15s;
+}
+.transcript-card:hover .card-actions { opacity: 1; }
+
+.mark-btn {
+  width: 22px; height: 22px; border-radius: 4px; border: 1px solid var(--border);
+  background: transparent; cursor: pointer; font-size: 11px; display: flex;
+  align-items: center; justify-content: center; color: var(--text-dim);
+}
+.mark-btn:hover { border-color: var(--text); }
+.mark-btn.hook:hover, .mark-btn.hook.active { background: var(--green); border-color: var(--green); color: #000; }
+.mark-btn.gold:hover, .mark-btn.gold.active { background: var(--yellow); border-color: var(--yellow); color: #000; }
+.mark-btn.turn:hover, .mark-btn.turn.active { background: var(--red); border-color: var(--red); color: #fff; }
+
+/* ── 中间：分析面板 ── */
+.panel-center { 
+  flex: 1; display: flex; flex-direction: column; overflow: hidden;
+}
+.tabs { 
+  display: flex; border-bottom: 1px solid var(--border); background: #161616;
+  flex-shrink: 0;
+}
+.tab { 
+  padding: 10px 18px; font-size: 13px; cursor: pointer; color: var(--text-dim);
+  border-bottom: 2px solid transparent; transition: all 0.15s;
+}
+.tab:hover { color: var(--text); }
+.tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+.tab .badge {
+  display: inline-block; background: var(--accent-dim); color: var(--accent);
+  font-size: 10px; padding: 1px 6px; border-radius: 8px; margin-left: 6px;
+}
+
+.analysis-content { flex: 1; overflow-y: auto; padding: 20px; color-scheme: dark; }
+
+.analysis-section { margin-bottom: 24px; }
+.analysis-section h3 { 
+  font-size: 14px; font-weight: 600; margin-bottom: 10px; 
+  display: flex; align-items: center; gap: 8px;
+}
+.analysis-section h3 .icon { font-size: 16px; }
+
+.template-card {
+  background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+  padding: 16px; margin-bottom: 12px;
+}
+.template-card h4 { font-size: 13px; color: var(--accent); margin-bottom: 8px; }
+.template-card .desc { font-size: 12px; color: var(--text-dim); margin-bottom: 10px; }
+.template-card .formula {
+  background: #111; border: 1px solid var(--border); border-radius: 6px;
+  padding: 12px; font-size: 13px; line-height: 1.6; font-family: 'SF Mono', Monaco, monospace;
+  white-space: pre-wrap;
+}
+.template-card .placeholder { 
+  background: var(--accent-dim); color: var(--accent); 
+  padding: 1px 4px; border-radius: 3px; font-size: 12px;
+}
+
+.score-row { display: flex; gap: 16px; margin-bottom: 16px; }
+.score-card {
+  flex: 1; background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: 8px; padding: 14px; text-align: center;
+}
+.score-card .label { font-size: 11px; color: var(--text-dim); margin-bottom: 6px; }
+.score-card .value { font-size: 28px; font-weight: 700; }
+.score-card .value.high { color: var(--green); }
+.score-card .value.mid { color: var(--yellow); }
+.score-card .value.low { color: var(--red); }
+.score-card .reason { font-size: 11px; color: var(--text-dim); margin-top: 6px; }
+
+.knowledge-card {
+  background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+  padding: 16px; margin-bottom: 12px;
+}
+.knowledge-card h4 { font-size: 13px; margin-bottom: 10px; }
+.knowledge-card .field { margin-bottom: 8px; }
+.knowledge-card .field-label { 
+  font-size: 10px; color: var(--accent); text-transform: uppercase; margin-bottom: 2px;
+}
+.knowledge-card .field-value { font-size: 13px; line-height: 1.5; }
+.knowledge-card .jump-btn {
+  display: inline-block; margin-top: 8px; padding: 4px 10px;
+  background: var(--accent-dim); color: var(--accent); border-radius: 4px;
+  font-size: 11px; cursor: pointer; border: none;
+}
+.knowledge-card .jump-btn:hover { background: var(--accent); color: #fff; }
+
+.empty-state {
+  display: flex; align-items: center; justify-content: center; height: 100%;
+  color: var(--text-dim); font-size: 14px; flex-direction: column; gap: 8px;
+}
+
+/* ── 右侧已废弃 ── */
+.panel-right { display: none; }
+.mark-summary { padding: 14px; border-bottom: 1px solid var(--border); }
+.mark-summary .count-row { display: flex; gap: 12px; margin-top: 8px; }
+.mark-summary .count-item {
+  display: flex; align-items: center; gap: 4px; font-size: 12px;
+}
+.mark-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.mark-dot.hook { background: var(--green); }
+.mark-dot.gold { background: var(--yellow); }
+.mark-dot.turn { background: var(--red); }
+
+.marked-list { flex: 1; overflow-y: auto; }
+.marked-item {
+  padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.04);
+  font-size: 12px; cursor: pointer;
+}
+.marked-item:hover { background: var(--card-hover); }
+.marked-item .ts { color: var(--accent); font-family: monospace; }
+.marked-item .text { margin-top: 4px; line-height: 1.4; }
+
+.export-bar {
+  padding: 12px 14px; border-top: 1px solid var(--border);
+  display: flex; gap: 8px;
+}
+.btn {
+  padding: 6px 14px; border-radius: 6px; font-size: 12px; cursor: pointer;
+  border: 1px solid var(--border); background: var(--card-bg); color: var(--text);
+  transition: all 0.15s;
+}
+.btn:hover { background: var(--card-hover); border-color: var(--text-dim); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn.primary:hover { background: #2563eb; }
+.btn.small { padding: 3px 8px; font-size: 11px; }
+
+/* 全局滚动条 */
+::-webkit-scrollbar { -webkit-appearance: none; appearance: none; width: 4px; background: transparent; }
+::-webkit-scrollbar-track { -webkit-appearance: none; background: transparent; }
+::-webkit-scrollbar-thumb { -webkit-appearance: none; background: rgba(255,255,255,0.08); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.18); }
+::-webkit-scrollbar-corner { background: transparent; }
+</style>
+</head>
+<body>
+
+<!-- ═══ 左侧常驻 Sidebar ═══ -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item active" onclick="switchView('workbench')">
+    <span class="si-icon">🖥️</span>
+    <span class="si-label">操作台</span>
+  </div>
+  <div class="sidebar-item" onclick="switchView('library')">
+    <span class="si-icon">📚</span>
+    <span class="si-label">素材库</span>
+    <span class="si-badge" id="libBadge">0</span>
+  </div>
+  <!-- 预留扩展位 -->
+  <div class="sidebar-divider"></div>
+  <div class="sidebar-section-label">扩展</div>
+  <div class="sidebar-item" style="opacity:0.3;pointer-events:none" title="即将上线">
+    <span class="si-icon">🧠</span>
+    <span class="si-label">洗稿工坊</span>
+  </div>
+  <div class="sidebar-item" style="opacity:0.3;pointer-events:none" title="即将上线">
+    <span class="si-icon">🎯</span>
+    <span class="si-label">选题看板</span>
+  </div>
+</div>
+
+<!-- ═══ 右侧主区域 ═══ -->
+<div class="main-area">
+  <!-- 顶部栏 -->
+  <div class="topbar">
+    <span class="logo">🎬 视频深度分析</span>
+    <span class="version" id="appVersion">v1.1.0</span>
+    <input type="text" placeholder="粘贴抖音/B站/YouTube链接后回车..." id="urlInput" 
+      onkeydown="if(event.key==='Enter')analyzeFromUrl()">
+    <button class="btn primary small" onclick="analyzeFromUrl()">🔗 分析链接</button>
+    <span class="status" id="statusBar">
+      <span class="dot idle"></span> 就绪
+    </span>
+    <div class="progress-wrap" id="progressWrap">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+  </div>
+
+  <!-- 主应用区 -->
+  <div class="app" id="mainApp">
+    <!-- 左侧：视频+对白 -->
+    <div class="panel-left" id="panelLeft">
+      <div class="video-transcript-row">
+        <div class="video-container" id="videoContainer">
+          <div class="video-placeholder">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <span>粘贴链接或拖入视频</span>
+          </div>
+          <video id="videoPlayer" style="display:none" controls 
+            ontimeupdate="onVideoTimeUpdate()" onloadedmetadata="onVideoLoaded()">
+          </video>
+        </div>
+        <div class="transcript-col">
+          <div class="section-header">
+            <span>📝 原文时间轴</span>
+            <span id="cardCount" style="font-size:11px;color:var(--text-dim)">0 条</span>
+          </div>
+          <div class="transcript-list" id="transcriptList">
+            <div class="empty-state" style="padding:40px">上传视频后自动转写</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 中间：分析面板 -->
+    <div class="panel-center">
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab('overview')">📊 内容总览</div>
+        <div class="tab" onclick="switchTab('script')">🎬 脚本解析</div>
+        <div class="tab" onclick="switchTab('cinematography')">🎥 镜头&声音</div>
+        <div class="tab" onclick="switchTab('template')">📋 复刻模板</div>
+        <div class="tab" onclick="switchTab('notes')">📝 标记及笔记 <span class="badge" id="marksBadge">0</span></div>
+      </div>
+      <div class="analysis-content" id="analysisContent">
+        <div class="empty-state">
+          <span style="font-size:32px">🔍</span>
+          <span>输入视频链接开始深度分析</span>
+          <span style="font-size:11px;color:var(--text-dim)">支持：画面分析 + 对白转写 + 结构拆解 + 知识提取</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 素材库视图 -->
+  <div class="panel-center" id="libraryView" style="display:none">
+    <div class="section-header">
+      <span>📚 素材库</span>
+      <span style="font-size:11px;color:var(--text-dim)" id="libCount">0 条素材</span>
+    </div>
+    <div style="flex:1;overflow-y:auto;padding:0">
+      <table class="material-table">
+        <thead><tr>
+          <th style="width:30px">#</th>
+          <th>视频链接</th>
+          <th>博主名称</th>
+          <th style="width:70px">平台</th>
+          <th style="width:80px">类型</th>
+          <th style="width:120px">收录时间</th>
+        </tr></thead>
+        <tbody id="materialTableBody">
+          <tr><td colspan="6" style="text-align:center;color:var(--text-dim);padding:40px">
+            暂无素材，在「操作台」分析视频后自动收录
+          </td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══ v1.1.0 ═══
+const APP_VERSION = '1.1.2';
+
+// ── 数据存储 ──
+let transcriptData = [];
+let analysisData = {};
+let marks = []; // {id, timestamp, text, type: 'hook'|'gold'|'turn'}
+let activeCardIdx = -1;
+let videoServingUrl = '';
+let currentVideoUrl = '';
+let currentVideoTitle = '';
+let materialLibrary = [];
+
+// 加载本地存储
+function loadLibrary() {
+  try {
+    const saved = localStorage.getItem('video_analyzer_library');
+    if (saved) materialLibrary = JSON.parse(saved);
+    document.getElementById('libBadge').textContent = materialLibrary.length;
+    document.getElementById('libCount').textContent = materialLibrary.length + ' 条素材';
+  } catch(e) {}
+}
+function saveLibrary() {
+  try {
+    localStorage.setItem('video_analyzer_library', JSON.stringify(materialLibrary));
+    document.getElementById('libBadge').textContent = materialLibrary.length;
+    document.getElementById('libCount').textContent = materialLibrary.length + ' 条素材';
+  } catch(e) {}
+}
+
+// ── Sidebar 视图切换 ──
+function switchView(view) {
+  document.querySelectorAll('.sidebar-item').forEach(el => el.classList.remove('active'));
+  const mainApp = document.getElementById('mainApp');
+  const libView = document.getElementById('libraryView');
+  
+  if (view === 'library') {
+    mainApp.style.display = 'none';
+    libView.style.display = 'flex';
+    document.querySelectorAll('.sidebar-item')[1].classList.add('active');
+    renderLibraryTable();
+  } else {
+    mainApp.style.display = 'flex';
+    libView.style.display = 'none';
+    document.querySelectorAll('.sidebar-item')[0].classList.add('active');
+  }
+}
+
+function renderLibraryTable() {
+  const tbody = document.getElementById('materialTableBody');
+  if (materialLibrary.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--text-dim);padding:40px">暂无素材，在「操作台」分析视频后自动收录</td></tr>';
+    return;
+  }
+  tbody.innerHTML = materialLibrary.map((m, i) => `
+    <tr onclick="loadMaterial(${i})" class="${m.url === currentVideoUrl ? 'loaded' : ''}">
+      <td style="color:var(--text-dim)">${i+1}</td>
+      <td title="${m.url}">${m.url.substring(0, 50)}...</td>
+      <td>${m.title || '-'}</td>
+      <td><span class="platform-tag">${m.platform || '-'}</span></td>
+      <td style="color:var(--text-dim)">${m.type || '-'}</td>
+      <td style="color:var(--text-dim)">${m.date || '-'}</td>
+    </tr>
+  `).join('');
+}
+
+function loadMaterial(idx) {
+  const m = materialLibrary[idx];
+  if (!m) return;
+  transcriptData = m.transcript || [];
+  analysisData = normalizeAnalysis(m.analysis || {});
+  marks = m.marks || [];
+  currentVideoUrl = m.url;
+  currentVideoTitle = m.title || '';
+  videoServingUrl = m.videoUrl || '';
+  
+  const vp = document.getElementById('videoPlayer');
+  if (videoServingUrl) {
+    vp.src = videoServingUrl;
+    vp.style.display = 'block';
+    document.querySelector('.video-placeholder').style.display = 'none';
+  }
+  
+  switchView('workbench');
+  renderTranscript();
+  updateCardCount();
+  renderMarks();
+  renderTabContent('overview');
+}
+
+// ── 归一化 ──
+function normalizeAnalysis(data) {
+  if (!data) return data;
+  if (data.script_analysis && !data.scriptAnalysis) data.scriptAnalysis = data.script_analysis;
+  if (data.scoring && !data.scores) data.scores = data.scoring;
+  if (data.structure && !data.scriptAnalysis) data.scriptAnalysis = { acts: data.structure.map(s => ({act:s.start, name:s.name, timeRange:s.start+'-'+s.end, narrativeFunction:s.desc, characterDynamics:'', dramaticTension:5, keyMoments:[]})), techniques:[] };
+  if (data.knowledge_card && !data.cinematography) data.cinematography = { disclaimer: '⚠️ 旧版数据' };
+  return data;
+}
+
+// ── 模拟数据 ──
+const DEMO_TRANSCRIPT = [
+  {ts:"00:00", tag:"开场", text:"下班后不知道吃什么？今天分享三个十分钟搞定的快手菜"},
+  {ts:"00:04", tag:"推荐", text:"第一个是蒜蓉西兰花，简单到离谱但好吃到舔盘"},
+  {ts:"00:09", tag:"步骤", text:"西兰花切小朵焯水一分钟，蒜切末，热油爆香"},
+  {ts:"00:15", tag:"技巧", text:"关键一步：焯水的时候加一点盐和油，颜色会特别翠绿"},
+  {ts:"00:21", tag:"步骤", text:"倒入西兰花翻炒两分钟，加生抽和蚝油，出锅"},
+  {ts:"00:26", tag:"推荐", text:"第二个是番茄炒蛋——虽然是家常菜，但很多人做错了"},
+  {ts:"00:31", tag:"技巧", text:"鸡蛋要先炒到七分熟盛出来，不要跟番茄一起炒"},
+  {ts:"00:36", tag:"步骤", text:"番茄单独炒出汁，加点糖中和酸味，再把鸡蛋倒回去"},
+  {ts:"00:41", tag:"强调", text:"这样鸡蛋嫩滑、番茄浓郁，完全不是一个级别的"},
+  {ts:"00:46", tag:"推荐", text:"第三个是懒人版酸汤肥牛，五分钟就能上桌"},
+  {ts:"00:50", tag:"步骤", text:"水烧开下肥牛片烫三十秒捞出，金针菇焯水铺底"},
+  {ts:"00:55", tag:"技巧", text:"灵魂在汤底：黄灯笼辣椒酱两勺加白醋，酸辣开胃"},
+  {ts:"01:00", tag:"步骤", text:"把肥牛铺在金针菇上，浇上热汤，撒葱花小米辣"},
+  {ts:"01:05", tag:"总结", text:"三个菜从备菜到上桌不超过半小时，比点外卖还快"},
+  {ts:"01:10", tag:"互动", text:"你们下班最喜欢做什么快手菜？评论区告诉我"},
+  {ts:"01:14", tag:"结尾", text:"喜欢的话点个关注，下期教你们做不用开火的凉拌菜"}
+];
+
+const DEMO_ANALYSIS = {
+  overview: {
+    oneLiner: "一个AI驱动的自媒体内容创作中台，通过视频转写+语义分析+知识管理+一键成稿，实现从素材到脚本的全流程自动化",
+    audience: "自媒体创作者、非技术背景的内容运营、想提升内容效率的个人创作者",
+    painPoints: "看到好内容不知道怎么拆解结构、写脚本耗时长、灵感碎片难以积累和复用",
+    viewpoint: "AI不是替代创作者，而是把「分析-拆解-复用」的循环压缩到分钟级",
+    cognition: "从「凭感觉创作」到「结构化拆解+模板化复刻」，让优质内容的生产变得可复制"
+  },
+  scriptAnalysis: {
+    acts: [
+      {act:1, name:"第一幕：Hook · 问题引入", timeRange:"00:00-00:24", narrativeFunction:"用自媒体人的真实痛点开场", characterDynamics:"创作者从迷茫到好奇", dramaticTension:3, keyMoments:[{ts:"00:03", desc:"抛出核心痛点"},{ts:"00:07", desc:"亮出工具名"}]},
+      {act:2, name:"第二幕：功能展示", timeRange:"00:25-00:42", narrativeFunction:"展示AI语义分析能力", characterDynamics:"从好奇到惊讶", dramaticTension:5, keyMoments:[{ts:"00:28", desc:"AI识别段落结构"}]},
+      {act:3, name:"第三幕：方法论", timeRange:"00:43-01:04", narrativeFunction:"揭露底层逻辑", characterDynamics:"从理解到兴奋", dramaticTension:6, keyMoments:[{ts:"00:48", desc:"解释公式化原理"}]},
+      {act:4, name:"第四幕：生态闭环", timeRange:"01:05-01:58", narrativeFunction:"展示完整创作生态", characterDynamics:"从认可到向往", dramaticTension:8, keyMoments:[{ts:"01:10", desc:"知识库积累价值"}]},
+      {act:5, name:"第五幕：CTA", timeRange:"01:59-02:10", narrativeFunction:"制造反差推动转化", characterDynamics:"从向往到行动", dramaticTension:4, keyMoments:[{ts:"02:02", desc:"2天开发对比"}]}
+    ],
+    emotionCurve:"开场低→第二幕爬升→第三幕加速→第四幕峰值→第五幕温和回落→整体S型曲线",
+    techniques: [
+      {name:"问题+推荐模式", usage:"第一幕开场，用痛点建立共鸣后立即给出方案", effect:"观众在第一句话就产生认同感"},
+      {name:"全景→特写递进", usage:"从整体功能→具体功能→方法论原理", effect:"每层都比上一层更深"},
+      {name:"时间锚定策略", usage:"第五幕用「2天开发」作为社交证明", effect:"制造FOMO感"}
+    ]
+  },
+  templates: [
+    {
+      name:"开头公式：问题+推荐",
+      desc:"用目标受众的痛点问题开头，快速给出推荐",
+      formula:"有没有【痛点描述】的【工具类型】？\n我推荐【工具名称】。\n它可以把【核心功能1】、【核心功能2】和【核心功能3】全部搞定。"
+    },
+    {
+      name:"正文公式：对比论证+个人体验",
+      desc:"通过对比旧方法/旧工具，用亲身经历论证推荐理由",
+      formula:"以前我做【场景】的时候，需要【繁琐过程】。\n用了【工具名】之后，我只需要【简化过程】。\n最大的区别是【核心差异点】。"
+    }
+  ],
+  cinematography: {
+    cinematography: {
+      shotTypes:"口播模式为主，中近景构图。功能演示段切入屏幕录制",
+      composition:"单人正面居中构图，符合口播的「直面观众」表达策略",
+      cameraMovement:"固定机位为主，轻微手持微动增加真实感"
+    },
+    lightingColor: {
+      lightingMood:"柔光正面打光，面部均匀明亮，背景适度虚化",
+      colorPalette:"暖色调为主，功能演示段切至冷色调UI界面形成对比",
+      visualRhythm:"讲话段节奏平稳，功能演示段加速，形成呼吸节奏"
+    },
+    soundDesign: {
+      bgm:"轻微电子/科技感配乐在Hook段和CTA段使用",
+      ambient:"室内录制，无明显环境噪音",
+      dialogueStyle:"口语化程度高，语速中快，信息密度在方法论段达峰值",
+      subtitleDesign:"底部居中字幕，关键词高亮色"
+    },
+    directorStyle: {
+      aesthetic:"实用主义美学——追求信息传递效率而非视觉华丽",
+      narrativeSignature:"建立共鸣→展示功能→揭示原理→拉出生态→推动行动",
+      culturalEncoding:"用技术圈层符号建立专业可信度，同时保持亲和力"
+    },
+    disclaimer:"⚠️ Demo 数据：基于对白文本推断，未使用实际画面分析"
+  },
+  scores: {
+    hook: { value:85, reason:"痛点精准、场景感强"},
+    structure: { value:82, reason:"层层递进"},
+    expression: { value:78, reason:"口语化好但部分段落可精简"}
+  }
+};
+
+// ── 初始化 ──
+function loadDemo() {
+  transcriptData = DEMO_TRANSCRIPT;
+  analysisData = DEMO_ANALYSIS;
+  renderTranscript();
+  updateCardCount();
+}
+
+function renderTranscript() {
+  const list = document.getElementById('transcriptList');
+  list.innerHTML = transcriptData.map((card, i) => {
+    const mark = marks.find(m => m.id === i);
+    let markClass = '';
+    if (mark) markClass = 'marked-' + mark.type;
+    if (i === activeCardIdx && !mark) markClass += ' active';
+    if (i === activeCardIdx && mark) markClass += ' active';
+    
+    return `
+    <div class="transcript-card ${markClass}" id="card-${i}" onclick="seekTo(${i})">
+      <div class="card-timestamp">${card.ts}</div>
+      <div class="card-content">
+        <div class="card-tag">${card.tag}</div>
+        <div class="card-text">${card.text}</div>
+      </div>
+      <div class="card-actions" onclick="event.stopPropagation()">
+        ${mark ? `<button class="mark-btn ${mark.type} active" title="删除标记" onclick="removeMark(${i})" style="background:var(--${mark.type==='hook'?'green':mark.type==='gold'?'yellow':'red'});color:#000">✕</button>` : ''}
+        <button class="mark-btn hook ${mark?.type==='hook'?'active':''}" title="好钩子" onclick="toggleMark(${i},'hook')">🪝</button>
+        <button class="mark-btn gold ${mark?.type==='gold'?'active':''}" title="金句" onclick="toggleMark(${i},'gold')">⭐</button>
+        <button class="mark-btn turn ${mark?.type==='turn'?'active':''}" title="转折点" onclick="toggleMark(${i},'turn')">↗</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function updateCardCount() {
+  document.getElementById('cardCount').textContent = transcriptData.length + ' 条';
+}
+
+// ── 视频联动 ──
+function seekTo(idx) {
+  activeCardIdx = idx;
+  const card = transcriptData[idx];
+  const [m, s] = card.ts.split(':').map(Number);
+  const seconds = m * 60 + s;
+  
+  const video = document.getElementById('videoPlayer');
+  if (video.src) {
+    video.currentTime = seconds;
+    video.play().catch(()=>{});
+  }
+  
+  renderTranscript();
+  document.getElementById(`card-${idx}`)?.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function onVideoTimeUpdate() {
+  const video = document.getElementById('videoPlayer');
+  const currentSec = video.currentTime;
+  let newActive = -1;
+  for (let i = 0; i < transcriptData.length; i++) {
+    const [m, s] = transcriptData[i].ts.split(':').map(Number);
+    const cardSec = m * 60 + s;
+    if (currentSec >= cardSec - 0.5) newActive = i;
+  }
+  if (newActive !== activeCardIdx) {
+    activeCardIdx = newActive;
+    renderTranscript();
+    document.getElementById(`card-${newActive}`)?.scrollIntoView({behavior:'smooth',block:'center'});
+  }
+}
+
+function onVideoLoaded() {
+  const vp = document.getElementById('videoPlayer');
+  vp.style.display = 'block';
+  document.querySelector('.video-placeholder').style.display = 'none';
+  
+  const ratio = vp.videoWidth / vp.videoHeight;
+  const panelLeft = document.getElementById('panelLeft');
+  if (ratio < 1) {
+    panelLeft.classList.add('layout-side');
+    vp.parentElement.style.aspectRatio = 'auto';
+    vp.parentElement.style.height = '100%';
+  } else {
+    panelLeft.classList.remove('layout-side');
+    vp.parentElement.style.aspectRatio = '16/9';
+    vp.parentElement.style.height = 'auto';
+  }
+}
+
+// ── 标记系统 ──
+function toggleMark(idx, type) {
+  const existing = marks.findIndex(m => m.id === idx);
+  if (existing >= 0) {
+    if (marks[existing].type === type) {
+      marks.splice(existing, 1);
+    } else {
+      marks[existing].type = type;
+    }
+  } else {
+    marks.push({ id:idx, timestamp:transcriptData[idx].ts, text:transcriptData[idx].text, type, note:'' });
+  }
+  renderTranscript();
+  renderMarks();
+}
+
+function updateMarkNote(idx) {
+  const textarea = document.getElementById('note-input-' + idx);
+  if (!textarea) return;
+  const m = marks.find(m => m.id === idx);
+  if (m) { m.note = textarea.value; }
+}
+
+function saveMarkNotes() {
+  marks.forEach(m => {
+    const ta = document.getElementById('note-input-' + m.id);
+    if (ta) m.note = ta.value;
+  });
+  alert('笔记已保存');
+}
+
+function clearMarks() { marks = []; renderTranscript(); renderMarks(); }
+
+function removeMark(idx) {
+  marks = marks.filter(m => m.id !== idx);
+  renderTranscript();
+  renderMarks();
+}
+
+function saveMarksToLibrary() {
+  const existing = materialLibrary.findIndex(m => m.url === currentVideoUrl);
+  if (existing >= 0) {
+    materialLibrary[existing].marks = [...marks];
+    materialLibrary[existing].analysis = analysisData;
+    materialLibrary[existing].transcript = transcriptData;
+    saveLibrary();
+    alert('标记已保存到素材库');
+  } else if (currentVideoUrl) {
+    saveCurrentToLibrary();
+    alert('已保存到素材库');
+  } else {
+    alert('请先分析视频');
+  }
+}
+
+function saveCurrentToLibrary() {
+  if (!currentVideoUrl) return;
+  const existing = materialLibrary.findIndex(m => m.url === currentVideoUrl);
+  const entry = {
+    url: currentVideoUrl,
+    title: currentVideoTitle || '未命名',
+    platform: detectPlatform(currentVideoUrl),
+    type: '视频分析',
+    date: new Date().toISOString().slice(0, 10),
+    marks: [...marks],
+    transcript: transcriptData,
+    analysis: analysisData,
+    videoUrl: videoServingUrl
+  };
+  if (existing >= 0) {
+    materialLibrary[existing] = entry;
+  } else {
+    materialLibrary.unshift(entry);
+  }
+  saveLibrary();
+}
+
+function addToLibrary(url, data) {
+  const existing = materialLibrary.findIndex(m => m.url === url);
+  const entry = {
+    url: url,
+    title: currentVideoTitle || (transcriptData && transcriptData[0] ? transcriptData[0].text.substring(0, 30) : '未命名'),
+    platform: detectPlatform(url),
+    type: '视频分析',
+    date: new Date().toISOString().slice(0, 10),
+    marks: [...marks],
+    transcript: transcriptData || data.transcript || [],
+    analysis: data.analysis || {},
+    videoUrl: videoServingUrl || data.video_url || ''
+  };
+  if (existing >= 0) {
+    materialLibrary[existing] = entry;
+  } else {
+    materialLibrary.unshift(entry);
+  }
+  saveLibrary();
+}
+
+function detectPlatform(url) {
+  if (url.includes('douyin.com')) return '抖音';
+  if (url.includes('bilibili.com') || url.includes('b23.tv')) return 'B站';
+  if (url.includes('youtube.com') || url.includes('youtu.be')) return 'YouTube';
+  if (url.includes('xiaohongshu.com') || url.includes('xhslink.com')) return '小红书';
+  return '其他';
+}
+
+// ── 进度条 ──
+function showProgress(active) {
+  const wrap = document.getElementById('progressWrap');
+  const bar = document.getElementById('progressBar');
+  if (active) {
+    wrap.classList.add('active');
+    bar.style.width = '0%';
+    bar.classList.remove('done-flash');
+  } else {
+    wrap.classList.remove('active');
+    bar.style.width = '0%';
+  }
+}
+function updateProgress(pct_val) {
+  const bar = document.getElementById('progressBar');
+  bar.style.width = Math.min(100, Math.max(1, pct_val)) + '%';
+  bar.classList.remove('done-flash');
+  if (pct_val >= 100) {
+    bar.classList.add('done-flash');
+  }
+}
+
+// ── 渲染标记及笔记 Tab ──
+function renderMarks() {
+  document.getElementById('marksBadge').textContent = marks.length;
+  const activeTab = document.querySelector('.tab.active');
+  if (activeTab && activeTab.textContent.includes('笔记')) {
+    renderNotesTab();
+  }
+}
+
+function renderNotesTab() {
+  const container = document.getElementById('analysisContent');
+  const typeLabel = { hook:'🪝 好钩子', gold:'⭐ 金句', turn:'↗ 转折点' };
+  const hookMarks = marks.filter(m=>m.type==='hook');
+  const goldMarks = marks.filter(m=>m.type==='gold');
+  const turnMarks = marks.filter(m=>m.type==='turn');
+  
+  if (marks.length === 0) {
+    container.innerHTML = `
+      <div class="empty-state">
+        <span style="font-size:32px">📝</span>
+        <span>还没有标记</span>
+        <span style="font-size:11px;color:var(--text-dim)">在左侧对白卡片上悬停，点击 🪝 ⭐ ↗ 按钮标记</span>
+      </div>`;
+    return;
+  }
+  
+  let html = `
+    <div class="analysis-section">
+      <div class="mark-summary" style="margin-bottom:16px">
+        <span style="font-size:12px;color:var(--text-dim)">已标记 <b>${marks.length}</b> 条</span>
+        <div class="count-row">
+          <span class="count-item"><span class="mark-dot hook"></span> 好钩子 <b>${hookMarks.length}</b></span>
+          <span class="count-item"><span class="mark-dot gold"></span> 金句 <b>${goldMarks.length}</b></span>
+          <span class="count-item"><span class="mark-dot turn"></span> 转折点 <b>${turnMarks.length}</b></span>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
+        <button class="btn primary small" onclick="saveMarksToLibrary()">💾 保存</button>
+        <button class="btn primary small" onclick="saveMarkNotes()">💾 保存笔记</button>
+        <button class="btn small" onclick="clearMarks()">🗑️ 清空</button>
+        <button class="btn small" onclick="exportMarks()">📋 导出</button>
+        <button class="btn small export-full-btn" onclick="exportFullReport()">📄 导出完整报告</button>
+      </div>
+  `;
+  
+  html += marks.map(m => `
+    <div class="marked-item" style="background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:0;margin-bottom:10px;overflow:hidden">
+      <div style="padding:10px 14px;cursor:pointer;display:flex;gap:10px;align-items:flex-start;border-bottom:1px solid var(--border)" onclick="seekTo(${m.id})">
+        <div style="flex:1">
+          <span class="ts" style="color:var(--accent);font-family:monospace;font-size:12px">${m.timestamp}</span>
+          <span style="margin-left:8px;font-size:11px;color:var(--${m.type==='hook'?'green':m.type==='gold'?'yellow':'red'})">${typeLabel[m.type]}</span>
+          <div style="margin-top:4px;font-size:13px;line-height:1.4">${m.text}</div>
+        </div>
+        <button onclick="event.stopPropagation();removeMark(${m.id})" style="background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:14px;padding:2px 6px" title="删除">✕</button>
+      </div>
+      <div style="padding:8px 14px" onclick="event.stopPropagation()">
+        <div style="font-size:11px;color:var(--text-dim);margin-bottom:4px">📝 笔记：</div>
+        <textarea id="note-input-${m.id}" oninput="updateMarkNote(${m.id})" 
+          style="width:100%;min-height:60px;background:var(--panel-bg);color:var(--text);border:1px solid var(--border);border-radius:4px;padding:8px;font-size:12px;resize:vertical;line-height:1.5;font-family:inherit"
+          placeholder="在此输入笔记...">${m.note||''}</textarea>
+      </div>
+    </div>
+  `).join('');
+  
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+// ── 导出 ──
+function exportMarks() {
+  if (marks.length === 0) { alert('还没有标记内容'); return; }
+  const typeLabel = { hook:'好钩子', gold:'金句', turn:'转折点' };
+  const text = marks.map(m => `[${m.timestamp}] [${typeLabel[m.type]}] ${m.text}${m.note ? '\n  笔记：'+m.note : ''}`).join('\n');
+  const blob = new Blob([text], {type:'text/plain'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = `marks_${new Date().toISOString().slice(0,10)}.txt`;
+  a.click();
+}
+
+async function exportFullReport() {
+  if (!analysisData.overview) { alert('还没有分析数据'); return; }
+  const exportBtn = document.querySelector('.export-full-btn');
+  if (exportBtn) { exportBtn.textContent = '⏳ 生成中...'; exportBtn.disabled = true; }
+  
+  try {
+    const body = {
+      video_meta: {
+        filename: currentVideoTitle || videoServingUrl?.split('/').pop() || '未命名',
+        duration: analysisData.videoMeta?.duration || '',
+        platform: analysisData.videoMeta?.platform || '',
+        source: currentVideoUrl ? 'url' : 'local',
+        path: videoServingUrl || ''
+      },
+      transcript: transcriptData,
+      analysis: analysisData,
+      token_stats: analysisData._tokenStats || {},
+      marks: marks,
+      run_id: analysisData._runId || '',
+      video_url: currentVideoUrl
+    };
+    
+    const resp = await fetch('/api/export-html', {
+      method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(body)
+    });
+    const data = await resp.json();
+    if (data.error) { alert('导出失败: ' + data.error); return; }
+    
+    const blob = new Blob([data.html], {type: 'text/html'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `report_${new Date().toISOString().slice(0,10)}.html`;
+    a.click();
+    
+    if (exportBtn) { exportBtn.textContent = '📄 导出完整报告'; exportBtn.disabled = false; }
+    alert(`✅ 报告已导出并保存到 Mac mini\n📁 ${data.saved_to}`);
+  } catch(e) {
+    if (exportBtn) { exportBtn.textContent = '📄 导出完整报告'; exportBtn.disabled = false; }
+    alert('导出失败: ' + e.message);
+  }
+}
+
+// ── Tab 切换 (v1.1.0: 去掉「标记」tab，新顺序) ──
+function switchTab(tab) {
+  const tabNames = ['overview','script','cinematography','template','notes'];
+  document.querySelectorAll('.tab').forEach((t,i) => {
+    t.classList.toggle('active', tabNames[i] === tab);
+  });
+  if (tab === 'notes') {
+    renderNotesTab();
+  } else {
+    renderTabContent(tab);
+  }
+}
+
+function renderTabContent(tab) {
+  const container = document.getElementById('analysisContent');
+  const ad = analysisData;
+  
+  if (!ad.overview) {
+    container.innerHTML = '<div class="empty-state"><span>请先加载分析数据</span></div>';
+    return;
+  }
+  
+  switch(tab) {
+    case 'overview': {
+      const story = ad.story || {};
+      const meta = ad.videoMeta || {};
+      const commerce = ad.commerce || {};
+      
+      // Section A: Basic Info
+      let basicHtml = '<div class="analysis-section"><h3>📋 基本信息</h3>';
+      basicHtml += `<div class="template-card"><div class="field"><div class="field-label">视频概要</div><div class="field-value">${ad.overview.oneLiner||story.synopsis||'—'}</div></div></div>`;
+      basicHtml += `<div class="template-card"><div class="field"><div class="field-label">类型/风格</div><div class="field-value">${(story.genre||[]).join(' / ')||'—'}</div></div></div>`;
+      if (meta.format) basicHtml += `<div class="template-card"><div class="field"><div class="field-label">格式</div><div class="field-value">${meta.format}</div></div></div>`;
+      if (meta.duration) basicHtml += `<div class="template-card"><div class="field"><div class="field-label">时长</div><div class="field-value">${meta.duration}</div></div></div>`;
+      if (meta.resolution) basicHtml += `<div class="template-card"><div class="field"><div class="field-label">分辨率</div><div class="field-value">${meta.resolution}</div></div></div>`;
+      if (meta.platform) basicHtml += `<div class="template-card"><div class="field"><div class="field-label">平台</div><div class="field-value">${meta.platform}</div></div></div>`;
+      basicHtml += '</div>';
+      
+      // Section B: Commercial Metrics
+      let commerceHtml = '<div class="analysis-section"><h3>📈 商业数据</h3>';
+      const hasCommerce = commerce.views || commerce.likes || commerce.saves || commerce.shares;
+      if (hasCommerce) {
+        commerceHtml += '<div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px">';
+        if (commerce.views) commerceHtml += `<div class="score-card" style="flex:1;min-width:80px"><div class="label">👁 播放量</div><div class="value" style="color:var(--accent)">${commerce.views}</div></div>`;
+        if (commerce.likes) commerceHtml += `<div class="score-card" style="flex:1;min-width:80px"><div class="label">👍 点赞</div><div class="value" style="color:var(--green)">${commerce.likes}</div></div>`;
+        if (commerce.saves) commerceHtml += `<div class="score-card" style="flex:1;min-width:80px"><div class="label">⭐ 收藏</div><div class="value" style="color:var(--yellow)">${commerce.saves}</div></div>`;
+        if (commerce.shares) commerceHtml += `<div class="score-card" style="flex:1;min-width:80px"><div class="label">↗ 转发</div><div class="value" style="color:var(--red)">${commerce.shares}</div></div>`;
+        if (commerce.danmaku) commerceHtml += `<div class="score-card" style="flex:1;min-width:80px"><div class="label">💬 弹幕</div><div class="value" style="color:#a78bfa">${commerce.danmaku}</div></div>`;
+        commerceHtml += '</div>';
+      } else {
+        commerceHtml += `<div class="template-card"><div class="field"><div class="field-value" style="color:var(--text-dim);font-style:italic">🔄 正在从 URL 获取商业数据... <a href="javascript:fetchCommerce()" style="color:var(--accent);text-decoration:underline">手动刷新</a></div></div></div>`;
+      }
+      if (commerce.topComments && commerce.topComments.length) {
+        commerceHtml += '<div style="margin-top:8px"><span style="font-size:12px;color:var(--text-dim)">💬 高频评论：</span>';
+        commerce.topComments.forEach(c => { commerceHtml += `<div style="font-size:12px;padding:4px 8px;margin:2px 0;background:var(--card-bg);border-radius:4px;border-left:2px solid var(--accent)">${c}</div>`; });
+        commerceHtml += '</div>';
+      }
+      if (commerce.insight) commerceHtml += `<div class="template-card" style="margin-top:8px"><div class="field"><div class="field-label">📊 精简指标分析</div><div class="field-value">${commerce.insight}</div></div></div>`;
+      commerceHtml += '</div>';
+      
+      // Section C: Scoring
+      let scoreHtml = '<div class="analysis-section"><h3>⭐ 三项评分</h3>';
+      if (ad.scores && ad.scores.hook) {
+        scoreHtml += '<div class="score-row">';
+        scoreHtml += `<div class="score-card"><div class="label">🪝 Hook 设计</div><div class="value high">${ad.scores.hook.value}</div><div class="reason">${ad.scores.hook.reason}</div></div>`;
+        scoreHtml += `<div class="score-card"><div class="label">🏗️ 结构设计</div><div class="value high">${ad.scores.structure.value}</div><div class="reason">${ad.scores.structure.reason}</div></div>`;
+        scoreHtml += `<div class="score-card"><div class="label">💬 表达效果</div><div class="value mid">${ad.scores.expression.value}</div><div class="reason">${ad.scores.expression.reason}</div></div>`;
+        scoreHtml += '</div>';
+      } else {
+        scoreHtml += '<div style="color:var(--text-dim);font-style:italic;font-size:13px">⚠️ 暂无评分数据</div>';
+      }
+      scoreHtml += '</div>';
+      
+      container.innerHTML = basicHtml + commerceHtml + scoreHtml;
+      break;
+    }
+      
+    case 'script': {
+      const sa = ad.scriptAnalysis || {};
+      const acts = sa.acts || [];
+      const tensionBar = (v) => `<span style="display:inline-block;width:${v*10}px;height:8px;border-radius:4px;background:linear-gradient(90deg,var(--green),var(--yellow),var(--red));opacity:${0.3+v*0.07}"></span>`;
+      container.innerHTML = `
+        <div class="analysis-section">
+          <h3>🎬 脚本解析 · 叙事结构</h3>
+          ${acts.map(a => `
+            <div class="template-card" style="border-left:3px solid var(--accent)">
+              <h4>${a.name} <span style="font-weight:normal;font-size:11px;color:var(--accent)">${a.timeRange||''}</span></h4>
+              <div class="desc" style="margin:6px 0"><b>叙事功能：</b>${a.narrativeFunction||''}</div>
+              <div style="font-size:12px;color:var(--text-dim);margin:4px 0"><b>人物动态：</b>${a.characterDynamics||''}</div>
+              <div style="font-size:11px;margin:6px 0">戏剧张力：${tensionBar(a.dramaticTension||5)} <span style="color:var(--text-dim)">${a.dramaticTension||5}/10</span></div>
+              ${(a.keyMoments||[]).map(m => `<div style="font-size:12px;margin:3px 0;padding-left:12px"><span style="color:var(--accent);font-family:monospace">${m.ts||''}</span> ${m.desc||''}</div>`).join('')}
+            </div>
+          `).join('')}
+          ${sa.emotionCurve ? `<div class="analysis-section"><h3>📈 情绪曲线</h3><p style="font-size:14px;line-height:1.6">${sa.emotionCurve}</p></div>` : ''}
+          ${(sa.techniques||[]).length ? `
+            <div class="analysis-section"><h3>🎯 叙事技巧</h3>
+              ${sa.techniques.map(t => `<div class="template-card"><h4>${t.name||''}</h4><div class="desc">📍 ${t.usage||''}</div><div style="font-size:12px;color:var(--accent);margin-top:4px">✨ ${t.effect||''}</div></div>`).join('')}
+            </div>` : ''}
+        </div>`;
+      break;
+    }
+      
+    case 'cinematography': {
+      const cm = ad.cinematography || {};
+      const c = cm.cinematography || {};
+      const lc = cm.lightingColor || {};
+      const sd = cm.soundDesign || {};
+      const ds = cm.directorStyle || {};
+      const isVision = cm._source === 'gemini_vision';
+      const fs = cm.frameStats || {};
+      
+      const isReanalysis = cm._source === 'gemini_vision_reanalysis';
+      const sourceBadge = isVision 
+        ? `<div style="background:${isReanalysis?'#1a0a0a':'#0a1a0a'};border:1px solid ${isReanalysis?'var(--red)':'var(--green)'};border-radius:6px;padding:8px 14px;margin-bottom:12px;font-size:12px"><span style="color:${isReanalysis?'var(--red)':'var(--green)'};font-weight:600">🤖 Gemini Vision ${isReanalysis?'重分析 (50帧)':'逐帧分析'}</span><span style="color:var(--text-dim)"> — 基于实际画面，非文本推断</span>${isReanalysis && cm._reanalysis_reason ? `<br><span style="color:var(--yellow);font-size:11px">触发原因：${cm._reanalysis_reason}</span>` : ''}</div>`
+        : (cm.disclaimer ? `<div style="background:#1a1a0a;border:1px solid var(--yellow);border-radius:6px;padding:8px 14px;margin-bottom:12px;font-size:12px;color:var(--yellow)">${cm.disclaimer}</div>` : '');
+      
+      const frameStatsHtml = fs.totalFramesAnalyzed 
+        ? `<div style="background:var(--card-bg);border-radius:8px;padding:10px 14px;margin-bottom:12px;display:flex;gap:16px;align-items:center;font-size:12px">
+            <span>📷 <b>${fs.totalFramesAnalyzed}</b> 个关键帧</span>
+            ${fs.shotTypeDistribution && Object.keys(fs.shotTypeDistribution).length ? `<span style="color:var(--text-dim)">景别分布：${Object.entries(fs.shotTypeDistribution).map(([k,v])=>k+v).join('·')}</span>` : ''}
+          </div>`
+        : '';
+      
+      container.innerHTML = `
+        <div class="analysis-section">
+          ${sourceBadge}
+          ${frameStatsHtml}
+          
+          <h3>🎥 镜头语言${isVision?'分析':'推断'}</h3>
+          <div class="template-card"><div class="field"><div class="field-label">景别策略</div><div class="field-value">${c.shotTypes||'—'}</div></div></div>
+          <div class="template-card"><div class="field"><div class="field-label">构图策略</div><div class="field-value">${c.composition||'—'}</div></div></div>
+          <div class="template-card"><div class="field"><div class="field-label">摄影机运动</div><div class="field-value">${c.cameraMovement||'—'}</div></div></div>
+          
+          <h3 style="margin-top:16px">🎨 光线与色彩</h3>
+          <div class="template-card"><div class="field"><div class="field-label">光线风格</div><div class="field-value">${lc.lightingMood||'—'}</div></div></div>
+          <div class="template-card"><div class="field"><div class="field-label">色彩策略</div><div class="field-value">${lc.colorPalette||'—'}</div></div></div>
+          <div class="template-card"><div class="field"><div class="field-label">视觉节奏</div><div class="field-value">${lc.visualRhythm||'—'}</div></div></div>
+          
+          <h3 style="margin-top:16px">🔊 声音设计</h3>
+          <div class="template-card"><div class="field"><div class="field-label">BGM</div><div class="field-value">${sd.bgm||'—'}</div></div></div>
+          <div class="template-card"><div class="field"><div class="field-label">环境音</div><div class="field-value">${sd.ambient||'—'}</div></div></div>
+          <div class="template-card"><div class="field"><div class="field-label">对白风格</div><div class="field-value">${sd.dialogueStyle||'—'}</div></div></div>
+          <div class="template-card"><div class="field"><div class="field-label">字幕设计</div><div class="field-value">${sd.subtitleDesign||'—'}</div></div></div>
+          
+          <h3 style="margin-top:16px">🎬 导演风格</h3>
+          <div class="template-card"><div class="field"><div class="field-label">美学取向</div><div class="field-value">${ds.aesthetic||'—'}</div></div></div>
+          <div class="template-card"><div class="field"><div class="field-label">叙事签名</div><div class="field-value">${ds.narrativeSignature||'—'}</div></div></div>
+          <div class="template-card"><div class="field"><div class="field-label">文化编码</div><div class="field-value">${ds.culturalEncoding||'—'}</div></div></div>
+        </div>`;
+      break;
+    }
+      
+    case 'template': {
+      const tp = ad.template || {};
+      const templates = tp.templates || ad.templates || [];
+      const re = tp.reusableElements || {};
+      container.innerHTML = `
+        <div class="analysis-section">
+          <h3>📋 可复刻模板</h3>
+          ${templates.map(t => `
+            <div class="template-card">
+              <h4>${t.name}</h4>
+              <div class="desc">${t.desc}</div>
+              ${t.formula ? `<div class="formula">${t.formula.replace(/【(.*?)】/g, '<span class="placeholder">【$1】</span>')}</div>` : ''}
+            </div>
+          `).join('')}
+          ${re.scriptPattern ? `<div class="analysis-section"><h3>📝 脚本模式</h3><p style="font-size:14px;line-height:1.6">${re.scriptPattern}</p></div>` : ''}
+          ${re.hookTechnique ? `<div class="analysis-section"><h3>🪝 Hook 技巧</h3><p style="font-size:14px;line-height:1.6">${re.hookTechnique}</p></div>` : ''}
+          ${re.topicAngle ? `<div class="analysis-section"><h3>🎯 话题切入点</h3><p style="font-size:14px;line-height:1.6">${re.topicAngle}</p></div>` : ''}
+          ${(re.viralFactors||[]).length ? `<div class="analysis-section"><h3>🔥 爆款因素</h3>${re.viralFactors.map(v=>`<div style="font-size:13px;padding:4px 0">• ${v}</div>`).join('')}</div>` : ''}
+        </div>`;
+      break;
+    }
+  }
+}
+
+// ── b23.tv 短链解析 ──
+async function resolveB23Url(b23Url) {
+  const match = b23Url.match(/b23\.tv\/([a-zA-Z0-9]+)/);
+  if (!match) return b23Url;
+  const shareId = match[1];
+  console.log('[B23] 解析短链:', shareId);
+  
+  const apis = [
+    `https://api.bilibili.com/x/share/channel/get?share_channel=COPY&share_id=${shareId}`,
+    `https://api.bilibili.com/x/share/video?share_id=${shareId}`,
+  ];
+  for (const api of apis) {
+    try {
+      const resp = await fetch(api, { signal: AbortSignal.timeout(6000) });
+      const text = await resp.text();
+      try {
+        const data = JSON.parse(text);
+        if (data.code === 0 && data.data) {
+          const bvid = data.data.bvid || data.data.short_link || '';
+          const aid = data.data.aid || '';
+          if (bvid) { console.log('[B23] 解析成功 →', bvid); return `https://www.bilibili.com/video/${bvid}`; }
+          if (aid) { console.log('[B23] 解析成功 → av'+aid); return `https://www.bilibili.com/video/av${aid}`; }
+        }
+      } catch(e) {
+        const metaMatch = text.match(/url=([^"'\s>]+)/i);
+        if (metaMatch) return metaMatch[1];
+      }
+    } catch(e) { console.log('[B23] API失败:', e.message); }
+  }
+  
+  try {
+    const resp = await fetch(b23Url, { redirect: 'follow', signal: AbortSignal.timeout(5000) });
+    if (resp.url && resp.url !== b23Url && !resp.url.includes('b23.tv')) return resp.url;
+  } catch(e) {}
+  
+  return b23Url;
+}
+
+async function resolveDouyinUrl(url) {
+  // 已经是 iesdouyin.com 格式，直接返回（去掉 region 参数）
+  if (url.includes('iesdouyin.com/share/video/')) {
+    return url.replace(/[?&]region=[^&]+/g, '').replace(/\?$/, '');
+  }
+  
+  try {
+    // 用浏览器跟踪短链重定向，提取 video ID
+    const resp = await fetch(url, {
+      method: 'HEAD', redirect: 'follow',
+      signal: AbortSignal.timeout(10000),
+      headers: { 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36' }
+    });
+    const finalUrl = resp.url;
+    console.log('[Douyin] redirect →', finalUrl);
+    
+    // 提取视频 ID
+    let vid = null;
+    const m1 = finalUrl.match(/\/video\/(\d+)/);
+    const m2 = finalUrl.match(/\/share\/video\/(\d+)/);
+    if (m1) vid = m1[1];
+    else if (m2) vid = m2[1];
+    
+    // 也尝试从原始 URL 提取
+    if (!vid) {
+      const m3 = url.match(/\/video\/(\d+)/);
+      if (m3) vid = m3[1];
+    }
+    
+    if (vid) {
+      // iesdouyin.com 海外可访问，不走 douyin.com（会被重定向到首页）
+      const iesUrl = `https://www.iesdouyin.com/share/video/${vid}/`;
+      console.log('[Douyin] resolved →', iesUrl);
+      return iesUrl;
+    }
+  } catch(e) { console.log('[Douyin] resolve error:', e.message); }
+  
+  return url;
+}
+
+// ── 商业数据抓取 ──
+async function fetchCommerce() {
+  if (!currentVideoUrl) return;
+  
+  const url = currentVideoUrl;
+  
+  // B站：前端直连 API（后端在越南可能被限，浏览器国内IP可用）
+  if (url.includes('bilibili.com') || url.includes('b23.tv')) {
+    try {
+      const frontendData = await fetchBilibiliCommerceFE(url);
+      if (frontendData && frontendData.views) {
+        analysisData.commerce = frontendData;
+        saveCommerceToLibrary();
+        renderTabContent('overview');
+        return;
+      }
+    } catch(e) { console.log('B站 FE fetch:', e.message); }
+  }
+  
+  // 抖音/Youtube：后端统一抓取（前端跨域受限）
+  try {
+    const resp = await fetch('/api/commerce', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({url: url})
+    });
+    const data = await resp.json();
+    if (data.commerce && !data.error && data.commerce.source !== 'douyin_limited' && data.commerce.source !== 'xhs_limited') {
+      analysisData.commerce = data.commerce;
+      saveCommerceToLibrary();
+      renderTabContent('overview');
+    }
+  } catch(e) { console.log('Backend commerce:', e); }
+}
+
+async function fetchBilibiliCommerceFE(url) {
+  let vid = null;
+  const bvMatch = url.match(/BV[a-zA-Z0-9]{10}/);
+  const avMatch = url.match(/av(\d+)/i);
+  if (bvMatch) vid = bvMatch[0];
+  else if (avMatch) vid = avMatch[1];
+  
+  if (!vid) {
+    try {
+      const resp = await fetch(url, { signal: AbortSignal.timeout(8000) });
+      const html = await resp.text();
+      const bvm = html.match(/BV[a-zA-Z0-9]{10}/);
+      const avm = html.match(/av(\d+)/i);
+      if (bvm) vid = bvm[0];
+      else if (avm) vid = avm[1];
+    } catch(e) {}
+  }
+  
+  if (!vid) return null;
+  
+  const statUrl = vid.startsWith('BV')
+    ? `https://api.bilibili.com/x/web-interface/view?bvid=${vid}`
+    : `https://api.bilibili.com/x/web-interface/view?aid=${vid}`;
+  
+  const resp = await fetch(statUrl, {
+    signal: AbortSignal.timeout(8000),
+    headers: { 'Referer': 'https://www.bilibili.com/' }
+  });
+  const data = await resp.json();
+  if (data.code === 0 && data.data) {
+    const stat = data.data.stat || {};
+    return {
+      views: formatCountFE(stat.view || 0),
+      likes: formatCountFE(stat.like || 0),
+      saves: formatCountFE(stat.favorite || 0),
+      shares: formatCountFE(stat.share || 0),
+      comments: formatCountFE(stat.reply || 0),
+      danmaku: formatCountFE(stat.danmaku || 0),
+      source: 'bilibili_api_fe'
+    };
+  }
+  return null;
+}
+
+async function fetchDouyinCommerceFE(url) {
+  // 抖音: 从页面HTML提取互动数据
+  try {
+    const resp = await fetch(url, {
+      signal: AbortSignal.timeout(10000),
+      headers: { 'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15' }
+    });
+    const html = await resp.text();
+    
+    // 尝试从 window._ROUTER_DATA 或 __NEXT_DATA__ 提取
+    let stat = null;
+    
+    // 匹配各种可能的JSON数据结构
+    const patterns = [
+      /"digg_count":\s*(\d+)/,        // 点赞
+      /"comment_count":\s*(\d+)/,     // 评论
+      /"share_count":\s*(\d+)/,      // 分享
+      /"collect_count":\s*(\d+)/,    // 收藏
+      /"play_count":\s*(\d+)/,       // 播放
+    ];
+    
+    let likes = 0, comments = 0, shares = 0, saves = 0, views = 0;
+    const m1 = html.match(/"digg_count":\s*(\d+)/); if (m1) likes = parseInt(m1[1]);
+    const m2 = html.match(/"comment_count":\s*(\d+)/); if (m2) comments = parseInt(m2[1]);
+    const m3 = html.match(/"share_count":\s*(\d+)/); if (m3) shares = parseInt(m3[1]);
+    const m4 = html.match(/"collect_count":\s*(\d+)/); if (m4) saves = parseInt(m4[1]);
+    const m5 = html.match(/"play_count":\s*(\d+)/); if (m5) views = parseInt(m5[1]);
+    
+    // 尝试另一种格式: "count": 12345
+    if (!views) {
+      const vm = html.match(/"aweme_detail".*?"statistics".*?"play_count":(\d+)/s);
+      if (vm) views = parseInt(vm[1]);
+    }
+    
+    if (views > 0 || likes > 0) {
+      return {
+        views: formatCountFE(views),
+        likes: formatCountFE(likes),
+        comments: formatCountFE(comments),
+        shares: formatCountFE(shares),
+        saves: formatCountFE(saves),
+        source: 'douyin_page_fe'
+      };
+    }
+  } catch(e) { console.log('Douyin FE fetch:', e.message); }
+  return null;
+}
+
+async function fetchYoutubeCommerceFE(url) {
+  try {
+    const vidMatch = url.match(/(?:v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+    if (!vidMatch) return null;
+    const vid = vidMatch[1];
+    
+    // 使用 oembed API（不需要key）
+    const oembedUrl = `https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${vid}&format=json`;
+    const resp1 = await fetch(oembedUrl, { signal: AbortSignal.timeout(8000) });
+    const oembed = await resp1.json();
+    
+    // 再尝试从页面提取互动数据（CORS可能被限制）
+    let views = null, likes = null;
+    try {
+      const resp2 = await fetch(`https://www.youtube.com/watch?v=${vid}`, {
+        signal: AbortSignal.timeout(8000),
+        headers: { 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36' }
+      });
+      const html = await resp2.text();
+      const vm = html.match(/"viewCount":\s*"(\d+)"/);
+      if (vm) views = parseInt(vm[1]);
+      const lm = html.match(/"likeCount":\s*"(\d+)"/);
+      if (lm) likes = parseInt(lm[1]);
+    } catch(e) {}
+    
+    const result = {
+      title: oembed.title || '',
+      author: oembed.author_name || '',
+      source: 'youtube_oembed_fe'
+    };
+    if (views) result.views = formatCountFE(views);
+    if (likes) result.likes = formatCountFE(likes);
+    
+    if (oembed.title || views) return result;
+  } catch(e) { console.log('Youtube FE fetch:', e.message); }
+  return null;
+}
+
+function formatCountFE(n) {
+  if (n >= 100000000) return (n/100000000).toFixed(1) + '亿';
+  if (n >= 10000) return (n/10000).toFixed(1) + '万';
+  return String(n);
+}
+
+function saveCommerceToLibrary() {
+  if (!currentVideoUrl) return;
+  const existing = materialLibrary.findIndex(m => m.url === currentVideoUrl);
+  if (existing >= 0) {
+    materialLibrary[existing].analysis = analysisData;
+    saveLibrary();
+  }
+}
+
+// ── 主分析流程 ──
+let analysisStartTime = 0;
+let pollTimer = null;
+
+async function analyzeFromUrl() {
+  let url = document.getElementById('urlInput').value.trim();
+  if (!url) { alert('请粘贴视频链接'); return; }
+  
+  if (currentVideoUrl && currentVideoUrl !== url && (marks.length > 0 || transcriptData.length > 0)) {
+    saveCurrentToLibrary();
+  }
+  
+  // 解析 b23.tv 短链
+  if (url.includes('b23.tv')) {
+    setStatus('running', '🔗 解析B站短链接...');
+    switchTab('overview');
+    const resolved = await resolveB23Url(url);
+    if (resolved !== url) {
+      url = resolved;
+      document.getElementById('urlInput').value = url;
+    }
+  }
+  
+  // 解析抖音短链 → iesdouyin.com（海外IP可访问）
+  if (url.includes('v.douyin.com') || url.includes('douyin.com') || url.includes('iesdouyin.com')) {
+    setStatus('running', '🔗 解析抖音链接...');
+    switchTab('overview');
+    const resolved = await resolveDouyinUrl(url);
+    if (resolved !== url) {
+      url = resolved;
+      document.getElementById('urlInput').value = url;
+    }
+  }
+  
+  analysisStartTime = Date.now();
+  showProgress(true);
+  setStatus('running', '🎬 提交分析任务...');
+  switchTab('overview');
+  document.getElementById('analysisContent').innerHTML = `<div class="empty-state"><span style="font-size:32px">🎬</span><span>正在提交视频分析...</span></div>`;
+  
+  let result = null;
+  try {
+    const resp1 = await fetch('/api/transcribe', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({url: url})
+    });
+    const startResult = await resp1.json();
+    if (startResult.error) {
+      setStatus('done', '⚠️ 提交失败');
+      showProgress(false);
+      document.getElementById('analysisContent').innerHTML = `<div class="empty-state"><span style="font-size:32px">⚠️</span><span>${startResult.error}</span></div>`;
+      return;
+    }
+    const taskId = startResult.task_id;
+    
+    // 轮询
+    let pollCount = 0;
+    const maxPolls = 150;
+    while (pollCount < maxPolls) {
+      await new Promise(r => setTimeout(r, 2000));
+      pollCount++;
+      const pollResp = await fetch('/api/task', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({task_id: taskId})
+      });
+      const task = await pollResp.json();
+      
+      if (task.status === 'done') { result = task.result; break; }
+      if (task.status === 'error') throw new Error(task.error || '分析失败');
+      
+      // 进度显示：server 数据优先，fallback 用时间估算
+      const elapsed = Math.round((Date.now() - analysisStartTime) / 1000);
+      let pct = task.progress || 0;
+      if (pct <= 0) {
+        // 客户端估算（下载~15%, Gemini~60%, DeepSeek~25%）
+        if (elapsed < 5) pct = 3;
+        else if (elapsed < 15) pct = 8;
+        else if (elapsed < 30) pct = 15;
+        else if (elapsed < 45) pct = 25;
+        else if (elapsed < 60) pct = 35;
+        else if (elapsed < 90) pct = 50;
+        else if (elapsed < 120) pct = 65;
+        else if (elapsed < 180) pct = 80;
+        else pct = 90;
+      }
+      updateProgress(pct);
+      setStatus('running', `⏳ 分析中 · ${elapsed}s · ${Math.round(pct)}% · ${task.stage||''}`);
+    }
+    if (!result) throw new Error('分析超时（5分钟），请重试');
+    
+    // 完成
+    const totalElapsed = Math.round((Date.now() - analysisStartTime) / 1000);
+    updateProgress(100);
+    await new Promise(r => setTimeout(r, 600));
+    showProgress(false);
+    
+    transcriptData = result.transcript || [];
+    videoServingUrl = result.video_url || '';
+    currentVideoUrl = url;
+    marks = [];
+    
+    renderTranscript();
+    updateCardCount();
+    if (videoServingUrl) {
+      const vp = document.getElementById('videoPlayer');
+      vp.src = videoServingUrl;
+      vp.style.display = 'block';
+      document.querySelector('.video-placeholder').style.display = 'none';
+    }
+    
+    if (result.analysis && result.analysis.overview) {
+      analysisData = normalizeAnalysis(result.analysis);
+      const ts = result.token_stats || {};
+      analysisData._tokenStats = ts;
+      analysisData._runId = result.run_id || '';
+      setStatus('done', `✅ 分析完成 · ⏱ ${totalElapsed}s`);
+      // 异步拉取商业数据
+      fetchCommerce();
+      renderTabContent('overview');
+      addToLibrary(url, {transcript: transcriptData, analysis: analysisData,
+                         video_url: videoServingUrl, token_stats: ts});
+    } else {
+      setStatus('done', `✅ 转写完成 · ⏱ ${totalElapsed}s · ${transcriptData.length}条对白`);
+      document.getElementById('analysisContent').innerHTML = `<div class="empty-state"><span style="font-size:32px">✅</span><span>转写完成，${transcriptData.length} 条对白</span></div>`;
+    }
+    
+  } catch(e) {
+    showProgress(false);
+    const msg = e.name === 'AbortError' ? '分析超时' : e.message;
+    setStatus('done', '⚠️ 分析失败');
+    document.getElementById('analysisContent').innerHTML = `<div class="empty-state"><span style="font-size:32px">⚠️</span><span>${msg}</span></div>`;
+  }
+}
+
+function setStatus(state, msg) {
+  const icons = { idle:'idle', running:'running', done:'done' };
+  document.getElementById('statusBar').innerHTML = 
+    `<span class="dot ${icons[state]}"></span> ${msg}`;
+}
+
+// ── 启动 ──
+document.getElementById('appVersion').textContent = 'v' + APP_VERSION;
+loadLibrary();
+loadDemo();
+renderTabContent('overview');
+</script>
+</body>
+</html>

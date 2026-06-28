@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>10fps 深度分析 — jVwFmaqkUJA 醉酒喜剧</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background:#0f0f0f; color:#e0e0e0; line-height:1.6; }
+.container { max-width:900px; margin:0 auto; padding:20px; }
+.header { text-align:center; padding:40px 20px; background:linear-gradient(135deg,#1a1a2e,#16213e); border-radius:16px; margin-bottom:24px; }
+.header h1 { font-size:2em; color:#fff; margin-bottom:8px; }
+.header .badge { display:inline-block; background:#e94560; color:#fff; padding:4px 12px; border-radius:20px; font-size:0.85em; margin:4px; }
+.header .subtitle { color:#888; font-size:0.9em; margin-top:8px; }
+.section { background:#1a1a1a; border-radius:12px; padding:24px; margin-bottom:20px; border:1px solid #2a2a2a; }
+.section h2 { color:#e94560; font-size:1.3em; margin-bottom:16px; padding-bottom:8px; border-bottom:1px solid #2a2a2a; }
+.tag { display:inline-block; background:#2a2a4a; color:#a0a0ff; padding:2px 10px; border-radius:12px; font-size:0.85em; margin:2px; }
+.stat-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; }
+.stat-card { background:#0d0d0d; padding:16px; border-radius:8px; text-align:center; }
+.stat-card .value { font-size:1.5em; font-weight:bold; color:#e94560; }
+.stat-card .label { font-size:0.8em; color:#888; }
+.causal-step { background:#0d0d0d; padding:12px; border-radius:8px; margin-bottom:8px; border-left:3px solid #e94560; }
+.step-num { font-weight:bold; color:#e94560; }
+.step-body { margin-top:4px; }
+.step-body .cause { color:#ff6b6b; }
+.step-body .behavior { color:#ffd93d; }
+.step-body .effect { color:#6bff6b; }
+.evidence { font-size:0.8em; color:#666; margin-top:4px; }
+.turning-point { background:#0d0d0d; padding:12px; border-radius:8px; margin-bottom:8px; border-left:3px solid #ffd93d; }
+.tp-time { color:#ffd93d; font-size:0.85em; }
+.character-card { background:#0d0d0d; padding:12px; border-radius:8px; margin-bottom:8px; }
+.character-card h4 { color:#a0a0ff; }
+.act-card { background:#0d0d0d; padding:12px; border-radius:8px; margin-bottom:8px; }
+.act-time { color:#888; font-size:0.85em; }
+.score-bar { display:flex; align-items:center; margin:12px 0; }
+.score-label { width:100px; font-size:0.9em; }
+.score-fill { height:24px; border-radius:12px; background:linear-gradient(90deg,#e94560,#ffd93d); transition:width 0.5s; }
+.score-value { margin-left:12px; font-weight:bold; }
+.template-card { background:#0d0d0d; padding:12px; border-radius:8px; margin-bottom:8px; }
+.template-card h4 { color:#ffd93d; }
+.formula { background:#000; padding:8px 12px; border-radius:6px; font-family:monospace; margin:8px 0; color:#6bff6b; }
+.transcript { max-height:300px; overflow-y:auto; background:#0d0d0d; padding:12px; border-radius:8px; font-family:monospace; font-size:0.85em; }
+.transcript .ts { color:#e94560; }
+.frame-stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:8px; margin-top:8px; }
+.frame-stat-card { background:#0d0d0d; padding:8px; border-radius:6px; text-align:center; }
+.frame-stat-card .count { font-size:1.2em; font-weight:bold; color:#a0a0ff; }
+.frame-stat-card .name { font-size:0.75em; color:#888; }
+@media (max-width:600px) { .score-bar { flex-direction:column; align-items:flex-start; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+    <h1>🎬 10fps 深度影像分析报告</h1>
+    <div class="badge">⚡ 10fps Vision Pipeline</div>
+    <div class="badge">🔬 不修补 · 纯上限验证</div>
+    <p class="subtitle">jVwFmaqkUJA 醉酒喜剧 | 2026-06-19 20:26 | 帧密度：每0.1秒/帧</p>
+</div>
+
+<!-- 技术指标 -->
+<div class="section">
+    <h2>📊 技术指标</h2>
+    <div class="stat-grid">
+        <div class="stat-card"><div class="value">455帧</div><div class="label">Vision 分析帧</div></div>
+        <div class="stat-card"><div class="value">10fps</div><div class="label">采样密度</div></div>
+        <div class="stat-card"><div class="value">209,889</div><div class="label">总 Token</div></div>
+        <div class="stat-card"><div class="value">$0.2145</div><div class="label">总成本</div></div>
+    </div>
+    <div class="frame-stats">
+        <div class="frame-stat-card"><div class="count">275</div><div class="name">正常</div></div><div class="frame-stat-card"><div class="count">109</div><div class="name">微醺</div></div><div class="frame-stat-card"><div class="count">12</div><div class="name">微醺/醉酒</div></div><div class="frame-stat-card"><div class="count">8</div><div class="name">无</div></div><div class="frame-stat-card"><div class="count">8</div><div class="name">微醺/困惑</div></div><div class="frame-stat-card"><div class="count">7</div><div class="name">微醺/惊讶</div></div><div class="frame-stat-card"><div class="count">6</div><div class="name">困惑/挣扎</div></div><div class="frame-stat-card"><div class="count">6</div><div class="name">清醒/困惑</div></div>
+    </div>
+</div>
+
+<!-- 故事理解 -->
+<div class="section">
+    <h2>📖 故事理解（Vision + 因果推理一体）</h2>
+    <p style="margin-bottom:12px;">
+        <span class="tag">生活切片</span>
+        <span class="tag">喜剧</span> <span class="tag">生活</span>
+        <span style="margin-left:8px;color:#888;">信心：85%</span>
+    </p>
+    <p style="font-size:1.1em;line-height:1.8;background:#0d0d0d;padding:16px;border-radius:8px;">
+        一名身穿蓝色T恤的男子在酒桌上过量饮酒，从清醒逐渐进入微醺和醉酒状态。他反复向空杯倒酒导致啤酒溢出，行为失控。醉酒后，他误将冰箱门当作车门，把头伸进冰箱内，并说出“我叫下一辆哈”等胡话，最终被困在冰箱门内，表现出醉酒后的行为错乱和喜剧性困境。
+    </p>
+</div>
+
+<!-- 因果链 -->
+<div class="section">
+    <h2>🔗 完整因果链</h2>
+    
+        <div class="causal-step">
+            <span class="step-num">Step 1</span>
+            <div class="step-body">
+                <span class="cause">起因：初始状态：男子在餐桌前饮酒</span> →
+                <span class="behavior">行为：男子倾斜啤酒瓶向空杯倒酒，啤酒溢出</span> →
+                <span class="effect">结果：啤酒持续溢出，显示醉酒迹象</span>
+                <div class="evidence">📷 画面证据：0s-2s: 蓝色T恤男子倾斜啤酒瓶，头部低垂；2s-4s: 啤酒持续溢出杯口 | ⏱ 0s-4s</div>
+            </div>
+        </div>
+        <div class="causal-step">
+            <span class="step-num">Step 2</span>
+            <div class="step-body">
+                <span class="cause">起因：醉酒加深导致行为失控</span> →
+                <span class="behavior">行为：男子继续向空杯倒酒，但杯中无液体流出</span> →
+                <span class="effect">结果：男子行为重复，显示严重醉酒</span>
+                <div class="evidence">📷 画面证据：4s-6s: 男子持续向空杯子倾倒啤酒，但杯中没有液体流出 | ⏱ 4s-6s</div>
+            </div>
+        </div>
+        <div class="causal-step">
+            <span class="step-num">Step 3</span>
+            <div class="step-body">
+                <span class="cause">起因：醉酒状态持续，行为异常</span> →
+                <span class="behavior">行为：男子头部转向左侧，右手拿生蚝壳，眼睛微闭</span> →
+                <span class="effect">结果：男子身体倾斜，动作迟缓</span>
+                <div class="evidence">📷 画面证据：16s-18s: 角色头部转向左侧，右手拿着生蚝壳，眼睛微闭；18s-20s: 男子头部继续转动，嘴巴微张 | ⏱ 16s-20s</div>
+            </div>
+        </div>
+        <div class="causal-step">
+            <span class="step-num">Step 4</span>
+            <div class="step-body">
+                <span class="cause">起因：醉酒后误判环境</span> →
+                <span class="behavior">行为：男子走向白色轿车，试图上车</span> →
+                <span class="effect">结果：男子打开车门，身体倾斜进入车内</span>
+                <div class="evidence">📷 画面证据：22s-24s: 白色轿车出现，字幕“我叫的车到了啊”；26s-28s: 男子左手扶车门框，身体向车内倾斜 | ⏱ 22s-28s</div>
+            </div>
+        </div>
+        <div class="causal-step">
+            <span class="step-num">Step 5</span>
+            <div class="step-body">
+                <span class="cause">起因：醉酒导致认知错误</span> →
+                <span class="behavior">行为：男子被困在玻璃门内，脸部和身体紧贴玻璃</span> →
+                <span class="effect">结果：男子误将冰箱门当作车门，头部伸入冰箱</span>
+                <div class="evidence">📷 画面证据：28s-30s: 男子被困在玻璃门内；34s-36s: 男子将头伸入冰箱，只能看到后脑勺 | ⏱ 28s-36s</div>
+            </div>
+        </div>
+        <div class="causal-step">
+            <span class="step-num">Step 6</span>
+            <div class="step-body">
+                <span class="cause">起因：醉酒状态达到顶峰</span> →
+                <span class="behavior">行为：男子头部抬起，嘴巴闭合，眼睛半闭，字幕“我叫下一辆哈”</span> →
+                <span class="effect">结果：男子行为错乱，显示醉酒后的喜剧性困境</span>
+                <div class="evidence">📷 画面证据：36s-38s: 男子头部略微向上抬起，嘴巴闭合，眼睛半闭，字幕“我叫下一辆哈” | ⏱ 36s-38s</div>
+            </div>
+        </div>
+</div>
+
+<!-- 戏剧机制 -->
+<div class="section">
+    <h2>🎭 戏剧机制</h2>
+    <p><strong>喜剧机制：</strong>醉酒喜剧：通过角色醉酒后的行为错乱（如向空杯倒酒、误将冰箱当车门）制造预期违背和荒谬感，笑点来自角色认知与现实的错位。</p>
+    <p style="margin-top:8px;"><strong>广义戏剧机制：</strong>节奏驱动：故事通过醉酒状态的逐步加深（从微醺到行为失控）推动叙事，转折点（误入冰箱）强化喜剧效果。</p>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:12px;">
+        <div style="background:#0d0d0d;padding:12px;border-radius:8px;">
+            <h4 style="color:#ff6b6b;">📐 客观现实线</h4>
+            <p>一名男子在酒桌上饮酒过量，醉酒后试图打车，但误将冰箱门当作车门，把头伸入冰箱内，并说出胡话。</p>
+        </div>
+        <div style="background:#0d0d0d;padding:12px;border-radius:8px;">
+            <h4 style="color:#a0a0ff;">🎭 主观视角线</h4>
+            <p>男子醉酒后认知错误，认为冰箱是出租车车门，表现出“我叫下一辆哈”等醉酒胡话。</p>
+        </div>
+    </div>
+</div>
+
+<!-- 关键转折点 -->
+<div class="section">
+    <h2>⚡ 关键转折点</h2>
+    
+        <div class="turning-point">
+            <span class="tp-time">⏱ 4s-6ss</span>
+            <strong>男子持续向空杯倒酒，但杯中无液体流出</strong>
+            <p>显示醉酒导致行为失控，是醉酒状态的关键标志</p>
+            <p class="evidence">📷 4s-6s: 男子持续向空杯子倾倒啤酒，但杯中没有液体流出</p>
+        </div>
+        <div class="turning-point">
+            <span class="tp-time">⏱ 28s-30ss</span>
+            <strong>男子被困在玻璃门内</strong>
+            <p>从正常上车行为转变为误入冰箱，是喜剧转折点</p>
+            <p class="evidence">📷 28s-30s: 男子被困在玻璃门内，脸部和身体紧贴玻璃</p>
+        </div>
+        <div class="turning-point">
+            <span class="tp-time">⏱ 34s-36ss</span>
+            <strong>男子将头伸入冰箱</strong>
+            <p>醉酒认知错误达到顶峰，行为荒谬</p>
+            <p class="evidence">📷 34s-36s: 男子将头伸入冰箱，只能看到后脑勺</p>
+        </div>
+</div>
+
+<!-- 角色分析 -->
+<div class="section">
+    <h2>👤 角色分析</h2>
+    
+        <div class="character-card">
+            <h4>主角</h4>
+            <p>身份：蓝色T恤男子</p>
+            <p>状态：从清醒逐渐进入微醺、醉酒状态</p>
+            <p>情绪弧线：从正常饮酒→微醺失控→醉酒行为错乱</p>
+        </div>
+</div>
+
+<!-- 内容总览 -->
+<div class="section">
+    <h2>📌 内容总览</h2>
+    <p><strong>一句话总结：</strong>醉酒男子误将冰箱当车门，喜剧困境引人发笑。</p>
+    <p><strong>目标受众：</strong>喜欢生活喜剧、醉酒趣事和幽默短片的年轻观众。</p>
+    <p><strong>核心观点：</strong>醉酒会导致认知错乱，但以幽默方式呈现生活小插曲。</p>
+    <p><strong>认知转化：</strong>从认为醉酒只是失控，变成理解醉酒可能带来荒谬喜剧。</p>
+</div>
+
+<!-- 叙事结构 -->
+<div class="section">
+    <h2>🎬 叙事结构分离</h2>
+    <p style="margin-bottom:12px;color:#888;">情绪曲线：情绪从平静（00:00）逐渐上升至微醺的满足（00:17），然后转为失控的困惑（00:26），在误入冰箱时达到荒谬的高潮（00:34），最后以滑稽的胡话收尾（00:44），整体呈现上升后缓降的曲线。</p>
+    
+        <div class="act-card">
+            <h4>第一幕：饮酒失控 <span class="act-time">⏱ 00:00-00:26</span></h4>
+            <p>叙事功能：建立主角从清醒到醉酒的行为失控过程，通过重复倒酒和空杯溢出展示醉酒状态。</p>
+            <p>人物动态：主角从正常饮酒逐渐进入微醺，动作迟缓，语言含糊，情绪从满足转为失控。</p>
+            <p>戏剧张力：★★★★☆☆☆☆☆☆ 4/10</p>
+            <ul><li>[00:00] 男子说“好了完整杯就吃了”，开始饮酒。</li><li>[00:04] 啤酒持续溢出空杯，显示醉酒迹象。</li><li>[00:17] 男子说“吃了”，动作重复，行为失控。</li><li>[00:23] 男子说“我这样的吃了大吧”，语言含糊，醉酒加深。</li></ul>
+        </div>
+        <div class="act-card">
+            <h4>第二幕：醉酒误判 <span class="act-time">⏱ 00:26-00:36</span></h4>
+            <p>叙事功能：展示主角醉酒后认知错误，误将冰箱门当作车门，导致喜剧性困境。</p>
+            <p>人物动态：主角行为完全失控，从试图上车到误入冰箱，情绪从困惑转为荒谬。</p>
+            <p>戏剧张力：★★★★★★★☆☆☆ 7/10</p>
+            <ul><li>[00:26] 男子说“吃了”，走向白色轿车，试图上车。</li><li>[00:31] 男子说“我给你吃”，被困在玻璃门内。</li><li>[00:34] 男子说“饭了”，将头伸入冰箱，认知错误达到顶峰。</li><li>[00:36] 男子说“我叫下一辆”，行为错乱，喜剧转折。</li></ul>
+        </div>
+        <div class="act-card">
+            <h4>第三幕：醉酒胡话 <span class="act-time">⏱ 00:36-00:45</span></h4>
+            <p>叙事功能：深化醉酒状态，通过胡话和错误指令强化喜剧效果，收尾于荒谬情境。</p>
+            <p>人物动态：主角完全沉浸在醉酒幻觉中，语言无逻辑，情绪从混乱转为滑稽。</p>
+            <p>戏剧张力：★★★★★☆☆☆☆☆ 5/10</p>
+            <ul><li>[00:36] 男子说“我叫下一辆”，继续胡话。</li><li>[00:40] 男子说“师傅啊”，误以为在打车。</li><li>[00:41] 男子说“关下空调”，错误指令。</li><li>[00:44] 男子说“练过烤奶一起”，语言完全混乱，喜剧收尾。</li></ul>
+        </div>
+    <h3 style="margin-top:16px;color:#ffd93d;">叙事技巧</h3>
+    <div class="causal-step"><strong>重复动作</strong>：在00:00-00:26中，男子反复向空杯倒酒，啤酒溢出。 → 强化醉酒失控感，制造视觉喜剧。</div><div class="causal-step"><strong>认知错位</strong>：在00:26-00:36中，男子误将冰箱门当作车门。 → 通过环境误判制造喜剧转折，突出醉酒荒谬。</div><div class="causal-step"><strong>语言混乱</strong>：在00:36-00:45中，男子说“我叫下一辆”、“关下空调”等胡话。 → 通过无逻辑对白深化醉酒状态，增强喜剧效果。</div>
+</div>
+
+<!-- 评分 -->
+<div class="section">
+    <h2>⭐ 三项评分</h2>
+    <div class="score-bar">
+        <span class="score-label">Hook 设计</span>
+        <div class="score-fill" style="width:85%"></div>
+        <span class="score-value">85</span>
+    </div>
+    <p style="font-size:0.85em;color:#888;margin-bottom:12px;">视频开头通过男子向空杯倒酒导致啤酒溢出的画面，迅速建立醉酒失控的喜剧冲突，吸引观众好奇后续发展。</p>
+    <div class="score-bar">
+        <span class="score-label">结构设计</span>
+        <div class="score-fill" style="width:82%"></div>
+        <span class="score-value">82</span>
+    </div>
+    <p style="font-size:0.85em;color:#888;margin-bottom:12px;">因果链清晰，从饮酒到醉酒再到误入冰箱，转折自然；但部分时间点（如16-20秒）与对白文本略有脱节，结构稍显松散。</p>
+    <div class="score-bar">
+        <span class="score-label">表达效果</span>
+        <div class="score-fill" style="width:78%"></div>
+        <span class="score-value">78</span>
+    </div>
+    <p style="font-size:0.85em;color:#888;">视觉表现力强，如啤酒溢出、冰箱门误认等画面生动；但对白文本零散且与画面配合不够紧密，削弱了表达效果。</p>
+</div>
+
+<!-- 复刻模板 -->
+<div class="section">
+    <h2>📋 复刻模板</h2>
+    
+    <h3 style="margin-top:12px;color:#ffd93d;">可复用元素</h3>
+    <p><strong>脚本模式：</strong></p>
+    <p><strong>Hook技巧：</strong></p>
+    <p><strong>话题切入：</strong></p>
+    <p><strong>爆款因素：</strong></p>
+</div>
+
+<!-- 对白转录 -->
+<div class="section">
+    <h2>🎙️ 对白转录（仅供参考）</h2>
+    <div class="transcript">
+        <div><span class="ts">[00:00]</span> 好了完整杯就吃了</div><div><span class="ts">[00:17]</span> 吃了</div><div><span class="ts">[00:23]</span> 我这样的吃了大吧</div><div><span class="ts">[00:26]</span> 吃了</div><div><span class="ts">[00:31]</span> 我给你吃</div><div><span class="ts">[00:34]</span> 饭了</div><div><span class="ts">[00:36]</span> 我叫下一辆</div><div><span class="ts">[00:40]</span> 师傅啊</div><div><span class="ts">[00:41]</span> 关下空调</div><div><span class="ts">[00:42]</span> 开开窗</div><div><span class="ts">[00:44]</span> 练过烤奶一起</div>
+    </div>
+</div>
+
+<div style="text-align:center;padding:40px;color:#444;font-size:0.85em;">
+    <p>🔬 10fps Vision Pipeline · 不修补 · 上限验证</p>
+    <p>分析引擎：Gemini 2.5 Flash Vision (逐帧) + DeepSeek V4 Pro (故事合成+文本分析)</p>
+</div>
+
+</div>
+</body>
+</html>
