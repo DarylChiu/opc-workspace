@@ -1,0 +1,8 @@
+videos/
+__pycache__/
+*.pyc
+.DS_Store
+logs/runs.jsonl
+logs/annotations.json
+nohup.out
+*.log
