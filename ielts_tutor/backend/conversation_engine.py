@@ -135,3 +135,14 @@ class ConversationEngine:
         # Store assistant response in history
         if full_response:
             self.conversation_history.append({"role": "assistant", "content": full_response})
+
+    def get_greeting(self) -> str:
+        """Return a session opening greeting based on mode"""
+        greetings = {
+            "ielts_part1": "Good morning. My name is Alex and I'll be your IELTS examiner today. Can you tell me your full name, please?",
+            "ielts_part2": "Now I'm going to give you a topic and I'd like you to talk about it for 1 to 2 minutes. Before you talk, you'll have 1 minute to prepare. Here is your topic: Describe a book you recently read. You should say: what the book was, why you read it, what it was about, and how you felt about it.",
+            "ielts_part3": "Now let's talk about some more general questions related to reading. Do you think people read less now than they did in the past?",
+            "business_pitch": "Welcome to your investor pitch practice. I'll play the role of a potential investor. Tell me about your business when you're ready.",
+            "free_talk": "Hi there! What would you like to chat about today?",
+        }
+        return greetings.get(self.mode, greetings["ielts_part1"])
