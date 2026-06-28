@@ -140,12 +140,11 @@ async def ws_chat(ws: WebSocket, sid: str):
                     await ws.send_json({"type": "status", "state": "mode_changed", "mode": mode})
 
             elif msg_type == "stop":
-                # Flush remaining audio
+                # Flush remaining audio but stay connected for next turn
                 text = await stt.flush()
                 if text and len(text.strip()) > 2:
                     await process_utterance(text)
-                await ws.send_json({"type": "status", "state": "stopped"})
-                break
+                await ws.send_json({"type": "status", "state": "listening"})
 
     except WebSocketDisconnect:
         logger.info(f"Session {sid} disconnected")
