@@ -16,6 +16,9 @@ from session_manager import SessionManager
 sessions = SessionManager()
 FRONTEND = os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend", "index.html")
 
+# Cost tracking
+cost_stats = {"stt_calls":0, "tts_calls":0, "tts_chars":0, "ds_input":0, "ds_output":0}
+
 app = FastAPI(title="IELTS Tutor v2.0")
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True,
                    allow_methods=["*"], allow_headers=["*"])
@@ -54,7 +57,11 @@ async def ds_chat(messages, max_tokens=200, temp=0.7):
     try:
         async with aiohttp.ClientSession() as s:
             async with s.post(url, json=b, headers=h, timeout=aiohttp.ClientTimeout(15)) as r:
-                return (await r.json())["choices"][0]["message"]["content"]
+                data = await r.json()
+                usage = data.get("usage", {})
+                cost_stats["ds_input"] += usage.get("prompt_tokens", 0)
+                cost_stats["ds_output"] += usage.get("completion_tokens", 0)
+                return data["choices"][0]["message"]["content"]
     except Exception as e:
         logger.error(f"DS: {e}"); return ""
 
@@ -80,6 +87,8 @@ async def ds_stream(messages, max_tokens=300):
     except Exception as e: logger.error(f"Stream: {e}")
 
 async def tts_speak(text):
+    cost_stats["tts_calls"] += 1
+    cost_stats["tts_chars"] += len(text)
     url = f"https://texttospeech.googleapis.com/v1/text:synthesize?key={GOOGLE_TTS_KEY}"
     b = {"input": {"text": text}, "voice": {"languageCode": "en-US", "name": "en-US-Journey-O"},
          "audioConfig": {"audioEncoding": "MP3", "speakingRate": 0.95}}
@@ -90,6 +99,7 @@ async def tts_speak(text):
     except: return ""
 
 async def stt_transcribe(audio_bytes):
+    cost_stats["stt_calls"] += 1
     body = {"config": {"encoding": "LINEAR16", "sampleRateHertz": 16000, "languageCode": "en-US",
                        "enableAutomaticPunctuation": True, "model": "latest_short"},
             "audio": {"content": base64.b64encode(audio_bytes).decode()}}
@@ -107,7 +117,7 @@ async def index(): return HTMLResponse(open(FRONTEND).read())
 @app.get("/api/health")
 async def health():
     ver = open(os.path.join(os.path.dirname(os.path.dirname(__file__)), "VERSION")).read().strip()
-    return {"status": "ok", "version": ver}
+    return {"status": "ok", "version": ver, "costs": cost_stats}
 
 @app.post("/api/session/start")
 async def start(req: Request):
@@ -146,6 +156,7 @@ async def ws_chat(ws: WebSocket, sid: str):
         user_texts.append(text)
         await ws.send_json({"type": "final_transcript", "text": text})
         history.append({"role": "user", "content": text})
+        cost_stats["ds_input"] += sum(len(m.get("content","")) for m in history) // 3
         if len(history) > 21: history[:] = [history[0]] + history[-20:]
 
         await ws.send_json({"type": "status", "state": "thinking"})
@@ -154,6 +165,7 @@ async def ws_chat(ws: WebSocket, sid: str):
         if not full: await ws.send_json({"type": "status", "state": "done"}); return
 
         await ws.send_json({"type": "response_text", "text": full})
+        cost_stats["ds_output"] += len(full) // 3
         history.append({"role": "assistant", "content": full})
         await ws.send_json({"type": "status", "state": "speaking"})
         await send_tts(full)
