@@ -312,7 +312,10 @@ async function toggleRecording() {
 }
 
 async function startRecording() {
-    if (!sessionId) await connectSession();
+    // Reuse existing connection if still open
+    if (!ws || ws.readyState !== WebSocket.OPEN) {
+        await connectSession();
+    }
 
     const stream = await navigator.mediaDevices.getUserMedia({
         audio: { sampleRate: 16000, channelCount: 1, echoCancellation: true }
@@ -328,7 +331,6 @@ async function startRecording() {
     processor.onaudioprocess = (e) => {
         if (!isRecording || !ws || ws.readyState !== WebSocket.OPEN) return;
         const input = e.inputBuffer.getChannelData(0);
-        // Convert Float32 to Int16 PCM
         const pcm = new Int16Array(input.length);
         for (let i = 0; i < input.length; i++) {
             pcm[i] = Math.max(-32768, Math.min(32767, input[i] * 32768));
