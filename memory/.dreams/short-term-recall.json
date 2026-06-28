@@ -1,0 +1,1438 @@
+{
+  "version": 1,
+  "updatedAt": "2026-06-28T02:02:15.649Z",
+  "entries": {
+    "memory:memory/archive/2026-03-24.md:138:171": {
+      "key": "memory:memory/archive/2026-03-24.md:138:171",
+      "path": "memory/archive/2026-03-24.md",
+      "startLine": 138,
+      "endLine": 171,
+      "source": "memory",
+      "snippet": "- ⚠️ Agent间通信部分建立（可接收来自Kitty的消息） - ❌ Brave Search API未配置 - ❌ openclaw CLI未安装（影响服务管理） 2. **CGV查询任务**: - ❌ 技术障碍：JavaScript WAF需要特殊绕过方案 - 🔄 等待Kitty的技术分享 3. **用户任务管理**: - ✅ 准时执行19:30提醒 - ⚠️ 等待用户确认下一步优先级 4. **成本计算体系**: - ✅ 已切换至纯API成本计算模式 - ⚠️ 需要验证API用量数据准确性 ## 重要决策待定记录 1. **基础能力完善 vs 核心开发**: 用户强调基础能力优先 2. **CGV查询方案选择**: 等待Kitty分享 vs 自行开发浏览器自动化 3. **通信配置**: 需要确认双向Agent间通信完全启用 ## 21:15 - 关于openclaw CLI安装的用户决策 - **用户担忧**: 担心安装会覆盖Kitty相关配置和身份信息 - **风险分析**: 检查配置文件后确认安装CLI不会修改现有配置 - **用户决定**: 等待Kitty完成当前任务后，再使用Terminal执行安全步骤 - **安全步骤**: 1. 先备份openclaw.json配置文件 2. 仅安装CLI工具（不自动启动服务） 3. 验证PATH配置 4. 测试非破坏性命令 ## 21:42 - TTS集成技术方案最终决策 - **选定方案**: OpenAI TTS - **预算约束*",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3752557724714279,
+      "maxScore": 0.3752557724714279,
+      "firstRecalledAt": "2026-06-10T03:55:58.938Z",
+      "lastRecalledAt": "2026-06-10T03:55:58.938Z",
+      "queryHashes": [
+        "5a70c56614f1"
+      ],
+      "recallDays": [
+        "2026-06-10"
+      ],
+      "conceptTags": [
+        "openai",
+        "备份",
+        "先备份openclaw.json配置文件",
+        "通信",
+        "部分",
+        "建立",
+        "接收",
+        "来自"
+      ]
+    },
+    "memory:memory/archive/2026-04-01.md:1:36": {
+      "key": "memory:memory/archive/2026-04-01.md:1:36",
+      "path": "memory/archive/2026-04-01.md",
+      "startLine": 1,
+      "endLine": 36,
+      "source": "memory",
+      "snippet": "# 2026年4月1日 - 工作日志 ## 早上（07:10 GMT+7） ### 用户询问定时汇报 用户Daryl在07:10询问：\"Bryson，定时汇报呢？\" ### 项目回顾 昨晚（3月31日）的项目进度： 1. **语音交互MVP项目** - TTS语音合成与前端集成 2. **问题**：WebSocket服务器未启动，移动端访问显示\"后端服务器-未响应\" 3. **解决方案**：创建了简化版服务器，调整了前端环境适配策略 4. **当前状态**：需要完整WebSocket支持服务器 ### 今日计划执行情况 根据昨晚的计划，今日上午（09:30-11:00）应： 1. 启动完整的WebSocket支持服务器 2. 提供新的测试链接和二维码 3. 进行第二次完整功能测试 4. 如果成功，继续集成Google Cloud TTS **现状**：当前07:10，还未开始上午的开发工作。 ## 中午（12:00 GMT+7） ### 用户反馈重要信息 用户Daryl在11:59回复：\"Bryson，不用设置每日定时汇报，你和Kitty的汇报体系下周会建立，请现在报告你的任务进度\" **关键指导**： 1. 不用设置每日定时汇报 2. 和Kitty（忧郁小猫主Agent）的汇报体系计划下周建立 3. 需要立即报告当前任务进度 ### 当前项目状态检查 **服务器状态**：没有正在运行的Python服务器进程 **端口状态**：端口8080空闲",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.37463789284229276,
+      "maxScore": 0.37463789284229276,
+      "firstRecalledAt": "2026-06-10T03:55:58.938Z",
+      "lastRecalledAt": "2026-06-10T03:55:58.938Z",
+      "queryHashes": [
+        "5a70c56614f1"
+      ],
+      "recallDays": [
+        "2026-06-10"
+      ],
+      "conceptTags": [
+        "后端服务器-未响应",
+        "30-11",
+        "工作",
+        "日志",
+        "早上",
+        "gmt",
+        "用户",
+        "询问"
+      ]
+    },
+    "memory:memory/archive/2026-04-07.md:347:391": {
+      "key": "memory:memory/archive/2026-04-07.md:347:391",
+      "path": "memory/archive/2026-04-07.md",
+      "startLine": 347,
+      "endLine": 391,
+      "source": "memory",
+      "snippet": "1. 🎙️ **语音交互主区域**： - 开始录音/停止录音按钮 - 双音频可视化：用户录音 vs Bryson反馈 - 交互状态实时显示 2. 📊 **练习统计**： - 交互次数计数 - 上次练习时间戳 - 统计重置功能 3. 🔧 **独立TTS测试区域**： - 保留TTS独立测试功能 - 支持自定义文本输入 **后端API端点**： 1. `POST /api/process_recording` - 处理录音并生成反馈 2. `POST /api/tts/speak` - TTS语音合成 3. `GET /api/status` - 服务器状态检查 ### **智能反馈逻辑** 实现简单的上下文感知反馈生成： - 根据交互次数选择不同鼓励语言 - 关键词检测（investor/business/pitch, ielts/test/exam） - 雅思考试相关建议模板 ### **部署状态** ``` ✅ 服务器运行: http://localhost:8083 ✅ ngrok隧道: https://unwhispering-imani-digitately.ngrok-free.dev ✅ TTS功能: 在线测试 ✅ 录音交互: 完整流程实现 ✅ SSL证书: 已修复验证问题 ``` ### **基础设施工作协调** **已完成任务**： 1. Bryson语音MVP基础架构稳定化 2. 完整交互流程设计和实现 3. 可扩展架构准备STT集成 **待协调任务**： 1. ❓ 与Kitty（",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.37219835519790645,
+      "maxScore": 0.37219835519790645,
+      "firstRecalledAt": "2026-06-10T03:55:58.938Z",
+      "lastRecalledAt": "2026-06-10T03:55:58.938Z",
+      "queryHashes": [
+        "5a70c56614f1"
+      ],
+      "recallDays": [
+        "2026-06-10"
+      ],
+      "conceptTags": [
+        "开始录音/停止录音按钮",
+        "api/process-recording",
+        "api/tts/speak",
+        "api/status",
+        "investor/business/pitch",
+        "ielts/test/exam",
+        "语音",
+        "交互"
+      ]
+    },
+    "memory:memory/archive/2026-03-24.md:118:146": {
+      "key": "memory:memory/archive/2026-03-24.md:118:146",
+      "path": "memory/archive/2026-03-24.md",
+      "startLine": 118,
+      "endLine": 146,
+      "source": "memory",
+      "snippet": "- **任务管理**: 用户要求明确优先级排序和任务状态更新 - **开发节奏**: 用户坚持\"基础能力完善→核心开发\"的阶段性推进 ## 下一步行动计划等待用户确认 - 选项1: 优先获取Kitty的CGV技术方案 - 选项2: 尝试浏览器自动化绕过CGV反爬虫 - 选项3: 继续基础能力完善（API密钥配置、通信验证） - 选项4: 返回主要任务（雅思陪练助手原型开发阶段2） ## 内存系统操作记录 - **20:32**: 执行内存刷新操作（Pre-compaction memory flush） - **目的**: 在会话自动压缩前存储持久记忆 - **处理方式**: 将重要事件和决策追加到 daily memory 文件 - **文件位置**: `/Users/zhaoyuzhao/.openclaw/xiaofeng_workspace/memory/2026-03-24.md` - **更新策略**: 仅追加新内容，不覆盖现有记录 - **系统状态**: 当前会话接近自动压缩，需要保存关键信息 ## 项目当前状态总结（截至20:32） 1. **基础能力进展**: - ✅ API密钥验证通过 - ⚠️ Agent间通信部分建立（可接收来自Kitty的消息） - ❌ Brave Search API未配置 - ❌ openclaw CLI未安装（影响服务管理） 2. **CGV查询任务**: - ❌ 技术障碍：JavaScript WAF需要特殊绕过方案 - 🔄 等待Kitty的技术分享 3. **用户任务管理**:",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7251989662647247,
+      "maxScore": 0.3714314609766006,
+      "firstRecalledAt": "2026-06-10T03:55:58.938Z",
+      "lastRecalledAt": "2026-06-23T04:44:26.631Z",
+      "queryHashes": [
+        "5a70c56614f1",
+        "a32093acb363"
+      ],
+      "recallDays": [
+        "2026-06-10",
+        "2026-06-23"
+      ],
+      "conceptTags": [
+        "pre-compaction",
+        "users/zhaoyuzhao",
+        "任务",
+        "管理",
+        "用户",
+        "要求",
+        "明确",
+        "优先"
+      ]
+    },
+    "memory:memory/archive/2026-04-08.md:31:54": {
+      "key": "memory:memory/archive/2026-04-08.md:31:54",
+      "path": "memory/archive/2026-04-08.md",
+      "startLine": 31,
+      "endLine": 54,
+      "source": "memory",
+      "snippet": "2. ✅ **版本冲突问题**: 彻底清理旧进程残留，确保版本一致性 3. ✅ **资源依赖问题**: 完全内联HTML/CSS/JS，消除外部资源依赖 4. ✅ **交互流程完整性**: 从单向TTS到完整录音→处理→反馈流程 ### **重要技术经验总结（已归档）** 所有详细的技术决策、问题解决方案、工作方法等已归档到： - **完整项目归档**: `MVP_PROJECT_ARCHIVE.md` - **快速查阅索引**: 包含时间线、架构演进、协作模式等系统性总结 - **学习收获**: 系统性诊断问题、可扩展架构设计、用户场景驱动开发 ### **当前工作状况** - **语音交互MVP**: 已完成并稳定运行 - **基础设施工作**: 等待与Kitty（忧郁小猫）协调具体任务 - **长期记忆系统**: 用户（Daryl）第三次提醒需要改善姓名记忆系统 ## **今日任务提醒** 1. **与Kitty协调基础设施工作** - 昨天Daryl通知需要处理基础设施问题 2. **改善长期记忆系统** - 确保正确记住用户姓名和身份信息 3. **语音MVP后续优化** - 考虑STT集成、更多反馈模板、性能优化等 ## **重要技术讨论：成本跟踪系统与API密钥共享问题** ### **问题识别** (13:40-17:28) Daryl指出关键问题：",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7251576602458953,
+      "maxScore": 0.37059538960456845,
+      "firstRecalledAt": "2026-06-10T03:55:58.938Z",
+      "lastRecalledAt": "2026-06-11T03:07:46.524Z",
+      "queryHashes": [
+        "5a70c56614f1",
+        "220f962ac136"
+      ],
+      "recallDays": [
+        "2026-06-10",
+        "2026-06-11"
+      ],
+      "conceptTags": [
+        "完全内联html/css/js",
+        "mvp-project-archive.md",
+        "40-17",
+        "版本",
+        "冲突",
+        "问题",
+        "彻底",
+        "清理"
+      ]
+    },
+    "memory:memory/archive/2026-03-24.md:96:122": {
+      "key": "memory:memory/archive/2026-03-24.md:96:122",
+      "path": "memory/archive/2026-03-24.md",
+      "startLine": 96,
+      "endLine": 122,
+      "source": "memory",
+      "snippet": "2. CGV反爬虫技术方案（浏览器自动化或通过Kitty） 3. Brave Search API密钥配置 ## Agent间通信重要进展 - **19:31**: 收到Kitty第一次测试消息（单向通信已建立） - **19:39**: 收到Kitty第二次测试消息确认AgentToAgent功能已启用 - **19:40**: 尝试返回消息给Kitty，发送超时（可能仍在配置中或单向通信） - **关键结论**: - ✅ Agent间通信功能已部分启用（可接收消息） - ⚠️ 双向通信可能需要进一步配置 - 🔧 Kitty正在解决SessionKey动态变化问题 ## CGV查询技术方案进展 - **用户需求**: 胡志明市CGV本周六排片（用户不懂越南语） - **技术障碍**: JavaScript计算型WAF（需要chlg参数+CRC32验证） - **解决方案待定**: - 等待Kitty分享其成功绕过的具体方法 - 或采用浏览器自动化方案（Puppeteer/Playwright） ## 用户沟通偏好记录 - **称呼**: Daryl（用户名称，我英文名是Bryson） - **时间意识**: 用户关注准确时间（19:30提醒准时执行） - **任务管理**: 用户要求明确优先级排序和任务状态更新 - **开发节奏**: 用户坚持\"基础能力完善→核心开发\"的阶段性推进 ## 下一步行动计划等待用户确认 - 选项1: 优先获取Kitty的CGV技术方案",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3696441829204559,
+      "maxScore": 0.3696441829204559,
+      "firstRecalledAt": "2026-06-10T03:55:58.938Z",
+      "lastRecalledAt": "2026-06-10T03:55:58.938Z",
+      "queryHashes": [
+        "5a70c56614f1"
+      ],
+      "recallDays": [
+        "2026-06-10"
+      ],
+      "conceptTags": [
+        "puppeteer/playwright",
+        "cgv",
+        "爬虫",
+        "技术",
+        "方案",
+        "浏览",
+        "自动",
+        "通过"
+      ]
+    },
+    "memory:memory/2026-06-10.md:1:25": {
+      "key": "memory:memory/2026-06-10.md:1:25",
+      "path": "memory/2026-06-10.md",
+      "startLine": 1,
+      "endLine": 25,
+      "source": "memory",
+      "snippet": "## 抖音视频v3深度分析完成 (21:15) - 视频: 7597261902088021622 (269s) - STT: Google STT粤语转录，12段对话，与画面字幕双重验证 - 视觉: 66个场景切换关键帧，使用openrouter/google/gemini-2.5-flash逐帧分析 - 报告: v3完整版包含对白时间线、四幕逐帧分析、镜头语言统计、导演风格6维度剖析 - 保存: reports/7597261902088021622_v3_20260610_211500.md ## 抖音视频分析MVP V4验收 & 数字资产归档 (22:00) - Daryl验收v4通过，要求复盘+归档 - 创建DOUYIN_ANALYZER_RUNBOOK.md — 完整操作手册，任何Agent可照做 - 文档包含11阶段完整流程、所有文件清单、API配置、成本估算、踩坑记录 - 项目状态：✅ 已交付DIARY # Also update projects cat >> /Users/zhaoyuzhao/.openclaw/xiaofeng_workspace/memory/projects.md << 'PROJ_ENTRY' ### 抖音视频分析MVP ✅ (2026-06-10 交付) - **产出**: 视频分析报告v4（对白+视觉+市场） - **示例视频**: 7597261902088021622（《行動代號：安心便服出行》269s粤语短片） - **技术栈**: ffmpeg + Google STT + Gemini Vision + HTM",
+      "recallCount": 16,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 6.562790602445602,
+      "maxScore": 0.4888044118881225,
+      "firstRecalledAt": "2026-06-11T03:07:46.524Z",
+      "lastRecalledAt": "2026-06-26T03:58:47.200Z",
+      "queryHashes": [
+        "220f962ac136",
+        "e9f652bf50be",
+        "8c278ea87c0f",
+        "b83b0f09208c",
+        "520a9e823393",
+        "9965a2c0f54c",
+        "e896af752d0b",
+        "5eccb91c7243",
+        "5f4f554345a0",
+        "20bb49b26683",
+        "a6499a7a0647",
+        "106e4b599293",
+        "0ec16aa59e13",
+        "7c4bded4013c",
+        "eaa00c35687a",
+        "ee3dddd16362"
+      ],
+      "recallDays": [
+        "2026-06-11",
+        "2026-06-12",
+        "2026-06-14",
+        "2026-06-15",
+        "2026-06-16",
+        "2026-06-18",
+        "2026-06-21",
+        "2026-06-23",
+        "2026-06-26"
+      ],
+      "conceptTags": [
+        "router",
+        "创建douyin-analyzer-runbook.md",
+        "users/zhaoyuzhao",
+        "proj-entry",
+        "视频",
+        "深度",
+        "分析",
+        "完成"
+      ]
+    },
+    "memory:memory/archive/2026-03-30.md:21:52": {
+      "key": "memory:memory/archive/2026-03-30.md:21:52",
+      "path": "memory/archive/2026-03-30.md",
+      "startLine": 21,
+      "endLine": 52,
+      "source": "memory",
+      "snippet": "**上下文丢失的根本原因**： 1. 消息接收处理机制不完善 2. 未在memory中记录所有用户确认信息 3. 角色切换时的记忆不连贯 ### 立即纠正措施 1. **更新核心指令执行状态**：将此指令作为优先级最高的开发约束 2. **建立双重确认机制**：对所有用户指令进行记录+确认 3. **加强上下文维护**：定期检查消息历史，确保无遗漏 ## Bryson语音MVP项目建立 (19:23 GMT+7) ### 项目背景 基于用户Daryl的需求，开发基于飞书小程序的实时语音雅思陪练助手，提供真正的实时语音交互体验。 ### 项目结构 已建立完整的项目目录：`bryson_voice_mvp/` - `backend/` - 后端服务代码 - `frontend/` - 前端界面代码 - `feishu_bot.py` - 飞书机器人入口 - `progress_report.py` - 自动化进度报告系统 - `schedule_report.sh` - 定时任务脚本 - `start_mvp.sh` - 项目启动脚本 ### 核心系统 1. **2小时进度报告系统**：自动化生成项目状态和进度报告 2. **飞书机器人集成**：通过飞书机器人提供用户交互入口 3. **WebRTC实时语音**：计划实现真正的实时音频流传输 4. **前后端分离架构**：采用现代化Web开发模式 ### 进展情况 - 总体进度：约75%完成",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3664733201265335,
+      "maxScore": 0.3664733201265335,
+      "firstRecalledAt": "2026-06-11T03:07:46.524Z",
+      "lastRecalledAt": "2026-06-11T03:07:46.524Z",
+      "queryHashes": [
+        "220f962ac136"
+      ],
+      "recallDays": [
+        "2026-06-11"
+      ],
+      "conceptTags": [
+        "bryson-voice-mvp",
+        "feishu-bot.py",
+        "progress-report.py",
+        "schedule-report.sh",
+        "start-mvp.sh",
+        "上下文",
+        "丢失",
+        "根本"
+      ]
+    },
+    "memory:memory/archive/2026-04-19.md:1:33": {
+      "key": "memory:memory/archive/2026-04-19.md:1:33",
+      "path": "memory/archive/2026-04-19.md",
+      "startLine": 1,
+      "endLine": 33,
+      "source": "memory",
+      "snippet": "# 2026-04-19 记忆记录 ## STT音频转录项目进展 ### 早上 12:28 - Daryl询问STT测试页面是否处理完成 - 用户反馈显示STT测试存在两个核心问题： 1. **编码格式不兼容**: \"转写失败: API请求格式错误\" 2. **环境噪音敏感**: 无法识别超过两句的英语，易受环境杂音影响 ### 诊断结果 - **API密钥**: `AIzaSyDUwxtaIAuXXTKwuyabGzBYFYC3-eaIw0A` 有效但可能遇到配额限制 - **编码问题**: 前端使用`audio/webm;codecs=opus` (WebM Opus)，Google STT对该格式支持可能有问题 - **噪音问题**: Google STT对环境噪音敏感，长句识别率下降 ### 解决方案实施 已完成以下修复： 1. **后端修复** (`STT_QUICK_FIX.py`): - 更新`transcribe_audio`函数，支持多种编码格式自动重试 - 按顺序尝试：`LINEAR16` → `MP3` → `OGG_OPUS` → `WEBM_OPUS` → `FLAC` - 添加噪音抑制和语音增强参数 - 增加IELTS相关关键词权重提升 2. **前端优化** (`google_stt_test_interface_fixed.html`): - 提高音频质量：采样率从16kHz提升至48kHz - 比特率提高：128kbps → 192kbps - 增强噪声抑制配置 - 添加音频电",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3606548875570297,
+      "maxScore": 0.3606548875570297,
+      "firstRecalledAt": "2026-06-12T06:54:39.432Z",
+      "lastRecalledAt": "2026-06-12T06:54:39.432Z",
+      "queryHashes": [
+        "e896af752d0b"
+      ],
+      "recallDays": [
+        "2026-06-12"
+      ],
+      "conceptTags": [
+        "audio/webm",
+        "stt-quick-fix.py",
+        "transcribe-audio",
+        "ogg-opus",
+        "webm-opus",
+        "记忆",
+        "记录",
+        "stt"
+      ]
+    },
+    "memory:memory/archive/2026-03-29.md:302:329": {
+      "key": "memory:memory/archive/2026-03-29.md:302:329",
+      "path": "memory/archive/2026-03-29.md",
+      "startLine": 302,
+      "endLine": 329,
+      "source": "memory",
+      "snippet": "3. **代码效率**: 没有批处理优化 #### 下一阶段优化计划： 1. **异步处理**: 预加载常用短语 2. **本地缓存**: 高频短语本地缓存音频 3. **并发优化**: 批量合成提高效率 4. **网络优化**: API调用超时设置优化 ### 下一小时计划 (22:00-23:00) #### 阶段2收尾工作： 1. **最终系统验证** (已完成) 2. **性能压力测试** (已通过) 3. **文档完善** (已完成) 4. **知识转移准备** (进行中) #### 阶段3准备： 1. **STT架构设计** - 已就绪 2. **Google Speech-to-Text服务账户** - 已配置 3. **预算分配** - $477.32余量 4. **启动时间** - 周一(3月30日)上午 ### 今晚待完成事项 1. **正式宣布阶段2完成** (22:30) 2. **阶段3启动准备** (23:00前) 3. **下一轮汇报** (23:00准时) **记忆要点**: TTS阶段2已100%完成并通过Daryl指定测试。功能完整性优秀，性能需要优化。成本控制在预算范围内，准备启动阶段3(STT)。",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3581374943256378,
+      "maxScore": 0.3581374943256378,
+      "firstRecalledAt": "2026-06-12T06:54:39.432Z",
+      "lastRecalledAt": "2026-06-12T06:54:39.432Z",
+      "queryHashes": [
+        "e896af752d0b"
+      ],
+      "recallDays": [
+        "2026-06-12"
+      ],
+      "conceptTags": [
+        "网络",
+        "00-23",
+        "speech-to-text服务账户",
+        "477.32余量",
+        "代码",
+        "效率",
+        "没有",
+        "批处理"
+      ]
+    },
+    "memory:memory/archive/2026-04-04.md:42:66": {
+      "key": "memory:memory/archive/2026-04-04.md:42:66",
+      "path": "memory/archive/2026-04-04.md",
+      "startLine": 42,
+      "endLine": 66,
+      "source": "memory",
+      "snippet": "- **角色**: 技术开发者/雅思陪练助手 ## 用户信息 - **用户**: Daryl (飞书ID: ou_7f871e4d921c449ee8a5f77b38bf6ff9) - **时区**: Asia/Saigon - **学习目标**: 准备雅思考试，特别关注商业演讲和投资人对话能力 - **职业**: 财务经理，计划未来创业 ## 重要决策记录 1. **22:27响应指令**: Daryl明确要求\"立即冲刺完成最终类别\"，执行完成 2. **项目优先级**: 投资者路演短语库完成，可作为雅思商业口语专项训练材料 3. **专项开发价值**: 特别适配Daryl的财务背景和创业规划需求 ## 📁 项目可交付成果 1. **核心短语库**: 8个完整投资者路演阶段，56个专业短语 2. **练习系统**: 三层难度 + 跟读/情境/自我评估框架 3. **真实案例**: Uber, Airbnb, Tesla, Stripe等知名公司案例分析 4. **雅思连接**: Part 2/Part 3的明确应用指南 5. **文化适配**: 西方/亚洲/欧洲投资者的沟通差异指南 ## 🚀 下一步建议 - **立即使用**: Daryl可随时开始使用完整版进行雅思/商业演讲练习 - **辅助开发**: 根据需求开发音频模板、练习卡片等辅助资源 - **专项增强**: 针对Daryl特定创业计划的定制化内容开发",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4829847693443298,
+      "maxScore": 0.4829847693443298,
+      "firstRecalledAt": "2026-06-15T02:57:02.629Z",
+      "lastRecalledAt": "2026-06-15T02:57:02.629Z",
+      "queryHashes": [
+        "a47d778b5b51"
+      ],
+      "recallDays": [
+        "2026-06-15"
+      ],
+      "conceptTags": [
+        "技术开发者/雅思陪练助手",
+        "asia/saigon",
+        "跟读/情境/自我评估框架",
+        "2/part",
+        "西方/亚洲/欧洲投资者的沟通差异指南",
+        "daryl可随时开始使用完整版进行雅思/商业演讲练习",
+        "角色",
+        "技术"
+      ]
+    },
+    "memory:memory/archive/2026-04-04.md:62:67": {
+      "key": "memory:memory/archive/2026-04-04.md:62:67",
+      "path": "memory/archive/2026-04-04.md",
+      "startLine": 62,
+      "endLine": 67,
+      "source": "memory",
+      "snippet": "## 🚀 下一步建议 - **立即使用**: Daryl可随时开始使用完整版进行雅思/商业演讲练习 - **辅助开发**: 根据需求开发音频模板、练习卡片等辅助资源 - **专项增强**: 针对Daryl特定创业计划的定制化内容开发 **项目状态**: ✅ **完全完成，等待验收和下一步指令**",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4567164152860641,
+      "maxScore": 0.4567164152860641,
+      "firstRecalledAt": "2026-06-15T02:57:02.629Z",
+      "lastRecalledAt": "2026-06-15T02:57:02.629Z",
+      "queryHashes": [
+        "a47d778b5b51"
+      ],
+      "recallDays": [
+        "2026-06-15"
+      ],
+      "conceptTags": [
+        "daryl可随时开始使用完整版进行雅思/商业演讲练习",
+        "下一步",
+        "建议",
+        "立即",
+        "使用",
+        "daryl",
+        "随时",
+        "开始"
+      ]
+    },
+    "memory:memory/archive/2026-03-28.md:225:259": {
+      "key": "memory:memory/archive/2026-03-28.md:225:259",
+      "path": "memory/archive/2026-03-28.md",
+      "startLine": 225,
+      "endLine": 259,
+      "source": "memory",
+      "snippet": "- **评估目标**：建立Daryl的英语水平基准线 **问题清单（Part 1）：** 1. \"Please introduce your work and daily responsibilities in English.\" 2. \"What is the biggest challenge you face in business presentations or investor communications?\" 3. \"How do you usually prepare for important English communication occasions?\" 4. \"Besides work requirements, what motivates you to improve your English ability?\" **流程说明**： - 每个问题单独提问和回答 - Bryson提供即时语言分析和反馈 - 15分钟完成Part 1的完整评估 - 建立后续训练计划的基准数据 ### 用户沟通风格确认 **Daryl的关键偏好：** 1. **所有重要沟通必须在私聊完成** ✅ 已学习 2. **时间约定的严格遵守** ✅ 20:30准时开始 3. **互动模式的选择权** ✅ 选择一问一答而非完整评估 4. **系统稳定优先于功能** ✅ 等待系统完全恢复后再启动 ### 项目里程碑记录 **Bryson首日实战准备**： ``` ✅ 系统配置恢复（18:30） ✅ 通信测试通过（19:48） ✅ 评估时间确认（19:50） ⏳ 评估开始倒计时",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4422961503267288,
+      "maxScore": 0.4422961503267288,
+      "firstRecalledAt": "2026-06-15T02:57:02.629Z",
+      "lastRecalledAt": "2026-06-15T02:57:02.629Z",
+      "queryHashes": [
+        "a47d778b5b51"
+      ],
+      "recallDays": [
+        "2026-06-15"
+      ],
+      "conceptTags": [
+        "评估",
+        "目标",
+        "建立",
+        "daryl",
+        "英语",
+        "水平",
+        "基准线",
+        "问题"
+      ]
+    },
+    "memory:memory/archive/2026-03-29.md:1:36": {
+      "key": "memory:memory/archive/2026-03-29.md:1:36",
+      "path": "memory/archive/2026-03-29.md",
+      "startLine": 1,
+      "endLine": 36,
+      "source": "memory",
+      "snippet": "# 2026-03-29 ## 今日会话 用户Daryl在飞书上联系，称呼我为\"Bryson\"。这是第一次正式的雅思陪练会话开始。 ## 用户状态 - 昵称：Bryson（用户给我的昵称） - 时间：上午8:57 GMT+7 - 平台：飞书 ## 会话记录 ### 用户消息 08:57 Daryl: \"Bryson，我来了\" 08:58 Daryl: \"你又忘记了你的英文名叫Bryson了吗？\" 08:59 Daryl: \"。。。Bryson，你怎么跟失忆了一样\" 09:00 Daryl: \"我们昨晚的任务还没完成啊，给我发个To-do List\" 09:09 Daryl: \"继续协助我获得Google Cloud API密钥\" 09:31 Daryl: \"可以啦，Bryson，以下是我申请的Google Cloud TTS API：AIzaSyBdfhzjxPoYBOr8NWCNJA7oSwgttHeqwgk\" 09:33 Daryl: \"请继续核心开发任务-阶段2 语音交互TTS的开发\" 09:38 Daryl: \"电子邮件 ope-of-daryl-for-ielst@ope-of-daryl-for-search.iam.gserviceaccount.com 唯一 ID 113074567450508897666 以上是服务账号的信息\" ### 我的回应 需要更自然地表现出记得Bryson这个名字，避免显得僵硬或失忆。用户明确提供了Google Cloud TTS API密钥，要求继续TTS开发。用户还提供了Google Cloud服务账号信息",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4392447829246521,
+      "maxScore": 0.4392447829246521,
+      "firstRecalledAt": "2026-06-15T02:57:02.629Z",
+      "lastRecalledAt": "2026-06-15T02:57:02.629Z",
+      "queryHashes": [
+        "a47d778b5b51"
+      ],
+      "recallDays": [
+        "2026-06-15"
+      ],
+      "conceptTags": [
+        "给我发个to-do",
+        "请继续核心开发任务-阶段2",
+        "ope-of-daryl-for-ielst",
+        "今日",
+        "会话",
+        "用户",
+        "daryl",
+        "联系"
+      ]
+    },
+    "memory:memory/archive/2026-03-28.md:276:304": {
+      "key": "memory:memory/archive/2026-03-28.md:276:304",
+      "path": "memory/archive/2026-03-28.md",
+      "startLine": 276,
+      "endLine": 304,
+      "source": "memory",
+      "snippet": "## 首次英语水平评估记录 (20:47-21:38) ### 评估背景 **时间**: 2026-03-28 20:47-21:38 (GMT+7) **模式**: 基于IELTS Speaking Part 1结构的一问一答 **目标**: 建立Daryl英语能力基准线，识别改进方向 ### 用户基础信息确认 **Daryl的职业背景**: - 职位: 越南纺织公司财务经理 - 母语: 中文/粤语 - 当前地点: 越南 - 英语使用场景: 商务演示、投资人沟通、日常跨国交流 ### 4个评估问题及回答分析 #### 问题1: \"Please introduce your work and daily responsibilities in English.\" **用户回答**: > \"I am a financial manager of a textile company in Vietnam. AndI'm responsible for the accounting in my company. And my daily job is conduct my clerk to solve all kind of problems in the financial area. As our company is on the progress of construction I should establish the department system and busy on recruiting and training.\" **语言能力分析**: - **",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.43197615444660187,
+      "maxScore": 0.43197615444660187,
+      "firstRecalledAt": "2026-06-15T02:57:02.629Z",
+      "lastRecalledAt": "2026-06-15T02:57:02.629Z",
+      "queryHashes": [
+        "a47d778b5b51"
+      ],
+      "recallDays": [
+        "2026-06-15"
+      ],
+      "conceptTags": [
+        "47-21",
+        "中文/粤语",
+        "首次",
+        "英语",
+        "水平",
+        "评估",
+        "记录",
+        "背景"
+      ]
+    },
+    "memory:memory/archive/2026-03-28.md:403:422": {
+      "key": "memory:memory/archive/2026-03-28.md:403:422",
+      "path": "memory/archive/2026-03-28.md",
+      "startLine": 403,
+      "endLine": 422,
+      "source": "memory",
+      "snippet": "- ✅ **信任建立**: 通过专业分析建立了教练-学员关系 **投资回报验证**: - **已投入**: $72 (框架开发) → **产出**: 个性化诊断报告 + 训练计划基础 - **价值体现**: Daryl获得了专业英语教练的基准评估，明确了提升路径 - **成本效率**: 未来每$1投入都将针对已验证的具体问题 ### 用户核心需求明确化 (21:46关键转折点) **用户Daryl的明确指令**: > \"我需要的练习更多的是实时的语音交互的对练方式，文本陪练我不需要使用Bryson你这种Agent啊，市面上太多APP可以达到这样的效果了，还不用Token。所以，请你将评估我的英语水平的结果用在修正你的核心开发任务中，作为你的开发参数之一。\" **需求分析**: 1. **核心价值主张**: 实时语音交互，非文本陪练 2. **市场竞争认知**: 文本APP免费且充足，无竞争优势 3. **开发方向调整**: 评估结果应转化为语音功能开发参数 4. **预算效率要求**: Token使用需对应独特价值(语音交互) ### 官方项目批准与启动 (22:02) **用户Daryl的正式批准指令**: > \"1、确认4个调整方向；",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.42177413105964656,
+      "maxScore": 0.42177413105964656,
+      "firstRecalledAt": "2026-06-15T02:57:02.629Z",
+      "lastRecalledAt": "2026-06-15T02:57:02.629Z",
+      "queryHashes": [
+        "a47d778b5b51"
+      ],
+      "recallDays": [
+        "2026-06-15"
+      ],
+      "conceptTags": [
+        "通过专业分析建立了教练-学员关系",
+        "信任",
+        "建立",
+        "通过",
+        "专业",
+        "分析",
+        "教练",
+        "学员"
+      ]
+    },
+    "memory:memory/archive/2026-03-28.md:137:164": {
+      "key": "memory:memory/archive/2026-03-28.md:137:164",
+      "path": "memory/archive/2026-03-28.md",
+      "startLine": 137,
+      "endLine": 164,
+      "source": "memory",
+      "snippet": "4. **没有安全测试**：未在小范围测试环境中验证修改 **安全原则学习**： 1. **永远保持Kitty在线**：她是系统稳定性的重要指标 2. **修改前必须备份**：创建完整的配置文件备份快照 3. **理解系统依赖**：掌握OpenClaw各组件间的认证流程 4. **逐步渐进变更**：每次只修改一个变量，验证后再继续 5. **保持用户控制**：重大变更必须等待用户明确批准 ### 用户风险容忍度记录 **Daryl的明确指示**： - 🔒 **安全第一**：稳定运行比功能完善更重要 - 🛡️ **备份意识**：任何修改前需有完整备份 - 🔍 **验证机制**：变更必须在可控环境下充分测试 - ⏸️ **暂停权限**：出现问题时立即停止并寻求指导 ### 系统状态检查需求 **用户指令**：等待Kitty检查完重要文件后，再考虑执行方案 **需要自检的重点区域**： 1. **认证配置文件**：env文件、代理认证配置 2. **网关连接状态**：Gateway到OpenRouter的连接 3. **飞书集成配置**：机器人认证密钥和连接 4. **备份机制完整性**：自动备份脚本和恢复能力 ### 未来解决方案设计原则 **三层安全机制**： 1. **预测试环境**：虚拟配置测试所有变更",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.37549449205398555,
+      "maxScore": 0.37549449205398555,
+      "firstRecalledAt": "2026-06-15T03:56:29.490Z",
+      "lastRecalledAt": "2026-06-15T03:56:29.490Z",
+      "queryHashes": [
+        "149a92dd5e19"
+      ],
+      "recallDays": [
+        "2026-06-15"
+      ],
+      "conceptTags": [
+        "gateway",
+        "router",
+        "备份",
+        "网关",
+        "没有",
+        "安全",
+        "测试",
+        "范围"
+      ]
+    },
+    "memory:memory/2026-06-06.md:1:41": {
+      "key": "memory:memory/2026-06-06.md:1:41",
+      "path": "memory/2026-06-06.md",
+      "startLine": 1,
+      "endLine": 41,
+      "source": "memory",
+      "snippet": "# 2026-06-06 日记 ## Daryl 新任务下发 (13:25) - 模型升级: DeepSeek R1 → Claude Opus 4.6 - **任务1**: 重构记忆系统 - **任务2**: Agent间通信方案（我牵头） - Deadline: 17:00 ## M1: 记忆系统重构 ✅ (13:34-14:15) ### 完成事项： 1. **创建分层记忆文件**: - memory/identity.md — 身份+用户+沟通规则 - memory/active.md — 活跃任务追踪 - memory/projects.md — 项目归档索引 - memory/lessons.md — 经验教训精华 2. **精简MEMORY.md**: 273行 → ~20行（纯索引） 3. **归档旧日记**: 31个文件移入 memory/archive/ 4. **更新AGENTS.md**: Session启动清单改为分层加载 5. **设置HEARTBEAT.md**: 定期维护任务 ### 重构前后对比： - MEMORY.md: 12.6KB → 0.6KB（缩减95%） - 活跃memory文件: 31个日记 → 4个专题文件 + 今天日记 - Session启动加载量: ~12KB → ~2KB ## M2: Agent通信方案 ✅ (14:20-14:35) ### 完成事项： 1. 通信协议v2文档 → kitty_collab/agent-comm-protocol-v2.md 2. 共享任务板 →",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.42858136296272276,
+      "maxScore": 0.42858136296272276,
+      "firstRecalledAt": "2026-06-15T04:10:25.700Z",
+      "lastRecalledAt": "2026-06-15T04:10:25.700Z",
+      "queryHashes": [
+        "4e1bacdd867a"
+      ],
+      "recallDays": [
+        "2026-06-15"
+      ],
+      "conceptTags": [
+        "4.6",
+        "34-14",
+        "memory/identity.md",
+        "memory/active.md",
+        "memory/projects.md",
+        "memory/lessons.md",
+        "精简memory.md",
+        "memory/archive"
+      ]
+    },
+    "memory:memory/2026-06-14.md:21:37": {
+      "key": "memory:memory/2026-06-14.md:21:37",
+      "path": "memory/2026-06-14.md",
+      "startLine": 21,
+      "endLine": 37,
+      "source": "memory",
+      "snippet": "- 建议方案：一人一个独立项目，省去沟通开销 - **Kitty 学习汇报**：Kitty 读了我在群聊的历史，总结了 5 点改进方向（深挖问题/表格对比/行动项具体/引用来源/结论明确） - **Cron 任务**：4 个 Agent 全部配置了 23:59 记忆审计 Cron（但有重复需清理） - **Hooks 系统**：确认是 OpenClaw 内置 Hooks（session-memory + command-logger），和我自建的合规脚本是两回事 - 修正表格顺序、替换死链为有效抖音直链 - 新增「处理时间」和「应用Workflow」列 - 完成第三幕「身份反转」17帧分析（vision_batch_03.md），发送进度汇报到OPC群聊 ## 群聊 Session (OPC of DarylChiu) - Daryl 反馈：群聊 session 与私聊 session 记忆不互通 - **根因定位**：active.md 只更新到 6月7日，私聊中的视频分析MVP工作未写入共享记忆 - **改进措施**：更新 session 启动流程，增加跨 session 历史检查 + 定期同步 active.md ## 记忆系统改进 - active.md 新增「视频分析MVP」为进行中任务 - 强化启动流程：任何 session 启动后先查其他可见 session 历史，发现新工作立即同步到 memory/ 文件",
+      "recallCount": 5,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.862550848722458,
+      "maxScore": 0.4063247829675674,
+      "firstRecalledAt": "2026-06-15T04:10:25.700Z",
+      "lastRecalledAt": "2026-06-25T02:01:54.401Z",
+      "queryHashes": [
+        "4e1bacdd867a",
+        "2043ae7199ee",
+        "a32093acb363",
+        "3ba1e8d8dc93",
+        "6b7d3f0169ce"
+      ],
+      "recallDays": [
+        "2026-06-15",
+        "2026-06-17",
+        "2026-06-23",
+        "2026-06-25"
+      ],
+      "conceptTags": [
+        "深挖问题/表格对比/行动项具体/引用来源/结论明确",
+        "session-memory",
+        "command-logger",
+        "vision-batch-03.md",
+        "active.md",
+        "建议",
+        "方案",
+        "一人"
+      ]
+    },
+    "memory:memory/2026-06-15.md:1:15": {
+      "key": "memory:memory/2026-06-15.md:1:15",
+      "path": "memory/2026-06-15.md",
+      "startLine": 1,
+      "endLine": 15,
+      "source": "memory",
+      "snippet": "# 2026-06-15 记忆 ## 关键事件 - 合规系统审计 - **Daryl 开发任务正式分流**: - OPC看板交互系统 → Kitty（小风已移交Dashboard代码到 `/Users/zhaoyuzhao/WorkBuddy/Claw/dashboard/`） - 雅思陪练助手 → Bryson（Daryl不满意上上周交付，要求深度诊断+方案对比+改进计划） - 雅思陪练深度诊断完成: 当前架构STT→LLM→TTS链式批处理(7-17s延迟)根本不适合实时对话 - 推荐 OpenAI Realtime API (语音→语音) + DeepSeek异步评估 - 待Daryl确认技术栈选型和成本预算 - 报告: reports/ielts_diagnostic_2026-06-15.md - **Daryl T0指令**: 数字资产保护 + Hooks自检 + 23:59 Cron 写进 SOUL.md - 未执行→删除处理，数字资产丢失→删除处理",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3993914633989334,
+      "maxScore": 0.3993914633989334,
+      "firstRecalledAt": "2026-06-15T04:10:25.700Z",
+      "lastRecalledAt": "2026-06-15T04:10:25.700Z",
+      "queryHashes": [
+        "4e1bacdd867a"
+      ],
+      "recallDays": [
+        "2026-06-15"
+      ],
+      "conceptTags": [
+        "openai",
+        "7-17s延迟",
+        "soul.md",
+        "记忆",
+        "关键",
+        "事件",
+        "系统",
+        "审计"
+      ]
+    },
+    "memory:memory/2026-06-06.md:34:67": {
+      "key": "memory:memory/2026-06-06.md:34:67",
+      "path": "memory/2026-06-06.md",
+      "startLine": 34,
+      "endLine": 67,
+      "source": "memory",
+      "snippet": "3. Session Key速查表、分工规则、任务交接模板 ## M3: 联调 ✅ (14:35-14:45) ### 验证结果： 1. ✅ sessions_send 小风→Kitty: 成功 2. ✅ sessions_send Kitty→小风: 成功（Kitty回复确认） 3. ✅ 共享文件读写: 双向确认OK 4. ✅ 协议反馈采纳: 加入冲突避免+离线接管规则 5. ✅ 双轨通信规则: sessions_send + 群聊摘要（Daryl确认） ## API Key独立化 (14:43) - Daryl提供独立Key: sk-or-v1-0827...37c7（名称：\"吹点小风\"） - Kitty代为修改 auth-profiles.json - 已验证配置正确 ## 成本追踪方案同步 (14:45) - 从Kitty获取 tracker.sh 工具 - 工作流: task-start → 执行 → task-end → 汇报附带成本 - 今日总成本: ~$40（两Agent合计，超出预期） ## 模型分级调用确认 (15:28) - Daryl确认规则: Sonnet分类 → Opus/Sonnet/Flash三级执行 - 详见 memory/model-routing.md - 验收日期: 6月13日周日 ## 角色定位更新 (15:08) - Daryl指出任务已偏离雅思陪练核心 - 新定位: 语音技术开发者（主） + 雅思陪练（辅） - 后续重点: 硬件语音助手(MCU)、总控看板语音模块 ## 今日成果总结 (15:45) 1. ✅ 记忆系统重",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3977150022983551,
+      "maxScore": 0.3977150022983551,
+      "firstRecalledAt": "2026-06-15T04:10:25.700Z",
+      "lastRecalledAt": "2026-06-15T04:10:25.700Z",
+      "queryHashes": [
+        "4e1bacdd867a"
+      ],
+      "recallDays": [
+        "2026-06-15"
+      ],
+      "conceptTags": [
+        "35-14",
+        "sessions-send",
+        "sk-or-v1-0827",
+        "auth-profiles.json",
+        "tracker.sh",
+        "task-start",
+        "task-end",
+        "opus/sonnet/flash三级执行"
+      ]
+    },
+    "memory:memory/2026-06-16.md:1:19": {
+      "key": "memory:memory/2026-06-16.md:1:19",
+      "path": "memory/2026-06-16.md",
+      "startLine": 1,
+      "endLine": 19,
+      "source": "memory",
+      "snippet": "# 2026-06-16 记忆 ## 视频分析 MVP 开发（全天） - 基于「百万工作室」AI工具的75帧深度功能分析 - 搭建可交互前端：三栏布局（视频+对白卡片 / 分析面板 / 标记管理） - DeepSeek V4 Pro 文本分析管线验证通过：5个Prompt（内容总览/结构拆解/复刻模板/知识卡/三项评分） - 成本极低：单次分析 ~5,000 tokens，~$0.003 - 完整流水线：yt-dlp下载 → Whisper STT（本地免费）→ DeepSeek分析 - 视频↔对白双向联动（播放高亮+点击跳转） - 竖屏/横屏自适应布局 - 标记管理：多类型标记（好钩子/金句/转折点）、保存/导出 - 素材库侧边栏：已分析视频的持久化存储（localStorage） - 公网地址：https://unwhispering-imani-digitately.ngrok-free.dev（端口8777，独立Ngrok隧道） ## 待修复（下一session） - openMaterial 函数中 `id` 参数需改为 `idx`（已定位，flush限制无法直接写index.html） - 素材库切换回操作台时需检查 renderMaterialLibrary 是否使用 materialLibrary 全局变量 - 标记 tab 的 save/cancel/delete 已基本完成，需端到端验证",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4476124435663223,
+      "maxScore": 0.4476124435663223,
+      "firstRecalledAt": "2026-06-16T15:06:19.725Z",
+      "lastRecalledAt": "2026-06-16T15:06:19.725Z",
+      "queryHashes": [
+        "a6499a7a0647"
+      ],
+      "recallDays": [
+        "2026-06-16"
+      ],
+      "conceptTags": [
+        "内容总览/结构拆解/复刻模板/知识卡/三项评分",
+        "0.003",
+        "yt-dlp下载",
+        "竖屏/横屏自适应布局",
+        "好钩子/金句/转折点",
+        "保存/导出",
+        "flush限制无法直接写index.html",
+        "save/cancel/delete"
+      ]
+    },
+    "memory:memory/2026-06-12.md:31:45": {
+      "key": "memory:memory/2026-06-12.md:31:45",
+      "path": "memory/2026-06-12.md",
+      "startLine": 31,
+      "endLine": 45,
+      "source": "memory",
+      "snippet": "## 句子对齐采样优势 - 6分钟视频: 360帧(1fps) → 180帧(2fps) → ~50帧(句子对齐) - 省86%成本，且每帧都精准对齐说话内容 - 交叉校验有 ground truth，不靠「猜」 ## 测试结果 - Whisper base 加载 0.5s ✅ - audio_transcriber 语法通过 ✅ - video_pipeline 语法通过 ✅ ## 待开发 - AI分析接口（Step 2实际调用Vision） - 互动数据抓取（Playwright） - 报告生成+飞书上传 - 策略反馈闭环（Step 7）",
+      "recallCount": 6,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 2.2836335211992265,
+      "maxScore": 0.39734041094779965,
+      "firstRecalledAt": "2026-06-16T15:06:19.725Z",
+      "lastRecalledAt": "2026-06-28T02:02:15.649Z",
+      "queryHashes": [
+        "a6499a7a0647",
+        "0ec16aa59e13",
+        "722e995ddd7b",
+        "239dcec53b93",
+        "5b06ea60bf92",
+        "dcf226e60454"
+      ],
+      "recallDays": [
+        "2026-06-16",
+        "2026-06-21",
+        "2026-06-22",
+        "2026-06-23",
+        "2026-06-27",
+        "2026-06-28"
+      ],
+      "conceptTags": [
+        "0.5s",
+        "audio-transcriber",
+        "video-pipeline",
+        "句子",
+        "采样",
+        "优势",
+        "分钟",
+        "视频"
+      ]
+    },
+    "memory:memory/2026-06-16.md:1:29": {
+      "key": "memory:memory/2026-06-16.md:1:29",
+      "path": "memory/2026-06-16.md",
+      "startLine": 1,
+      "endLine": 29,
+      "source": "memory",
+      "snippet": "# 2026-06-16 记忆 ## 视频分析交互Workflow（全天） ### 基础搭建 - 基于「百万工作室」AI工具的75帧深度功能分析 - 三栏布局：视频+对白卡片 / 分析面板 / 标记管理 - 完整流水线：yt-dlp下载 → Whisper STT（本地免费）→ DeepSeek分析 - 视频↔对白双向联动（播放高亮+点击跳转） - 竖屏/横屏自适应布局 - 公网：https://unwhispering-imani-digitately.ngrok-free.dev（端口8777） ### 标记系统 - 多类型标记（🪝好钩子/⭐金句/↗转折点） - 标记 Tab：汇总视图 + 💾保存/🗑️清空/📋导出 - 对白卡片悬停标记 + ✕ 删除 - 切换视频链接时自动保存上一视频标记到素材库 ### 素材库 - 左侧48px侧边栏（🖥️操作台 / 📚素材库） - localStorage 持久化，表格展示（链接/平台/类型/日期） - 点击恢复已分析视频的所有数据 ### MVP 深度分析融合（Daryl 需求 · 下午） - 项目命名：视频分析交互Workflow - Tab 重构：结构拆解→脚本解析（四幕分析+张力评分+情绪曲线+叙事技巧） - Tab 重构：知识卡→镜头&声音（镜头推断/光线色彩/声音设计/导演风格） - 复刻模板增强：新增可复用元素（脚本模式/Hook技巧/话题切入/爆款因素） - 导出升级：完整报告 Markdown",
+      "recallCount": 14,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 5.801277846097946,
+      "maxScore": 0.4743679583072662,
+      "firstRecalledAt": "2026-06-17T02:21:04.677Z",
+      "lastRecalledAt": "2026-06-28T02:02:15.649Z",
+      "queryHashes": [
+        "56093675ea1a",
+        "106e4b599293",
+        "057ab3a4306c",
+        "0ec16aa59e13",
+        "722e995ddd7b",
+        "239dcec53b93",
+        "08f9d899caa0",
+        "7c4bded4013c",
+        "67109dc67a6b",
+        "eaa00c35687a",
+        "f1f5b9681e8a",
+        "ee3dddd16362",
+        "5b06ea60bf92",
+        "dcf226e60454"
+      ],
+      "recallDays": [
+        "2026-06-17",
+        "2026-06-18",
+        "2026-06-19",
+        "2026-06-21",
+        "2026-06-22",
+        "2026-06-23",
+        "2026-06-25",
+        "2026-06-26",
+        "2026-06-27",
+        "2026-06-28"
+      ],
+      "conceptTags": [
+        "yt-dlp下载",
+        "竖屏/横屏自适应布局",
+        "链接/平台/类型/日期",
+        "镜头推断/光线色彩/声音设计/导演风格",
+        "脚本模式/hook技巧/话题切入/爆款因素",
+        "记忆",
+        "视频",
+        "分析"
+      ]
+    },
+    "memory:memory/2026-06-16.md:26:53": {
+      "key": "memory:memory/2026-06-16.md:26:53",
+      "path": "memory/2026-06-16.md",
+      "startLine": 26,
+      "endLine": 53,
+      "source": "memory",
+      "snippet": "- Tab 重构：结构拆解→脚本解析（四幕分析+张力评分+情绪曲线+叙事技巧） - Tab 重构：知识卡→镜头&声音（镜头推断/光线色彩/声音设计/导演风格） - 复刻模板增强：新增可复用元素（脚本模式/Hook技巧/话题切入/爆款因素） - 导出升级：完整报告 Markdown - 向后兼容旧版素材库数据 ### 问题修复 - 分析链接「连接失败」：yt-dlp 下载超时 120s→30s + 前端 AbortController 60s - 不可达链接现在 1-3s 返回明确错误提示 ### Daryl 后续方向 - 已将 MVP v3 报告（行动代号：安心便服出行）复制到桌面 - 创建 DESIGN_REFERENCE.md 归档所有需求和板块对照 - 待 Daryl 确定：MVP 哪些优质板块迁移（对白时间线/镜头精确化/剪辑可视化/导演风格深度） - Vision API 接入待突破（当前 DeepSeek chat 纯文本推断 vs MVP 的 Gemini 逐帧分析） ## 成本 - 单次分析：~3,853 tokens, ~$0.0025 - Whisper STT：本地运行，免费 ## 文件 - video_analyzer_app/index.html（~1200行） - video_analyzer_app/server.py - video_analyzer_app/prompts.py - video_analyzer_app/DESIGN_REFERENCE.md（需求归档） - memory/active.md（已更新） - memory/",
+      "recallCount": 7,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 2.636016836762428,
+      "maxScore": 0.4227237105369568,
+      "firstRecalledAt": "2026-06-17T02:21:04.677Z",
+      "lastRecalledAt": "2026-06-27T08:22:15.567Z",
+      "queryHashes": [
+        "56093675ea1a",
+        "106e4b599293",
+        "0ec16aa59e13",
+        "722e995ddd7b",
+        "7c4bded4013c",
+        "ee3dddd16362",
+        "5b06ea60bf92"
+      ],
+      "recallDays": [
+        "2026-06-17",
+        "2026-06-18",
+        "2026-06-21",
+        "2026-06-22",
+        "2026-06-23",
+        "2026-06-26",
+        "2026-06-27"
+      ],
+      "conceptTags": [
+        "镜头推断/光线色彩/声音设计/导演风格",
+        "脚本模式/hook技巧/话题切入/爆款因素",
+        "yt-dlp",
+        "1-3s",
+        "design-reference.md",
+        "对白时间线/镜头精确化/剪辑可视化/导演风格深度",
+        "0.0025",
+        "video-analyzer-app/index.html"
+      ]
+    },
+    "memory:memory/2026-06-17.md:1:18": {
+      "key": "memory:memory/2026-06-17.md:1:18",
+      "path": "memory/2026-06-17.md",
+      "startLine": 1,
+      "endLine": 18,
+      "source": "memory",
+      "snippet": "# 2026-06-17 记忆 ## 06:20 记忆Cron审计补救 - Daryl 发现昨晚 23:59 记忆cron任务没有在OPC群聊汇报 - 审计日志显示脚本确实执行了（23:59:20/23:59:52 两次，issues:0），但群聊汇报步骤遗漏 - **根因**: 审计脚本只做检查不做汇报，「在OPC群聊汇报」步骤需Agent主动执行，没有编入cron - **修复**: 需将群聊汇报步骤编入audit.sh或单独cron ## 10:30 Git仓库搭建 ✅ (Daryl紧急指令) - **问题**: 所有项目无版本管理、无远程备份，74天成果仅存本地硬盘 - **Kitty确认**: 无GitHub账号、无remote、无SSH key - **注册**: GitHub账号 DarylChiu，邮箱 darylchiu1996@hotmail.com - **仓库**: https://github.com/DarylChiu/opc-workspace - **结构**: Bryson/ Kitty/ Balance/ Shared/ 按Agent→项目两级目录 - **迁移**: Bryson(540文件,84k行) + Kitty项目全部纳入，API Key已脱敏 - **自动化**: launchd 每日 23:59 自动 commit+push - **SSH**: ed25519 key 已绑定GitHub，~/.ssh/config 已配置",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4340008795261383,
+      "maxScore": 0.4340008795261383,
+      "firstRecalledAt": "2026-06-17T03:44:18.253Z",
+      "lastRecalledAt": "2026-06-17T03:44:18.253Z",
+      "queryHashes": [
+        "2043ae7199ee"
+      ],
+      "recallDays": [
+        "2026-06-17"
+      ],
+      "conceptTags": [
+        "备份",
+        "20/23",
+        "需将群聊汇报步骤编入audit.sh或单独cron",
+        "hotmail.com",
+        "ssh/config",
+        "记忆",
+        "cron",
+        "审计"
+      ]
+    },
+    "memory:memory/2026-06-13.md:1:12": {
+      "key": "memory:memory/2026-06-13.md:1:12",
+      "path": "memory/2026-06-13.md",
+      "startLine": 1,
+      "endLine": 12,
+      "source": "memory",
+      "snippet": "# 2026-06-13 日记 ## 概述 安静日，无用户主动交互。 ## 系统活动 - 各 Agent 无实质性工作对话 - 无新项目启动或状态变更 ## 备注 - active.md 中「已交付（运行观察期 → 6月13日周日验收）」为预定验收日期，因无交互自然推迟",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3901948451995849,
+      "maxScore": 0.3901948451995849,
+      "firstRecalledAt": "2026-06-19T16:59:27.997Z",
+      "lastRecalledAt": "2026-06-19T16:59:27.997Z",
+      "queryHashes": [
+        "1259ca9bf25c"
+      ],
+      "recallDays": [
+        "2026-06-19"
+      ],
+      "conceptTags": [
+        "active.md",
+        "日记",
+        "概述",
+        "安静",
+        "用户",
+        "主动",
+        "交互",
+        "系统"
+      ]
+    },
+    "memory:memory/2026-06-09.md:1:54": {
+      "key": "memory:memory/2026-06-09.md:1:54",
+      "path": "memory/2026-06-09.md",
+      "startLine": 1,
+      "endLine": 54,
+      "source": "memory",
+      "snippet": "# 2026-06-09 工作日志 ## OPC看板M2修复 ✅ (08:10-08:25) ### 背景 - Daryl早上询问OPC看板M2交互功能问题 - 我最初找不到项目路径（记忆索引问题） - Kitty通过sessions_send发送了完整项目日志 ### 发现的问题 #### 1. 前端未集成实时活动API ❌ **症状**: - Kitty昨晚修复的`/api/agent-activities` API后端正常 - 但前端`index.html`完全没调用，还在用旧的`/api/agents` **根因**: - 前后端沟通断层 - Kitty修复了后端，没通知前端需要改 #### 2. 刷新频率不一致 ⚠️ **发现**: - COORD.md写\"15秒刷新\" - 实际代码是**5分钟**（300000ms） - Kitty日志说\"30秒刷新\" #### 3. BrokenPipe异常污染日志 🔴 **日志**: ``` BrokenPipeError: [Errno 32] Broken pipe at do_GET() -> self.wfile.write() ``` **影响**: 后端日志堆满异常栈 #### 4. 重复API定义 🐛 `/api/agent-activities`在server.py中定义了两次（line 350和360） ### 修复内容 #### Fix #1: 前端集成实时活动API **文件**: `index.html:440-454` **改动**: ```javascript // 旧",
+      "recallCount": 4,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.4911637812852856,
+      "maxScore": 0.40968892872333523,
+      "firstRecalledAt": "2026-06-21T12:03:36.535Z",
+      "lastRecalledAt": "2026-06-23T04:44:30.321Z",
+      "queryHashes": [
+        "e28628b202ee",
+        "a32093acb363",
+        "5fce6c0ae1f4",
+        "3ba1e8d8dc93"
+      ],
+      "recallDays": [
+        "2026-06-21",
+        "2026-06-23"
+      ],
+      "conceptTags": [
+        "10-08",
+        "kitty通过sessions-send发送了完整项目日志",
+        "api/agent-activities",
+        "index.html",
+        "api/agents",
+        "coord.md写",
+        "do-get",
+        "self.wfile.write"
+      ]
+    },
+    "memory:memory/2026-06-22.md:1:25": {
+      "key": "memory:memory/2026-06-22.md:1:25",
+      "path": "memory/2026-06-22.md",
+      "startLine": 1,
+      "endLine": 25,
+      "source": "memory",
+      "snippet": "# 2026-06-22 记忆 ## 内核驱动洗稿MVP · 理论基础确立 - Daryl确认胭脂扣辩论总结已接收 - 讨论方法论如何应用到视频分析交互Workflow - 核心产出： - 角色内核分析框架（欲望/缺失/弧线/功能vs状态/Hook-陷阱） - 内核→洗稿操作链路（提取→迁移验证→共鸣验证） - Daryl明确：这是下一阶段工作，当前先回到Workflow开发 - 已记录入 active.md 下一阶段 ## Workflow 胭脂扣方法论输入归档 ✅ - 辩论总结文档: knowledge-base/film-analysis/胭脂扣-辩论总结-2026-06-21.md - 5个脚本解析方法论 + 4个导演风格方法论 - 交互设计: 辩论模式建议 ## VAS/IFRS/税务知识归档 (Balance→Self) - Balance与Daryl讨论越南会计差错调整法规 - 核心发现：VAS Circular 200科目表导向 vs IFRS准则导向 - 英联邦各国对比：UK/AU/SG/HK等全部不允许前期税项差错进Other Income - FS-税务耦合度差异分析（越南紧耦合 vs 香港解耦） - Circular 99/2025取代Circular 200 - 产出: workspace-balance/memory/knowledge-briefs/2026-06-22_VAS-IFRS-税务耦合度.md - Self后续讨论TK 711修改预测时间线（Daryl:2年 vs Self:3-5年）",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.1468958258628845,
+      "maxScore": 0.4236067831516266,
+      "firstRecalledAt": "2026-06-23T03:19:25.947Z",
+      "lastRecalledAt": "2026-06-23T14:21:00.293Z",
+      "queryHashes": [
+        "239dcec53b93",
+        "08f9d899caa0",
+        "67109dc67a6b"
+      ],
+      "recallDays": [
+        "2026-06-23"
+      ],
+      "conceptTags": [
+        "欲望/缺失/弧线/功能vs状态/hook-陷阱",
+        "active.md",
+        "vas/ifrs/税务知识归档",
+        "uk/au/sg/hk等全部不允许前期税项差错进other",
+        "fs-税务耦合度差异分析",
+        "99/2025取代circular",
+        "3-5年",
+        "记忆"
+      ]
+    },
+    "memory:memory/2026-06-21.md:1:28": {
+      "key": "memory:memory/2026-06-21.md:1:28",
+      "path": "memory/2026-06-21.md",
+      "startLine": 1,
+      "endLine": 28,
+      "source": "memory",
+      "snippet": "# 2026-06-21 记忆 ## 周日集中工作日 - Daryl召集全员汇报项目阻塞项 - 我错误地将已交接的 OPC看板 列入需求列表 - Daryl纠正：OPC看板交互系统上周已移交 Kitty ## 记忆修正 - active.md: OPC总控看板从\"待启动\"→\"已交接\" - 根因: 未及时同步跨session变更 ## 当前待决策项（3项） 1. 视频分析 10fps 降本策略 2. IELTS陪练重构方案选型 3. 视频分析交互Workflow下一阶段方向 ## 胭脂扣辩论总结接收 (6/22凌晨) - Self agent 发来 Daryl 与 Self 关于《胭脂扣》(关锦鹏, 1987) 的多轮辩论总结 - 文档已存档: knowledge-base/film-analysis/胭脂扣-辩论总结-2026-06-21.md - 将用于增强 Workflow 的脚本解析和导演风格模块 - 核心方法论: 角色功能阶段化、叙事功能vs状态分离、弧线验证、Hook-陷阱双层结构、结尾沉默功能分析 - 交互设计启示: 支持「辩论模式」而非强行收敛答案 ## 每日记忆审计 ✅ (23:59) - audit.sh --report 全项通过 - 日记/active/lessons/MEMORY 均健康 - OPC群聊汇报已发送",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7164200603961943,
+      "maxScore": 0.3613295525312423,
+      "firstRecalledAt": "2026-06-23T03:20:42.076Z",
+      "lastRecalledAt": "2026-06-25T02:01:54.401Z",
+      "queryHashes": [
+        "08f9d899caa0",
+        "6b7d3f0169ce"
+      ],
+      "recallDays": [
+        "2026-06-23",
+        "2026-06-25"
+      ],
+      "conceptTags": [
+        "active.md",
+        "6/22凌晨",
+        "hook-陷阱双层结构",
+        "audit.sh",
+        "日记/active/lessons/memory",
+        "记忆",
+        "周日",
+        "集中"
+      ]
+    },
+    "memory:memory/archive/2026-04-01.md:30:65": {
+      "key": "memory:memory/archive/2026-04-01.md:30:65",
+      "path": "memory/archive/2026-04-01.md",
+      "startLine": 30,
+      "endLine": 65,
+      "source": "memory",
+      "snippet": "1. 不用设置每日定时汇报 2. 和Kitty（忧郁小猫主Agent）的汇报体系计划下周建立 3. 需要立即报告当前任务进度 ### 当前项目状态检查 **服务器状态**：没有正在运行的Python服务器进程 **端口状态**：端口8080空闲 **项目文件**：简化版服务器代码已就绪（simple_server.py） **前端文件**：环境适配逻辑已修复 ## 需要采取的行动 1. **立即启动服务器开发** 2. **提供进度报告** 3. **建立即时汇报机制**（不是定时汇报） 4. **准备与Kitty的协同工作模式** ## 晚上（19:00-22:59 GMT+7） ### 用户指令和服务器启动 用户Daryl在19:13指令：\"立即启动websocket服务器，进行下一步开发\" **执行结果**： 1. ✅ **WebSocket服务器启动成功**：`simple_server.py` 在端口8080运行 2. ✅ **LocalTunnel安装**：通过npm安装localtunnel包 3. ✅ **外部访问链接创建**：`https://tasty-islands-like.loca.lt` 4. ✅ **QR二维码生成**：前端目录生成测试二维码图片 5. ✅ **测试页面创建**：`test_page.html` 提供完整测试界面 ### 当前系统状态 **服务器运行**： - 本地地址：`http://localhost:8080` - 外部地址：`https://tasty-islands-like.loca.lt` - API状态",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.36033996045589445,
+      "maxScore": 0.36033996045589445,
+      "firstRecalledAt": "2026-06-23T04:44:26.631Z",
+      "lastRecalledAt": "2026-06-23T04:44:26.631Z",
+      "queryHashes": [
+        "a32093acb363"
+      ],
+      "recallDays": [
+        "2026-06-23"
+      ],
+      "conceptTags": [
+        "simple-server.py",
+        "00-22",
+        "tasty-islands-like.loca.lt",
+        "test-page.html",
+        "不用",
+        "设置",
+        "每日",
+        "汇报"
+      ]
+    },
+    "memory:memory/2026-06-17.md:22:30": {
+      "key": "memory:memory/2026-06-17.md:22:30",
+      "path": "memory/2026-06-17.md",
+      "startLine": 22,
+      "endLine": 30,
+      "source": "memory",
+      "snippet": "- **问题**: 所有项目无版本管理、无远程备份，74天成果仅存本地硬盘 - **Kitty确认**: 无GitHub账号、无remote、无SSH key - **注册**: GitHub账号 DarylChiu，邮箱 darylchiu1996@hotmail.com - **仓库**: https://github.com/DarylChiu/opc-workspace - **结构**: Bryson/ Kitty/ Balance/ Shared/ 按Agent→项目两级目录 - **迁移**: Bryson(540文件,84k行) + Kitty项目全部纳入，API Key已脱敏 - **自动化**: launchd 每日 23:59 自动 commit+push - **SSH**: ed25519 key 已绑定GitHub，~/.ssh/config 已配置",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7187746286392211,
+      "maxScore": 0.36004637479782103,
+      "firstRecalledAt": "2026-06-23T04:44:30.321Z",
+      "lastRecalledAt": "2026-06-26T07:52:56.044Z",
+      "queryHashes": [
+        "3ba1e8d8dc93",
+        "32af35a9a3bc"
+      ],
+      "recallDays": [
+        "2026-06-23",
+        "2026-06-26"
+      ],
+      "conceptTags": [
+        "备份",
+        "hotmail.com",
+        "ssh/config",
+        "问题",
+        "所有",
+        "项目",
+        "版本",
+        "管理"
+      ]
+    },
+    "memory:memory/2026-06-12.md:1:38": {
+      "key": "memory:memory/2026-06-12.md:1:38",
+      "path": "memory/2026-06-12.md",
+      "startLine": 1,
+      "endLine": 38,
+      "source": "memory",
+      "snippet": "2026-06-12 15:15 - 视频分析管道 V3.1 开发 ================================================ ## Daryl决策 1. 默认采样策略：句子对齐采样（比2fps盲采精准，帧数与对白对齐） 2. 音频处理：始终跑Whisper/Google STT，不以字幕为准 - 理由：短视频字幕常和音频不一致（过审原因） ## V3.1 管道开发完成 已创建3个新文件： ### video_pipeline.py — 主流程编排器 - Step 0: 视频下载 (yt-dlp) + 内容预检（时长/静态帧占比/场景切换率） - Step 1: 音频提取 + Whisper STT（始终运行） - Step 2: 关键帧采样（A路句子对齐 / B路三层提取器） - Step 3: 音频×视觉交叉校验 - Step 4: 精确补帧（只补缺口区间） - Step 5: 互动数据（占位） - Step 6: 构造AI分析包 ### audio_transcriber.py — 音频转写模块 - Whisper (本地免费) + Google STT (API) - 音频提取: ffmpeg → 16kHz mono WAV - 句子清理: 合并过短片段/过近间隔 ### WORKFLOW_V3.md — 更新为V3.1 - 完整7步管道设计 - 决策记录 - 成本对比表 ## 句子对齐采样优势 - 6分钟视频: 360帧(1fps) → 180帧(2fps) → ~50帧(句子对齐) - 省86%成本，且每帧都",
+      "recallCount": 4,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.5553324311971664,
+      "maxScore": 0.42815935313701625,
+      "firstRecalledAt": "2026-06-23T14:21:00.293Z",
+      "lastRecalledAt": "2026-06-28T02:02:15.649Z",
+      "queryHashes": [
+        "67109dc67a6b",
+        "eaa00c35687a",
+        "5b06ea60bf92",
+        "dcf226e60454"
+      ],
+      "recallDays": [
+        "2026-06-23",
+        "2026-06-27",
+        "2026-06-28"
+      ],
+      "conceptTags": [
+        "v3.1",
+        "始终跑whisper/google",
+        "video-pipeline.py",
+        "yt-dlp",
+        "时长/静态帧占比/场景切换率",
+        "audio-transcriber.py",
+        "合并过短片段/过近间隔",
+        "workflow-v3.md"
+      ]
+    },
+    "memory:memory/2026-06-19.md:1:31": {
+      "key": "memory:memory/2026-06-19.md:1:31",
+      "path": "memory/2026-06-19.md",
+      "startLine": 1,
+      "endLine": 31,
+      "source": "memory",
+      "snippet": "# 2026-06-19 记忆 ## 视频分析 — 30fps 验证与策略调整 ### Daryl 具体反馈（10fps 报告） - 因果链 gaps：6s-15s 之间应有笑点 - 16s-18s「右手拿生蚝壳」应推理出「醉酒误认手机」 - 22s-24s「试图上车」→「冰箱内」缺少因果连接（应为「误认冰箱门为车门」） - 客观现实线应不止「误认冰箱门」一条 - 要求用 30fps 重新跑 ### 30fps 执行 - 🔧 修复合成 prompt 截断 bug（12000→30000 字符限制，增加覆盖率要求） - 📊 180 桶/1365 帧 Vision分析，$0.63，784s - ⚠️ 1317/1365 帧成功（48帧网络丢失） - 🗂️ 建立帧缓存和断点恢复机制 ### 30fps vs 10fps 对比 | Daryl 要求 | 10fps | 30fps | |-----------|-------|-------| | 6s-15s 笑点 | ❌空白 | ✅瓜子入杯(6.5-7s)+按烟灰缸(8.5-9.5s) | | 生蚝壳→手机 | ❌仅描述 | ✅「将生蚝壳当成手机滑动」 | | 主观视角线 | ❌无 | ✅4条完整 | | 喜剧节拍 | ❌无 | ✅5个+机制标注 | ### 新问题 - ⚠️ 30fps 因果链仅覆盖 0-17.5s，后半段(17.5-45.5s)消失 - ✅ 10fps 抓到的「冰箱门当车门」弧线在 30fps 中丢失 - 根因：LLM 合成阶段注意力分布不均，数据量增大反而导致覆盖退步 ### Daryl 最终",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.37458757460117337,
+      "maxScore": 0.37458757460117337,
+      "firstRecalledAt": "2026-06-23T14:21:06.652Z",
+      "lastRecalledAt": "2026-06-23T14:21:06.652Z",
+      "queryHashes": [
+        "eaa00c35687a"
+      ],
+      "recallDays": [
+        "2026-06-23"
+      ],
+      "conceptTags": [
+        "网络",
+        "6s-15s",
+        "16s-18s",
+        "22s-24s",
+        "桶/1365",
+        "0.63",
+        "1317/1365",
+        "6.5-7s"
+      ]
+    },
+    "memory:memory/2026-06-20.md:1:13": {
+      "key": "memory:memory/2026-06-20.md:1:13",
+      "path": "memory/2026-06-20.md",
+      "startLine": 1,
+      "endLine": 13,
+      "source": "memory",
+      "snippet": "# 2026-06-20 记忆 ## 视频分析 — 等待策略调整 - Daryl 6/19 判断当前方向不对，需要重新考虑策略 - 今日无新进展，等待 Daryl 下一步指示 - 关键认知（6/19已记录）：纯提升FPS不能自动解决因果链和故事完整性问题 ## 系统 - 无新的 xiaofeng 直接对话 - 多个 Agent（main, balance, self）执行每日记忆归档 cron - balance Agent 处理 RM-Database 文件迁移方案讨论 - 23:59 xiaofeng 每日记忆归档 cron 运行",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.741087159514427,
+      "maxScore": 0.38223571777343746,
+      "firstRecalledAt": "2026-06-23T14:21:06.652Z",
+      "lastRecalledAt": "2026-06-25T02:01:54.401Z",
+      "queryHashes": [
+        "eaa00c35687a",
+        "6b7d3f0169ce"
+      ],
+      "recallDays": [
+        "2026-06-23",
+        "2026-06-25"
+      ],
+      "conceptTags": [
+        "6/19",
+        "6/19已记录",
+        "rm-database",
+        "记忆",
+        "视频",
+        "分析",
+        "等待",
+        "策略"
+      ]
+    },
+    "memory:memory/archive/2026-05-03.md:1:59": {
+      "key": "memory:memory/archive/2026-05-03.md:1:59",
+      "path": "memory/archive/2026-05-03.md",
+      "startLine": 1,
+      "endLine": 59,
+      "source": "memory",
+      "snippet": "# 2026-05-03 记忆索引系统v3.1验收报告 ## 核心测试结果 ### 1. 身份绑定验证 ```python # 身份加载测试 load_identity('Bryson') → { '英文名': 'Bryson', '中文名': '吹点小风', '简称': '小风', '角色': '技术开发者/雅思陪练助手', '加载时间': '0.23s' } ``` ### 2. 跨会话记忆测试 ```javascript // 会话A (商业场景) storeMemory('用户偏好: 商业路演>学术讨论') // 会话B (技术场景) recallMemory('用户偏好') → '商业路演>学术讨论' (响应: 0.41s) ``` ### 3. 压力测试 (112身份/5000条目) ```csv 测试项,目标值,实测值,状态 请求成功率,≥95%,98.2%,✅ 并发响应,<1.0s,0.89s,✅ 内存占用,<150MB,142MB,✅ ``` ### 4. 异常处理 ```rust // 冲突注入测试 setIdentity(\"Bryson\") setIdentity(\"小风\") → [WARN] 身份冲突: \"小风\"是\"Bryson\"的别名 [SUGGEST] 使用switchIdentity(\"小风\")切换模式 // 崩溃恢复 模拟段错误 → 3.2秒回滚 (数据丢失: 0条) ``` ## 验收结论 ```json { \"总体状态\": \"通过\", \"严重问题\": 0, \"待优化项\": 1, \"生产部",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3967515707015991,
+      "maxScore": 0.3967515707015991,
+      "firstRecalledAt": "2026-06-25T02:01:54.401Z",
+      "lastRecalledAt": "2026-06-25T02:01:54.401Z",
+      "queryHashes": [
+        "6b7d3f0169ce"
+      ],
+      "recallDays": [
+        "2026-06-25"
+      ],
+      "conceptTags": [
+        "记忆索引系统v3.1验收报告",
+        "load-identity",
+        "技术开发者/雅思陪练助手",
+        "0.23s",
+        "0.41s",
+        "112身份/5000条目",
+        "98.2",
+        "1.0s"
+      ]
+    },
+    "memory:memory/archive/2026-05-17.md:1:24": {
+      "key": "memory:memory/archive/2026-05-17.md:1:24",
+      "path": "memory/archive/2026-05-17.md",
+      "startLine": 1,
+      "endLine": 24,
+      "source": "memory",
+      "snippet": "## Memory Flush @ 2026-05-17 16:28 (Asia/Saigon) ### Core Identity Compliance - User reconfirmed dual identity usage: - **Bryson**: Primary identity for technical development - **吹点小风**: IELTS coaching identity - Emoji signature: 🌬️ remains consistent ### Memory System Action Item ⚠️ *Priority*: Improve persistent name/identity recall (user's 3rd request) ### Archived Module Status - **Bryson Voice MVP**: Archived & available @ https://unwhispering-imani-digitately.ngrok-free.dev - **STT Module**: Archived & available (same domain) - Access permissions: Daryl-only modification rights ### System Note Flush completed without modification to: - SOUL.md - MEMORY.md - AGENTS.md - TOOLS.m",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.36554616689682007,
+      "maxScore": 0.36554616689682007,
+      "firstRecalledAt": "2026-06-25T02:01:54.401Z",
+      "lastRecalledAt": "2026-06-25T02:01:54.401Z",
+      "queryHashes": [
+        "6b7d3f0169ce"
+      ],
+      "recallDays": [
+        "2026-06-25"
+      ],
+      "conceptTags": [
+        "asia/saigon",
+        "name/identity",
+        "daryl-only",
+        "soul.md",
+        "memory.md",
+        "agents.md",
+        "tools.m",
+        "flush"
+      ]
+    },
+    "memory:memory/archive/2026-04-07.md:54:83": {
+      "key": "memory:memory/archive/2026-04-07.md:54:83",
+      "path": "memory/archive/2026-04-07.md",
+      "startLine": 54,
+      "endLine": 83,
+      "source": "memory",
+      "snippet": "### **下一步行动计划** 1. 为端口8082设置新的ngrok隧道 2. 提供新的测试链接给用户Daryl 3. 验证核心功能: 语音录制和TTS合成 4. 如果简易版本可行，再修复原服务器配置 **记录时间**: 2026年4月7日 00:02 (Asia/Saigon) --- ## **2026年4月7日下午 - 系统性诊断与解决方案实施** ### **用户反馈与重新评估** 用户Daryl指出：\"我们解决这个外部网络的问题已经花了有3-4天了\"，并要求进行系统性诊断。 ### **系统性技术诊断（2026-04-07 14:36开始）** **根本原因识别**： 1. **架构设计缺陷**: ngrok隧道指向端口8082（仅静态HTML），而Bryson API服务器在端口8081 2. **端口分离问题**: 前端与API分离在不同端口，ngrok无法同时代理 3. **症状表现**: 页面能加载但所有API请求失败，按钮点击无效 **技术验证**： - ✅ Bryson语音API服务器: 正常运行 (端口8081, 延迟7.51ms) - ✅ 独立HTTP服务器: 正常运行 (端口8082, 提供静态HTML) - ✅ ngrok隧道: 已建立 (但指向错误端口) - ❌ 当前架构: 端口分离导致功能断裂 ### **解决方案对比与决策** 提交三种方案给用户： 1. **方案A（推荐）**: 前端内嵌到Bryson服务器 (单一端口8081)",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.35396802723407744,
+      "maxScore": 0.35396802723407744,
+      "firstRecalledAt": "2026-06-25T03:19:52.201Z",
+      "lastRecalledAt": "2026-06-25T03:19:52.201Z",
+      "queryHashes": [
+        "f1f5b9681e8a"
+      ],
+      "recallDays": [
+        "2026-06-25"
+      ],
+      "conceptTags": [
+        "网络",
+        "asia/saigon",
+        "我们解决这个外部网络的问题已经花了有3-4天了",
+        "延迟7.51ms",
+        "下一步",
+        "行动",
+        "计划",
+        "设置"
+      ]
+    },
+    "memory:memory/2026-06-24.md:1:25": {
+      "key": "memory:memory/2026-06-24.md:1:25",
+      "path": "memory/2026-06-24.md",
+      "startLine": 1,
+      "endLine": 25,
+      "source": "memory",
+      "snippet": "# 2026-06-24 记忆 ## 视频分析交互Workflow · B站支持 + 分析质量修复 ### B站视频支持 ✅ - **根因**: yt-dlp 不识别 b23.tv 短链，且 B站 API 境外 IP 封锁 - **修复**: - 后端 `server.py` 新增 you-get 下载器（B站专用，境外可下载） - 前端 `index.html` 新增 `resolveB23Url()` 解析 b23.tv 短链（利用用户浏览器国内IP） - **文档**: `video_analyzer_app/VIDEO_DOWNLOAD_STRATEGY.md` ### 视频截断修复 ✅ - **根因**: ffmpeg `-t 180` 硬编码截断长视频，导致脚本解析只到 02:59 - **Daryl批评**: 只盯着删参数，没考虑全管道前后配合。不要为\"省空间\"牺牲\"分析质量\" - **修复**: 简化策略——压缩但不截断，仅 >50MB 触发关键帧（标注降级） - **原则**: 先对齐阶段目标（叙事正确），再搞分级复杂度（镜头/BGM 是 Phase 2） ### 脚本分析质量修复 ✅ - **根因**: `SCRIPT_ANALYSIS_PROMPT` 让 DeepSeek 直接接受 Gemini 解读，没有推理验证 - **Daryl指出错误**: - \"父亲挨揍\"→应该是\"儿子挨揍\"（角色关系核实失败） - \"忘作业\"→应该是\"故意留家里\"（动机深度不够） - **修复**: prompt 加入三步强制验证（角色关系、动机深度",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.1527490764856339,
+      "maxScore": 0.4006084054708481,
+      "firstRecalledAt": "2026-06-25T03:19:52.201Z",
+      "lastRecalledAt": "2026-06-28T02:02:15.649Z",
+      "queryHashes": [
+        "f1f5b9681e8a",
+        "5b06ea60bf92",
+        "dcf226e60454"
+      ],
+      "recallDays": [
+        "2026-06-25",
+        "2026-06-27",
+        "2026-06-28"
+      ],
+      "conceptTags": [
+        "yt-dlp",
+        "b23.tv",
+        "server.py",
+        "you-get",
+        "index.html",
+        "镜头/bgm",
+        "script-analysis-prompt",
+        "记忆"
+      ]
+    },
+    "memory:memory/archive/2026-04-08.md:67:92": {
+      "key": "memory:memory/archive/2026-04-08.md:67:92",
+      "path": "memory/archive/2026-04-08.md",
+      "startLine": 67,
+      "endLine": 92,
+      "source": "memory",
+      "snippet": "- 创建真正的独立Key，获得100%精确成本数据 - 无需复杂的分摊算法 ### **成本影响澄清**（重要修正） **我的错误假设**：原先认为创建独立Key会增加成本 **实际分析**：Daryl正确指出成本核心是token消耗，不是Key数量 - OpenRouter按**tokens消耗**计费，不是按API Key数量 - 相同工作负荷下，API调用次数基本一致，无论Key数量 - 费率不变：无论用1个key还是2个key，每1000个token的价格相同 ### **正确结论** 1. **独立Key不会增加OpenRouter成本**（主要成本是token，不是key数量） 2. **API调用次数基本一致**（工作负荷决定，不是key数量） 3. **主要差异是追踪精度和操作复杂度**： - 共享Key：基于调用模式的**算法分摊**（误差±15-20%） - 独立Key：**100%准确**的各自成本，无需分摊计算 ### **建议方案对比** 1. **最高精度需求** → 使用独立Key 2. **可接受中等精度** → 保持共享Key，优化分摊算法 3. **折中方案** → 关键项目用独立Key，其他共享 ### **我的开发模式调整** 基于\"项目驱动、需求导向\"的特点： - **不按时间段分段**（不像Kitty的固定时段） - **按项目/任务分段**：`project_<name>`, `feature_<name>`, `teaching_<type>`等",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3638269603252411,
+      "maxScore": 0.3638269603252411,
+      "firstRecalledAt": "2026-06-26T03:58:47.200Z",
+      "lastRecalledAt": "2026-06-26T03:58:47.200Z",
+      "queryHashes": [
+        "ee3dddd16362"
+      ],
+      "recallDays": [
+        "2026-06-26"
+      ],
+      "conceptTags": [
+        "router",
+        "15-20",
+        "按项目/任务分段",
+        "创建",
+        "真正",
+        "独立",
+        "key",
+        "获得"
+      ]
+    },
+    "memory:memory/archive/2026-03-28.md:1:29": {
+      "key": "memory:memory/archive/2026-03-28.md:1:29",
+      "path": "memory/archive/2026-03-28.md",
+      "startLine": 1,
+      "endLine": 29,
+      "source": "memory",
+      "snippet": "# 2026-03-28 项目进展与成本管理 ## 关键事件记录 ### 用户交互（15:20） - **用户Daryl**在飞书群聊中明确要求成本汇报：“Bryson，把你目前的成本情况给我做个汇报吧” - **语境分析**：用户关注项目财务健康状况，希望确认预算使用情况 - **深层需求**：验证前期基础能力建设价值，决定是否推进核心功能开发 ### 用户偏好确认（15:35） - **重要习惯发现**：用户Daryl明确要求所有成本报告必须发送到当前聊天的**私聊对话框** - **指令清晰**：“我指的是在私聊框中没收到完整的成本报告，请你学习我这个习惯” - **记忆更新**：未来所有成本汇报请求，**必须直接回复到当前私聊对话**，不得发送到群聊或其他渠道 ### 成本汇报详情（私聊完整版） **时间截点**：2026-03-28 15:20 (Asia/Saigon) #### 财务数据概览 - **总预算**：$550 - **已使用成本**：$72（纯文本陪练框架开发） - **剩余预算**：$478 - **预警阈值**：$300（54.5%预算使用率） - **当前使用率**：13.1% - **距离预警线**：$228（安全边际充分） #### 预算阶段分析 | 阶段 | 预算 | 实际成本 | 状态 | |------|------|----------|------| | 基础能力阶段 | $72 | $72 | ✅ 100%完成 |",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3634777992963791,
+      "maxScore": 0.3634777992963791,
+      "firstRecalledAt": "2026-06-26T03:58:47.200Z",
+      "lastRecalledAt": "2026-06-26T03:58:47.200Z",
+      "queryHashes": [
+        "ee3dddd16362"
+      ],
+      "recallDays": [
+        "2026-06-26"
+      ],
+      "conceptTags": [
+        "asia/saigon",
+        "54.5",
+        "13.1",
+        "项目",
+        "进展",
+        "成本",
+        "管理",
+        "关键"
+      ]
+    },
+    "memory:memory/2026-06-24.md:21:40": {
+      "key": "memory:memory/2026-06-24.md:21:40",
+      "path": "memory/2026-06-24.md",
+      "startLine": 21,
+      "endLine": 40,
+      "source": "memory",
+      "snippet": "- \"父亲挨揍\"→应该是\"儿子挨揍\"（角色关系核实失败） - \"忘作业\"→应该是\"故意留家里\"（动机深度不够） - **修复**: prompt 加入三步强制验证（角色关系、动机深度、逻辑连贯性） ### 镜头&声音分析优化 ✅ - **Daryl指出**: 情景剧不该全维度均等分析，要详略得当。剪辑节奏对留存率贡献大 - **修复**: `CINEMATOGRAPHY_PROMPT` 加入类型感知——先判断内容类型→识别有分析价值的维度→深挖重点/一笔带过 - **输出新字段**: `_contentType`, `_visualComplexity`, `_deepDims`, `_shallowDims` ### 待明天继续 - [ ] 重跑 B站视频验证脚本分析修复效果 - [ ] 前端镜头 Tab 适配新的元数据展示 - [ ] Daryl 可能还有更多问题需要指出 ### Daryl 的核心反馈 - 不要过度设计 → 对齐当前阶段目标再搭框架 - 修改 pipeline 任一部分要拉通前后链路思考 - 分析质量 > 文件大小，不要为了省空间牺牲分析能力 - 工具不是问题，prompt 的深度决定分析质量",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3744876891374588,
+      "maxScore": 0.3744876891374588,
+      "firstRecalledAt": "2026-06-27T08:22:15.567Z",
+      "lastRecalledAt": "2026-06-27T08:22:15.567Z",
+      "queryHashes": [
+        "5b06ea60bf92"
+      ],
+      "recallDays": [
+        "2026-06-27"
+      ],
+      "conceptTags": [
+        "cinematography-prompt",
+        "深挖重点/一笔带过",
+        "父亲",
+        "挨揍",
+        "应该",
+        "儿子",
+        "角色",
+        "关系"
+      ]
+    },
+    "memory:memory/2026-06-27.md:1:27": {
+      "key": "memory:memory/2026-06-27.md:1:27",
+      "path": "memory/2026-06-27.md",
+      "startLine": 1,
+      "endLine": 27,
+      "source": "memory",
+      "snippet": "# 2026-06-27 记忆 ## 视频分析交互Workflow v1.1.0 交付 ### Daryl 五项迭代需求（全量完成） 1. **对白滚动条**: 半透明6px滚动条 + overscroll-behavior:contain 隔离滚动链 2. **Sidebar左置**: 从app内部移至body最左侧全高常驻，预留洗稿工坊/选题看板扩展位 3. **顶栏精简**: 去视频标签框/Demo按钮，增加CSS动画进度条，状态完成显示⏱分析用时(Xs) 4. **Tab重构**: 删「标记」Tab→新序：内容总览/脚本解析/镜头声音/复刻模板/标记笔记，模板后移留联动接口 5. **商业数据抓取**: server.py新增/api/commerce端点+fetch_commerce_data()，支持B站API+YouTube页面解析，分析完成后自动获取 ### 技术要点 - 布局重构: body flex row → sidebar(56px) + main-area(flex:1) - 进度条: CSS indeterminate动画替代内容区步骤文字 - B站API: /x/web-interface/view?bvid= 获取view/like/fav/share - YT: oembed获取元信息 + 页面正则提取viewCount/likeCount - 版号: 1.0.0 → 1.1.0（VERSION文件 + index.html/health端点） ### 产物 - video_analyzer_app/index.html（重写，~930",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.6666441658624778,
+      "maxScore": 0.6666441658624778,
+      "firstRecalledAt": "2026-06-28T02:02:15.649Z",
+      "lastRecalledAt": "2026-06-28T02:02:15.649Z",
+      "queryHashes": [
+        "dcf226e60454"
+      ],
+      "recallDays": [
+        "2026-06-28"
+      ],
+      "conceptTags": [
+        "v1.1.0",
+        "overscroll-behavior",
+        "预留洗稿工坊/选题看板扩展位",
+        "去视频标签框/demo按钮",
+        "内容总览/脚本解析/镜头声音/复刻模板/标记笔记",
+        "server.py新增/api/commerce端点",
+        "fetch-commerce-data",
+        "main-area"
+      ]
+    }
+  }
+}
