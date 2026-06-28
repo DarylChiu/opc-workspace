@@ -142,7 +142,8 @@ async def ws_chat(ws: WebSocket, sid: str):
     stt_buf = b""
     history = [{"role": "system", "content": SYSTEM_PROMPTS.get(mode, SYSTEM_PROMPTS["free_talk"])}]
     last_audio = time.time()
-    muted = False  # mute during AI speaking to avoid echo
+    muted = False
+    user_texts = []  # mute during AI speaking to avoid echo
 
     async def send_text(text, is_user=False):
         nonlocal last_audio
@@ -169,6 +170,7 @@ async def ws_chat(ws: WebSocket, sid: str):
         if not text or len(text.strip()) < 2: return
 
         logger.info(f"STT: {text[:80]}")
+        user_texts.append(text)
         await send_text(text, is_user=True)
         history.append({"role": "user", "content": text})
 
@@ -223,23 +225,38 @@ async def ws_chat(ws: WebSocket, sid: str):
                 stt_buf += base64.b64decode(msg.get("data", ""))
                 last_audio = time.time()
 
-            elif t == "evaluate":
-                # Quick score for last user utterance
-                if len(history) < 3: continue
-                last_user = next((m["content"] for m in reversed(history) if m["role"]=="user"), "")
-                if not last_user: continue
+            elif t == "evaluate_final":
+                # Final comprehensive evaluation of all user utterances
+                if not user_texts:
+                    user_texts_ws = [m["content"] for m in history if m["role"] == "user"]
+                else:
+                    user_texts_ws = user_texts
+                if not user_texts_ws: continue
 
+                all_text = "\n---\n".join(user_texts_ws[-10:])
                 score_prompt = [
-                    {"role":"system","content":"""You are an IELTS speaking evaluator. Score the user's last response on 4 dimensions (0-9 scale). Return ONLY valid JSON:
-{"fluency":X.X, "vocabulary":X.X, "grammar":X.X, "pronunciation":X.X, "note":"one brief improvement tip in Chinese"}"""},
-                    {"role":"user","content": f"Score this speaking response:\n\"{last_user}\""}
+                    {"role":"system","content":"""You are an IELTS speaking evaluator. Based on the user's complete conversation, provide a comprehensive assessment.
+Return ONLY valid JSON:
+{
+  "fluency": X.X,
+  "vocabulary": X.X,
+  "grammar": X.X,
+  "pronunciation": X.X,
+  "overall": X.X,
+  "summary": "2-3 sentence overall assessment in English",
+  "improvements": ["specific grammar/phrasing issue with correction, e.g. 'You said X — better to say Y'", ...],
+  "highlights": ["specific good usage the user did well, e.g. 'Good use of natural phrase X when describing Y'", ...]
+}
+Provide 2-4 improvements and 2-3 highlights. All text in English."""},
+                    {"role":"user","content": f"Evaluate this IELTS speaking conversation:\n{all_text}"}
                 ]
-                result = await ds_chat(DEEPSEEK_KEY, DEEPSEEK_BASE, score_prompt, max_tokens=150, temperature=0.3)
+                result = await ds_chat(DEEPSEEK_KEY, DEEPSEEK_BASE, score_prompt, max_tokens=400, temperature=0.3)
                 try:
                     scores = json.loads(result)
-                    await ws.send_json({"type":"score","scores":scores,"note":scores.get("note","")})
+                    await ws.send_json({"type":"score","scores":scores})
+                    logger.info(f"Final score: overall={scores.get('overall')}")
                 except:
-                    logger.debug(f"Score parse failed: {result[:80]}")
+                    logger.debug(f"Score parse fail: {result[:80]}")
 
             elif t == "mode":
                 m = msg.get("mode")
