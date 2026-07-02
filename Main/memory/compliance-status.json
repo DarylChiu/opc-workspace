@@ -1,0 +1,16 @@
+{
+  "timestamp": "2026-06-29T01:06:22Z",
+  "health": "DEGRADED",
+  "passes": 5,
+  "issues": 1,
+  "issue_list": [
+  "active.md 超过48小时未更新（332h）"
+],
+  "pass_list": [
+  "identity.md 存在且非空",
+  "active.md 存在且非空",
+  "workflow-rules.md 存在且非空",
+  "AGENTS.md 存在且非空",
+  "今日日记 2026-06-29.md 存在"
+]
+}
