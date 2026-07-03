@@ -1,0 +1,16 @@
+{
+  "lastChecks": {
+    "system_health": 1745742400,
+    "gateway": 1745742400,
+    "ngrok": 1745742400,
+    "aggregated_gateway": 1745742400,
+    "services": 1745742400
+  },
+  "lastFullCheck": "2026-04-27 10:26 UTC",
+  "notes": {
+    "gateway_process": "77913 running",
+    "ngrok_tunnel": "gateway-aggregated active",
+    "aggregated_gateway": "8050 healthy",
+    "exec_error_mentioned": "dawn-rid exec failed (code 0) but main gateway running"
+  }
+}
