@@ -91,3 +91,22 @@
   "🔴 active.md 需更新 — 有新任务变更但 32 小时未动",
   "🔴 今日日记缺失 — 必须创建"
 ]}
+{"timestamp":"2026-06-28T20:18:45+0700","check":"post-op","task":"Phase 1 管线1完成: 6文件/910行/3模式自测通过","score":2,"total":5,"warnings":[
+  ""
+]}
+{"timestamp":"2026-06-29T15:22:23+0700","check":"post-op","task":"Phase3评估引擎+报告+持久化+成本仪表板","score":2,"total":5,"warnings":[
+  "🔴 今日日记疑似 Cron 骨架（11行, 2段落, 仅Cron事件）— 必须补充实际内容"
+]}
+{"timestamp":"2026-06-29T22:53:50+0700","check":"post-op","task":"今日日终记忆系统更新：日记补充+lessons更新+active.md更新","score":3,"total":5,"warnings":[
+  ""
+]}
+{"timestamp":"2026-07-02T19:56:15+0700","check":"post-op","task":"语音交互Debug验收模块 Phase 1+2 完成：debug_logger.py后端诊断采集+独立debug面板前端","score":1,"total":5,"warnings":[
+  "🔴 active.md 需更新 — 有新任务变更但 19 小时未动",
+  "🔴 今日日记疑似 Cron 骨架（5行, 1段落, 仅Cron事件）— 必须补充实际内容",
+  "📝 必须补充今日日记（当前为Cron骨架）: 语音交互Debug验收模块 Phase 1+2 完成：debug_logger.py后端诊断采集+独立debug面板前端",
+  "🔴 任务涉及问题/失败/审计发现，建议提炼到 lessons.md"
+]}
+{"timestamp":"2026-07-03T08:29:36+0700","check":"post-op","task":"将debug面板整合进IELTS Tutor v2.0主前端，作为Assessment旁边的tab模块","score":2,"total":5,"warnings":[
+  "🔴 今日日记缺失 — 必须创建",
+  "🔴 任务涉及问题/失败/审计发现，建议提炼到 lessons.md"
+]}
