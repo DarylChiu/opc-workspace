@@ -1,0 +1,63 @@
+{"timestamp":"2026-06-15T00:03:01+0700","check":"L4-audit","fixes":0,"issues":1}
+{"timestamp":"2026-06-15T00:03:34+0700","check":"L4-audit","fixes":0,"issues":0}
+{"timestamp":"2026-06-15T00:05:47+0700","check":"L4-audit","fixes":0,"issues":0}
+{"timestamp":"2026-06-15T10:52:05+0700","check":"L4-audit","fixes":0,"issues":0}
+{"timestamp":"2026-06-15T10:56:14+0700","check":"post-op","task":"Soul.md 写入数字资产保护 T0 规则","score":3,"total":5,"warnings":[
+  ""
+]}
+{"timestamp":"2026-06-15T23:59:00+0700","check":"L4-audit","fixes":0,"issues":0}
+{"timestamp":"2026-06-16T00:08:14+0700","check":"L4-audit","fixes":0,"issues":1}
+{"timestamp":"2026-06-16T00:08:28+0700","check":"L4-audit","fixes":0,"issues":0}
+{"timestamp":"2026-06-16T23:59:02+0700","check":"L4-audit","fixes":0,"issues":1}
+{"timestamp":"2026-06-17T00:02:03+0700","check":"L4-audit","fixes":0,"issues":2}
+{"timestamp":"2026-06-17T00:02:18+0700","check":"L4-audit","fixes":0,"issues":0}
+{"timestamp":"2026-06-17T23:59:05+0700","check":"L4-audit","fixes":0,"issues":0}
+{"timestamp":"2026-06-18T00:23:21+0700","check":"L4-audit","fixes":0,"issues":1}
+{"timestamp":"2026-06-18T00:23:38+0700","check":"L4-audit","fixes":0,"issues":0}
+{"timestamp":"2026-06-18T23:59:04+0700","check":"L4-audit","fixes":0,"issues":1}
+{"timestamp":"2026-06-19T00:02:35+0700","check":"L4-audit","fixes":0,"issues":2}
+{"timestamp":"2026-06-19T00:02:47+0700","check":"L4-audit","fixes":0,"issues":0}
+{"timestamp":"2026-06-19T07:19:03+0700","check":"post-op","task":"创建行为心理学和人格障碍框架文档","score":3,"total":5,"warnings":[
+  ""
+]}
+{"timestamp":"2026-06-19T23:59:02+0700","check":"L4-audit","fixes":0,"issues":0}
+{"timestamp":"2026-06-20T00:02:30+0700","check":"L4-audit","fixes":0,"issues":1}
+{"timestamp":"2026-06-20T00:02:40+0700","check":"L4-audit","fixes":0,"issues":0}
+{"timestamp":"2026-06-20T23:59:00+0700","check":"L4-audit","fixes":0,"issues":1}
+{"timestamp":"2026-06-21T00:05:25+0700","check":"L4-audit","fixes":0,"issues":2}
+{"timestamp":"2026-06-21T00:05:39+0700","check":"L4-audit","fixes":0,"issues":0}
+{"timestamp":"2026-06-22T00:02:05+0700","check":"L4-audit","fixes":0,"issues":1}
+{"timestamp":"2026-06-22T00:02:15+0700","check":"L4-audit","fixes":0,"issues":0}
+{"timestamp":"2026-06-22T16:29:57+0700","check":"post-op","task":"Balance知识网络更新归档：VAS知识树4节点+跨境对比网络3节点创建完成","score":3,"total":5,"warnings":[
+  ""
+]}
+{"timestamp":"2026-06-22T16:33:32+0700","check":"post-op","task":"归纳Balance两份越南会计报告并加入知识网络：新建VAS差错更正实操指南+英联邦全域禁止调查，更新Cross-Border-Home/VAS-Home/VAS-29/CIT-Overprovision关联","score":3,"total":5,"warnings":[
+  ""
+]}
+{"timestamp":"2026-06-23T00:03:26+0700","check":"L4-audit","fixes":0,"issues":1}
+{"timestamp":"2026-06-23T00:03:42+0700","check":"L4-audit","fixes":0,"issues":0}
+{"timestamp":"2026-06-24T00:02:28+0700","check":"L4-audit","fixes":0,"issues":2}
+{"timestamp":"2026-06-24T00:02:42+0700","check":"L4-audit","fixes":0,"issues":0}
+{"timestamp":"2026-06-25T00:01:46+0700","check":"L4-audit","fixes":0,"issues":1}
+{"timestamp":"2026-06-25T00:01:57+0700","check":"L4-audit","fixes":0,"issues":0}
+{"timestamp":"2026-06-25T08:38:49+0700","check":"post-op","task":"Daryl追问日记缺失根因+补全6/23-6/24日记+修复post-op脚本关键词匹配","score":2,"total":5,"warnings":[
+  "🟡 考虑更新 active.md — 有任务修改且已 32 小时"
+]}
+{"timestamp":"2026-06-28T13:49:36+0700","check":"post-op","task":"方法论卡片系统搭建：Obsidian vault + OPC看板集成方案 + AI技术知识树归档","score":2,"total":5,"warnings":[
+  "🔴 active.md 需更新 — 有新任务变更但 13 小时未动"
+]}
+{"timestamp":"2026-06-28T13:50:07+0700","check":"post-op","task":"方法论卡片系统搭建：Obsidian vault + OPC看板集成方案 + AI技术知识树归档","score":3,"total":5,"warnings":[
+  ""
+]}
+{"timestamp":"2026-07-01T22:53:08+0700","check":"post-op","task":"Future Textile-Wellname 股东借款利息处理案例加入知识树","score":3,"total":5,"warnings":[
+  ""
+]}
+{"timestamp":"2026-07-01T22:55:09+0700","check":"post-op","task":"验证并更新Balance的FutureTextile-Wellname案例归档索引","score":2,"total":5,"warnings":[
+  "🟡 考虑更新 active.md — 有任务修改且已 22 小时"
+]}
+{"timestamp":"2026-07-01T22:55:22+0700","check":"post-op","task":"验证并更新Balance的FutureTextile-Wellname案例归档索引","score":3,"total":5,"warnings":[
+  ""
+]}
+{"timestamp":"2026-07-02T09:31:10+0700","check":"post-op","task":"关联方与股东借款知识树搭建 — IAS 24/IFRS 9/IAS 32/VAS 26 四节点+Cross-Border专题Hub页+案例链接更新","score":3,"total":5,"warnings":[
+  ""
+]}

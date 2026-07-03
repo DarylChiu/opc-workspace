@@ -1,0 +1,289 @@
+{
+  "version": 1,
+  "updatedAt": "2026-07-03T07:48:20.930Z",
+  "entries": {
+    "memory:memory/2026-06-22.md:22:34": {
+      "key": "memory:memory/2026-06-22.md:22:34",
+      "path": "memory/2026-06-22.md",
+      "startLine": 22,
+      "endLine": 34,
+      "source": "memory",
+      "snippet": "- `01-Financial/VAS/Circular-99-2025/Circular-99-2025-Overview.md` — 新制度过渡（含 IFRS 15 + SFP术语） - `01-Financial/VAS/Circular-99-2025/IFRS-15-Impact-on-Vietnam-Revenue.md` — 🆕 IFRS 15 对越南收入确认的冲击（3场景+3税种传导+耦合推理链） - `01-Financial/Cross-Border/Cross-Border-Home.md` — 对比网络入口 - `01-Financial/Cross-Border/VAS-vs-IFRS-Philosophy.md` — 科目表导向 vs 准则导向 - `01-Financial/Cross-Border/Three-Jurisdiction-FS-Tax-Coupling.md` — 三地耦合度模型 - `01-Financial/Cross-Border/CIT-Overprovision-Reversal-Comparison.md` — 案例对比（已扩展：CIT-on-CIT效应 + Error vs Estimate判定 + P&L列报对比 + IAS 8.49披露要求） - **报告归档**: Balance 2份研究报告已复制到 `reports/balance/` - **核心洞察**: 1. VAS/IFRS 差异的本质是「科目表导向 vs 准则导向」的操作系统级差异 2. 越南审计师走 TK 711",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7855960428714752,
+      "maxScore": 0.42359391152858733,
+      "firstRecalledAt": "2026-06-23T01:11:55.954Z",
+      "lastRecalledAt": "2026-07-01T15:51:59.663Z",
+      "queryHashes": [
+        "320339ac2bbc",
+        "bde6514eef32"
+      ],
+      "recallDays": [
+        "2026-06-23",
+        "2026-07-01"
+      ],
+      "conceptTags": [
+        "网络",
+        "cit-on-cit效应",
+        "8.49披露要求",
+        "reports/balance",
+        "vas/ifrs",
+        "financial",
+        "vas",
+        "circular"
+      ]
+    },
+    "memory:memory/2026-06-22.md:60:69": {
+      "key": "memory:memory/2026-06-22.md:60:69",
+      "path": "memory/2026-06-22.md",
+      "startLine": 60,
+      "endLine": 69,
+      "source": "memory",
+      "snippet": "1. VAS Circular 200科目表导向 vs IFRS准则导向 → 哲学差异节点已有系统性论证 2. 英联邦全域禁止前期税项差错进入Other Income → 独立调查节点（UK/AU/SG/HK/MY/NZ/CA/ZA/IN） 3. 越南FS-税表紧耦合 vs 中国香港解耦 → 耦合度模型已有完整论证 4. Circular 99/2025将于2026年起取代Circular 200 → 新制度过渡节点已有分析 ## 待跟进 - 已在 OPC 群聊向 Daryl/Balance 汇报知识网络更新完成 - Circular 99/2025 全文待获取验证 - Daryl 校准后的首次实际对抗待触发",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7138050556182861,
+      "maxScore": 0.35916271805763245,
+      "firstRecalledAt": "2026-06-23T01:11:55.954Z",
+      "lastRecalledAt": "2026-07-02T01:34:29.969Z",
+      "queryHashes": [
+        "320339ac2bbc",
+        "0e624d92beca"
+      ],
+      "recallDays": [
+        "2026-06-23",
+        "2026-07-02"
+      ],
+      "conceptTags": [
+        "网络",
+        "uk/au/sg/hk/my/nz/ca/za/in",
+        "越南fs-税表紧耦合",
+        "99/2025将于2026年起取代circular",
+        "daryl/balance",
+        "99/2025",
+        "vas",
+        "circular"
+      ]
+    },
+    "memory:memory/2026-06-22.md:45:62": {
+      "key": "memory:memory/2026-06-22.md:45:62",
+      "path": "memory/2026-06-22.md",
+      "startLine": 45,
+      "endLine": 62,
+      "source": "memory",
+      "snippet": "- 已补建 `IFRS-15-Impact-on-Vietnam-Revenue.md`（3场景+3税种+耦合推理链） ## 当前状态 - 记忆系统运行正常 - 合规脚本全部就绪 - VAS 知识树已初始化（4节点） - 跨境对比网络已初始化（3节点 + 首页） ### 第二轮归档：实操指南 + 英联邦调查 (同日，Balance → Self 经 Daryl 批准) - **来源**: Balance 两份完整报告（越南会计差错调整法规指导 + VAS-vs-IFRS CIT前期多计提冲回对比），Daryl 附四条核心结论 - **Vault 新增文件** (2个): - `01-Financial/VAS/VAS-29-Errors/VAS-Error-Correction-Practical-Guide.md` — 📐 完整实操指南（决策树+5场景分录模板+税务风险梯度+行动清单） - `01-Financial/Cross-Border/Commonwealth-Tax-Error-Prohibition.md` — 英联邦9司法管辖区全域禁止调查 - **Vault 更新文件** (4个): Cross-Border-Home.md / VAS-Home.md / VAS-29-Changes...md / CIT-Overprovision-Reversal-Comparison.md（交叉链接补全） - **四条核心结论已纳入知识网络**： 1. VAS Circular 200科目表导向 vs IFRS准则导向 → 哲学差异节点已有系统性论证",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.35269947350025177,
+      "maxScore": 0.35269947350025177,
+      "firstRecalledAt": "2026-06-23T01:11:55.954Z",
+      "lastRecalledAt": "2026-06-23T01:11:55.954Z",
+      "queryHashes": [
+        "320339ac2bbc"
+      ],
+      "recallDays": [
+        "2026-06-23"
+      ],
+      "conceptTags": [
+        "网络",
+        "vas-vs-ifrs",
+        "cross-border-home.md",
+        "vas-home.md",
+        "vas-29-changes",
+        "ifrs",
+        "impact",
+        "vietnam"
+      ]
+    },
+    "memory:memory/2026-06-29.md:1:21": {
+      "key": "memory:memory/2026-06-29.md:1:21",
+      "path": "memory/2026-06-29.md",
+      "startLine": 1,
+      "endLine": 21,
+      "source": "memory",
+      "snippet": "# 2026-06-29 日记 ## 关键事件 ### 方法论卡片审批系统搭建（Daryl × Self 讨论） - **决策链**：飞书文档（静态无交互）→ Bitable（缺权限）→ OPC看板 sidebar 第6模块（最终方案） - **产出**： - `~/methodology-cards/` standalone Obsidian vault（Git + cron备份） - 2张卡片：胭脂扣/双层分离法 + VAS/FDI外部压力驱动 - Kitty 提供 OPC看板完整资料 - **Daryl 核心决策**：审批入 OPC 统一系统，不走飞书外部工具 ### AI技术知识树·案例归档 - Bryson 传递「视频分析交互Workflow」完整归档 - 已归纳到 `knowledge-base/AI技术/视频分析交互Workflow/工程开发经验.md` - 覆盖：管线架构、前后端协作、迭代流程、多平台适配、CSS坑、版号管理 ### 交付物 - `~/methodology-cards/` — 8 files, 2 commits - `knowledge-base/AI技术/视频分析交互Workflow/工程开发经验.md` — 新增",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.38127408027648924,
+      "maxScore": 0.38127408027648924,
+      "firstRecalledAt": "2026-06-28T15:59:37.021Z",
+      "lastRecalledAt": "2026-06-28T15:59:37.021Z",
+      "queryHashes": [
+        "f4c8d50bb371"
+      ],
+      "recallDays": [
+        "2026-06-28"
+      ],
+      "conceptTags": [
+        "备份",
+        "methodology-cards",
+        "胭脂扣/双层分离法",
+        "vas/fdi外部压力驱动",
+        "日记",
+        "关键",
+        "事件",
+        "方法"
+      ]
+    },
+    "memory:memory/2026-06-28.md:1:26": {
+      "key": "memory:memory/2026-06-28.md:1:26",
+      "path": "memory/2026-06-28.md",
+      "startLine": 1,
+      "endLine": 26,
+      "source": "memory",
+      "snippet": "# 2026-06-28 日记（星期日） ## 关键事件 ### 记忆 Cron 审计（00:03） - 执行 audit.sh --report - 发现 4 浅层 + 2 深层问题，1 项已自动修复（日记骨架创建） - **7 个活跃 session 告警**: 午夜边界 false positive（6/27 残留进程），与 6/27 同日模式一致 - active.md 更新 timestamp（上次 6/25 → 今 6/28） - 日记从骨架补全为真实内容 ## 当日状态 - 🕐 午夜刚开始，暂无实质业务活动 - 昨日（6/27）日记完整，记忆系统健康 - 审计结果：修复后全部问题已关闭 ## 进行中项目 - ACCA F1 知识库建设（20 章节全部完成，待 Daryl 验收） - VAS 知识树 + 跨境对比网络 - OPC看板方法论卡片集成（待 Daryl 确认方向） ## 等待 Daryl - [ ] 确认 OPC看板方法论卡片集成方向 - [ ] 发送第一批手写笔记 + 录音 - [ ] 确认心理学域子分类",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.36349444687366483,
+      "maxScore": 0.36349444687366483,
+      "firstRecalledAt": "2026-06-28T16:00:41.416Z",
+      "lastRecalledAt": "2026-06-28T16:00:41.416Z",
+      "queryHashes": [
+        "4897c34c4feb"
+      ],
+      "recallDays": [
+        "2026-06-28"
+      ],
+      "conceptTags": [
+        "网络",
+        "audit.sh",
+        "6/27",
+        "active.md",
+        "6/25",
+        "6/28",
+        "日记",
+        "星期日"
+      ]
+    },
+    "memory:memory/2026-06-27.md:1:25": {
+      "key": "memory:memory/2026-06-27.md:1:25",
+      "path": "memory/2026-06-27.md",
+      "startLine": 1,
+      "endLine": 25,
+      "source": "memory",
+      "snippet": "# 2026-06-27 日记（星期六） ## 关键事件 ### 记忆 Cron 审计（00:05） - 执行 audit.sh --report - 当日日记缺失 → 自动创建骨架（已修复为完整内容） - **9 个活跃 session 告警**: 经核实均为 6/26 残留或 Cron 自身进程，午夜边界 false positive - 审计 flag 2 深层 + 3 浅层均为边界误报机制触发的已知模式 - 补充完整日记后状态正常 ## 当日状态 - 🕐 午夜刚开始，暂无实质业务活动 - 昨日（6/26）日记完整（20 行），记忆系统健康 ## 进行中项目 - ACCA F1 知识库建设 - VAS 知识树 + 跨境对比网络 - OPC看板方法论卡片集成（待 Daryl 确认方向） ## 等待 Daryl - [ ] 确认 OPC看板方法论卡片集成方向 - [ ] 发送第一批手写笔记 + 录音 - [ ] 确认心理学域子分类",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.35638075768947597,
+      "maxScore": 0.35638075768947597,
+      "firstRecalledAt": "2026-06-28T16:00:41.416Z",
+      "lastRecalledAt": "2026-06-28T16:00:41.416Z",
+      "queryHashes": [
+        "4897c34c4feb"
+      ],
+      "recallDays": [
+        "2026-06-28"
+      ],
+      "conceptTags": [
+        "网络",
+        "audit.sh",
+        "6/26",
+        "日记",
+        "星期六",
+        "关键",
+        "事件",
+        "记忆"
+      ]
+    },
+    "memory:memory/2026-06-29.md:1:22": {
+      "key": "memory:memory/2026-06-29.md:1:22",
+      "path": "memory/2026-06-29.md",
+      "startLine": 1,
+      "endLine": 22,
+      "source": "memory",
+      "snippet": "# 2026-06-29 日记 ## 关键事件 ### 方法论卡片审批系统搭建（Daryl × Self 讨论） - **决策链**：飞书文档（静态无交互）→ Bitable（缺权限）→ OPC看板 sidebar 第6模块（最终方案） - **产出**： - `~/methodology-cards/` standalone Obsidian vault（Git + cron备份） - 2张卡片：胭脂扣/双层分离法 + VAS/FDI外部压力驱动 - Kitty 提供 OPC看板完整资料 - **Daryl 核心决策**：审批入 OPC 统一系统，不走飞书外部工具 ### AI技术知识树·案例归档 - Bryson 传递「视频分析交互Workflow」完整归档 - 已归纳到 `knowledge-base/AI技术/视频分析交互Workflow/工程开发经验.md` - 覆盖：管线架构、前后端协作、迭代流程、多平台适配、CSS坑、版号管理 ### 贷款材料自动化处理 v2 完整版（10:00-10:12） - **触发**: Daryl 反馈 v1 四文件过于骨架化 → 要求重写为完整版 - **数据来源**: Balance 跨 session trajectory 数据回溯（4 轮 v2.3 运行日志 + process_results 结构 + 处理报告 + active.md） - **产出**: 4 个文件重写（共 832 行/34KB），从骨架扩展为操作级细节： - Home.md: 两批次对比表 + 项目里程碑 + 输出物清单",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3697025328874588,
+      "maxScore": 0.3697025328874588,
+      "firstRecalledAt": "2026-07-02T02:27:53.204Z",
+      "lastRecalledAt": "2026-07-02T02:27:53.204Z",
+      "queryHashes": [
+        "6f2bc2d1b0b1"
+      ],
+      "recallDays": [
+        "2026-07-02"
+      ],
+      "conceptTags": [
+        "备份",
+        "methodology-cards",
+        "胭脂扣/双层分离法",
+        "vas/fdi外部压力驱动",
+        "00-10",
+        "v2.3",
+        "process-results",
+        "active.md"
+      ]
+    },
+    "memory:memory/2026-06-22.md:1:24": {
+      "key": "memory:memory/2026-06-22.md:1:24",
+      "path": "memory/2026-06-22.md",
+      "startLine": 1,
+      "endLine": 24,
+      "source": "memory",
+      "snippet": "# 2026-06-22 日记 ## 关键事件 ### 记忆 Cron 审计（00:01） - 执行 audit.sh --report - 发现问题： - 今日日记缺失 → 已创建本文件 - 其他检查项（active.md、lessons.md、归档、MEMORY.md）均正常 - 修复完成，审计通过 ## 知识网络建设 ### VAS 知识树 + 跨境对比网络初始化 (Balance 归档 → Self 归纳) - **来源**: Balance 2026-06-22 越南会计差错调整法规研究归档（两次传输） - **Vault 新增文件** (7→10个，本轮+3): - `01-Financial/VAS/VAS-Home.md` — VAS 知识树入口（已扩展：+Accounting Law 2015, +CIT Laws） - `01-Financial/VAS/VAS-29-Errors/VAS-29-Changes-in-Accounting-Estimates-and-Errors.md` — 差错更正核心节点 - `01-Financial/VAS/VAS-29-Errors/VAS-29-Journal-Entry-Templates.md` — 🆕 5场景分录模板库 - `01-Financial/VAS/VAS-29-Errors/VAS-29-Tax-Side-Impact.md` — 🆕 税务侧详解（滞纳金/罚款/时效） - `01-Financial/VAS/Circular-200/Circular-200-",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.36712983548641204,
+      "maxScore": 0.36712983548641204,
+      "firstRecalledAt": "2026-07-02T02:27:53.204Z",
+      "lastRecalledAt": "2026-07-02T02:27:53.204Z",
+      "queryHashes": [
+        "6f2bc2d1b0b1"
+      ],
+      "recallDays": [
+        "2026-07-02"
+      ],
+      "conceptTags": [
+        "网络",
+        "audit.sh",
+        "active.md",
+        "lessons.md",
+        "memory.md",
+        "01-financial/vas/vas-home.md",
+        "滞纳金/罚款/时效",
+        "日记"
+      ]
+    },
+    "memory:memory/2026-07-02.md:22:38": {
+      "key": "memory:memory/2026-07-02.md:22:38",
+      "path": "memory/2026-07-02.md",
+      "startLine": 22,
+      "endLine": 38,
+      "source": "memory",
+      "snippet": "## 🕘 关联方与股东借款知识树搭建（09:27–09:35） - **触发**: Daryl 纠正知识树搭建方法 + 要求「关联方/股东借款」案例加入知识树并同步 Obsidian + Git - **方法论纠正**: - 收到树叶不能直接贴到 01-Financial → 先 websearch 确认管辖准则 → 准则=树干 - 财务有 IASB 种好的树（乔木），顺着主干爬即可 → 之前跳步是偷懒 - 技术没有统一锚点 → 用藤蔓模式（多附着点、交叉生长、不强制分层） - **产出**: - IFRS-IAS/IAS-24 关联方披露（定义/披露条款/贷款映射） - IFRS-IAS/IFRS-9 关联方贷款（FV初始计量/低于市场利率/ECL） - IFRS-IAS/IAS-32 债股分类（substance over form/股东贷款权益分类） - VAS/VAS-26 关联方披露（对标IAS 24/标注体系缺口） - Cross-Border-Home 新增专题 Hub - VAS-Home 加入 VAS 26 - FutureTextile-Wellname 案例反向链接到准则节点 - **Git**: commit 988cd48 (52 files, +3342/-9)，push 失败 — Gitea localhost:3000 未运行 - **合规**: L0 启动通过 / post-op 3/5（active+日记正常）",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4551227748394012,
+      "maxScore": 0.4551227748394012,
+      "firstRecalledAt": "2026-07-03T07:48:20.930Z",
+      "lastRecalledAt": "2026-07-03T07:48:20.930Z",
+      "queryHashes": [
+        "983783c9bf99"
+      ],
+      "recallDays": [
+        "2026-07-03"
+      ],
+      "conceptTags": [
+        "关联方/股东借款",
+        "01-financial",
+        "ifrs-ias/ias-24",
+        "定义/披露条款/贷款映射",
+        "ifrs-ias/ifrs-9",
+        "fv初始计量/低于市场利率/ecl",
+        "ifrs-ias/ias-32",
+        "form/股东贷款权益分类"
+      ]
+    }
+  }
+}
