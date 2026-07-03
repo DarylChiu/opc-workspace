@@ -51,3 +51,6 @@
 {"timestamp":"2026-07-03T13:16:18+0700","check":"post-op","task":"贷款材料自动化整理执行手册v2.3","score":3,"total":5,"warnings":[
   ""
 ]}
+{"timestamp":"2026-07-04T00:05:37+0700","check":"post-op","task":"每日记忆归档审计 2026-07-04","score":3,"total":5,"warnings":[
+  "🔴 任务涉及问题/失败/审计发现，建议提炼到 lessons.md"
+]}
