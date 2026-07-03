@@ -1,5 +1,14 @@
 # Recent Conversations
-Last updated: 2026-07-02 00:01 GMT+7
+Last updated: 2026-07-04 00:06 GMT+7
+
+## 2026-07-03 — Daryl 休息日
+- 全天无 Daryl 活动，7 月工作计划待确认
+- 午夜 Cron 审计正常执行
+
+## 2026-07-02 — 隧道调试 + 验收准备
+- 晚间: cloudflared临时隧道 + loca.lt双隧道就绪，解决 exec background 进程 SIGKILL 问题
+- OPC看板 Sidebar 实时 badge + 成本仪表盘实时化完成
+- M2 Agent状态面板等待 Daryl 明早验收
 
 ## 2026-07-01 — 月初静默日
 - 全天无 Daryl 活动，等待 7 月工作计划确认
