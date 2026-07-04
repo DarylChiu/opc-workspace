@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-03T07:48:20.930Z",
+  "updatedAt": "2026-07-04T04:12:00.540Z",
   "entries": {
     "memory:memory/2026-06-22.md:22:34": {
       "key": "memory:memory/2026-06-22.md:22:34",
@@ -75,18 +75,20 @@
       "endLine": 62,
       "source": "memory",
       "snippet": "- 已补建 `IFRS-15-Impact-on-Vietnam-Revenue.md`（3场景+3税种+耦合推理链） ## 当前状态 - 记忆系统运行正常 - 合规脚本全部就绪 - VAS 知识树已初始化（4节点） - 跨境对比网络已初始化（3节点 + 首页） ### 第二轮归档：实操指南 + 英联邦调查 (同日，Balance → Self 经 Daryl 批准) - **来源**: Balance 两份完整报告（越南会计差错调整法规指导 + VAS-vs-IFRS CIT前期多计提冲回对比），Daryl 附四条核心结论 - **Vault 新增文件** (2个): - `01-Financial/VAS/VAS-29-Errors/VAS-Error-Correction-Practical-Guide.md` — 📐 完整实操指南（决策树+5场景分录模板+税务风险梯度+行动清单） - `01-Financial/Cross-Border/Commonwealth-Tax-Error-Prohibition.md` — 英联邦9司法管辖区全域禁止调查 - **Vault 更新文件** (4个): Cross-Border-Home.md / VAS-Home.md / VAS-29-Changes...md / CIT-Overprovision-Reversal-Comparison.md（交叉链接补全） - **四条核心结论已纳入知识网络**： 1. VAS Circular 200科目表导向 vs IFRS准则导向 → 哲学差异节点已有系统性论证",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.35269947350025177,
-      "maxScore": 0.35269947350025177,
+      "totalScore": 0.7119429051876067,
+      "maxScore": 0.359243431687355,
       "firstRecalledAt": "2026-06-23T01:11:55.954Z",
-      "lastRecalledAt": "2026-06-23T01:11:55.954Z",
+      "lastRecalledAt": "2026-07-04T04:12:00.540Z",
       "queryHashes": [
-        "320339ac2bbc"
+        "320339ac2bbc",
+        "8c4a11c25925"
       ],
       "recallDays": [
-        "2026-06-23"
+        "2026-06-23",
+        "2026-07-04"
       ],
       "conceptTags": [
         "网络",
@@ -230,18 +232,20 @@
       "endLine": 24,
       "source": "memory",
       "snippet": "# 2026-06-22 日记 ## 关键事件 ### 记忆 Cron 审计（00:01） - 执行 audit.sh --report - 发现问题： - 今日日记缺失 → 已创建本文件 - 其他检查项（active.md、lessons.md、归档、MEMORY.md）均正常 - 修复完成，审计通过 ## 知识网络建设 ### VAS 知识树 + 跨境对比网络初始化 (Balance 归档 → Self 归纳) - **来源**: Balance 2026-06-22 越南会计差错调整法规研究归档（两次传输） - **Vault 新增文件** (7→10个，本轮+3): - `01-Financial/VAS/VAS-Home.md` — VAS 知识树入口（已扩展：+Accounting Law 2015, +CIT Laws） - `01-Financial/VAS/VAS-29-Errors/VAS-29-Changes-in-Accounting-Estimates-and-Errors.md` — 差错更正核心节点 - `01-Financial/VAS/VAS-29-Errors/VAS-29-Journal-Entry-Templates.md` — 🆕 5场景分录模板库 - `01-Financial/VAS/VAS-29-Errors/VAS-29-Tax-Side-Impact.md` — 🆕 税务侧详解（滞纳金/罚款/时效） - `01-Financial/VAS/Circular-200/Circular-200-",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.36712983548641204,
+      "totalScore": 0.7311041831970215,
       "maxScore": 0.36712983548641204,
       "firstRecalledAt": "2026-07-02T02:27:53.204Z",
-      "lastRecalledAt": "2026-07-02T02:27:53.204Z",
+      "lastRecalledAt": "2026-07-04T04:12:00.540Z",
       "queryHashes": [
-        "6f2bc2d1b0b1"
+        "6f2bc2d1b0b1",
+        "8c4a11c25925"
       ],
       "recallDays": [
-        "2026-07-02"
+        "2026-07-02",
+        "2026-07-04"
       ],
       "conceptTags": [
         "网络",
