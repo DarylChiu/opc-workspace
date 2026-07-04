@@ -162,3 +162,19 @@
 - 存储位置：`opc-dashboard/data/workflows.json`
 - API可用：`GET/POST /api/workflows`
 - 前端已验证拖拽编辑+属性修改+保存
+
+### 7/4 — v2.0 前瞻：项目里程碑记忆系统主动扫描
+- **需求**：Dashboard 每 6 小时主动扫描 4 个 Agent 的 `memory/projects.md` + `memory/project_*.md`，提取项目开发计划和里程碑
+- **动机**：当前依赖 Agent 主动 POST /api/report，数据陈旧不可靠（覆盖式替换丢数据）
+- **状态**：已做过原型验证（7/4），解析逻辑可行但 Daryl 决定推迟到 v2.0
+- **接口留白**：`GET /api/projects/milestones`（预留但未启用）
+- **解析策略**：
+  - `projects.md` → 按 ## 分节提取项目名+状态+元数据
+  - `project_*.md` → 提取 M1/M2 等里程碑详情
+  - 中英文模糊匹配合并 dedup
+  - 无 phase 的按状态生成默认阶段
+- **注意事项**：
+  - Agent 需维护 `projects.md`（当前仅 Kitty/Bryson/Balance/Self 有，Shared 无）
+  - `project_*.md` 不强求，仅 Kitty 有
+  - 需先在合规 Hooks 中加入 project 文件存在性检查，再启用前端
+- **相关代码**：已全部 revert，原型可参考本次 git history

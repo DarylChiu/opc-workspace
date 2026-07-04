@@ -1,23 +1,13 @@
 # 当前活跃任务
 
-> 最后更新: 2026-07-04 00:06 GMT+7
+> 最后更新: 2026-07-04 13:30 GMT+7
 
 ## 🟢 进行中
-### 🔴 M2 Agent状态面板验收（当前优先级最高）
-- **状态**: 隧道就绪，等待Daryl验收
-- M2a WebSocket / M2b 飞书DM / M2c 实时推送全部完成
+### 🔴 M2 Workflow可视化编辑器验收（当前）
+- **状态**: Agent状态与任务模块 ✅，开始验收 Workflow 模块
+- **版本**: v1.3.4（已 commit + tag）
 - **隧道**: https://flood-villages-project-considerations.trycloudflare.com
-- **备用隧道**: https://seven-tigers-clap.loca.lt
-- **本地**: localhost:8765 → OPC看板 v1.3.2, HTTP 200 ✅
-- **明早继续** ⏰ 验收剩余部分
-
-### OPC看板实时刷新功能
-- 修复sidebar 5模块实时badge + 成本仪表盘session真实成本 ✅
-- Agent状态面板任务自动同步（active.md→Dashboard）
-
-### Agent状态面板任务自动同步
-- 解析各Agent的memory/active.md → Dashboard自动展示
-- 等待Daryl确认后为Xiaofeng创建active.md
+- **本地**: localhost:8765
 
 ## 🔵 待办
 ### OPC看板v1.4
@@ -29,7 +19,23 @@
 - OPC看板Agent卡片增加「约定版本」字段
 - 机制变更时自动通知对应Agent
 
+### M2 剩余模块
+- 成本仪表盘验收
+- 沙箱任务验收
+
 ## ✅ 已完成
+### 🔴 M2 Agent状态面板验收 (7/4)
+- M2a WebSocket / M2b 飞书DM / M2c 实时推送全部完成 ✅
+- Daryl 验收通过，commit v1.3.4
+
+### OPC看板实时刷新功能
+- 修复sidebar 5模块实时badge + 成本仪表盘session真实成本 ✅
+- Agent状态面板任务自动同步（active.md→Dashboard） ✅
+
+### Agent状态面板任务自动同步
+- 解析各Agent的memory/active.md → Dashboard自动展示 ✅
+- Xiaofeng active.md 已创建
+
 ### 隧道调试 & 验收准备 (7/2 晚)
 - cloudflared临时隧道 + loca.lt双隧道就绪
 - 问题根因: exec background进程在session切换时被SIGKILL
