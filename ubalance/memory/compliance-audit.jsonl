@@ -54,3 +54,7 @@
 {"timestamp":"2026-07-04T00:05:37+0700","check":"post-op","task":"每日记忆归档审计 2026-07-04","score":3,"total":5,"warnings":[
   "🔴 任务涉及问题/失败/审计发现，建议提炼到 lessons.md"
 ]}
+{"timestamp":"2026-07-05T00:01:26+0700","check":"post-op","task":"每日记忆归档审计修复","score":2,"total":5,"warnings":[
+  "🟡 考虑更新 active.md — 有任务修改且已 15 小时",
+  "🔴 任务涉及问题/失败/审计发现，建议提炼到 lessons.md"
+]}
