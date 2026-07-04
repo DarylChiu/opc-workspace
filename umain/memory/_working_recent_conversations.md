@@ -1,5 +1,11 @@
 # Recent Conversations
-Last updated: 2026-07-04 00:06 GMT+7
+Last updated: 2026-07-05 00:02 GMT+7
+
+## 2026-07-04 — M2 Agent状态面板验收通过
+- M2a WebSocket / M2b 飞书DM / M2c 实时推送全部完成 ✅
+- Daryl 验收通过，commit v1.3.4 + tag
+- active.md 更新至当天状态
+- 午夜 Cron 审计正常执行
 
 ## 2026-07-03 — Daryl 休息日
 - 全天无 Daryl 活动，7 月工作计划待确认
