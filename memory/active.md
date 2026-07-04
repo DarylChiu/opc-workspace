@@ -1,8 +1,18 @@
 # 当前活跃任务 (中期记忆 — 每次session加载)
 
-> 最后更新: 2026-06-29 22:52
+> 最后更新: 2026-07-04 23:59
 
 ## 🔴 进行中
+### 语音交互 Debug 验收模块 🔍
+- **Daryl 7/2 指令**: 为雅思陪练助手v2.0开发独立的语音交互Debug验收模块
+- **目标**: 后端debug_logger + 独立前端面板，DEBUG_MODE=1开关控制，不污染v2.0前端
+- **进度**: ✅ Phase 1 (debug_logger.py) ✅ Phase 2 (debug-panel/index.html) ✅ Phase 3 (会话列表+导出)
+- **状态**: 🟡 等待验收 — Debug 面板已整合进主前端（Assessment 旁 🔍 Debug tab），待 Daryl 重启服务器验收
+- **产物**: `ielts_tutor/backend/debug_logger.py` (651行), `ielts_tutor/frontend/index.html` (44547 bytes, 含Debug tab)
+- **成本**: 开发 ~$0.15 / 预算 $2.00
+- **访问方式**: 运行 `DEBUG_MODE=1 venv/bin/python backend/server.py`，浏览器打开主页，右侧面板出现 🔍 Debug tab
+- **变更**: 7/3 将 debug 面板从独立页面整合进主前端同一页面，通过 DEBUG_MODE 控制 tab 可见性
+
 ### 视频分析 — 10fps Vision 管线 🚨
 - **Daryl 6/19 指令**: 停止低成本+打补丁方式，先不计成本验证上限
 - **开发哲学**: 先高成本MVP验证上限→再降本（已记录入 lessons.md）
@@ -69,6 +79,15 @@
 - **月成本**: ~$5-10
 
 ## 📋 下一阶段
+### 11. 7月基建 — Agent自进化 + Loop Engineering 🧬🔁
+- **Daryl 6/30 指令**: 完成OPC看板交互系统和IELTS陪练v2.0后，7月推新一轮基建
+- **两大方向**:
+  - **Agent自进化**: 让Agent能从经验中自动改进（已有调研基础：情景记忆注入/合规自进化/跨Agent经验池）
+  - **Loop Engineering**: 建立自动化开发-验证-反馈闭环，减少Daryl手动验收负担
+- **核心目标**: 开发流程自动化，释放Daryl时间 → 专注OPC知识网络体系搭建
+- **Daryl 当前瓶颈**: 每天验收4个Agent项目，身体压力大
+- **预期效果**: 自动化后 Daryl 可专注与 Self/恨点小己 搭建知识网络
+
 ### 10. 内核驱动洗稿MVP 🧠
 - **理论基础**: 2026-06-22 Daryl+Self《胭脂扣》辩论方法论
 - **核心框架**: 角色内核提取（欲望/缺失/弧线/共鸣/Hook-陷阱）→ 内核卡片 → 内核迁移验证 → 洗稿建议 → 共鸣验证
