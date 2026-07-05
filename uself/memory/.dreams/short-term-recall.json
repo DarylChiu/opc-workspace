@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-04T04:12:00.540Z",
+  "updatedAt": "2026-07-05T08:00:54.689Z",
   "entries": {
     "memory:memory/2026-06-22.md:22:34": {
       "key": "memory:memory/2026-06-22.md:22:34",
@@ -201,18 +201,21 @@
       "endLine": 22,
       "source": "memory",
       "snippet": "# 2026-06-29 日记 ## 关键事件 ### 方法论卡片审批系统搭建（Daryl × Self 讨论） - **决策链**：飞书文档（静态无交互）→ Bitable（缺权限）→ OPC看板 sidebar 第6模块（最终方案） - **产出**： - `~/methodology-cards/` standalone Obsidian vault（Git + cron备份） - 2张卡片：胭脂扣/双层分离法 + VAS/FDI外部压力驱动 - Kitty 提供 OPC看板完整资料 - **Daryl 核心决策**：审批入 OPC 统一系统，不走飞书外部工具 ### AI技术知识树·案例归档 - Bryson 传递「视频分析交互Workflow」完整归档 - 已归纳到 `knowledge-base/AI技术/视频分析交互Workflow/工程开发经验.md` - 覆盖：管线架构、前后端协作、迭代流程、多平台适配、CSS坑、版号管理 ### 贷款材料自动化处理 v2 完整版（10:00-10:12） - **触发**: Daryl 反馈 v1 四文件过于骨架化 → 要求重写为完整版 - **数据来源**: Balance 跨 session trajectory 数据回溯（4 轮 v2.3 运行日志 + process_results 结构 + 处理报告 + active.md） - **产出**: 4 个文件重写（共 832 行/34KB），从骨架扩展为操作级细节： - Home.md: 两批次对比表 + 项目里程碑 + 输出物清单",
-      "recallCount": 1,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.3697025328874588,
-      "maxScore": 0.3697025328874588,
+      "totalScore": 1.11020068526268,
+      "maxScore": 0.37962106764316556,
       "firstRecalledAt": "2026-07-02T02:27:53.204Z",
-      "lastRecalledAt": "2026-07-02T02:27:53.204Z",
+      "lastRecalledAt": "2026-07-05T08:00:54.689Z",
       "queryHashes": [
-        "6f2bc2d1b0b1"
+        "6f2bc2d1b0b1",
+        "96cbb54ce475",
+        "af50ce3a81d2"
       ],
       "recallDays": [
-        "2026-07-02"
+        "2026-07-02",
+        "2026-07-05"
       ],
       "conceptTags": [
         "备份",
