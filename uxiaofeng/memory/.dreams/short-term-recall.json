@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-03T07:57:05.634Z",
+  "updatedAt": "2026-07-05T07:45:58.119Z",
   "entries": {
     "memory:memory/archive/2026-03-24.md:138:171": {
       "key": "memory:memory/archive/2026-03-24.md:138:171",
@@ -350,22 +350,24 @@
       "endLine": 66,
       "source": "memory",
       "snippet": "- **角色**: 技术开发者/雅思陪练助手 ## 用户信息 - **用户**: Daryl (飞书ID: ou_7f871e4d921c449ee8a5f77b38bf6ff9) - **时区**: Asia/Saigon - **学习目标**: 准备雅思考试，特别关注商业演讲和投资人对话能力 - **职业**: 财务经理，计划未来创业 ## 重要决策记录 1. **22:27响应指令**: Daryl明确要求\"立即冲刺完成最终类别\"，执行完成 2. **项目优先级**: 投资者路演短语库完成，可作为雅思商业口语专项训练材料 3. **专项开发价值**: 特别适配Daryl的财务背景和创业规划需求 ## 📁 项目可交付成果 1. **核心短语库**: 8个完整投资者路演阶段，56个专业短语 2. **练习系统**: 三层难度 + 跟读/情境/自我评估框架 3. **真实案例**: Uber, Airbnb, Tesla, Stripe等知名公司案例分析 4. **雅思连接**: Part 2/Part 3的明确应用指南 5. **文化适配**: 西方/亚洲/欧洲投资者的沟通差异指南 ## 🚀 下一步建议 - **立即使用**: Daryl可随时开始使用完整版进行雅思/商业演讲练习 - **辅助开发**: 根据需求开发音频模板、练习卡片等辅助资源 - **专项增强**: 针对Daryl特定创业计划的定制化内容开发",
-      "recallCount": 3,
+      "recallCount": 4,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.2423920243978501,
+      "totalScore": 1.6039290875196457,
       "maxScore": 0.4829847693443298,
       "firstRecalledAt": "2026-06-15T02:57:02.629Z",
-      "lastRecalledAt": "2026-07-02T12:01:29.187Z",
+      "lastRecalledAt": "2026-07-05T03:17:42.955Z",
       "queryHashes": [
         "a47d778b5b51",
         "ddd3fb33cbc5",
-        "bcd241400675"
+        "bcd241400675",
+        "e96b3914de3d"
       ],
       "recallDays": [
         "2026-06-15",
         "2026-06-28",
-        "2026-07-02"
+        "2026-07-02",
+        "2026-07-05"
       ],
       "conceptTags": [
         "技术开发者/雅思陪练助手",
@@ -385,20 +387,22 @@
       "endLine": 67,
       "source": "memory",
       "snippet": "## 🚀 下一步建议 - **立即使用**: Daryl可随时开始使用完整版进行雅思/商业演讲练习 - **辅助开发**: 根据需求开发音频模板、练习卡片等辅助资源 - **专项增强**: 针对Daryl特定创业计划的定制化内容开发 **项目状态**: ✅ **完全完成，等待验收和下一步指令**",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.8478971809148788,
+      "totalScore": 1.2144049853086472,
       "maxScore": 0.4567164152860641,
       "firstRecalledAt": "2026-06-15T02:57:02.629Z",
-      "lastRecalledAt": "2026-07-02T12:01:29.187Z",
+      "lastRecalledAt": "2026-07-05T03:17:42.955Z",
       "queryHashes": [
         "a47d778b5b51",
-        "bcd241400675"
+        "bcd241400675",
+        "e96b3914de3d"
       ],
       "recallDays": [
         "2026-06-15",
-        "2026-07-02"
+        "2026-07-02",
+        "2026-07-05"
       ],
       "conceptTags": [
         "daryl可随时开始使用完整版进行雅思/商业演讲练习",
@@ -418,20 +422,22 @@
       "endLine": 259,
       "source": "memory",
       "snippet": "- **评估目标**：建立Daryl的英语水平基准线 **问题清单（Part 1）：** 1. \"Please introduce your work and daily responsibilities in English.\" 2. \"What is the biggest challenge you face in business presentations or investor communications?\" 3. \"How do you usually prepare for important English communication occasions?\" 4. \"Besides work requirements, what motivates you to improve your English ability?\" **流程说明**： - 每个问题单独提问和回答 - Bryson提供即时语言分析和反馈 - 15分钟完成Part 1的完整评估 - 建立后续训练计划的基准数据 ### 用户沟通风格确认 **Daryl的关键偏好：** 1. **所有重要沟通必须在私聊完成** ✅ 已学习 2. **时间约定的严格遵守** ✅ 20:30准时开始 3. **互动模式的选择权** ✅ 选择一问一答而非完整评估 4. **系统稳定优先于功能** ✅ 等待系统完全恢复后再启动 ### 项目里程碑记录 **Bryson首日实战准备**： ``` ✅ 系统配置恢复（18:30） ✅ 通信测试通过（19:48） ✅ 评估时间确认（19:50） ⏳ 评估开始倒计时",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.8077023148536682,
+      "totalScore": 1.1763861745595932,
       "maxScore": 0.4422961503267288,
       "firstRecalledAt": "2026-06-15T02:57:02.629Z",
-      "lastRecalledAt": "2026-07-02T12:01:29.187Z",
+      "lastRecalledAt": "2026-07-05T03:17:42.955Z",
       "queryHashes": [
         "a47d778b5b51",
-        "bcd241400675"
+        "bcd241400675",
+        "e96b3914de3d"
       ],
       "recallDays": [
         "2026-06-15",
-        "2026-07-02"
+        "2026-07-02",
+        "2026-07-05"
       ],
       "conceptTags": [
         "评估",
@@ -513,18 +519,20 @@
       "endLine": 422,
       "source": "memory",
       "snippet": "- ✅ **信任建立**: 通过专业分析建立了教练-学员关系 **投资回报验证**: - **已投入**: $72 (框架开发) → **产出**: 个性化诊断报告 + 训练计划基础 - **价值体现**: Daryl获得了专业英语教练的基准评估，明确了提升路径 - **成本效率**: 未来每$1投入都将针对已验证的具体问题 ### 用户核心需求明确化 (21:46关键转折点) **用户Daryl的明确指令**: > \"我需要的练习更多的是实时的语音交互的对练方式，文本陪练我不需要使用Bryson你这种Agent啊，市面上太多APP可以达到这样的效果了，还不用Token。所以，请你将评估我的英语水平的结果用在修正你的核心开发任务中，作为你的开发参数之一。\" **需求分析**: 1. **核心价值主张**: 实时语音交互，非文本陪练 2. **市场竞争认知**: 文本APP免费且充足，无竞争优势 3. **开发方向调整**: 评估结果应转化为语音功能开发参数 4. **预算效率要求**: Token使用需对应独特价值(语音交互) ### 官方项目批准与启动 (22:02) **用户Daryl的正式批准指令**: > \"1、确认4个调整方向；",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.42177413105964656,
+      "totalScore": 0.782233440876007,
       "maxScore": 0.42177413105964656,
       "firstRecalledAt": "2026-06-15T02:57:02.629Z",
-      "lastRecalledAt": "2026-06-15T02:57:02.629Z",
+      "lastRecalledAt": "2026-07-05T03:17:42.955Z",
       "queryHashes": [
-        "a47d778b5b51"
+        "a47d778b5b51",
+        "e96b3914de3d"
       ],
       "recallDays": [
-        "2026-06-15"
+        "2026-06-15",
+        "2026-07-05"
       ],
       "conceptTags": [
         "通过专业分析建立了教练-学员关系",
@@ -782,13 +790,13 @@
       "endLine": 29,
       "source": "memory",
       "snippet": "# 2026-06-16 记忆 ## 视频分析交互Workflow（全天） ### 基础搭建 - 基于「百万工作室」AI工具的75帧深度功能分析 - 三栏布局：视频+对白卡片 / 分析面板 / 标记管理 - 完整流水线：yt-dlp下载 → Whisper STT（本地免费）→ DeepSeek分析 - 视频↔对白双向联动（播放高亮+点击跳转） - 竖屏/横屏自适应布局 - 公网：https://unwhispering-imani-digitately.ngrok-free.dev（端口8777） ### 标记系统 - 多类型标记（🪝好钩子/⭐金句/↗转折点） - 标记 Tab：汇总视图 + 💾保存/🗑️清空/📋导出 - 对白卡片悬停标记 + ✕ 删除 - 切换视频链接时自动保存上一视频标记到素材库 ### 素材库 - 左侧48px侧边栏（🖥️操作台 / 📚素材库） - localStorage 持久化，表格展示（链接/平台/类型/日期） - 点击恢复已分析视频的所有数据 ### MVP 深度分析融合（Daryl 需求 · 下午） - 项目命名：视频分析交互Workflow - Tab 重构：结构拆解→脚本解析（四幕分析+张力评分+情绪曲线+叙事技巧） - Tab 重构：知识卡→镜头&声音（镜头推断/光线色彩/声音设计/导演风格） - 复刻模板增强：新增可复用元素（脚本模式/Hook技巧/话题切入/爆款因素） - 导出升级：完整报告 Markdown",
-      "recallCount": 19,
+      "recallCount": 20,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 7.8690229773521425,
+      "totalScore": 8.292167049646377,
       "maxScore": 0.4743679583072662,
       "firstRecalledAt": "2026-06-17T02:21:04.677Z",
-      "lastRecalledAt": "2026-07-03T07:57:05.634Z",
+      "lastRecalledAt": "2026-07-05T07:45:58.119Z",
       "queryHashes": [
         "56093675ea1a",
         "106e4b599293",
@@ -808,7 +816,8 @@
         "c4ea273c53c4",
         "b3124f661b04",
         "23710d525eea",
-        "88e7e5c1c3be"
+        "88e7e5c1c3be",
+        "20eaeaf135e4"
       ],
       "recallDays": [
         "2026-06-17",
@@ -823,7 +832,8 @@
         "2026-06-28",
         "2026-06-29",
         "2026-06-30",
-        "2026-07-03"
+        "2026-07-03",
+        "2026-07-05"
       ],
       "conceptTags": [
         "yt-dlp下载",
@@ -1016,20 +1026,22 @@
       "endLine": 28,
       "source": "memory",
       "snippet": "# 2026-06-21 记忆 ## 周日集中工作日 - Daryl召集全员汇报项目阻塞项 - 我错误地将已交接的 OPC看板 列入需求列表 - Daryl纠正：OPC看板交互系统上周已移交 Kitty ## 记忆修正 - active.md: OPC总控看板从\"待启动\"→\"已交接\" - 根因: 未及时同步跨session变更 ## 当前待决策项（3项） 1. 视频分析 10fps 降本策略 2. IELTS陪练重构方案选型 3. 视频分析交互Workflow下一阶段方向 ## 胭脂扣辩论总结接收 (6/22凌晨) - Self agent 发来 Daryl 与 Self 关于《胭脂扣》(关锦鹏, 1987) 的多轮辩论总结 - 文档已存档: knowledge-base/film-analysis/胭脂扣-辩论总结-2026-06-21.md - 将用于增强 Workflow 的脚本解析和导演风格模块 - 核心方法论: 角色功能阶段化、叙事功能vs状态分离、弧线验证、Hook-陷阱双层结构、结尾沉默功能分析 - 交互设计启示: 支持「辩论模式」而非强行收敛答案 ## 每日记忆审计 ✅ (23:59) - audit.sh --report 全项通过 - 日记/active/lessons/MEMORY 均健康 - OPC群聊汇报已发送",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.7164200603961943,
-      "maxScore": 0.3613295525312423,
+      "totalScore": 1.093356695771217,
+      "maxScore": 0.37693663537502287,
       "firstRecalledAt": "2026-06-23T03:20:42.076Z",
-      "lastRecalledAt": "2026-06-25T02:01:54.401Z",
+      "lastRecalledAt": "2026-07-05T07:45:58.119Z",
       "queryHashes": [
         "08f9d899caa0",
-        "6b7d3f0169ce"
+        "6b7d3f0169ce",
+        "20eaeaf135e4"
       ],
       "recallDays": [
         "2026-06-23",
-        "2026-06-25"
+        "2026-06-25",
+        "2026-07-05"
       ],
       "conceptTags": [
         "active.md",
@@ -1151,20 +1163,22 @@
       "endLine": 31,
       "source": "memory",
       "snippet": "# 2026-06-19 记忆 ## 视频分析 — 30fps 验证与策略调整 ### Daryl 具体反馈（10fps 报告） - 因果链 gaps：6s-15s 之间应有笑点 - 16s-18s「右手拿生蚝壳」应推理出「醉酒误认手机」 - 22s-24s「试图上车」→「冰箱内」缺少因果连接（应为「误认冰箱门为车门」） - 客观现实线应不止「误认冰箱门」一条 - 要求用 30fps 重新跑 ### 30fps 执行 - 🔧 修复合成 prompt 截断 bug（12000→30000 字符限制，增加覆盖率要求） - 📊 180 桶/1365 帧 Vision分析，$0.63，784s - ⚠️ 1317/1365 帧成功（48帧网络丢失） - 🗂️ 建立帧缓存和断点恢复机制 ### 30fps vs 10fps 对比 | Daryl 要求 | 10fps | 30fps | |-----------|-------|-------| | 6s-15s 笑点 | ❌空白 | ✅瓜子入杯(6.5-7s)+按烟灰缸(8.5-9.5s) | | 生蚝壳→手机 | ❌仅描述 | ✅「将生蚝壳当成手机滑动」 | | 主观视角线 | ❌无 | ✅4条完整 | | 喜剧节拍 | ❌无 | ✅5个+机制标注 | ### 新问题 - ⚠️ 30fps 因果链仅覆盖 0-17.5s，后半段(17.5-45.5s)消失 - ✅ 10fps 抓到的「冰箱门当车门」弧线在 30fps 中丢失 - 根因：LLM 合成阶段注意力分布不均，数据量增大反而导致覆盖退步 ### Daryl 最终",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.7582533985376357,
-      "maxScore": 0.38366582393646237,
+      "totalScore": 1.1554287940263748,
+      "maxScore": 0.397175395488739,
       "firstRecalledAt": "2026-06-23T14:21:06.652Z",
-      "lastRecalledAt": "2026-07-03T07:57:05.634Z",
+      "lastRecalledAt": "2026-07-05T07:44:46.556Z",
       "queryHashes": [
         "eaa00c35687a",
-        "88e7e5c1c3be"
+        "88e7e5c1c3be",
+        "9785f2c09329"
       ],
       "recallDays": [
         "2026-06-23",
-        "2026-07-03"
+        "2026-07-03",
+        "2026-07-05"
       ],
       "conceptTags": [
         "网络",
@@ -1310,25 +1324,27 @@
       "endLine": 25,
       "source": "memory",
       "snippet": "# 2026-06-24 记忆 ## 视频分析交互Workflow · B站支持 + 分析质量修复 ### B站视频支持 ✅ - **根因**: yt-dlp 不识别 b23.tv 短链，且 B站 API 境外 IP 封锁 - **修复**: - 后端 `server.py` 新增 you-get 下载器（B站专用，境外可下载） - 前端 `index.html` 新增 `resolveB23Url()` 解析 b23.tv 短链（利用用户浏览器国内IP） - **文档**: `video_analyzer_app/VIDEO_DOWNLOAD_STRATEGY.md` ### 视频截断修复 ✅ - **根因**: ffmpeg `-t 180` 硬编码截断长视频，导致脚本解析只到 02:59 - **Daryl批评**: 只盯着删参数，没考虑全管道前后配合。不要为\"省空间\"牺牲\"分析质量\" - **修复**: 简化策略——压缩但不截断，仅 >50MB 触发关键帧（标注降级） - **原则**: 先对齐阶段目标（叙事正确），再搞分级复杂度（镜头/BGM 是 Phase 2） ### 脚本分析质量修复 ✅ - **根因**: `SCRIPT_ANALYSIS_PROMPT` 让 DeepSeek 直接接受 Gemini 解读，没有推理验证 - **Daryl指出错误**: - \"父亲挨揍\"→应该是\"儿子挨揍\"（角色关系核实失败） - \"忘作业\"→应该是\"故意留家里\"（动机深度不够） - **修复**: prompt 加入三步强制验证（角色关系、动机深度",
-      "recallCount": 5,
+      "recallCount": 6,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.9180712908506394,
+      "totalScore": 2.292738765478134,
       "maxScore": 0.4006913512945175,
       "firstRecalledAt": "2026-06-25T03:19:52.201Z",
-      "lastRecalledAt": "2026-06-29T01:18:03.761Z",
+      "lastRecalledAt": "2026-07-05T07:44:46.556Z",
       "queryHashes": [
         "f1f5b9681e8a",
         "5b06ea60bf92",
         "dcf226e60454",
         "9d2df9feca1a",
-        "b3124f661b04"
+        "b3124f661b04",
+        "9785f2c09329"
       ],
       "recallDays": [
         "2026-06-25",
         "2026-06-27",
         "2026-06-28",
-        "2026-06-29"
+        "2026-06-29",
+        "2026-07-05"
       ],
       "conceptTags": [
         "yt-dlp",
@@ -1443,23 +1459,25 @@
       "endLine": 27,
       "source": "memory",
       "snippet": "# 2026-06-27 记忆 ## 视频分析交互Workflow v1.1.0 交付 ### Daryl 五项迭代需求（全量完成） 1. **对白滚动条**: 半透明6px滚动条 + overscroll-behavior:contain 隔离滚动链 2. **Sidebar左置**: 从app内部移至body最左侧全高常驻，预留洗稿工坊/选题看板扩展位 3. **顶栏精简**: 去视频标签框/Demo按钮，增加CSS动画进度条，状态完成显示⏱分析用时(Xs) 4. **Tab重构**: 删「标记」Tab→新序：内容总览/脚本解析/镜头声音/复刻模板/标记笔记，模板后移留联动接口 5. **商业数据抓取**: server.py新增/api/commerce端点+fetch_commerce_data()，支持B站API+YouTube页面解析，分析完成后自动获取 ### 技术要点 - 布局重构: body flex row → sidebar(56px) + main-area(flex:1) - 进度条: CSS indeterminate动画替代内容区步骤文字 - B站API: /x/web-interface/view?bvid= 获取view/like/fav/share - YT: oembed获取元信息 + 页面正则提取viewCount/likeCount - 版号: 1.0.0 → 1.1.0（VERSION文件 + index.html/health端点） ### 产物 - video_analyzer_app/index.html（重写，~930",
-      "recallCount": 4,
+      "recallCount": 5,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.8854666629919181,
+      "totalScore": 2.275737110722936,
       "maxScore": 0.6666441658624778,
       "firstRecalledAt": "2026-06-28T02:02:15.649Z",
-      "lastRecalledAt": "2026-06-30T03:51:16.708Z",
+      "lastRecalledAt": "2026-07-05T07:45:58.119Z",
       "queryHashes": [
         "dcf226e60454",
         "9d2df9feca1a",
         "b3124f661b04",
-        "23710d525eea"
+        "23710d525eea",
+        "20eaeaf135e4"
       ],
       "recallDays": [
         "2026-06-28",
         "2026-06-29",
-        "2026-06-30"
+        "2026-06-30",
+        "2026-07-05"
       ],
       "conceptTags": [
         "v1.1.0",
@@ -1479,22 +1497,25 @@
       "endLine": 18,
       "source": "memory",
       "snippet": "# 2026-06-28 记忆 ## 视频分析交互Workflow v1.1.1 Debug ### Daryl 四项 bug 修复（全量完成） 1. **🔇 视频无声音**: you-get 下载B站视频时只选 video stream (dash-flv480-AVC)，无音频流。修复：改为下载全部dash-flv480格式 → ffprobe检测分离的video+audio部分 → ffmpeg合并。yt-dlp 同步加 `-f bestvideo+bestaudio/best` 2. **📜 对白模块无滚动条**: `.transcript-col` 缺少 flex 约束，内部 `.transcript-list` 无高度参考无法overflow。修复：加 `flex:1; min-height:0; display:flex; flex-direction:column` 3. **📊 进度条改为%显示**: 原为 indeterminate 动画（移动闪烁\"进行中\"）→ 改为 server 端 stage-based 进度上报（5%→15%→25%→50%→60%→95%→100%），前端显示百分比文字+进度条宽度 4. **💰 商业数据URL获取**: B站 API 被后端（境外IP）封锁 → 新增前端直连 B站 API fallback（利用用户浏览器国内IP），数据增加弹幕字段 ### 技术要点 - you-get 下载B站：dash-flv480-AVC只含视频，dash-flv480含分离的video+audio - ffprobe检测流类型",
-      "recallCount": 3,
+      "recallCount": 5,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.2139379978179932,
+      "totalScore": 1.9500774264335632,
       "maxScore": 0.4298336029052734,
       "firstRecalledAt": "2026-06-28T06:13:16.079Z",
-      "lastRecalledAt": "2026-06-30T03:51:16.708Z",
+      "lastRecalledAt": "2026-07-05T07:45:58.119Z",
       "queryHashes": [
         "9d2df9feca1a",
         "b3124f661b04",
-        "23710d525eea"
+        "23710d525eea",
+        "9785f2c09329",
+        "20eaeaf135e4"
       ],
       "recallDays": [
         "2026-06-28",
         "2026-06-29",
-        "2026-06-30"
+        "2026-06-30",
+        "2026-07-05"
       ],
       "conceptTags": [
         "v1.1.1",
@@ -1860,18 +1881,20 @@
       "endLine": 24,
       "source": "memory",
       "snippet": "# 2026-06-26 日记 ## 系统 - 00:01 6/25 Cron 审计执行（因 WORKSPACE 路径 bug 修复延迟至午夜） - 修复: audit.sh/post-op.sh/startup.sh 的 WORKSPACE fallback 路径从 4 级改 2 级 - 清理: 错误创建的 /Users/zhaoyuzhao/memory/ 目录 - active.md 补充项目关键词: 下载器、脚本 ## 合规系统排障 (10:00) - Daryl 追问 Step6/Step8/symlinks 为什么 main workspace 没生效 - **根因**: 部署时给 main 建了 workspace-main 作为新家，但 main session 实际运行在 workspace - 错误假设 main 是「新 Agent 需要新 workspace」 - 实际 main/Kitty 是最老的 Agent，workspace 跑了几个月 - 根本错误：把「部署系统」当成「给新 Agent 建 workspace」，应该是「升级已有 workspace」 - 修复: workspace/scripts/compliance/ 已切 symlink，config/main.json 路径改回 workspace - workspace-main 是错误产物，可删除 - **教训**: main 是原住民不是新房客，升级≠搬迁 ## 视频分析 Workflow 迭代 - Daryl 要求收口 UI 交互 Bug，先修页面设计问题再讨论功",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.39613145887851714,
-      "maxScore": 0.39613145887851714,
+      "totalScore": 0.7985321700572967,
+      "maxScore": 0.40240071117877957,
       "firstRecalledAt": "2026-06-30T03:51:16.708Z",
-      "lastRecalledAt": "2026-06-30T03:51:16.708Z",
+      "lastRecalledAt": "2026-07-05T07:45:58.119Z",
       "queryHashes": [
-        "23710d525eea"
+        "23710d525eea",
+        "20eaeaf135e4"
       ],
       "recallDays": [
-        "2026-06-30"
+        "2026-06-30",
+        "2026-07-05"
       ],
       "conceptTags": [
         "6/25",
@@ -1891,20 +1914,22 @@
       "endLine": 35,
       "source": "memory",
       "snippet": "# 2026年4月8日 ## **昨日项目总结 - Bryson语音交互MVP成功完成** ### **项目状态确认** - **项目名称**: Bryson语音交互MVP - IELTS陪练助手 - **完成时间**: 2026年4月7日 23:05 (Asia/Saigon) - **版本**: 1.1.0-full-interaction - **部署地址**: https://unwhispering-imani-digitately.ngrok-free.dev - **状态**: ✅ 成功完成用户测试和验收 ### **用户反馈记录** **用户Daryl的评价** (23:05): - \"很不错，我们取得了重大突破！\" - 成功完成**4次完整语音交互**验证 - 所有功能正常工作，系统稳定可靠 ### **功能完备性检查结果** ``` ✅ 服务器连接与状态检查 ✅ 语音录制与本地播放 ✅ 录音自动触发反馈机制 ✅ Bryson TTS语音生成与播放 ✅ 交互次数统计与管理 ✅ 用户界面功能完整性 ``` ### **技术架构突破** 经过3-4天的技术攻坚，成功解决多重技术瓶颈： 1. ✅ **架构简化**: 从多端口分离到单一嵌入式服务架构 2. ✅ **版本冲突问题**: 彻底清理旧进程残留，确保版本一致性 3. ✅ **资源依赖问题**: 完全内联HTML/CSS/JS，消除外部资源依赖 4. ✅ **交互流程完整性**: 从单向TTS到完整录音→处理→反馈流程 ### **重要技术经验总结（已归档）**",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.7778538137674331,
+      "totalScore": 1.134127926826477,
       "maxScore": 0.4268904238939285,
       "firstRecalledAt": "2026-07-02T12:01:25.842Z",
-      "lastRecalledAt": "2026-07-03T03:55:36.671Z",
+      "lastRecalledAt": "2026-07-05T03:17:42.955Z",
       "queryHashes": [
         "125f33cb4ac8",
-        "6bd884df5740"
+        "6bd884df5740",
+        "e96b3914de3d"
       ],
       "recallDays": [
         "2026-07-02",
-        "2026-07-03"
+        "2026-07-03",
+        "2026-07-05"
       ],
       "conceptTags": [
         "asia/saigon",
