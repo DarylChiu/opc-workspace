@@ -1,51 +1,30 @@
 # 当前活跃任务
 
-> 最后更新: 2026-07-04 13:30 GMT+7
+> 最后更新: 2026-07-05 19:00 GMT+7
 
-## 🟢 进行中
-### 🔴 M2 Workflow可视化编辑器验收（当前）
-- **状态**: Agent状态与任务模块 ✅，开始验收 Workflow 模块
-- **版本**: v1.3.4（已 commit + tag）
-- **隧道**: https://flood-villages-project-considerations.trycloudflare.com
-- **本地**: localhost:8765
+## 🟢 运维
+### OPC Dashboard v1.4 — 运行中
+- **地址**: http://localhost:8765
+- **隧道**: https://abc-submission-snake-fed.trycloudflare.com
+- **管理**: `cd /Users/zhaoyuzhao/WorkBuddy/Claw/opc-dashboard && bash manage.sh {start|stop|restart|status|logs}`
+
+## ✅ 已完成
+### OPC看板 v1.4 (7/5)
+- 主次优先级视觉分层 ✅ — P0-P3 四级优先，左侧色条+徽章+创建时可选
+- Bryson 雅思陪练产物补全 ✅ — ielts_tutor 加入扫描优先级，3→7 产物
+- symlink 重复清理 ✅ — 移除 opc-workspace/Bryson/ielts_tutor_v2.0 旧副本
+
+### M2 成本仪表盘验收 (7/5)
+- 柱状图+饼图布局、字体对比度、项目归集表 ✅
+- DeepSeek V4 Pro 定价修正 + cron 过滤 ✅ · Commit v1.5
+
+### M2 Workflow可视化编辑器验收 (7/5)
+- 交互协议 v1.0 ✅ · Commit v1.3.5
+
+### M2 Agent状态面板验收 (7/4)
+- WebSocket + 飞书DM + 实时推送 ✅ · Commit v1.3.4
 
 ## 🔵 待办
-### OPC看板v1.4
-- 主次优先级视觉分层
-- Bryson雅思陪练产物补全
-- symlink重复清理
-
 ### Agent版本变更通知
 - OPC看板Agent卡片增加「约定版本」字段
 - 机制变更时自动通知对应Agent
-
-### M2 剩余模块
-- 成本仪表盘验收
-- 沙箱任务验收
-
-## ✅ 已完成
-### 🔴 M2 Agent状态面板验收 (7/4)
-- M2a WebSocket / M2b 飞书DM / M2c 实时推送全部完成 ✅
-- Daryl 验收通过，commit v1.3.4
-
-### OPC看板实时刷新功能
-- 修复sidebar 5模块实时badge + 成本仪表盘session真实成本 ✅
-- Agent状态面板任务自动同步（active.md→Dashboard） ✅
-
-### Agent状态面板任务自动同步
-- 解析各Agent的memory/active.md → Dashboard自动展示 ✅
-- Xiaofeng active.md 已创建
-
-### 隧道调试 & 验收准备 (7/2 晚)
-- cloudflared临时隧道 + loca.lt双隧道就绪
-- 问题根因: exec background进程在session切换时被SIGKILL
-- 解决方案: nohup & disown完全脱离终端
-
-### OPC看板Sidebar实时badge (7/2)
-- 5模块各加实时摘要badge,每小时自动刷新
-
-### OPC看板成本仪表盘实时化 (7/2)
-- 数据源从agent_reports改为session estimatedCostUsd
-
-### OPC看板v1.3.2产物模块 (6/29)
-- 72条产物全部可预览,4 Agent workspace扫描正常

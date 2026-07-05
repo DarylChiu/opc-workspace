@@ -1,5 +1,15 @@
 # Recent Conversations
-Last updated: 2026-07-05 00:02 GMT+7
+Last updated: 2026-07-05 22:37 GMT+7
+
+## 2026-07-05 — 高产出周日
+- 🚨 P0: 僵尸 Session 耗尽 DeepSeek 余额 → 事故报告+清理（~$30-50 浪费）
+- M2 Workflow 交互逻辑修正 → v1.3.5（4 Agent 统一单次回复规则）
+- M2 成本仪表盘验收 → v1.5（柱状图+饼图+DeepSeek定价修正）
+- M2 沙箱任务验收 → v1.3.6
+- OPC看板 v1.4：优先级视觉分层+雅思产物补全+symlink清理
+- 隧道修复×2（cloudflared 临时隧道易断）
+- Test for Video: 视频生成工具测试 ✅ (Google Veo 3.1 Fast)
+- M2 全部模块验收完毕
 
 ## 2026-07-04 — M2 Agent状态面板验收通过
 - M2a WebSocket / M2b 飞书DM / M2c 实时推送全部完成 ✅
