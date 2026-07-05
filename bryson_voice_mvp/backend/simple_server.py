@@ -193,6 +193,7 @@ if __name__ == "__main__":
         "simple_server:app",
         host="0.0.0.0",
         port=8080,
-        reload=True,
-        log_level="info"
+        reload=False,  # 禁用重载，减少资源占用
+        log_level="info",
+        access_log=True
     )

@@ -10,20 +10,36 @@
     "lastRunMode": "local"
   },
   "auth": {
-    "profiles": {}
+    "profiles": {
+      "deepseek_bryson": {
+        "type": "apiKey",
+        "provider": "deepseek",
+        "apiKey": "REDACTED_API_KEY"
+      }
+    }
   },
   "agents": {
     "defaults": {
       "model": {
-        "primary": "openrouter/deepseek/deepseek-r1",
+        "primary": "deepseek/deepseek-r1",
         "fallbacks": [
-          "openrouter/anthropic/claude-3.7-sonnet"
+          "deepseek/deepseek-chat",
+          "openrouter/anthropic/claude-3-5-sonnet-20241022"
         ]
       },
       "models": {
-        "openrouter/deepseek/deepseek-r1": {},
-        "openrouter/google/gemini-2.0-flash": {},
-        "openrouter/google/gemini-2.5-flash": {}
+        "deepseek/deepseek-chat": {
+          "provider": "deepseek",
+          "apiKey": "REDACTED_API_KEY"
+        },
+        "deepseek/deepseek-r1": {
+          "provider": "deepseek",
+          "apiKey": "REDACTED_API_KEY"
+        },
+        "openrouter/anthropic/claude-3-5-sonnet-20241022": {
+          "provider": "openrouter",
+          "apiKey": "${OPENROUTER_API_KEY}"
+        }
       },
       "workspace": "/Users/zhaoyuzhao/.openclaw/workspace"
     },
@@ -36,10 +52,10 @@
         "name": "xiaofeng",
         "workspace": "/Users/zhaoyuzhao/.openclaw/xiaofeng_workspace",
         "agentDir": "/Users/zhaoyuzhao/.openclaw/agents/xiaofeng/agent",
-        "model": "openrouter/deepseek/deepseek-r1",
+        "model": "deepseek/deepseek-r1",
         "identity": {
-          "name": "吹点小风",
-          "emoji": "🌬️"
+          "name": "\u5439\u70b9\u5c0f\u98ce",
+          "emoji": "\ud83c\udf2c\ufe0f"
         }
       }
     ]
@@ -109,11 +125,11 @@
         "xiaofeng": {
           "appId": "cli_a94a032b6d385bd8",
           "appSecret": "3htUPMLBansvBV23hXN6MgaO615kKa28",
-          "botName": "吹点小风"
+          "botName": "\u5439\u70b9\u5c0f\u98ce"
         },
         "default": {
           "appId": "cli_a9307c22ddb8dcd1",
-          "botName": "忧郁小猫",
+          "botName": "\u5fe7\u90c1\u5c0f\u732b",
           "appSecret": "eWDmRnMYFRCHLRuvqDrIlhzTtdZ8Elad"
         }
       }

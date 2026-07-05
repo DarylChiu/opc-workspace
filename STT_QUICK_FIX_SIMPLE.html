@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STT测试 - Bryson IELTS陪练助手</title>
+    <style>
+        body {
+            font-family: -apple-system, Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #1a237e;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #3949ab;
+        }
+        .record-section {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s;
+        }
+        .btn:hover {
+            background: #388E3C;
+            transform: translateY(-2px);
+        }
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .btn-stop {
+            background: #f44336;
+        }
+        .btn-stop:hover {
+            background: #d32f2f;
+        }
+        .status {
+            font-size: 16px;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+        .recording {
+            background: #ffebee;
+            color: #c62828;
+            border: 2px dashed #f44336;
+        }
+        .ready {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #4CAF50;
+        }
+        .results {
+            background: white;
+            border: 2px solid #2196F3;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        .error {
+            background: #ffebee;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .loading {
+            text-align: center;
+            color: #2196F3;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎤 STT音频转录测试</h1>
+        <p class="subtitle">Bryson IELTS陪练助手 | 无需API密钥 | 直接录音转写</p>
+        
+        <div class="card">
+            <h2>📋 测试说明</h2>
+            <p>这是一个简化的Google STT测试界面，专门解决HTTPS环境下的交互问题。</p>
+            <p><strong>特性：</strong></p>
+            <ul>
+                <li>✅ 完全内联HTML，无外部依赖</li>
+                <li>✅ 适配HTTPS安全上下文</li>
+                <li>✅ 按钮交互优化确保响应</li>
+                <li>✅ 无需API密钥（已内置服务器端）</li>
+                <li>✅ 支持录音和文件上传两种方式</li>
+            </ul>
+        </div>
+        
+        <div class="record-section">
+            <h2>🎙️ 录音测试</h2>
+            <button class="btn" id="startBtn" onclick="startRecording()">🔴 开始录音</button>
+            <button class="btn btn-stop" id="stopBtn" onclick="stopRecording()" disabled>⏹️ 停止录音</button>
+            
+            <div id="status" class="status ready">
+                就绪 - 请点击"开始录音"按钮
+            </div>
+            
+            <div id="debugInfo" style="color: #666; font-size: 14px; margin: 20px 0;"></div>
+            
+            <div style="margin: 30px 0; border-top: 1px solid #eee; padding-top: 20px;">
+                <h3>📁 文件上传测试</h3>
+                <input type="file" id="audioFile" accept="audio/*" style="padding: 10px;">
+                <button class="btn" onclick="uploadAudio()" style="background: #2196F3;">📤 上传并转写</button>
+            </div>
+        </div>
+        
+        <div id="results" class="results" style="display: none;">
+            <h2>📝 转录结果</h2>
+            <div id="transcript"></div>
+            <div id="confidence"></div>
+            <div id="details"></div>
+        </div>
+        
+        <div id="loading" class="loading" style="display: none;">
+            <p>🧠 正在处理音频...</p>
+        </div>
+    </div>
+
+    <script>
+        let mediaRecorder = null;
+        let audioChunks = [];
+        let isRecording = false;
+        
+        // 调试信息
+        function logDebug(msg) {
+            console.log(msg);
+            const debugEl = document.getElementById('debugInfo');
+            if (debugEl) {
+                debugEl.innerHTML += `<div>${new Date().toLocaleTimeString()}: ${msg}</div>`;
+            }
+        }
+        
+        // 更新状态
+        function updateStatus(text, isRecording = false) {
+            const statusEl = document.getElementById('status');
+            statusEl.textContent = text;
+            statusEl.className = 'status ' + (isRecording ? 'recording' : 'ready');
+        }
+        
+        // 开始录音
+        async function startRecording() {
+            try {
+                logDebug('开始录音流程...');
+                updateStatus('请求麦克风权限...', false);
+                
+                // 基本音频约束
+                const constraints = {
+                    audio: {
+                        echoCancellation: true,
+                        noiseSuppression: true,
+                        autoGainControl: true
+                    }
+                };
+                
+                logDebug('获取媒体流...');
+                const stream = await navigator.mediaDevices.getUserMedia(constraints);
+                
+                // 确定MediaRecorder支持的格式
+                const options = { audioBitsPerSecond: 128000 };
+                
+                // 按优先级检查支持的MIME类型
+                const mimeTypes = [
+                    'audio/webm;codecs=opus',
+                    'audio/webm',
+                    'audio/mp4',
+                    'audio/ogg;codecs=opus'
+                ];
+                
+                for (const mimeType of mimeTypes) {
+                    if (MediaRecorder.isTypeSupported(mimeType)) {
+                        options.mimeType = mimeType;
+                        logDebug(`使用MIME类型: ${mimeType}`);
+                        break;
+                    }
+                }
+                
+                mediaRecorder = new MediaRecorder(stream, options);
+                audioChunks = [];
+                
+                mediaRecorder.ondataavailable = (event) => {
+                    if (event.data.size > 0) {
+                        audioChunks.push(event.data);
+                    }
+                };
+                
+                mediaRecorder.onstop = async () => {
+                    logDebug(`录音完成，共 ${audioChunks.length} 个数据块`);
+                    updateStatus('处理录音中...', false);
+                    
+                    const audioBlob = new Blob(audioChunks, { type: options.mimeType || 'audio/webm' });
+                    
+                    // 自动发送STT请求
+                    await processAudio(audioBlob, '录音');
+                    
+                    // 释放麦克风
+                    stream.getTracks().forEach(track => track.stop());
+                };
+                
+                // 开始录音
+                mediaRecorder.start();
+                isRecording = true;
+                
+                // 更新UI
+                document.getElementById('startBtn').disabled = true;
+                document.getElementById('stopBtn').disabled = false;
+                updateStatus('🔴 录音中...', true);
+                logDebug('✅ 录音已开始');
+                
+                // 60秒自动停止保护
+                setTimeout(() => {
+                    if (isRecording) {
+                        logDebug('⏰ 时间到，自动停止');
+                        stopRecording();
+                    }
+                }, 60000);
+                
+            } catch (error) {
+                logDebug(`❌ 录音失败: ${error.message}`);
+                updateStatus(`录音失败: ${error.message}`, false);
+                document.getElementById('startBtn').disabled = false;
+                document.getElementById('stopBtn').disabled = true;
+            }
+        }
+        
+        // 停止录音
+        function stopRecording() {
+            if (mediaRecorder && isRecording) {
+                mediaRecorder.stop();
+                isRecording = false;
+                
+                document.getElementById('startBtn').disabled = false;
+                document.getElementById('stopBtn').disabled = true;
+                logDebug('✅ 录音已停止');
+            }
+        }
+        
+        // 上传音频文件
+        async function uploadAudio() {
+            const fileInput = document.getElementById('audioFile');
+            if (!fileInput.files || fileInput.files.length === 0) {
+                logDebug('❌ 请先选择音频文件');
+                return;
+            }
+            
+            const file = fileInput.files[0];
+            logDebug(`上传文件: ${file.name} (${Math.round(file.size/1024)}KB)`);
+            
+            updateStatus(`处理文件 ${file.name}...`, false);
+            await processAudio(file, '文件上传');
+        }
+        
+        // 处理音频并发送STT
+        async function processAudio(audioBlob, source) {
+            try {
+                // 显示加载状态
+                document.getElementById('loading').style.display = 'block';
+                
+                // 获取当前Ngrok域名
+                const baseUrl = window.location.origin;
+                logDebug(`发送到服务器: ${baseUrl}`);
+                
+                // 将Blob转换为base64
+                const reader = new FileReader();
+                const base64Promise = new Promise((resolve, reject) => {
+                    reader.onloadend = () => {
+                        // 移除data:前缀
+                        const base64Data = reader.result.split(',')[1];
+                        resolve(base64Data);
+                    };
+                    reader.onerror = reject;
+                });
+                
+                reader.readAsDataURL(audioBlob);
+                const base64Audio = await base64Promise;
+                
+                // 准备STT请求
+                const sttRequest = {
+                    config: {
+                        encoding: "WEBM_OPUS",
+                        sampleRateHertz: 48000,
+                        languageCode: "en-US",
+                        enableAutomaticPunctuation: true,
+                        useEnhanced: true,
+                    },
+                    audio: {
+                        content: base64Audio
+                    }
+                };
+                
+                logDebug('发送STT请求...');
+                const response = await fetch('/api/stt/transcribe', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(sttRequest)
+                });
+                
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`服务器响应错误 ${response.status}: ${errorText}`);
+                }
+                
+                const result = await response.json();
+                logDebug(`✅ STT成功: ${result.transcript?.length || 0} 字符`);
+                
+                // 显示结果
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('results').style.display = 'block';
+                
+                const transcriptEl = document.getElementById('transcript');
+                transcriptEl.innerHTML = `
+                    <h3>📝 转录文本:</h3>
+                    <div style="background: #f0f8ff; padding: 15px; border-radius: 8px; margin: 10px 0; white-space: pre-wrap;">
+                        ${result.transcript || '未检测到语音'}
+                    </div>
+                `;
+                
+                const confidenceEl = document.getElementById('confidence');
+                confidenceEl.innerHTML = `
+                    <h4>📊 评分信息:</h4>
+                    <p>置信度: ${result.confidence ? (result.confidence * 100).toFixed(1) : 'N/A'}%</p>
+                    <p>检测语言: ${result.language || '英语'}</p>
+                `;
+                
+                updateStatus(`✅ 处理完成 (${source})`, false);
+                
+            } catch (error) {
+                logDebug(`❌ STT处理失败: ${error.message}`);
+                updateStatus(`处理失败: ${error.message}`, false);
+                
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('results').style.display = 'block';
+                
+                const transcriptEl = document.getElementById('transcript');
+                transcriptEl.innerHTML = `
+                    <div class="error">
+                        <h3>❌ 错误信息:</h3>
+                        <p>${error.message}</p>
+                        <p><small>请检查网络连接，确保浏览器支持麦克风权限。</small></p>
+                    </div>
+                `;
+            }
+        }
+        
+        // 页面加载完成
+        window.addEventListener('load', () => {
+            logDebug('页面加载完成');
+            updateStatus('就绪 - 等待用户操作', false);
+            
+            // 检查麦克风权限
+            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                logDebug('❌ 浏览器不支持MediaDevices API');
+                updateStatus('浏览器不支持麦克风访问', false);
+                document.getElementById('startBtn').disabled = true;
+            } else {
+                logDebug('✅ 浏览器支持MediaDevices API');
+            }
+        });
+    </script>
+</body>
+</html>

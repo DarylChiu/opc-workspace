@@ -6,27 +6,34 @@
       "project": "视频分析交互Workflow",
       "lead": "Bryson (xiaofeng)",
       "status": "in_progress",
-      "totalEstimatedHours": 72,
-      "totalActualHours": 32,
+      "totalEstimatedHours": 87,
+      "totalActualHours": 50,
       "description": "核心理念：以「视频分析MVP」分析引擎为核心，新增「交互式前端界面」（借鉴百万工作室）为外层交互壳。内核驱动分析，外壳提供可视化与交互易用性。",
       "nodes": [
         {
           "id": "n_shell_input",
           "type": "taskNode",
-          "position": { "x": 80, "y": 40 },
+          "position": {
+            "x": 80,
+            "y": 40
+          },
           "data": {
             "label": "📥 视频接入 (交互壳)",
             "description": "URL输入 / Demo演示 / 链接验证 | 借鉴百万工作室的输入交互设计",
             "agent": "kitty",
-            "estimatedHours": 4,
+            "estimatedHours": 2,
             "actualHours": 4,
             "status": "done"
-          }
+          },
+          "isCore": false
         },
         {
           "id": "n_shell_layout",
           "type": "taskNode",
-          "position": { "x": 80, "y": 150 },
+          "position": {
+            "x": 80,
+            "y": 150
+          },
           "data": {
             "label": "🖥️ 交互界面壳 (交互壳)",
             "description": "三栏布局(视频+对白/分析/标记) + 竖屏横屏自适应 + 视频↔对白双向联动 | 借鉴百万工作室前端架构",
@@ -39,7 +46,10 @@
         {
           "id": "n_mvp_download",
           "type": "taskNode",
-          "position": { "x": 360, "y": 40 },
+          "position": {
+            "x": 360,
+            "y": 40
+          },
           "data": {
             "label": "⬇️ 视频下载 ⭐MVP",
             "description": "yt-dlp下载 + AbortController 60s超时保护",
@@ -52,7 +62,10 @@
         {
           "id": "n_mvp_audio",
           "type": "taskNode",
-          "position": { "x": 360, "y": 160 },
+          "position": {
+            "x": 360,
+            "y": 160
+          },
           "data": {
             "label": "🎵 音频提取 ⭐MVP",
             "description": "ffmpeg提取音频轨道 → 为STT准备",
@@ -65,25 +78,31 @@
         {
           "id": "n_mvp_stt",
           "type": "taskNode",
-          "position": { "x": 360, "y": 280 },
+          "position": {
+            "x": 360,
+            "y": 280
+          },
           "data": {
             "label": "🎙️ STT语音转写 ⭐MVP",
             "description": "Whisper 本地tiny模型 → 时间戳对齐对白 → 为后续全部分析模块提供文本基础",
             "agent": "xiaofeng",
             "estimatedHours": 6,
-            "actualHours": 6,
+            "actualHours": 2,
             "status": "done"
           }
         },
         {
           "id": "n_mvp_frames",
           "type": "taskNode",
-          "position": { "x": 640, "y": 40 },
+          "position": {
+            "x": 640,
+            "y": 40
+          },
           "data": {
             "label": "🎬 关键帧抽取 ⭐MVP",
-            "description": "ffmpeg scene detect → 场景切换检测 → 关键帧提取(10-30张)",
+            "description": "Gemini 原生视频分析：视频直传→端到端帧级理解，替代传统ffmpeg场景检测+关键帧提取",
             "agent": "xiaofeng",
-            "estimatedHours": 8,
+            "estimatedHours": 1,
             "actualHours": 0,
             "status": "pending"
           }
@@ -91,7 +110,10 @@
         {
           "id": "n_mvp_timeline",
           "type": "taskNode",
-          "position": { "x": 360, "y": 410 },
+          "position": {
+            "x": 360,
+            "y": 410
+          },
           "data": {
             "label": "📊 技术指标总览 ⭐MVP",
             "description": "视频元数据: 分辨率/帧率/编码/时长/文件大小",
@@ -104,7 +126,10 @@
         {
           "id": "n_mvp_script",
           "type": "taskNode",
-          "position": { "x": 80, "y": 430 },
+          "position": {
+            "x": 80,
+            "y": 430
+          },
           "data": {
             "label": "🎬 脚本结构深度分析 ⭐MVP",
             "description": "四幕拆解 + 逐帧证据 + 戏剧张力评分(1-10) + 情绪曲线 + 叙事技巧 | MVP核心板块",
@@ -117,7 +142,10 @@
         {
           "id": "n_mvp_cine",
           "type": "taskNode",
-          "position": { "x": 360, "y": 560 },
+          "position": {
+            "x": 360,
+            "y": 560
+          },
           "data": {
             "label": "📷 镜头语言分析 ⭐MVP",
             "description": "景别占比统计 / 构图手法分类 / 光线特征 / 色彩时间线 | 需Vision API精确化 → 当前文本推断",
@@ -130,7 +158,10 @@
         {
           "id": "n_mvp_editing",
           "type": "taskNode",
-          "position": { "x": 640, "y": 200 },
+          "position": {
+            "x": 640,
+            "y": 200
+          },
           "data": {
             "label": "✂️ 剪辑与声音 ⭐MVP",
             "description": "剪辑密度曲线 / 转场分析 / 音效设计 / BGM情绪匹配 / 节奏可视化",
@@ -143,7 +174,10 @@
         {
           "id": "n_mvp_director",
           "type": "taskNode",
-          "position": { "x": 640, "y": 360 },
+          "position": {
+            "x": 640,
+            "y": 360
+          },
           "data": {
             "label": "🎭 导演风格 ⭐MVP",
             "description": "6维度: 纪实美学/道具驱动/反打镜头/文化编码/黑色幽默/第四面墙",
@@ -156,7 +190,10 @@
         {
           "id": "n_mvp_reusable",
           "type": "taskNode",
-          "position": { "x": 640, "y": 520 },
+          "position": {
+            "x": 640,
+            "y": 520
+          },
           "data": {
             "label": "💡 创作者可复用元素 ⭐MVP",
             "description": "模板公式 / Hook技巧 / 话题切入策略 / 爆款因素拆解",
@@ -169,7 +206,10 @@
         {
           "id": "n_mvp_compare",
           "type": "taskNode",
-          "position": { "x": 640, "y": 660 },
+          "position": {
+            "x": 640,
+            "y": 660
+          },
           "data": {
             "label": "🔬 版本对比 ⭐MVP",
             "description": "同作者/同主题多视频横向对比 → 风格演化追踪",
@@ -182,20 +222,26 @@
         {
           "id": "n_vision",
           "type": "taskNode",
-          "position": { "x": 360, "y": 700 },
+          "position": {
+            "x": 360,
+            "y": 700
+          },
           "data": {
             "label": "🖼️ Vision API 接入 ⭐MVP",
-            "description": "关键帧→Vision模型逐帧分析→景别/构图/光线/色彩/人物/情绪精确化 | GPT-4o/Gemini/DeepSeek VL2",
+            "description": "Gemini 端到端多模态分析：视频输入→结构化输出(景别/构图/光线/色彩/人物/情绪)，替代分步Vision+LLM管线",
             "agent": "xiaofeng",
-            "estimatedHours": 12,
-            "actualHours": 0,
+            "estimatedHours": 4,
+            "actualHours": 2,
             "status": "pending"
           }
         },
         {
           "id": "n_shell_marks",
           "type": "taskNode",
-          "position": { "x": 80, "y": 580 },
+          "position": {
+            "x": 80,
+            "y": 580
+          },
           "data": {
             "label": "🏷️ 标记系统 (交互壳)",
             "description": "Hook/金句/转折点多类型标记 + 保存/导出Markdown + 清空 | 交互增强",
@@ -208,7 +254,10 @@
         {
           "id": "n_shell_library",
           "type": "taskNode",
-          "position": { "x": 80, "y": 710 },
+          "position": {
+            "x": 80,
+            "y": 710
+          },
           "data": {
             "label": "📚 素材库 (交互壳)",
             "description": "localStorage持久化 / 表格浏览 / 一键恢复历史分析 | 交互增强",
@@ -221,7 +270,10 @@
         {
           "id": "n_shell_deploy",
           "type": "taskNode",
-          "position": { "x": 80, "y": 850 },
+          "position": {
+            "x": 80,
+            "y": 850
+          },
           "data": {
             "label": "🌐 公网部署 (交互壳)",
             "description": "Cloudflare Tunnel → 端口8777 公网访问 → 可分享链接",
@@ -231,47 +283,227 @@
             "status": "done"
           }
         },
-      {
-        "id": "n_test",
-        "type": "taskNode",
-        "position": { "x": 360, "y": 850 },
-        "data": {
-          "label": "🧪 质量测试与迭代",
-          "description": "多视频对比测试 + 输出一致性校验 + 报告完整性检查",
-          "agent": "xiaofeng",
-          "estimatedHours": 6,
-          "actualHours": 0,
-          "status": "pending"
+        {
+          "id": "n_test",
+          "type": "taskNode",
+          "position": {
+            "x": 360,
+            "y": 850
+          },
+          "data": {
+            "label": "🧪 质量测试与迭代",
+            "description": "多视频对比测试 + 输出一致性校验 + 报告完整性检查",
+            "agent": "xiaofeng",
+            "estimatedHours": 6,
+            "actualHours": 0,
+            "status": "pending"
+          }
+        },
+        {
+          "id": "n_gemini_feature",
+          "type": "taskNode",
+          "position": {
+            "x": 640,
+            "y": 200
+          },
+          "data": {
+            "label": "⚡ Gemini 多模态特征提取",
+            "description": "Gemini 原生多模态：同时提取视觉特征+文本特征+结构特征，替代 CLIP+Whisper 特征向量化",
+            "agent": "xiaofeng",
+            "estimatedHours": 2,
+            "actualHours": 1,
+            "status": "done"
+          }
         }
-      }
-    ],
-    "edges": [
-      { "id": "e01", "source": "n_shell_input", "target": "n_mvp_download", "data": { "logic": "THEN" } },
-      { "id": "e02", "source": "n_shell_input", "target": "n_shell_layout", "data": { "logic": "AND" } },
-      { "id": "e03", "source": "n_mvp_download", "target": "n_mvp_audio", "data": { "logic": "THEN" } },
-      { "id": "e04", "source": "n_mvp_audio", "target": "n_mvp_stt", "data": { "logic": "THEN" } },
-      { "id": "e05", "source": "n_mvp_download", "target": "n_mvp_frames", "data": { "logic": "AND" } },
-      { "id": "e06", "source": "n_shell_layout", "target": "n_mvp_script", "data": { "logic": "AND" } },
-      { "id": "e07", "source": "n_mvp_stt", "target": "n_mvp_script", "data": { "logic": "THEN" } },
-      { "id": "e08", "source": "n_mvp_stt", "target": "n_mvp_timeline", "data": { "logic": "THEN" } },
-      { "id": "e09", "source": "n_mvp_script", "target": "n_mvp_cine", "data": { "logic": "THEN" } },
-      { "id": "e10", "source": "n_mvp_frames", "target": "n_mvp_editing", "data": { "logic": "THEN" } },
-      { "id": "e11", "source": "n_mvp_editing", "target": "n_mvp_director", "data": { "logic": "THEN" } },
-      { "id": "e12", "source": "n_mvp_cine", "target": "n_mvp_reusable", "data": { "logic": "THEN" } },
-      { "id": "e13", "source": "n_mvp_director", "target": "n_mvp_reusable", "data": { "logic": "AND" } },
-      { "id": "e14", "source": "n_mvp_reusable", "target": "n_mvp_compare", "data": { "logic": "THEN" } },
-      { "id": "e15", "source": "n_mvp_cine", "target": "n_vision", "data": { "logic": "THEN" } },
-      { "id": "e16", "source": "n_mvp_frames", "target": "n_vision", "data": { "logic": "AND" } },
-      { "id": "e17", "source": "n_vision", "target": "n_test", "data": { "logic": "AND" } },
-      { "id": "e18", "source": "n_mvp_script", "target": "n_shell_marks", "data": { "logic": "THEN" } },
-      { "id": "e19", "source": "n_mvp_cine", "target": "n_shell_marks", "data": { "logic": "AND" } },
-      { "id": "e20", "source": "n_shell_marks", "target": "n_shell_library", "data": { "logic": "THEN" } },
-      { "id": "e21", "source": "n_shell_layout", "target": "n_shell_deploy", "data": { "logic": "THEN" } },
-      { "id": "e22", "source": "n_shell_library", "target": "n_shell_deploy", "data": { "logic": "AND" } },
-      { "id": "e23", "source": "n_mvp_compare", "target": "n_test", "data": { "logic": "AND" } }
-    ],
-    "createdAt": "2026-06-17T02:00:00.000Z",
-    "updatedAt": "2026-06-17T03:55:00.000Z"
-  }
-]
+      ],
+      "edges": [
+        {
+          "id": "e01",
+          "source": "n_shell_input",
+          "target": "n_mvp_download",
+          "data": {
+            "logic": "THEN"
+          }
+        },
+        {
+          "id": "e02",
+          "source": "n_shell_input",
+          "target": "n_shell_layout",
+          "data": {
+            "logic": "AND"
+          }
+        },
+        {
+          "id": "e03",
+          "source": "n_mvp_download",
+          "target": "n_mvp_audio",
+          "data": {
+            "logic": "THEN"
+          }
+        },
+        {
+          "id": "e04",
+          "source": "n_mvp_audio",
+          "target": "n_mvp_stt",
+          "data": {
+            "logic": "THEN"
+          }
+        },
+        {
+          "id": "e05",
+          "source": "n_mvp_download",
+          "target": "n_mvp_frames",
+          "data": {
+            "logic": "AND"
+          }
+        },
+        {
+          "id": "e06",
+          "source": "n_shell_layout",
+          "target": "n_mvp_script",
+          "data": {
+            "logic": "AND"
+          }
+        },
+        {
+          "id": "e07",
+          "source": "n_mvp_stt",
+          "target": "n_mvp_script",
+          "data": {
+            "logic": "THEN"
+          }
+        },
+        {
+          "id": "e08",
+          "source": "n_mvp_stt",
+          "target": "n_mvp_timeline",
+          "data": {
+            "logic": "THEN"
+          }
+        },
+        {
+          "id": "e09",
+          "source": "n_mvp_script",
+          "target": "n_mvp_cine",
+          "data": {
+            "logic": "THEN"
+          }
+        },
+        {
+          "id": "e10",
+          "source": "n_mvp_frames",
+          "target": "n_mvp_editing",
+          "data": {
+            "logic": "THEN"
+          }
+        },
+        {
+          "id": "e11",
+          "source": "n_mvp_editing",
+          "target": "n_mvp_director",
+          "data": {
+            "logic": "THEN"
+          }
+        },
+        {
+          "id": "e12",
+          "source": "n_mvp_cine",
+          "target": "n_mvp_reusable",
+          "data": {
+            "logic": "THEN"
+          }
+        },
+        {
+          "id": "e13",
+          "source": "n_mvp_director",
+          "target": "n_mvp_reusable",
+          "data": {
+            "logic": "AND"
+          }
+        },
+        {
+          "id": "e14",
+          "source": "n_mvp_reusable",
+          "target": "n_mvp_compare",
+          "data": {
+            "logic": "THEN"
+          }
+        },
+        {
+          "id": "e15",
+          "source": "n_mvp_cine",
+          "target": "n_vision",
+          "data": {
+            "logic": "THEN"
+          }
+        },
+        {
+          "id": "e16",
+          "source": "n_mvp_frames",
+          "target": "n_vision",
+          "data": {
+            "logic": "AND"
+          }
+        },
+        {
+          "id": "e17",
+          "source": "n_vision",
+          "target": "n_test",
+          "data": {
+            "logic": "AND"
+          }
+        },
+        {
+          "id": "e18",
+          "source": "n_mvp_script",
+          "target": "n_shell_marks",
+          "data": {
+            "logic": "THEN"
+          }
+        },
+        {
+          "id": "e19",
+          "source": "n_mvp_cine",
+          "target": "n_shell_marks",
+          "data": {
+            "logic": "AND"
+          }
+        },
+        {
+          "id": "e20",
+          "source": "n_shell_marks",
+          "target": "n_shell_library",
+          "data": {
+            "logic": "THEN"
+          }
+        },
+        {
+          "id": "e21",
+          "source": "n_shell_layout",
+          "target": "n_shell_deploy",
+          "data": {
+            "logic": "THEN"
+          }
+        },
+        {
+          "id": "e22",
+          "source": "n_shell_library",
+          "target": "n_shell_deploy",
+          "data": {
+            "logic": "AND"
+          }
+        },
+        {
+          "id": "e23",
+          "source": "n_mvp_compare",
+          "target": "n_test",
+          "data": {
+            "logic": "AND"
+          }
+        }
+      ],
+      "createdAt": "2026-06-17T02:00:00.000Z",
+      "updatedAt": "2026-06-17T03:55:00.000Z"
+    }
+  ]
 }

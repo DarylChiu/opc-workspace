@@ -11,8 +11,12 @@ from typing import AsyncIterator
 
 logger = logging.getLogger(__name__)
 
-# DashScope Realtime API
-QWEN_WS_URL = "wss://dashscope.aliyuncs.com/api-ws/v1/realtime"
+# DashScope Realtime API（文档: help.aliyun.com/zh/model-studio/realtime）
+# Workspace endpoint from CSV: ws-spzk3f7tb6hcawwn.cn-beijing.maas.aliyuncs.com
+QWEN_WS_HOST = "ws-spzk3f7tb6hcawwn.cn-beijing.maas.aliyuncs.com"
+QWEN_WS_URL = f"wss://{QWEN_WS_HOST}/api-ws/v1/realtime"
+QWEN_MODEL = "qwen3.5-omni-flash-realtime"  # 当前默认: flash (无需白名单)
+QWEN_MODEL_PLUS = "qwen3.5-omni-plus-realtime"  # 旗舰，需百炼控制台申请白名单
 
 
 class QwenOmniClient:
@@ -28,11 +32,13 @@ class QwenOmniClient:
     """
 
     def __init__(self, api_key: str, mode: str = "ielts_part1",
-                 voice: str = "Cherry", language: str = "en-US"):
+                 voice: str = "Ethan", language: str = "en-US",
+                 model: str = None):
         self.api_key = api_key
         self.mode = mode
         self.voice = voice
         self.language = language
+        self.model = model or QWEN_MODEL  # 允许外部指定模型
         self.ws = None
         self._session_id = None
         self._pending_events = asyncio.Queue()
@@ -73,34 +79,28 @@ class QwenOmniClient:
     async def connect(self) -> dict:
         """建立 WebSocket 连接并初始化会话"""
         import websockets
+        import uuid
 
+        ws_url = f"{QWEN_WS_URL}?model={self.model}"
         headers = {"Authorization": f"Bearer {self.api_key}"}
         self.ws = await websockets.connect(
-            QWEN_WS_URL,
+            ws_url,
             additional_headers=headers,
             ping_interval=30,
             ping_timeout=10,
         )
 
-        # Configure session
+        # Configure session（文档: help.aliyun.com/zh/model-studio/realtime）
         system_prompt = self.SYSTEM_PROMPTS.get(self.mode, self.SYSTEM_PROMPTS["free_talk"])
         session_config = {
+            "event_id": f"event_{uuid.uuid4().hex[:21]}",
             "type": "session.update",
             "session": {
                 "modalities": ["text", "audio"],
                 "instructions": system_prompt,
                 "voice": self.voice,
-                "input_audio_format": "pcm16",
-                "output_audio_format": "pcm16",
-                "input_audio_transcription": {"model": "whisper-1"},
-                "turn_detection": {
-                    "type": "server_vad",
-                    "threshold": 0.5,
-                    "prefix_padding_ms": 300,
-                    "silence_duration_ms": 800,
-                },
-                "temperature": 0.7,
-                "max_response_output_tokens": 300,
+                "input_audio_format": "pcm",       # 16kHz PCM
+                "output_audio_format": "pcm",      # 24kHz PCM 输出
             },
         }
         await self.ws.send(json.dumps(session_config))
@@ -150,12 +150,15 @@ class QwenOmniClient:
 
             msg_type = msg.get("type", "")
 
-            if msg_type == "response.text.delta":
+            # 文档定义的事件类型:
+            # 文本+音频模式: response.audio_transcript.delta / response.audio_transcript.done
+            # 仅文本模式: response.text.delta / response.text.done
+            if msg_type == "response.audio_transcript.delta":
                 yield {"type": "text", "data": msg.get("delta", "")}
             elif msg_type == "response.audio.delta":
                 yield {"type": "audio", "data": msg.get("delta", "")}
-            elif msg_type == "response.text.done":
-                yield {"type": "text_done", "text": msg.get("text", "")}
+            elif msg_type == "response.audio_transcript.done":
+                yield {"type": "text_done", "text": msg.get("transcript", "")}
             elif msg_type == "response.audio.done":
                 yield {"type": "audio_done"}
             elif msg_type == "response.done":
@@ -168,6 +171,9 @@ class QwenOmniClient:
                 yield {"type": "speech_started"}
             elif msg_type == "input_audio_buffer.speech_stopped":
                 yield {"type": "speech_stopped"}
+            elif msg_type == "conversation.item.input_audio_transcription.completed":
+                # 用户语音转写完成
+                yield {"type": "user_transcript", "transcript": msg.get("transcript", "")}
 
     async def close(self):
         if self.ws:

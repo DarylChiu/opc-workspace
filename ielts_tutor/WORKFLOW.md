@@ -243,18 +243,33 @@ ielts_tutor/
 - [x] 3模式自测通过 (ielts_part1/business_pitch/free_talk)
 - [ ] Daryl 浏览器验收
 
-### Phase 2 · 管线2 接入（Qwen-Omni）
-- [ ] Qwen-Omni Realtime API 对接
-- [ ] WebRTC 分流逻辑
-- [ ] 管线切换前端交互
-- [ ] 会话转录存档
+### Phase 2 · 管线2 接入（Qwen-Omni）✅ 代码完成
+- [x] Qwen-Omni Realtime API 对接（WebSocket，workspace endpoint）
+- [x] 管线2 服务端分支逻辑（handle_realtime）
+- [x] 前端引擎选择器 + 用户友好标签
+- [x] 文本+音频双向流测试通过
+- [x] 模型自动降级（plus→flash）
+- [x] API Key 配置 + fallback
+- [ ] Daryl 用户测试（真人语音验收）
+- [ ] 前端音频采集→Qwen 音频输入路径验证
 
-### Phase 3 · 打磨
-- [ ] 学习记录数据库
-- [ ] 薄弱点追踪
-- [ ] 自适应难度
+### Phase 3 · 评估与报告闭环 ✅ 核心完成
+- [x] 管线2 会话结束后触发 DeepSeek 评估
+- [x] IELTS 四维评分（流利度/词汇/语法/发音）
+- [x] HTML 报告生成（generate_report 集成双管线）
+- [x] 报告历史列表 API (/api/reports + /api/history)
+- [x] 薄弱点追踪 (/api/weaknesses，跨会话错误频次统计)
+- [x] 评估结果持久化至 SQLite
+- [ ] 逐句纠错标记前端展示
+- [ ] 发音专项评估（跟读评分）
+
+### Phase 4 · 打磨与公网服务化 🔨 进行中
+- [x] 会话历史持久化（SQLite: sessions/transcripts/evaluations/errors）
+- [x] 成本统计仪表板（/api/costs + 前端实时显示）
+- [ ] 自适应难度（根据评分动态调整题目）
+- [ ] 发音跟读模式
 - [ ] 移动端适配
-- [ ] ngrok 公网部署
+- [ ] Ngrok 隧道稳定性优化
 
 ---
 

@@ -6,6 +6,10 @@ Skills define _how_ tools work. This file is for _your_ specifics — the stuff 
 
 Things like:
 
+### Communication Rules
+- **Language**: Use Chinese for questions and task reports
+- **Group Reply**: Reply as normal messages in group chats (no "topic" style)
+
 - Camera names and locations
 - SSH hosts and aliases
 - Preferred voices for TTS

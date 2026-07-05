@@ -1,0 +1,32 @@
+🔍 检查Whisper.js依赖环境...
+✅ whisper-turbo已安装
+✅ whisper-webgpu已安装
+
+🔍 检查IELTS音频样本...
+✅ 找到 8 个音频样本用于测试
+
+📝 创建Whisper.js测试服务器...
+
+🔧 有用的命令:
+   # 检查浏览器WebGPU支持
+   chrome://flags/#enable-unsafe-webgpu
+
+   # 如果Whisper.js失败，测试Google STT备用方案
+   node google_stt_test.js
+📝 创建Google STT测试脚本: google_stt_test.js
+
+🎯 现在请打开浏览器访问 http://localhost:3000 进行Whisper.js测试
+🚀 测试服务器启动: http://localhost:3000
+📁 音频样本目录: /Users/zhaoyuzhao/.openclaw/xiaofeng_workspace/test_audio/ielts_benchmark
+🎯 测试样本数量: 8
+
+📋 测试步骤:
+1. 打开上面的URL在支持WebGPU的浏览器中（Chrome 113+ / Edge 113+）
+2. 点击"检查环境"按钮验证浏览器支持
+3. 点击"加载Whisper模型"（首次需要下载约100MB模型）
+4. 选择音频文件并点击"转写音频"
+
+⚠️  注意:
+   - 首次加载模型需要下载，请耐心等待
+   - 确保浏览器支持WebGPU（chrome://flags/#enable-unsafe-webgpu）
+   - 如果Whisper.js失败，我们将测试Google STT作为备用方案

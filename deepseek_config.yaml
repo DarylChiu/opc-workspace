@@ -1,0 +1,225 @@
+# Deepseek成本跟踪系统配置
+# 适用于Bryson专属成本追踪
+
+app:
+  name: "Deepseek Cost Tracker - Bryson"
+  version: "1.0.0"
+  author: "Bryson / 吹点小风"
+  description: "精确追踪Deepseek API使用成本的系统"
+
+api:
+  key: "REDACTED_API_KEY"
+  base_url: "https://api.deepseek.com"
+  default_model: "deepseek-chat"
+  timeout: 30
+  max_retries: 3
+
+cost:
+  # Deepseek官方费率（$ per 1M tokens）
+  rate_input: 0.14    # 输入tokens费率
+  rate_output: 0.28   # 输出tokens费率
+  
+  # 成本警报阈值
+  alerts:
+    daily:
+      warning: 0.8    # $0.8触发警告
+      critical: 1.0   # $1.0触发严重警报
+    monthly:
+      warning: 12.0   # $12.0触发警告
+      critical: 15.0  # $15.0触发严重警报
+    weekly:
+      warning: 4.0    # $4.0触发警告
+      critical: 5.0   # $5.0触发严重警报
+
+database:
+  path: "deepseek_cost.db"
+  backup:
+    enabled: true
+    interval_hours: 24
+    keep_days: 30
+  optimization:
+    vacuum_days: 7
+
+project_tracking:
+  # 项目前缀自动识别
+  prefixes:
+    - "project_"      # 项目开发
+    - "feature_"      # 功能开发
+    - "teaching_"     # 教学任务
+    - "task_"         # 任务执行
+    - "debug_"        # 调试工作
+    - "test_"         # 测试工作
+    - "analysis_"     # 分析工作
+  
+  # 默认项目设置
+  default_project: "default"
+  
+  # 会话管理
+  auto_session: true
+  session_timeout_hours: 24
+
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  file: "deepseek_cost_tracker.log"
+  max_size_mb: 10
+  backup_count: 5
+  
+  # 控制台输出
+  console:
+    enabled: true
+    format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+reporting:
+  daily_report_time: "23:30"  # 每日报告生成时间
+  weekly_report_day: "sunday" # 每周报告生成日
+  monthly_report_day: "last"  # 每月报告生成日（最后一天）
+  
+  # 报告输出格式
+  formats:
+    markdown: true
+    json: true
+    csv: false  # 如果需要可以开启
+  
+  # 报告内容
+  include:
+    summary: true
+    project_breakdown: true
+    trend_analysis: true
+    alerts: true
+    recommendations: false  # 成本优化建议（暂不启用）
+
+integration:
+  # OpenClaw集成设置
+  openclaw:
+    enabled: true
+    workspace_path: "/Users/zhaoyuzhao/.openclaw/xiaofeng_workspace"
+    
+    # 集成模式
+    mode: "interceptor"  # interceptor: API调用拦截, monitor: 独立监控
+    
+    # 拦截器设置
+    interceptor:
+      hook_file: "deepseek_interceptor_hook.js"
+      config_path: "config/deepseek_integration.json"
+  
+  # 通知集成
+  notifications:
+    email: false
+    webhook: false
+    
+    # 飞书集成
+    feishu:
+      enabled: false
+      webhook_url: ""
+      card_format: true
+
+monitoring:
+  # 实时监控
+  realtime_updates: true
+  update_interval_seconds: 60
+  
+  # 健康检查
+  health_check:
+    enabled: true
+    check_interval_minutes: 5
+    
+  # 性能监控
+  performance:
+    track_response_time: true
+    track_error_rate: true
+    track_cache_hit_rate: true
+
+optimization:
+  # 缓存策略
+  cache:
+    enabled: true
+    max_size_mb: 100
+    ttl_hours: 24
+    
+  # 数据库优化
+  batch_write_size: 100  # 批量写入记录数
+  
+  # 异步处理
+  async_enabled: true
+  max_concurrent_requests: 10
+
+backup:
+  # 数据备份
+  auto_backup: true
+  backup_dir: "backups"
+  
+  # 备份策略
+  keep:
+    daily: 7
+    weekly: 4
+    monthly: 12
+
+compatibility:
+  # Kitty的OpenRouter系统兼容性
+  openrouter_format: true
+  
+  # 输出格式兼容
+  output_formats:
+    daily_report: "summary"
+    project_report: "detailed"
+    cost_breakdown: "by_percentage"
+  
+  # 统一接口兼容
+  unified_api: true
+  api_version: "v1"
+
+development:
+  # 开发环境设置
+  debug_mode: false
+  simulate_api_calls: false  # 模拟API调用（测试用）
+  
+  # 测试数据
+  test_data:
+    enabled: false
+    generate_test_records: false
+    
+  # 开发者设置
+  developer_mode: false
+
+deployment:
+  # 部署配置
+  service_name: "deepseek-cost-tracker"
+  
+  # 启动服务
+  auto_start: true
+  restart_on_failure: true
+  
+  # 配置管理
+  config_reload: true
+  hot_reload_interval_seconds: 300
+
+version_control:
+  # 版本追踪
+  track_versions: true
+  version_file: "VERSION.md"
+  
+  # 变更日志
+  changelog: true
+  changelog_file: "CHANGELOG.md"
+
+# 环境特定配置覆盖
+environments:
+  development:
+    logging:
+      level: "DEBUG"
+    database:
+      path: "deepseek_cost_dev.db"
+  
+  testing:
+    database:
+      path: "deepseek_cost_test.db"
+    development:
+      debug_mode: true
+  
+  production:
+    logging:
+      level: "INFO"
+    monitoring:
+      realtime_updates: true
+    backup:
+      auto_backup: true

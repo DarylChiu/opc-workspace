@@ -20,8 +20,8 @@ GOOGLE_TTS_KEY = _read_key(os.path.join(AUTH_DIR, "google", "ielts_tts_2026.key"
 DEEPSEEK_KEY = os.environ.get("DEEPSEEK_API_KEY") or _read_key(os.path.join(AUTH_DIR, "deepseek", "api.key"))
 DEEPSEEK_BASE = "https://api.deepseek.com/v1"
 
-# Qwen-Omni (Daryl 准备中)
-QWEN_OMNI_KEY = _read_key(os.path.join(AUTH_DIR, "qwen", "omni_realtime.key"))
+# Qwen-Omni (2026-06-29 Daryl 已配置)
+QWEN_OMNI_KEY = os.environ.get("QWEN_OMNI_KEY") or _read_key(os.path.join(AUTH_DIR, "qwen", "omni_realtime.key"))
 
 # Server
 HOST = "0.0.0.0"

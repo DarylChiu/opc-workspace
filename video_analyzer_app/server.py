@@ -44,7 +44,7 @@ def call_deepseek(prompt: str, system: str = "你是专业的视频分析助手�
         "temperature":0.3,"max_tokens":max_tokens}).encode()
     req = urllib.request.Request(DEEPSEEK_BASE, data=payload,
         headers={"Authorization":f"Bearer {DEEPSEEK_API_KEY}","Content-Type":"application/json"})
-    resp = urllib.request.urlopen(req, timeout=120)
+    resp = urllib.request.urlopen(req, timeout=180)
     data = json.loads(resp.read())
     content = data["choices"][0]["message"]["content"].strip()
     if content.startswith("```"): content = content.split("\n",1)[1]
@@ -165,7 +165,7 @@ def gemini_video_analyze(video_path: str, max_retries: int = 2, transcribe_only:
                                  "Content-Type":"application/json",
                                  "HTTP-Referer":"http://localhost:8777",
                                  "X-Title":"Video Analyzer V3"})
-                    resp = urllib.request.urlopen(req, timeout=300)
+                    resp = urllib.request.urlopen(req, timeout=600)
                     data = json.loads(resp.read())
                     elapsed = time.time() - t0
                     usage = data.get("usage", {})
