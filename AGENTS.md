@@ -30,25 +30,33 @@ Don't ask permission. Just do it.
 3. 若有新发现（新任务、新产物、新决策），立即更新 `memory/active.md` 和 `memory/YYYY-MM-DD.md`
 4. 这样无论在哪个 session 被问到，都能看到全局工作状态
 
-### 🔒 四层合规执行系统（每次 session 全周期强制运行）
+### 🔒 四层合规执行系统 + Sentinel 插件强制
 
-参考 Claude Code 四层架构，用自建脚本实现等效的合规闭环。
+> ⚠️ Sentinel Plugin 已启用：`before_tool_call` 系统级阻断。以下脚本是 Agent 自查机制，Plugin 是物理级强制。
+
+#### 🛡️ Sentinel 自动升级规则（Plugin 强制执行）
+
+| 触发条件 | 动作 |
+|---------|------|
+| 编辑 `.env` / `*.secret` | **P0 BLOCK** |
+| `rm -rf` / `npm publish` | **P0 BLOCK** |
+| `git push --force` / `git push origin main` | **P0 APPROVAL** |
+| 编辑 `package.json` / `**/types/*` / `**/api/*` / `**/schema*` | **P1 APPROVAL** |
+| 单 session write+edit >20 次 | **P1 APPROVAL** |
+| 涉及 >3 个不同目录 | **P1 APPROVAL** |
+| 夜间 23:00-08:00 | P1 自动降级 P2 |
 
 #### L0 · 启动验证（Session 启动时必跑）
 ```bash
 bash scripts/compliance/startup.sh
 ```
-> 验证所有必读文件存在、active.md 新鲜度、日记存在、目录完整
-> 结果写入 `memory/compliance-status.json`
-> 如果有 error，必须先修复再继续工作
 
-#### L2 · 操作前分级（涉及 >3 步工具调用时必须先跑）
+#### L2 · 操作前分级（涉及 >3 步 MUST 跑，Sentinel 会检测跳过）
 ```bash
 bash scripts/compliance/pre-op.sh "<操作描述>" "[涉及文件]" "[影响范围]"
 ```
-> 自动判定 P0-P3 级别
-> P0→BLOCK（必须请示 Daryl）| P1→CONFIRM（提供方案后请示）| P2/P3→PASS（自主执行）
-> 不跑 pre-op 不准开始复杂操作
+> P0→BLOCK | P1→CONFIRM | P2/P3→PASS
+> ⚠️ 不跑 pre-op：Sentinel 在 write>3 次后自动拦截升级 P1
 
 #### L3 · 操作后验证（任务完成时必跑）
 ```bash

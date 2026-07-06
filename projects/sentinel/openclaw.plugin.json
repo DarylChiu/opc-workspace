@@ -1,0 +1,82 @@
+{
+  "id": "sentinel",
+  "activation": {
+    "onStartup": true
+  },
+  "name": "Sentinel · P0-P3 合规哨兵",
+  "description": "System-level enforcement of the P0-P3 decision matrix. Blocks P0 operations, requires approval for P1, and tracks cumulative operation risk via path-based sensitivity matching and operation count thresholds.",
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "enabled": { "type": "boolean" },
+      "targetAgents": {
+        "type": "array",
+        "items": { "type": "string" },
+        "description": "Agent IDs to enforce. Empty = all agents."
+      },
+      "auditDir": {
+        "type": "string",
+        "description": "Directory for audit logs. Default: memory/"
+      },
+      "p0BlockNotify": {
+        "type": "boolean",
+        "default": true,
+        "description": "Send DM notification on P0 block events"
+      },
+      "nightDowngradeStart": {
+        "type": "integer",
+        "default": 23,
+        "description": "Hour (0-23) when night downgrade starts"
+      },
+      "nightDowngradeEnd": {
+        "type": "integer",
+        "default": 8,
+        "description": "Hour (0-23) when night downgrade ends"
+      },
+      "p1TimeoutMinutes": {
+        "type": "integer",
+        "default": 30,
+        "minimum": 5,
+        "maximum": 120
+      },
+      "writeThreshold": {
+        "type": "integer",
+        "default": 20,
+        "description": "Max write+edit calls before auto-upgrade to P1"
+      },
+      "execThreshold": {
+        "type": "integer",
+        "default": 15,
+        "description": "Max exec calls before warning"
+      },
+      "dirThreshold": {
+        "type": "integer",
+        "default": 3,
+        "description": "Max distinct top-level dirs before auto-upgrade to P1"
+      },
+      "p0Paths": {
+        "type": "array",
+        "items": { "type": "string" },
+        "default": [".env", ".env.*", "*.secret", "scripts/compliance/*"],
+        "description": "Path patterns that trigger P0 block"
+      },
+      "p1Paths": {
+        "type": "array",
+        "items": { "type": "string" },
+        "default": ["package.json", "requirements.txt", "go.mod", "**/types/*", "**/api/*", "**/interface*", "**/schema*", "**/migrations/*"],
+        "description": "Path patterns that trigger P1 approval"
+      }
+    }
+  },
+  "uiHints": {
+    "enabled": { "label": "Enable Sentinel", "help": "Globally enable or disable P0-P3 enforcement." },
+    "targetAgents": { "label": "Target Agents", "help": "Agent IDs to enforce. Leave empty to apply to all agents." },
+    "p0BlockNotify": { "label": "P0 Block Notifications", "help": "Send DM notification when P0 operations are blocked." },
+    "nightDowngradeStart": { "label": "Night Mode Start Hour" },
+    "nightDowngradeEnd": { "label": "Night Mode End Hour" },
+    "writeThreshold": { "label": "Write Count Threshold", "help": "Auto-upgrade to P1 after this many write+edit calls per session." },
+    "execThreshold": { "label": "Exec Count Threshold" },
+    "dirThreshold": { "label": "Directory Diversity Threshold" }
+  }
+}

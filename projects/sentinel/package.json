@@ -1,0 +1,9 @@
+{
+  "name": "sentinel",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "P0-P3 compliance sentinel — system-level enforcement of decision matrix for OpenClaw agents",
+  "openclaw": {
+    "extensions": ["./index.js"]
+  }
+}
