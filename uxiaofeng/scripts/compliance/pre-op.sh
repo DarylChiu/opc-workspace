@@ -1,1 +1,1 @@
-/Users/zhaoyuzhao/.openclaw/compliance/scripts/pre-op.sh
+/Users/zhaoyuzhao/.openclaw/xiaofeng_workspace/projects/sentinel/pre-op-v3.sh
