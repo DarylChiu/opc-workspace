@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-05T08:00:54.689Z",
+  "updatedAt": "2026-07-06T06:24:18.256Z",
   "entries": {
     "memory:memory/2026-06-22.md:22:34": {
       "key": "memory:memory/2026-06-22.md:22:34",
@@ -201,21 +201,24 @@
       "endLine": 22,
       "source": "memory",
       "snippet": "# 2026-06-29 日记 ## 关键事件 ### 方法论卡片审批系统搭建（Daryl × Self 讨论） - **决策链**：飞书文档（静态无交互）→ Bitable（缺权限）→ OPC看板 sidebar 第6模块（最终方案） - **产出**： - `~/methodology-cards/` standalone Obsidian vault（Git + cron备份） - 2张卡片：胭脂扣/双层分离法 + VAS/FDI外部压力驱动 - Kitty 提供 OPC看板完整资料 - **Daryl 核心决策**：审批入 OPC 统一系统，不走飞书外部工具 ### AI技术知识树·案例归档 - Bryson 传递「视频分析交互Workflow」完整归档 - 已归纳到 `knowledge-base/AI技术/视频分析交互Workflow/工程开发经验.md` - 覆盖：管线架构、前后端协作、迭代流程、多平台适配、CSS坑、版号管理 ### 贷款材料自动化处理 v2 完整版（10:00-10:12） - **触发**: Daryl 反馈 v1 四文件过于骨架化 → 要求重写为完整版 - **数据来源**: Balance 跨 session trajectory 数据回溯（4 轮 v2.3 运行日志 + process_results 结构 + 处理报告 + active.md） - **产出**: 4 个文件重写（共 832 行/34KB），从骨架扩展为操作级细节： - Home.md: 两批次对比表 + 项目里程碑 + 输出物清单",
-      "recallCount": 3,
+      "recallCount": 5,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.11020068526268,
+      "totalScore": 1.8485301882028577,
       "maxScore": 0.37962106764316556,
       "firstRecalledAt": "2026-07-02T02:27:53.204Z",
-      "lastRecalledAt": "2026-07-05T08:00:54.689Z",
+      "lastRecalledAt": "2026-07-06T06:24:18.256Z",
       "queryHashes": [
         "6f2bc2d1b0b1",
         "96cbb54ce475",
-        "af50ce3a81d2"
+        "af50ce3a81d2",
+        "ed28f7c18930",
+        "044caf9a1155"
       ],
       "recallDays": [
         "2026-07-02",
-        "2026-07-05"
+        "2026-07-05",
+        "2026-07-06"
       ],
       "conceptTags": [
         "备份",
@@ -290,6 +293,37 @@
         "fv初始计量/低于市场利率/ecl",
         "ifrs-ias/ias-32",
         "form/股东贷款权益分类"
+      ]
+    },
+    "memory:memory/2026-06-29.md:20:33": {
+      "key": "memory:memory/2026-06-29.md:20:33",
+      "path": "memory/2026-06-29.md",
+      "startLine": 20,
+      "endLine": 33,
+      "source": "memory",
+      "snippet": "- **数据来源**: Balance 跨 session trajectory 数据回溯（4 轮 v2.3 运行日志 + process_results 结构 + 处理报告 + active.md） - **产出**: 4 个文件重写（共 832 行/34KB），从骨架扩展为操作级细节： - Home.md: 两批次对比表 + 项目里程碑 + 输出物清单 - 工作流演进.md: 完整 7 步管线（每步 I/O/校验规则/异常处理）+ v2.3 四轮调试轨迹 + 异常终态分析 - 技术方案.md: OCR 判定阈值推导（50 字）、ToKhai 四层匹配（L1=98/99）、B/L 词边界正则、NBSP 编码陷阱、179 文件误删事故 - 经验教训.md: 12 条教训全部附具体案例和数据回溯 - **路径修正**: active.md 记录路径从 `knowledge-base/03-AI技术/` 修正为 `ACCA-Knowledge-Network/03-AI-Tech/Loan-Material-Automation/`（磁盘实际位置） - **已知待办**: Daryl 需确认知识树最终位置和关联关系 ### 贷款材料自动化 v3 方法论提取（10:45-10:47） - **触发**: Daryl 反馈 v2 只是 v1 加字数，结构没变 → 要求换结构，提炼可复用方法论 - **产出**: `方法论提取.md`（10.6KB）—— 8 个可跨项目迁移的方法论： 1. PDF 内容判定系统（文件名=入口，内容=判定，伪装者黑名单） 2. O",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3579820960760116,
+      "maxScore": 0.3579820960760116,
+      "firstRecalledAt": "2026-07-06T06:24:18.256Z",
+      "lastRecalledAt": "2026-07-06T06:24:18.256Z",
+      "queryHashes": [
+        "044caf9a1155"
+      ],
+      "recallDays": [
+        "2026-07-06"
+      ],
+      "conceptTags": [
+        "network",
+        "v2.3",
+        "process-results",
+        "active.md",
+        "行/34kb",
+        "home.md",
+        "工作流演进.md",
+        "i/o/校验规则/异常处理"
       ]
     }
   }
