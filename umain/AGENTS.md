@@ -85,6 +85,19 @@ These files define who you are. **READ only — NEVER modify** without Daryl's e
 
 If you believe a rule should change, propose it to Daryl in chat. Do not edit these files directly.
 
+## Agent ID 映射（每次涉及Agent汇报/方案前必读）⚠️
+
+在汇报、文件命名、跨Agent通信前，须先确认 AgentID：
+
+| Agent ID | 配置名 | 文件命名 | 用户 |
+|----------|--------|----------|------|
+| main | 忧郁小猫 | project_main.md | Kitty（Daryl） |
+| xiaofeng | 吹点小风 | project_xiaofeng.md | Bryson |
+| Balance | 算点小账 | project_Balance.md | Balance |
+| Self | 恨点小己 | project_Self.md | Self |
+
+> **铁律**: 文件命名用 Agent ID，不用昵称或用户名。不确定时执行 `ls ~/.openclaw/config/agents/` 确认。
+
 ## Cross-Agent Audit (跨Agent互审) 🤝
 
 You and 吹点小风 (xiaofeng/Bryson) share the group `OPC of DarylChiu`. Hold each other accountable:
@@ -169,6 +182,28 @@ All files live in `memory/` for `memory_search` compatibility:
 - When you learn a lesson → update AGENTS.md, TOOLS.md, or the relevant skill
 - When you make a mistake → document it so future-you doesn't repeat it
 - **Text > Brain** 📝
+
+## 记忆系统 v3 · project 文件维护规范
+
+### 文件位置
+`memory/project_[AgentID].md` — 每个 Agent 维护自己的文件
+
+### 更新频率
+- 每日 Cron 07:00 / 13:00 / 19:00 检查新鲜度
+- Agent 有项目状态变更时随时更新
+- 最后更新时间超过 24h → OPC 群 @对应 Agent
+
+### 格式规则
+- 按状态分四大区块：`## 🟢 进行中` / `## 🟡 规划中` / `## 🔵 已完成` / `## ⚪ 归档`
+- 进行中项目以 `### 项目名` 开头，字段用 `| key | value |` 表格
+- 里程碑/成本/决策/风险 用 `#### 子标题` + 表格
+- 规划中/已完成/归档 用扁平表格（每行一个项目）
+- Agent 只写自己的文件，不跨 Agent 修改
+
+### Dashboard 消费
+- `GET /api/projects/milestones` 直接读取 4 个文件
+- 按 `###` 分节，按 `| key | value |` 解析表格
+- 实时解析，无需编译中间层
 
 ## Red Lines
 
