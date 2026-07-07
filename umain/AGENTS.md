@@ -27,6 +27,12 @@ Don't ask permission. Just do it.
 
 参考 Claude Code 四层架构，用自建脚本实现等效的合规闭环。
 
+> **🛡️ Sentinel 插件（2026-07-07 上线）**：
+> Gateway 级 `before_tool_call` 钩子自动拦截：P0→BLOCK / P1→requireApproval / 累积阈值自动升级。
+> **pre-op.sh 仍须运行**：Sentinel 负责运行时阻断，pre-op 负责事前分级，两者互补。
+> 配置位置：`plugins.entries.sentinel.config` in `openclaw.json`
+> 审计日志：`memory/sentinel-audit.jsonl`（JSONL，每行一条决策记录）
+
 #### L0 · 启动验证（Session 启动时必跑）
 ```bash
 bash scripts/compliance/startup.sh

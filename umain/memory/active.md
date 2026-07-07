@@ -1,11 +1,18 @@
 # 当前活跃任务
 
-> 最后更新: 2026-07-06 16:55 GMT+7
+> 最后更新: 2026-07-07 07:50 GMT+7
 
 ## 🟢 运维
-### OPC Dashboard v1.5 — 运行中
+### Sentinel 合规哨兵 v1.0 — 部署中 🔄
+- **状态**: Gateway 插件已加载，配置已更新，等待 Gateway 重启生效
+- **审计日志**: `memory/sentinel-audit.jsonl`
+- **配置**: `plugins.entries.sentinel.config` in `openclaw.json`
+- **待完成**: Gateway 重启后验证 P0/P1 拦截 / pre-op 对齐 / OPC 看板集成 (M2.3)
+
+### OPC Dashboard v1.5 → v1.6 — 运行中
 - **地址**: http://localhost:8765
-- **隧道**: https://background-completion-roger-charlotte.trycloudflare.com
+- **当前版本**: v1.6 · M3 项目总线集成完成 ✅ (commit: 690decf)
+- **M3 完成**: 项目总线面板 + 成本项目拆分 + 产物项目分组
 - **管理**: `cd /Users/zhaoyuzhao/WorkBuddy/Claw/opc-dashboard && bash manage.sh {start|stop|restart|status|logs}`
 
 ## ✅ 已完成

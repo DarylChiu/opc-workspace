@@ -86,3 +86,6 @@
 {"timestamp":"2026-07-05T21:47:51+0700","check":"post-op","task":"M2验收完成 — OPC看板交互系统 v1.5 全模块验收 + 成本仪表盘完善 + 退出测试模式","score":3,"total":5,"warnings":[
   ""
 ]}
+{"timestamp":"2026-07-07T07:49:03+0700","check":"post-op","task":"Sentinel 深度集成 — 配置完善+AGENTS.md更新+active.md更新","score":3,"total":5,"warnings":[
+  ""
+]}
