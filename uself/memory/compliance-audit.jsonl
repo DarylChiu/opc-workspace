@@ -61,3 +61,6 @@
 {"timestamp":"2026-07-02T09:31:10+0700","check":"post-op","task":"关联方与股东借款知识树搭建 — IAS 24/IFRS 9/IAS 32/VAS 26 四节点+Cross-Border专题Hub页+案例链接更新","score":3,"total":5,"warnings":[
   ""
 ]}
+{"timestamp":"2026-07-07T11:31:39+0700","check":"post-op","task":"OPC Dashboard 设计系统调研 DESIGN.md 编写","score":2,"total":5,"warnings":[
+  "🔴 active.md 需更新 — 有新任务变更但 11 小时未动"
+]}
