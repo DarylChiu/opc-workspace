@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-07T14:50:33.291Z",
+  "updatedAt": "2026-07-08T08:37:37.416Z",
   "entries": {
     "memory:memory/2026-06-08.md:19:38": {
       "key": "memory:memory/2026-06-08.md:19:38",
@@ -1049,6 +1049,68 @@
         "cron",
         "任务",
         "提醒"
+      ]
+    },
+    "memory:memory/2026-07-07.md:1:28": {
+      "key": "memory:memory/2026-07-07.md:1:28",
+      "path": "memory/2026-07-07.md",
+      "startLine": 1,
+      "endLine": 28,
+      "source": "memory",
+      "snippet": "# 2026-07-07 日记 ## 07:44 · Daryl 通知继续深度集成 - Daryl: \"Gateway已重启，你可以继续昨晚深度集成的任务了\" - 确认 Sentinel 插件已加载（10 个插件之一，hookCount: 2） ## 07:45-07:50 · Sentinel 深度集成 ### 已完成 - **配置完善**: 添加完整 sentinel config（阈值、路径黑白名单、夜间降级、超时设置）到 openclaw.json - **plugins.allow**: 添加 \"sentinel\" 到白名单 - **AGENTS.md 更新**: 添加 Sentinel 插件说明（L0-L4 合规节） - **active.md 更新**: 添加 Sentinel 部署状态条目 - **验证**: 插件 loaded, activated, hooks 注册成功（before_tool_call + session_end） ### Gateway 状态 - 配置变更已检测：`config change detected; evaluating reload (plugins.entries.sentinel.config, plugins.allow)` - Gateway 推迟重启：等待当前 session 完成（`deferring until 2 operation(s), 1 reply(ies), 1 embedded run(s), 1 task run(s) complete`） ### 待 Gateway 重启后验证 - [",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3937246114015579,
+      "maxScore": 0.3937246114015579,
+      "firstRecalledAt": "2026-07-08T08:37:37.416Z",
+      "lastRecalledAt": "2026-07-08T08:37:37.416Z",
+      "queryHashes": [
+        "a9f7ae8b28ff"
+      ],
+      "recallDays": [
+        "2026-07-08"
+      ],
+      "conceptTags": [
+        "gateway",
+        "45-07",
+        "openclaw.json",
+        "plugins.allow",
+        "agents.md",
+        "l0-l4",
+        "active.md",
+        "before-tool-call"
+      ]
+    },
+    "memory:memory/2026-07-07.md:42:62": {
+      "key": "memory:memory/2026-07-07.md:42:62",
+      "path": "memory/2026-07-07.md",
+      "startLine": 42,
+      "endLine": 62,
+      "source": "memory",
+      "snippet": "- 之前加的 `plugins.allow: [\"sentinel\"]` 导致 Gateway 重启后只加载 2 个插件 - Daryl 禁用 Sentinel 后 Gateway 无法正常启动 - **根因**: plugins.allow 限制了非 bundled 插件加载 - **修复**: Daryl 手工清除了 plugins.allow 配置 ### Balance Feishu ID 修复 - Balance 的 USER.md 缺少 Daryl 的 Balance 通道 Feishu ID - 已添加 `ou_0d7a57b9a531823aa1edee6874dcbb34` 到 Balance 的 USER.md - 已添加 OPC 看板访问信息到 Balance 的 MEMORY.md ## 09:35-09:45 · M3 项目总线完成 100% ### 完成项目 - **项目总线面板**: 聚合 costs/projects + artifacts?group=project + agents/projects - **成本面板项目拆分**: `/api/costs/projects` 面板，按项目汇总 tokens/cost/sessions，支持模型明细展开 - **产物面板项目分组**: 「按项目分组」切换按钮，显示项目名+文件数，支持 agent 过滤联动 - **Commits**: `8809c5d` (项目总线) + `690decf` (成本+产物) - **M3 进度**: 30% → 100% ✅ ## 全天 · 隔壁隧道稳定性",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.36333366632461545,
+      "maxScore": 0.36333366632461545,
+      "firstRecalledAt": "2026-07-08T08:37:37.416Z",
+      "lastRecalledAt": "2026-07-08T08:37:37.416Z",
+      "queryHashes": [
+        "a9f7ae8b28ff"
+      ],
+      "recallDays": [
+        "2026-07-08"
+      ],
+      "conceptTags": [
+        "gateway",
+        "plugins.allow",
+        "user.md",
+        "memory.md",
+        "35-09",
+        "costs/projects",
+        "agents/projects",
+        "api/costs/projects"
       ]
     }
   }
