@@ -1,5 +1,23 @@
 # Recent Conversations
-Last updated: 2026-07-06 00:16 GMT+7
+Last updated: 2026-07-09 00:05 GMT+7
+
+## 2026-07-08 — 看门狗修复 + 成本诊断 + Whisper修复
+- **上午**: 看门狗 PATH 修复（crontab PATH缺失→4轮重启失败→手动修复→隧道稳定13h+）
+- **下午**: Balance 成本仪表盘深度诊断（sessions.json vs .jsonl, $0.10→$37→$85三层真相）
+- **下午**: Xiaofeng Whisper 超时修复（8s→15s + 保留部分输出，雅思陪练语音不再截断）
+- **夜间**: Daryl 就寝确认
+- 看门狗方案验证有效：全天零人工干预
+
+## 2026-07-07 — 基建讨论 + 成本发现
+- Daryl 与 Bryson 讨论 7 月基建方向（Agent自进化 + Loop Engineering）
+- Daryl 发现成本异常：Kitty 单日 $30，触发成本仪表盘审计
+- Sentinel 合规哨兵上线（Gateway 插件加载）
+- 记忆系统v3 project文件创建完成
+
+## 2026-07-06 — 记忆系统v3开发
+- project_main/xiaofeng/Balance/Self.md 模板+API+Cron全部完成
+- GET /api/projects/milestones 上线
+- OPC看板持久化修复（30s→30min刷新 + 磁盘持久化）
 
 ## 2026-07-05 — 高产出周日
 - 🚨 P0: 僵尸 Session 耗尽 DeepSeek 余额 → 事故报告+清理（~$30-50 浪费）
