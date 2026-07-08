@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-07T00:50:05.436Z",
+  "updatedAt": "2026-07-08T08:39:07.381Z",
   "entries": {
     "memory:memory/archive/2026-03-24.md:138:171": {
       "key": "memory:memory/archive/2026-03-24.md:138:171",
@@ -1200,20 +1200,22 @@
       "endLine": 13,
       "source": "memory",
       "snippet": "# 2026-06-20 记忆 ## 视频分析 — 等待策略调整 - Daryl 6/19 判断当前方向不对，需要重新考虑策略 - 今日无新进展，等待 Daryl 下一步指示 - 关键认知（6/19已记录）：纯提升FPS不能自动解决因果链和故事完整性问题 ## 系统 - 无新的 xiaofeng 直接对话 - 多个 Agent（main, balance, self）执行每日记忆归档 cron - balance Agent 处理 RM-Database 文件迁移方案讨论 - 23:59 xiaofeng 每日记忆归档 cron 运行",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.741087159514427,
+      "totalScore": 1.095023727416992,
       "maxScore": 0.38223571777343746,
       "firstRecalledAt": "2026-06-23T14:21:06.652Z",
-      "lastRecalledAt": "2026-06-25T02:01:54.401Z",
+      "lastRecalledAt": "2026-07-08T08:39:07.381Z",
       "queryHashes": [
         "eaa00c35687a",
-        "6b7d3f0169ce"
+        "6b7d3f0169ce",
+        "3898356a5431"
       ],
       "recallDays": [
         "2026-06-23",
-        "2026-06-25"
+        "2026-06-25",
+        "2026-07-08"
       ],
       "conceptTags": [
         "6/19",
@@ -1233,18 +1235,20 @@
       "endLine": 59,
       "source": "memory",
       "snippet": "# 2026-05-03 记忆索引系统v3.1验收报告 ## 核心测试结果 ### 1. 身份绑定验证 ```python # 身份加载测试 load_identity('Bryson') → { '英文名': 'Bryson', '中文名': '吹点小风', '简称': '小风', '角色': '技术开发者/雅思陪练助手', '加载时间': '0.23s' } ``` ### 2. 跨会话记忆测试 ```javascript // 会话A (商业场景) storeMemory('用户偏好: 商业路演>学术讨论') // 会话B (技术场景) recallMemory('用户偏好') → '商业路演>学术讨论' (响应: 0.41s) ``` ### 3. 压力测试 (112身份/5000条目) ```csv 测试项,目标值,实测值,状态 请求成功率,≥95%,98.2%,✅ 并发响应,<1.0s,0.89s,✅ 内存占用,<150MB,142MB,✅ ``` ### 4. 异常处理 ```rust // 冲突注入测试 setIdentity(\"Bryson\") setIdentity(\"小风\") → [WARN] 身份冲突: \"小风\"是\"Bryson\"的别名 [SUGGEST] 使用switchIdentity(\"小风\")切换模式 // 崩溃恢复 模拟段错误 → 3.2秒回滚 (数据丢失: 0条) ``` ## 验收结论 ```json { \"总体状态\": \"通过\", \"严重问题\": 0, \"待优化项\": 1, \"生产部",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.3967515707015991,
+      "totalScore": 0.7678446143865585,
       "maxScore": 0.3967515707015991,
       "firstRecalledAt": "2026-06-25T02:01:54.401Z",
-      "lastRecalledAt": "2026-06-25T02:01:54.401Z",
+      "lastRecalledAt": "2026-07-08T08:39:07.381Z",
       "queryHashes": [
-        "6b7d3f0169ce"
+        "6b7d3f0169ce",
+        "3898356a5431"
       ],
       "recallDays": [
-        "2026-06-25"
+        "2026-06-25",
+        "2026-07-08"
       ],
       "conceptTags": [
         "记忆索引系统v3.1验收报告",
@@ -2137,18 +2141,21 @@
       "endLine": 17,
       "source": "memory",
       "snippet": "# 2026-07-06 日记 ## Daryl 活动 - **16:56** Daryl 询问群组消息转发情况 - **17:00** Daryl 指出 P0-P3 决策矩阵执行率低是核心问题，要求聚焦\"系统强制+事前阻断\" - **17:15** Grill-me 完整走完 6 轮，确认 P0-P3 边界 + Sentinel 架构 - **17:55** 项目命名 \"Sentinel · 合规哨兵\" ## Agent 活动 (Bryson) - **16:58** 诊断合规系统：pre-op 从未实际执行（audit log 0 条），确认脚本无法强制 Agent - **17:10** 深度调研：OpenClaw Plugin Hooks / Hermes Tirith / Claude Code / Codex / Ouro Loop / Bernstein - **17:15-17:50** Grill-me：Daryl 逐条确认 P0-P3 边界、判定架构（方案 D 分层+累积阈值）、阻断处理策略、试运行指标 - **17:55** 开始 Sentinel 开发 - **18:00** Plugin 核心代码完成（index.js）+ openclaw.plugin.json + package.json - **18:00** Plugin 安装成功，验证通过 - **18:01** pre-op.sh v3 对齐新边界，AGENTS.md 加入 Sentinel 规则",
-      "recallCount": 1,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.3785787373781204,
-      "maxScore": 0.3785787373781204,
+      "totalScore": 1.1130679488182067,
+      "maxScore": 0.3801931768655777,
       "firstRecalledAt": "2026-07-07T00:50:05.436Z",
-      "lastRecalledAt": "2026-07-07T00:50:05.436Z",
+      "lastRecalledAt": "2026-07-08T08:39:07.381Z",
       "queryHashes": [
-        "2d8641a8beef"
+        "2d8641a8beef",
+        "2c61c92223a6",
+        "3898356a5431"
       ],
       "recallDays": [
-        "2026-07-07"
+        "2026-07-07",
+        "2026-07-08"
       ],
       "conceptTags": [
         "p0-p3",
@@ -2252,6 +2259,68 @@
         "执行",
         "状态",
         "bryson"
+      ]
+    },
+    "memory:memory/2026-06-25.md:1:27": {
+      "key": "memory:memory/2026-06-25.md:1:27",
+      "path": "memory/2026-06-25.md",
+      "startLine": 1,
+      "endLine": 27,
+      "source": "memory",
+      "snippet": "# 2026-06-25 记忆 ## 记忆系统自检 · post-op.sh 同步修复 - Daryl 在群聊要求所有 Agent 检查记忆系统是否与 Self 存在同样问题 - Self 三层根因：Cron 骨架日记、post-op 关键词过窄、过度依赖脚本 - **我的诊断**：与 Self 完全一致的问题（今日日记缺失、post-op.sh 关键词窄、Cron 骨架检测弱） ## 修复动作 ### post-op.sh 同步升级 - 扩展触发词：新增 `决策|方案|架构|讨论|辩论|指令|规划` - Cron 骨架检测：日记 < 15 行 + 仅含 Cron 事件 → 强制告警 - 来源：Self 已验证的修复方案直接移植 ### 已验证 - 6/23 日记：29行，内容详实（Video Analyzer bug修复 + OPC看板方法论卡片集成） - 6/24 日记：42行，内容详实（B站支持 + 视频截断修复 + 分析质量修复） - 跨 session 同步正常，未遗漏 DM 对话内容 ## 当前任务状态 - 视频分析交互Workflow：Daryl 测试验收中，待重跑 B站视频验证脚本修复效果 - active.md 今天无需更新（最近一次 6/24 16:00，内容准确） ## 系统 - 09:01 Daryl 群聊 @ 要求检查记忆系统 - post-op.sh 已同步 Self 的修复（v2） - 23:59 Cron 审计: 发现 WORKSPACE 路径 bug（4级→2级），修复 audit.sh/post-op.sh/startup.sh，清",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.35505773425102233,
+      "maxScore": 0.35505773425102233,
+      "firstRecalledAt": "2026-07-08T08:39:07.381Z",
+      "lastRecalledAt": "2026-07-08T08:39:07.381Z",
+      "queryHashes": [
+        "3898356a5431"
+      ],
+      "recallDays": [
+        "2026-07-08"
+      ],
+      "conceptTags": [
+        "post-op.sh",
+        "post-op",
+        "6/23",
+        "6/24",
+        "active.md",
+        "audit.sh/post-op.sh/startup.sh",
+        "记忆",
+        "系统"
+      ]
+    },
+    "memory:memory/2026-06-15.md:1:18": {
+      "key": "memory:memory/2026-06-15.md:1:18",
+      "path": "memory/2026-06-15.md",
+      "startLine": 1,
+      "endLine": 18,
+      "source": "memory",
+      "snippet": "# 2026-06-15 记忆 ## 关键事件 - 合规系统审计 - **Daryl 开发任务正式分流**: - OPC看板交互系统 → Kitty（小风已移交Dashboard代码到 `/Users/zhaoyuzhao/WorkBuddy/Claw/dashboard/`） - 雅思陪练助手 → Bryson（Daryl不满意上上周交付，要求深度诊断+方案对比+改进计划） - 雅思陪练深度诊断完成: 当前架构STT→LLM→TTS链式批处理(7-17s延迟)根本不适合实时对话 - 推荐 OpenAI Realtime API (语音→语音) + DeepSeek异步评估 - 待Daryl确认技术栈选型和成本预算 - 报告: reports/ielts_diagnostic_2026-06-15.md - **Daryl T0指令**: 数字资产保护 + Hooks自检 + 23:59 Cron 写进 SOUL.md - 未执行→删除处理，数字资产丢失→删除处理 - **机制基建统一规范**: 编写完成 → `memory/mechanism-infra-spec.md`（8大维度） - 合规脚本已复制到 Kitty/Balance/Self workspace - 待验证各Agent的23:59 Cron配置",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3542143404483795,
+      "maxScore": 0.3542143404483795,
+      "firstRecalledAt": "2026-07-08T08:39:07.381Z",
+      "lastRecalledAt": "2026-07-08T08:39:07.381Z",
+      "queryHashes": [
+        "3898356a5431"
+      ],
+      "recallDays": [
+        "2026-07-08"
+      ],
+      "conceptTags": [
+        "openai",
+        "7-17s延迟",
+        "soul.md",
+        "memory/mechanism-infra-spec.md",
+        "kitty/balance/self",
+        "记忆",
+        "关键",
+        "事件"
       ]
     }
   }
