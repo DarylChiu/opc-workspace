@@ -1,0 +1,362 @@
+{
+  "version": 1,
+  "updatedAt": "2026-06-25T08:18:44.420Z",
+  "entries": {
+    "memory:memory/2026-06-08.md:19:38": {
+      "key": "memory:memory/2026-06-08.md:19:38",
+      "path": "memory/2026-06-08.md",
+      "startLine": 19,
+      "endLine": 38,
+      "source": "memory",
+      "snippet": "- 问题：双Agent同时修改导致协调混乱，Daryl不满。后续约定：Kitty维护前端(index.html)，Bryson维护后端(server.py/sandbox/scripts) ### M2分工 - Bryson：Cloudflare Tunnel + 启动脚本(nohup/stop/restart) + 沙箱面板完善 - Kitty：代码Review完成 + 二期方案评估完成 ### 发现的问题 - `uvx`未安装 → 已通过brew安装uv → markitdown OCR可用 - Balance/Self在群聊中被动消费Token → 配置`requireMention: true`过滤非@消息 ### 技术栈 前端：HTML5+CSS3+Vanilla JS（零依赖） 后端：Python 3 http.server + openclaw status CLI 数据：本地JSON文件 部署：localhost:8091 → Cloudflare Tunnel（待CF账号） ## 模型使用 全天使用Deepseek V4 Pro，群聊成本~$0.28（Kitty用量最大）。 切换成本估算：Sonnet 4.5为6-7x，Opus 4.6为30-34x。",
+      "recallCount": 4,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.4374543199635235,
+      "maxScore": 0.3658620953559875,
+      "firstRecalledAt": "2026-06-10T08:38:56.106Z",
+      "lastRecalledAt": "2026-06-20T04:40:41.195Z",
+      "queryHashes": [
+        "baf63fec6b3f",
+        "a6d13b6b367b",
+        "6553ba066de7",
+        "043506816c43"
+      ],
+      "recallDays": [
+        "2026-06-10",
+        "2026-06-14",
+        "2026-06-16",
+        "2026-06-20"
+      ],
+      "conceptTags": [
+        "index.html",
+        "server.py/sandbox/scripts",
+        "nohup/stop/restart",
+        "balance/self在群聊中被动消费token",
+        "http.server",
+        "0.28",
+        "4.5为6-7x",
+        "4.6为30-34x"
+      ]
+    },
+    "memory:memory/2026-06-08.md:1:26": {
+      "key": "memory:memory/2026-06-08.md:1:26",
+      "path": "memory/2026-06-08.md",
+      "startLine": 1,
+      "endLine": 26,
+      "source": "memory",
+      "snippet": "# 2026-06-08 记忆记录 ## OPC看板交互系统开发 ### M1完成（全部8个模块） - HTML骨架：暗色主题 + 8面板导航 + 响应式，Kitty完成 - 任务看板：三列拖拽 + 新建任务弹窗 + JSON持久化，Kitty完成 - 产物追踪面板：文件扫描 + 类型过滤 + 预览跳转，Kitty完成 - 预览面板：iframe + 文件列表，Kitty完成 - 项目进度：里程碑时间线 + 风险卡片，Kitty完成 - Agent状态面板：`/api/agents` → `openclaw status` 实时数据，Bryson完成 - server.py后端：Python http.server + API端点，Bryson重写 - agent_bridge.js：30s轮询Agent状态，Bryson完成 - 沙箱接口预留：`OPC.registerSandboxUpdater()` + 占位面板 ### Daryl验收反馈修改 - Agent状态+任务合并面板：4个Agent卡片，每个下方显示待办/进行中/最近完成三列，完成可链产物追踪 - 左侧菜单重排：A.Agent状态和任务 → B.产物与预览 → C.成本仪表盘 → D.沙箱任务 - 问题：双Agent同时修改导致协调混乱，Daryl不满。后续约定：Kitty维护前端(index.html)，Bryson维护后端(server.py/sandbox/scripts) ### M2分工 - Bryson：Cloudflare Tunnel + 启动脚本(nohup/stop/restart)",
+      "recallCount": 9,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 3.427386939525604,
+      "maxScore": 0.42484429478645325,
+      "firstRecalledAt": "2026-06-15T03:30:18.281Z",
+      "lastRecalledAt": "2026-06-25T08:18:44.420Z",
+      "queryHashes": [
+        "d0676496441a",
+        "24415ddf110f",
+        "7bba932542f0",
+        "6f10c9d84d3d",
+        "6553ba066de7",
+        "309c5746f393",
+        "966ee38362dd",
+        "06a4830fac51",
+        "91a6642ada90"
+      ],
+      "recallDays": [
+        "2026-06-15",
+        "2026-06-16",
+        "2026-06-17",
+        "2026-06-23",
+        "2026-06-25"
+      ],
+      "conceptTags": [
+        "api/agents",
+        "server.py后端",
+        "http.server",
+        "agent-bridge.js",
+        "opc.registersandboxupdater",
+        "每个下方显示待办/进行中/最近完成三列",
+        "a.agent状态和任务",
+        "b.产物与预览"
+      ]
+    },
+    "memory:memory/2026-06-14.md:1:16": {
+      "key": "memory:memory/2026-06-14.md:1:16",
+      "path": "memory/2026-06-14.md",
+      "startLine": 1,
+      "endLine": 16,
+      "source": "memory",
+      "snippet": "# 2026-06-14 工作日志 ## 基建合规审计 - Daryl发起6/6-6/14基建执行合规审计 - Kitty自评23/100，小枫自评38/100 - 问题根因：强制执行缺位、Session失忆、建了就放 ## 机制改进 - AGENTS.md升级：新增Session End强制Checkpoint、只读核心文件锁定、跨Agent互审机制 - 部署23:59每日记忆检查Cron（LaunchAgent: ai.openclaw.daily-memory-check） - 小枫传授跨session读历史方法：用sessions_history读对方session而非自己session ## 关键决策 - Daryl指令：不用heartbeat做合规检查（触发比例太低），改用23:59 Cron - 基建执行从「Agent自觉」向「系统强制」转变",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.35486378371715543,
+      "maxScore": 0.35486378371715543,
+      "firstRecalledAt": "2026-06-15T03:50:09.835Z",
+      "lastRecalledAt": "2026-06-15T03:50:09.835Z",
+      "queryHashes": [
+        "d799ba7cb955"
+      ],
+      "recallDays": [
+        "2026-06-15"
+      ],
+      "conceptTags": [
+        "daryl发起6/6-6/14基建执行合规审计",
+        "kitty自评23/100",
+        "小枫自评38/100",
+        "agents.md升级",
+        "ai.openclaw.daily-memory-check",
+        "工作",
+        "日志",
+        "基建"
+      ]
+    },
+    "memory:memory/2026-06-12.md:1:34": {
+      "key": "memory:memory/2026-06-12.md:1:34",
+      "path": "memory/2026-06-12.md",
+      "startLine": 1,
+      "endLine": 34,
+      "source": "memory",
+      "snippet": "# 2026-06-12 补记 > 补记原因：当日未写日记，2026-06-15 Daryl 转发聊天记录后补全。 ## OPC看板 Workflow 模块需求 ### 核心定位 - **ComfyUI风格** 可拖拽节点+连线可视化编辑器 - 一个项目 = 一条workflow，每个环节标注负责Agent - 时间轴：每个环节预估/实际耗时，Daryl可缩短预估来驱动Agent调整方案 ### 技术决策 - **前端**：React Flow 做节点编辑器（依赖已安装） - **实时同步**：WebSocket方案A — 拖拽完5秒内通知Agent - 事件通知不消耗LLM Token，Agent仅感知状态变化 - 不采用WebSocket方案B（实时双向同步，Token消耗太高） - **交互逻辑**： - 已完成项目：只读模式，下次运行时DM私聊确认+风险提示 - 进行中项目：暂停→DM私聊确认处理方式+提醒沉没成本 ### 侧边栏最终结构 (5模块) A. Agent状态和任务 B. 产物与预览 C. Workflow 可视化编辑器 D. 成本仪表盘 E. 沙箱任务 ### 技术栈 - Workflow面板：React + React Flow - 实时推送：WebSocket (OpenClaw Gateway) - 其余面板：Vanilla JS - 后端：Node.js - 部署：Cloudflare Tunnel（需支持WebSocket）",
+      "recallCount": 11,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 4.1011914759874335,
+      "maxScore": 0.3933618903160095,
+      "firstRecalledAt": "2026-06-16T01:29:58.954Z",
+      "lastRecalledAt": "2026-06-23T07:16:07.510Z",
+      "queryHashes": [
+        "7bba932542f0",
+        "4e22542f12b7",
+        "6f10c9d84d3d",
+        "6553ba066de7",
+        "309c5746f393",
+        "966ee38362dd",
+        "1e37dbbd2ef6",
+        "3e0b7be0bdfd",
+        "d80d7c04a53e",
+        "b934193de3bd",
+        "06a4830fac51"
+      ],
+      "recallDays": [
+        "2026-06-16",
+        "2026-06-17",
+        "2026-06-20",
+        "2026-06-22",
+        "2026-06-23"
+      ],
+      "conceptTags": [
+        "gateway",
+        "每个环节预估/实际耗时",
+        "node.js",
+        "原因",
+        "当日",
+        "日记",
+        "daryl",
+        "转发"
+      ]
+    },
+    "memory:memory/2026-06-05.md:1:24": {
+      "key": "memory:memory/2026-06-05.md:1:24",
+      "path": "memory/2026-06-05.md",
+      "startLine": 1,
+      "endLine": 24,
+      "source": "memory",
+      "snippet": "# 2026-06-05 工作日志 ## WorkBuddy深度调研（Daryl授权直接查看本机安装） ### 关键发现 - WorkBuddy = 腾讯CodeBuddy的桌面AI Agent产品 - 底层引擎：Electron + CodeBuddy CLI（fork自Claude Code类架构） - 默认模型：DeepSeek-V4-Pro（从进程参数确认） - 本地数据库：SQLite（workbuddy.db） - 已配置渠道：飞书Bot、微信公众号、微信CrawBot ### 核心架构分析 1. **工具链**：Read/Write/Edit/Bash/WebFetch/WebSearch/Skill/SkillManage/TaskCreate/ImageGen/Agent/TeamCreate/SendMessage + MCP tools 2. **MCP集成**：connector-proxy（HTTP MCP server，本地端口） - 内置tools: preview_url, open_result_view, connect_cloud_service, deliver_attachments, workbuddy_cloudstudio_deploy - Ardot设计工具（Figma-like）: 20+ ardot_* tools 3. **Skill系统**：与OpenClaw类似的SKILL.md结构，但有更完整的生态（60+官方plugins） 4. **部署系统**：CloudStudio Deploy - 一键将",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7242659509181977,
+      "maxScore": 0.3704701364040375,
+      "firstRecalledAt": "2026-06-16T01:30:52.058Z",
+      "lastRecalledAt": "2026-06-16T02:59:18.657Z",
+      "queryHashes": [
+        "40d11b113fe2",
+        "6f10c9d84d3d"
+      ],
+      "recallDays": [
+        "2026-06-16"
+      ],
+      "conceptTags": [
+        "deepseek-v4-pro",
+        "workbuddy.db",
+        "connector-proxy",
+        "preview-url",
+        "open-result-view",
+        "connect-cloud-service",
+        "deliver-attachments",
+        "workbuddy-cloudstudio-deploy"
+      ]
+    },
+    "memory:memory/2026-06-13.md:1:11": {
+      "key": "memory:memory/2026-06-13.md:1:11",
+      "path": "memory/2026-06-13.md",
+      "startLine": 1,
+      "endLine": 11,
+      "source": "memory",
+      "snippet": "# 2026-06-13 补记 > 补记原因：当日未写日记。从 session 记录和 context 中推断当日活动。 ## 主要事件 - 无 OPC 看板相关开发（待 Daryl 进一步补充当日内容） ## 状态 - 6/8 M1 完成后的间歇期 - 6/14 进行了基建合规审计",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7017853796482085,
+      "maxScore": 0.35105693340301514,
+      "firstRecalledAt": "2026-06-16T02:59:18.657Z",
+      "lastRecalledAt": "2026-06-19T07:06:58.944Z",
+      "queryHashes": [
+        "6f10c9d84d3d",
+        "bb140318e924"
+      ],
+      "recallDays": [
+        "2026-06-16",
+        "2026-06-19"
+      ],
+      "conceptTags": [
+        "6/8",
+        "6/14",
+        "原因",
+        "当日",
+        "日记",
+        "记录",
+        "context",
+        "推断"
+      ]
+    },
+    "memory:memory/2026-06-16.md:1:23": {
+      "key": "memory:memory/2026-06-16.md:1:23",
+      "path": "memory/2026-06-16.md",
+      "startLine": 1,
+      "endLine": 23,
+      "source": "memory",
+      "snippet": "# 2026-06-16 工作日志 ## OPC看板交互系统 M2 开发 - 16:57 Daryl在群聊确认：直接开始M2，完成后一起给迭代意见 - 17:00-17:40 完成M2全部3个模块开发 ### 实现内容 - **Panel C · Workflow编辑器**: 纯Vanilla JS实现可拖拽节点+SVG连线画布，支持节点属性编辑（Agent/估时/实际/状态），左侧项目列表+保存到JSON - **Panel D · 成本仪表盘**: 直接从4个Agent的sessions.json文件读取统计，显示Agent分解柱状图+模型使用统计 - **Panel E · 沙箱任务**: 容器状态（openclaw sandbox list）+ 近期56条任务历史（openclaw tasks list） - **后端新增**: /api/workflows (GET/POST), /api/costs (cache 2min), /api/sandbox-tasks (cache 30s) - **任务操作增强**: pending/in-progress任务卡片hover显示开始/完成/删除按钮 ### 技术决策 - [P2] Workflow不用React Flow CDN（兼容性复杂），改用Vanilla JS原生拖拽+SVG连线 → 理由：零依赖、加载快、功能够用 - [P2] 成本数据不用openclaw status --usage（超时），改用直接读sessions.json → 理由：响应快、数据准确、不消耗额外LLM Token - [P3]",
+      "recallCount": 4,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.4758351176977156,
+      "maxScore": 0.39033138453960414,
+      "firstRecalledAt": "2026-06-17T01:07:51.323Z",
+      "lastRecalledAt": "2026-06-23T15:03:20.639Z",
+      "queryHashes": [
+        "966ee38362dd",
+        "1e37dbbd2ef6",
+        "06a4830fac51",
+        "d0dac3caea55"
+      ],
+      "recallDays": [
+        "2026-06-17",
+        "2026-06-20",
+        "2026-06-23"
+      ],
+      "conceptTags": [
+        "00-17",
+        "agent/估时/实际/状态",
+        "直接从4个agent的sessions.json文件读取统计",
+        "api/workflows",
+        "get/post",
+        "api/costs",
+        "api/sandbox-tasks",
+        "改用直接读sessions.json"
+      ]
+    },
+    "memory:memory/2026-06-19.md:1:30": {
+      "key": "memory:memory/2026-06-19.md:1:30",
+      "path": "memory/2026-06-19.md",
+      "startLine": 1,
+      "endLine": 30,
+      "source": "memory",
+      "snippet": "# 2026-06-19 工作日志 ## 00:00 每日记忆归档 Cron 触发 - 审计发现：日记缺失 + active_tasks 39h 未更新 → 已修复 ## 全天：OPC看板 Workflow 编辑器问题排查与架构迭代 ### 问题发现 (19:40) - Daryl反馈：Workflow模块点击后空白，三个需求一个都没看到 - 根因：备份回滚时丢失了v2改动，编辑器退回到原始版本 ### 修复尝试历程 1. **修复v2代码** → 语法正确但不渲染（白屏） 2. **添加错误捕获** → import语句被放在ES模块最前面导致违反规范 3. **Vite构建方案** → 自包含bundle但仍是type=module，浏览器不加载 4. **完全回退到5805b9c** → 原始版本也用importmap+module，同病 5. **最终方案** → 普通script标签(UMD React) + 动态import(ReactFlow) - 文件：`opc-dashboard/workflow-editor.html` (624行, 30KB) - 架构：0个ES模块, 0个importmap - 进度：Step 1-4 加载追踪，红色错误提示栏 - 待Daryl明天实测验证 ### 隧道管理 - 8765(OPC看板) → cake-marking-metals-miscellaneous.trycloudflare.com (PID 51360) - 8777(视频分析) → supreme-hall-blanket-",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.105463510751724,
+      "maxScore": 0.3790972739458084,
+      "firstRecalledAt": "2026-06-20T04:46:48.226Z",
+      "lastRecalledAt": "2026-06-23T07:16:07.510Z",
+      "queryHashes": [
+        "1e37dbbd2ef6",
+        "21607fbcd7e4",
+        "06a4830fac51"
+      ],
+      "recallDays": [
+        "2026-06-20",
+        "2026-06-21",
+        "2026-06-23"
+      ],
+      "conceptTags": [
+        "备份",
+        "active-tasks",
+        "1-4",
+        "supreme-hall-blanket",
+        "工作",
+        "日志",
+        "每日",
+        "记忆"
+      ]
+    },
+    "memory:memory/2026-06-17.md:1:28": {
+      "key": "memory:memory/2026-06-17.md:1:28",
+      "path": "memory/2026-06-17.md",
+      "startLine": 1,
+      "endLine": 28,
+      "source": "memory",
+      "snippet": "# 2026-06-17 工作日志 ## 08:07 Daryl指令：Workflow需求梳理 + 视频分析MVP部署 - 调用了 `deepseek/deepseek-v4-pro` - 梳理了Workflow全部已确认需求（文件: memory/project_opc_dashboard.md） - 以Bryson的\"视频分析MVP V3.1\"为例部署完整Workflow到OPC看板 - 9节点、9连线、并行分支、预估72h - 部署路径: opc-dashboard/data/workflows.json - 服务器运行中 localhost:8765，API正常返回 ## 10:28 OPC统一Git仓库上线 - 仓库: https://github.com/DarylChiu/opc-workspace - Kitty/ 目录已归档：统一规范文档+Hooks自检系统+6/14-17记忆+全部项目代码 - commit: 8a71070 Kitty: 归档统一规范文档+Hooks自检系统+6/14-6/17项目成果 - 后续每日23:59 Cron任务同步 git push 记忆到仓库 ## 10:30 Workflow编辑器重建 - 修复了6/16 vanilla JS重写丢失6/12迭代需求的问题 - 用React Flow 12.3重建了workflow-editor.html - 实现：项目列表/节点折叠/水平排列/触发方式/连线逻辑/手动保存 - Cloudflare Tunnel: https://sen-going-relations-loose.t",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7363389283418655,
+      "maxScore": 0.37335004210472106,
+      "firstRecalledAt": "2026-06-20T04:46:48.226Z",
+      "lastRecalledAt": "2026-06-24T01:26:00.327Z",
+      "queryHashes": [
+        "1e37dbbd2ef6",
+        "a347a2c91a20"
+      ],
+      "recallDays": [
+        "2026-06-20",
+        "2026-06-24"
+      ],
+      "conceptTags": [
+        "deepseek/deepseek-v4-pro",
+        "memory/project-opc-dashboard.md",
+        "v3.1",
+        "6/14-17记忆",
+        "6/14-6/17项目成果",
+        "修复了6/16",
+        "js重写丢失6/12迭代需求的问题",
+        "12.3重建了workflow-editor.html"
+      ]
+    },
+    "memory:memory/2026-06-23.md:1:16": {
+      "key": "memory:memory/2026-06-23.md:1:16",
+      "path": "memory/2026-06-23.md",
+      "startLine": 1,
+      "endLine": 16,
+      "source": "memory",
+      "snippet": "# 2026-06-23 工作日志 ## 00:01 每日记忆归档 Cron 触发 - 审计修复：今日日记缺失 → 已创建 - active_tasks 29h 未更新 → 已刷新 ## 17:00-21:00 OPC看板 Workflow编辑器 Path B M1 开发+验收 - 问题：Workflow编辑器无法渲染（ES模块+Vite rolldown IIFE问题） - 修复：切到 esbuild IIFE → iframe隔离 - 移植 5805b9c 版本外观（Top Bar、项目卡片、节点配置面板等） - 连线+标签纯白、4方向拖拽手柄、核心节点手动标记+呼吸动画 - 展开/收起迭代：单击节点→双击节点→齿轮按钮方案（最终验收） - **最终方案**：单击节点任意位置展开/收起，点击⚙齿轮打开配置面板，点击画布空白关闭 - 21:00 Daryl验收通过 ✅ Path B M1 完成 - M2（WebSocket同步+DM通知）待启动",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.40183713436126706,
+      "maxScore": 0.40183713436126706,
+      "firstRecalledAt": "2026-06-23T15:03:20.639Z",
+      "lastRecalledAt": "2026-06-23T15:03:20.639Z",
+      "queryHashes": [
+        "d0dac3caea55"
+      ],
+      "recallDays": [
+        "2026-06-23"
+      ],
+      "conceptTags": [
+        "active-tasks",
+        "00-21",
+        "展开/收起迭代",
+        "单击节点任意位置展开/收起",
+        "工作",
+        "日志",
+        "每日",
+        "记忆"
+      ]
+    }
+  }
+}

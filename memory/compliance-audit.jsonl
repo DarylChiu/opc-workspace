@@ -91,22 +91,63 @@
   "🔴 active.md 需更新 — 有新任务变更但 32 小时未动",
   "🔴 今日日记缺失 — 必须创建"
 ]}
-{"timestamp":"2026-06-28T20:18:45+0700","check":"post-op","task":"Phase 1 管线1完成: 6文件/910行/3模式自测通过","score":2,"total":5,"warnings":[
-  ""
-]}
-{"timestamp":"2026-06-29T15:22:23+0700","check":"post-op","task":"Phase3评估引擎+报告+持久化+成本仪表板","score":2,"total":5,"warnings":[
-  "🔴 今日日记疑似 Cron 骨架（11行, 2段落, 仅Cron事件）— 必须补充实际内容"
-]}
-{"timestamp":"2026-06-29T22:53:50+0700","check":"post-op","task":"今日日终记忆系统更新：日记补充+lessons更新+active.md更新","score":3,"total":5,"warnings":[
-  ""
-]}
-{"timestamp":"2026-07-02T19:56:15+0700","check":"post-op","task":"语音交互Debug验收模块 Phase 1+2 完成：debug_logger.py后端诊断采集+独立debug面板前端","score":1,"total":5,"warnings":[
-  "🔴 active.md 需更新 — 有新任务变更但 19 小时未动",
-  "🔴 今日日记疑似 Cron 骨架（5行, 1段落, 仅Cron事件）— 必须补充实际内容",
-  "📝 必须补充今日日记（当前为Cron骨架）: 语音交互Debug验收模块 Phase 1+2 完成：debug_logger.py后端诊断采集+独立debug面板前端",
-  "🔴 任务涉及问题/失败/审计发现，建议提炼到 lessons.md"
-]}
-{"timestamp":"2026-07-03T08:29:36+0700","check":"post-op","task":"将debug面板整合进IELTS Tutor v2.0主前端，作为Assessment旁边的tab模块","score":2,"total":5,"warnings":[
-  "🔴 今日日记缺失 — 必须创建",
-  "🔴 任务涉及问题/失败/审计发现，建议提炼到 lessons.md"
-]}
+{"timestamp":"2026-07-03T23:59:05+0700","check":"L4-audit-v2","agent":"main","fixes":0,"shallow_issues":1,"deep_issues":0,"diary_lines":20,"diary_sections":2}
+{"timestamp":"2026-07-03T23:59:00+0700","check":"L4-audit-v2","agent":"xiaofeng","fixes":0,"shallow_issues":2,"deep_issues":0,"diary_lines":19,"diary_sections":2}
+{"timestamp":"2026-07-03T23:59:05+0700","check":"L4-audit-v2","agent":"xiaofeng","fixes":0,"shallow_issues":2,"deep_issues":0,"diary_lines":19,"diary_sections":2}
+{"timestamp":"2026-07-03T23:59:21+0700","check":"L4-audit-v2","agent":"xiaofeng","fixes":0,"shallow_issues":2,"deep_issues":0,"diary_lines":19,"diary_sections":2}
+{"timestamp":"2026-07-03T23:59:45+0700","check":"L4-audit-v2","agent":"xiaofeng","fixes":0,"shallow_issues":2,"deep_issues":0,"diary_lines":19,"diary_sections":2}
+{"timestamp":"2026-07-04T00:04:38+0700","check":"L4-audit-v2","agent":"balance","fixes":1,"shallow_issues":5,"deep_issues":2,"diary_lines":4,"diary_sections":1}
+{"timestamp":"2026-07-04T00:06:10+0700","check":"L4-audit-v2","agent":"main","fixes":1,"shallow_issues":6,"deep_issues":2,"diary_lines":4,"diary_sections":1}
+{"timestamp":"2026-07-04T00:07:19+0700","check":"L4-audit-v2","agent":"balance","fixes":0,"shallow_issues":2,"deep_issues":0,"diary_lines":25,"diary_sections":5}
+{"timestamp":"2026-07-04T00:07:52+0700","check":"L4-audit-v2","agent":"balance","fixes":0,"shallow_issues":2,"deep_issues":0,"diary_lines":25,"diary_sections":5}
+{"timestamp":"2026-07-04T00:08:43+0700","check":"L4-audit-v2","agent":"self","fixes":1,"shallow_issues":7,"deep_issues":3,"diary_lines":4,"diary_sections":1}
+{"timestamp":"2026-07-04T00:10:19+0700","check":"L4-audit-v2","agent":"self","fixes":0,"shallow_issues":3,"deep_issues":1,"diary_lines":11,"diary_sections":2}
+{"timestamp":"2026-07-04T00:10:59+0700","check":"L4-audit-v2","agent":"main","fixes":0,"shallow_issues":2,"deep_issues":0,"diary_lines":20,"diary_sections":2}
+{"timestamp":"2026-07-04T23:59:00+0700","check":"L4-audit-v2","agent":"main","fixes":0,"shallow_issues":2,"deep_issues":0,"diary_lines":20,"diary_sections":2}
+{"timestamp":"2026-07-04T23:59:00+0700","check":"L4-audit-v2","agent":"xiaofeng","fixes":1,"shallow_issues":6,"deep_issues":2,"diary_lines":4,"diary_sections":1}
+{"timestamp":"2026-07-04T23:59:00+0700","check":"L4-audit-v2","agent":"xiaofeng","fixes":0,"shallow_issues":5,"deep_issues":2,"diary_lines":5,"diary_sections":1}
+{"timestamp":"2026-07-04T23:59:26+0700","check":"L4-audit-v2","agent":"xiaofeng","fixes":0,"shallow_issues":5,"deep_issues":2,"diary_lines":5,"diary_sections":1}
+{"timestamp":"2026-07-05T00:00:50+0700","check":"L4-audit-v2","agent":"balance","fixes":1,"shallow_issues":5,"deep_issues":2,"diary_lines":4,"diary_sections":1}
+{"timestamp":"2026-07-05T00:02:04+0700","check":"L4-audit-v2","agent":"main","fixes":1,"shallow_issues":5,"deep_issues":2,"diary_lines":4,"diary_sections":1}
+{"timestamp":"2026-07-05T00:03:25+0700","check":"L4-audit-v2","agent":"balance","fixes":0,"shallow_issues":2,"deep_issues":0,"diary_lines":20,"diary_sections":5}
+{"timestamp":"2026-07-05T00:03:55+0700","check":"L4-audit-v2","agent":"balance","fixes":0,"shallow_issues":2,"deep_issues":0,"diary_lines":20,"diary_sections":5}
+{"timestamp":"2026-07-05T00:04:50+0700","check":"L4-audit-v2","agent":"self","fixes":1,"shallow_issues":5,"deep_issues":2,"diary_lines":4,"diary_sections":1}
+{"timestamp":"2026-07-05T00:05:53+0700","check":"L4-audit-v2","agent":"main","fixes":0,"shallow_issues":2,"deep_issues":0,"diary_lines":18,"diary_sections":2}
+{"timestamp":"2026-07-05T23:59:05+0700","check":"L4-audit-v2","agent":"main","fixes":0,"shallow_issues":2,"deep_issues":0,"diary_lines":65,"diary_sections":7}
+{"timestamp":"2026-07-05T23:59:00+0700","check":"L4-audit-v2","agent":"xiaofeng","fixes":0,"shallow_issues":3,"deep_issues":1,"diary_lines":47,"diary_sections":4}
+{"timestamp":"2026-07-05T23:59:05+0700","check":"L4-audit-v2","agent":"xiaofeng","fixes":0,"shallow_issues":3,"deep_issues":1,"diary_lines":47,"diary_sections":4}
+{"timestamp":"2026-07-05T23:59:19+0700","check":"L4-audit-v2","agent":"xiaofeng","fixes":0,"shallow_issues":3,"deep_issues":1,"diary_lines":47,"diary_sections":4}
+{"timestamp":"2026-07-06T00:15:10+0700","check":"L4-audit-v2","agent":"balance","fixes":1,"shallow_issues":6,"deep_issues":2,"diary_lines":4,"diary_sections":1}
+{"timestamp":"2026-07-06T00:16:46+0700","check":"L4-audit-v2","agent":"main","fixes":2,"shallow_issues":5,"deep_issues":2,"diary_lines":4,"diary_sections":1}
+{"timestamp":"2026-07-06T00:18:05+0700","check":"L4-audit-v2","agent":"balance","fixes":0,"shallow_issues":2,"deep_issues":0,"diary_lines":16,"diary_sections":4}
+{"timestamp":"2026-07-06T00:19:11+0700","check":"L4-audit-v2","agent":"self","fixes":1,"shallow_issues":6,"deep_issues":2,"diary_lines":4,"diary_sections":1}
+{"timestamp":"2026-07-06T00:19:53+0700","check":"L4-audit-v2","agent":"self","fixes":0,"shallow_issues":4,"deep_issues":2,"diary_lines":8,"diary_sections":1}
+{"timestamp":"2026-07-06T00:20:32+0700","check":"L4-audit-v2","agent":"main","fixes":0,"shallow_issues":2,"deep_issues":0,"diary_lines":20,"diary_sections":2}
+{"timestamp":"2026-07-06T23:59:02+0700","check":"L4-audit-v2","agent":"main","fixes":0,"shallow_issues":2,"deep_issues":0,"diary_lines":31,"diary_sections":3}
+{"timestamp":"2026-07-06T23:59:02+0700","check":"L4-audit-v2","agent":"xiaofeng","fixes":0,"shallow_issues":3,"deep_issues":1,"diary_lines":16,"diary_sections":2}
+{"timestamp":"2026-07-06T23:59:19+0700","check":"L4-audit-v2","agent":"xiaofeng","fixes":0,"shallow_issues":3,"deep_issues":1,"diary_lines":16,"diary_sections":2}
+{"timestamp":"2026-07-06T23:59:00+0700","check":"L4-audit-v2","agent":"xiaofeng","fixes":0,"shallow_issues":3,"deep_issues":1,"diary_lines":16,"diary_sections":2}
+{"timestamp":"2026-07-07T00:02:27+0700","check":"L4-audit-v2","agent":"balance","fixes":1,"shallow_issues":5,"deep_issues":2,"diary_lines":4,"diary_sections":1}
+{"timestamp":"2026-07-07T00:03:58+0700","check":"L4-audit-v2","agent":"main","fixes":2,"shallow_issues":5,"deep_issues":2,"diary_lines":4,"diary_sections":1}
+{"timestamp":"2026-07-07T00:04:25+0700","check":"L4-audit-v2","agent":"main","fixes":0,"shallow_issues":2,"deep_issues":0,"diary_lines":21,"diary_sections":2}
+{"timestamp":"2026-07-07T00:04:57+0700","check":"L4-audit-v2","agent":"balance","fixes":0,"shallow_issues":2,"deep_issues":0,"diary_lines":16,"diary_sections":2}
+{"timestamp":"2026-07-07T00:06:01+0700","check":"L4-audit-v2","agent":"self","fixes":1,"shallow_issues":6,"deep_issues":3,"diary_lines":4,"diary_sections":1}
+{"timestamp":"2026-07-07T00:07:12+0700","check":"L4-audit-v2","agent":"self","fixes":0,"shallow_issues":2,"deep_issues":0,"diary_lines":15,"diary_sections":2}
+{"timestamp":"2026-07-07T00:07:59+0700","check":"L4-audit-v2","agent":"main","fixes":0,"shallow_issues":2,"deep_issues":0,"diary_lines":21,"diary_sections":2}
+{"timestamp":"2026-07-07T00:08:24+0700","check":"L4-audit-v2","agent":"main","fixes":0,"shallow_issues":2,"deep_issues":0,"diary_lines":21,"diary_sections":2}
+{"timestamp":"2026-07-07T23:59:04+0700","check":"L4-audit-v2","agent":"main","fixes":0,"shallow_issues":2,"deep_issues":0,"diary_lines":76,"diary_sections":14}
+{"timestamp":"2026-07-07T23:59:00+0700","check":"L4-audit-v2","agent":"xiaofeng","fixes":1,"shallow_issues":4,"deep_issues":2,"diary_lines":8,"diary_sections":2}
+{"timestamp":"2026-07-07T23:59:04+0700","check":"L4-audit-v2","agent":"xiaofeng","fixes":0,"shallow_issues":4,"deep_issues":2,"diary_lines":8,"diary_sections":2}
+{"timestamp":"2026-07-07T23:59:19+0700","check":"L4-audit-v2","agent":"xiaofeng","fixes":0,"shallow_issues":4,"deep_issues":2,"diary_lines":8,"diary_sections":2}
+{"timestamp":"2026-07-08T00:01:38+0700","check":"L4-audit-v2","agent":"xiaofeng","fixes":2,"shallow_issues":6,"deep_issues":3,"diary_lines":4,"diary_sections":1}
+{"timestamp":"2026-07-08T00:02:28+0700","check":"L4-audit-v2","agent":"balance","fixes":1,"shallow_issues":6,"deep_issues":2,"diary_lines":4,"diary_sections":1}
+{"timestamp":"2026-07-08T00:03:52+0700","check":"L4-audit-v2","agent":".openclaw","fixes":1,"shallow_issues":7,"deep_issues":1,"diary_lines":4,"diary_sections":1}
+{"timestamp":"2026-07-08T00:04:07+0700","check":"L4-audit-v2","agent":"balance","fixes":0,"shallow_issues":2,"deep_issues":0,"diary_lines":15,"diary_sections":2}
+{"timestamp":"2026-07-08T00:05:22+0700","check":"L4-audit-v2","agent":"balance","fixes":0,"shallow_issues":2,"deep_issues":0,"diary_lines":15,"diary_sections":2}
+{"timestamp":"2026-07-08T00:06:09+0700","check":"L4-audit-v2","agent":"self","fixes":1,"shallow_issues":5,"deep_issues":2,"diary_lines":4,"diary_sections":1}
+{"timestamp":"2026-07-08T23:59:00+0700","check":"L4-audit-v2","agent":"main","fixes":0,"shallow_issues":2,"deep_issues":0,"diary_lines":19,"diary_sections":3}
+{"timestamp":"2026-07-08T23:59:00+0700","check":"L4-audit-v2","agent":"xiaofeng","fixes":0,"shallow_issues":5,"deep_issues":3,"diary_lines":5,"diary_sections":1}
+{"timestamp":"2026-07-08T23:59:00+0700","check":"L4-audit-v2","agent":"xiaofeng","fixes":0,"shallow_issues":5,"deep_issues":3,"diary_lines":5,"diary_sections":1}
+{"timestamp":"2026-07-08T23:59:19+0700","check":"L4-audit-v2","agent":"xiaofeng","fixes":0,"shallow_issues":5,"deep_issues":3,"diary_lines":5,"diary_sections":1}
+{"timestamp":"2026-07-09T00:00:44+0700","check":"L4-audit-v2","agent":"xiaofeng","fixes":2,"shallow_issues":6,"deep_issues":3,"diary_lines":4,"diary_sections":1}
+{"timestamp":"2026-07-09T00:02:13+0700","check":"L4-audit-v2","agent":"balance","fixes":2,"shallow_issues":5,"deep_issues":2,"diary_lines":4,"diary_sections":1}
