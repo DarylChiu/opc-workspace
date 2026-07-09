@@ -58,3 +58,15 @@
   "🟡 考虑更新 active.md — 有任务修改且已 15 小时",
   "🔴 任务涉及问题/失败/审计发现，建议提炼到 lessons.md"
 ]}
+{"timestamp":"2026-07-09T09:09:02+0700","check":"post-op","task":"OPC看板成本统计改用.jsonl全量解析","score":3,"total":5,"warnings":[
+  ""
+]}
+{"timestamp":"2026-07-09T09:43:20+0700","check":"post-op","task":"OPC看板成本Cron搭建+每日推Kitty","score":3,"total":5,"warnings":[
+  ""
+]}
+{"timestamp":"2026-07-09T09:55:34+0700","check":"post-op","task":"端口修正+超时保护+兜底文件机制","score":3,"total":5,"warnings":[
+  ""
+]}
+{"timestamp":"2026-07-09T11:21:55+0700","check":"post-op","task":"v2.4完整重跑103文件+设备分类","score":3,"total":5,"warnings":[
+  ""
+]}

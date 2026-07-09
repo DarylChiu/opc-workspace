@@ -1,8 +1,22 @@
 # 当前活跃任务
 
-> 最后更新: 2026-07-08 00:02 GMT+7 (每日cron审计)
+> 最后更新: 2026-07-09 09:10 GMT+7 (Balance: OPC看板成本统计更新)
 
 ## ✅ 已完成
+### OPC看板成本统计 — .jsonl全量解析 + 每日自动推送 ✅ (2026-07-09)
+- **触发**: Daryl指令「让看板改用.jsonl全量解析，每日推送给Kitty修正v1.6.1」
+- **交付物**:
+  - ✅ `scripts/full_cost_scan.py` — 全量扫描14个Agent/262个.jsonl
+  - ✅ `opc_dashboard/server.py` 的 `get_cost_data()` 已更新为全量扫描
+  - ✅ `cost_live.json` — 全量$100.89 / 本月$39.49 / 今日$0.38
+  - ✅ **Cron: 成本全量扫描推Kitty** (ID: 521a3db3) — 每日23:45执行
+  - ✅ HEARTBEAT.md 已记录周期任务流程
+- **推送链路**: 23:45扫描→sessions_send Kitty→Kitty更新看板→回复确认→Balance验证API→汇报纳入23:59记忆审计
+- **⚠️ 纠正**: OPC看板v1.6.1由Kitty全面负责（非Bryson），Bryson已交接完毕
+- **关键发现**: JSONL仅覆盖~14%实际成本(OpenRouter $739 vs JSONL $101)，旧session删除/旋转导致
+- **脚本**: `~/.openclaw/workspace-balance/scripts/full_cost_scan.py`
+
+## ✅ 已完成（历史）
 ### Outcome2全量干扰文件清理 ✅ (2026-06-28, 已纠正)
 - **触发**: Daryl发现244-HMVFZ240124中有2类干扰项
 - **⚠️ 初版错误**: 误将清关资料中英文明细的PDF也一并删除（Daryl只要求删Excel）
@@ -88,11 +102,19 @@
 - **待确认项已搁置**：转入实战，Daryl直接验收v2.1工作流成果，不单独修复这3项
 - 📍 `/Users/zhaoyuzhao/Desktop/Balance贷款材料自动化处理/`
 
-### 贷款材料整理 — v2.1 报关单文件规则 ⚠️ (2026-06-27 Daryl纠正)
-- **规则**: 报关单只保留 QDTQ（通关决定书），排除 DONG THUE（中间产物）
-- ✅ 保留: ToKhaiHQ7N_QDTQ_*.xlsx
-- ❌ 排除: DONG THUE, ARRIVAL NOTICE, TraCuuCont, 请款单/付款申请, download
-- **v2.2待更新**: 后续所有贷款材料自动化处理需内置此过滤规则
+### 贷款材料整理 — v2.4 完整重跑 ✅ (2026-07-09)
+- **触发**: Daryl确认规则后要求重跑103个文件
+- **v2.4新增**: E1-E8排除矩阵 + 设备/原材料分类
+- **重跑结果**:
+  - 103发票 / 100目录 / $6,887,555.02
+  - 保留657文件 / 排除184文件
+  - E1清关资料Excel: 92 | E2运费VAT: 18 | E3 DONG THUE: 59 | E4到货通知: 2 | E5 NBSP重复: 1 | E6临时文件: 1 | E7付款请款: 11
+  - 设备: 21条 | 原材料: 61条 | 混合: 9条 | ⚠️待确认: 9条
+- **产出**: `Outcome1-v2.4-20260709_1121.xlsx` + `Outcome2-v2.4-20260709_1121/`
+- **成本**: 脚本0.1秒/$0本地, LLM session ~$0.03
+- **242验证**: 7文件→3文件（清关PDF + AWB + QDTQ），干扰全部排除 ✅
+- 📍 `/Users/zhaoyuzhao/Desktop/Balance贷款材料自动化处理-6,887,555.02usd/`
+- ⏳ 等待Daryl徒弟完整反馈
 
 ### 贷款材料整理 — 6,887,555.02usd批次 ✅ (2026-06-26 v2.1实战) → 🔧 2026-06-27清理完成
 - **触发**: Daryl直接发原材料，要求按工作流实战(跳过验收→直接跑)
