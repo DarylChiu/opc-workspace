@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-06T06:24:18.256Z",
+  "updatedAt": "2026-07-09T02:05:30.759Z",
   "entries": {
     "memory:memory/2026-06-22.md:22:34": {
       "key": "memory:memory/2026-06-22.md:22:34",
@@ -201,24 +201,26 @@
       "endLine": 22,
       "source": "memory",
       "snippet": "# 2026-06-29 日记 ## 关键事件 ### 方法论卡片审批系统搭建（Daryl × Self 讨论） - **决策链**：飞书文档（静态无交互）→ Bitable（缺权限）→ OPC看板 sidebar 第6模块（最终方案） - **产出**： - `~/methodology-cards/` standalone Obsidian vault（Git + cron备份） - 2张卡片：胭脂扣/双层分离法 + VAS/FDI外部压力驱动 - Kitty 提供 OPC看板完整资料 - **Daryl 核心决策**：审批入 OPC 统一系统，不走飞书外部工具 ### AI技术知识树·案例归档 - Bryson 传递「视频分析交互Workflow」完整归档 - 已归纳到 `knowledge-base/AI技术/视频分析交互Workflow/工程开发经验.md` - 覆盖：管线架构、前后端协作、迭代流程、多平台适配、CSS坑、版号管理 ### 贷款材料自动化处理 v2 完整版（10:00-10:12） - **触发**: Daryl 反馈 v1 四文件过于骨架化 → 要求重写为完整版 - **数据来源**: Balance 跨 session trajectory 数据回溯（4 轮 v2.3 运行日志 + process_results 结构 + 处理报告 + active.md） - **产出**: 4 个文件重写（共 832 行/34KB），从骨架扩展为操作级细节： - Home.md: 两批次对比表 + 项目里程碑 + 输出物清单",
-      "recallCount": 5,
+      "recallCount": 6,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.8485301882028577,
-      "maxScore": 0.37962106764316556,
+      "totalScore": 2.2482269823551175,
+      "maxScore": 0.3996967941522598,
       "firstRecalledAt": "2026-07-02T02:27:53.204Z",
-      "lastRecalledAt": "2026-07-06T06:24:18.256Z",
+      "lastRecalledAt": "2026-07-09T02:05:01.425Z",
       "queryHashes": [
         "6f2bc2d1b0b1",
         "96cbb54ce475",
         "af50ce3a81d2",
         "ed28f7c18930",
-        "044caf9a1155"
+        "044caf9a1155",
+        "d423aae34203"
       ],
       "recallDays": [
         "2026-07-02",
         "2026-07-05",
-        "2026-07-06"
+        "2026-07-06",
+        "2026-07-09"
       ],
       "conceptTags": [
         "备份",
@@ -324,6 +326,130 @@
         "home.md",
         "工作流演进.md",
         "i/o/校验规则/异常处理"
+      ]
+    },
+    "memory:memory/2026-06-29.md:30:45": {
+      "key": "memory:memory/2026-06-29.md:30:45",
+      "path": "memory/2026-06-29.md",
+      "startLine": 30,
+      "endLine": 45,
+      "source": "memory",
+      "snippet": "- **触发**: Daryl 反馈 v2 只是 v1 加字数，结构没变 → 要求换结构，提炼可复用方法论 - **产出**: `方法论提取.md`（10.6KB）—— 8 个可跨项目迁移的方法论： 1. PDF 内容判定系统（文件名=入口，内容=判定，伪装者黑名单） 2. OCR 回退阈值调校（阈值=两峰谷底，不是固定数） 3. 锚点优先匹配策略（先找 99% 锚点，再补 1% 回退） 4. 小样本→大规模风险检查清单（6 类只在 103 条中暴露的风险） 5. 增量调试四轮收敛模式（每轮只改一个模块，跑全量验证） 6. 模糊指令语义边界确认协议（Daryl\"Excel文件\"→179文件误删的教训） 7. 记忆系统可靠性（post-op.sh 窄关键词导致项目从记忆消失） 8. Daryl 验收偏好（实战模式 + 简短精确反馈 + 主动排查语义边界） ### 交付物 - `~/methodology-cards/` — 8 files, 2 commits - `ACCA-Knowledge-Network/03-AI-Tech/Loan-Material-Automation/` — 5 文件（含方法论提取.md） - `knowledge-base/AI技术/视频分析交互Workflow/工程开发经验.md` — 之前创建",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.40193126201629636,
+      "maxScore": 0.40193126201629636,
+      "firstRecalledAt": "2026-07-09T02:05:01.425Z",
+      "lastRecalledAt": "2026-07-09T02:05:01.425Z",
+      "queryHashes": [
+        "d423aae34203"
+      ],
+      "recallDays": [
+        "2026-07-09"
+      ],
+      "conceptTags": [
+        "network",
+        "方法论提取.md",
+        "10.6kb",
+        "post-op.sh",
+        "methodology-cards",
+        "含方法论提取.md",
+        "触发",
+        "daryl"
+      ]
+    },
+    "memory:memory/2026-07-03.md:1:21": {
+      "key": "memory:memory/2026-07-03.md:1:21",
+      "path": "memory/2026-07-03.md",
+      "startLine": 1,
+      "endLine": 21,
+      "source": "memory",
+      "snippet": "# 2026-07-03 日记 ## 🕛 午夜 Cron 记忆归档审计（00:04） - 审计通过，午夜边界误报已确认无需处理 - Git pull 失败为预期（workspace-self 无 remote） ## 🕤 03-AI-Tech 知识树全貌汇报（09:46） - **触发**: Daryl 在飞书 DM 要求汇总「6月22日至今」的 03-AI-Tech 知识树 - **交付**: 完整树结构 + 藤蔓交叉点图 + 汇总表 - 工程开发经验（视频分析交互Workflow）/ 贷款材料自动化 / 电影学方法论 三大模块 - 三条共享藤蔓：自动化管线设计 / prompt 工程策略 / 迭代流程管理 - 总计 43 文件（含 01-Financial 侧 VAS + Cross-Border + IFRS-IAS） - **来源标注**: Bryson 归档（工程开发）、Balance 实操（贷款材料自动化）、Daryl×Self 辩论（电影学方法论） ## 🌙 Daryl 身体不适（22:03 OPC群） - Daryl 在 OPC 群聊中表示「我感觉我身体不行了，怎么办」@忧郁小猫 - 小枫（吹点小风）立即回应关心，询问具体症状 - 主 Agent（Kitty）判断未被直接@，保持静默（NO_REPLY） ## 当日其他 Agent 活动 - **Balance**: 与 Daryl 飞书 DM 中重组 OPC Dashboard active.md，将等待类任务从「进行中」移入「⏸️ 暂停/等待」，仅保留 Future Textile",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.36229974329471587,
+      "maxScore": 0.36229974329471587,
+      "firstRecalledAt": "2026-07-09T02:05:30.461Z",
+      "lastRecalledAt": "2026-07-09T02:05:30.461Z",
+      "queryHashes": [
+        "1842053952cb"
+      ],
+      "recallDays": [
+        "2026-07-09"
+      ],
+      "conceptTags": [
+        "workspace-self",
+        "03-ai-tech",
+        "01-financial",
+        "cross-border",
+        "ifrs-ias",
+        "no-reply",
+        "active.md",
+        "暂停/等待"
+      ]
+    },
+    "memory:memory/2026-06-15.md:1:27": {
+      "key": "memory:memory/2026-06-15.md:1:27",
+      "path": "memory/2026-06-15.md",
+      "startLine": 1,
+      "endLine": 27,
+      "source": "memory",
+      "snippet": "# 2026-06-15 日记 ## 关键事件 ### Daryl 合规审计与全员警告 - Daryl 对全员发出严厉警告：未按 Hooks 机制自检系统执行工作流 + 未执行每日 23:59 记忆 Cron → 直接删除 - Daryl 追加 T0 优先级规则：核心项目数字资产（需求、日志、产物等）丢失 → 直接删除 ### 自我审计与修复 - 发现三个硬伤与 Kitty 同款： 1. 6/11-6/13 日记缺失 — 已补记（标注中等确信） 2. 合规脚本从未实际执行 — 脚本存在但未调用 3. ai.openclaw.daily-memory-check.plist 未部署 — 已创建、加载到 launchd - 已执行：startup.sh 全部通过、audit.sh 通过 ### Soul.md 更新 - 新增「数字资产保护 — T0 优先级」红线规则 - 明确定义：需求文档、开发日志、设计产物、代码、知识库内容均属核心数字资产 - Self 负有特殊责任：所有经手材料必须归档 ### lessons.md 更新 - 新增「2026-06-15 合规流程失效事故」条目 - 核心教训：脚本文件存在 ≠ 已部署到工作流 ## 待跟进 - Hooks 机制自检系统规范 — 已向 Daryl/小枫 请求同步，待接收",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3550862729549408,
+      "maxScore": 0.3550862729549408,
+      "firstRecalledAt": "2026-07-09T02:05:30.461Z",
+      "lastRecalledAt": "2026-07-09T02:05:30.461Z",
+      "queryHashes": [
+        "1842053952cb"
+      ],
+      "recallDays": [
+        "2026-07-09"
+      ],
+      "conceptTags": [
+        "6/11-6/13",
+        "startup.sh",
+        "audit.sh",
+        "soul.md",
+        "lessons.md",
+        "daryl/小枫",
+        "日记",
+        "关键"
+      ]
+    },
+    "memory:memory/2026-06-14.md:1:28": {
+      "key": "memory:memory/2026-06-14.md:1:28",
+      "path": "memory/2026-06-14.md",
+      "startLine": 1,
+      "endLine": 28,
+      "source": "memory",
+      "snippet": "# 2026-06-14 日记 ## 重大进展 ### ACCA F1 知识网络建设启动 - Daryl 决策：ACCA 从 F1 起步（放弃原建议的 F3） - 要求：读完 BPP/Kaplan 最新版教材，画出完整知识网络 - 要求：提供 Obsidian 可视化 Demo 验收 ### Obsidian Vault Demo 搭建 - 完整目录结构：5 域 4 层架构 - 总览层：首页 Home + 仪表盘 Dashboard + 跨域地图 Knowledge-Map - F1 层：F1-Home（带考试结构、理论索引、课程衔接图） - 模块层：A/B/C/D/E 五个模块首页，各有完整 Mermaid 思维导图 - 深度页：B1 战略管理（含战略层次、SWOT、Porter、Ansoff、BCG 等全部可视化） - 模板：概念模板/理论模板/跨域关联模板 - 图谱配置：按模块着色（A蓝/B绿/C橙/D青/E红） ### 材料问题 - BPP/Kaplan F1 教材为商业版权材料，网上无合法免费版 - 已告知 Daryl 需要他提供：①教材（扫描/拍照/PDF）②手写笔记 + 录音 - 可用的公开资源：ACCA 官方 Syllabus（已下载）、ACCA 官网学习资源、OpenTuition 等免费平台 ## 待解决 - Daryl 是否已有 BPP/Kaplan 教材？能否拍照/扫描发给我？ - 或者接受使用公开免费资源（OpenTuition + ACCA 官网 + aCOWtancy）作为替代？ ## ⚠️ 重大修复",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.40557349324226377,
+      "maxScore": 0.40557349324226377,
+      "firstRecalledAt": "2026-07-09T02:05:30.759Z",
+      "lastRecalledAt": "2026-07-09T02:05:30.759Z",
+      "queryHashes": [
+        "cc79b7d98f2a"
+      ],
+      "recallDays": [
+        "2026-07-09"
+      ],
+      "conceptTags": [
+        "网络",
+        "bpp/kaplan",
+        "knowledge-map",
+        "f1-home",
+        "a/b/c/d/e",
+        "概念模板/理论模板/跨域关联模板",
+        "a蓝/b绿/c橙/d青/e红",
+        "扫描/拍照/pdf"
       ]
     }
   }
