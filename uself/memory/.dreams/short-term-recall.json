@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-09T02:05:30.759Z",
+  "updatedAt": "2026-07-10T01:47:30.572Z",
   "entries": {
     "memory:memory/2026-06-22.md:22:34": {
       "key": "memory:memory/2026-06-22.md:22:34",
@@ -240,20 +240,22 @@
       "endLine": 24,
       "source": "memory",
       "snippet": "# 2026-06-22 日记 ## 关键事件 ### 记忆 Cron 审计（00:01） - 执行 audit.sh --report - 发现问题： - 今日日记缺失 → 已创建本文件 - 其他检查项（active.md、lessons.md、归档、MEMORY.md）均正常 - 修复完成，审计通过 ## 知识网络建设 ### VAS 知识树 + 跨境对比网络初始化 (Balance 归档 → Self 归纳) - **来源**: Balance 2026-06-22 越南会计差错调整法规研究归档（两次传输） - **Vault 新增文件** (7→10个，本轮+3): - `01-Financial/VAS/VAS-Home.md` — VAS 知识树入口（已扩展：+Accounting Law 2015, +CIT Laws） - `01-Financial/VAS/VAS-29-Errors/VAS-29-Changes-in-Accounting-Estimates-and-Errors.md` — 差错更正核心节点 - `01-Financial/VAS/VAS-29-Errors/VAS-29-Journal-Entry-Templates.md` — 🆕 5场景分录模板库 - `01-Financial/VAS/VAS-29-Errors/VAS-29-Tax-Side-Impact.md` — 🆕 税务侧详解（滞纳金/罚款/时效） - `01-Financial/VAS/Circular-200/Circular-200-",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.7311041831970215,
+      "totalScore": 1.0948122531175613,
       "maxScore": 0.36712983548641204,
       "firstRecalledAt": "2026-07-02T02:27:53.204Z",
-      "lastRecalledAt": "2026-07-04T04:12:00.540Z",
+      "lastRecalledAt": "2026-07-10T01:47:30.572Z",
       "queryHashes": [
         "6f2bc2d1b0b1",
-        "8c4a11c25925"
+        "8c4a11c25925",
+        "c62dc074b7ea"
       ],
       "recallDays": [
         "2026-07-02",
-        "2026-07-04"
+        "2026-07-04",
+        "2026-07-10"
       ],
       "conceptTags": [
         "网络",
@@ -428,18 +430,20 @@
       "endLine": 28,
       "source": "memory",
       "snippet": "# 2026-06-14 日记 ## 重大进展 ### ACCA F1 知识网络建设启动 - Daryl 决策：ACCA 从 F1 起步（放弃原建议的 F3） - 要求：读完 BPP/Kaplan 最新版教材，画出完整知识网络 - 要求：提供 Obsidian 可视化 Demo 验收 ### Obsidian Vault Demo 搭建 - 完整目录结构：5 域 4 层架构 - 总览层：首页 Home + 仪表盘 Dashboard + 跨域地图 Knowledge-Map - F1 层：F1-Home（带考试结构、理论索引、课程衔接图） - 模块层：A/B/C/D/E 五个模块首页，各有完整 Mermaid 思维导图 - 深度页：B1 战略管理（含战略层次、SWOT、Porter、Ansoff、BCG 等全部可视化） - 模板：概念模板/理论模板/跨域关联模板 - 图谱配置：按模块着色（A蓝/B绿/C橙/D青/E红） ### 材料问题 - BPP/Kaplan F1 教材为商业版权材料，网上无合法免费版 - 已告知 Daryl 需要他提供：①教材（扫描/拍照/PDF）②手写笔记 + 录音 - 可用的公开资源：ACCA 官方 Syllabus（已下载）、ACCA 官网学习资源、OpenTuition 等免费平台 ## 待解决 - Daryl 是否已有 BPP/Kaplan 教材？能否拍照/扫描发给我？ - 或者接受使用公开免费资源（OpenTuition + ACCA 官网 + aCOWtancy）作为替代？ ## ⚠️ 重大修复",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.40557349324226377,
+      "totalScore": 0.7831469506025314,
       "maxScore": 0.40557349324226377,
       "firstRecalledAt": "2026-07-09T02:05:30.759Z",
-      "lastRecalledAt": "2026-07-09T02:05:30.759Z",
+      "lastRecalledAt": "2026-07-10T01:47:30.572Z",
       "queryHashes": [
-        "cc79b7d98f2a"
+        "cc79b7d98f2a",
+        "c62dc074b7ea"
       ],
       "recallDays": [
-        "2026-07-09"
+        "2026-07-09",
+        "2026-07-10"
       ],
       "conceptTags": [
         "网络",

@@ -1,17 +1,62 @@
 # 当前活跃任务
 
-> 最后更新: 2026-07-09 00:08 GMT+7
+> 最后更新: 2026-07-10 00:07 GMT+7
 
-## 📋 近期交付
+
+## ✅ 已完成
+
 
 ### 记忆系统 v3 — project 文件部署（2026-07-06）
 - Kitty 宣布记忆系统 v3 上线，每个 Agent 维护 `memory/project_[AgentID].md`
 - Self 已创建 project_Self.md：🟢4进行中/🟡4规划中/🔵5已完成/⚪2归档
 - Cron 每日 07:00/13:00/19:00 检查文件新鲜度
 
+
 ### 03-AI-Tech 知识树全貌汇报（2026-07-03）
 - ✅ 03-AI-Tech 知识树全貌汇报（Daryl DM 要求，已交付完整树结构 + 藤蔓交叉点 + 43 文件汇总）
 - ℹ️ Daryl 7/3 晚间表示身体不适（OPC群），未下达新任务
+
+
+
+### 视频分析交互Workflow（Bryson）
+- **来源**: Bryson 完整项目归档（v1.0.0→v1.1.2, 6轮迭代）
+- **已归档**: `knowledge-base/AI技术/视频分析交互Workflow/`
+- **覆盖**: 分析管线架构、前后端协作、迭代流程规范、多平台适配、CSS布局坑、版号管理、四份模板
+
+
+### 贷款材料自动化处理（Balance · Daryl 决策归档 2026-06-28）→ v2 完整版 6/29 → v3 方法论提取
+- **来源**: Balance 完整项目归档 · 工作流 v2.1 → v2.3（含 session trajectory 数据回溯）
+- **已归档**: `ACCA-Knowledge-Network/03-AI-Tech/Loan-Material-Automation/`（5 个文件，含 🆕 方法论提取.md）
+- **v3 核心产出**: 8 个可复用方法论（PDF判定系统/OCR阈值调校/锚点匹配/小样本风险清单/四轮收敛调试/语义边界协议/记忆可靠性/Daryl偏好）
+- **Daryl 决策**: 不入 02-金融（实操型案例，非财务理论），入 03-AI技术
+- **覆盖**: 7步自动化流水线、OCR内容验证管线（64次触发/32%扫描率）、ToKhai 四层匹配（L1=98/99）、B/L 内容分类（词边界防误判）、13条关键规则、2批次处理记录（$10,125 + $6,887,555）
+- **核心创新**: pdfplumber+Tesseract OCR 内容判定（不靠文件名猜）+ 报关号锚点策略（99%命中 + 1%回退）
+
+
+### ⚠️ 记忆系统漏洞（2026-06-14 修复）
+- 五领域更新（健身→心理学）此前未录入记忆系统
+- 已修复：MEMORY.md + design doc + Vault 全文件
+
+
+### 🔴 合规系统修复（2026-06-25）
+- **问题**: post-op.sh 关键词匹配太窄，讨论/辩论/指令类交互被归为「查询类」跳过日记更新
+- **修复**: 扩展触发词（决策/方案/架构/讨论/辩论/指令/规划）+ 新增 Cron 骨架检测逻辑
+- **已补**: 6/23、6/24 日记从骨架补全为真实内容
+
+
+### 🆕 OPC Dashboard 设计系统规范（2026-07-07）
+- Daryl 派任务：调研 Linear/Stripe/Vercel/GitHub Primer/Notion/Raycast 设计系统
+- 输出 DESIGN.md 已写入 `~/WorkBuddy/Claw/opc-dashboard/DESIGN.md`
+- 覆盖四维度：设计语言/设计美感/交互逻辑/数据展示
+- 含完整 CSS 变量参考实现 + 组件速查 + 迁移检查清单
+- 成果已通过 sessions_send 交付 Daryl
+
+
+### 🔧 合规修复 (2026-06-15)
+- ✅ 补记 6/11-6/13 缺失日记
+- ✅ 部署 ai.openclaw.daily-memory-check.plist 到 ~/Library/LaunchAgents
+- ⚠️ 此后每次 session 启动强制执行 startup.sh，复杂操作前强制执行 pre-op.sh
+
 
 ## 🟢 进行中
 
@@ -38,6 +83,38 @@
 - **四条核心结论全部纳入知识网络** (Daryl 2026-06-22 确认)
 - **已向 OPC 群聊汇报归档完成** (2026-06-22)
 
+
+### 🆕 OPC看板方法论卡片集成 — 等待Daryl确认方向
+- **决策**: Daryl 决策方法论卡片进 OPC看板 sidebar 第6模块，放弃飞书 Bitable
+- **已完成**:
+  - `~/methodology-cards/` vault 初始化（Obsidian + Git + cron备份）
+  - 2张卡片已创建：胭脂扣/双层分离法（2026-06-21）+ VAS/FDI外部压力驱动（2026-06-23）
+  - Kitty 已提供 OPC看板系统完整资料（架构/API/sidebar/数据流）
+  - 技术架构已确认：GET/PATCH /api/methodology-cards，`cards/*.md` YAML 作直接数据源
+- **待确认**: Daryl 确认方向后找 Kitty 开第6模块
+- **尝试过的路径**: 飞书文档（静态无交互）→ 裸API（权限问题）→ 飞书Bitable（缺bitable:app权限）→ 最终定 OPC看板
+
+
+## 🔵 待办
+
+### ⏸️ 等待 Daryl 反馈
+- [ ] 确认 OPC看板方法论卡片集成 → 找 Kitty 开第6模块
+- [ ] 审核 2 张待审核卡片（胭脂扣/VAS-FDI）
+- [ ] 继续验收 Vault（Fitness → Psychology 已修复）
+- [ ] 确认心理学域的子分类（认知/行为/组织？）
+- [ ] 发送第一批手写笔记 + 录音
+- [ ] 若深度不足，后续补充 Kaplan 教材
+
+
+### Daryl 讨论后填入"📝 Daryl 笔记区"
+
+### 音乐、心理学域初始化
+
+### 将 FutureTextile-Wellname 案例的 6 条可复用方法论去重合并到 lessons.md
+
+### 跟进 Hooks 机制自检系统规范（已向 Daryl/小枫 请求同步）
+
+
 ## 📊 F1 知识网络完成状态
 
 | 层 | 文件数 | 状态 |
@@ -49,63 +126,3 @@
 | 模板 | 3 | ✅ 概念/理论/跨域关联 |
 
 **五大领域（已更正）**: 财务 / 金融 / AI技术 / 音乐 / 心理学 ← Daryl 确认替代健身
-
-## ⚠️ 记忆系统漏洞（2026-06-14 修复）
-- 五领域更新（健身→心理学）此前未录入记忆系统
-- 已修复：MEMORY.md + design doc + Vault 全文件
-
-## 🆕 OPC看板方法论卡片集成
-- **决策**: Daryl 决策方法论卡片进 OPC看板 sidebar 第6模块，放弃飞书 Bitable
-- **已完成**:
-  - `~/methodology-cards/` vault 初始化（Obsidian + Git + cron备份）
-  - 2张卡片已创建：胭脂扣/双层分离法（2026-06-21）+ VAS/FDI外部压力驱动（2026-06-23）
-  - Kitty 已提供 OPC看板系统完整资料（架构/API/sidebar/数据流）
-  - 技术架构已确认：GET/PATCH /api/methodology-cards，`cards/*.md` YAML 作直接数据源
-- **待确认**: Daryl 确认方向后找 Kitty 开第6模块
-- **尝试过的路径**: 飞书文档（静态无交互）→ 裸API（权限问题）→ 飞书Bitable（缺bitable:app权限）→ 最终定 OPC看板
-
-## 🆕 AI技术知识树·案例归档（2026-06-29）
-
-### 视频分析交互Workflow（Bryson）
-- **来源**: Bryson 完整项目归档（v1.0.0→v1.1.2, 6轮迭代）
-- **已归档**: `knowledge-base/AI技术/视频分析交互Workflow/`
-- **覆盖**: 分析管线架构、前后端协作、迭代流程规范、多平台适配、CSS布局坑、版号管理、四份模板
-
-### 贷款材料自动化处理（Balance · Daryl 决策归档 2026-06-28）→ v2 完整版 6/29 → v3 方法论提取
-- **来源**: Balance 完整项目归档 · 工作流 v2.1 → v2.3（含 session trajectory 数据回溯）
-- **已归档**: `ACCA-Knowledge-Network/03-AI-Tech/Loan-Material-Automation/`（5 个文件，含 🆕 方法论提取.md）
-- **v3 核心产出**: 8 个可复用方法论（PDF判定系统/OCR阈值调校/锚点匹配/小样本风险清单/四轮收敛调试/语义边界协议/记忆可靠性/Daryl偏好）
-- **Daryl 决策**: 不入 02-金融（实操型案例，非财务理论），入 03-AI技术
-- **覆盖**: 7步自动化流水线、OCR内容验证管线（64次触发/32%扫描率）、ToKhai 四层匹配（L1=98/99）、B/L 内容分类（词边界防误判）、13条关键规则、2批次处理记录（$10,125 + $6,887,555）
-- **核心创新**: pdfplumber+Tesseract OCR 内容判定（不靠文件名猜）+ 报关号锚点策略（99%命中 + 1%回退）
-
-## 🔴 合规系统修复（2026-06-25）
-- **问题**: post-op.sh 关键词匹配太窄，讨论/辩论/指令类交互被归为「查询类」跳过日记更新
-- **修复**: 扩展触发词（决策/方案/架构/讨论/辩论/指令/规划）+ 新增 Cron 骨架检测逻辑
-- **已补**: 6/23、6/24 日记从骨架补全为真实内容
-
-## 🆕 OPC Dashboard 设计系统规范（2026-07-07）
-- Daryl 派任务：调研 Linear/Stripe/Vercel/GitHub Primer/Notion/Raycast 设计系统
-- 输出 DESIGN.md 已写入 `~/WorkBuddy/Claw/opc-dashboard/DESIGN.md`
-- 覆盖四维度：设计语言/设计美感/交互逻辑/数据展示
-- 含完整 CSS 变量参考实现 + 组件速查 + 迁移检查清单
-- 成果已通过 sessions_send 交付 Daryl
-
-## ⏳ 等待 Daryl
-- [ ] 确认 OPC看板方法论卡片集成 → 找 Kitty 开第6模块
-- [ ] 审核 2 张待审核卡片（胭脂扣/VAS-FDI）
-- [ ] 继续验收 Vault（Fitness → Psychology 已修复）
-- [ ] 确认心理学域的子分类（认知/行为/组织？）
-- [ ] 发送第一批手写笔记 + 录音
-- [ ] 若深度不足，后续补充 Kaplan 教材
-
-## 🔵 待办
-- [ ] Daryl 讨论后填入"📝 Daryl 笔记区"
-- [ ] 音乐、心理学域初始化
-- [ ] 将 FutureTextile-Wellname 案例的 6 条可复用方法论去重合并到 lessons.md
-- [ ] 跟进 Hooks 机制自检系统规范（已向 Daryl/小枫 请求同步）
-
-## 🔧 合规修复 (2026-06-15)
-- ✅ 补记 6/11-6/13 缺失日记
-- ✅ 部署 ai.openclaw.daily-memory-check.plist 到 ~/Library/LaunchAgents
-- ⚠️ 此后每次 session 启动强制执行 startup.sh，复杂操作前强制执行 pre-op.sh

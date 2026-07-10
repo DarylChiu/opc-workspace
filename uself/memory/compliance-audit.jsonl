@@ -64,3 +64,6 @@
 {"timestamp":"2026-07-07T11:31:39+0700","check":"post-op","task":"OPC Dashboard 设计系统调研 DESIGN.md 编写","score":2,"total":5,"warnings":[
   "🔴 active.md 需更新 — 有新任务变更但 11 小时未动"
 ]}
+{"timestamp":"2026-07-10T00:09:04+0700","check":"post-op","task":"每日记忆归档审计修复","score":3,"total":5,"warnings":[
+  "🔴 任务涉及问题/失败/审计发现，建议提炼到 lessons.md"
+]}

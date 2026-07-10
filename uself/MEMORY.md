@@ -6,6 +6,7 @@
 
 ## Config
 - 月预算: $20 | 模型: deepseek-v4-pro | 五大领域: 财务/金融/AI技术/音乐/心理学
+- **Obsidian Vault**: `/Users/zhaoyuzhao/Desktop/ACCA-Knowledge-Network/` (Daryl 使用的正式 Vault，所有 IAS/IFRS 知识网络写入此路径，不是 workspace-self 副本)
 
 ## Team & Comms
 - Daryl: Owner | Kitty: 首席Agent | 小枫(技术)/Balance(财务)/Self(知识管理)
