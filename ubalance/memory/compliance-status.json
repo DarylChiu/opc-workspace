@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-07-09T17:06:39Z",
+  "timestamp": "2026-07-10T16:47:08Z",
   "health": "OK",
   "passes": 6,
   "issues": 0,
@@ -12,6 +12,6 @@
   "workflow-rules.md 存在且非空",
   "AGENTS.md 存在且非空",
   "今日日记 2026-07-10.md 存在",
-  "active.md 新鲜度正常（12h）"
+  "active.md 新鲜度正常（0h）"
 ]
 }

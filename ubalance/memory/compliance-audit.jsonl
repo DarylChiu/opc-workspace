@@ -70,3 +70,12 @@
 {"timestamp":"2026-07-09T11:21:55+0700","check":"post-op","task":"v2.4完整重跑103文件+设备分类","score":3,"total":5,"warnings":[
   ""
 ]}
+{"timestamp":"2026-07-10T09:00:36+0700","check":"post-op","task":"更新v2.5操作手册并飞书发送Daryl","score":2,"total":5,"warnings":[
+  "🟡 考虑更新 active.md — 有任务修改且已 21 小时"
+]}
+{"timestamp":"2026-07-10T23:28:18+0700","check":"post-op","task":"JGL-KHOA DUNG并购框架交付+Daryl交代车辆费用专项分析待明天","score":2,"total":5,"warnings":[
+  "🔴 active.md 需更新 — 有新任务变更但 13 小时未动"
+]}
+{"timestamp":"2026-07-10T23:47:26+0700","check":"post-op","task":"成本推送闭环确认：Kitty验证OPC看板数据一致","score":3,"total":5,"warnings":[
+  ""
+]}

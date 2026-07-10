@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-07T01:45:41.521Z",
+  "updatedAt": "2026-07-10T01:59:06.449Z",
   "entries": {
     "memory:memory/2026-06-10.md:1:29": {
       "key": "memory:memory/2026-06-10.md:1:29",
@@ -434,25 +434,27 @@
       "endLine": 32,
       "source": "memory",
       "snippet": "- 已session_send问Kitty，Kitty回复：当前Workflow只是可视化编辑器，无执行引擎 - 需小枫开发Workflow执行引擎，工时约30-42h - 短期替代：Daryl写「任务模板」说明文件，Balance按模板静默执行全部步骤后一次性回复 ### 🔴 贷款材料整理项目启动（17:24-17:31）⚠️ 此前遗漏，6/25从session恢复 - 17:24 Daryl发送 `贷款材料整理-任务模版.xlsx`，解析为5阶段工作流： ① 从L1-Raw Materials提取发票号/合同号 → ② 关键字在RM-Database中OCR匹配PDF发票+报关单+提单 → ③ 输出关键字段到汇总Excel → ④ 循环全部发票号 → ⑤ 错误标记 - 17:27 发送 `L1-Raw Materials-10,125usd.xlsx`，成功读取：10条发票记录，供应商HUA FENG GROUP，总金额$10,125.75 - 17:31 开始发送RM-Database拆分包（RM-Database-1of 10.zip已接收），后续9个未传完 - ⚠️ post-op.sh关键词太窄→此段未写入日记→6/22暂停时也未同步到active.md - ⏸️ 6/22 Daryl指令暂缓",
-      "recallCount": 5,
+      "recallCount": 6,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.9115142732858657,
+      "totalScore": 2.2871908664703366,
       "maxScore": 0.4238295644521713,
       "firstRecalledAt": "2026-06-26T02:19:50.472Z",
-      "lastRecalledAt": "2026-07-03T06:09:47.521Z",
+      "lastRecalledAt": "2026-07-10T01:59:06.449Z",
       "queryHashes": [
         "18acc3968aed",
         "b791d4f40f82",
         "6bc4393abc35",
         "80fee6937724",
-        "a3a03f7467ef"
+        "a3a03f7467ef",
+        "4f0269625828"
       ],
       "recallDays": [
         "2026-06-26",
         "2026-06-28",
         "2026-06-30",
-        "2026-07-03"
+        "2026-07-03",
+        "2026-07-10"
       ],
       "conceptTags": [
         "已session-send问kitty",
@@ -472,22 +474,25 @@
       "endLine": 92,
       "source": "memory",
       "snippet": "- **输入**: `6,887,555.02usd 贷款材料/` (L1 103条 STT242-410 + RM-Database 12月/771子目录) - **执行v2.1工作流**: 7步全自动 (输入验证→数据提取→目录匹配→材料收集→OCR验证→质检→输出) - **产出到桌面**: `Balance贷款材料自动化处理-6,887,555.02usd/` ### 处理过程关键发现 1. **-1后缀匹配问题**: 13条-1发票UNMATCHED → 发现RM目录名不含-1, 修复为base目录搜索 2. **设备Invoice模式不同**: HMM/HMK设备类不含\"中英文明细\" → 放宽为\"清关资料\"即匹配 3. **报关单命名多样**: 非ToKhaiHQ格式, 用 `发票号_海关号.xls` → 增加数字模式识别 4. **嵌套子目录**: HMAEFZ240104文件在子目录 → 改为递归扫描 5. **NBSP编码干扰**: Toshiba→Desktop复制时遇到权限错误, 改为扫描现有文件 ### 最终结果 - **100/103 OK (97.1%)**, 0 INCOMPLETE, 3 UNMATCHED - UNMATCHED: RE-VN240904 + RE-2024-054 (RE退款单, 非进口发票) + HMVFZ240072-1(目录缺失) - Outcome1 Excel (103行+公式), Outcome2 100个子目录, process_results.json, 处理报告 ### 工作流模式确定 - Daryl选",
-      "recallCount": 4,
+      "recallCount": 6,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.769322183728218,
-      "maxScore": 0.4722033768892288,
+      "totalScore": 2.7270574927330014,
+      "maxScore": 0.4884566485881805,
       "firstRecalledAt": "2026-06-28T03:34:09.810Z",
-      "lastRecalledAt": "2026-07-03T06:09:47.521Z",
+      "lastRecalledAt": "2026-07-10T01:59:06.449Z",
       "queryHashes": [
         "eaae2c6e1fc7",
         "b791d4f40f82",
         "80fee6937724",
-        "a3a03f7467ef"
+        "a3a03f7467ef",
+        "e6dc5570bcf1",
+        "4f0269625828"
       ],
       "recallDays": [
         "2026-06-28",
-        "2026-07-03"
+        "2026-07-03",
+        "2026-07-10"
       ],
       "conceptTags": [
         "555.02usd",
@@ -507,22 +512,25 @@
       "endLine": 76,
       "source": "memory",
       "snippet": "### 问题5 · Outcome1 Excel格式 - ①日期写入Ngày Tháng Năm 2026处 - ②日期格式YYYY/MM/DD - ③产品列留空 - ④删除表内子汇总 - 补充a：供应商≠HUA FENG时按实际更新B/C/D列 - 补充b：超17行自动插行 - **修复**：4项格式修正+TỔNG CỘNG公式修正，全部完成 ### 技术问题 - NBSP(\\xa0)编码导致文件匹配失败，需模糊匹配 - 干扰检测逻辑初版有bug（日期\"12-19\"含\"-1\"子串），已修正 ### 待确认项 - Seq2 B/L：RM-Database/26.中有I228475630*/MV5150LHT，需Daryl指定 - Seq4 mv9650l.pdf是否为B/L（RM-Database有BL2305342010.PDF） - Seq10 AM2502SSG310(2).pdf类型 ### 产出 - `fix_v2.py` + `fix_v2_1.py` 修复脚本 - `process_results.json` 已更新（含fix_v2记录） - Outcome1 Excel v2 已保存 - Outcome2 10个子目录已清理/补充 ## 23:10 贷款材料整理 — 6,887,555.02usd 批次实战处理 - **Daryl要求**: 跳过验收，直接按v2.1工作流实战，输入在Toshiba硬盘 - **输入**: `6,887,555.02usd 贷款材料/` (L1 103条 STT242-410 + RM-Database 12月/771子目",
-      "recallCount": 4,
+      "recallCount": 6,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.5855937212705613,
-      "maxScore": 0.4410713642835617,
+      "totalScore": 2.4429144322872163,
+      "maxScore": 0.44380269348621365,
       "firstRecalledAt": "2026-06-28T03:34:09.810Z",
-      "lastRecalledAt": "2026-07-03T06:09:47.521Z",
+      "lastRecalledAt": "2026-07-10T01:59:06.449Z",
       "queryHashes": [
         "eaae2c6e1fc7",
         "b791d4f40f82",
         "80fee6937724",
-        "a3a03f7467ef"
+        "a3a03f7467ef",
+        "e6dc5570bcf1",
+        "4f0269625828"
       ],
       "recallDays": [
         "2026-06-28",
-        "2026-07-03"
+        "2026-07-03",
+        "2026-07-10"
       ],
       "conceptTags": [
         "2日期格式yyyy/mm/dd",
@@ -542,20 +550,23 @@
       "endLine": 27,
       "source": "memory",
       "snippet": "# 2026-06-28 日记 ## 概述 - Daryl交互日，贷款材料自动化整理 v2.0→v2.3 全流程开发+验收 ## 00:02 记忆系统审计 - **触发**: Cron 每日归档任务 (audit.sh --report) - **审计结果**: 1项自动修复(日记骨架)，3浅层+2深层告警（午夜边界误报） - **前日回顾**: 2026-06-27（周六）无用户交互 ## 10:33 Daryl要求清理Outcome2干扰文件 - 删除15个 `1_*` 运费VAT Invoice、163个 `清关资料中英文明细` xlsm/xlsx、1个 `~$`临时文件，合计179文件 - **⚠️ 失误**: 初版误删清关资料PDF，Daryl立即指出→AppleScript恢复→Python精确还原 - **教训**: Daryl说\"Excel文件\"=仅xlsm/xlsx，PDF的invoice/SC/packing list必须保留 ## 16:00-17:20 贷款材料整理工作流 v2.0→v2.3 全流程 ### 版本演进 | 版本 | 完成率 | 数据源 | 核心改进 | |------|:---:|------|------| | v2.1 | 50.5% | RM-Database原始 | 基准线（pdfplumber+openpyxl） | | v2.2 | 84.0% | 预收集Outcome2-材料包 | B/L内容识别（海运关键词+船公司列表） | | **v2.3** | **96.1%** | RM-Database原始 | OCR",
-      "recallCount": 2,
+      "recallCount": 4,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.801650670170784,
+      "totalScore": 1.5630658358335494,
       "maxScore": 0.4301204293966293,
       "firstRecalledAt": "2026-06-28T14:46:29.385Z",
-      "lastRecalledAt": "2026-07-03T06:09:47.521Z",
+      "lastRecalledAt": "2026-07-10T01:59:06.449Z",
       "queryHashes": [
         "b791d4f40f82",
-        "a3a03f7467ef"
+        "a3a03f7467ef",
+        "e6dc5570bcf1",
+        "4f0269625828"
       ],
       "recallDays": [
         "2026-06-28",
-        "2026-07-03"
+        "2026-07-03",
+        "2026-07-10"
       ],
       "conceptTags": [
         "v2.0",
