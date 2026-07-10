@@ -1,5 +1,16 @@
 # Recent Conversations
-Last updated: 2026-07-09 00:05 GMT+7
+Last updated: 2026-07-11 00:05 GMT+7
+
+## 2026-07-10 — Daryl active.md查阅 + 成本确认
+- Daryl 要求把 4 Agent 的 active.md 通过飞书发送
+- 已发送 Kitty/Bryson/Balance/Self 全量 active.md
+- Balance 成本扫描 cron 确认 Dashboard /api/costs 已用 jsonl-full-scan
+- 全量成本 $104.58 / 本月 $44.98 / 今日 $2.90
+- 7/7 峰值 $25.05（DeepSeek R1 大量调用）已记录
+
+## 2026-07-09 — Daryl全天未出现
+- 全天无 Daryl 活动，系统静默运行
+- 午夜 Cron 审计正常执行
 
 ## 2026-07-08 — 看门狗修复 + 成本诊断 + Whisper修复
 - **上午**: 看门狗 PATH 修复（crontab PATH缺失→4轮重启失败→手动修复→隧道稳定13h+）
