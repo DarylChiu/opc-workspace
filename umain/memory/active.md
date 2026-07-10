@@ -2,7 +2,7 @@
 
 > 最后更新: 2026-07-07 07:50 GMT+7
 
-## 🟢 运维
+## 🟢 进行中
 ### Sentinel 合规哨兵 v1.0 — 部署中 🔄
 - **状态**: Gateway 插件已加载，配置已更新，等待 Gateway 重启生效
 - **审计日志**: `memory/sentinel-audit.jsonl`
