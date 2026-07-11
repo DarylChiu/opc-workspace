@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-08T08:37:37.416Z",
+  "updatedAt": "2026-07-11T04:42:08.555Z",
   "entries": {
     "memory:memory/2026-06-08.md:19:38": {
       "key": "memory:memory/2026-06-08.md:19:38",
@@ -1111,6 +1111,68 @@
         "costs/projects",
         "agents/projects",
         "api/costs/projects"
+      ]
+    },
+    "memory:memory/2026-07-06.md:21:32": {
+      "key": "memory:memory/2026-07-06.md:21:32",
+      "path": "memory/2026-07-06.md",
+      "startLine": 21,
+      "endLine": 32,
+      "source": "memory",
+      "snippet": "- 17:00 OPC Dashboard 服务挂掉（进程异常退出）→ 重启 - 17:05 tunnel 过期 → 重建（charm-functioning-donna-time.trycloudflare.com） - 22:37 tunnel 再次挂+服务进程异常退出 → 全栈重启 - 23:00 Gateway 重启（Sentinel 插件加载）→ OPC Dashboard 被带下线 → 再次全栈重启 - ⚠️ 今天累计 8 次 tunnel 重建，临时隧道完全不适合长期使用 ## 状态概览 - 各 Agent 处于待命状态 - 7 月基建方向（Agent自进化 + Loop Engineering）已在 Daryl 与 Bryson 讨论中推进 - OPC 看板 v1.5 运行中 - M2 全部模块验收完毕",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.41068755388259887,
+      "maxScore": 0.41068755388259887,
+      "firstRecalledAt": "2026-07-11T04:42:08.555Z",
+      "lastRecalledAt": "2026-07-11T04:42:08.555Z",
+      "queryHashes": [
+        "03ae1fc4cf49"
+      ],
+      "recallDays": [
+        "2026-07-11"
+      ],
+      "conceptTags": [
+        "gateway",
+        "v1.5",
+        "opc",
+        "dashboard",
+        "服务",
+        "进程",
+        "异常",
+        "退出"
+      ]
+    },
+    "memory:memory/2026-07-07.md:60:78": {
+      "key": "memory:memory/2026-07-07.md:60:78",
+      "path": "memory/2026-07-07.md",
+      "startLine": 60,
+      "endLine": 78,
+      "source": "memory",
+      "snippet": "## 全天 · 隔壁隧道稳定性问题（heartbeat 会话处理） - 今天 tunnel 多次挂掉（~10+ 次），OPC Dashboard 服务进程也多次异常退出 - **根因发现**: 重启时旧 cloudflared 进程未清干净 → 多个 cloudflared 竞争同一端口 → tunnel 返回 000/502 - **修复**: 重启前必须 `pkill -9 -f cloudflared` 彻底清理，再启单一进程 → 稳定性显著提升（3.5h+ 连续运行） - **待办**: 建议为 OPC Dashboard + tunnel 配 LaunchAgent 自动重启，根治临时隧道不稳定（需 Daryl 确认方向） ## 21:50 · Crontab 手动安装（Daryl 指令）✅ - Daryl 将「Crontab 手动安装」移至 In Progress（无描述） - 结合全天隧道痛点 → 判断需求为装看门狗自动恢复 OPC Dashboard + tunnel - **产物**: `opc-dashboard/scripts/watchdog.sh` - 检本地服务（localhost:8765）异常 → manage.sh restart - 检隧道异常 → pkill -9 彻底清理 + 重建单一 cloudflared + 自动写回新 URL - 日志滚动保留 500 行 - **crontab 条目**: `*/5 * * * *` 每 5 分钟执行 - 旧 crontab 已备份到 /tmp/crontab_backup_*.tx",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3524476319551468,
+      "maxScore": 0.3524476319551468,
+      "firstRecalledAt": "2026-07-11T04:42:08.555Z",
+      "lastRecalledAt": "2026-07-11T04:42:08.555Z",
+      "queryHashes": [
+        "03ae1fc4cf49"
+      ],
+      "recallDays": [
+        "2026-07-11"
+      ],
+      "conceptTags": [
+        "backup",
+        "备份",
+        "000/502",
+        "3.5h",
+        "manage.sh",
+        "tmp/crontab-backup",
+        "全天",
+        "隔壁"
       ]
     }
   }
