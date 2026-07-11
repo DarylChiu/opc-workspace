@@ -67,3 +67,6 @@
 {"timestamp":"2026-07-10T00:09:04+0700","check":"post-op","task":"每日记忆归档审计修复","score":3,"total":5,"warnings":[
   "🔴 任务涉及问题/失败/审计发现，建议提炼到 lessons.md"
 ]}
+{"timestamp":"2026-07-11T21:35:15+0700","check":"post-op","task":"KHOA DUNG案例知识树入库：创建案例文件+方法论卡片+PIT速查卡+Vietnam-Tax目录，更新Cross-Border-Home和Knowledge-Map两个索引","score":2,"total":5,"warnings":[
+  "🟡 考虑更新 active.md — 有任务修改且已 21 小时"
+]}

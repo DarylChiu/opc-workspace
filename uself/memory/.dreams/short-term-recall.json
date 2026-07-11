@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-10T01:47:30.572Z",
+  "updatedAt": "2026-07-11T15:00:46.408Z",
   "entries": {
     "memory:memory/2026-06-22.md:22:34": {
       "key": "memory:memory/2026-06-22.md:22:34",
@@ -9,20 +9,22 @@
       "endLine": 34,
       "source": "memory",
       "snippet": "- `01-Financial/VAS/Circular-99-2025/Circular-99-2025-Overview.md` — 新制度过渡（含 IFRS 15 + SFP术语） - `01-Financial/VAS/Circular-99-2025/IFRS-15-Impact-on-Vietnam-Revenue.md` — 🆕 IFRS 15 对越南收入确认的冲击（3场景+3税种传导+耦合推理链） - `01-Financial/Cross-Border/Cross-Border-Home.md` — 对比网络入口 - `01-Financial/Cross-Border/VAS-vs-IFRS-Philosophy.md` — 科目表导向 vs 准则导向 - `01-Financial/Cross-Border/Three-Jurisdiction-FS-Tax-Coupling.md` — 三地耦合度模型 - `01-Financial/Cross-Border/CIT-Overprovision-Reversal-Comparison.md` — 案例对比（已扩展：CIT-on-CIT效应 + Error vs Estimate判定 + P&L列报对比 + IAS 8.49披露要求） - **报告归档**: Balance 2份研究报告已复制到 `reports/balance/` - **核心洞察**: 1. VAS/IFRS 差异的本质是「科目表导向 vs 准则导向」的操作系统级差异 2. 越南审计师走 TK 711",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.7855960428714752,
+      "totalScore": 1.1515941143035888,
       "maxScore": 0.42359391152858733,
       "firstRecalledAt": "2026-06-23T01:11:55.954Z",
-      "lastRecalledAt": "2026-07-01T15:51:59.663Z",
+      "lastRecalledAt": "2026-07-11T14:31:04.421Z",
       "queryHashes": [
         "320339ac2bbc",
-        "bde6514eef32"
+        "bde6514eef32",
+        "458bf27530b3"
       ],
       "recallDays": [
         "2026-06-23",
-        "2026-07-01"
+        "2026-07-01",
+        "2026-07-11"
       ],
       "conceptTags": [
         "网络",
@@ -75,20 +77,22 @@
       "endLine": 62,
       "source": "memory",
       "snippet": "- 已补建 `IFRS-15-Impact-on-Vietnam-Revenue.md`（3场景+3税种+耦合推理链） ## 当前状态 - 记忆系统运行正常 - 合规脚本全部就绪 - VAS 知识树已初始化（4节点） - 跨境对比网络已初始化（3节点 + 首页） ### 第二轮归档：实操指南 + 英联邦调查 (同日，Balance → Self 经 Daryl 批准) - **来源**: Balance 两份完整报告（越南会计差错调整法规指导 + VAS-vs-IFRS CIT前期多计提冲回对比），Daryl 附四条核心结论 - **Vault 新增文件** (2个): - `01-Financial/VAS/VAS-29-Errors/VAS-Error-Correction-Practical-Guide.md` — 📐 完整实操指南（决策树+5场景分录模板+税务风险梯度+行动清单） - `01-Financial/Cross-Border/Commonwealth-Tax-Error-Prohibition.md` — 英联邦9司法管辖区全域禁止调查 - **Vault 更新文件** (4个): Cross-Border-Home.md / VAS-Home.md / VAS-29-Changes...md / CIT-Overprovision-Reversal-Comparison.md（交叉链接补全） - **四条核心结论已纳入知识网络**： 1. VAS Circular 200科目表导向 vs IFRS准则导向 → 哲学差异节点已有系统性论证",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.7119429051876067,
-      "maxScore": 0.359243431687355,
+      "totalScore": 1.1032828658819198,
+      "maxScore": 0.39133996069431304,
       "firstRecalledAt": "2026-06-23T01:11:55.954Z",
-      "lastRecalledAt": "2026-07-04T04:12:00.540Z",
+      "lastRecalledAt": "2026-07-11T14:31:04.421Z",
       "queryHashes": [
         "320339ac2bbc",
-        "8c4a11c25925"
+        "8c4a11c25925",
+        "458bf27530b3"
       ],
       "recallDays": [
         "2026-06-23",
-        "2026-07-04"
+        "2026-07-04",
+        "2026-07-11"
       ],
       "conceptTags": [
         "网络",
@@ -240,22 +244,24 @@
       "endLine": 24,
       "source": "memory",
       "snippet": "# 2026-06-22 日记 ## 关键事件 ### 记忆 Cron 审计（00:01） - 执行 audit.sh --report - 发现问题： - 今日日记缺失 → 已创建本文件 - 其他检查项（active.md、lessons.md、归档、MEMORY.md）均正常 - 修复完成，审计通过 ## 知识网络建设 ### VAS 知识树 + 跨境对比网络初始化 (Balance 归档 → Self 归纳) - **来源**: Balance 2026-06-22 越南会计差错调整法规研究归档（两次传输） - **Vault 新增文件** (7→10个，本轮+3): - `01-Financial/VAS/VAS-Home.md` — VAS 知识树入口（已扩展：+Accounting Law 2015, +CIT Laws） - `01-Financial/VAS/VAS-29-Errors/VAS-29-Changes-in-Accounting-Estimates-and-Errors.md` — 差错更正核心节点 - `01-Financial/VAS/VAS-29-Errors/VAS-29-Journal-Entry-Templates.md` — 🆕 5场景分录模板库 - `01-Financial/VAS/VAS-29-Errors/VAS-29-Tax-Side-Impact.md` — 🆕 税务侧详解（滞纳金/罚款/时效） - `01-Financial/VAS/Circular-200/Circular-200-",
-      "recallCount": 3,
+      "recallCount": 4,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.0948122531175613,
-      "maxScore": 0.36712983548641204,
+      "totalScore": 1.4641936004161833,
+      "maxScore": 0.3693813472986221,
       "firstRecalledAt": "2026-07-02T02:27:53.204Z",
-      "lastRecalledAt": "2026-07-10T01:47:30.572Z",
+      "lastRecalledAt": "2026-07-11T14:31:04.421Z",
       "queryHashes": [
         "6f2bc2d1b0b1",
         "8c4a11c25925",
-        "c62dc074b7ea"
+        "c62dc074b7ea",
+        "458bf27530b3"
       ],
       "recallDays": [
         "2026-07-02",
         "2026-07-04",
-        "2026-07-10"
+        "2026-07-10",
+        "2026-07-11"
       ],
       "conceptTags": [
         "网络",
@@ -454,6 +460,38 @@
         "概念模板/理论模板/跨域关联模板",
         "a蓝/b绿/c橙/d青/e红",
         "扫描/拍照/pdf"
+      ]
+    },
+    "memory:memory/2026-06-22.md:32:53": {
+      "key": "memory:memory/2026-06-22.md:32:53",
+      "path": "memory/2026-06-22.md",
+      "startLine": 32,
+      "endLine": 53,
+      "source": "memory",
+      "snippet": "3. FS-税务耦合度模型可延伸至收入确认、减值、准备计提等所有会计决策 4. Circular 99/2025 引入 IFRS 但不改变 FS-税务耦合机制 → 可能产生双重报告负担 5. Circular 99/2025 收入确认向 IFRS 15 五步法靠拢 → 紧耦合下收入确认时点变化会直接传导致税务结果 6. 术语对齐（Balance Sheet→Statement of Financial Position）标志表层IFRS化 ### Daryl-Self 角色校准 (同日) - Daryl 明确 Self 的「结构性对抗功能」：站在认知对立面，补齐主观缺失角度 - 校准同意，力度/深度/频率后续精进 ### Daryl 纠偏：推理链需要自驱完成 - Daryl 指出 IFRS 15 与 CIT 差错案例的关联我一开始没解释清楚 - 纠正后补全了完整推理链：耦合机制是通用放大器 → CIT案例证明其存在和大小 → IFRS 15 预测其下一次发作位置 - Daryl 要求：归纳推理必须自己走到税务传导这一步，不需要引导 - 已补建 `IFRS-15-Impact-on-Vietnam-Revenue.md`（3场景+3税种+耦合推理链） ## 当前状态 - 记忆系统运行正常 - 合规脚本全部就绪 - VAS 知识树已初始化（4节点） - 跨境对比网络已初始化（3节点 + 首页） ### 第二轮归档：实操指南 + 英联邦调查 (同日，Balance → Self 经 Daryl 批准)",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.711977931857109,
+      "maxScore": 0.3587674111127853,
+      "firstRecalledAt": "2026-07-11T15:00:40.785Z",
+      "lastRecalledAt": "2026-07-11T15:00:46.408Z",
+      "queryHashes": [
+        "1d5167a0d60e",
+        "6438eedefff2"
+      ],
+      "recallDays": [
+        "2026-07-11"
+      ],
+      "conceptTags": [
+        "网络",
+        "fs-税务耦合度模型可延伸至收入确认",
+        "99/2025",
+        "fs-税务耦合机制",
+        "daryl-self",
+        "力度/深度/频率后续精进",
+        "税务",
+        "耦合"
       ]
     }
   }
