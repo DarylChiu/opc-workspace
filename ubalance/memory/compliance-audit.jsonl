@@ -82,3 +82,6 @@
 {"timestamp":"2026-07-12T23:46:19+0700","check":"post-op","task":"每日成本全量扫描cron任务","score":3,"total":5,"warnings":[
   ""
 ]}
+{"timestamp":"2026-07-13T00:06:06+0700","check":"post-op","task":"每日记忆归档审计 2026-07-13","score":3,"total":5,"warnings":[
+  "🔴 任务涉及问题/失败/审计发现，建议提炼到 lessons.md"
+]}
