@@ -79,3 +79,6 @@
 {"timestamp":"2026-07-10T23:47:26+0700","check":"post-op","task":"成本推送闭环确认：Kitty验证OPC看板数据一致","score":3,"total":5,"warnings":[
   ""
 ]}
+{"timestamp":"2026-07-12T23:46:19+0700","check":"post-op","task":"每日成本全量扫描cron任务","score":3,"total":5,"warnings":[
+  ""
+]}
