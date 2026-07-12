@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-12T04:26:15.541Z",
+  "updatedAt": "2026-07-12T17:07:59.896Z",
   "entries": {
     "memory:memory/2026-06-08.md:19:38": {
       "key": "memory:memory/2026-06-08.md:19:38",
@@ -250,20 +250,22 @@
       "endLine": 11,
       "source": "memory",
       "snippet": "# 2026-06-13 补记 > 补记原因：当日未写日记。从 session 记录和 context 中推断当日活动。 ## 主要事件 - 无 OPC 看板相关开发（待 Daryl 进一步补充当日内容） ## 状态 - 6/8 M1 完成后的间歇期 - 6/14 进行了基建合规审计",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.7017853796482085,
-      "maxScore": 0.35105693340301514,
+      "totalScore": 1.1102725327014922,
+      "maxScore": 0.40848715305328365,
       "firstRecalledAt": "2026-06-16T02:59:18.657Z",
-      "lastRecalledAt": "2026-06-19T07:06:58.944Z",
+      "lastRecalledAt": "2026-07-12T17:07:59.896Z",
       "queryHashes": [
         "6f10c9d84d3d",
-        "bb140318e924"
+        "bb140318e924",
+        "cdd161ca80af"
       ],
       "recallDays": [
         "2026-06-16",
-        "2026-06-19"
+        "2026-06-19",
+        "2026-07-13"
       ],
       "conceptTags": [
         "6/8",
@@ -578,18 +580,20 @@
       "endLine": 7,
       "source": "memory",
       "snippet": "# 2026-06-22 工作日志 ## 00:01 每日记忆归档 Cron 触发 - 审计修复：昨日日记缺失 → 已创建 - 当前无新需求或变更 - active_tasks: Workflow编辑器渲染仍在等待Daryl实测",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.4031297415494919,
-      "maxScore": 0.4031297415494919,
+      "totalScore": 0.8067497730255127,
+      "maxScore": 0.40362003147602077,
       "firstRecalledAt": "2026-07-02T09:33:43.192Z",
-      "lastRecalledAt": "2026-07-02T09:33:43.192Z",
+      "lastRecalledAt": "2026-07-12T17:07:59.896Z",
       "queryHashes": [
-        "30b6c84f8664"
+        "30b6c84f8664",
+        "cdd161ca80af"
       ],
       "recallDays": [
-        "2026-07-02"
+        "2026-07-02",
+        "2026-07-13"
       ],
       "conceptTags": [
         "active-tasks",
@@ -1185,6 +1189,99 @@
         "tmp/crontab-backup",
         "全天",
         "隔壁"
+      ]
+    },
+    "memory:memory/2026-07-11.md:1:22": {
+      "key": "memory:memory/2026-07-11.md:1:22",
+      "path": "memory/2026-07-11.md",
+      "startLine": 1,
+      "endLine": 22,
+      "source": "memory",
+      "snippet": "# 2026-07-11 日记 ## 00:03 · 午夜 Cron 审计 (7/10→7/11 跨日) - `audit.sh --report` 运行，发现 5 个浅层问题 + 2 个深层问题 - **已修复**: July 10 白天活动补全（Daryl查阅active.md + Balance成本确认） - **已修复**: recent_conversations 增加 July 10 条目 - **已修复**: 本日记从骨架→完整 - **已知问题**: git remote 未配置（本地 commit 正常，push 失败） - **活跃任务**: Sentinel M2.3 Gateway重启验证 / OPC Dashboard v1.6 运行中 ## 状态概览 - **active.md**: 新鲜 (14h，7/7 更新)，任务清晰 - **日记链**: 7/1-7/11 完整无断档 - **项目文件**: project_main/xiaofeng/Balance/Self.md 均有更新 - **Git**: 本地 commit 正常，remote 未配置（已知） - **成本**: 全量 $104.58 | 本月 $45.27 | 昨日 $2.90 ## 待关注 - [ ] Sentinel Gateway 重启后验证 (M2.3) — 从 7/9 结转 - [ ] git remote 配置 - [ ] Crontab 手动安装（项目cron被系统拦截）",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.39025809764862057,
+      "maxScore": 0.39025809764862057,
+      "firstRecalledAt": "2026-07-12T17:07:59.896Z",
+      "lastRecalledAt": "2026-07-12T17:07:59.896Z",
+      "queryHashes": [
+        "cdd161ca80af"
+      ],
+      "recallDays": [
+        "2026-07-13"
+      ],
+      "conceptTags": [
+        "gateway",
+        "7/10",
+        "7/11",
+        "audit.sh",
+        "daryl查阅active.md",
+        "recent-conversations",
+        "m2.3",
+        "v1.6"
+      ]
+    },
+    "memory:memory/2026-07-01.md:1:22": {
+      "key": "memory:memory/2026-07-01.md:1:22",
+      "path": "memory/2026-07-01.md",
+      "startLine": 1,
+      "endLine": 22,
+      "source": "memory",
+      "snippet": "# 2026-07-01 日记 ## 00:03 · 午夜 Cron 审计 - 7月1日 00:00，main 审计 cron 触发，执行 L4 每日归档审计 - 审计结果： - 今日日记缺失 → 自动创建骨架（已修复） - 昨天日记存在（37行，内容完整）✅ - active.md 新鲜（3h）✅ - 13 个活跃 session → 判定日记过短（凌晨边界误报，同 6/30 模式） - Git pull 失败 → 无 remote 配置（本地 repo，预期行为） - 修复数：1（骨架创建），浅层问题 4，深层问题 2（均为凌晨边界误报） - 各 Agent 午夜 audit cron 交叉运行，与 6/30 同日模式一致 ## 7月开篇 - 今天是 7 月第一天，月度工作计划待 Daryl 确认 - 6/30 晚间 Daryl 宣布 7 月基建方向：Agent自进化 + Loop Engineering - 当前活跃项目：OPC看板（v1.4 待开发）、雅思陪练助手 v2.0（收尾） ## 状态概览 - 昨天（6/30）：Daryl 验收暂停，7月基建方向发布 - 今天：月初首日，等待 Daryl 确认 7 月具体工作安排",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.38805677890777585,
+      "maxScore": 0.38805677890777585,
+      "firstRecalledAt": "2026-07-12T17:07:59.896Z",
+      "lastRecalledAt": "2026-07-12T17:07:59.896Z",
+      "queryHashes": [
+        "cdd161ca80af"
+      ],
+      "recallDays": [
+        "2026-07-13"
+      ],
+      "conceptTags": [
+        "active.md",
+        "6/30",
+        "v1.4",
+        "v2.0",
+        "日记",
+        "午夜",
+        "cron",
+        "审计"
+      ]
+    },
+    "memory:memory/2026-06-20.md:1:12": {
+      "key": "memory:memory/2026-06-20.md:1:12",
+      "path": "memory/2026-06-20.md",
+      "startLine": 1,
+      "endLine": 12,
+      "source": "memory",
+      "snippet": "# 2026-06-20 工作日志 ## 00:00 每日记忆归档 Cron 触发 - 审计发现：今日日记缺失 → 已创建 - 其他检查项均通过 ## 00:00 状态一览 - **隧道**： - 8765(OPC) → cake-marking-metals-miscellaneous.trycloudflare.com ✅ - 8777(视频分析) → supreme-hall-blanket-handbook.trycloudflare.com ✅ - **Workflow编辑器**：普通script方案待Daryl实测验证",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.38382733464241026,
+      "maxScore": 0.38382733464241026,
+      "firstRecalledAt": "2026-07-12T17:07:59.896Z",
+      "lastRecalledAt": "2026-07-12T17:07:59.896Z",
+      "queryHashes": [
+        "cdd161ca80af"
+      ],
+      "recallDays": [
+        "2026-07-13"
+      ],
+      "conceptTags": [
+        "工作",
+        "日志",
+        "每日",
+        "记忆",
+        "归档",
+        "cron",
+        "触发",
+        "审计"
       ]
     }
   }

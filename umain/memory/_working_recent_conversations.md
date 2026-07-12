@@ -1,5 +1,12 @@
 # Recent Conversations
-Last updated: 2026-07-12 00:03 GMT+7
+Last updated: 2026-07-13 00:07 GMT+7
+
+## 2026-07-12 — 静默日（Daryl 未出现）
+- Daryl 全天未出现，系统静默运行
+- 午夜 Cron 审计正常执行（7/11→7/12）
+- Balance 在 OPC 群汇总出差前待办 + 发现 OPC Dashboard 自定义域名
+- 自定义域名 `opc-darylchiu.serveousercontent.com` 比临时 trycloudflare URL 稳定
+- 全量成本 $112.97 | 本月 $53.37
 
 ## 2026-07-11 — 静默日（Daryl 未出现）
 - Daryl 全天未出现，系统静默运行
