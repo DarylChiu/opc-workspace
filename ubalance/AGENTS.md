@@ -46,9 +46,13 @@ bash scripts/compliance/post-op.sh "<任务描述>" "[产出文件]"
 ```bash
 bash scripts/compliance/audit.sh --report
 ```
-> 全量检查日记/active/lessons/MEMORY/归档
+> 全量检查日记/active/lessons/MEMORY/归档 + 成本仪表盘验证（步骤9）
 > 自动修复可修复的问题（归档过期日记等）
-> 完成后在 OPC 群聊汇报「已完成今日（YYYY年MM月DD日）的记忆系统更新」
+> 完成后在 OPC 群聊汇报，**必须包含以下4项**：
+> 1. 记忆系统审计结果（修复X项/问题X项）
+> 2. **成本仪表盘状态**（今日$X | 本月$X | API正常/降级/异常）
+> 3. Kitty 同步状态（已确认/降级文件已就位/超时未确认）
+> 4. 标记「已完成今日（YYYY年MM月DD日）的记忆系统更新」
 
 ## Memory Architecture (v2)
 
