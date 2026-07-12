@@ -1,16 +1,17 @@
 {
-  "timestamp": "2026-07-07T00:44:31Z",
-  "health": "DEGRADED",
-  "passes": 5,
-  "issues": 1,
+  "timestamp": "2026-06-29T01:16:52Z",
+  "health": "OK",
+  "passes": 6,
+  "issues": 0,
   "issue_list": [
-  "今日日记 2026-07-07.md 缺失 — 需要从 session 历史补充"
+  ""
 ],
   "pass_list": [
   "identity.md 存在且非空",
   "active.md 存在且非空",
   "workflow-rules.md 存在且非空",
   "AGENTS.md 存在且非空",
-  "active.md 新鲜度正常（7h）"
+  "今日日记 2026-06-29.md 存在",
+  "active.md 新鲜度正常（8h）"
 ]
 }
