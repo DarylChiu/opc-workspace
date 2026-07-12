@@ -1,14 +1,25 @@
 # 当前活跃任务
 
-> 最后更新: 2026-07-11 21:35 GMT+7
+> 最后更新: 2026-07-12 09:00 GMT+7
 
 
 ## ✅ 已完成
 
+### KHOA DUNG 案例目录重组 + PIT 路径规范化（2026-07-12）
+- Daryl 指令：KHOA DUNG 案例归入 02-Finance/M&A，PIT速查规范路径为 01-Financial/Tax/PIT/PIT-Vietnam
+- 创建 02-Finance/M&A/ 目录（Home.md + 案例文件迁入）
+- 创建 01-Financial/Tax/PIT/PIT-Vietnam/ 路径，PIT税率速查迁移至新规范位置
+- 更新 wikilink 相对路径、Cross-Border-Home 链接、02-Finance/Home 索引
+- 旧 Vietnam-Tax 目录保留迁移说明（Home.md）
+- Daryl 表示目录还不够全面，后续自行调整
+- Daryl 指出遗漏点1：受托支付通道 → 已补建 `02-Finance/Capital-Raising/Bank-Loan/Project-Loan/受托支付通道.md`
+- 覆盖：受托支付合规逻辑/壳公司通道模式/税务风险敞口/VAT-CIT-转让定价联动
+- 另两个遗漏点 Daryl 未展开，说"先这样吧"
+
 ### KHOA DUNG 越南M&A案例知识树入库（2026-07-11）
 - Balance提交完整案例总结（3份报告），Self审阅后提炼三条可复用方法论原则
 - Daryl确认后执行入库：创建4个新文件+更新2个索引
-- 新增目录: `01-Financial/Vietnam-Tax/`（越南税务速查）
+- ~~新增目录: `01-Financial/Vietnam-Tax/`~~ → 已于7/12重组至 Tax/PIT 规范路径
 - 产出: 案例记录/方法论卡片/PIT速查卡/Vietnam-Tax索引
 
 ### 记忆系统 v3 — project 文件部署（2026-07-06）
