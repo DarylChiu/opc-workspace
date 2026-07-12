@@ -3,12 +3,6 @@
 > 最后更新: 2026-07-12 00:03 GMT+7
 
 ## 🟢 进行中
-### Sentinel 合规哨兵 v1.0 — 部署中 🔄
-- **状态**: Gateway 插件已加载，配置已更新，等待 Gateway 重启生效
-- **审计日志**: `memory/sentinel-audit.jsonl`
-- **配置**: `plugins.entries.sentinel.config` in `openclaw.json`
-- **待完成**: Gateway 重启后验证 P0/P1 拦截 / pre-op 对齐 / OPC 看板集成 (M2.3)
-
 ### OPC Dashboard v1.5 → v1.6 — 运行中
 - **地址**: http://localhost:8765
 - **当前版本**: v1.6 · M3 项目总线集成完成 ✅ (commit: 690decf)
@@ -50,3 +44,9 @@
 ### Crontab 手动安装
 - 记忆系统v3 cron 被系统拦截，需 Daryl 手动执行:
   `(crontab -l; echo '0 7,13,19 * * * bash ~/.openclaw/workspace/scripts/projects/cron_notify_update.sh >> /tmp/project_cron.log 2>&1') | crontab -`
+
+## ⚪ 搁置
+### Sentinel 合规哨兵 v1.0 — 暂停
+- **原因**: Daryl与Bryson讨论后认为当前方案风险较大，先搁置
+- **状态**: 插件配置保留但未激活，无需Gateway重启
+- **参考**: `plugins.entries.sentinel.config` in `openclaw.json`

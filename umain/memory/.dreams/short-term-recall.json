@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-11T04:42:08.555Z",
+  "updatedAt": "2026-07-12T04:26:15.541Z",
   "entries": {
     "memory:memory/2026-06-08.md:19:38": {
       "key": "memory:memory/2026-06-08.md:19:38",
@@ -869,21 +869,24 @@
       "endLine": 66,
       "source": "memory",
       "snippet": "## 18:50 · OPC看板 v1.4 完成 ✅ - Daryl 将「OPC看板v1.4」移至 In Progress → 完成三项需求 - **主次优先级视觉分层**：P0-P3 四级，左侧色条+徽章+创建时可选 - **Bryson 雅思陪练补全**：ielts_tutor 加入扫描优先级，产物 3→7 - **symlink 清理**：移除 opc-workspace 中旧 ielts_tutor_v2.0 副本 - Commit v1.4 + tag ## 状态概览 - 🔴 M2 全模块验收完毕 ✅ → v1.5 生产模式 - OPC 看板 v1.4 并入 v1.5 - 验收报告已生成 `decision_reports/m2_acceptance_report_2026-07-05.md` - 7 月基建方向（Agent自进化 + Loop Engineering）待 Daryl 启动确认 - ✅ M2 全部模块验收完毕 + v1.4 完成 - 待办: Agent版本变更通知 - 雅思陪练 v2.0 收尾中 - 7 月基建方向（Agent自进化 + Loop Engineering）待 Daryl 启动确认",
-      "recallCount": 3,
+      "recallCount": 5,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.246081069111824,
+      "totalScore": 1.9987947672605515,
       "maxScore": 0.44552976489067075,
       "firstRecalledAt": "2026-07-06T01:12:01.162Z",
-      "lastRecalledAt": "2026-07-07T11:17:49.124Z",
+      "lastRecalledAt": "2026-07-12T04:25:16.078Z",
       "queryHashes": [
         "af4fa58d2480",
         "f8aac1c4eb69",
-        "7c926c8f68f2"
+        "7c926c8f68f2",
+        "32c589b9a581",
+        "230b4b00be19"
       ],
       "recallDays": [
         "2026-07-06",
-        "2026-07-07"
+        "2026-07-07",
+        "2026-07-12"
       ],
       "conceptTags": [
         "v1.4",
@@ -1120,18 +1123,23 @@
       "endLine": 32,
       "source": "memory",
       "snippet": "- 17:00 OPC Dashboard 服务挂掉（进程异常退出）→ 重启 - 17:05 tunnel 过期 → 重建（charm-functioning-donna-time.trycloudflare.com） - 22:37 tunnel 再次挂+服务进程异常退出 → 全栈重启 - 23:00 Gateway 重启（Sentinel 插件加载）→ OPC Dashboard 被带下线 → 再次全栈重启 - ⚠️ 今天累计 8 次 tunnel 重建，临时隧道完全不适合长期使用 ## 状态概览 - 各 Agent 处于待命状态 - 7 月基建方向（Agent自进化 + Loop Engineering）已在 Daryl 与 Bryson 讨论中推进 - OPC 看板 v1.5 运行中 - M2 全部模块验收完毕",
-      "recallCount": 1,
+      "recallCount": 5,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.41068755388259887,
-      "maxScore": 0.41068755388259887,
+      "totalScore": 2.0373600900173185,
+      "maxScore": 0.4152030527591705,
       "firstRecalledAt": "2026-07-11T04:42:08.555Z",
-      "lastRecalledAt": "2026-07-11T04:42:08.555Z",
+      "lastRecalledAt": "2026-07-12T04:26:15.541Z",
       "queryHashes": [
-        "03ae1fc4cf49"
+        "03ae1fc4cf49",
+        "3524490ccf2a",
+        "32c589b9a581",
+        "230b4b00be19",
+        "7508206e087e"
       ],
       "recallDays": [
-        "2026-07-11"
+        "2026-07-11",
+        "2026-07-12"
       ],
       "conceptTags": [
         "gateway",
@@ -1151,18 +1159,22 @@
       "endLine": 78,
       "source": "memory",
       "snippet": "## 全天 · 隔壁隧道稳定性问题（heartbeat 会话处理） - 今天 tunnel 多次挂掉（~10+ 次），OPC Dashboard 服务进程也多次异常退出 - **根因发现**: 重启时旧 cloudflared 进程未清干净 → 多个 cloudflared 竞争同一端口 → tunnel 返回 000/502 - **修复**: 重启前必须 `pkill -9 -f cloudflared` 彻底清理，再启单一进程 → 稳定性显著提升（3.5h+ 连续运行） - **待办**: 建议为 OPC Dashboard + tunnel 配 LaunchAgent 自动重启，根治临时隧道不稳定（需 Daryl 确认方向） ## 21:50 · Crontab 手动安装（Daryl 指令）✅ - Daryl 将「Crontab 手动安装」移至 In Progress（无描述） - 结合全天隧道痛点 → 判断需求为装看门狗自动恢复 OPC Dashboard + tunnel - **产物**: `opc-dashboard/scripts/watchdog.sh` - 检本地服务（localhost:8765）异常 → manage.sh restart - 检隧道异常 → pkill -9 彻底清理 + 重建单一 cloudflared + 自动写回新 URL - 日志滚动保留 500 行 - **crontab 条目**: `*/5 * * * *` 每 5 分钟执行 - 旧 crontab 已备份到 /tmp/crontab_backup_*.tx",
-      "recallCount": 1,
+      "recallCount": 4,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.3524476319551468,
-      "maxScore": 0.3524476319551468,
+      "totalScore": 1.4689011096954345,
+      "maxScore": 0.37773482203483577,
       "firstRecalledAt": "2026-07-11T04:42:08.555Z",
-      "lastRecalledAt": "2026-07-11T04:42:08.555Z",
+      "lastRecalledAt": "2026-07-12T04:26:15.541Z",
       "queryHashes": [
-        "03ae1fc4cf49"
+        "03ae1fc4cf49",
+        "3524490ccf2a",
+        "32c589b9a581",
+        "7508206e087e"
       ],
       "recallDays": [
-        "2026-07-11"
+        "2026-07-11",
+        "2026-07-12"
       ],
       "conceptTags": [
         "backup",
