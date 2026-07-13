@@ -70,3 +70,6 @@
 {"timestamp":"2026-07-11T21:35:15+0700","check":"post-op","task":"KHOA DUNG案例知识树入库：创建案例文件+方法论卡片+PIT速查卡+Vietnam-Tax目录，更新Cross-Border-Home和Knowledge-Map两个索引","score":2,"total":5,"warnings":[
   "🟡 考虑更新 active.md — 有任务修改且已 21 小时"
 ]}
+{"timestamp":"2026-07-13T08:47:36+0700","check":"post-op","task":"按Plan A重构KHOA DUNG案例节点：合并Balance 3份原始报告+链接规范拆分","score":2,"total":5,"warnings":[
+  "🔴 active.md 需更新 — 有新任务变更但 23 小时未动"
+]}

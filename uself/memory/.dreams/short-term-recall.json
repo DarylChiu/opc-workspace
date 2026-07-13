@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-11T15:00:46.408Z",
+  "updatedAt": "2026-07-13T01:44:45.007Z",
   "entries": {
     "memory:memory/2026-06-22.md:22:34": {
       "key": "memory:memory/2026-06-22.md:22:34",
@@ -492,6 +492,130 @@
         "力度/深度/频率后续精进",
         "税务",
         "耦合"
+      ]
+    },
+    "memory:memory/2026-07-12.md:48:56": {
+      "key": "memory:memory/2026-07-12.md:48:56",
+      "path": "memory/2026-07-12.md",
+      "startLine": 48,
+      "endLine": 56,
+      "source": "memory",
+      "snippet": "- 回复：纯 Markdown 文本库 1.9MB 属正常（175个.md文件无附件）；需安装 Obsidian APK - 提供 GitHub Releases APK 下载路径 + vault 打开路径指引 - 结果：同步 100% 完成，Daryl 后续自行安装 Obsidian ## 今日状态 - 周日，Daryl 早期指令 + 晚间技术支持已执行完毕 - active.md 待办项：OPC看板方法论卡片集成、关联方知识树案例挂载（Daryl 未催） - ⚠️ Git remote 问题持续，所有 Agent push 均失败",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3981054067611694,
+      "maxScore": 0.3981054067611694,
+      "firstRecalledAt": "2026-07-13T00:58:28.977Z",
+      "lastRecalledAt": "2026-07-13T00:58:28.977Z",
+      "queryHashes": [
+        "b65ed672215b"
+      ],
+      "recallDays": [
+        "2026-07-13"
+      ],
+      "conceptTags": [
+        "1.9mb",
+        "175个.md文件无附件",
+        "active.md",
+        "回复",
+        "markdown",
+        "文本",
+        "正常",
+        "文件"
+      ]
+    },
+    "memory:memory/2026-07-12.md:34:53": {
+      "key": "memory:memory/2026-07-12.md:34:53",
+      "path": "memory/2026-07-12.md",
+      "startLine": 34,
+      "endLine": 53,
+      "source": "memory",
+      "snippet": "- 更新索引：02-Finance/Home.md、Cross-Border-Home.md、active.md ### 08:55 Daryl 指出遗漏 — 受托支付通道 - Daryl 指出 KHOA DUNG 案例中受托支付通道结构被遗漏——不是税务附属细节，是独立的融资结构知识点 - 路径：`02-Finance/Capital-Raising/Bank-Loan/Project-Loan/受托支付通道.md` - 覆盖：受托支付合规逻辑 / 壳公司通道模式 / 税务风险（VAT-CIT-转让定价-PIT联动）/ vs流贷vs自付对比 - 交叉引用：KHOA DUNG 案例新增反向链接 → 受托支付通道 - 02-Finance/Home.md 新增 Capital-Raising 节点 - 另两个遗漏点 Daryl 未展开，说「先这样吧」待后续补 ## 19:47 Daryl DM — Syncthing + Obsidian 平板部署支持 - Daryl 在三星平板上配置 Syncthing，Create 按钮灰色不可点击 - 诊断：未勾选共享设备（黄色圆点→需点击变为勾选状态） - 解决后 Daryl 追问：351 files 只显示 1MB？怎么打开？ - 回复：纯 Markdown 文本库 1.9MB 属正常（175个.md文件无附件）；需安装 Obsidian APK - 提供 GitHub Releases APK 下载路径 + vault 打开路径指引 - 结果：同步 100% 完成，Daryl 后续自行安装 Obsidian ## 今日状态 -",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3617259442806244,
+      "maxScore": 0.3617259442806244,
+      "firstRecalledAt": "2026-07-13T00:58:28.977Z",
+      "lastRecalledAt": "2026-07-13T00:58:28.977Z",
+      "queryHashes": [
+        "b65ed672215b"
+      ],
+      "recallDays": [
+        "2026-07-13"
+      ],
+      "conceptTags": [
+        "02-finance/home.md",
+        "cross-border-home.md",
+        "active.md",
+        "vat-cit-转让定价-pit联动",
+        "capital-raising",
+        "1.9mb",
+        "175个.md文件无附件",
+        "更新"
+      ]
+    },
+    "memory:memory/2026-07-11.md:27:55": {
+      "key": "memory:memory/2026-07-11.md:27:55",
+      "path": "memory/2026-07-11.md",
+      "startLine": 27,
+      "endLine": 55,
+      "source": "memory",
+      "snippet": "- ACCA-Knowledge-Network: ~169 文件，架构稳定 - VAS 23 文件 / IFRS-IAS 27 文件，覆盖完整 ## 待关注（继承自 7/9-7/10） - ⚠️ Sentinel/Gateway 死锁问题：小枫已定位根因，修复待执行 - 📋 OPC Dashboard M5 合规面板：被 Gateway 重启中断，待续 - 🔧 Git remote 未配置：所有 Agent push 均失败，等 Daryl 配置 - 📋 关联方与股东借款知识树：准则节点已就位，案例待挂载 - 📋 方法论卡片 OPC看板集成：等待 Daryl 确认方向 ## 21:35 KHOA DUNG案例知识树入库 ### 背景 Balance提交KHOA DUNG越南M&A案例完整分析（3份报告），Daryl要求Self审阅并加入知识树。 ### 工作内容 1. 完整审阅Balance三份报告（案例分析总结+路径对比A2vsA3+路径对比A3vs资产包） 2. 提炼三条可复用方法论原则： - 税率不可类比推断 - 法律概念选择=税基创造/消灭 - 交易结构越简单越好 3. 向Daryl提交知识树放置建议（一例两卡方案） 4. 创建4个新文件：案例记录、方法论卡片、PIT速查卡、Vietnam-Tax索引 5. 更新2个索引：Cross-Border-Home.md、Knowledge-Map.md ### 产出 - `01-Financial/Cross-Border/KHOA_DUNG-越南M&A税务筹划案例.md` - `01-F",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.38556358516216277,
+      "maxScore": 0.38556358516216277,
+      "firstRecalledAt": "2026-07-13T01:44:45.007Z",
+      "lastRecalledAt": "2026-07-13T01:44:45.007Z",
+      "queryHashes": [
+        "21c260464b08"
+      ],
+      "recallDays": [
+        "2026-07-13"
+      ],
+      "conceptTags": [
+        "gateway",
+        "network",
+        "acca-knowledge-network",
+        "ifrs-ias",
+        "7/9-7/10",
+        "sentinel/gateway",
+        "税基创造/消灭",
+        "vietnam-tax索引"
+      ]
+    },
+    "memory:memory/2026-07-12.md:17:38": {
+      "key": "memory:memory/2026-07-12.md:17:38",
+      "path": "memory/2026-07-12.md",
+      "startLine": 17,
+      "endLine": 38,
+      "source": "memory",
+      "snippet": "## 08:44 Daryl DM — 目录重组指令 ### KHOA DUNG 案例迁入 02-Finance/M&A - Daryl 明确：M&A案例应归入 02-Finance/M&A，而非 Cross-Border - 执行：创建 `02-Finance/M&A/` 目录（Home.md + 案例文件） - 从 Cross-Border 删除旧副本，更新 Cross-Border-Home 链接指向新位置 - Daryl 反馈：「目录还不够全面，后续我再调整」→ 初始结构留白，等他补充 ### PIT税率速查规范路径 - Daryl 指定跨领域「树叶」规范路径：`01-Financial/Tax/PIT/PIT-Vietnam/PIT-税率速查` - 执行：创建完整 Tax/PIT/PIT-Vietnam 三层目录，文件迁移并修复所有 wikilink 相对路径 - 旧 Vietnam-Tax 目录保留迁移说明（Vietnam-Tax-Home.md） - 清理：删除旧位置的两个同名文件，避免 Obsidian wikilink 歧义 ### 产出汇总 - 新增目录：`02-Finance/M&A/`、`01-Financial/Tax/PIT/PIT-Vietnam/` - 迁移文件：KHOA DUNG 案例（Cross-Border→M&A）、PIT速查卡（Vietnam-Tax→Tax/PIT/PIT-Vietnam） - 更新索引：02-Finance/Home.md、Cross-Border-Home.md、active.md ### 08:55 Da",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.37091415524482724,
+      "maxScore": 0.37091415524482724,
+      "firstRecalledAt": "2026-07-13T01:44:45.007Z",
+      "lastRecalledAt": "2026-07-13T01:44:45.007Z",
+      "queryHashes": [
+        "21c260464b08"
+      ],
+      "recallDays": [
+        "2026-07-13"
+      ],
+      "conceptTags": [
+        "02-finance/m",
+        "cross-border",
+        "home.md",
+        "cross-border-home",
+        "tax/pit/pit-vietnam",
+        "vietnam-tax",
+        "vietnam-tax-home.md",
+        "01-financial/tax/pit/pit-vietnam"
       ]
     }
   }

@@ -1,9 +1,17 @@
 # 当前活跃任务
 
-> 最后更新: 2026-07-12 09:00 GMT+7
+> 最后更新: 2026-07-13 08:48 GMT+7
 
 
 ## ✅ 已完成
+
+### 🆕 KHOA DUNG Plan A 重构（2026-07-13）
+- Daryl 反馈知识网络两大问题：树叶细节丢失严重 + 关联跳转目标不一致
+- 方案A（源头保留）在 KHOA DUNG 节点执行完毕：190行→461行
+- 合并 Balance 4份原始报告完整内容，新增：三阶段税负拆解/6错误完整纠正/现金安全验证/方案演进轨迹
+- 链接规范标准化：🔗(树叶→树叶,8项) + 📂(Home页导航,4项)
+- frontmatter 加 `type: leaf` + `parent: Home` 元数据
+- Daryl 平板验证后决定其他树叶是否同步重构
 
 ### KHOA DUNG 案例目录重组 + PIT 路径规范化（2026-07-12）
 - Daryl 指令：KHOA DUNG 案例归入 02-Finance/M&A，PIT速查规范路径为 01-Financial/Tax/PIT/PIT-Vietnam
