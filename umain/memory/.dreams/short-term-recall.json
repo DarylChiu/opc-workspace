@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-12T17:07:59.896Z",
+  "updatedAt": "2026-07-13T13:37:03.525Z",
   "entries": {
     "memory:memory/2026-06-08.md:19:38": {
       "key": "memory:memory/2026-06-08.md:19:38",
@@ -580,16 +580,17 @@
       "endLine": 7,
       "source": "memory",
       "snippet": "# 2026-06-22 工作日志 ## 00:01 每日记忆归档 Cron 触发 - 审计修复：昨日日记缺失 → 已创建 - 当前无新需求或变更 - active_tasks: Workflow编辑器渲染仍在等待Daryl实测",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.8067497730255127,
+      "totalScore": 1.1843501836061476,
       "maxScore": 0.40362003147602077,
       "firstRecalledAt": "2026-07-02T09:33:43.192Z",
-      "lastRecalledAt": "2026-07-12T17:07:59.896Z",
+      "lastRecalledAt": "2026-07-13T13:37:03.525Z",
       "queryHashes": [
         "30b6c84f8664",
-        "cdd161ca80af"
+        "cdd161ca80af",
+        "9e126ef47c5d"
       ],
       "recallDays": [
         "2026-07-02",
@@ -1198,15 +1199,16 @@
       "endLine": 22,
       "source": "memory",
       "snippet": "# 2026-07-11 日记 ## 00:03 · 午夜 Cron 审计 (7/10→7/11 跨日) - `audit.sh --report` 运行，发现 5 个浅层问题 + 2 个深层问题 - **已修复**: July 10 白天活动补全（Daryl查阅active.md + Balance成本确认） - **已修复**: recent_conversations 增加 July 10 条目 - **已修复**: 本日记从骨架→完整 - **已知问题**: git remote 未配置（本地 commit 正常，push 失败） - **活跃任务**: Sentinel M2.3 Gateway重启验证 / OPC Dashboard v1.6 运行中 ## 状态概览 - **active.md**: 新鲜 (14h，7/7 更新)，任务清晰 - **日记链**: 7/1-7/11 完整无断档 - **项目文件**: project_main/xiaofeng/Balance/Self.md 均有更新 - **Git**: 本地 commit 正常，remote 未配置（已知） - **成本**: 全量 $104.58 | 本月 $45.27 | 昨日 $2.90 ## 待关注 - [ ] Sentinel Gateway 重启后验证 (M2.3) — 从 7/9 结转 - [ ] git remote 配置 - [ ] Crontab 手动安装（项目cron被系统拦截）",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.39025809764862057,
+      "totalScore": 0.7671526759862899,
       "maxScore": 0.39025809764862057,
       "firstRecalledAt": "2026-07-12T17:07:59.896Z",
-      "lastRecalledAt": "2026-07-12T17:07:59.896Z",
+      "lastRecalledAt": "2026-07-13T13:37:03.525Z",
       "queryHashes": [
-        "cdd161ca80af"
+        "cdd161ca80af",
+        "9e126ef47c5d"
       ],
       "recallDays": [
         "2026-07-13"
@@ -1229,15 +1231,16 @@
       "endLine": 22,
       "source": "memory",
       "snippet": "# 2026-07-01 日记 ## 00:03 · 午夜 Cron 审计 - 7月1日 00:00，main 审计 cron 触发，执行 L4 每日归档审计 - 审计结果： - 今日日记缺失 → 自动创建骨架（已修复） - 昨天日记存在（37行，内容完整）✅ - active.md 新鲜（3h）✅ - 13 个活跃 session → 判定日记过短（凌晨边界误报，同 6/30 模式） - Git pull 失败 → 无 remote 配置（本地 repo，预期行为） - 修复数：1（骨架创建），浅层问题 4，深层问题 2（均为凌晨边界误报） - 各 Agent 午夜 audit cron 交叉运行，与 6/30 同日模式一致 ## 7月开篇 - 今天是 7 月第一天，月度工作计划待 Daryl 确认 - 6/30 晚间 Daryl 宣布 7 月基建方向：Agent自进化 + Loop Engineering - 当前活跃项目：OPC看板（v1.4 待开发）、雅思陪练助手 v2.0（收尾） ## 状态概览 - 昨天（6/30）：Daryl 验收暂停，7月基建方向发布 - 今天：月初首日，等待 Daryl 确认 7 月具体工作安排",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.38805677890777585,
+      "totalScore": 0.7493206799030303,
       "maxScore": 0.38805677890777585,
       "firstRecalledAt": "2026-07-12T17:07:59.896Z",
-      "lastRecalledAt": "2026-07-12T17:07:59.896Z",
+      "lastRecalledAt": "2026-07-13T13:37:03.525Z",
       "queryHashes": [
-        "cdd161ca80af"
+        "cdd161ca80af",
+        "9e126ef47c5d"
       ],
       "recallDays": [
         "2026-07-13"
@@ -1282,6 +1285,130 @@
         "cron",
         "触发",
         "审计"
+      ]
+    },
+    "memory:memory/2026-07-08.md:1:23": {
+      "key": "memory:memory/2026-07-08.md:1:23",
+      "path": "memory/2026-07-08.md",
+      "startLine": 1,
+      "endLine": 23,
+      "source": "memory",
+      "snippet": "# 2026-07-08 日记 ## 09:20-09:37 · 看门狗 PATH 修复 - 昨天装的 OPC Dashboard 隧道看门狗生效但重启失败 - **Bug**: crontab 环境 PATH 缺失 → `nohup: node: No such file or directory` → 服务/Tunnel 全挂 - 看门狗连续 4 轮 (09:20/25/30/35) 尝试重启都失败 - **修复**: `watchdog.sh` 增加 `export PATH=\"/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:$PATH\"` - 手动重启后全部恢复：server PID 34647 + tunnel `hand-selection-attacks-relief.trycloudflare.com` - Commit `cda65bc` - 💡 教训: crontab PATH 极简，脚本内必须显式 export ## 全天 · 隧道稳定性验证 - PATH 修复后隧道稳定运行 13h+（09:40 → 22:37），看门狗零干预 - 对比昨天：全天手动重启 10+ 次 ← **看门狗方案已验证有效** ## 下午 · Balance 成本仪表盘深度诊断 - Daryl 发现成本看板数据严重不准（7月显示$0.10，实际账单~$85） - Balance 深度诊断发现根因： 1. **看板读 `sessions.json`（10-15条快照）而非 `.jsonl`（227-492条完整记录）** →",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.36751475334167477,
+      "maxScore": 0.36751475334167477,
+      "firstRecalledAt": "2026-07-13T00:29:56.880Z",
+      "lastRecalledAt": "2026-07-13T00:29:56.880Z",
+      "queryHashes": [
+        "1664d3c70a47"
+      ],
+      "recallDays": [
+        "2026-07-13"
+      ],
+      "conceptTags": [
+        "20-09",
+        "服务/tunnel",
+        "20/25/30/35",
+        "watchdog.sh",
+        "opt/homebrew/bin",
+        "usr/local/bin",
+        "usr/bin",
+        "0.10"
+      ]
+    },
+    "memory:memory/2026-06-26.md:19:36": {
+      "key": "memory:memory/2026-06-26.md:19:36",
+      "path": "memory/2026-06-26.md",
+      "startLine": 19,
+      "endLine": 36,
+      "source": "memory",
+      "snippet": "- Bug 3: 转写token丢失（无字幕视频的Gemini转写token） - 已重启服务器（PID 48515） ## ⚖️ Balance — 贷款材料整理 6,887,555.02usd 批次 - **触发**：Daryl 直接发原材料，要求按 v2.1 工作流实战 - **结果**：103条发票 → 100/103 OK (97.1%), 3条 UNMATCHED (RE退款单+目录缺失) - **关键发现**：-1后缀匹配陷阱、设备Invoice命名多样、报关单.xls格式、嵌套子目录 - **产出**：~\\~/Desktop/Balance贷款材料自动化处理-6,887,555.02usd/\\~（Outcome1 Excel + Outcome2 100子目录） - 4条新规则已写入 Balance lessons.md ## 🔜 待续 - [ ] Daryl 提供 8765 server.js 路径 → 合入 M2 Agent状态面板 - [ ] Daryl 选择 Agent 自进化深入方向 → 出详细方案 - [ ] 等待 Bryson 修复 V2 Bug 后第二轮交叉验证 ## 活动记录 <!-- day events below -->",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.35790004730224606,
+      "maxScore": 0.35790004730224606,
+      "firstRecalledAt": "2026-07-13T00:29:56.880Z",
+      "lastRecalledAt": "2026-07-13T00:29:56.880Z",
+      "queryHashes": [
+        "1664d3c70a47"
+      ],
+      "recallDays": [
+        "2026-07-13"
+      ],
+      "conceptTags": [
+        "555.02usd",
+        "v2.1",
+        "100/103",
+        "97.1",
+        "报关单.xls格式",
+        "desktop/balance贷款材料自动化处理-6",
+        "lessons.md",
+        "server.js"
+      ]
+    },
+    "memory:memory/2026-07-13.md:1:20": {
+      "key": "memory:memory/2026-07-13.md:1:20",
+      "path": "memory/2026-07-13.md",
+      "startLine": 1,
+      "endLine": 20,
+      "source": "memory",
+      "snippet": "# 2026-07-13 日记 ## 00:07 · 午夜 Cron 审计 (7/12→7/13 跨日) - `audit.sh --report` 运行，发现 5 个浅层问题 + 2 个深层问题 - **已修复**: 骨架日记创建 / 2026-06-12.md 归档 - **已知问题**: git remote 未配置（本地 commit 正常，push 失败） - **活跃任务**: OPC Dashboard v1.6 运行中 / Sentinel 搁置 ## 状态概览 - **active.md**: 新鲜 (13h)，任务无实质变更 - **日记链**: 7/1-7/13 完整无断档 - **Git**: 本地 commit 正常，remote 未配置（已知） - **Session 活动**: 14 个活跃 session（7/12 跨日边界正常现象） - **成本**: 全量 $112.97 | 本月 $53.37 | 今日 $4.79 ## 待关注 - [ ] Sentinel Gateway 重启后验证 (M2.3) — 从 7/9 结转 - [ ] git remote 配置 - [ ] Crontab 手动安装（项目cron被系统拦截）",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.37500822842121123,
+      "maxScore": 0.37500822842121123,
+      "firstRecalledAt": "2026-07-13T13:37:03.525Z",
+      "lastRecalledAt": "2026-07-13T13:37:03.525Z",
+      "queryHashes": [
+        "9e126ef47c5d"
+      ],
+      "recallDays": [
+        "2026-07-13"
+      ],
+      "conceptTags": [
+        "gateway",
+        "7/12",
+        "7/13",
+        "audit.sh",
+        "v1.6",
+        "active.md",
+        "7/1-7/13",
+        "112.97"
+      ]
+    },
+    "memory:memory/2026-07-10.md:1:29": {
+      "key": "memory:memory/2026-07-10.md:1:29",
+      "path": "memory/2026-07-10.md",
+      "startLine": 1,
+      "endLine": 29,
+      "source": "memory",
+      "snippet": "# 2026-07-10 日记 ## 00:05 · 午夜 Cron 审计 (7/9→7/10 跨日) - `audit.sh --report` 运行正常 - 昨日 (7/9) 日记完整 + 归档正常 - 今日日记已创建并填充 - Git push 失败（remote 未配置，已知问题） - **活跃任务**: Sentinel M2.3 Gateway 重启验证待完成，OPC Dashboard v1.6 运行中 ## 状态概览 - **active.md**: 新鲜 (11h)，任务清晰 - **日记链**: 7/1-7/10 完整无断档 - **项目文件**: project_main/xiaofeng/Balance/Self.md 均有更新 - **Git**: 本地 commit 正常，remote 未配置 - **隧道**: 7/9 全天稳定，看门狗实战验证通过 ## 白天活动 - **Daryl 会话**: 要求把 4 个 Agent 的 active.md 通过飞书发给 Daryl - 已发送: Kitty, Bryson, Balance, Self 的 active.md 全量内容 - Balance 成本扫描 cron 中途打断，确认 Dashboard `/api/costs` 已用全量 JSONL 扫描（$104.58 / 5571 calls） - **成本扫描**: Balance cron 全量扫描完成，今日 $2.90 / 本月 $44.98 / 全量 $104.58 - 7/7 峰值 $25.05（DeepSeek R1",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3607376456260681,
+      "maxScore": 0.3607376456260681,
+      "firstRecalledAt": "2026-07-13T13:37:03.525Z",
+      "lastRecalledAt": "2026-07-13T13:37:03.525Z",
+      "queryHashes": [
+        "9e126ef47c5d"
+      ],
+      "recallDays": [
+        "2026-07-13"
+      ],
+      "conceptTags": [
+        "gateway",
+        "7/9",
+        "7/10",
+        "audit.sh",
+        "m2.3",
+        "v1.6",
+        "active.md",
+        "7/1-7/10"
       ]
     }
   }
