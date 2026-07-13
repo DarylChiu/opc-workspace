@@ -1,5 +1,10 @@
 # 经验教训精华
 
+### 🔴 2026-07-07 Agent映射表必须用权威来源
+- **问题**: 系统级任务时 session_send 发错了人（发给算点小账而非忧郁小猫），混淆了 Agent 对应关系
+- **规则**: 系统级任务（调度/查所有Agent）执行前必读 `memory/agent-mapping.md`，用飞书显示名汇报
+- **权威来源**: 忧郁小猫 (Kitty, agent:main) 是首席Agent
+
 ### 2026-06-25 合规自动化盲区：讨论/辩论/指令类交互被忽略
 - **问题**: post-op.sh 关键词只匹配「完成/交付/修复」类，Daryl 的指令下达、架构讨论、方案辩论全被归为「查询类」跳过
 - **发现者**: Self 先诊断，Daryl 要求全员检查 → 确认我也有同样问题
@@ -64,6 +69,12 @@
 - 根因：把「部署新合规系统」等同于「给新 Agent 建 workspace」的思维惯性
 - 实际：main 是系统中最老的 Agent，workspace 已运行数月
 - 正确做法：旧脚本备份→切 symlink→验证
+
+## 🔴 2026-07-11 Sentinel v1 事故复盘
+- **问题**: Sentinel v1 Plugin 的 `before_tool_call` 拦截全部工具（含只读），依赖 Gateway 通信做审批，审计日志写入触发 config hot-reload → restart → reconnect → replay 正反馈震荡，造成 $20 API 浪费 + Gateway 反复重启
+- **根因**: Hook 太宽（连 read 都拦）+ 依赖外部通信 + 写操作触发重载
+- **修复方向 (Sentinel v2)**: 只拦截 write/edit/exec，全部内联判断（零 Gateway 通信），不写 audit log（根除重载触发），block:true 直接拒绝
+- **教训**: before_tool_call hook 必须窄（只拦写操作）、零外部依赖、零副作用写操作
 
 ## 记忆系统（上次重构总结）
 1. **MEMORY.md不能当垃圾桶** — 只放高频核心索引，<30行
