@@ -73,3 +73,6 @@
 {"timestamp":"2026-07-13T08:47:36+0700","check":"post-op","task":"按Plan A重构KHOA DUNG案例节点：合并Balance 3份原始报告+链接规范拆分","score":2,"total":5,"warnings":[
   "🔴 active.md 需更新 — 有新任务变更但 23 小时未动"
 ]}
+{"timestamp":"2026-07-14T09:56:07+0700","check":"post-op","task":"合并Balance债转股生效日争议增量到FutureTextile-Wellname树叶","score":2,"total":5,"warnings":[
+  "🔴 今日日记疑似 Cron 骨架（11行, 2段落, 仅Cron事件）— 必须补充实际内容"
+]}
