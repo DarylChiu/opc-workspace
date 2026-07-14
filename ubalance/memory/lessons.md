@@ -64,3 +64,29 @@
 3. **程序三段式** — 程序描述(What) + 执行过程(How, 红色标记) + 执行结果(What we found)，不能脱节
 4. **可追溯性** — Reference链接完整，支持证据可查，复核人不能靠猜
 5. **国内模板常见问题** — 数据与程序脱节，程序描述模糊，Reference缺失。2026-06-08 Daryl强调对比
+
+## 2026-07-14 · 成本统计的财务铁律：沉没成本不会因文件移动而消失
+- **Daryl 警告**: "历史成本就是历史成本，不会因为解决了某个问题 API 成本就消失，特别是 Balance 你是财务，应该知道沉没成本也是成本。"
+- **我的错误**: 前期把"session 文件被归档/移入 .trash 导致统计消失"当作可接受的解释。这是财务思维失职——会计不会因为凭证归档就说支出没发生。
+- **根因**: 旧 full_cost_scan.py 只遍历活着的 14 个 agent 目录，跳过 .trash/backups；文件一移动，历史成本当场清零，累计数不升反降。
+- **修复**: 重写为 **append-only 台账** (`data/cost_ledger.jsonl`)，按 `responseId` 去重全量遍历 ~/.openclaw（含 .trash/backups）。一旦入账永久保留，累计只增不减，重复拷贝不会重复计数。
+- **真值对比**: 旧看板 $66 → 去重台账真值 **$281.53**。Sentinel 僵尸 session $47.89（863 笔，7/5–7/13）已永久入账，删文件也删不掉。
+- **仍存的量级差**: 台账 $281 vs OpenRouter 官网实际扣费仍可能对不齐 → 长期需接 OpenRouter 账单 API 做外部真值锚点，.jsonl 只做明细拆分。
+- **教训**: 成本系统的默认设计必须是 append-only / 只增不减；任何"重扫可能变小"的口径对财务都是错的。
+
+## 2026-07-14 · 贷款材料整理 v2.6 — 两个方向性错误(Daryl两次纠正)
+- **错误1: 违背"读内容不看文件名"铁律(重犯)**
+  - Step A 通关判定、贷款用途分类，我都退回用"目录名+文件名"关键词判断
+  - 贷款用途分类16/24落"待确认"，因为没打开Invoice/销售合同读品名(POLYESTER YARN等清晰可读)
+  - 正确: 打开Invoice/Sales Contract读`Name of Commodity/品名规格` + ToKhai的HS Code(54xx纺织原料/84xx机器)交叉判定
+- **错误2: 违背"一切从L1出发"任务模版铁律**
+  - 我让RM-Database目录反向往Outcome1塞行(set(primary_inv)|set(tokhai_keys))
+  - 导致不在L1的发票(HMA22047/HMADFZ230010)混进输出，浪费Daryl注意力
+  - 铁律: 任务模版第一句=①从L1提取发票号→②RM-Database匹配→③输出。单向，L1是唯一起点。只遍历L1行，找不到标缺失，绝不新增L1以外的行
+- **教训**: Daryl的任务模版/历史规则是硬约束，动手前必须回读，不能凭记忆自作主张。同一类错误(靠文件名偷懒)已被纠正多次
+
+## 2026-07-14 · v2.6 分类器严重遗漏(Daryl已经说过但未执行)
+- Arrival Notice 没被排除: 内容含 ARRIVAL NOTICE,但因自然引述了提单号/船名,B/L检测 反把 arrival 排除给否决了
+- FREIGHT NOTE 完全没有排除关键词: 内容为运费单但含 Shipper/Consignee → 被当 B/L 收
+- DELIVERY ORDER/AN文档也混入 B/L
+- **根因: Daryl 之前明确说过"B/L里不要放Arrival Note和Freight Note",但 build 分类器时未加这两条排除规则 → 6/28的Outcome2干扰文件清理已有此教训,重犯**

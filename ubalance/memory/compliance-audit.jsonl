@@ -91,3 +91,6 @@
 {"timestamp":"2026-07-14T00:03:19+0700","check":"post-op","task":"每日记忆归档审计 2026-07-14","score":3,"total":5,"warnings":[
   "🔴 任务涉及问题/失败/审计发现，建议提炼到 lessons.md"
 ]}
+{"timestamp":"2026-07-14T09:56:59+0700","check":"post-op","task":"归档Future Textile利息资本化案例卡片+派发Self更新知识树树叶","score":3,"total":5,"warnings":[
+  ""
+]}

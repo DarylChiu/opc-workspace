@@ -1,6 +1,21 @@
 # 当前活跃任务
 
-> 最后更新: 2026-07-13 09:30 GMT+7 (Balance: JGL并购项目暂告段落，归档Daryl方案原稿)
+> 最后更新: 2026-07-14 09:00 GMT+7 (Balance: 成本统计重构为append-only台账，修复历史成本蒸发问题)
+
+## 🔧 进行中
+### OPC成本仪表盘修复 — append-only台账 (2026-07-14)
+- **触发**: Daryl质疑"截止昨天成本数据是否正确"+警告"沉没成本也是成本，历史成本不会消失"
+- **根因**: 旧脚本只扫活agent目录，跳过.trash/backups；文件归档→历史成本蒸发，累计不升反降
+- **已完成**:
+  - ✅ 重写 `scripts/full_cost_scan.py` 为 append-only 台账模式
+  - ✅ 台账 `data/cost_ledger.jsonl`：全量遍历~/.openclaw(含.trash/backups)，responseId去重，只增不减
+  - ✅ 真值 **$281.53**（旧看板仅$66）| Sentinel僵尸session $47.89已永久入账
+  - ✅ 幂等性验证通过（二次运行仅+2笔新调用，总额只增）
+  - ✅ 兜底文件已推送 `~/opc-workspace/Kitty/opc-dashboard/data/cost_daily.json`
+- **待办**:
+  - ✅ 已通知Kitty看板读取新数据（累计$281.53）+ 加Archived agent显示
+  - ⏳ [P1] 接 OpenRouter 官方账单API做外部真值锚点（台账$281 vs 官网实际仍可能对不齐）
+- **脚本**: `scripts/full_cost_scan.py` + `scripts/generate_cost_daily.py`
 
 ## ✅ 已完成
 ### ⏸️ JGL收购KHOA DUNG 并购项目（暂告段落）(2026-07-13)
@@ -97,6 +112,13 @@
   - ✅ 第二轮深度3条（攻击7-9）→ 方案升级化解 (7/1)
   - ✅ 第三轮2条（攻击7-8新编号：审计师/IFRS9）→ Daryl确认已死 (7/2)
   - ⏳ 第三轮4条（攻击9-12：法律性质/日期链/MLI信号/实质=资本金）→ 待Daryl防御
+- **7/14 收尾进展 — 债转股生效日争议**:
+  - A&C事务所回复：**IRC修订日**=生效日/会计确认日（国家批准外资出资变更之点）
+  - **Daryl定论**: ERC修订日=确认时点，协议日=计量补充；纠正Balance「取IRC/ERC较晚者」脱离实务（FDI增资固定先IRC后ERC）
+  - Daryl风险取向: 越南法未完善，跟随A&C(IRC日)或为较安全实务处理
+  - Balance判断: 排除协议日；ERC说更合法理；跟A&C是否有代价取决于**IRC与ERC是否同一会计期间**（同期→免费跟随；跨期/FX波动→ERC口径值得pushback）
+  - ✅ **案例卡片已建**: `reports/案例卡片-FutureTextile利息资本化-债转股生效日-20260714.md`
+  - 📤 已派发 Self(恨点小己) 更新知识树「树叶」，完成后飞书DM汇报
 - **关键产出**: `reports/FutureTextile-Wellname股东借款利息处理_总结_2026-07-01.md` (完整攻防+方案框架+证据链+15文件模板)
 - **⚠️ 记忆系统故障**: 7/1会话L4自检未执行→日记为骨架→7/2启动时记忆断裂。根因: audit.sh骨架检测被冗长cron输出+空「当日事件」占位符绕过。已修复audit.sh/post-op.sh/startup.sh三脚本。
 
