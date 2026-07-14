@@ -22,7 +22,7 @@
    - 通过`session_status`获取准确的日期和星期
    - 永远不要凭记忆说"今天是星期X"
 
-## 生活助手提醒（✅ LaunchAgent已部署 2026-06-11）
+## 生活助手提醒（✅ crontab 单一来源 2026-07-14 去重）
 
 ### 每日固定提醒 - DM私聊发送
 - ✅ **07:20** | 💊 早上涂软膏
@@ -30,12 +30,16 @@
 - ✅ **23:00** | 💊🛏️ 准备睡觉（涂软膏+整理）
 - ✅ **23:30** | 🌙 确认就寝
 
+> ⚠️ **2026-07-14 修复重复发送**：此前 LaunchAgent(6/11部署) 和 crontab 两套都在发同样提醒 → 每条发两遍。
+> 已卸载并删除 4 个 `ai.openclaw.life-reminder.*` LaunchAgent（备份于 `backups/launchagents-20260714_*`）。
+> **现唯一来源 = crontab**（直接调 `openclaw message send`，无脚本依赖）。以后加提醒只改 crontab，勿再用 LaunchAgent。
+
 ### 久坐监测
 - ❌ **待实现** - 需开发macOS活跃状态监测脚本
 - 目标: 每15分钟检测，连续活跃1.5小时提醒走动 🚶‍♂️
 
-**实现方式**：macOS LaunchAgent (~/Library/LaunchAgents/ai.openclaw.life-reminder.*.plist)  
-**发送脚本**：~/.openclaw/workspace/scripts/send_feishu_dm.sh
+**实现方式**：crontab（唯一来源，2026-07-14 起）· 旧 LaunchAgent 已卸载
+**发送命令**：`openclaw message send --channel feishu --account default --target user:<id> --message "..."`
 
 ## Heartbeat周期性任务
 
