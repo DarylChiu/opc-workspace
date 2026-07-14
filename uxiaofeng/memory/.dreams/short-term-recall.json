@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-11T08:49:44.117Z",
+  "updatedAt": "2026-07-14T01:07:46.944Z",
   "entries": {
     "memory:memory/archive/2026-03-24.md:138:171": {
       "key": "memory:memory/archive/2026-03-24.md:138:171",
@@ -2042,18 +2042,20 @@
       "endLine": 442,
       "source": "memory",
       "snippet": "3. **开发方向调整**: 评估结果应转化为语音功能开发参数 4. **预算效率要求**: Token使用需对应独特价值(语音交互) ### 官方项目批准与启动 (22:02) **用户Daryl的正式批准指令**: > \"1、确认4个调整方向； > 2、立即开始核心开发任务的阶段2-语音交互功能TTS的开发，记得将核心开发任务的API调用成本作为开发成本记录；并将本次对我的测试作为开发参数之一；取得所有资源正式开始开发后项目进度每个小时汇报一次 > 3、哪些资源需要我来协调请列个清单提醒我，我现在完成协调\" **批准内容确认**: 1. ✅ **确认4个调整方向**: - 暂停文本模式深化 - 全力加速语音功能 - 使用评估结果作开发参数 - 优先投资者演示场景 2. ✅ **正式启动TTS开发**: - 每小时进度汇报机制 - API调用成本纳入开发成本记录 - 英语测试结果作为核心开发参数 3. ✅ **资源协调支持**: 用户Daryl将立即协调所需资源 **技术参数编码完成** (基于Daryl评估结果): ``` Daryl_IELTS_Level: 5.5-6.0 → Speech_Rate: 0.85x_normal Chinese_Logic_Challenge: true → Sentence_Complexity: simplified Business_Priority: investor_pitch → Tone_Emphasis: confidence_+30%",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.404783296585083,
+      "totalScore": 0.7645704448223114,
       "maxScore": 0.404783296585083,
       "firstRecalledAt": "2026-07-02T12:01:25.842Z",
-      "lastRecalledAt": "2026-07-02T12:01:25.842Z",
+      "lastRecalledAt": "2026-07-14T01:07:46.944Z",
       "queryHashes": [
-        "125f33cb4ac8"
+        "125f33cb4ac8",
+        "5eadbeded0cd"
       ],
       "recallDays": [
-        "2026-07-02"
+        "2026-07-02",
+        "2026-07-14"
       ],
       "conceptTags": [
         "立即开始核心开发任务的阶段2-语音交互功能tts的开发",
@@ -2250,6 +2252,130 @@
         "api-key-path",
         "项目",
         "关键"
+      ]
+    },
+    "memory:memory/archive/2026-05-30.md:1:15": {
+      "key": "memory:memory/archive/2026-05-30.md:1:15",
+      "path": "memory/archive/2026-05-30.md",
+      "startLine": 1,
+      "endLine": 15,
+      "source": "memory",
+      "snippet": "## 语音模块归档状态 (2026-05-30) ### ✅ 可用语音服务 1. **Bryson语音交互MVP** - 完整双向语音交互系统 - 访问地址: https://unwhispering-imani-digitately.ngrok-free.dev - 状态: 已归档，随时可重新部署 2. **语音转录测试(STT)** - 高精度语音转文字服务 - 与MVP共享访问地址 - Google Cloud STT集成，长句识别达标 ### 调用权限 - Daryl和主Agent\"忧郁小猫\"均有调用权限 - 仅Daryl有修改/删除权限",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.36505441665649413,
+      "maxScore": 0.36505441665649413,
+      "firstRecalledAt": "2026-07-14T01:07:46.944Z",
+      "lastRecalledAt": "2026-07-14T01:07:46.944Z",
+      "queryHashes": [
+        "5eadbeded0cd"
+      ],
+      "recallDays": [
+        "2026-07-14"
+      ],
+      "conceptTags": [
+        "仅daryl有修改/删除权限",
+        "语音",
+        "归档",
+        "状态",
+        "可用",
+        "服务",
+        "bryson",
+        "交互"
+      ]
+    },
+    "memory:memory/archive/2026-06-12.md:31:45": {
+      "key": "memory:memory/archive/2026-06-12.md:31:45",
+      "path": "memory/archive/2026-06-12.md",
+      "startLine": 31,
+      "endLine": 45,
+      "source": "memory",
+      "snippet": "## 句子对齐采样优势 - 6分钟视频: 360帧(1fps) → 180帧(2fps) → ~50帧(句子对齐) - 省86%成本，且每帧都精准对齐说话内容 - 交叉校验有 ground truth，不靠「猜」 ## 测试结果 - Whisper base 加载 0.5s ✅ - audio_transcriber 语法通过 ✅ - video_pipeline 语法通过 ✅ ## 待开发 - AI分析接口（Step 2实际调用Vision） - 互动数据抓取（Playwright） - 报告生成+飞书上传 - 策略反馈闭环（Step 7）",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.35899793207645414,
+      "maxScore": 0.35899793207645414,
+      "firstRecalledAt": "2026-07-14T01:07:46.944Z",
+      "lastRecalledAt": "2026-07-14T01:07:46.944Z",
+      "queryHashes": [
+        "5eadbeded0cd"
+      ],
+      "recallDays": [
+        "2026-07-14"
+      ],
+      "conceptTags": [
+        "0.5s",
+        "audio-transcriber",
+        "video-pipeline",
+        "句子",
+        "采样",
+        "优势",
+        "分钟",
+        "视频"
+      ]
+    },
+    "memory:memory/archive/2026-03-29.md:270:309": {
+      "key": "memory:memory/archive/2026-03-29.md:270:309",
+      "path": "memory/archive/2026-03-29.md",
+      "startLine": 270,
+      "endLine": 309,
+      "source": "memory",
+      "snippet": "### 22:18 TTS功能测试执行 Daryl要求对阶段2成果进行测试，指定了两个测试语句： 1. **测试语句1**: \"Hello Bryson, this is a basic TTS test.\" 2. **测试语句2**: \"我正在测试语音合成系统的稳定性。\" #### 测试脚本执行结果： **测试环境**: - API密钥: 已验证 - Python版本: 3.x - 测试脚本: tts_phase2_test.py **测试用例1结果**: - ✅ 状态: 通过 - ⏱️ 响应时间: 6.03秒 - 📏 文件大小: 32,640字节 (31.9KB) - 🏆 速度评分: 2/5 (偏慢) **测试用例2结果**: - ✅ 状态: 通过 - ⏱️ 响应时间: 7.36秒 - 📏 文件大小: 44,160字节 (43.1KB) - 🏆 速度评分: 2/5 (偏慢) #### 测试总结： - **功能完整性**: ✅ 100%通过 (2/2测试用例) - **多语言支持**: ✅ 英语和中文均支持 - **响应时间**: ⚠️ 平均6.69秒，需要优化 - **音频质量**: ✅ 文件生成正常，可播放 **性能问题分析**: 1. **网络延迟**: Google TTS API网络请求时间较长 2. **音频播放**: 音频加载和播放时间未优化 3. **代码效率**: 没有批处理优化 #### 下一阶段优化计划： 1. **异步处理**: 预加载常用短语 2. **本地缓存**: 高频短语本地缓存音频 3. **并发优化**: 批量合成提高效",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3546952426433563,
+      "maxScore": 0.3546952426433563,
+      "firstRecalledAt": "2026-07-14T01:07:46.944Z",
+      "lastRecalledAt": "2026-07-14T01:07:46.944Z",
+      "queryHashes": [
+        "5eadbeded0cd"
+      ],
+      "recallDays": [
+        "2026-07-14"
+      ],
+      "conceptTags": [
+        "网络",
+        "3.x",
+        "tts-phase2-test.py",
+        "6.03秒",
+        "31.9kb",
+        "2/5",
+        "7.36秒",
+        "43.1kb"
+      ]
+    },
+    "memory:memory/archive/2026-03-29.md:163:197": {
+      "key": "memory:memory/archive/2026-03-29.md:163:197",
+      "path": "memory/archive/2026-03-29.md",
+      "startLine": 163,
+      "endLine": 197,
+      "source": "memory",
+      "snippet": "|----------|----------|------| | **开发对话** | ~$0.45 | TTS开发相关对话 | | **项目报告** | ~$0.06 | 进度汇报和成本报告 | | **测试验证** | ~$0.12 | 系统测试对话 | | **今日总累计** | **~$0.63** | 约占阶段2总成本100% | ### 汇报执行情况 Daryl要求19:00-24:00每小时汇报一次，但我的汇报出现延误： - **19:00汇报**: 实际发送延迟至19:20 - **20:00汇报**: 实际发送延迟至20:22 - **21:00汇报**: 实际发送延迟至21:24 **时间管理改进计划**： 1. 提前5分钟准备汇报内容 2. 使用标准化汇报模板 3. 设置内部时间提醒机制 ### 阶段3准备情况 (STT语音识别) **已启动的前期工作**： 1. **账户准备**: Google Speech-to-Text服务账号就绪 2. **架构设计**: TTS系统架构可直接复用 3. **预算余量**: $477.37充足 4. **时间计划**: 周一(3月30日)启动开发 ### 重要技术突破记录 #### 成本节省里程碑： **从$0.5/月降至$0.00/月的TTS成本** (使用Google免费配额) - 原计划：OpenAI TTS $0.5/月 (33,333字符) - 实际方案：Google TTS免费配额1,000,000字符/月 - 节省率：96%，月成本从$0.5降至<$0.02 #### Daryl个性化",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3505926996469497,
+      "maxScore": 0.3505926996469497,
+      "firstRecalledAt": "2026-07-14T01:07:46.944Z",
+      "lastRecalledAt": "2026-07-14T01:07:46.944Z",
+      "queryHashes": [
+        "5eadbeded0cd"
+      ],
+      "recallDays": [
+        "2026-07-14"
+      ],
+      "conceptTags": [
+        "openai",
+        "0.45",
+        "0.06",
+        "0.12",
+        "0.63",
+        "00-24",
+        "speech-to-text服务账号就绪",
+        "477.37充足"
       ]
     }
   }
