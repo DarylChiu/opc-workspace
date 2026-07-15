@@ -1,5 +1,21 @@
 # Recent Conversations
-Last updated: 2026-07-14 00:03 GMT+7
+Last updated: 2026-07-16 00:04 GMT+7
+
+## 2026-07-15 — 自进化基建上线日
+- **Self L3 自进化基建上线**: Daryl拍板, SAGE Checker(三维审查) + Reflexion(检讨机制) + EVOLUTION.md协议全部交付 ✅
+- **测试验证**: 坏稿 FAIL (0/1/1) / 好稿 PASS (8/9/8)，判别力验证通过
+- **TTS 方案B部署** (xiaofeng): Piper en_US-lessac-high.onnx 替代 Kokoro 为主引擎，三重fallback就位
+- **成本全量扫描** (Balance): 6281 calls / 239.9M tokens / $68.30 全量对齐
+- **生活提醒 crontab**: 4个提醒(07:20/20:00/23:00/23:30) + 审计 + 看门狗 + 项目通知 就位
+- **午夜审计正常**: 7/14→7/15 跨日，骨架日记已填充
+- 全量成本 $68.30 | 本月 $8.70
+
+## 2026-07-14 — 静默日
+- Daryl 全天未出现
+- 午夜 Cron 审计正常执行（7/13→7/14）
+- Self 审计修复完成（日记充实 + active 时间戳 + Git）→ OPC 已发送
+- Balance 审计 + Git push 成功（91 commits 积压清除）→ OPC 已发送
+- 全量成本 $112.97 | 本月 $53.37 | 今日 $4.79
 
 ## 2026-07-13 — 静默日（Daryl 未出现）
 - Daryl 全天未出现，系统静默运行
@@ -89,15 +105,3 @@ Last updated: 2026-07-14 00:03 GMT+7
 - **Self产物推送诊断**: Self写入`opc-workspace/Self/`（死路径），正确路径是`~/.openclaw/workspace-self/`。v1.3后扫描机制已从opc-workspace改为真实workspace。Self需搬家4项产物。
 - **Daryl 22:51休息**: 今天没有里程碑式验收，感到糟心。强调失败经验也要总结，记忆系统更新要好好做。
 - **教训**: Agent版本升级时缺乏机制变更通知，导致Agent按旧逻辑操作。待办：OPC看板增加「约定版本」字段+自动通知。
-
-## 2026-06-28 — OPC v1.1.0 + v1.1.1 全天迭代
-- OPC看板 v1.1.0（6项需求全量重写 server.js+index.html，93ced72）
-- v1.1.1 5项修复（任务面板/里程碑配色/产物空白/Workflow双向通信/成本图表，e40c5b5）
-- 全天密集开发：上午需求→下午重写→晚上修复
-
-## 2026-06-27 — DM噪音风暴 + M2验收就绪 + 视频分析v1.1.0交付
-- Daryl凌晨抱怨DM停不下来 → 诊断：4条生活提醒cron + Balance NO_REPLY路由
-- M2验收环境就绪，隧道更新
-- Xiaofeng: 视频分析v1.1.0 五项迭代全量交付
-- Workflow编辑器: DM轰炸修复（server.js不再DM + debounce）
-- 等待: Daryl验收M2+视频分析 / cron去留决定
