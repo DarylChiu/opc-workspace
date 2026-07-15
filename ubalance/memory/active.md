@@ -1,19 +1,30 @@
 # 当前活跃任务
 
-> 最后更新: 2026-07-14 09:00 GMT+7 (Balance: 成本统计重构为append-only台账，修复历史成本蒸发问题)
+> 最后更新: 2026-07-15 13:55 GMT+7 (Balance: 贷款材料工作流定版 v2.7.0，Daryl指令冻结)
 
 ## 🔧 进行中
+### 贷款材料整理 — ✅ v2.7.0 定版 (2026-07-15 Daryl指令，工作流阶段性冻结)
+- **输入**: Toshiba硬盘 `HUATEX贷款材料/` | L1-Raw Materials-Year2023 (322发票) | RM-Database/2023 (仅THÁNG 1-10)
+- **7/14 Daryl两次纠正**: ①读内容不看文件名 ②一切从L1出发（详见 lessons.md）
+- **7/14 产出**: Outcome1-v2.6-1to6 + Outcome2三件套包(1-6月, 65完整/44不完整) — 输出在硬盘
+- **7/15 Daryl新规则（飞书）**:
+  1. 贷款材料包=五类文件全保留：Invoice(货物/设备,物流发票除外)+Sales Contract/Confirmation+Packing List+B/L或Sea Waybill+ToKhai(已通关Excel)——不管2/5/10个文件都全收，SC分多份PDF也全放
+  2. 序号2/3 (NSLMYR221078/221081) 的 Invoice 合订在 B/L或Sea Waybill 文件内 → 多标签组合，同时满足Invoice+B/L，报告/备注显式标记「📌Invoice在B/L文件内」，不再误报缺B/L
+  - ⚠️ 纠正: 我一度把独立SC当干扰剔除(v2.6.1)，Daryl明确SC是五类材料之一必须保留，已改回
+- **7/15 已完成(v2.6.2)**: doc_classify.py重构为多标签 classify_keep(Inv/SC/PL/BL/SWB/AWB/ToKhai，合订PDF可多标签) + gen_outcome2_v2_6.py(五类全拷贝) + process_v2_6.py(5类覆盖) + 操作手册v2.6.2，8个合成用例测试全对
+- **✅ 定版 v2.7.0**: 4-6月测试样本已交付(52/53完整,唯一缺项STT99源数据缺提单)；等Daryl抽查反馈后再推其他月份
+
 ### OPC成本仪表盘修复 — append-only台账 (2026-07-14)
 - **触发**: Daryl质疑"截止昨天成本数据是否正确"+警告"沉没成本也是成本，历史成本不会消失"
 - **根因**: 旧脚本只扫活agent目录，跳过.trash/backups；文件归档→历史成本蒸发，累计不升反降
 - **已完成**:
   - ✅ 重写 `scripts/full_cost_scan.py` 为 append-only 台账模式
   - ✅ 台账 `data/cost_ledger.jsonl`：全量遍历~/.openclaw(含.trash/backups)，responseId去重，只增不减
-  - ✅ 真值 **$281.53**（旧看板仅$66）| Sentinel僵尸session $47.89已永久入账
+  - ⚠️ 首版台账$281.53系污染值(重复记账,8336条)，7/14 15:37已重建→当前干净台账7400条/$70.39(.polluted.bak留存)
   - ✅ 幂等性验证通过（二次运行仅+2笔新调用，总额只增）
   - ✅ 兜底文件已推送 `~/opc-workspace/Kitty/opc-dashboard/data/cost_daily.json`
 - **待办**:
-  - ✅ 已通知Kitty看板读取新数据（累计$281.53）+ 加Archived agent显示
+  - ✅ 7/15 与Kitty对账: live端点(~/WorkBuddy/Claw/opc-dashboard, PID 12926)已并入全量jsonl扫描; 差异源=台账append-only+扫描范围(.trash/backups), 零成本调用两边都不计
   - ⏳ [P1] 接 OpenRouter 官方账单API做外部真值锚点（台账$281 vs 官网实际仍可能对不齐）
 - **脚本**: `scripts/full_cost_scan.py` + `scripts/generate_cost_daily.py`
 

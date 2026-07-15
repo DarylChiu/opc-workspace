@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-process_v2_6.py — v2.6 贷款材料整理(2023 HUATEX批次)
+process_v2_6.py — v2.7.0 贷款材料整理(2023 HUATEX批次)
 铁律1: 严格从 L1 出发 —— 只遍历 L1 发票行，绝不新增 L1 以外的行
 铁律2: 内容级判定 —— ToKhai读通关状态/金额/HS码，Invoice读品名，不靠文件名
 13列: 序号|发票号|关单号|报关日期|金额(USD)|日期|供应商|贷款用途分类|分类依据|置信度|三件套完整性|ToKhai勾稽|备注
@@ -9,7 +9,7 @@ process_v2_6.py — v2.6 贷款材料整理(2023 HUATEX批次)
 import os, sys, re, glob
 sys.path.insert(0, os.path.dirname(__file__))
 from tokhai_extract import extract_tokhai, is_tokhai_filename, _norm
-from doc_classify import classify_file, pdf_text as _pdf_text
+from doc_classify import classify_keep_ex, attribute_file, pdf_text as _pdf_text
 import openpyxl
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from datetime import datetime
@@ -136,6 +136,8 @@ for row in ws.iter_rows(min_row=4, values_only=True):
     l1_rows.append({'stt': row[0], 'supplier': str(row[1]).strip() if row[1] else '',
                     'inv': inv, 'l1_date': dstr, 'amount': amt})
 wb.close()
+L1_INVS = {r['inv'] for r in l1_rows}
+L1_PREFIXES = {re.match(r'^[A-Za-z]+', i).group(0).upper() for i in L1_INVS if re.match(r'^[A-Za-z]+', i)}   # 全年发票号集合，用于他票干扰判定
 print(f'L1 发票总数: {len(l1_rows)}')
 
 # ================= 建 RM-Database 目录索引(发票号→目录路径) =================
@@ -150,14 +152,25 @@ for m in months:
         if os.path.isdir(dp):
             dir_paths.append((d, dp))
 
+def _dir_tokens(d):
+    """目录名 → 发票号token集。处理: 序号前缀/+连接/尾部破折号/数量标注/品牌前缀"""
+    core = re.sub(r'^\s*\d+\.\s*', '', d).strip()
+    out = set()
+    for t in re.split(r'[\s+]+', core):
+        t = t.strip().strip('-').strip()
+        if re.match(r'^[A-Za-z]{2,}\d{3,}(-\d+)?$', t):
+            out.add(t)
+    return out
+
 def find_dir_for_invoice(inv):
-    """为 L1 发票号找 RM-Database 目录：目录名去序号前缀后，token 精确等于发票号"""
-    matches = []
-    for d, dp in dir_paths:
-        core = re.sub(r'^\s*\d+\.\s*', '', d).strip()
-        tokens = re.split(r'\s+', core)
-        if inv in tokens:
-            matches.append((d, dp))
+    """为 L1 发票号找 RM-Database 目录: 精确token; 兄弟票X-N回退base X"""
+    matches = [(d, dp) for d, dp in dir_paths if inv in _dir_tokens(d)]
+    if matches:
+        return matches
+    m = re.match(r'^(.*?)-\d+$', inv)
+    if m:
+        base = m.group(1)
+        matches = [(d, dp) for d, dp in dir_paths if base in _dir_tokens(d)]
     return matches
 
 # ================= 主流程：只遍历 L1 =================
@@ -182,14 +195,32 @@ for rec in l1_rows:
     else:
         dp = matches[0][1]
         files = [f for f in os.listdir(dp) if os.path.isfile(os.path.join(dp, f))]
-        # 分类文件 + 收集通关ToKhai
-        cats = []
+        _core = re.sub(r'^\s*\d+\.\s*', '', os.path.basename(dp)).strip()
+        dir_invs = {t for t in re.split(r'[\s+]+', _core)
+                    if re.match(r'^[A-Za-z]{2,10}\d{4,}(-\d+)?$', t) and t != inv
+                and (re.match(r'^[A-Za-z]+', t).group(0).upper() in L1_PREFIXES)}
+        biz_cands = L1_INVS | dir_invs
+        # 多标签分类 + 发票号归属过滤 (Daryl 7/15: 五类全保留，但必须匹配L1票号，他票剔除)
+        allt = set()          # 归属过滤后的标签并集
+        combo_files = []      # 含 Invoice+提单合订的文件
         cleared = []
+        dropped_other = 0     # 引用他票号被剔除的干扰文件数
         for f in files:
-            c, r = classify_file(os.path.join(dp, f))
-            cats.append(c)
-            if c == 'TOKHAI_QDTQ' and r is not None and r['is_cleared']:
-                cleared.append(r)
+            ok, tags, r, text = classify_keep_ex(os.path.join(dp, f))
+            if not ok:
+                continue
+            if 'TOKHAI_QDTQ' in tags:
+                if r is not None and r['is_cleared']:
+                    cleared.append(r)
+                continue
+            att = attribute_file(text, f, inv,
+                                 biz_cands if (tags & {'INVOICE','SALES_CONTRACT','PACKING_LIST'}) else L1_INVS)
+            if att.startswith('other:'):
+                dropped_other += 1
+                continue
+            allt |= tags
+            if 'INVOICE' in tags and (tags & {'BL', 'SWB', 'AWB'}):
+                combo_files.append(f)
         # ToKhai 勾稽（方案B：金额完全相等）
         picked = [c for c in cleared if c['amount'] is not None
                   and rec['amount'] is not None and abs(c['amount']-rec['amount'])<TOL]
@@ -207,15 +238,22 @@ for rec in l1_rows:
             grade = '❌未匹配'
             note = '⚠️无金额勾稽通关报关单-待人工复核'
             hs = cleared[0]['hs_code'] if cleared else ''
-        # 三件套完整性
-        has_inv = any(c in ('INVOICE_PDF','TOKHAI_QDTQ') for c in cats)
-        has_bl = any(c in ('BL','SWB','AWB') for c in cats)
-        has_tokhai = 'TOKHAI_QDTQ' in cats
+        # 完整性 (5类覆盖; Invoice/SC/装箱单均算业务单据)
+        has_inv = 'INVOICE' in allt
+        has_sc = 'SALES_CONTRACT' in allt
+        has_pl = 'PACKING_LIST' in allt
+        has_bl = bool(allt & {'BL','SWB','AWB'})
+        has_tokhai = 'TOKHAI_QDTQ' in allt
         miss = []
-        if not has_inv: miss.append('Invoice')
+        if not (has_inv or has_sc or has_pl): miss.append('业务单据')
         if not has_bl: miss.append('B/L')
         if not has_tokhai: miss.append('ToKhai')
-        complete = '✅完整' if (has_inv and has_bl) else '⚠️缺'+','.join(miss)
+        complete = '✅完整' if ((has_inv or has_sc or has_pl) and has_bl and has_tokhai) else '⚠️缺'+','.join(miss)
+        # 标记: Invoice在B/L文件内 (Daryl 7/15要求)
+        if combo_files:
+            note = (note + '；' if note else '') + '📌Invoice在B/L文件内(合订)'
+        if dropped_other:
+            note = (note + '；' if note else '') + f'🚫剔除他票干扰{dropped_other}件'
         # 用途分类: Invoice品名为主 + HS码交叉验证(Daryl确认口径)
         hs_cls = classify_by_hs(hs)
         inv_cls, inv_prod, _ = classify_by_invoice(dp, files)

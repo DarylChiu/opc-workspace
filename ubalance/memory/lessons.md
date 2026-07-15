@@ -90,3 +90,14 @@
 - FREIGHT NOTE 完全没有排除关键词: 内容为运费单但含 Shipper/Consignee → 被当 B/L 收
 - DELIVERY ORDER/AN文档也混入 B/L
 - **根因: Daryl 之前明确说过"B/L里不要放Arrival Note和Freight Note",但 build 分类器时未加这两条排除规则 → 6/28的Outcome2干扰文件清理已有此教训,重犯**
+
+## 2026-07-15 · 贷款材料包=五类文件 + 合订文件多标签
+- **贷款材料包=5类全保留(Daryl 7/15定调)**: Invoice(货物/设备,物流发票除外)+Sales Contract/Confirmation+Packing List+B/L或SWB+ToKhai(已通关Excel)。不管几个文件都全收，SC分多份PDF也全放
+- **⭐又犯"自作主张"**: Daryl说"SC单独是一个文件很正常"，我先理解成"SC该剔除"并真去改代码剔除。实际意思是SC本身就是贷款材料一类必须保留。教训: 文档形态的行业常态先确认再动手，不要把"这很正常"听成"把它剔了"
+- **SC≠Invoice但也要收**: SALES CONFIRMATION 不能当Invoice关键词(SC页同含CONTRACT NO/UNIT PRICE结构要素,会误判为发票,需先按SC标题排除)，但SC作为独立类仍需收进包
+- **合订文件不能只给一个类别**: Invoice页与B/L/SWB页合订在同一PDF时，判成单一INVOICE就丢了B/L→误报"缺B/L"(序号2/3实例)。正确=多标签同时满足两项+显式标记「📌Invoice在B/L文件内」
+
+## 2026-07-15下午 · "全收"≠无条件收——票号金额匹配层不能丢
+- Daryl纠正: 五类材料全保留的前提是**精准匹配L1发票号+金额**。我"收敛了材料类型又忘了匹配需求"
+- 实证: 共享目录(HMABFZ230136+HMA23009)互相串票、兄弟票X-1混入X的包——4-6月清出10+处干扰
+- 技术教训: ①D/O判定只认首页前400字符标题区(真提单条款里也有delivery order字样) ②越南VAT发票(HÓA ĐƠN GTGT)=物流费用发票要排除 ③移动硬盘I/O瞬时失败会毒化文本缓存,空结果不入缓存 ④票号token匹配须防X匹配到X-1
