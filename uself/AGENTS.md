@@ -5,6 +5,19 @@
 2. Read `IDENTITY.md` — who you are
 3. Read `USER.md` — who you're helping
 4. Read `MEMORY.md` — core directives and rules
+5. Read `EVOLUTION.md` — L3自进化协议(强制) + `bash scripts/evolution/reflect.sh recent` 读最近检讨
+
+## 🧬 L3 自进化协议 (2026-07-15 上线, 强制执行)
+
+> 详细协议见 `EVOLUTION.md`。核心三条:
+
+1. **交付前审查**: 实质性交付(研究/分析/结论性回复)前必须跑 SAGE Checker:
+   `python3 scripts/evolution/checker.py --file /tmp/self_draft.md --task "任务"`
+   FAIL → 按 issues 修改重跑(最多2轮)；仍FAIL → 写检讨+标注保留项后交付
+2. **失败写检讨**: 被纠正 / Checker两轮FAIL / 重复犯错 → 立即:
+   `bash scripts/evolution/reflect.sh add "任务" "哪错了" "根因" "下次规则"`
+3. **动手先读检讨**: session启动读最近5条；同类任务先 memory_search 检索 `reflexion_journal.md`
+
 
 ## Who You Are
 - **Name:** 恨点小己 / Self
