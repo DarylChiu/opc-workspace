@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-15T15:00:52.187Z",
+  "updatedAt": "2026-07-15T17:03:39.170Z",
   "entries": {
     "memory:memory/2026-06-10.md:1:29": {
       "key": "memory:memory/2026-06-10.md:1:29",
@@ -1149,18 +1149,20 @@
       "endLine": 67,
       "source": "memory",
       "snippet": "- 与JGL并购项目完全独立 - ⏳ 明天发详细数据 ## 📊 23:45 每日成本扫描（Cron） - **状态**: ⚠️ 已降级写文件，Kitty未确认 - **扫描结果**: - 今日: $2.8951 | 本月: $44.9828 | 全量: $104.5810 - 262个.jsonl文件 | 260,610,914 tokens | 5,568次调用 - **按Agent**: Kitty $39.66(本月), Bryson $57.57, Balance $3.36, Self $2.35 - **按模型**: DeepSeek R1 $51.06, DeepSeek V4 $29.24, Claude Opus 4.8 $23.49 - **7日趋势**: 7/4 $0.49 → 7/5 $2.46 → 7/6 $3.53 → 7/7 $25.05 ⚠️峰值 → 7/8 $3.18 → 7/9 $4.21 → 7/10 $2.90 - **API验证**: localhost:8765/api/costs ✅ 正常响应, _source=jsonl-full-scan - **兜底文件**: ~/opc-workspace/Kitty/opc-dashboard/data/cost_daily.json 已写入 ## ✅ 23:45 → 次日 16:47 成本推送闭环完成 - **Kitty确认**: OPC看板 `/api/costs` 已用全量.jsonl扫描(每30分钟refreshCostFromJsonl) - **数据一致**: 全",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.4058798462152481,
-      "maxScore": 0.4058798462152481,
+      "totalScore": 0.8901831328868866,
+      "maxScore": 0.48430328667163847,
       "firstRecalledAt": "2026-07-11T16:50:21.879Z",
-      "lastRecalledAt": "2026-07-11T16:50:21.879Z",
+      "lastRecalledAt": "2026-07-15T17:03:39.170Z",
       "queryHashes": [
-        "484161ac125b"
+        "484161ac125b",
+        "f8aa6a942abc"
       ],
       "recallDays": [
-        "2026-07-11"
+        "2026-07-11",
+        "2026-07-16"
       ],
       "conceptTags": [
         "2.8951",
@@ -1180,18 +1182,20 @@
       "endLine": 52,
       "source": "memory",
       "snippet": "- 7/7峰值$25.05(opera-4.8覆写), 7/9今日$5.85正常 - **兜底文件**: 已写 `/tmp/cost_daily_report.json` + Kitty dashboard `cost_daily.json` - **Kitty通知**: ⚠️已降级写文件，Kitty未确认（sessions_send 30s超时） - **API验证**: http://localhost:8765/api/costs ✅ 正常响应，`_source:jsonl-full-scan` - **状态**: 降级（数据完整，仅Kitty通知未收到回复）",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.4342033207416534,
-      "maxScore": 0.4342033207416534,
+      "totalScore": 0.9397658765316008,
+      "maxScore": 0.5055625557899475,
       "firstRecalledAt": "2026-07-12T00:43:43.858Z",
-      "lastRecalledAt": "2026-07-12T00:43:43.858Z",
+      "lastRecalledAt": "2026-07-15T17:03:39.170Z",
       "queryHashes": [
-        "8988082d78fa"
+        "8988082d78fa",
+        "f8aa6a942abc"
       ],
       "recallDays": [
-        "2026-07-12"
+        "2026-07-12",
+        "2026-07-16"
       ],
       "conceptTags": [
         "7/7峰值",
@@ -1735,6 +1739,37 @@
         "textile",
         "生效",
         "争议"
+      ]
+    },
+    "memory:memory/2026-07-12.md:48:53": {
+      "key": "memory:memory/2026-07-12.md:48:53",
+      "path": "memory/2026-07-12.md",
+      "startLine": 48,
+      "endLine": 53,
+      "source": "memory",
+      "snippet": "- 按模型: deepseek-r1 $51.06, v4-pro $37.63, opus-4.8 $23.49, sonnet-4.5 $0.64 - 本月变化: +$2.93 vs 昨日, 主要来自Kitty(+$4.31) - 状态: ⚠️ 降级写文件 — Kitty session_send超时30s无响应，cost_daily.json已就位 - API验证: ✅ localhost:8765/api/costs 可达（但数据源仍为旧sessions.json，Kitty需更新到.jsonl全量扫描） - 文件路径: ~/opc-workspace/Kitty/opc-dashboard/data/cost_daily.json",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4765618503093719,
+      "maxScore": 0.4765618503093719,
+      "firstRecalledAt": "2026-07-15T17:03:39.170Z",
+      "lastRecalledAt": "2026-07-15T17:03:39.170Z",
+      "queryHashes": [
+        "f8aa6a942abc"
+      ],
+      "recallDays": [
+        "2026-07-16"
+      ],
+      "conceptTags": [
+        "deepseek-r1",
+        "51.06",
+        "v4-pro",
+        "37.63",
+        "opus-4.8",
+        "23.49",
+        "sonnet-4.5",
+        "0.64"
       ]
     }
   }
