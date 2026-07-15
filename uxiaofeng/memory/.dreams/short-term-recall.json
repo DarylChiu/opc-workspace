@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-14T01:07:46.944Z",
+  "updatedAt": "2026-07-15T07:54:17.558Z",
   "entries": {
     "memory:memory/archive/2026-03-24.md:138:171": {
       "key": "memory:memory/archive/2026-03-24.md:138:171",
@@ -2376,6 +2376,162 @@
         "00-24",
         "speech-to-text服务账号就绪",
         "477.37充足"
+      ]
+    },
+    "memory:memory/2026-07-10.md:1:25": {
+      "key": "memory:memory/2026-07-10.md:1:25",
+      "path": "memory/2026-07-10.md",
+      "startLine": 1,
+      "endLine": 25,
+      "source": "memory",
+      "snippet": "# 2026-07-10 日记 ## Agent 跨 Session 活动 ### Balance ⚖️ — JGL收购KHOA DUNG 并购框架 v1.0 - **触发**: Daryl 接香港JGL收购越南KHOA DUNG项目（KHOA DUNG由越南自然人代持） - **交付**: `workspace-balance/reports/JGL-KHOA_DUNG-并购框架-v1.0-20260710.md` - **核心框架**: 定价风险地图 + CIT Law 2025 税负分析（2%新规）+ 4条路径对比(A/B/C/D) + 推荐路径A（代持人直接转，利用个人PIT 0.1%） - **待确认**: 行业、估值、代持协议、代持人身份等8项关键信息 - **后续**: Daryl 提到在忙公司车辆费用专项分析（独立任务，明天发数据） ### Self 📚 — ACCA Batch 1 部署 + Desktop Vault 路径确认 - 完成 Batch 1 深度重建（IAS 1/8/10/34 七层知识网络） - 修复 IAS-34 frontmatter 残留问题 - **重要教训**: 之前写到了 workspace-self 副本而非 Daryl 使用的 Desktop Vault - **Desktop Vault 路径**: `/Users/zhaoyuzhao/Desktop/ACCA-Knowledge-Network/` - Daryl 明确要求以后不要再犯此错误，已写入 Self MEMORY.md ### Balance Cron",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7189345121383667,
+      "maxScore": 0.3668738007545471,
+      "firstRecalledAt": "2026-07-15T04:05:00.872Z",
+      "lastRecalledAt": "2026-07-15T07:54:17.558Z",
+      "queryHashes": [
+        "924c008ae31b",
+        "d33530d7c19e"
+      ],
+      "recallDays": [
+        "2026-07-15"
+      ],
+      "conceptTags": [
+        "network",
+        "网络",
+        "v1.0",
+        "a/b/c/d",
+        "0.1",
+        "1/8/10/34",
+        "ias-34",
+        "workspace-self"
+      ]
+    },
+    "memory:memory/2026-07-01.md:1:30": {
+      "key": "memory:memory/2026-07-01.md:1:30",
+      "path": "memory/2026-07-01.md",
+      "startLine": 1,
+      "endLine": 30,
+      "source": "memory",
+      "snippet": "# 2026-07-01 日记 ## 〇、今日概况 - 7月第一天，Q3 启动 - 主要事件：Self Agent 归档 Balance 发送的 FutureTextile × Wellname 股东借款利息案例 - 本 session 全天无活跃对话，仅午夜 Cron 审计 ## 一、跨 Agent 活动 ### Self Agent — 知识树归档 - **15:52 GMT+7**: Self 收到 Balance 的 FutureTextile × Wellname 股东借款利息案例攻防总结 - **归档位置**: `ACCA-Knowledge-Network/01-Financial/Cross-Border/FutureTextile-Wellname-Shareholder-Loan-Interest.md` - **核心洞察**: 法律概念选择决定税务结果 — waiver vs condition precedent - **提取方法论**: 6条可复用方法论（已记录到 workspace-self/memory/） - **已同步索引**: Cross-Border-Home.md - **后续**: 方法论去重合并到 lessons.md（待办） ### Balance Agent — 案例攻防报告 - **15:50 GMT+7**: 完成 FutureTextile × Wellname 案例6轮攻防验证 - 方案已通过 Daryl 确认（可转换借款+附条件利息 = 零税务敞口） ## 二、系统状态 - Git remote 未配置，pull",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3629032492637634,
+      "maxScore": 0.3629032492637634,
+      "firstRecalledAt": "2026-07-15T04:05:00.872Z",
+      "lastRecalledAt": "2026-07-15T04:05:00.872Z",
+      "queryHashes": [
+        "924c008ae31b"
+      ],
+      "recallDays": [
+        "2026-07-15"
+      ],
+      "conceptTags": [
+        "network",
+        "workspace-self/memory",
+        "cross-border-home.md",
+        "lessons.md",
+        "日记",
+        "今日",
+        "概况",
+        "第一"
+      ]
+    },
+    "memory:memory/archive/2026-04-17.md:1:6": {
+      "key": "memory:memory/archive/2026-04-17.md:1:6",
+      "path": "memory/archive/2026-04-17.md",
+      "startLine": 1,
+      "endLine": 6,
+      "source": "memory",
+      "snippet": "# 2026-04-17 ## 早晨 - **07:43**: Daryl询问开发任务执行状态：\"Bryson，你在执行开发任务了吗？一切正常吧？\" - 需要检查当前任务执行状态 - 特别是昨天（4月15日）制定的STT开发计划执行情况",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.35592664182186123,
+      "maxScore": 0.35592664182186123,
+      "firstRecalledAt": "2026-07-15T04:05:00.872Z",
+      "lastRecalledAt": "2026-07-15T04:05:00.872Z",
+      "queryHashes": [
+        "924c008ae31b"
+      ],
+      "recallDays": [
+        "2026-07-15"
+      ],
+      "conceptTags": [
+        "早晨",
+        "daryl",
+        "询问",
+        "开发",
+        "任务",
+        "执行",
+        "状态",
+        "bryson"
+      ]
+    },
+    "memory:memory/archive/2026-06-06.md:1:41": {
+      "key": "memory:memory/archive/2026-06-06.md:1:41",
+      "path": "memory/archive/2026-06-06.md",
+      "startLine": 1,
+      "endLine": 41,
+      "source": "memory",
+      "snippet": "# 2026-06-06 日记 ## Daryl 新任务下发 (13:25) - 模型升级: DeepSeek R1 → Claude Opus 4.6 - **任务1**: 重构记忆系统 - **任务2**: Agent间通信方案（我牵头） - Deadline: 17:00 ## M1: 记忆系统重构 ✅ (13:34-14:15) ### 完成事项： 1. **创建分层记忆文件**: - memory/identity.md — 身份+用户+沟通规则 - memory/active.md — 活跃任务追踪 - memory/projects.md — 项目归档索引 - memory/lessons.md — 经验教训精华 2. **精简MEMORY.md**: 273行 → ~20行（纯索引） 3. **归档旧日记**: 31个文件移入 memory/archive/ 4. **更新AGENTS.md**: Session启动清单改为分层加载 5. **设置HEARTBEAT.md**: 定期维护任务 ### 重构前后对比： - MEMORY.md: 12.6KB → 0.6KB（缩减95%） - 活跃memory文件: 31个日记 → 4个专题文件 + 今天日记 - Session启动加载量: ~12KB → ~2KB ## M2: Agent通信方案 ✅ (14:20-14:35) ### 完成事项： 1. 通信协议v2文档 → kitty_collab/agent-comm-protocol-v2.md 2. 共享任务板 →",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.35144362449645994,
+      "maxScore": 0.35144362449645994,
+      "firstRecalledAt": "2026-07-15T04:05:00.872Z",
+      "lastRecalledAt": "2026-07-15T04:05:00.872Z",
+      "queryHashes": [
+        "924c008ae31b"
+      ],
+      "recallDays": [
+        "2026-07-15"
+      ],
+      "conceptTags": [
+        "4.6",
+        "34-14",
+        "memory/identity.md",
+        "memory/active.md",
+        "memory/projects.md",
+        "memory/lessons.md",
+        "精简memory.md",
+        "memory/archive"
+      ]
+    },
+    "memory:memory/archive/2026-06-13.md:1:12": {
+      "key": "memory:memory/archive/2026-06-13.md:1:12",
+      "path": "memory/archive/2026-06-13.md",
+      "startLine": 1,
+      "endLine": 12,
+      "source": "memory",
+      "snippet": "# 2026-06-13 日记 ## 概述 安静日，无用户主动交互。 ## 系统活动 - 各 Agent 无实质性工作对话 - 无新项目启动或状态变更 ## 备注 - active.md 中「已交付（运行观察期 → 6月13日周日验收）」为预定验收日期，因无交互自然推迟",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3501851886510849,
+      "maxScore": 0.3501851886510849,
+      "firstRecalledAt": "2026-07-15T04:05:00.872Z",
+      "lastRecalledAt": "2026-07-15T04:05:00.872Z",
+      "queryHashes": [
+        "924c008ae31b"
+      ],
+      "recallDays": [
+        "2026-07-15"
+      ],
+      "conceptTags": [
+        "active.md",
+        "日记",
+        "概述",
+        "安静",
+        "用户",
+        "主动",
+        "交互",
+        "系统"
       ]
     }
   }
