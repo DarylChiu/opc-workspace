@@ -1,0 +1,327 @@
+{
+  "v": "0.9.1",
+  "results": [
+    {
+      "mode": "ielts_part1",
+      "rounds": [
+        {
+          "r": 0,
+          "w": true,
+          "stt": 0,
+          "llm": 0,
+          "tot": 2779,
+          "txt": "",
+          "ch": 1
+        },
+        {
+          "r": 1,
+          "w": false,
+          "stt": 1672,
+          "llm": 1127,
+          "tot": 5605,
+          "txt": "My name is Daryl. I'm from China, but I live in Vi",
+          "ch": 1
+        },
+        {
+          "r": 2,
+          "w": false,
+          "stt": 1392,
+          "llm": 1329,
+          "tot": 5220,
+          "txt": "I enjoy reading and hiking on weekends. I also lik",
+          "ch": 1
+        },
+        {
+          "r": 3,
+          "w": false,
+          "stt": 1361,
+          "llm": 1357,
+          "tot": 8206,
+          "txt": "I studied international business. My favorite subj",
+          "ch": 1
+        },
+        {
+          "r": 4,
+          "w": false,
+          "stt": 1299,
+          "llm": 1375,
+          "tot": 8307,
+          "txt": "I live in Ho Chi Minh City, it's busy, but conveni",
+          "ch": 1
+        },
+        {
+          "r": 5,
+          "w": false,
+          "stt": 1558,
+          "llm": 1231,
+          "tot": 9104,
+          "txt": "I wake up at 7:00 and start work at 8:30, I commut",
+          "ch": 1
+        }
+      ],
+      "avg": {
+        "stt": 1456,
+        "llm": 1284,
+        "tot": 7288
+      }
+    },
+    {
+      "mode": "ielts_part2",
+      "rounds": [
+        {
+          "r": 0,
+          "w": true,
+          "stt": 0,
+          "llm": 0,
+          "tot": 6326,
+          "txt": "",
+          "ch": 1
+        },
+        {
+          "r": 1,
+          "w": false,
+          "stt": 1617,
+          "llm": 2195,
+          "tot": 14496,
+          "txt": "The book was Atomic Habits by James Clear. It's ab",
+          "ch": 0
+        },
+        {
+          "r": 2,
+          "w": false,
+          "stt": 1338,
+          "llm": 1376,
+          "tot": 9344,
+          "txt": "I finished it last month. Reading 20 Pages nightly",
+          "ch": 1
+        },
+        {
+          "r": 3,
+          "w": false,
+          "stt": 1310,
+          "llm": 1600,
+          "tot": 12157,
+          "txt": "The main idea is Tiny daily improvements. 1% bette",
+          "ch": 1
+        },
+        {
+          "r": 4,
+          "w": false,
+          "stt": 1529,
+          "llm": 1624,
+          "tot": 10828,
+          "txt": "It changed my work approach. I focus on small rout",
+          "ch": 1
+        },
+        {
+          "r": 5,
+          "w": false,
+          "stt": 1345,
+          "llm": 1099,
+          "tot": 8536,
+          "txt": "I recommend it to anyone wanting to improve its pr",
+          "ch": 1
+        }
+      ],
+      "avg": {
+        "stt": 1428,
+        "llm": 1579,
+        "tot": 11072
+      }
+    },
+    {
+      "mode": "ielts_part3",
+      "rounds": [
+        {
+          "r": 0,
+          "w": true,
+          "stt": 0,
+          "llm": 0,
+          "tot": 2934,
+          "txt": "",
+          "ch": 1
+        },
+        {
+          "r": 1,
+          "w": false,
+          "stt": 1373,
+          "llm": 1229,
+          "tot": 8846,
+          "txt": "People definitely read less. Now social media cons",
+          "ch": 1
+        },
+        {
+          "r": 2,
+          "w": false,
+          "stt": 1456,
+          "llm": 1386,
+          "tot": 13222,
+          "txt": "Reading develops critical thinking regular readers",
+          "ch": 1
+        },
+        {
+          "r": 3,
+          "w": false,
+          "stt": 1272,
+          "llm": 1308,
+          "tot": 9475,
+          "txt": "Schools need 30 minutes of Silent. Reading daily. ",
+          "ch": 1
+        },
+        {
+          "r": 4,
+          "w": false,
+          "stt": 1441,
+          "llm": 1775,
+          "tot": 9067,
+          "txt": "Digital platforms. Make books. Accessible audioboo",
+          "ch": 1
+        },
+        {
+          "r": 5,
+          "w": false,
+          "stt": 1176,
+          "llm": 1518,
+          "tot": 11559,
+          "txt": "In my country. People read business books. Fiction",
+          "ch": 1
+        }
+      ],
+      "avg": {
+        "stt": 1344,
+        "llm": 1443,
+        "tot": 10434
+      }
+    },
+    {
+      "mode": "business_pitch",
+      "rounds": [
+        {
+          "r": 0,
+          "w": true,
+          "stt": 0,
+          "llm": 0,
+          "tot": 2922,
+          "txt": "",
+          "ch": 1
+        },
+        {
+          "r": 1,
+          "w": false,
+          "stt": 1375,
+          "llm": 2674,
+          "tot": 14972,
+          "txt": "Sustainable Fabrics Revenue. Grew 40%.",
+          "ch": 0
+        },
+        {
+          "r": 2,
+          "w": false,
+          "stt": 1539,
+          "llm": 2606,
+          "tot": 14997,
+          "txt": "We serve international fashion brands, 12, Clarenc",
+          "ch": 0
+        },
+        {
+          "r": 3,
+          "w": false,
+          "stt": 1274,
+          "llm": 2403,
+          "tot": 13997,
+          "txt": "Are waterless dying. Technology reduces water used",
+          "ch": 0
+        },
+        {
+          "r": 4,
+          "w": false,
+          "stt": 1332,
+          "llm": 2916,
+          "tot": 15002,
+          "txt": "The sustainable textile Market reaches, 200 billio",
+          "ch": 0
+        },
+        {
+          "r": 5,
+          "w": false,
+          "stt": 1365,
+          "llm": 3101,
+          "tot": 15000,
+          "txt": "We seek 5 million series 8, scale production and e",
+          "ch": 0
+        }
+      ],
+      "avg": {
+        "stt": 1377,
+        "llm": 2740,
+        "tot": 14794
+      }
+    },
+    {
+      "mode": "free_talk",
+      "rounds": [
+        {
+          "r": 0,
+          "w": true,
+          "stt": 0,
+          "llm": 0,
+          "tot": 1849,
+          "txt": "",
+          "ch": 1
+        },
+        {
+          "r": 1,
+          "w": false,
+          "stt": 1411,
+          "llm": 1160,
+          "tot": 9799,
+          "txt": "I visited Tokyo and Kyoto recently, the food was i",
+          "ch": 1
+        },
+        {
+          "r": 2,
+          "w": false,
+          "stt": 1345,
+          "llm": 1264,
+          "tot": 9900,
+          "txt": "I'm into photography. I bought a camera last year ",
+          "ch": 1
+        },
+        {
+          "r": 3,
+          "w": false,
+          "stt": 1465,
+          "llm": 1574,
+          "tot": 8193,
+          "txt": "Work-life balance matters. I don't check emails af",
+          "ch": 1
+        },
+        {
+          "r": 4,
+          "w": false,
+          "stt": 1141,
+          "llm": 1591,
+          "tot": 9796,
+          "txt": "I'm thinking about learning Spanish, it would be u",
+          "ch": 1
+        },
+        {
+          "r": 5,
+          "w": false,
+          "stt": 1138,
+          "llm": 1549,
+          "tot": 13396,
+          "txt": "My favorite Cuisine is Japanese. I cook pasta at",
+          "ch": 0
+        }
+      ],
+      "avg": {
+        "stt": 1300,
+        "llm": 1428,
+        "tot": 10217
+      }
+    }
+  ],
+  "grand_avg_ms": 10761,
+  "time_s": 286
+}

@@ -1,0 +1,714 @@
+{
+  "summary": {
+    "session_id": "7e8e38a2",
+    "mode": "ielts_part1",
+    "pipeline": "cascade",
+    "created_at": "2026-07-09T12:31:33.553615+00:00",
+    "ended_at": "2026-07-09T12:41:16.016008+00:00",
+    "total_turns": 14,
+    "avg_e2e_ms": 8332.0,
+    "total_issues": 14
+  },
+  "turns": [
+    {
+      "id": 227,
+      "session_id": "7e8e38a2",
+      "turn_id": 2,
+      "timestamp_start": 1783600312.133288,
+      "timestamp_end": 1783600318.923986,
+      "e2e_latency_ms": 6789.820909500122,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "Good evening Alex. My name is Stavro. Stavro too.",
+      "asr_confidence": 1.0,
+      "asr_latency_ms": 863.2330894470215,
+      "asr_model": "google-stt-latest_short",
+      "llm_intent": "general_chat",
+      "llm_response": "Good evening, Stavro. It's nice to meet you. Let me start with a simple question — do you work or are you a student at the moment?",
+      "llm_latency_ms": 4414.6058559417725,
+      "llm_model": "",
+      "llm_tokens_in": 0,
+      "llm_tokens_out": 0,
+      "tts_text": "Good evening, Stavro. It's nice to meet you. Let me start with a simple question — do you work or are you a student at the moment?",
+      "tts_latency_ms": 1511.9819641113281,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 6790ms，ASR=863ms LLM=4415ms TTS=1512ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "warn",
+          "symptom": "ASR 处理偏慢",
+          "diagnosis": "ASR 耗时 863ms，超过推荐值 300ms",
+          "solution": "📝 可能原因: 长句子/网络延迟/STT服务响应慢，已记录",
+          "rule_id": "slow_asr_only"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 4415ms，tokens: in=0 out=0 model=",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    },
+    {
+      "id": 228,
+      "session_id": "7e8e38a2",
+      "turn_id": 3,
+      "timestamp_start": 1783600332.846402,
+      "timestamp_end": 1783600338.7239199,
+      "e2e_latency_ms": 5877.047777175903,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "I have been working for 6 years.",
+      "asr_confidence": 1.0,
+      "asr_latency_ms": 664.1600131988525,
+      "asr_model": "google-stt-latest_short",
+      "llm_intent": "general_chat",
+      "llm_response": "That's great — six years is a solid amount of experience. What field do you work in?",
+      "llm_latency_ms": 4141.391754150391,
+      "llm_model": "",
+      "llm_tokens_in": 0,
+      "llm_tokens_out": 0,
+      "tts_text": "That's great — six years is a solid amount of experience. What field do you work in?",
+      "tts_latency_ms": 1071.4960098266602,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 5877ms，ASR=664ms LLM=4141ms TTS=1071ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "warn",
+          "symptom": "ASR 处理偏慢",
+          "diagnosis": "ASR 耗时 664ms，超过推荐值 300ms",
+          "solution": "📝 可能原因: 长句子/网络延迟/STT服务响应慢，已记录",
+          "rule_id": "slow_asr_only"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 4141ms，tokens: in=0 out=0 model=",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    },
+    {
+      "id": 229,
+      "session_id": "7e8e38a2",
+      "turn_id": 4,
+      "timestamp_start": 1783600353.1176698,
+      "timestamp_end": 1783600360.190109,
+      "e2e_latency_ms": 7071.951150894165,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "I am a financial manager.",
+      "asr_confidence": 1.0,
+      "asr_latency_ms": 495.5940246582031,
+      "asr_model": "google-stt-latest_short",
+      "llm_intent": "general_chat",
+      "llm_response": "Oh, a financial manager — that sounds like a role that requires a lot of attention to detail and responsibility. What does a typical day look like for you in that position?",
+      "llm_latency_ms": 5405.702829360962,
+      "llm_model": "",
+      "llm_tokens_in": 0,
+      "llm_tokens_out": 0,
+      "tts_text": "Oh, a financial manager — that sounds like a role that requires a lot of attention to detail and responsibility. What does a typical day look like for you in that position?",
+      "tts_latency_ms": 1170.654296875,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 7072ms，ASR=496ms LLM=5406ms TTS=1171ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "warn",
+          "symptom": "ASR 处理偏慢",
+          "diagnosis": "ASR 耗时 496ms，超过推荐值 300ms",
+          "solution": "📝 可能原因: 长句子/网络延迟/STT服务响应慢，已记录",
+          "rule_id": "slow_asr_only"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 5406ms，tokens: in=0 out=0 model=",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    },
+    {
+      "id": 230,
+      "session_id": "7e8e38a2",
+      "turn_id": 5,
+      "timestamp_start": 1783600387.335281,
+      "timestamp_end": 1783600395.329589,
+      "e2e_latency_ms": 7993.682861328125,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "It's hard to say. Sometimes it's a busy day, but sometimes I just deal with some routine routine.",
+      "asr_confidence": 1.0,
+      "asr_latency_ms": 845.1807498931885,
+      "asr_model": "google-stt-latest_short",
+      "llm_intent": "general_chat",
+      "llm_response": "I see — so it can be quite unpredictable. Some days must be hectic with deadlines, while others are more predictable. Do you prefer the busy days or the quieter, routine ones?",
+      "llm_latency_ms": 5771.229028701782,
+      "llm_model": "",
+      "llm_tokens_in": 0,
+      "llm_tokens_out": 0,
+      "tts_text": "I see — so it can be quite unpredictable. Some days must be hectic with deadlines, while others are more predictable. Do you prefer the busy days or the quieter, routine ones?",
+      "tts_latency_ms": 1377.2730827331543,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 7994ms，ASR=845ms LLM=5771ms TTS=1377ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "warn",
+          "symptom": "ASR 处理偏慢",
+          "diagnosis": "ASR 耗时 845ms，超过推荐值 300ms",
+          "solution": "📝 可能原因: 长句子/网络延迟/STT服务响应慢，已记录",
+          "rule_id": "slow_asr_only"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 5771ms，tokens: in=0 out=0 model=",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    },
+    {
+      "id": 231,
+      "session_id": "7e8e38a2",
+      "turn_id": 7,
+      "timestamp_start": 1783600427.758189,
+      "timestamp_end": 1783600436.867758,
+      "e2e_latency_ms": 9109.075784683228,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "Actually, I prefer a busy day, but I do something more structural than the routine to make my effort to improve myself.",
+      "asr_confidence": 1.0,
+      "asr_latency_ms": 891.7460441589355,
+      "asr_model": "google-stt-latest_short",
+      "llm_intent": "general_chat",
+      "llm_response": "That's a balanced way to look at it — you enjoy being challenged but also want structure for growth. What kind of things do you do to improve yourself in your field? Do you take courses, read, or something else?",
+      "llm_latency_ms": 7004.323720932007,
+      "llm_model": "",
+      "llm_tokens_in": 0,
+      "llm_tokens_out": 0,
+      "tts_text": "That's a balanced way to look at it — you enjoy being challenged but also want structure for growth. What kind of things do you do to improve yourself in your field? Do you take courses, read, or something else?",
+      "tts_latency_ms": 1213.0060195922852,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 9109ms，ASR=892ms LLM=7004ms TTS=1213ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "warn",
+          "symptom": "ASR 处理偏慢",
+          "diagnosis": "ASR 耗时 892ms，超过推荐值 300ms",
+          "solution": "📝 可能原因: 长句子/网络延迟/STT服务响应慢，已记录",
+          "rule_id": "slow_asr_only"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 7004ms，tokens: in=0 out=0 model=",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    },
+    {
+      "id": 232,
+      "session_id": "7e8e38a2",
+      "turn_id": 9,
+      "timestamp_start": 1783600471.3868082,
+      "timestamp_end": 1783600482.96525,
+      "e2e_latency_ms": 11577.756881713867,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "Yep, I picked some courses and mixed and do some notes on the IFRS and VAS, I mean the accounting policy.",
+      "asr_confidence": 1.0,
+      "asr_latency_ms": 951.8320560455322,
+      "asr_model": "google-stt-latest_short",
+      "llm_intent": "general_chat",
+      "llm_response": "That's really impressive — keeping up with IFRS and local accounting standards shows real dedication to your craft. Now let me shift gears a little. I'd love to hear about where you live. Do you live in a busy city area or a quieter part of town?",
+      "llm_latency_ms": 9324.720859527588,
+      "llm_model": "",
+      "llm_tokens_in": 0,
+      "llm_tokens_out": 0,
+      "tts_text": "That's really impressive — keeping up with IFRS and local accounting standards shows real dedication to your craft. Now let me shift gears a little. I'd love to hear about where you live. Do you live in a busy city area or a quieter part of town?",
+      "tts_latency_ms": 1301.203966140747,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 11578ms，ASR=952ms LLM=9325ms TTS=1301ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "warn",
+          "symptom": "ASR 处理偏慢",
+          "diagnosis": "ASR 耗时 952ms，超过推荐值 300ms",
+          "solution": "📝 可能原因: 长句子/网络延迟/STT服务响应慢，已记录",
+          "rule_id": "slow_asr_only"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 9325ms，tokens: in=0 out=0 model=",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    },
+    {
+      "id": 233,
+      "session_id": "7e8e38a2",
+      "turn_id": 11,
+      "timestamp_start": 1783600522.703517,
+      "timestamp_end": 1783600530.5655649,
+      "e2e_latency_ms": 7861.19270324707,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "Now, I live in a quiet part of town in a factory area, but actually I enjoy living in a busy city, like Hu Jimin City.",
+      "asr_confidence": 1.0,
+      "asr_latency_ms": 1062.025785446167,
+      "asr_model": "google-stt-latest_short",
+      "llm_intent": "general_chat",
+      "llm_response": "Oh, so you're currently in a quieter spot but you're drawn to the energy of Ho Chi Minh City — that's an interesting contrast. What is it about the busy city life that appeals to you so much?",
+      "llm_latency_ms": 5383.872985839844,
+      "llm_model": "",
+      "llm_tokens_in": 0,
+      "llm_tokens_out": 0,
+      "tts_text": "Oh, so you're currently in a quieter spot but you're drawn to the energy of Ho Chi Minh City — that's an interesting contrast. What is it about the busy city life that appeals to you so much?",
+      "tts_latency_ms": 1415.2939319610596,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 7861ms，ASR=1062ms LLM=5384ms TTS=1415ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "warn",
+          "symptom": "ASR 处理偏慢",
+          "diagnosis": "ASR 耗时 1062ms，超过推荐值 300ms",
+          "solution": "📝 可能原因: 长句子/网络延迟/STT服务响应慢，已记录",
+          "rule_id": "slow_asr_only"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 5384ms，tokens: in=0 out=0 model=",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    },
+    {
+      "id": 234,
+      "session_id": "7e8e38a2",
+      "turn_id": 13,
+      "timestamp_start": 1783600570.207535,
+      "timestamp_end": 1783600576.4566588,
+      "e2e_latency_ms": 6247.888803482056,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "First of all, it's so convenient for me to do shopping, enjoy all kinds of coffee, and learn the concept of a life-house show because I enjoy music, coffee, and the action and the fractionable issue. you",
+      "asr_confidence": 1.0,
+      "asr_latency_ms": 1263.611078262329,
+      "asr_model": "google-stt-latest_short",
+      "llm_intent": "general_chat",
+      "llm_response": "",
+      "llm_latency_ms": 3485.383987426758,
+      "llm_model": "",
+      "llm_tokens_in": 0,
+      "llm_tokens_out": 0,
+      "tts_text": "I'm sorry, I didn't quite catch that. Could you say it again?",
+      "tts_latency_ms": 1498.8937377929688,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 6248ms，ASR=1264ms LLM=3485ms TTS=1499ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "warn",
+          "symptom": "ASR 处理偏慢",
+          "diagnosis": "ASR 耗时 1264ms，超过推荐值 300ms",
+          "solution": "📝 可能原因: 长句子/网络延迟/STT服务响应慢，已记录",
+          "rule_id": "slow_asr_only"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 3485ms，tokens: in=0 out=0 model=",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    },
+    {
+      "id": 235,
+      "session_id": "7e8e38a2",
+      "turn_id": 16,
+      "timestamp_start": 1783600612.600718,
+      "timestamp_end": 1783600625.454516,
+      "e2e_latency_ms": 12853.09886932373,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "The busy city life appealed to me because it's so convenient for me to do shopping in your kind of coffee and learn and enjoy the concept or like house show and that's all. you",
+      "asr_confidence": 1.0,
+      "asr_latency_ms": 1087.8047943115234,
+      "asr_model": "google-stt-latest_short",
+      "llm_intent": "general_chat",
+      "llm_response": "Ah, I see — so it's the convenience of shopping, the variety of coffee shops, and the live music or house shows that really draw you in. That makes a lot of sense. Do you get the chance to visit Ho Chi Minh City often for those things, or is it more of a rare treat?",
+      "llm_latency_ms": 11007.123947143555,
+      "llm_model": "",
+      "llm_tokens_in": 0,
+      "llm_tokens_out": 0,
+      "tts_text": "Ah, I see — so it's the convenience of shopping, the variety of coffee shops, and the live music or house shows that really draw you in. That makes a lot of sense. Do you get the chance to visit Ho Chi Minh City often for those things, or is it more of a rare treat?",
+      "tts_latency_ms": 758.1701278686523,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 12853ms，ASR=1088ms LLM=11007ms TTS=758ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "warn",
+          "symptom": "ASR 处理偏慢",
+          "diagnosis": "ASR 耗时 1088ms，超过推荐值 300ms",
+          "solution": "📝 可能原因: 长句子/网络延迟/STT服务响应慢，已记录",
+          "rule_id": "slow_asr_only"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 11007ms，tokens: in=0 out=0 model=",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    },
+    {
+      "id": 236,
+      "session_id": "7e8e38a2",
+      "turn_id": 19,
+      "timestamp_start": 1783600685.173908,
+      "timestamp_end": 1783600698.70576,
+      "e2e_latency_ms": 13531.201362609863,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "Actually, I almost go to Ho Chi Minh City every week and I also make some business trip to Ho Chi Minh to visit the client or visit the partner such as all the firm. like",
+      "asr_confidence": 1.0,
+      "asr_latency_ms": 1606.3082218170166,
+      "asr_model": "google-stt-latest_short",
+      "llm_intent": "general_chat",
+      "llm_response": "That's quite a commute — every week must keep you pretty busy! So you get to experience the best of both worlds then: the calm of your factory area to recharge, and the buzz of the city for work and leisure. When you're in Ho Chi Minh City for business, do you ever have time to squeeze in one of those coffee shop visits or a show?",
+      "llm_latency_ms": 10687.54506111145,
+      "llm_model": "",
+      "llm_tokens_in": 0,
+      "llm_tokens_out": 0,
+      "tts_text": "That's quite a commute — every week must keep you pretty busy! So you get to experience the best of both worlds then: the calm of your factory area to recharge, and the buzz of the city for work and leisure. When you're in Ho Chi Minh City for business, do you ever have time to squeeze in one of those coffee shop visits or a show?",
+      "tts_latency_ms": 1237.3480796813965,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 13531ms，ASR=1606ms LLM=10688ms TTS=1237ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "warn",
+          "symptom": "ASR 处理偏慢",
+          "diagnosis": "ASR 耗时 1606ms，超过推荐值 300ms",
+          "solution": "📝 可能原因: 长句子/网络延迟/STT服务响应慢，已记录",
+          "rule_id": "slow_asr_only"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 10688ms，tokens: in=0 out=0 model=",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    },
+    {
+      "id": 237,
+      "session_id": "7e8e38a2",
+      "turn_id": 20,
+      "timestamp_start": 1783600698.720713,
+      "timestamp_end": 1783600704.222524,
+      "e2e_latency_ms": 5500.153064727783,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "the city, and I'd like to stay in here. I'm staying there.",
+      "asr_confidence": 1.0,
+      "asr_latency_ms": 1029.6261310577393,
+      "asr_model": "google-stt-latest_short",
+      "llm_intent": "general_chat",
+      "llm_response": "",
+      "llm_latency_ms": 3168.6270236968994,
+      "llm_model": "",
+      "llm_tokens_in": 0,
+      "llm_tokens_out": 0,
+      "tts_text": "I'm sorry, I didn't quite catch that. Could you say it again?",
+      "tts_latency_ms": 1301.8999099731445,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 5500ms，ASR=1030ms LLM=3169ms TTS=1302ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "warn",
+          "symptom": "ASR 处理偏慢",
+          "diagnosis": "ASR 耗时 1030ms，超过推荐值 300ms",
+          "solution": "📝 可能原因: 长句子/网络延迟/STT服务响应慢，已记录",
+          "rule_id": "slow_asr_only"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 3169ms，tokens: in=0 out=0 model=",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    },
+    {
+      "id": 238,
+      "session_id": "7e8e38a2",
+      "turn_id": 21,
+      "timestamp_start": 1783600740.575099,
+      "timestamp_end": 1783600749.940486,
+      "e2e_latency_ms": 9363.9976978302,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "Yep. I have ever been to one of those coffee shops",
+      "asr_confidence": 1.0,
+      "asr_latency_ms": 1601.8497943878174,
+      "asr_model": "google-stt-latest_short",
+      "llm_intent": "general_chat",
+      "llm_response": "",
+      "llm_latency_ms": 5405.879974365234,
+      "llm_model": "",
+      "llm_tokens_in": 0,
+      "llm_tokens_out": 0,
+      "tts_text": "I'm sorry, I didn't quite catch that. Could you say it again?",
+      "tts_latency_ms": 2356.2679290771484,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 9364ms，ASR=1602ms LLM=5406ms TTS=2356ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "warn",
+          "symptom": "ASR 处理偏慢",
+          "diagnosis": "ASR 耗时 1602ms，超过推荐值 300ms",
+          "solution": "📝 可能原因: 长句子/网络延迟/STT服务响应慢，已记录",
+          "rule_id": "slow_asr_only"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 5406ms，tokens: in=0 out=0 model=",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    },
+    {
+      "id": 239,
+      "session_id": "7e8e38a2",
+      "turn_id": 22,
+      "timestamp_start": 1783600749.954648,
+      "timestamp_end": 1783600755.795062,
+      "e2e_latency_ms": 5838.681936264038,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "and I like the short name every half.",
+      "asr_confidence": 1.0,
+      "asr_latency_ms": 915.2719974517822,
+      "asr_model": "google-stt-latest_short",
+      "llm_intent": "general_chat",
+      "llm_response": "",
+      "llm_latency_ms": 2747.9238510131836,
+      "llm_model": "",
+      "llm_tokens_in": 0,
+      "llm_tokens_out": 0,
+      "tts_text": "I'm sorry, I didn't quite catch that. Could you say it again?",
+      "tts_latency_ms": 2175.4860877990723,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 5839ms，ASR=915ms LLM=2748ms TTS=2175ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "warn",
+          "symptom": "ASR 处理偏慢",
+          "diagnosis": "ASR 耗时 915ms，超过推荐值 300ms",
+          "solution": "📝 可能原因: 长句子/网络延迟/STT服务响应慢，已记录",
+          "rule_id": "slow_asr_only"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 2748ms，tokens: in=0 out=0 model=",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    },
+    {
+      "id": 240,
+      "session_id": "7e8e38a2",
+      "turn_id": 24,
+      "timestamp_start": 1783600833.92509,
+      "timestamp_end": 1783600840.9551492,
+      "e2e_latency_ms": 7029.463291168213,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "Sorry, I have to do something my own.",
+      "asr_confidence": 1.0,
+      "asr_latency_ms": 1206.6991329193115,
+      "asr_model": "google-stt-latest_short",
+      "llm_intent": "general_chat",
+      "llm_response": "No problem at all — I understand. Thank you for chatting with me, and I hope you have a great day. Best of luck with everything!",
+      "llm_latency_ms": 4582.634210586548,
+      "llm_model": "",
+      "llm_tokens_in": 0,
+      "llm_tokens_out": 0,
+      "tts_text": "No problem at all — I understand. Thank you for chatting with me, and I hope you have a great day. Best of luck with everything!",
+      "tts_latency_ms": 1240.1299476623535,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 7029ms，ASR=1207ms LLM=4583ms TTS=1240ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "warn",
+          "symptom": "ASR 处理偏慢",
+          "diagnosis": "ASR 耗时 1207ms，超过推荐值 300ms",
+          "solution": "📝 可能原因: 长句子/网络延迟/STT服务响应慢，已记录",
+          "rule_id": "slow_asr_only"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 4583ms，tokens: in=0 out=0 model=",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    }
+  ]
+}

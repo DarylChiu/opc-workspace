@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔍 IELTS Tutor v2.0 · 实时监控</title>
+<style>
+:root {
+    --bg:#0a0a14; --card:#12122a; --border:#1e1e3a;
+    --accent:#6c63ff; --accent2:#00d4aa; --text:#d0d0e8;
+    --muted:#666; --danger:#ff6b6b; --warn:#ffa500;
+    --stt:#4fc3f7; --llm:#ce93d8; --tts:#aed581;
+    --audio:#ffb74d; --state:#4db6ac;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+    font-family: 'SF Mono', 'Cascadia Code', 'Fira Code', 'JetBrains Mono', monospace;
+    background:var(--bg); color:var(--text); min-height:100vh;
+    padding:12px 16px;
+}
+.header {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:10px 16px; background:var(--card); border-radius:10px;
+    border:1px solid var(--border); margin-bottom:10px;
+}
+.header h1 { font-size:15px; font-weight:600; }
+.header .conn { font-size:11px; display:flex; align-items:center; gap:6px; }
+.dot { width:8px;height:8px;border-radius:50%;display:inline-block; }
+.dot.live { background:var(--accent2); animation:pulse 1.5s infinite; }
+.dot.dead { background:var(--danger); }
+@keyframes pulse { 50%{opacity:.3} }
+
+.grid { display:grid; grid-template-columns:1fr 320px; gap:10px; height:calc(100vh - 80px); }
+
+/* Left: Timeline */
+.timeline-panel {
+    background:var(--card); border-radius:10px; border:1px solid var(--border);
+    display:flex; flex-direction:column; overflow:hidden;
+}
+.timeline-header {
+    display:flex; align-items:center; gap:6px; padding:8px 12px;
+    border-bottom:1px solid var(--border); font-size:11px; flex-shrink:0;
+}
+.timeline-header .filter-btn {
+    background:var(--bg); color:var(--muted); border:1px solid var(--border);
+    border-radius:4px; padding:2px 8px; font-size:10px; cursor:pointer;
+    font-family:inherit; transition:all .15s;
+}
+.timeline-header .filter-btn.on { color:var(--text); border-color:var(--accent); }
+.timeline-header .filter-btn.audio-on { color:var(--audio); border-color:var(--audio); }
+.timeline-header .filter-btn.stt-on { color:var(--stt); border-color:var(--stt); }
+.timeline-header .filter-btn.llm-on { color:var(--llm); border-color:var(--llm); }
+.timeline-header .filter-btn.tts-on { color:var(--tts); border-color:var(--tts); }
+.timeline-header .filter-btn.state-on { color:var(--state); border-color:var(--state); }
+.timeline-header .filter-btn.err-on { color:var(--danger); border-color:var(--danger); }
+.timeline-header .count { color:var(--muted); margin-left:auto; font-size:10px; }
+.timeline-list {
+    flex:1; overflow-y:auto; padding:0; font-size:11px;
+}
+.timeline-list::-webkit-scrollbar { width:4px; }
+.timeline-list::-webkit-scrollbar-thumb { background:var(--border); border-radius:2px; }
+
+.event-row {
+    display:flex; align-items:flex-start; gap:8px; padding:4px 12px;
+    border-bottom:1px solid rgba(255,255,255,.02);
+    transition:background .1s;
+}
+.event-row:hover { background:rgba(255,255,255,.03); }
+.event-row.hidden { display:none; }
+.event-time { color:var(--muted); font-size:10px; white-space:nowrap; min-width:68px; padding-top:1px; }
+.event-badge {
+    font-size:9px; padding:1px 5px; border-radius:3px; white-space:nowrap; min-width:48px;
+    text-align:center; font-weight:600; text-transform:uppercase;
+}
+.event-badge.audio { background:rgba(255,183,77,.15); color:var(--audio); }
+.event-badge.stt { background:rgba(79,195,247,.15); color:var(--stt); }
+.event-badge.llm { background:rgba(206,147,216,.15); color:var(--llm); }
+.event-badge.tts { background:rgba(174,213,129,.15); color:var(--tts); }
+.event-badge.state { background:rgba(77,182,172,.15); color:var(--state); }
+.event-badge.session { background:rgba(108,99,255,.15); color:var(--accent); }
+.event-badge.error { background:rgba(255,107,107,.15); color:var(--danger); }
+.event-detail { flex:1; word-break:break-all; line-height:1.5; }
+.event-detail .sid { color:var(--accent); }
+.event-detail .latency { color:var(--warn); font-size:10px; margin-left:4px; }
+.event-detail .preview { color:var(--muted); font-size:10px; display:block; margin-top:1px; }
+
+/* Right: side panels */
+.side-panels { display:flex; flex-direction:column; gap:10px; overflow-y:auto; }
+
+/* Session state */
+.state-panel {
+    background:var(--card); border-radius:10px; border:1px solid var(--border);
+    padding:10px 12px;
+}
+.state-panel h3 { font-size:12px; margin-bottom:8px; color:var(--muted); }
+.sessions-list { font-size:11px; }
+.session-card {
+    padding:8px; background:var(--bg); border-radius:6px; margin-bottom:6px;
+    border:1px solid var(--border);
+}
+.session-card .s-head { display:flex; justify-content:space-between; align-items:center; }
+.session-card .s-id { color:var(--accent); font-weight:600; }
+.session-card .s-mode { font-size:10px; color:var(--muted); }
+.session-card .s-pipeline { font-size:9px; padding:1px 6px; border-radius:3px; background:rgba(108,99,255,.15); color:var(--accent); }
+.session-card .s-state {
+    font-size:10px; padding:2px 8px; border-radius:3px; display:inline-block; margin-top:4px;
+}
+.s-state.active { background:rgba(0,212,170,.15); color:var(--accent2); }
+.s-state.listening { background:rgba(0,212,170,.15); color:var(--accent2); }
+.s-state.thinking { background:rgba(255,165,0,.15); color:var(--warn); }
+.s-state.stt { background:rgba(79,195,247,.15); color:var(--stt); }
+.s-state.llm { background:rgba(206,147,216,.15); color:var(--llm); }
+.s-state.tts { background:rgba(174,213,129,.15); color:var(--tts); }
+.s-state.speaking { background:rgba(108,99,255,.15); color:var(--accent); }
+.session-card .s-detail { font-size:10px; color:var(--muted); margin-top:3px; }
+.session-card .s-detail .val { color:var(--text); }
+
+/* Metrics */
+.metrics-panel {
+    background:var(--card); border-radius:10px; border:1px solid var(--border);
+    padding:10px 12px;
+}
+.metrics-panel h3 { font-size:12px; margin-bottom:8px; color:var(--muted); }
+.metric-row { display:flex; justify-content:space-between; padding:3px 0; font-size:11px; }
+.metric-row .label { color:var(--muted); }
+.metric-row .value { font-weight:600; }
+.metric-row .value.fast { color:var(--accent2); }
+.metric-row .value.slow { color:var(--warn); }
+
+/* Audio viz */
+.audio-panel {
+    background:var(--card); border-radius:10px; border:1px solid var(--border);
+    padding:10px 12px;
+}
+.audio-panel h3 { font-size:12px; margin-bottom:8px; color:var(--muted); }
+.audio-bars { display:flex; align-items:flex-end; gap:2px; height:40px; }
+.audio-bars .bar {
+    flex:1; background:var(--border); border-radius:1px;
+    transition:height .08s linear, background .15s;
+}
+.audio-bars .bar.hot { background:var(--audio); }
+.audio-bars .bar.peak { background:var(--accent2); }
+
+/* Latency sparkline */
+.latency-row { display:flex; gap:10px; margin-top:8px; }
+.latency-item { flex:1; text-align:center; }
+.latency-item .l-label { font-size:9px; color:var(--muted); }
+.latency-item .l-val { font-size:16px; font-weight:700; }
+.latency-item .l-val.stt-c { color:var(--stt); }
+.latency-item .l-val.llm-c { color:var(--llm); }
+.latency-item .l-val.tts-c { color:var(--tts); }
+
+/* Auto-scroll toggle */
+.scroll-ctrl {
+    font-size:10px; color:var(--muted); display:flex; align-items:center; gap:4px;
+}
+.scroll-ctrl input { accent-color:var(--accent); }
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>🔍 IELTS Tutor v2.0 · 实时监控</h1>
+    <div class="conn">
+        <span class="dot dead" id="connDot"></span>
+        <span id="connStatus">Connecting...</span>
+        <span style="color:var(--muted);font-size:10px" id="uptime"></span>
+    </div>
+</div>
+
+<div class="grid">
+    <!-- Timeline -->
+    <div class="timeline-panel">
+        <div class="timeline-header">
+            <span style="font-weight:600">📋 Event Stream</span>
+            <button class="filter-btn on" data-filter="audio" onclick="toggleFilter('audio',this)">🎤 Audio</button>
+            <button class="filter-btn stt-on" data-filter="stt" onclick="toggleFilter('stt',this)">📝 STT</button>
+            <button class="filter-btn llm-on" data-filter="llm" onclick="toggleFilter('llm',this)">🧠 LLM</button>
+            <button class="filter-btn tts-on" data-filter="tts" onclick="toggleFilter('tts',this)">🔊 TTS</button>
+            <button class="filter-btn state-on" data-filter="state" onclick="toggleFilter('state',this)">🔄 State</button>
+            <button class="filter-btn err-on" data-filter="error" onclick="toggleFilter('error',this)">❌ Error</button>
+            <label class="scroll-ctrl">
+                <input type="checkbox" id="autoScroll" checked> 自动滚动
+            </label>
+            <span class="count" id="eventCount">0 events</span>
+        </div>
+        <div class="timeline-list" id="timeline"></div>
+    </div>
+
+    <!-- Side -->
+    <div class="side-panels">
+        <!-- Sessions -->
+        <div class="state-panel">
+            <h3>📡 Active Sessions</h3>
+            <div class="sessions-list" id="sessionsList">
+                <div style="color:var(--muted);font-size:11px">Waiting for sessions...</div>
+            </div>
+        </div>
+
+        <!-- Audio visualizer -->
+        <div class="audio-panel">
+            <h3>🎤 Audio Level <span style="font-size:10px;color:var(--muted)" id="audioLabel">idle</span></h3>
+            <div class="audio-bars" id="audioBars"></div>
+            <div class="latency-row">
+                <div class="latency-item">
+                    <div class="l-label">STT</div>
+                    <div class="l-val stt-c" id="sttLatency">--</div>
+                </div>
+                <div class="latency-item">
+                    <div class="l-label">LLM</div>
+                    <div class="l-val llm-c" id="llmLatency">--</div>
+                </div>
+                <div class="latency-item">
+                    <div class="l-label">TTS</div>
+                    <div class="l-val tts-c" id="ttsLatency">--</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick metrics -->
+        <div class="metrics-panel">
+            <h3>📊 Session Metrics</h3>
+            <div id="metricsBody">
+                <div class="metric-row"><span class="label">Total sessions</span><span class="value">0</span></div>
+                <div class="metric-row"><span class="label">Last STT result</span><span class="value" style="font-size:10px">--</span></div>
+                <div class="metric-row"><span class="label">Last LLM response</span><span class="value" style="font-size:10px">--</span></div>
+                <div class="metric-row"><span class="label">Errors</span><span class="value" id="errorCount" style="color:var(--danger)">0</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// ── State ──
+const state = {
+    events: [],
+    filters: { audio:true, stt:true, llm:true, tts:true, state:true, error:true },
+    sessions: {},
+    audioLevel: 0,
+    lastLatency: { stt:null, llm:null, tts:null },
+    errorCount: 0,
+    totalSessions: 0
+};
+
+const timeline = document.getElementById('timeline');
+const ES = new EventSource('/api/monitor/stream');
+
+// ── Audio bars ──
+function initAudioBars() {
+    const container = document.getElementById('audioBars');
+    for (let i = 0; i < 30; i++) {
+        const bar = document.createElement('div');
+        bar.className = 'bar';
+        container.appendChild(bar);
+    }
+}
+initAudioBars();
+
+let audioAnimFrame;
+function animateAudioBars(level) {
+    const bars = document.querySelectorAll('#audioBars .bar');
+    const label = document.getElementById('audioLabel');
+    if (level < 0.02) {
+        bars.forEach(b => { b.style.height = '2px'; b.className = 'bar'; });
+        label.textContent = 'idle';
+        return;
+    }
+    label.textContent = level > 0.5 ? 'loud 🔊' : level > 0.15 ? 'speaking' : 'low';
+    bars.forEach((b, i) => {
+        const h = Math.max(2, level * 38 * (0.4 + 0.6 * Math.random()));
+        b.style.height = h + 'px';
+        b.className = 'bar' + (level > 0.5 ? ' peak' : level > 0.15 ? ' hot' : '');
+    });
+}
+
+// ── Render helpers ──
+const CATEGORY_MAP = {
+    audio_chunk:'audio', audio_flush:'audio', audio_start:'audio',
+    stt_result:'stt', partial_transcript:'stt',
+    llm_response:'llm',
+    tts_start:'tts',
+    pipeline_state:'state', session_state:'state', session_end:'state',
+    error:'error'
+};
+
+const CATEGORY_LABEL = { audio:'AUDIO', stt:'STT', llm:'LLM', tts:'TTS', state:'STATE', error:'ERROR' };
+
+function catLabel(c) { return CATEGORY_LABEL[c] || c.toUpperCase(); }
+
+function formatTime(ts) {
+    const d = new Date(ts * 1000);
+    return d.toLocaleTimeString('en-GB', {hour12:false}) + '.' + String(d.getMilliseconds()).padStart(3,'0');
+}
+
+function renderEvent(evt, prepend=false) {
+    const cat = CATEGORY_MAP[evt.type] || 'state';
+    const row = document.createElement('div');
+    row.className = 'event-row';
+    row.dataset.cat = cat;
+    if (!state.filters[cat]) row.classList.add('hidden');
+
+    let detail = '';
+    const sid = evt.sid ? `<span class="sid">${evt.sid}</span> ` : '';
+
+    switch (evt.type) {
+        case 'audio_chunk':
+            const kb = (evt.size / 1024).toFixed(1);
+            detail = `${sid}📦 ${kb}KB`;
+            // Animate audio level
+            state.audioLevel = Math.min(1, evt.size / 16000);
+            break;
+        case 'audio_flush':
+            detail = `${sid}📤 flush ${(evt.size/1024).toFixed(1)}KB · ${evt.duration_s || 0}s`;
+            state.audioLevel = 0;
+            break;
+        case 'audio_start':
+            detail = `${sid}🎙️ recording started`;
+            break;
+        case 'stt_result':
+            const lat = evt.latency_s ? ` <span class="latency">${evt.latency_s}s</span>` : '';
+            detail = `${sid}📝 ${evt.text || ''}${lat}`;
+            if (evt.latency_s) {
+                state.lastLatency.stt = evt.latency_s;
+                document.getElementById('sttLatency').textContent = evt.latency_s + 's';
+                document.getElementById('sttLatency').className = 'l-val stt-c ' + (evt.latency_s < 1 ? 'fast' : 'slow');
+            }
+            break;
+        case 'llm_response':
+            const llat = evt.latency_s ? ` <span class="latency">${evt.latency_s}s</span>` : '';
+            detail = `${sid}🧠 <span class="preview">${(evt.text || '').slice(0,100)}</span>${llat}`;
+            if (evt.latency_s) {
+                state.lastLatency.llm = evt.latency_s;
+                document.getElementById('llmLatency').textContent = evt.latency_s + 's';
+                document.getElementById('llmLatency').className = 'l-val llm-c ' + (evt.latency_s < 2 ? 'fast' : 'slow');
+            }
+            break;
+        case 'tts_start':
+            const tlat = evt.latency_s ? ` <span class="latency">${evt.latency_s}s</span>` : '';
+            detail = `${sid}🔊 <span class="preview">${(evt.text_preview || '').slice(0,80)}</span>${tlat}`;
+            if (evt.latency_s) {
+                state.lastLatency.tts = evt.latency_s;
+                document.getElementById('ttsLatency').textContent = evt.latency_s + 's';
+                document.getElementById('ttsLatency').className = 'l-val tts-c ' + (evt.latency_s < 1 ? 'fast' : 'slow');
+            }
+            break;
+        case 'pipeline_state':
+            detail = `${sid}🔄 → ${evt.state}`;
+            if (evt.sid && state.sessions[evt.sid]) {
+                state.sessions[evt.sid].state = evt.state;
+                updateSessionCards();
+            }
+            // Reset audio level on state change away from listening
+            if (evt.state !== 'listening') state.audioLevel = 0;
+            break;
+        case 'session_state':
+            const pipe = evt.pipeline || '?';
+            detail = `${sid}📡 session: ${evt.state} · ${pipe} · ${evt.mode || ''}`;
+            if (evt.state === 'active' || evt.state === 'listening') {
+                if (!state.sessions[evt.sid]) {
+                    state.sessions[evt.sid] = { state: 'active', pipeline: pipe, mode: evt.mode, startTs: evt.ts };
+                    state.totalSessions++;
+                }
+                state.sessions[evt.sid].state = evt.state;
+            }
+            updateSessionCards();
+            break;
+        case 'session_end':
+            detail = `${sid}🏁 session ended`;
+            delete state.sessions[evt.sid];
+            updateSessionCards();
+            state.audioLevel = 0;
+            break;
+        case 'error':
+            detail = `${sid}❌ ${evt.msg || 'unknown error'}`;
+            state.errorCount++;
+            document.getElementById('errorCount').textContent = state.errorCount;
+            document.getElementById('errorCount').style.color = 'var(--danger)';
+            break;
+        case 'monitor_init':
+            detail = `🟢 Monitor connected · uptime: ${evt.server_uptime || '?'} · ${evt.session_count || 0} sessions`;
+            document.getElementById('uptime').textContent = '↑' + (evt.server_uptime || '');
+            break;
+        default:
+            detail = `${sid}${JSON.stringify(evt).slice(0,150)}`;
+    }
+
+    row.innerHTML = `<span class="event-time">${formatTime(evt.ts)}</span>
+        <span class="event-badge ${cat}">${catLabel(cat)}</span>
+        <span class="event-detail">${detail}</span>`;
+
+    if (prepend) {
+        timeline.insertBefore(row, timeline.firstChild);
+    } else {
+        timeline.appendChild(row);
+    }
+
+    // Auto-scroll
+    if (document.getElementById('autoScroll').checked) {
+        timeline.scrollTop = timeline.scrollHeight;
+    }
+}
+
+function updateSessionCards() {
+    const container = document.getElementById('sessionsList');
+    const sids = Object.keys(state.sessions);
+    if (sids.length === 0) {
+        container.innerHTML = '<div style="color:var(--muted);font-size:11px">No active sessions</div>';
+        return;
+    }
+    container.innerHTML = sids.map(sid => {
+        const s = state.sessions[sid];
+        const duration = s.startTs ? Math.floor((Date.now()/1000 - s.startTs)) : 0;
+        const durStr = duration > 60 ? `${Math.floor(duration/60)}m${duration%60}s` : `${duration}s`;
+        const pipeLabel = s.pipeline === 'realtime' ? 'Qwen-Omni' : 'Cascade';
+        return `<div class="session-card">
+            <div class="s-head">
+                <span class="s-id">${sid}</span>
+                <span class="s-pipeline">${pipeLabel}</span>
+            </div>
+            <div class="s-mode">${s.mode || '?'}</div>
+            <span class="s-state ${s.state || 'active'}">${s.state || 'active'}</span>
+            <div class="s-detail">⏱ <span class="val">${durStr}</span></div>
+        </div>`;
+    }).join('');
+}
+
+function toggleFilter(cat, btn) {
+    state.filters[cat] = !state.filters[cat];
+    if (state.filters[cat]) {
+        btn.classList.add(cat+'-on');
+        btn.classList.add('on');
+    } else {
+        btn.classList.remove(cat+'-on');
+        btn.classList.remove('on');
+    }
+    // Update visibility
+    document.querySelectorAll('.event-row').forEach(row => {
+        if (row.dataset.cat === cat) {
+            row.classList.toggle('hidden', !state.filters[cat]);
+        }
+    });
+}
+
+// ── Audio level decay animation ──
+let audioDecayTimer;
+function startAudioDecay() {
+    if (audioDecayTimer) return;
+    audioDecayTimer = setInterval(() => {
+        if (state.audioLevel > 0.01) {
+            state.audioLevel *= 0.85;
+            animateAudioBars(state.audioLevel);
+        } else {
+            state.audioLevel = 0;
+            animateAudioBars(0);
+        }
+    }, 200);
+}
+startAudioDecay();
+
+// ── SSE handler ──
+ES.onmessage = (e) => {
+    try {
+        const evt = JSON.parse(e.data);
+        state.events.push(evt);
+        if (state.events.length > 500) state.events = state.events.slice(-500);
+        renderEvent(evt, true);
+        document.getElementById('eventCount').textContent = state.events.length + ' events';
+    } catch (err) {
+        console.error('SSE parse error', err);
+    }
+};
+
+ES.onopen = () => {
+    document.getElementById('connDot').className = 'dot live';
+    document.getElementById('connStatus').textContent = 'Live';
+    document.getElementById('connStatus').style.color = 'var(--accent2)';
+};
+
+ES.onerror = () => {
+    document.getElementById('connDot').className = 'dot dead';
+    document.getElementById('connStatus').textContent = 'Disconnected · retrying...';
+    document.getElementById('connStatus').style.color = 'var(--danger)';
+};
+</script>
+</body>
+</html>

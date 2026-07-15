@@ -1,0 +1,363 @@
+{
+  "v": "0.9.1",
+  "results": [
+    {
+      "mode": "ielts_part1",
+      "rounds": [
+        {
+          "r": 0,
+          "w": true,
+          "stt": 0,
+          "llm": 0,
+          "tot": 203,
+          "fa": 203,
+          "ch": 1,
+          "txt": ""
+        },
+        {
+          "r": 1,
+          "w": false,
+          "stt": 625,
+          "llm": 944,
+          "tot": 1884,
+          "fa": 1884,
+          "ch": 1,
+          "txt": "My name is Darryl. I'm from China, but I"
+        },
+        {
+          "r": 2,
+          "w": false,
+          "stt": 530,
+          "llm": 1213,
+          "tot": 2047,
+          "fa": 2047,
+          "ch": 1,
+          "txt": "I enjoy reading and hiking on weekends. "
+        },
+        {
+          "r": 3,
+          "w": false,
+          "stt": 696,
+          "llm": 1667,
+          "tot": 2731,
+          "fa": 2730,
+          "ch": 1,
+          "txt": "I studied international business. My fav"
+        },
+        {
+          "r": 4,
+          "w": false,
+          "stt": 534,
+          "llm": 1481,
+          "tot": 2327,
+          "fa": 2327,
+          "ch": 1,
+          "txt": "I live in Ho Chi Ming City. It's busy bu"
+        },
+        {
+          "r": 5,
+          "w": false,
+          "stt": 726,
+          "llm": 1347,
+          "tot": 2348,
+          "fa": 2348,
+          "ch": 1,
+          "txt": "I wake up at 7 and start work at 8.30. I"
+        }
+      ],
+      "avg": {
+        "stt": 622,
+        "llm": 1330,
+        "fa": 2267,
+        "tot": 2267
+      }
+    },
+    {
+      "mode": "ielts_part2",
+      "rounds": [
+        {
+          "r": 0,
+          "w": true,
+          "stt": 0,
+          "llm": 0,
+          "tot": 474,
+          "fa": 474,
+          "ch": 1,
+          "txt": ""
+        },
+        {
+          "r": 1,
+          "w": false,
+          "stt": 571,
+          "llm": 1951,
+          "tot": 3384,
+          "fa": 3383,
+          "ch": 1,
+          "txt": "The book was Atomic Habits by James Clea"
+        },
+        {
+          "r": 2,
+          "w": false,
+          "stt": 550,
+          "llm": 1696,
+          "tot": 2727,
+          "fa": 2727,
+          "ch": 1,
+          "txt": "I finished it last month reading 20 page"
+        },
+        {
+          "r": 3,
+          "w": false,
+          "stt": 561,
+          "llm": 1277,
+          "tot": 2203,
+          "fa": 2203,
+          "ch": 1,
+          "txt": "The main idea is tiny daily improvements"
+        },
+        {
+          "r": 4,
+          "w": false,
+          "stt": 546,
+          "llm": 1239,
+          "tot": 1896,
+          "fa": 1896,
+          "ch": 1,
+          "txt": "It changed my work approach. I focus on "
+        },
+        {
+          "r": 5,
+          "w": false,
+          "stt": 603,
+          "llm": 1141,
+          "tot": 1884,
+          "fa": 1884,
+          "ch": 1,
+          "txt": "I recommend it to anyone wanting to impr"
+        }
+      ],
+      "avg": {
+        "stt": 566,
+        "llm": 1461,
+        "fa": 2419,
+        "tot": 2419
+      }
+    },
+    {
+      "mode": "ielts_part3",
+      "rounds": [
+        {
+          "r": 0,
+          "w": true,
+          "stt": 0,
+          "llm": 0,
+          "tot": 187,
+          "fa": 187,
+          "ch": 1,
+          "txt": ""
+        },
+        {
+          "r": 1,
+          "w": false,
+          "stt": 482,
+          "llm": 1255,
+          "tot": 1957,
+          "fa": 1957,
+          "ch": 1,
+          "txt": "People definitely read less now. Social "
+        },
+        {
+          "r": 2,
+          "w": false,
+          "stt": 484,
+          "llm": 1716,
+          "tot": 2923,
+          "fa": 2922,
+          "ch": 1,
+          "txt": "Reading develops critical thinking. Regu"
+        },
+        {
+          "r": 3,
+          "w": false,
+          "stt": 581,
+          "llm": 1677,
+          "tot": 2717,
+          "fa": 2717,
+          "ch": 1,
+          "txt": "Schools need 30 minutes of silent readin"
+        },
+        {
+          "r": 4,
+          "w": false,
+          "stt": 528,
+          "llm": 1657,
+          "tot": 2664,
+          "fa": 2663,
+          "ch": 1,
+          "txt": "Digital platforms make books accessible."
+        },
+        {
+          "r": 5,
+          "w": false,
+          "stt": 674,
+          "llm": 1624,
+          "tot": 2699,
+          "fa": 2698,
+          "ch": 1,
+          "txt": "In my country people read business books"
+        }
+      ],
+      "avg": {
+        "stt": 550,
+        "llm": 1586,
+        "fa": 2591,
+        "tot": 2592
+      }
+    },
+    {
+      "mode": "business_pitch",
+      "rounds": [
+        {
+          "r": 0,
+          "w": true,
+          "stt": 0,
+          "llm": 0,
+          "tot": 219,
+          "fa": 219,
+          "ch": 1,
+          "txt": ""
+        },
+        {
+          "r": 1,
+          "w": false,
+          "stt": 514,
+          "llm": 2186,
+          "tot": 3897,
+          "fa": 3897,
+          "ch": 1,
+          "txt": "Our company Future Textile makes sustain"
+        },
+        {
+          "r": 2,
+          "w": false,
+          "stt": 516,
+          "llm": 2302,
+          "tot": 3906,
+          "fa": 3906,
+          "ch": 1,
+          "txt": "We serve international fashion brands, 1"
+        },
+        {
+          "r": 3,
+          "w": false,
+          "stt": 552,
+          "llm": 2474,
+          "tot": 4211,
+          "fa": 4211,
+          "ch": 1,
+          "txt": "Our waterless dyeing technology reduces "
+        },
+        {
+          "r": 4,
+          "w": false,
+          "stt": 539,
+          "llm": 2463,
+          "tot": 4547,
+          "fa": 4547,
+          "ch": 1,
+          "txt": "The sustainable textile market reaches 2"
+        },
+        {
+          "r": 5,
+          "w": false,
+          "stt": 556,
+          "llm": 2847,
+          "tot": 4826,
+          "fa": 4826,
+          "ch": 1,
+          "txt": "We seek 5 million Series A to scale prod"
+        }
+      ],
+      "avg": {
+        "stt": 535,
+        "llm": 2454,
+        "fa": 4277,
+        "tot": 4277
+      }
+    },
+    {
+      "mode": "free_talk",
+      "rounds": [
+        {
+          "r": 0,
+          "w": true,
+          "stt": 0,
+          "llm": 0,
+          "tot": 162,
+          "fa": 162,
+          "ch": 1,
+          "txt": ""
+        },
+        {
+          "r": 1,
+          "w": false,
+          "stt": 687,
+          "llm": 1479,
+          "tot": 2451,
+          "fa": 2451,
+          "ch": 1,
+          "txt": "I visited Tokyo and Kyoto recently. The "
+        },
+        {
+          "r": 2,
+          "w": false,
+          "stt": 554,
+          "llm": 1554,
+          "tot": 2532,
+          "fa": 2532,
+          "ch": 1,
+          "txt": "I'm into photography. I bought a camera "
+        },
+        {
+          "r": 3,
+          "w": false,
+          "stt": 716,
+          "llm": 1643,
+          "tot": 2776,
+          "fa": 2776,
+          "ch": 1,
+          "txt": "Work-life balance matters. I don't check"
+        },
+        {
+          "r": 4,
+          "w": false,
+          "stt": 551,
+          "llm": 1398,
+          "tot": 2278,
+          "fa": 2278,
+          "ch": 1,
+          "txt": "I'm thinking about learning Spanish. It "
+        },
+        {
+          "r": 5,
+          "w": false,
+          "stt": 523,
+          "llm": 1724,
+          "tot": 2914,
+          "fa": 2914,
+          "ch": 1,
+          "txt": "My favorite cuisine is Japanese. I cook "
+        }
+      ],
+      "avg": {
+        "stt": 606,
+        "llm": 1560,
+        "fa": 2590,
+        "tot": 2590
+      }
+    }
+  ],
+  "grand_avg_ms": 2829,
+  "first_audio_ms": 2829,
+  "time_s": 75
+}

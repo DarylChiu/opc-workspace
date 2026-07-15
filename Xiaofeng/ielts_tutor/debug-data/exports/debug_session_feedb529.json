@@ -1,0 +1,264 @@
+{
+  "summary": {
+    "session_id": "feedb529",
+    "mode": "ielts_part1",
+    "pipeline": "cascade",
+    "created_at": "2026-07-05T08:15:09.725575+00:00",
+    "ended_at": "2026-07-05T08:18:51.614821+00:00",
+    "total_turns": 5,
+    "avg_e2e_ms": 11119.0,
+    "total_issues": 5
+  },
+  "turns": [
+    {
+      "id": 1,
+      "session_id": "feedb529",
+      "turn_id": 1,
+      "timestamp_start": 1783239329.747711,
+      "timestamp_end": 1783239339.804449,
+      "e2e_latency_ms": 10049.0,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "Good morning, Alex, I'm Daryl, Daryl chill. That's my full name.",
+      "asr_confidence": 0.7339142,
+      "asr_latency_ms": 3905.0,
+      "asr_model": "google-stt-latest_short",
+      "llm_intent": "ielts_part1",
+      "llm_response": "Good morning, Daryl. Nice to meet you. Let's start with a simple one — do you work or are you a student?",
+      "llm_latency_ms": 1370.0,
+      "llm_model": "deepseek-chat",
+      "llm_tokens_in": 303,
+      "llm_tokens_out": 34,
+      "tts_text": "Good morning, Daryl. Nice to meet you. Let's start with a simple one — do you work or are you a student?",
+      "tts_latency_ms": 4774.0,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 10049ms，ASR=3905ms LLM=1370ms TTS=4774ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "warn",
+          "symptom": "ASR 处理偏慢",
+          "diagnosis": "ASR 耗时 3905ms，超过推荐值 300ms",
+          "solution": "📝 可能原因: 长句子/网络延迟/STT服务响应慢，已记录",
+          "rule_id": "slow_asr_only"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 1370ms，tokens: in=303 out=34 model=deepseek-chat",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "session_id": "feedb529",
+      "turn_id": 2,
+      "timestamp_start": 1783239357.1708229,
+      "timestamp_end": 1783239367.314379,
+      "e2e_latency_ms": 10131.0,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "I have worked for almost 6 years as a Financial Manager.",
+      "asr_confidence": 0.89201254,
+      "asr_latency_ms": 4273.0,
+      "asr_model": "google-stt-latest_short",
+      "llm_intent": "ielts_part1",
+      "llm_response": "Interesting! That sounds like a demanding job. What does a typical day look like for you as a financial manager?",
+      "llm_latency_ms": 1015.0,
+      "llm_model": "deepseek-chat",
+      "llm_tokens_in": 359,
+      "llm_tokens_out": 37,
+      "tts_text": "Interesting! That sounds like a demanding job. What does a typical day look like for you as a financial manager?",
+      "tts_latency_ms": 4843.0,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 10131ms，ASR=4273ms LLM=1015ms TTS=4843ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "warn",
+          "symptom": "ASR 处理偏慢",
+          "diagnosis": "ASR 耗时 4273ms，超过推荐值 300ms",
+          "solution": "📝 可能原因: 长句子/网络延迟/STT服务响应慢，已记录",
+          "rule_id": "slow_asr_only"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 1015ms，tokens: in=359 out=37 model=deepseek-chat",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "session_id": "feedb529",
+      "turn_id": 3,
+      "timestamp_start": 1783239385.911509,
+      "timestamp_end": 1783239396.3663192,
+      "e2e_latency_ms": 10443.0,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "Always a busy day everyday. Dude, I should stop all kinds of problem in the financial department.",
+      "asr_confidence": 0.75229186,
+      "asr_latency_ms": 3674.0,
+      "asr_model": "google-stt-latest_short",
+      "llm_intent": "ielts_part1",
+      "llm_response": "I see, so you're the go-to person for solving problems. That must keep you on your toes. Do you enjoy the challenge, or does it ever get a bit overwhelming?",
+      "llm_latency_ms": 1373.0,
+      "llm_model": "deepseek-chat",
+      "llm_tokens_in": 443,
+      "llm_tokens_out": 52,
+      "tts_text": "I see, so you're the go-to person for solving problems. That must keep you on your toes. Do you enjoy the challenge, or does it ever get a bit overwhelming?",
+      "tts_latency_ms": 5396.0,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 10443ms，ASR=3674ms LLM=1373ms TTS=5396ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "warn",
+          "symptom": "ASR 处理偏慢",
+          "diagnosis": "ASR 耗时 3674ms，超过推荐值 300ms",
+          "solution": "📝 可能原因: 长句子/网络延迟/STT服务响应慢，已记录",
+          "rule_id": "slow_asr_only"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 1373ms，tokens: in=443 out=52 model=deepseek-chat",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "session_id": "feedb529",
+      "turn_id": 4,
+      "timestamp_start": 1783239427.1264498,
+      "timestamp_end": 1783239440.761924,
+      "e2e_latency_ms": 13625.0,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "Actually, I am always enjoying the challenge in sometime and sometimes I will I fail a kind of overwhelming due to the lack of perfection in the in my employee.",
+      "asr_confidence": 0.8042142,
+      "asr_latency_ms": 5474.0,
+      "asr_model": "google-stt-latest_short",
+      "llm_intent": "ielts_part1",
+      "llm_response": "That's understandable — you can't control everything, even when you're the one in charge. Let's shift topics a little. How about your hometown? What's it like?",
+      "llm_latency_ms": 1514.0,
+      "llm_model": "deepseek-chat",
+      "llm_tokens_in": 550,
+      "llm_tokens_out": 53,
+      "tts_text": "That's understandable — you can't control everything, even when you're the one in charge. Let's shift topics a little. How about your hometown? What's it like?",
+      "tts_latency_ms": 6637.0,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 13625ms，ASR=5474ms LLM=1514ms TTS=6637ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "warn",
+          "symptom": "ASR 处理偏慢",
+          "diagnosis": "ASR 耗时 5474ms，超过推荐值 300ms",
+          "solution": "📝 可能原因: 长句子/网络延迟/STT服务响应慢，已记录",
+          "rule_id": "slow_asr_only"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 1514ms，tokens: in=550 out=53 model=deepseek-chat",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "session_id": "feedb529",
+      "turn_id": 5,
+      "timestamp_start": 1783239471.364405,
+      "timestamp_end": 1783239482.723388,
+      "e2e_latency_ms": 11349.0,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "My hometown is Junction City Guangdong Province in China and is the schedule for small City in near them near the road to SeaWorld.",
+      "asr_confidence": 0.584777,
+      "asr_latency_ms": 5931.0,
+      "asr_model": "google-stt-latest_short",
+      "llm_intent": "ielts_part1",
+      "llm_response": "That sounds like a nice location — close to the sea. What do you enjoy most about living there?",
+      "llm_latency_ms": 1024.0,
+      "llm_model": "deepseek-chat",
+      "llm_tokens_in": 625,
+      "llm_tokens_out": 31,
+      "tts_text": "That sounds like a nice location — close to the sea. What do you enjoy most about living there?",
+      "tts_latency_ms": 4394.0,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 11349ms，ASR=5931ms LLM=1024ms TTS=4394ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "warn",
+          "symptom": "ASR 识别置信度低",
+          "diagnosis": "转录: \"My hometown is Junction City Guangdong Province in China and\"，置信度 58%",
+          "solution": "🔧 可能原因: 背景噪音/发音不清/口音。建议: 靠近麦克风、放慢语速、检查环境噪音",
+          "rule_id": "low_asr_confidence"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 1024ms，tokens: in=625 out=31 model=deepseek-chat",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    }
+  ]
+}

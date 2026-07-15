@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔍 Voice Debug Panel — IELTS Tutor v2.0</title>
+<style>
+:root { --bg:#0d1117; --panel:#161b22; --border:#30363d; --text:#e6edf3; --dim:#8b949e;
+  --green:#3fb950; --yellow:#d29922; --red:#f85149; --accent:#58a6ff; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  display:flex; height:100vh; overflow:hidden; }
+/* Left: pipeline + diagnostics */
+#main { flex:1; display:flex; flex-direction:column; padding:16px; gap:12px; overflow-y:auto; }
+/* Right: history sidebar */
+#sidebar { width:320px; background:var(--panel); border-left:1px solid var(--border);
+  display:flex; flex-direction:column; padding:12px; gap:8px; overflow-y:auto; }
+
+.header { display:flex; align-items:center; justify-content:space-between; padding-bottom:8px; border-bottom:1px solid var(--border); }
+.header h1 { font-size:18px; font-weight:600; }
+.badge { font-size:11px; padding:2px 8px; border-radius:10px; font-weight:600; }
+.badge-ok { background:var(--green); color:#000; }
+.badge-warn { background:var(--yellow); color:#000; }
+.badge-err { background:var(--red); color:#fff; }
+
+/* Pipeline visualization */
+.pipeline { display:flex; align-items:center; gap:8px; padding:12px; background:var(--panel); border-radius:8px; border:1px solid var(--border); flex-wrap:wrap; }
+.pipe-step { display:flex; flex-direction:column; align-items:center; padding:8px 16px; border-radius:6px; background:#1c2128; border:1px solid var(--border); min-width:90px; transition:all .3s; }
+.pipe-step.active { border-color:var(--accent); box-shadow:0 0 8px rgba(88,166,255,.3); }
+.pipe-step .label { font-size:11px; color:var(--dim); margin-bottom:2px; }
+.pipe-step .value { font-size:13px; font-weight:600; }
+.pipe-step .time { font-size:10px; color:var(--dim); }
+.pipe-arrow { color:var(--dim); font-size:18px; }
+.e2e-box { margin-left:auto; padding:8px 16px; border-radius:6px; background:#1c2128; border:1px solid var(--border); text-align:center; }
+.e2e-box .val { font-size:20px; font-weight:700; }
+.e2e-box .lbl { font-size:10px; color:var(--dim); }
+.e2e-box.ok { border-color:var(--green); }
+.e2e-box.warn { border-color:var(--yellow); }
+.e2e-box.err { border-color:var(--red); }
+
+/* Sections */
+.section { background:var(--panel); border:1px solid var(--border); border-radius:8px; padding:12px; }
+.section-title { font-size:13px; font-weight:600; margin-bottom:8px; color:var(--dim); text-transform:uppercase; letter-spacing:.5px; }
+.diagnostic-item { display:flex; align-items:flex-start; gap:8px; padding:8px; border-radius:6px; margin-bottom:6px; background:#1c2128; border-left:3px solid transparent; }
+.diagnostic-item.warn { border-left-color:var(--yellow); }
+.diagnostic-item.error { border-left-color:var(--red); }
+.diagnostic-item .sev { font-size:14px; margin-top:1px; }
+.diagnostic-item .content { flex:1; }
+.diagnostic-item .symptom { font-size:13px; font-weight:600; }
+.diagnostic-item .diag { font-size:12px; color:var(--dim); margin-top:2px; }
+.diagnostic-item .solution { font-size:12px; color:var(--accent); margin-top:3px; }
+.empty-state { text-align:center; padding:32px; color:var(--dim); font-size:13px; }
+
+/* Detail panels */
+.detail-row { display:flex; gap:12px; }
+.detail-col { flex:1; min-width:0; }
+.detail-block { background:#1c2128; border-radius:6px; padding:8px 10px; margin-bottom:6px; }
+.detail-block .label { font-size:10px; color:var(--dim); text-transform:uppercase; }
+.detail-block .content { font-size:12px; margin-top:2px; word-break:break-all; max-height:80px; overflow-y:auto; }
+.detail-block .meta { font-size:10px; color:var(--dim); margin-top:2px; }
+
+/* History sidebar */
+.history-item { padding:8px; border-radius:6px; cursor:pointer; border:1px solid transparent; transition:.2s; display:flex; align-items:center; gap:8px; }
+.history-item:hover { background:#1c2128; }
+.history-item.current { border-color:var(--accent); background:#1c2128; }
+.history-item .tnum { font-size:11px; color:var(--dim); width:24px; flex-shrink:0; }
+.history-item .tlat { font-size:12px; font-weight:600; flex-shrink:0; width:60px; }
+.history-item .tpvw { font-size:11px; color:var(--dim); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; flex:1; }
+.history-item .tstatus { font-size:14px; flex-shrink:0; }
+
+/* Controls */
+.controls { display:flex; gap:8px; flex-wrap:wrap; }
+.btn { padding:6px 14px; border-radius:6px; border:1px solid var(--border); background:var(--panel); color:var(--text); cursor:pointer; font-size:12px; transition:.2s; }
+.btn:hover { border-color:var(--accent); }
+.btn.primary { background:var(--accent); color:#000; border-color:var(--accent); font-weight:600; }
+#status-bar { padding:8px 12px; background:var(--panel); border:1px solid var(--border); border-radius:6px; font-size:12px; display:flex; align-items:center; gap:8px; }
+#status-bar .dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+#status-bar .dot.on { background:var(--green); animation:pulse 2s infinite; }
+#status-bar .dot.off { background:var(--dim); }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+/* Connect overlay */
+#connect-overlay { position:fixed; inset:0; background:var(--bg); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px; z-index:10; }
+#connect-overlay.hidden { display:none; }
+#connect-overlay h2 { font-size:16px; color:var(--dim); }
+#connect-overlay input { padding:10px 14px; border-radius:6px; border:1px solid var(--border); background:var(--panel); color:var(--text); width:300px; font-size:14px; }
+</style>
+</head>
+<body>
+
+<div id="connect-overlay">
+  <h2>🔍 连接 Debug 面板</h2>
+  <input id="session-input" type="text" placeholder="输入 Session ID...">
+  <div style="display:flex;gap:8px;">
+    <button class="btn primary" onclick="connect()">连接</button>
+    <button class="btn" onclick="loadSessions()">📋 查看可用会话</button>
+  </div>
+  <div id="session-list" style="display:none;width:320px;max-height:200px;overflow-y:auto;margin-top:8px;"></div>
+  <div style="font-size:11px;color:var(--dim);margin-top:8px;">
+    先启动 v2.0 (DEBUG_MODE=1)，再打开此面板
+  </div>
+</div>
+
+<div id="main">
+  <!-- Header -->
+  <div class="header">
+    <div style="display:flex;align-items:center;gap:8px;">
+      <h1>🔍 Voice Debug Panel</h1>
+      <span id="session-badge" class="badge badge-ok" style="display:none;"></span>
+    </div>
+    <div class="controls">
+      <span id="turn-label" style="font-size:12px;color:var(--dim);"></span>
+      <button class="btn" onclick="exportSession()">📥 导出</button>
+      <button class="btn" onclick="disconnect()">断开</button>
+    </div>
+  </div>
+
+  <!-- Status bar -->
+  <div id="status-bar">
+    <span class="dot off" id="status-dot"></span>
+    <span id="status-text">等待连接...</span>
+    <span style="margin-left:auto;color:var(--dim);font-size:11px;" id="status-time"></span>
+  </div>
+
+  <!-- Pipeline -->
+  <div class="pipeline" id="pipeline">
+    <div class="pipe-step" id="step-audio">🎤<span class="label">录音</span><span class="value" id="v-audio">—</span></div>
+    <span class="pipe-arrow">→</span>
+    <div class="pipe-step" id="step-asr">📝<span class="label">ASR</span><span class="value" id="v-asr">—</span><span class="time" id="t-asr"></span></div>
+    <span class="pipe-arrow">→</span>
+    <div class="pipe-step" id="step-llm">🧠<span class="label">LLM</span><span class="value" id="v-llm">—</span><span class="time" id="t-llm"></span></div>
+    <span class="pipe-arrow">→</span>
+    <div class="pipe-step" id="step-tts">🔊<span class="label">TTS</span><span class="value" id="v-tts">—</span><span class="time" id="t-tts"></span></div>
+    <div class="e2e-box ok" id="e2e-box">
+      <span class="lbl">端到端延迟</span>
+      <div class="val" id="v-e2e">—</div>
+    </div>
+  </div>
+
+  <!-- Diagnostics -->
+  <div class="section">
+    <div class="section-title">🩺 自动诊断</div>
+    <div id="diagnostics"><div class="empty-state">等待数据...</div></div>
+  </div>
+
+  <!-- Detail panels -->
+  <div class="section">
+    <div class="section-title">📋 本轮详情</div>
+    <div class="detail-row">
+      <div class="detail-col">
+        <div class="detail-block"><span class="label">📝 ASR 转录</span><div class="content" id="d-asr-transcript">—</div><div class="meta" id="d-asr-meta"></div></div>
+        <div class="detail-block"><span class="label">🎤 音频信息</span><div class="content" id="d-audio-meta">—</div></div>
+      </div>
+      <div class="detail-col">
+        <div class="detail-block"><span class="label">🧠 LLM 回复</span><div class="content" id="d-llm-response">—</div><div class="meta" id="d-llm-meta"></div></div>
+        <div class="detail-block"><span class="label">🔊 TTS 文本</span><div class="content" id="d-tts-text">—</div><div class="meta" id="d-tts-meta"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Sidebar: History -->
+<div id="sidebar">
+  <div class="section-title" style="margin-bottom:0;">📜 会话历史</div>
+  <div style="display:flex;gap:8px;font-size:11px;color:var(--dim);margin-bottom:4px;">
+    <span>总数: <b id="hist-count">0</b></span>
+    <span>平均: <b id="hist-avg">—</b>ms</span>
+    <span>问题: <b id="hist-issues">0</b></span>
+  </div>
+  <div id="history-list" style="flex:1;overflow-y:auto;"></div>
+  <div style="padding:8px;">
+    <button class="btn" onclick="resetView()" style="width:100%;">🔄 重置视图</button>
+  </div>
+</div>
+
+<script>
+// ── State ──
+let ws = null;
+let sessionId = null;
+let turns = [];
+let currentTurnId = null;
+let pendingTurn = null; // partial data for current turn
+const HSL = `ws://${location.hostname}:${location.port || 8767}`;
+
+// ── Connect ──
+function connect() {
+  const inp = document.getElementById('session-input').value.trim();
+  if (!inp) return;
+  sessionId = inp === 'new' ? 'new' : inp;
+  openWS(sessionId);
+}
+
+function openWS(sid) {
+  if (ws) ws.close();
+  const protocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+  const url = `${protocol}//${location.host}/debug/ws/${sid}`;
+  console.log('Connecting to', url);
+  ws = new WebSocket(url);
+  
+  ws.onopen = () => {
+    document.getElementById('connect-overlay').classList.add('hidden');
+    document.getElementById('status-dot').className = 'dot on';
+    document.getElementById('status-text').textContent = `已连接: ${sid}`;
+    document.getElementById('session-badge').style.display = 'inline';
+    document.getElementById('session-badge').textContent = sid;
+    document.getElementById('session-badge').className = 'badge badge-ok';
+    pendingTurn = null;
+    resetPipelineUI();
+  };
+  
+  ws.onmessage = (e) => {
+    const msg = JSON.parse(e.data);
+    handleMessage(msg);
+  };
+  
+  ws.onclose = () => {
+    document.getElementById('status-dot').className = 'dot off';
+    document.getElementById('status-text').textContent = '已断开，点击导出可保存数据';
+    document.getElementById('connect-overlay').classList.remove('hidden');
+    document.getElementById('session-input').value = sid;
+  };
+  
+  ws.onerror = () => {
+    document.getElementById('status-dot').className = 'dot off';
+    document.getElementById('status-text').textContent = '连接失败 — 确认后端已启动且 DEBUG_MODE=1';
+  };
+}
+
+function disconnect() {
+  if (ws) ws.close();
+  ws = null;
+}
+
+async function loadSessions() {
+  const div = document.getElementById('session-list');
+  div.style.display = 'block';
+  div.innerHTML = '<div style="text-align:center;padding:16px;color:var(--dim);">加载中...</div>';
+  try {
+    const resp = await fetch('/debug/sessions?limit=20');
+    const data = await resp.json();
+    if (!data.sessions || data.sessions.length === 0) {
+      div.innerHTML = '<div style="text-align:center;padding:12px;color:var(--dim);">暂无会话。请先启动 v2.0 会话 (DEBUG_MODE=1)</div>';
+      return;
+    }
+    div.innerHTML = data.sessions.map(s => {
+      const sev = s.total_issues > 0 ? '⚠️' : '✅';
+      const active = !s.ended_at ? ' 🟢' : '';
+      return `
+        <div style="padding:8px;border:1px solid var(--border);border-radius:6px;margin-bottom:4px;cursor:pointer;display:flex;align-items:center;gap:8px;"
+             onclick="document.getElementById('session-input').value='${s.session_id}';connect();">
+          <span style="font-size:14px;">${sev}</span>
+          <span style="flex:1;font-size:12px;">
+            <b>${s.session_id}</b>${active}<br>
+            <span style="color:var(--dim);font-size:10px;">${s.mode || '-'} | ${s.pipeline || '-'} | ${s.total_turns||0} turns | avg ${(s.avg_e2e_ms||0).toFixed(0)}ms</span>
+          </span>
+          <span style="font-size:10px;color:var(--dim);">${s.created_at ? s.created_at.substring(11,16) : ''}</span>
+        </div>`;
+    }).join('');
+  } catch(e) {
+    div.innerHTML = `<div style="text-align:center;padding:12px;color:var(--red);">加载失败: ${e.message}</div>`;
+  }
+}
+
+// ── Message handler ──
+function handleMessage(msg) {
+  const t = msg.type;
+  document.getElementById('status-time').textContent = new Date().toLocaleTimeString();
+  
+  if (t === 'session_info' && msg.data) {
+    // Replay existing turns
+    if (msg.data.turns && msg.data.turns.length > 0) {
+      turns = msg.data.turns;
+      renderHistory();
+      selectTurn(turns[turns.length - 1].turn_id);
+    }
+    if (msg.data.turns_count !== undefined) {
+      document.getElementById('hist-count').textContent = msg.data.turns_count;
+    }
+    return;
+  }
+  
+  if (t === 'ready') return;
+  
+  if (t === 'turn_start') {
+    pendingTurn = { turn_id: msg.data.turn_id };
+    resetPipelineUI();
+    document.getElementById('turn-label').textContent = `Turn #${msg.data.turn_id}`;
+    setStepActive('step-audio');
+    return;
+  }
+  
+  if (t === 'asr_done') {
+    setStepActive('step-asr');
+    document.getElementById('v-asr').textContent = msg.data.confidence ? `${(msg.data.confidence*100).toFixed(0)}%` : '✓';
+    document.getElementById('t-asr').textContent = `${msg.data.latency_ms?.toFixed(0) || '—'}ms`;
+    document.getElementById('d-asr-transcript').textContent = msg.data.transcript || '(空)';
+    document.getElementById('d-asr-meta').textContent = `置信度: ${msg.data.confidence ? (msg.data.confidence*100).toFixed(0)+'%' : 'N/A'} | 耗时: ${msg.data.latency_ms?.toFixed(0) || '—'}ms`;
+    if (pendingTurn) pendingTurn.asr_done = true;
+    return;
+  }
+  
+  if (t === 'llm_done') {
+    setStepActive('step-llm');
+    document.getElementById('v-llm').textContent = msg.data.intent || '✓';
+    document.getElementById('t-llm').textContent = `${msg.data.latency_ms?.toFixed(0) || '—'}ms`;
+    document.getElementById('d-llm-response').textContent = msg.data.response_preview || '(空)';
+    document.getElementById('d-llm-meta').textContent = `意图: ${msg.data.intent || 'N/A'} | Tokens: in=${msg.data.tokens_in||0} out=${msg.data.tokens_out||0} | 模型: ${msg.data.model||'N/A'} | 耗时: ${msg.data.latency_ms?.toFixed(0)||'—'}ms`;
+    if (pendingTurn) pendingTurn.llm_done = true;
+    return;
+  }
+  
+  if (t === 'tts_done') {
+    setStepActive('step-tts');
+    document.getElementById('v-tts').textContent = '✓';
+    document.getElementById('t-tts').textContent = `${msg.data.latency_ms?.toFixed(0) || '—'}ms`;
+    document.getElementById('d-tts-text').textContent = msg.data.text_preview || '(空)';
+    document.getElementById('d-tts-meta').textContent = `耗时: ${msg.data.latency_ms?.toFixed(0) || '—'}ms`;
+    if (pendingTurn) pendingTurn.tts_done = true;
+    return;
+  }
+  
+  if (t === 'turn_complete') {
+    const d = msg.data;
+    turns.push(d);
+    currentTurnId = d.turn_id;
+    document.getElementById('v-e2e').textContent = `${d.e2e_latency_ms?.toFixed(0) || '—'}ms`;
+    updateE2eBox(d.e2e_latency_ms, d.severity);
+    renderDiagnostics(d.issues || []);
+    setAllStepsDone();
+    renderHistory();
+    highlightHistoryItem(d.turn_id);
+    if (pendingTurn) pendingTurn = null;
+    return;
+  }
+  
+  if (t === 'diagnostic_alert') {
+    // Alert flashes are handled by turn_complete
+    return;
+  }
+}
+
+// ── UI helpers ──
+function resetPipelineUI() {
+  ['step-audio','step-asr','step-llm','step-tts'].forEach(id => {
+    document.getElementById(id).classList.remove('active');
+  });
+  document.getElementById('v-audio').textContent = '—';
+  document.getElementById('v-asr').textContent = '—';
+  document.getElementById('v-llm').textContent = '—';
+  document.getElementById('v-tts').textContent = '—';
+  document.getElementById('t-asr').textContent = '';
+  document.getElementById('t-llm').textContent = '';
+  document.getElementById('t-tts').textContent = '';
+  document.getElementById('v-e2e').textContent = '—';
+  document.getElementById('e2e-box').className = 'e2e-box';
+  document.getElementById('d-asr-transcript').textContent = '—';
+  document.getElementById('d-asr-meta').textContent = '';
+  document.getElementById('d-llm-response').textContent = '—';
+  document.getElementById('d-llm-meta').textContent = '';
+  document.getElementById('d-tts-text').textContent = '—';
+  document.getElementById('d-tts-meta').textContent = '';
+  document.getElementById('d-audio-meta').textContent = '—';
+  document.getElementById('diagnostics').innerHTML = '<div class="empty-state">处理中...</div>';
+}
+
+function setStepActive(id) {
+  document.getElementById(id).classList.add('active');
+}
+
+function setAllStepsDone() {
+  ['step-audio','step-asr','step-llm','step-tts'].forEach(id => {
+    document.getElementById(id).classList.add('active');
+  });
+}
+
+function updateE2eBox(latency, severity) {
+  const box = document.getElementById('e2e-box');
+  box.classList.remove('ok','warn','err');
+  if (severity === 'error') box.classList.add('err');
+  else if (severity === 'warn') box.classList.add('warn');
+  else box.classList.add('ok');
+}
+
+function renderDiagnostics(issues) {
+  const div = document.getElementById('diagnostics');
+  if (!issues || issues.length === 0) {
+    div.innerHTML = '<div class="empty-state" style="color:var(--green);">✅ 本轮无问题</div>';
+    return;
+  }
+  div.innerHTML = issues.map(i => `
+    <div class="diagnostic-item ${i.severity}">
+      <span class="sev">${i.severity === 'error' ? '🔴' : '⚠️'}</span>
+      <div class="content">
+        <div class="symptom">${i.symptom}</div>
+        <div class="diag">${i.diagnosis || ''}</div>
+        <div class="solution">${i.solution || ''}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderHistory() {
+  const list = document.getElementById('history-list');
+  const count = document.getElementById('hist-count');
+  const avg = document.getElementById('hist-avg');
+  const issuesBadge = document.getElementById('hist-issues');
+  
+  count.textContent = turns.length;
+  if (turns.length > 0) {
+    const avgMs = turns.reduce((s,t) => s + (t.e2e_latency_ms||0), 0) / turns.length;
+    avg.textContent = avgMs.toFixed(0);
+    issuesBadge.textContent = turns.filter(t => t.severity && t.severity !== 'ok').length;
+  }
+  
+  list.innerHTML = [...turns].reverse().map(t => {
+    const sevIcon = t.severity === 'error' ? '🔴' : t.severity === 'warn' ? '⚠️' : '✅';
+    const cls = currentTurnId === t.turn_id ? 'history-item current' : 'history-item';
+    return `
+      <div class="${cls}" onclick="selectTurn(${t.turn_id})">
+        <span class="tnum">#${t.turn_id}</span>
+        <span class="tlat">${(t.e2e_latency_ms||0).toFixed(0)}ms</span>
+        <span class="tpvw">${(t.asr_transcript || t.asr_preview || '').substring(0, 30)}</span>
+        <span class="tstatus">${sevIcon}</span>
+      </div>`;
+  }).join('');
+}
+
+function highlightHistoryItem(turnId) {
+  document.querySelectorAll('#history-list .history-item').forEach(el => {
+    el.classList.toggle('current', el.querySelector('.tnum')?.textContent === `#${turnId}`);
+  });
+}
+
+function selectTurn(turnId) {
+  currentTurnId = turnId;
+  const turn = turns.find(t => t.turn_id === turnId);
+  if (!turn) return;
+  
+  document.getElementById('turn-label').textContent = `Turn #${turnId}`;
+  document.getElementById('d-asr-transcript').textContent = turn.asr_transcript || turn.asr?.transcript || '—';
+  document.getElementById('d-asr-meta').textContent = `置信度: ${turn.asr_confidence ? (turn.asr_confidence*100).toFixed(0)+'%' : 'N/A'} | 耗时: ${turn.asr_latency_ms?.toFixed(0) || '—'}ms`;
+  document.getElementById('d-llm-response').textContent = turn.llm_response || turn.llm?.response || '—';
+  document.getElementById('d-llm-meta').textContent = `模型: ${turn.llm_model || 'N/A'}`;
+  document.getElementById('d-tts-text').textContent = turn.tts_text || turn.tts?.text || '—';
+  document.getElementById('d-tts-meta').textContent = '';
+  document.getElementById('d-audio-meta').textContent = turn.audio_duration_s ? `时长: ${turn.audio_duration_s.toFixed(1)}s | 大小: ${(turn.audio_size_bytes||0)}bytes` : '—';
+  document.getElementById('v-e2e').textContent = `${(turn.e2e_latency_ms||0).toFixed(0)}ms`;
+  updateE2eBox(turn.e2e_latency_ms, turn.severity);
+  renderDiagnostics(turn.issues || []);
+  highlightHistoryItem(turnId);
+}
+
+function resetView() {
+  if (turns.length > 0) selectTurn(turns[turns.length - 1].turn_id);
+}
+
+// ── Export ──
+async function exportSession() {
+  if (!sessionId) return alert('未连接');
+  try {
+    const resp = await fetch(`/debug/export/${sessionId}`);
+    if (!resp.ok) { alert('导出失败，确认 session 存在'); return; }
+    const data = await resp.json();
+    const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `debug_session_${sessionId}.json`;
+    a.click();
+    alert(`✅ 已导出: debug_session_${sessionId}.json (${data.turns_count} turns)`);
+  } catch(e) {
+    alert('导出失败: ' + e.message);
+  }
+}
+</script>
+</body>
+</html>
