@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-13T13:37:03.525Z",
+  "updatedAt": "2026-07-15T09:37:10.694Z",
   "entries": {
     "memory:memory/2026-06-08.md:19:38": {
       "key": "memory:memory/2026-06-08.md:19:38",
@@ -580,21 +580,23 @@
       "endLine": 7,
       "source": "memory",
       "snippet": "# 2026-06-22 工作日志 ## 00:01 每日记忆归档 Cron 触发 - 审计修复：昨日日记缺失 → 已创建 - 当前无新需求或变更 - active_tasks: Workflow编辑器渲染仍在等待Daryl实测",
-      "recallCount": 3,
+      "recallCount": 4,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.1843501836061476,
+      "totalScore": 1.538601469993591,
       "maxScore": 0.40362003147602077,
       "firstRecalledAt": "2026-07-02T09:33:43.192Z",
-      "lastRecalledAt": "2026-07-13T13:37:03.525Z",
+      "lastRecalledAt": "2026-07-15T00:20:33.869Z",
       "queryHashes": [
         "30b6c84f8664",
         "cdd161ca80af",
-        "9e126ef47c5d"
+        "9e126ef47c5d",
+        "6914e401ba84"
       ],
       "recallDays": [
         "2026-07-02",
-        "2026-07-13"
+        "2026-07-13",
+        "2026-07-15"
       ],
       "conceptTags": [
         "active-tasks",
@@ -1231,19 +1233,21 @@
       "endLine": 22,
       "source": "memory",
       "snippet": "# 2026-07-01 日记 ## 00:03 · 午夜 Cron 审计 - 7月1日 00:00，main 审计 cron 触发，执行 L4 每日归档审计 - 审计结果： - 今日日记缺失 → 自动创建骨架（已修复） - 昨天日记存在（37行，内容完整）✅ - active.md 新鲜（3h）✅ - 13 个活跃 session → 判定日记过短（凌晨边界误报，同 6/30 模式） - Git pull 失败 → 无 remote 配置（本地 repo，预期行为） - 修复数：1（骨架创建），浅层问题 4，深层问题 2（均为凌晨边界误报） - 各 Agent 午夜 audit cron 交叉运行，与 6/30 同日模式一致 ## 7月开篇 - 今天是 7 月第一天，月度工作计划待 Daryl 确认 - 6/30 晚间 Daryl 宣布 7 月基建方向：Agent自进化 + Loop Engineering - 当前活跃项目：OPC看板（v1.4 待开发）、雅思陪练助手 v2.0（收尾） ## 状态概览 - 昨天（6/30）：Daryl 验收暂停，7月基建方向发布 - 今天：月初首日，等待 Daryl 确认 7 月具体工作安排",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.7493206799030303,
+      "totalScore": 1.0998551547527313,
       "maxScore": 0.38805677890777585,
       "firstRecalledAt": "2026-07-12T17:07:59.896Z",
-      "lastRecalledAt": "2026-07-13T13:37:03.525Z",
+      "lastRecalledAt": "2026-07-15T09:37:10.694Z",
       "queryHashes": [
         "cdd161ca80af",
-        "9e126ef47c5d"
+        "9e126ef47c5d",
+        "2c96466deea9"
       ],
       "recallDays": [
-        "2026-07-13"
+        "2026-07-13",
+        "2026-07-15"
       ],
       "conceptTags": [
         "active.md",
@@ -1409,6 +1413,68 @@
         "v1.6",
         "active.md",
         "7/1-7/10"
+      ]
+    },
+    "memory:memory/2026-07-15.md:1:33": {
+      "key": "memory:memory/2026-07-15.md:1:33",
+      "path": "memory/2026-07-15.md",
+      "startLine": 1,
+      "endLine": 33,
+      "source": "memory",
+      "snippet": "# 2026-07-15 日记 ## 00:10 · 每日记忆归档审计 — 7/14→7/15 跨日 - `audit.sh --report` 运行 - **问题**: 骨架日记（Cron 自动创建，内容待补充） + Git pull 失败 - **已修复**: 充实日记内容 / Git commit 待执行 - **Session 活动**: 17 个活跃 session（跨日边界正常） ## 7/14 晚间重要事件摘要（跨日回溯） ### TTS 方案B部署 (xiaofeng) - Piper en_US-lessac-high.onnx (109MB) 替代 Kokoro 为主引擎，发音准确 - 引擎链: Piper high → Kokoro → Google TTS（三重 fallback） - 句尾 300ms 静音填充保留 - 服务已重启，8767 端口 + ngrok 正常 ### 成本系统全量扫描 (Balance) - 全量 jsonl 扫描: 6281 calls / 239.9M tokens / $68.30 - 仪表盘数据对齐: 6287 calls / 240.2M / $68.36（差6次/扫描时差） - cost_daily.json 降级写文件机制已就位 - cost_daily 路径对齐问题已识别（写 Kitty/opc-workspace，真身在 WorkBuddy/Claw） ### 仪表盘 `/api/costs` 确认 (main→Balance 核实) - 仪表盘已用 jsonl 全量扫描，不读 cost_daily",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.350582018494606,
+      "maxScore": 0.350582018494606,
+      "firstRecalledAt": "2026-07-15T09:37:10.694Z",
+      "lastRecalledAt": "2026-07-15T09:37:10.694Z",
+      "queryHashes": [
+        "2c96466deea9"
+      ],
+      "recallDays": [
+        "2026-07-15"
+      ],
+      "conceptTags": [
+        "7/14",
+        "7/15",
+        "audit.sh",
+        "en-us-lessac-high.onnx",
+        "239.9m",
+        "68.30",
+        "240.2m",
+        "68.36"
+      ]
+    },
+    "memory:memory/2026-06-30.md:1:23": {
+      "key": "memory:memory/2026-06-30.md:1:23",
+      "path": "memory/2026-06-30.md",
+      "startLine": 1,
+      "endLine": 23,
+      "source": "memory",
+      "snippet": "# 2026-06-30 日记 ## 00:00-00:07 午夜 Cron 风暴 - 午夜 00:00 整点，main/balance/xiaofeng/self 4 个 Agent 的 audit cron 同时触发（各自独立执行 L4 审计） - 各 Agent 审计结果各异： - **main** (00:01): 日记骨架→充实，active.md 补全关键词，已知误报清理 - **balance** (00:02): 日记骨架→完善，active.md 时间戳更新 - **xiaofeng** (00:03): 全部 8 项通过，仅 git upstream tracking 警告 - **self** (00:04): 日记骨架补全为 24 行，git remote 缺失（预期行为） - **main 二次** (00:06，当前): 日记已充实，补充交叉验证详情 ## 审计交叉验证说明 - audit 检测到 16 个 24h 内活跃 session，实际仅 2-3 个属 6/30（其余属 6/29 晚间密集开发） - 6/29 晚间: Daryl 休息、OPC 群记忆更新汇报、xiaofeng IELTS tutor bugfix、balance 回复 - 6/30 凌晨: 各 Agent 审计 cron 5 个 - 日记\"过短\"为午夜边界误报（00:00 刚过时日记仅骨架） ## 21:00 · Daryl 宣布今晚验收暂停 + 7月基建方向 - **调用模型**: deepseek/deepseek-v4-pro - Da",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3500840932130813,
+      "maxScore": 0.3500840932130813,
+      "firstRecalledAt": "2026-07-15T09:37:10.694Z",
+      "lastRecalledAt": "2026-07-15T09:37:10.694Z",
+      "queryHashes": [
+        "2c96466deea9"
+      ],
+      "recallDays": [
+        "2026-07-15"
+      ],
+      "conceptTags": [
+        "00-00",
+        "main/balance/xiaofeng/self",
+        "active.md",
+        "2-3",
+        "6/30",
+        "6/29",
+        "deepseek/deepseek-v4-pro",
+        "日记"
       ]
     }
   }

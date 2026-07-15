@@ -1,8 +1,14 @@
 # 当前活跃任务
 
-> 最后更新: 2026-07-14 00:03 GMT+7
+> 最后更新: 2026-07-15 11:36 GMT+7
 
 ## 🟢 进行中
+### Agent自进化基建 — Self L3试点 (7/15启动)
+- **M1-M3 已交付**: SAGE Checker(checker.py) + Reflexion(reflect.sh) + EVOLUTION.md协议 + Self AGENTS.md接入 ✅
+- **测试**: 坏稿FAIL(0/1/1)/好稿PASS(8/9/8),判别力验证通过
+- **下一步**: 观察Self执行1周 → 评估效果 → 决定是否推L2(提示优化)或推广其他Agent
+- **调研**: memory/research_agent_self_evolution.md
+
 ### OPC Dashboard v1.5 → v1.6 — 运行中
 - **地址**: http://localhost:8765
 - **当前版本**: v1.6 · M3 项目总线集成完成 ✅ (commit: 690decf)
@@ -37,6 +43,11 @@
 - WebSocket + 飞书DM + 实时推送 ✅
 
 ## 🔵 待办
+### ✅ 生活提醒 crontab 安装 (7/15 已完成)
+- crontab 已安装并验证通过 ✅，内容与 `/tmp/new_crontab.txt` 一致
+- 4 个生活提醒 (07:20/20:00/23:00/23:30) + 审计 + 看门狗 + 项目通知均已就位
+- 日志文件 `/tmp/life_reminder.log` 尚未生成（首次运行后自动创建）
+
 ### Agent版本变更通知
 - OPC看板Agent卡片增加「约定版本」字段
 - 机制变更时自动通知对应Agent
