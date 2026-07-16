@@ -273,6 +273,7 @@ body { overscroll-behavior:none; -webkit-tap-highlight-color:transparent; }
 <div class="app">
     <div class="header">
         <h1 id="appTitle">🎤 IELTS Tutor</h1>
+        <a href="/dashboard" style="font-size:11px;color:var(--accent2);text-decoration:none;white-space:nowrap">📊 数据库</a>
         <div class="header-right">
             <div class="mic-lvl"><div class="bar"><div class="fill" id="micFill"></div></div></div>
             <div class="status-dot" id="statusDot"></div>
@@ -1170,6 +1171,39 @@ function showScores(m){
         document.getElementById('highlightSection').style.display='block';
         document.getElementById('highlightList').innerHTML=s.highlights.map(t=>`<div class="score-item good">${colorizeHL(t)}</div>`).join('');
     }
+    showDashboardCTA();  // v1.1.0 M4: 评估完成 → 引导进入数据库/跟读
+}
+
+// ═══ v1.1.0 M4: 训练→数据库→跟读 串联 ═══
+let ctaTimer=null;
+async function showDashboardCTA(){
+    let pending=0;
+    try{
+        const q=await fetch('/api/review/queue?limit=8').then(r=>r.json());
+        pending=(q.queue||[]).length;
+    }catch(e){}
+    const sec=document.createElement('div');
+    sec.id='dashCTA';
+    sec.style.cssText='margin-top:8px;padding:10px;background:var(--bg);border:1px solid var(--accent);border-radius:8px;text-align:center';
+    sec.innerHTML=`
+        <div style="font-size:12px;font-weight:600">${pending>0?`🎙️ 今日有 ${pending} 条待巩固`:'📊 查看你的训练数据'}</div>
+        <div style="display:flex;gap:6px;margin-top:8px">
+            ${pending>0?`<button onclick="location.href='/shadow'" style="flex:1;padding:8px;border:none;border-radius:7px;background:var(--accent2);color:#000;font-weight:700;font-size:12px;cursor:pointer">开始跟读 →</button>`:''}
+            <button onclick="location.href='/dashboard'" style="flex:1;padding:8px;border:none;border-radius:7px;background:var(--accent);color:#fff;font-weight:700;font-size:12px;cursor:pointer">训练数据库 →</button>
+        </div>
+        <div id="ctaCountdown" style="font-size:10px;color:var(--muted);margin-top:6px;cursor:pointer">10s 后自动进入数据库（点此取消）</div>`;
+    const tab=document.getElementById('assessmentTab');
+    const old=document.getElementById('dashCTA'); if(old) old.remove();
+    tab.appendChild(sec);
+    let left=10;
+    const cd=sec.querySelector('#ctaCountdown');
+    cd.onclick=()=>{ clearInterval(ctaTimer); ctaTimer=null; cd.textContent='已取消自动跳转'; };
+    if(ctaTimer) clearInterval(ctaTimer);
+    ctaTimer=setInterval(()=>{
+        left--;
+        if(left<=0){ clearInterval(ctaTimer); location.href='/dashboard'; }
+        else cd.textContent=`${left}s 后自动进入数据库（点此取消）`;
+    },1000);
 }
 
 function colorize(t){

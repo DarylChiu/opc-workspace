@@ -394,9 +394,12 @@ async def review_attempt(item_id: int, req: Request):
     if len(pcm) < 3200:  # <0.1s
         return {"error": "audio_too_short"}
     t0 = time.time()
-    tr = StreamingTranscriber()
-    tr.feed(pcm)
-    transcript, confidence = tr.transcribe()
+    def _stt_sync():
+        tr = StreamingTranscriber()
+        tr.feed(pcm)
+        return tr.transcribe()
+    # 压测发现: 同步STT阻塞事件循环9s → keep-alive连接被关闭+其他API卡死; 挪线程池
+    transcript, confidence = await asyncio.to_thread(_stt_sync)
     wer, diff = word_wer_diff(item["target_text"], transcript)
     score = max(0.0, round(1.0 - wer, 3))
     passed = wer <= SHADOW_PASS_WER
