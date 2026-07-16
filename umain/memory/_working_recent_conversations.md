@@ -1,5 +1,13 @@
 # Recent Conversations
-Last updated: 2026-07-16 00:04 GMT+7
+Last updated: 2026-07-17 00:05 GMT+7
+
+## 2026-07-16 — 法律定论 + iOS录音修复 + 成本API对齐
+- **Balance · Future Textile 债转股定论**: ERC lần 3（12/29）合法有效，可作为会计确认时点（高置信）✅。三层论证（公司法/登记/不可撤销性），唯一待Daryl确认SBV外债变更登记
+- **xiaofeng · iOS录音修复**: 雅思跟读App删掉设备枚举→getUserMedia，iPhone自动选输入设备 ✅
+- **成本API讨论** (main↔Balance): OPC Dashboard v1.6 `/api/costs` 已jsonl全量扫描，Balance的cost_daily.json推送冗余。数据有差异（服务器$30.57/$89.85 vs Balance $12.46/$72.06），待查根因
+- **成本扫描** (Balance 23:45): 今日 $1.38 | 本月 $12.46 | 全量 $72.06
+- **项目文件更新**: Main(07:00) + Self(19:00)
+- **午夜审计正常**: 7/16→7/17 跨日，骨架日记已填充
 
 ## 2026-07-15 — 自进化基建上线日
 - **Self L3 自进化基建上线**: Daryl拍板, SAGE Checker(三维审查) + Reflexion(检讨机制) + EVOLUTION.md协议全部交付 ✅
@@ -100,8 +108,4 @@ Last updated: 2026-07-16 00:04 GMT+7
 - **7月基建重点**: Agent自进化（经验自动改进）+ Loop Engineering（自动化开发验证闭环）
 - 基建目标：开发自动化 → 释放 Daryl 时间 → 专注与 Self 搭建知识网络
 
-## 2026-06-29 — 产物模块验收 + Self推送路径修复 + Daryl休息
-- **OPC看板**: v1.3.2 产物与预览模块验收通过 ✅，72条产物全部可预览
-- **Self产物推送诊断**: Self写入`opc-workspace/Self/`（死路径），正确路径是`~/.openclaw/workspace-self/`。v1.3后扫描机制已从opc-workspace改为真实workspace。Self需搬家4项产物。
-- **Daryl 22:51休息**: 今天没有里程碑式验收，感到糟心。强调失败经验也要总结，记忆系统更新要好好做。
-- **教训**: Agent版本升级时缺乏机制变更通知，导致Agent按旧逻辑操作。待办：OPC看板增加「约定版本」字段+自动通知。
+
