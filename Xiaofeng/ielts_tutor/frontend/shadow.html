@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+<title>🎙️ 跟读巩固 · IELTS Tutor</title>
+<style>
+:root {
+    --bg:#0f0f1a; --card:#1a1a2e; --border:#2a2a4a;
+    --accent:#6c63ff; --accent2:#00d4aa; --text:#e0e0f0;
+    --muted:#888; --gold:#ffd700; --danger:#ff6b6b;
+    --green:#3fb950; --yellow:#d29922; --rec:#ff3333;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { -webkit-text-size-adjust:100%; }
+body {
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    background:var(--bg); color:var(--text); min-height:100vh;
+    padding:12px 16px calc(20px + env(safe-area-inset-bottom));
+    display:flex; justify-content:center;
+}
+.wrap { width:100%; max-width:640px; display:flex; flex-direction:column; gap:12px; }
+.header { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+.header h1 { font-size:17px; }
+.header .back { padding:6px 14px; border-radius:7px; font-size:12px; font-weight:600; background:var(--accent); color:#fff; text-decoration:none; white-space:nowrap; }
+.progress-bar { display:flex; gap:4px; }
+.progress-bar .seg { flex:1; height:5px; border-radius:3px; background:var(--border); }
+.progress-bar .seg.done { background:var(--green); }
+.progress-bar .seg.cur { background:var(--accent2); }
+.card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:18px; }
+.cat-badge { display:inline-block; padding:2px 10px; border-radius:10px; font-size:10px; font-weight:700; background:var(--border); margin-bottom:10px; }
+.target { font-size:21px; font-weight:700; line-height:1.45; }
+.target .w-ok { color:var(--green); }
+.target .w-miss { color:var(--danger); text-decoration:underline; }
+.ctx { font-size:12px; color:var(--muted); margin-top:10px; line-height:1.5; }
+.ctx .wrong { color:#ff5252; text-decoration:line-through; }
+.ctx .correct { color:#4caf50; font-weight:700; }
+.btn-row { display:flex; gap:8px; margin-top:16px; flex-wrap:wrap; }
+.btn {
+    flex:1; min-height:48px; border:none; border-radius:10px; cursor:pointer;
+    font-size:14px; font-weight:700; touch-action:manipulation; white-space:nowrap;
+    display:flex; align-items:center; justify-content:center; gap:6px;
+}
+.btn:disabled { opacity:.4; cursor:not-allowed; }
+.btn-play { background:var(--accent); color:#fff; }
+.btn-rec { background:var(--accent2); color:#000; }
+.btn-rec.recording { background:var(--rec); color:#fff; animation:pulse 1s infinite; }
+@keyframes pulse { 50%{opacity:.6} }
+.btn-slow { flex:0 0 auto; background:transparent; border:1px solid var(--border); color:var(--muted); padding:0 14px; font-size:12px; }
+.btn-slow.on { border-color:var(--accent2); color:var(--accent2); }
+.btn-skip { background:transparent; border:1px solid var(--border); color:var(--muted); }
+.btn-next { background:var(--gold); color:#000; }
+
+.result { margin-top:14px; padding:12px; border-radius:10px; background:var(--bg); display:none; }
+.result.show { display:block; animation:fadeIn .3s; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(5px)} }
+.result .verdict { font-size:16px; font-weight:800; }
+.result .verdict.pass { color:var(--green); }
+.result .verdict.fail { color:var(--yellow); }
+.result .heard { font-size:13px; color:var(--muted); margin-top:6px; line-height:1.5; }
+.result .nums { display:flex; gap:14px; margin-top:8px; font-size:12px; color:var(--muted); }
+.result .nums b { color:var(--text); }
+
+.status-line { font-size:12px; color:var(--muted); text-align:center; min-height:18px; }
+.done-card { text-align:center; padding:40px 20px; }
+.done-card .big { font-size:42px; }
+.done-card .msg { font-size:15px; font-weight:600; margin-top:10px; line-height:1.6; }
+.done-card .sub { font-size:12px; color:var(--muted); margin-top:6px; }
+.empty { text-align:center; color:var(--muted); padding:50px 16px; font-size:13px; line-height:1.7; }
+audio { display:none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+    <div class="header">
+        <h1>🎙️ 今日跟读巩固</h1>
+        <a class="back" href="/dashboard">← 数据库</a>
+    </div>
+    <div class="progress-bar" id="progressBar"></div>
+
+    <div class="card" id="mainCard" style="display:none">
+        <span class="cat-badge" id="catBadge"></span>
+        <div class="target" id="targetText"></div>
+        <div class="ctx" id="ctxText"></div>
+        <div class="btn-row">
+            <button class="btn btn-play" id="playBtn" onclick="playRef()">▶️ 听范音</button>
+            <button class="btn btn-slow" id="slowBtn" onclick="toggleSlow()">🐢 慢速</button>
+            <button class="btn btn-rec" id="recBtn" onclick="toggleRec()" disabled>🎙️ 跟读</button>
+        </div>
+        <div class="result" id="resultBox">
+            <div class="verdict" id="verdict"></div>
+            <div class="heard" id="heardText"></div>
+            <div class="nums"><span>准确度 <b id="scoreNum">-</b></span><span>WER <b id="werNum">-</b></span><span>第 <b id="tryNum">1</b> 次</span></div>
+            <div class="btn-row">
+                <button class="btn btn-skip" onclick="retry()">🔁 再试一次</button>
+                <button class="btn btn-next" id="nextBtn" onclick="nextItem()" style="display:none">下一条 →</button>
+            </div>
+        </div>
+        <div class="btn-row" id="skipRow">
+            <button class="btn btn-skip" onclick="nextItem()">跳过，稍后再练 →</button>
+        </div>
+    </div>
+
+    <div class="card done-card" id="doneCard" style="display:none">
+        <div class="big">🎉</div>
+        <div class="msg" id="doneMsg"></div>
+        <div class="sub" id="doneSub"></div>
+        <div class="btn-row" style="justify-content:center">
+            <a class="btn btn-play" style="text-decoration:none;max-width:220px" href="/dashboard">📊 查看训练数据库</a>
+        </div>
+    </div>
+
+    <div class="empty" id="emptyBox" style="display:none">
+        ✨ 当前没有待巩固的句子<br>完成一次口语训练后，改进建议会自动进入跟读队列
+    </div>
+
+    <div class="status-line" id="statusLine">加载中...</div>
+    <audio id="refAudio"></audio>
+</div>
+
+<script>
+let queue = [], idx = 0, tries = 0, passedCount = 0;
+let slow = false, recording = false;
+let micStream = null, audioCtx = null, proc = null, pcmChunks = [];
+let refAudioB64 = null, refItemId = null;
+
+const $ = id => document.getElementById(id);
+const esc = s => (s||'').replace(/</g,'&lt;');
+const fmt = s => esc(s).replace(/~~(.+?)~~/g,'<span class="wrong">$1</span>').replace(/\*\*(.+?)\*\*/g,'<span class="correct">$1</span>');
+
+async function load() {
+    try {
+        const d = await fetch('/api/review/queue?limit=8').then(r=>r.json());
+        queue = d.queue || [];
+        if (!queue.length) { $('emptyBox').style.display='block'; $('statusLine').textContent=''; return; }
+        renderProgress();
+        showItem();
+        await setupMic();
+    } catch(e) { $('statusLine').textContent = '加载失败: ' + e.message; }
+}
+
+function renderProgress() {
+    $('progressBar').innerHTML = queue.map((_,i) =>
+        `<div class="seg ${i<idx?'done':i===idx?'cur':''}"></div>`).join('');
+}
+
+function showItem() {
+    const it = queue[idx];
+    $('mainCard').style.display = 'block';
+    $('doneCard').style.display = 'none';
+    $('catBadge').textContent = it.category || 'grammar';
+    $('targetText').textContent = it.target_text;
+    $('ctxText').innerHTML = fmt(it.context || '');
+    $('resultBox').classList.remove('show');
+    $('skipRow').style.display = 'flex';
+    $('nextBtn').style.display = 'none';
+    tries = 0;
+    refAudioB64 = null; refItemId = null;
+    renderProgress();
+    $('statusLine').textContent = `第 ${idx+1} / ${queue.length} 条`;
+}
+
+async function setupMic() {
+    try {
+        micStream = await navigator.mediaDevices.getUserMedia({audio:{sampleRate:16000,channelCount:1,echoCancellation:true,noiseSuppression:true}});
+        $('recBtn').disabled = false;
+    } catch(e) { $('statusLine').textContent = '⚠️ 麦克风未授权，无法跟读'; }
+}
+
+async function playRef() {
+    const it = queue[idx];
+    $('playBtn').disabled = true;
+    try {
+        if (!refAudioB64 || refItemId !== it.id) {
+            $('statusLine').textContent = '合成范音中...';
+            const d = await fetch(`/api/review/${it.id}/tts`, {method:'POST'}).then(r=>r.json());
+            refAudioB64 = d.audio; refItemId = it.id;
+        }
+        const a = $('refAudio');
+        a.src = 'data:audio/wav;base64,' + refAudioB64;
+        a.playbackRate = slow ? 0.75 : 1.0;
+        await a.play();
+        $('statusLine').textContent = slow ? '🐢 慢速播放中' : '▶️ 播放中';
+        a.onended = () => { $('statusLine').textContent = '跟着读一遍试试 🎙️'; $('playBtn').disabled = false; };
+    } catch(e) { $('statusLine').textContent = '范音播放失败'; }
+    $('playBtn').disabled = false;
+}
+
+function toggleSlow() { slow = !slow; $('slowBtn').classList.toggle('on', slow); }
+
+function toggleRec() {
+    if (!recording) startRec(); else stopRec();
+}
+
+function startRec() {
+    if (!micStream) return;
+    recording = true; pcmChunks = [];
+    $('recBtn').classList.add('recording');
+    $('recBtn').textContent = '⏹ 完成跟读';
+    $('statusLine').textContent = '🔴 录音中，读完点「完成跟读」';
+    audioCtx = new AudioContext({sampleRate:16000});
+    const src = audioCtx.createMediaStreamSource(micStream);
+    proc = audioCtx.createScriptProcessor(4096,1,1);
+    src.connect(proc);
+    const g = audioCtx.createGain(); g.gain.value = 0;
+    proc.connect(g); g.connect(audioCtx.destination);
+    proc.onaudioprocess = e => {
+        const input = e.inputBuffer.getChannelData(0);
+        const pcm = new Int16Array(input.length);
+        for (let i=0;i<input.length;i++) pcm[i] = Math.max(-32768, Math.min(32767, input[i]*32768));
+        pcmChunks.push(pcm);
+    };
+}
+
+async function stopRec() {
+    recording = false;
+    $('recBtn').classList.remove('recording');
+    $('recBtn').textContent = '🎙️ 跟读';
+    if (proc) { proc.disconnect(); proc = null; }
+    if (audioCtx) { audioCtx.close().catch(()=>{}); audioCtx = null; }
+    const total = pcmChunks.reduce((n,c)=>n+c.length, 0);
+    if (total < 1600) { $('statusLine').textContent = '录音太短，再试一次'; return; }
+    const all = new Int16Array(total);
+    let off = 0; pcmChunks.forEach(c => { all.set(c, off); off += c.length; });
+    let bin = ''; const bytes = new Uint8Array(all.buffer);
+    const CH = 0x8000;
+    for (let i=0;i<bytes.length;i+=CH) bin += String.fromCharCode.apply(null, bytes.subarray(i, i+CH));
+    $('statusLine').textContent = '⏳ 识别打分中...';
+    $('recBtn').disabled = true;
+    try {
+        const it = queue[idx];
+        const d = await fetch(`/api/review/${it.id}/attempt`, {
+            method:'POST', headers:{'Content-Type':'application/json'},
+            body: JSON.stringify({audio: btoa(bin)})
+        }).then(r=>r.json());
+        if (d.error) { $('statusLine').textContent = '打分失败: ' + d.error; $('recBtn').disabled = false; return; }
+        tries++;
+        showResult(d);
+    } catch(e) { $('statusLine').textContent = '打分失败: ' + e.message; }
+    $('recBtn').disabled = false;
+}
+
+function showResult(d) {
+    $('resultBox').classList.add('show');
+    $('skipRow').style.display = 'none';
+    // 目标句按 diff 高亮
+    if (d.diff && d.diff.length) {
+        $('targetText').innerHTML = d.diff.map(w =>
+            `<span class="${w.ok?'w-ok':'w-miss'}">${esc(w.word)}</span>`).join(' ');
+    }
+    $('verdict').className = 'verdict ' + (d.passed ? 'pass' : 'fail');
+    $('verdict').textContent = d.passed ? '✅ 通过！已标记巩固' : '🔁 接近了，再来一次';
+    $('heardText').innerHTML = '识别到: “' + esc(d.transcript || '(空)') + '”';
+    $('scoreNum').textContent = (d.score*100).toFixed(0) + '%';
+    $('werNum').textContent = (d.wer*100).toFixed(0) + '%';
+    $('tryNum').textContent = tries;
+    $('nextBtn').style.display = d.passed ? 'flex' : 'none';
+    if (d.passed) { passedCount++; $('statusLine').textContent = '👏 干得漂亮'; }
+    else $('statusLine').textContent = '听一遍范音，注意标红的词';
+}
+
+function retry() {
+    $('resultBox').classList.remove('show');
+    $('skipRow').style.display = 'flex';
+    $('targetText').textContent = queue[idx].target_text;
+    $('statusLine').textContent = '先听范音，再跟读 🎙️';
+}
+
+function nextItem() {
+    idx++;
+    if (idx >= queue.length) { finish(); return; }
+    showItem();
+}
+
+function finish() {
+    $('mainCard').style.display = 'none';
+    $('doneCard').style.display = 'block';
+    $('doneMsg').textContent = `今日跟读完成：${passedCount} / ${queue.length} 条通过巩固`;
+    $('doneSub').textContent = passedCount < queue.length ? '未通过的会留在队列，明天继续' : '全部巩固，太强了！';
+    $('progressBar').innerHTML = queue.map((_,i)=>`<div class="seg done"></div>`).join('');
+    $('statusLine').textContent = '';
+    if (micStream) { micStream.getTracks().forEach(t=>t.stop()); micStream = null; }
+}
+
+load();
+</script>
+</body>
+</html>

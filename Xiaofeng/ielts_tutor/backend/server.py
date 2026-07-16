@@ -319,6 +319,103 @@ async def dashboard_reviews(limit: int = 100, status: str = None):
 async def dashboard_history(limit: int = 20):
     return {"history": sessions.get_history(limit=min(limit, 100))}
 
+# ── v1.1.0 M3: 跟读闭环 Shadowing ──
+SHADOW_HTML = os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend", "shadow.html")
+SHADOW_PASS_WER = float(os.environ.get("SHADOW_PASS_WER", "0.25"))  # WER≤25% 判通过
+
+def _norm_words(text):
+    return re.findall(r"[a-z']+", (text or "").lower())
+
+def word_wer_diff(ref_text, hyp_text):
+    """词级 Levenshtein WER + 对齐 diff（供前端高亮）"""
+    ref, hyp = _norm_words(ref_text), _norm_words(hyp_text)
+    if not ref:
+        return 0.0, []
+    n, m = len(ref), len(hyp)
+    d = [[0] * (m + 1) for _ in range(n + 1)]
+    for i in range(n + 1): d[i][0] = i
+    for j in range(m + 1): d[0][j] = j
+    for i in range(1, n + 1):
+        for j in range(1, m + 1):
+            cost = 0 if ref[i-1] == hyp[j-1] else 1
+            d[i][j] = min(d[i-1][j] + 1, d[i][j-1] + 1, d[i-1][j-1] + cost)
+    # 回溯: 标记 ref 每个词 matched / missed
+    diff = []
+    i, j = n, m
+    while i > 0 or j > 0:
+        if i > 0 and j > 0 and d[i][j] == d[i-1][j-1] and ref[i-1] == hyp[j-1]:
+            diff.append({"word": ref[i-1], "ok": True}); i -= 1; j -= 1
+        elif i > 0 and j > 0 and d[i][j] == d[i-1][j-1] + 1:
+            diff.append({"word": ref[i-1], "ok": False}); i -= 1; j -= 1
+        elif i > 0 and d[i][j] == d[i-1][j] + 1:
+            diff.append({"word": ref[i-1], "ok": False}); i -= 1
+        else:
+            j -= 1  # hyp 多余词, 不进 ref diff
+    diff.reverse()
+    return d[n][m] / n, diff
+
+def _get_review_item(item_id):
+    import sqlite3 as _sq
+    from session_manager import DB_PATH as _dbp
+    conn = _sq.connect(_dbp); conn.row_factory = _sq.Row
+    row = conn.execute("SELECT * FROM review_items WHERE id=?", (item_id,)).fetchone()
+    conn.close()
+    return dict(row) if row else None
+
+@app.get("/shadow")
+async def shadow_page():
+    if os.path.exists(SHADOW_HTML):
+        return HTMLResponse(open(SHADOW_HTML).read())
+    return HTMLResponse("<h1>Shadow not found</h1>", status_code=404)
+
+@app.get("/api/review/queue")
+async def review_queue(limit: int = 8):
+    return {"queue": sessions.get_review_queue(limit=min(limit, 20)), "pass_wer": SHADOW_PASS_WER}
+
+@app.post("/api/review/{item_id}/tts")
+async def review_tts(item_id: int):
+    item = _get_review_item(item_id)
+    if not item:
+        return {"error": "not_found"}
+    audio = await tts_speak(item["target_text"])
+    return {"audio": audio, "format": "wav"}
+
+@app.post("/api/review/{item_id}/attempt")
+async def review_attempt(item_id: int, req: Request):
+    """跟读打分: 收 base64 PCM(16k mono int16) → STT → 词级WER → 记录+回写"""
+    item = _get_review_item(item_id)
+    if not item:
+        return {"error": "not_found"}
+    body = await req.json()
+    try:
+        pcm = base64.b64decode(body.get("audio", ""))
+    except Exception:
+        return {"error": "bad_audio"}
+    if len(pcm) < 3200:  # <0.1s
+        return {"error": "audio_too_short"}
+    t0 = time.time()
+    tr = StreamingTranscriber()
+    tr.feed(pcm)
+    transcript, confidence = tr.transcribe()
+    wer, diff = word_wer_diff(item["target_text"], transcript)
+    score = max(0.0, round(1.0 - wer, 3))
+    passed = wer <= SHADOW_PASS_WER
+    sessions.record_shadow_attempt(item_id, transcript, score, wer, audio_ms=int(len(pcm) / 32))
+    if passed:
+        sessions.mark_consolidated(item_id)
+    cost_stats["stt_calls"] += 1
+    logger.info(f"SHADOW: item={item_id} wer={wer:.2f} passed={passed} stt={time.time()-t0:.1f}s '{transcript[:60]}'")
+    return {"transcript": transcript, "confidence": confidence, "wer": round(wer, 3),
+            "score": score, "passed": passed,
+            "status": "consolidated" if passed else "pending", "diff": diff}
+
+@app.post("/api/review/{item_id}/consolidate")
+async def review_consolidate(item_id: int):
+    if not _get_review_item(item_id):
+        return {"error": "not_found"}
+    sessions.mark_consolidated(item_id)
+    return {"ok": True}
+
 @app.get("/api/health")
 async def health():
     ver = open(os.path.join(os.path.dirname(os.path.dirname(__file__)), "VERSION")).read().strip()
