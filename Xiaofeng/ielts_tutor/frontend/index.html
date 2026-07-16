@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
 <title>🎤 IELTS Tutor</title>
 <style>
 :root {
@@ -242,13 +242,15 @@ body { overscroll-behavior:none; -webkit-tap-highlight-color:transparent; }
     .dev-info { max-width:110px; }
     .dev-info select { max-width:100px; }
 
-    /* 控制条: 换行 + 大触控目标; select 16px 防 iOS 聚焦自动放大 */
-    .ctrls { flex-wrap:wrap; gap:6px; padding:8px 10px; }
-    .ctrls label { font-size:12px; }
-    .ctrls select { flex:1 1 34%; min-width:0; font-size:16px; padding:8px 6px; }
-    .btn { flex:1 1 auto; min-height:42px; font-size:14px; padding:8px 12px; }
-    .btn-send { font-size:15px; }
-    #costDisplay { flex:1 1 auto; text-align:center; margin-left:0 !important; }
+    /* 控制条: 模式/引擎/按钮固定单行, 字体缩小 (v1.0.1 Daryl反馈); maximum-scale=1 防 iOS 聚焦缩放 */
+    .ctrls { flex-wrap:wrap; gap:4px; padding:6px 8px; }
+    .ctrls label { display:none; }
+    .ctrls select { flex:1 1 0; min-width:0; font-size:12px; padding:7px 2px; }
+    .btn { flex:0 0 auto; min-height:36px; font-size:12px; padding:6px 10px; }
+    .btn-send { font-size:12px; padding:6px 12px; }
+    #pipelineLabel { display:none; } /* 与引擎下拉框重复, 移动端隐藏 */
+    #costDisplay { flex:1 1 60%; text-align:center; margin-left:0 !important; order:10; }
+    #debugBadge { order:11; }
 
     /* 主区: 纵向堆叠，对话优先 */
     .main { flex-direction:column; gap:6px; }

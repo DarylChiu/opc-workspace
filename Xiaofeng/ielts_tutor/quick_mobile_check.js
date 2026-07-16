@@ -17,6 +17,18 @@ async function checkViewport(browser, name, vp) {
     const rect = s => { const e = q(s); if (!e) return null; const b = e.getBoundingClientRect(); return { x: +b.x.toFixed(0), y: +b.y.toFixed(0), w: +b.width.toFixed(0), h: +b.height.toFixed(0) }; };
     const btns = [...document.querySelectorAll('.btn, .panel-tab')].filter(b => b.offsetParent !== null)
       .map(b => ({ label: b.textContent.trim().slice(0, 10), h: +b.getBoundingClientRect().height.toFixed(0) }));
+    // 控制条单行检测: 选择框+按钮应在同一行 (排除 cost/badge/label)
+    const rowTops = state => {
+      document.getElementById('startBtn').style.display = state === 'session' ? 'none' : 'inline-block';
+      document.getElementById('endBtn').style.display = state === 'session' ? 'inline-block' : 'none';
+      document.getElementById('manualSendBtn').style.display = state === 'session' ? 'inline-block' : 'none';
+      const els = [...document.querySelectorAll('.ctrls select, .ctrls .btn')].filter(e => e.offsetParent !== null);
+      // 用中心线Y分组(20px容差), 避免 align-items:center 下高度差异误报
+      return [...new Set(els.map(e => { const b = e.getBoundingClientRect(); return Math.round((b.top + b.height / 2) / 20); }))];
+    };
+    const idleRows = rowTops('idle');
+    const sessionRows = rowTops('session');
+    rowTops('idle'); // 恢复
     return {
       hScroll: document.documentElement.scrollWidth > document.documentElement.clientWidth,
       scrollW: document.documentElement.scrollWidth,
@@ -27,7 +39,7 @@ async function checkViewport(browser, name, vp) {
       header: rect('.header'), ctrls: rect('.ctrls'),
       dialogue: rect('.dialogue-col'), panel: rect('.right-panel'),
       title: q('#appTitle').textContent,
-      btns,
+      btns, idleRows, sessionRows,
       overflowEls: [...document.querySelectorAll('body *')].filter(e => {
         const b = e.getBoundingClientRect();
         return b.width > 0 && b.right > document.documentElement.clientWidth + 1;
@@ -49,7 +61,7 @@ async function checkViewport(browser, name, vp) {
   console.log('=== MOBILE 390x844 ===');
   console.log(JSON.stringify(mobile, null, 1));
   console.log('=== MOBILE 360x740 ===');
-  console.log(JSON.stringify({ hScroll: mobileSmall.hScroll, mainDir: mobileSmall.mainDir, panelCollapsed: mobileSmall.panelCollapsed, overflowEls: mobileSmall.overflowEls, btns: mobileSmall.btns }, null, 1));
+  console.log(JSON.stringify({ hScroll: mobileSmall.hScroll, mainDir: mobileSmall.mainDir, panelCollapsed: mobileSmall.panelCollapsed, overflowEls: mobileSmall.overflowEls, btns: mobileSmall.btns, idleRows: mobileSmall.idleRows, sessionRows: mobileSmall.sessionRows }, null, 1));
   console.log('=== DESKTOP 1280x800 ===');
   console.log(JSON.stringify({ hScroll: desktop.hScroll, mainDir: desktop.mainDir, panelCollapsed: desktop.panelCollapsed, panelW: desktop.panel && desktop.panel.w, title: desktop.title }, null, 1));
 
@@ -58,7 +70,11 @@ async function checkViewport(browser, name, vp) {
   if (mobile.hScroll) errs.push('mobile 390: 出现横向滚动');
   if (mobile.mainDir !== 'column') errs.push('mobile 390: main 未纵向堆叠');
   if (!mobile.panelCollapsed || !mobile.panelContentHidden) errs.push('mobile 390: 右侧面板未收起');
-  if (mobile.btns.some(b => b.h < 38)) errs.push('mobile 390: 存在 <38px 触控目标: ' + JSON.stringify(mobile.btns.filter(b => b.h < 38)));
+  if (mobile.btns.some(b => b.h < 36)) errs.push('mobile 390: 存在 <36px 触控目标: ' + JSON.stringify(mobile.btns.filter(b => b.h < 36)));
+  if (mobile.idleRows.length > 1) errs.push('mobile 390: 空闲态控制条不是单行 ' + JSON.stringify(mobile.idleRows));
+  if (mobile.sessionRows.length > 1) errs.push('mobile 390: 会话态控制条(终止+发送)不是单行 ' + JSON.stringify(mobile.sessionRows));
+  if (mobileSmall.idleRows.length > 1) errs.push('mobile 360: 空闲态控制条不是单行');
+  if (mobileSmall.sessionRows.length > 1) errs.push('mobile 360: 会话态控制条不是单行');
   if (mobile.overflowEls.length) errs.push('mobile 390: 元素溢出 ' + mobile.overflowEls.join(','));
   if (mobileSmall.hScroll) errs.push('mobile 360: 出现横向滚动');
   if (desktop.mainDir !== 'row') errs.push('desktop: 两栏布局被破坏');
