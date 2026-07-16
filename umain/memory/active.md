@@ -1,6 +1,6 @@
 # 当前活跃任务
 
-> 最后更新: 2026-07-15 11:36 GMT+7
+> 最后更新: 2026-07-16 08:55 GMT+7
 
 ## 🟢 进行中
 ### Agent自进化基建 — Self L3试点 (7/15启动)
@@ -16,6 +16,12 @@
 - **管理**: `cd /Users/zhaoyuzhao/WorkBuddy/Claw/opc-dashboard && bash manage.sh {start|stop|restart|status|logs}`
 
 ## ✅ 已完成
+### 生活提醒 crontab 安装 (7/15)
+- crontab 已安装并验证通过 ✅，4 个生活提醒 (07:20/20:00/23:00/23:30) + 审计 + 看门狗 + 项目通知均已就位
+
+### 记忆系统v3 cron 安装 (7/15)
+- crontab 安装完成 ✅，7/15 起 07:00/13:00/19:00 正常触发（见 /tmp/project_cron.log）
+
 ### 记忆系统v3 — project文件开发 (7/6)
 - 模板+API+Cron 全部完成 ✅
 - project_main/xiaofeng/Balance/Self.md 创建 ✅
@@ -43,18 +49,9 @@
 - WebSocket + 飞书DM + 实时推送 ✅
 
 ## 🔵 待办
-### ✅ 生活提醒 crontab 安装 (7/15 已完成)
-- crontab 已安装并验证通过 ✅，内容与 `/tmp/new_crontab.txt` 一致
-- 4 个生活提醒 (07:20/20:00/23:00/23:30) + 审计 + 看门狗 + 项目通知均已就位
-- 日志文件 `/tmp/life_reminder.log` 尚未生成（首次运行后自动创建）
-
-### Agent版本变更通知
+### Agent版本变更通知（并入 Dashboard M4）
 - OPC看板Agent卡片增加「约定版本」字段
 - 机制变更时自动通知对应Agent
-
-### Crontab 手动安装
-- 记忆系统v3 cron 被系统拦截，需 Daryl 手动执行:
-  `(crontab -l; echo '0 7,13,19 * * * bash ~/.openclaw/workspace/scripts/projects/cron_notify_update.sh >> /tmp/project_cron.log 2>&1') | crontab -`
 
 ## ⚪ 搁置
 ### Sentinel 合规哨兵 v1.0 — 暂停

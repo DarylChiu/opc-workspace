@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-15T09:37:10.694Z",
+  "updatedAt": "2026-07-16T01:10:20.622Z",
   "entries": {
     "memory:memory/2026-06-08.md:19:38": {
       "key": "memory:memory/2026-06-08.md:19:38",
@@ -337,13 +337,13 @@
       "endLine": 30,
       "source": "memory",
       "snippet": "# 2026-06-19 工作日志 ## 00:00 每日记忆归档 Cron 触发 - 审计发现：日记缺失 + active_tasks 39h 未更新 → 已修复 ## 全天：OPC看板 Workflow 编辑器问题排查与架构迭代 ### 问题发现 (19:40) - Daryl反馈：Workflow模块点击后空白，三个需求一个都没看到 - 根因：备份回滚时丢失了v2改动，编辑器退回到原始版本 ### 修复尝试历程 1. **修复v2代码** → 语法正确但不渲染（白屏） 2. **添加错误捕获** → import语句被放在ES模块最前面导致违反规范 3. **Vite构建方案** → 自包含bundle但仍是type=module，浏览器不加载 4. **完全回退到5805b9c** → 原始版本也用importmap+module，同病 5. **最终方案** → 普通script标签(UMD React) + 动态import(ReactFlow) - 文件：`opc-dashboard/workflow-editor.html` (624行, 30KB) - 架构：0个ES模块, 0个importmap - 进度：Step 1-4 加载追踪，红色错误提示栏 - 待Daryl明天实测验证 ### 隧道管理 - 8765(OPC看板) → cake-marking-metals-miscellaneous.trycloudflare.com (PID 51360) - 8777(视频分析) → supreme-hall-blanket-",
-      "recallCount": 11,
+      "recallCount": 12,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 4.071963879466057,
-      "maxScore": 0.4051756829023361,
+      "totalScore": 4.4829401791095735,
+      "maxScore": 0.4109762996435165,
       "firstRecalledAt": "2026-06-20T04:46:48.226Z",
-      "lastRecalledAt": "2026-07-07T11:17:49.124Z",
+      "lastRecalledAt": "2026-07-16T01:10:20.622Z",
       "queryHashes": [
         "1e37dbbd2ef6",
         "21607fbcd7e4",
@@ -355,7 +355,8 @@
         "2533c12b4ef0",
         "14e886338f59",
         "d05ad8c633a1",
-        "7c926c8f68f2"
+        "7c926c8f68f2",
+        "48b5eabf8dd9"
       ],
       "recallDays": [
         "2026-06-20",
@@ -366,7 +367,8 @@
         "2026-07-01",
         "2026-07-02",
         "2026-07-05",
-        "2026-07-07"
+        "2026-07-07",
+        "2026-07-16"
       ],
       "conceptTags": [
         "备份",
@@ -876,24 +878,26 @@
       "endLine": 66,
       "source": "memory",
       "snippet": "## 18:50 · OPC看板 v1.4 完成 ✅ - Daryl 将「OPC看板v1.4」移至 In Progress → 完成三项需求 - **主次优先级视觉分层**：P0-P3 四级，左侧色条+徽章+创建时可选 - **Bryson 雅思陪练补全**：ielts_tutor 加入扫描优先级，产物 3→7 - **symlink 清理**：移除 opc-workspace 中旧 ielts_tutor_v2.0 副本 - Commit v1.4 + tag ## 状态概览 - 🔴 M2 全模块验收完毕 ✅ → v1.5 生产模式 - OPC 看板 v1.4 并入 v1.5 - 验收报告已生成 `decision_reports/m2_acceptance_report_2026-07-05.md` - 7 月基建方向（Agent自进化 + Loop Engineering）待 Daryl 启动确认 - ✅ M2 全部模块验收完毕 + v1.4 完成 - 待办: Agent版本变更通知 - 雅思陪练 v2.0 收尾中 - 7 月基建方向（Agent自进化 + Loop Engineering）待 Daryl 启动确认",
-      "recallCount": 5,
+      "recallCount": 6,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.9987947672605515,
+      "totalScore": 2.409069302678108,
       "maxScore": 0.44552976489067075,
       "firstRecalledAt": "2026-07-06T01:12:01.162Z",
-      "lastRecalledAt": "2026-07-12T04:25:16.078Z",
+      "lastRecalledAt": "2026-07-16T01:10:20.622Z",
       "queryHashes": [
         "af4fa58d2480",
         "f8aac1c4eb69",
         "7c926c8f68f2",
         "32c589b9a581",
-        "230b4b00be19"
+        "230b4b00be19",
+        "48b5eabf8dd9"
       ],
       "recallDays": [
         "2026-07-06",
         "2026-07-07",
-        "2026-07-12"
+        "2026-07-12",
+        "2026-07-16"
       ],
       "conceptTags": [
         "v1.4",
@@ -1130,23 +1134,25 @@
       "endLine": 32,
       "source": "memory",
       "snippet": "- 17:00 OPC Dashboard 服务挂掉（进程异常退出）→ 重启 - 17:05 tunnel 过期 → 重建（charm-functioning-donna-time.trycloudflare.com） - 22:37 tunnel 再次挂+服务进程异常退出 → 全栈重启 - 23:00 Gateway 重启（Sentinel 插件加载）→ OPC Dashboard 被带下线 → 再次全栈重启 - ⚠️ 今天累计 8 次 tunnel 重建，临时隧道完全不适合长期使用 ## 状态概览 - 各 Agent 处于待命状态 - 7 月基建方向（Agent自进化 + Loop Engineering）已在 Daryl 与 Bryson 讨论中推进 - OPC 看板 v1.5 运行中 - M2 全部模块验收完毕",
-      "recallCount": 5,
+      "recallCount": 6,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 2.0373600900173185,
+      "totalScore": 2.4352081686258313,
       "maxScore": 0.4152030527591705,
       "firstRecalledAt": "2026-07-11T04:42:08.555Z",
-      "lastRecalledAt": "2026-07-12T04:26:15.541Z",
+      "lastRecalledAt": "2026-07-16T01:10:20.622Z",
       "queryHashes": [
         "03ae1fc4cf49",
         "3524490ccf2a",
         "32c589b9a581",
         "230b4b00be19",
-        "7508206e087e"
+        "7508206e087e",
+        "48b5eabf8dd9"
       ],
       "recallDays": [
         "2026-07-11",
-        "2026-07-12"
+        "2026-07-12",
+        "2026-07-16"
       ],
       "conceptTags": [
         "gateway",
@@ -1475,6 +1481,37 @@
         "6/29",
         "deepseek/deepseek-v4-pro",
         "日记"
+      ]
+    },
+    "memory:memory/archive/2026-06-08.md:1:26": {
+      "key": "memory:memory/archive/2026-06-08.md:1:26",
+      "path": "memory/archive/2026-06-08.md",
+      "startLine": 1,
+      "endLine": 26,
+      "source": "memory",
+      "snippet": "# 2026-06-08 记忆记录 ## OPC看板交互系统开发 ### M1完成（全部8个模块） - HTML骨架：暗色主题 + 8面板导航 + 响应式，Kitty完成 - 任务看板：三列拖拽 + 新建任务弹窗 + JSON持久化，Kitty完成 - 产物追踪面板：文件扫描 + 类型过滤 + 预览跳转，Kitty完成 - 预览面板：iframe + 文件列表，Kitty完成 - 项目进度：里程碑时间线 + 风险卡片，Kitty完成 - Agent状态面板：`/api/agents` → `openclaw status` 实时数据，Bryson完成 - server.py后端：Python http.server + API端点，Bryson重写 - agent_bridge.js：30s轮询Agent状态，Bryson完成 - 沙箱接口预留：`OPC.registerSandboxUpdater()` + 占位面板 ### Daryl验收反馈修改 - Agent状态+任务合并面板：4个Agent卡片，每个下方显示待办/进行中/最近完成三列，完成可链产物追踪 - 左侧菜单重排：A.Agent状态和任务 → B.产物与预览 → C.成本仪表盘 → D.沙箱任务 - 问题：双Agent同时修改导致协调混乱，Daryl不满。后续约定：Kitty维护前端(index.html)，Bryson维护后端(server.py/sandbox/scripts) ### M2分工 - Bryson：Cloudflare Tunnel + 启动脚本(nohup/stop/restart)",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4082972288131714,
+      "maxScore": 0.4082972288131714,
+      "firstRecalledAt": "2026-07-16T01:10:20.622Z",
+      "lastRecalledAt": "2026-07-16T01:10:20.622Z",
+      "queryHashes": [
+        "48b5eabf8dd9"
+      ],
+      "recallDays": [
+        "2026-07-16"
+      ],
+      "conceptTags": [
+        "api/agents",
+        "server.py后端",
+        "http.server",
+        "agent-bridge.js",
+        "opc.registersandboxupdater",
+        "每个下方显示待办/进行中/最近完成三列",
+        "a.agent状态和任务",
+        "b.产物与预览"
       ]
     }
   }
