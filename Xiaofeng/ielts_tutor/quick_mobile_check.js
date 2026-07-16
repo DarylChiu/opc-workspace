@@ -24,7 +24,11 @@ async function checkViewport(browser, name, vp) {
       document.getElementById('manualSendBtn').style.display = state === 'session' ? 'inline-block' : 'none';
       const els = [...document.querySelectorAll('.ctrls select, .ctrls .btn')].filter(e => e.offsetParent !== null);
       // 用中心线Y分组(20px容差), 避免 align-items:center 下高度差异误报
-      return [...new Set(els.map(e => { const b = e.getBoundingClientRect(); return Math.round((b.top + b.height / 2) / 20); }))];
+      const rows = [...new Set(els.map(e => { const b = e.getBoundingClientRect(); return Math.round((b.top + b.height / 2) / 20); }))];
+      const selWidths = [...document.querySelectorAll('.ctrls select')].map(e => +e.getBoundingClientRect().width.toFixed(0));
+      const btnBottom = Math.max(...els.map(e => e.getBoundingClientRect().bottom));
+      const cost = document.getElementById('costDisplay').getBoundingClientRect();
+      return { rows, selWidths, costBelowBtns: cost.top >= btnBottom - 2 };
     };
     const idleRows = rowTops('idle');
     const sessionRows = rowTops('session');
@@ -71,10 +75,15 @@ async function checkViewport(browser, name, vp) {
   if (mobile.mainDir !== 'column') errs.push('mobile 390: main 未纵向堆叠');
   if (!mobile.panelCollapsed || !mobile.panelContentHidden) errs.push('mobile 390: 右侧面板未收起');
   if (mobile.btns.some(b => b.h < 36)) errs.push('mobile 390: 存在 <36px 触控目标: ' + JSON.stringify(mobile.btns.filter(b => b.h < 36)));
-  if (mobile.idleRows.length > 1) errs.push('mobile 390: 空闲态控制条不是单行 ' + JSON.stringify(mobile.idleRows));
-  if (mobile.sessionRows.length > 1) errs.push('mobile 390: 会话态控制条(终止+发送)不是单行 ' + JSON.stringify(mobile.sessionRows));
-  if (mobileSmall.idleRows.length > 1) errs.push('mobile 360: 空闲态控制条不是单行');
-  if (mobileSmall.sessionRows.length > 1) errs.push('mobile 360: 会话态控制条不是单行');
+  if (mobile.idleRows.rows.length > 1) errs.push('mobile 390: 空闲态控制条不是单行 ' + JSON.stringify(mobile.idleRows.rows));
+  if (mobile.sessionRows.rows.length > 1) errs.push('mobile 390: 会话态控制条(终止+发送)不是单行 ' + JSON.stringify(mobile.sessionRows.rows));
+  for (const [st, d] of [['空闲态', mobile.idleRows], ['会话态', mobile.sessionRows]]) {
+    if (d.selWidths.some(w => w < 60)) errs.push(`mobile 390 ${st}: 模式/引擎下拉框被压窄 ${JSON.stringify(d.selWidths)}`);
+    if (!d.costBelowBtns) errs.push(`mobile 390 ${st}: 成本显示未换到第二行`);
+  }
+  if (mobileSmall.idleRows.rows.length > 1) errs.push('mobile 360: 空闲态控制条不是单行');
+  if (mobileSmall.sessionRows.rows.length > 1) errs.push('mobile 360: 会话态控制条不是单行');
+  if (mobileSmall.idleRows.selWidths.some(w => w < 55) || mobileSmall.sessionRows.selWidths.some(w => w < 55)) errs.push('mobile 360: 下拉框被压窄');
   if (mobile.overflowEls.length) errs.push('mobile 390: 元素溢出 ' + mobile.overflowEls.join(','));
   if (mobileSmall.hScroll) errs.push('mobile 360: 出现横向滚动');
   if (desktop.mainDir !== 'row') errs.push('desktop: 两栏布局被破坏');
