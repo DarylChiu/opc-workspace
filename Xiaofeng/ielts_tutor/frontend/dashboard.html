@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+<title>📊 训练数据库 · IELTS Tutor</title>
+<style>
+:root {
+    --bg:#0f0f1a; --card:#1a1a2e; --border:#2a2a4a;
+    --accent:#6c63ff; --accent2:#00d4aa; --text:#e0e0f0;
+    --muted:#888; --gold:#ffd700; --danger:#ff6b6b;
+    --green:#3fb950; --yellow:#d29922;
+    --heat0:#1a1a2e; --heat1:#0e4429; --heat2:#006d32; --heat3:#26a641; --heat4:#39d353;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { -webkit-text-size-adjust:100%; }
+body {
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    background:var(--bg); color:var(--text); min-height:100vh;
+    padding:12px 16px calc(20px + env(safe-area-inset-bottom));
+    display:flex; justify-content:center;
+}
+.wrap { width:100%; max-width:1100px; display:flex; flex-direction:column; gap:12px; }
+.header { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+.header h1 { font-size:18px; }
+.header .back {
+    padding:6px 14px; border-radius:7px; font-size:12px; font-weight:600;
+    background:var(--accent); color:#fff; text-decoration:none; white-space:nowrap;
+}
+.card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:14px; }
+.card h2 { font-size:13px; color:var(--accent2); margin-bottom:10px; }
+
+/* 周期统计卡 */
+.stats-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(100px,1fr)); gap:8px; }
+.stat {
+    background:var(--bg); border-radius:8px; padding:10px 6px; text-align:center;
+}
+.stat .num { font-size:22px; font-weight:800; color:var(--accent2); }
+.stat .num.gold { color:var(--gold); }
+.stat .num.warn { color:var(--danger); }
+.stat .lbl { font-size:10px; color:var(--muted); margin-top:2px; }
+
+/* 跟读入口 CTA */
+.cta {
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    background:linear-gradient(135deg,#1e3a5f,#2d1f4e); border:1px solid var(--accent);
+    border-radius:10px; padding:14px;
+}
+.cta .txt { font-size:14px; font-weight:600; }
+.cta .sub { font-size:11px; color:var(--muted); margin-top:2px; }
+.cta button {
+    padding:10px 18px; border-radius:8px; border:none; cursor:pointer;
+    background:var(--accent2); color:#000; font-size:14px; font-weight:700; white-space:nowrap;
+    min-height:42px;
+}
+.cta button:disabled { opacity:.4; }
+
+/* 趋势图 */
+.chart-box { position:relative; height:220px; }
+.legend { display:flex; flex-wrap:wrap; gap:10px; margin-top:8px; font-size:10px; color:var(--muted); }
+.legend span::before { content:"●"; margin-right:3px; }
+.lg-o::before { color:var(--gold); } .lg-f::before { color:var(--accent2); }
+.lg-v::before { color:#4dc9f6; } .lg-g::before { color:#f39c12; } .lg-p::before { color:#e74c8b; }
+
+/* 日历热力图 */
+.heatmap { display:flex; gap:3px; overflow-x:auto; padding-bottom:4px; }
+.hm-week { display:flex; flex-direction:column; gap:3px; }
+.hm-cell { width:13px; height:13px; border-radius:3px; background:var(--heat0); border:1px solid #22223a; flex-shrink:0; }
+.hm-legend { display:flex; align-items:center; gap:4px; font-size:10px; color:var(--muted); margin-top:6px; justify-content:flex-end; }
+.hm-legend .hm-cell { width:10px; height:10px; }
+
+/* To Improve 清单 */
+.review-item {
+    display:flex; align-items:flex-start; gap:8px; padding:9px 10px;
+    background:var(--bg); border-radius:8px; margin-bottom:6px;
+    border-left:3px solid var(--yellow);
+}
+.review-item.done { border-left-color:var(--green); opacity:.65; }
+.review-item .target { font-size:13px; font-weight:600; line-height:1.4; }
+.review-item .ctx { font-size:11px; color:var(--muted); margin-top:3px; line-height:1.4; }
+.review-item .meta { font-size:10px; color:var(--muted); margin-top:4px; display:flex; gap:8px; flex-wrap:wrap; }
+.badge { padding:1px 7px; border-radius:9px; font-size:9px; font-weight:700; }
+.badge.pending { background:var(--yellow); color:#000; }
+.badge.consolidated { background:var(--green); color:#000; }
+.badge.cat { background:var(--border); color:var(--text); }
+.filter-row { display:flex; gap:6px; margin-bottom:10px; }
+.filter-btn {
+    padding:5px 12px; border-radius:14px; font-size:11px; border:1px solid var(--border);
+    background:transparent; color:var(--muted); cursor:pointer;
+}
+.filter-btn.active { background:var(--accent); color:#fff; border-color:var(--accent); }
+
+/* 历史列表 */
+table { width:100%; border-collapse:collapse; font-size:12px; }
+th { text-align:left; color:var(--muted); font-size:10px; padding:4px 6px; border-bottom:1px solid var(--border); }
+td { padding:7px 6px; border-bottom:1px solid #22223a; }
+td .score { font-weight:700; color:var(--gold); }
+td a { color:var(--accent2); text-decoration:none; font-size:11px; }
+.empty { text-align:center; color:var(--muted); font-size:12px; padding:24px 10px; line-height:1.6; }
+
+.demo-tag {
+    display:none; padding:2px 8px; border-radius:10px; font-size:10px; font-weight:700;
+    background:var(--yellow); color:#000;
+}
+body.demo .demo-tag { display:inline-block; }
+
+@media (max-width:820px) {
+    body { padding:8px 8px calc(16px + env(safe-area-inset-bottom)); }
+    .header h1 { font-size:15px; }
+    .stats-row { grid-template-columns:repeat(3,1fr); }
+    .chart-box { height:180px; }
+    .card { padding:11px; }
+    td:nth-child(2) { display:none; } th:nth-child(2) { display:none; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+    <div class="header">
+        <h1>📊 训练数据库 <span class="demo-tag">DEMO 数据</span></h1>
+        <a class="back" href="/">← 返回训练</a>
+    </div>
+
+    <!-- 今日跟读 CTA -->
+    <div class="cta" id="ctaBox" style="display:none">
+        <div>
+            <div class="txt" id="ctaText">今日有 0 条待巩固</div>
+            <div class="sub">跟读法巩固：听范音 → 跟读 → 打分 → 通过</div>
+        </div>
+        <button id="ctaBtn" onclick="alert('跟读模块 M3 开发中，敬请期待')">开始跟读 →</button>
+    </div>
+
+    <!-- 周期统计 -->
+    <div class="card">
+        <h2>📅 本周统计</h2>
+        <div class="stats-row" id="statsRow"></div>
+    </div>
+
+    <!-- 分数趋势 -->
+    <div class="card">
+        <h2>📈 分数趋势（近30天）</h2>
+        <div class="chart-box"><canvas id="trendChart"></canvas></div>
+        <div class="legend">
+            <span class="lg-o">Overall</span><span class="lg-f">Fluency</span>
+            <span class="lg-v">Vocabulary</span><span class="lg-g">Grammar</span><span class="lg-p">Pronunciation</span>
+        </div>
+        <div class="empty" id="trendEmpty" style="display:none">暂无评估数据 — 完成一次口语训练后这里会出现你的分数曲线 📈</div>
+    </div>
+
+    <!-- 练习日历 -->
+    <div class="card">
+        <h2>🗓️ 练习日历（近12周）</h2>
+        <div class="heatmap" id="heatmap"></div>
+        <div class="hm-legend">少 <div class="hm-cell" style="background:var(--heat0)"></div><div class="hm-cell" style="background:var(--heat1)"></div><div class="hm-cell" style="background:var(--heat2)"></div><div class="hm-cell" style="background:var(--heat3)"></div><div class="hm-cell" style="background:var(--heat4)"></div> 多</div>
+    </div>
+
+    <!-- To Improve 清单 -->
+    <div class="card">
+        <h2>🔧 To Improve 累积清单</h2>
+        <div class="filter-row">
+            <button class="filter-btn active" data-f="all" onclick="setFilter(this)">全部</button>
+            <button class="filter-btn" data-f="pending" onclick="setFilter(this)">待巩固</button>
+            <button class="filter-btn" data-f="consolidated" onclick="setFilter(this)">已巩固</button>
+        </div>
+        <div id="reviewList"></div>
+        <div class="empty" id="reviewEmpty" style="display:none">还没有待改进项 — 训练评估后，系统会自动把改进建议收集到这里 🔧</div>
+    </div>
+
+    <!-- 会话历史 -->
+    <div class="card">
+        <h2>📜 会话历史</h2>
+        <table id="histTable">
+            <thead><tr><th>日期</th><th>模式</th><th>轮次</th><th>Overall</th><th>报告</th></tr></thead>
+            <tbody id="histBody"></tbody>
+        </table>
+        <div class="empty" id="histEmpty" style="display:none">暂无会话记录</div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>
+const DEMO = new URLSearchParams(location.search).get('demo') === '1';
+if (DEMO) document.body.classList.add('demo');
+let reviews = [], filter = 'all';
+
+// ── Demo 数据（Prototype 演示用，不落库）──
+function demoData() {
+    const days = [], today = new Date();
+    for (let i = 29; i >= 0; i--) {
+        const d = new Date(today); d.setDate(d.getDate() - i);
+        days.push(d.toISOString().slice(0, 10));
+    }
+    const trend = [];
+    let base = 5.0;
+    days.forEach((day, i) => {
+        if (i % 3 !== 0) return;
+        base += (Math.random() - 0.35) * 0.3;
+        const o = Math.min(7.5, Math.max(4.5, base));
+        trend.push({ day, overall:+o.toFixed(1), fluency:+(o-0.3+Math.random()*.6).toFixed(1),
+            vocabulary:+(o-0.4+Math.random()*.6).toFixed(1), grammar:+(o-0.5+Math.random()*.6).toFixed(1),
+            pronunciation:+(o-0.2+Math.random()*.5).toFixed(1), session_id:'demo'+i, report_path:null });
+    });
+    const calendar = days.filter(()=>Math.random()>0.35).map(day=>({day, count:1+Math.floor(Math.random()*4)}));
+    return {
+        stats: { trend, calendar,
+            week:{sessions_7d:9, evals_7d:6, best_7d:6.5},
+            review:{total:14, pending:6, consolidated:8, added_today:3} },
+        reviews: [
+            {id:1,target_text:"I focus on my professional skills",context:"You said ~~I'm coming in at my professional steel~~ → **I focus on my professional skills** — 'coming in at' and 'steel' are incorrect.",category:"vocab",status:"pending",review_count:1,best_score:0.6,created_at:days[28]},
+            {id:2,target_text:"I like playing video games",context:"You said ~~I like play video~~ → **I like playing video games** — missing gerund and plural form.",category:"grammar",status:"pending",review_count:0,best_score:0,created_at:days[28]},
+            {id:3,target_text:"Could you explain why?",context:"You said ~~Why why?~~ → **Could you explain why?** — use a complete sentence.",category:"grammar",status:"pending",review_count:2,best_score:0.8,created_at:days[27]},
+            {id:4,target_text:"How can I defeat the enemy?",context:"You said ~~How can I receive an evil?~~ → **How can I defeat the enemy?** — word choice.",category:"vocab",status:"consolidated",review_count:3,best_score:1.0,created_at:days[20]},
+            {id:5,target_text:"My favorite dish is called spaghetti",context:"You said ~~My favorite dish call spaghetti~~ → **My favorite dish is called spaghetti** — passive voice.",category:"grammar",status:"consolidated",review_count:2,best_score:0.95,created_at:days[15]},
+        ],
+        history: trend.slice(-8).reverse().map((t,i)=>({id:'demo'+i, mode:['ielts_part1','free_talk','business_pitch'][i%3],
+            created_at:t.day+'T10:00:00', transcript_count:6+i, overall:t.overall, report_path:null})),
+    };
+}
+
+// ── 渲染 ──
+function renderStats(s) {
+    const w = s.week || {}, r = s.review || {};
+    document.getElementById('statsRow').innerHTML = `
+        <div class="stat"><div class="num">${w.sessions_7d||0}</div><div class="lbl">本周练习</div></div>
+        <div class="stat"><div class="num">${w.evals_7d||0}</div><div class="lbl">完成评估</div></div>
+        <div class="stat"><div class="num gold">${w.best_7d?(+w.best_7d).toFixed(1):'—'}</div><div class="lbl">本周最高分</div></div>
+        <div class="stat"><div class="num warn">${r.pending||0}</div><div class="lbl">待巩固</div></div>
+        <div class="stat"><div class="num">${r.consolidated||0}</div><div class="lbl">已巩固</div></div>
+        <div class="stat"><div class="num">${r.added_today||0}</div><div class="lbl">今日新增</div></div>`;
+    if (r.pending > 0) {
+        document.getElementById('ctaBox').style.display = 'flex';
+        document.getElementById('ctaText').textContent = `今日有 ${r.pending} 条待巩固`;
+    }
+}
+
+function renderTrend(trend) {
+    if (!trend || trend.length === 0) {
+        document.getElementById('trendEmpty').style.display = 'block';
+        document.querySelector('.chart-box').style.display = 'none';
+        document.querySelector('.legend').style.display = 'none';
+        return;
+    }
+    const mk = (key,color)=>({ label:key, data:trend.map(t=>t[key]), borderColor:color,
+        backgroundColor:color, tension:.3, pointRadius:3, borderWidth:2 });
+    new Chart(document.getElementById('trendChart'), {
+        type:'line',
+        data:{ labels:trend.map(t=>t.day.slice(5)), datasets:[
+            mk('overall','#ffd700'), mk('fluency','#00d4aa'), mk('vocabulary','#4dc9f6'),
+            mk('grammar','#f39c12'), mk('pronunciation','#e74c8b')]},
+        options:{ responsive:true, maintainAspectRatio:false,
+            plugins:{ legend:{display:false} },
+            scales:{ y:{min:4,max:9,ticks:{color:'#888',stepSize:1},grid:{color:'#2a2a4a'}},
+                     x:{ticks:{color:'#888',maxTicksLimit:10},grid:{display:false}} } }
+    });
+}
+
+function renderHeatmap(calendar) {
+    const map = {}; (calendar||[]).forEach(c=>map[c.day]=c.count);
+    const box = document.getElementById('heatmap');
+    const today = new Date();
+    const start = new Date(today); start.setDate(start.getDate() - 83);
+    // 对齐到周一
+    while (start.getDay() !== 1) start.setDate(start.getDate() - 1);
+    let html = '';
+    for (let w = 0; w < 12; w++) {
+        html += '<div class="hm-week">';
+        for (let d = 0; d < 7; d++) {
+            const cur = new Date(start); cur.setDate(cur.getDate() + w*7 + d);
+            if (cur > today) { html += '<div class="hm-cell" style="opacity:0"></div>'; continue; }
+            const key = cur.toISOString().slice(0,10);
+            const n = map[key] || 0;
+            const lvl = n===0?0 : n===1?1 : n===2?2 : n<=4?3 : 4;
+            html += `<div class="hm-cell" style="background:var(--heat${lvl})" title="${key}: ${n}次"></div>`;
+        }
+        html += '</div>';
+    }
+    box.innerHTML = html;
+}
+
+function renderReviews() {
+    const list = reviews.filter(r => filter==='all' || r.status===filter);
+    const box = document.getElementById('reviewList');
+    document.getElementById('reviewEmpty').style.display = list.length ? 'none' : 'block';
+    box.innerHTML = list.map(r => `
+        <div class="review-item ${r.status==='consolidated'?'done':''}">
+            <div style="flex:1">
+                <div class="target">${esc(r.target_text)}</div>
+                <div class="ctx">${fmt(r.context)}</div>
+                <div class="meta">
+                    <span class="badge ${r.status}">${r.status==='pending'?'待巩固':'已巩固'}</span>
+                    <span class="badge cat">${r.category}</span>
+                    <span>跟读 ${r.review_count} 次</span>
+                    ${r.best_score?`<span>最佳 ${(r.best_score*100).toFixed(0)}%</span>`:''}
+                    <span>${(r.created_at||'').slice(5,10)}</span>
+                </div>
+            </div>
+        </div>`).join('');
+}
+
+function renderHistory(hist) {
+    document.getElementById('histEmpty').style.display = hist.length ? 'none' : 'block';
+    document.getElementById('histBody').innerHTML = hist.map(h => `
+        <tr>
+            <td>${(h.created_at||'').slice(5,16).replace('T',' ')}</td>
+            <td>${h.mode||''}</td>
+            <td>${h.transcript_count||0}</td>
+            <td>${h.overall?`<span class="score">${(+h.overall).toFixed(1)}</span>`:'—'}</td>
+            <td>${h.report_path?`<a href="/reports/${h.report_path.split('/').pop()}" target="_blank">查看</a>`:'—'}</td>
+        </tr>`).join('');
+}
+
+function setFilter(btn) {
+    filter = btn.dataset.f;
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    renderReviews();
+}
+
+const esc = s => (s||'').replace(/</g,'&lt;');
+const fmt = s => esc(s).replace(/~~(.+?)~~/g,'<span style="color:#ff5252;text-decoration:line-through">$1</span>')
+                       .replace(/\*\*(.+?)\*\*/g,'<span style="color:#4caf50;font-weight:700">$1</span>');
+
+// ── 加载 ──
+async function load() {
+    let stats, revData, histData;
+    if (DEMO) {
+        const d = demoData();
+        stats = d.stats; revData = {reviews:d.reviews}; histData = {history:d.history};
+    } else {
+        [stats, revData, histData] = await Promise.all([
+            fetch('/api/dashboard/stats?days=30').then(r=>r.json()),
+            fetch('/api/dashboard/reviews?limit=100').then(r=>r.json()),
+            fetch('/api/dashboard/history?limit=20').then(r=>r.json()),
+        ]);
+    }
+    renderStats(stats);
+    renderTrend(stats.trend);
+    renderHeatmap(stats.calendar);
+    reviews = revData.reviews || [];
+    renderReviews();
+    renderHistory(histData.history || []);
+}
+load();
+</script>
+</body>
+</html>

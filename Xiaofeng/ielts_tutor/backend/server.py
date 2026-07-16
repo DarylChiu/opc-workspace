@@ -298,6 +298,27 @@ async def monitor_stream(request: Request):
                 break
     return StreamingResponse(event_stream(), media_type="text/event-stream")
 
+# ── v1.1.0 M2: 训练数据库页 Dashboard ──
+DASHBOARD_HTML = os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend", "dashboard.html")
+
+@app.get("/dashboard")
+async def dashboard_page():
+    if os.path.exists(DASHBOARD_HTML):
+        return HTMLResponse(open(DASHBOARD_HTML).read())
+    return HTMLResponse("<h1>Dashboard not found</h1>", status_code=404)
+
+@app.get("/api/dashboard/stats")
+async def dashboard_stats(days: int = 30):
+    return sessions.get_progress_stats(days=min(days, 365))
+
+@app.get("/api/dashboard/reviews")
+async def dashboard_reviews(limit: int = 100, status: str = None):
+    return {"reviews": sessions.get_review_list(limit=min(limit, 500), status=status)}
+
+@app.get("/api/dashboard/history")
+async def dashboard_history(limit: int = 20):
+    return {"history": sessions.get_history(limit=min(limit, 100))}
+
 @app.get("/api/health")
 async def health():
     ver = open(os.path.join(os.path.dirname(os.path.dirname(__file__)), "VERSION")).read().strip()
@@ -768,6 +789,11 @@ FORMAT RULES:
                         logger.error(f"Report gen failed: {e}")
                     
                     session["last_score"] = sc  # HTTP fallback 缓存 (问题3修复)
+                    # v1.1.0 M1: 评估落库 + 自动灌跟读队列（修复: 此前从未调用 save_evaluation）
+                    try:
+                        sessions.save_evaluation(sid, sc, report_path=sc.get("report_path"))
+                    except Exception as e:
+                        logger.error(f"save_evaluation failed: {e}")
                     try:
                         await ws.send_json({"type": "score", "scores": sc})
                         logger.info(f"Final: overall={sc.get('overall')}")
@@ -805,6 +831,12 @@ FORMAT RULES:
                 except json.JSONDecodeError:
                     sc = {"overall": 0, "summary": "Evaluation unavailable. Please try again.", "improvements": [], "highlights": []}
                 session["last_score"] = sc  # HTTP fallback 缓存 (问题3修复)
+                # v1.1.0 M1: 断线自动评估同样落库+灌队列
+                try:
+                    if sc.get("overall"):
+                        sessions.save_evaluation(sid, sc)
+                except Exception as e:
+                    logger.error(f"AUTO-EVAL save_evaluation failed: {e}")
                 try: await ws.send_json({"type": "score", "scores": sc})
                 except: logger.warning(f"AUTO-EVAL: client disconnected, score cached for /api/session/{sid}/score")
                 logger.info(f"AUTO-EVAL: score={sc.get('overall')}")
