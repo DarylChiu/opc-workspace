@@ -122,7 +122,38 @@ audio { display:none; }
 let queue = [], idx = 0, tries = 0, passedCount = 0;
 let slow = false, recording = false;
 let micStream = null, audioCtx = null, proc = null, pcmChunks = [];
-let refAudioB64 = null, refItemId = null;
+let refAudioB64 = null, refItemId = null, recSampleRate = 16000, liveRms = 0;
+let availableDevices = [], curDev = null;
+
+// ── 设备选择 ──
+async function detectDevices(){
+    try{
+        const devs = await navigator.mediaDevices.enumerateDevices();
+        availableDevices = devs.filter(d => d.kind === 'audioinput' && d.deviceId && d.label);
+        const info = $('deviceInfo');
+        if (availableDevices.length > 1){
+            const sel = document.createElement('select');
+            sel.style.cssText = 'background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:3px;font-size:11px;padding:2px 4px;max-width:140px;margin-left:4px';
+            sel.onchange = switchDevice;
+            availableDevices.forEach((d, i) => {
+                const o = document.createElement('option');
+                o.value = d.deviceId; o.textContent = d.label || 'Mic ' + (i+1);
+                sel.appendChild(o);
+            });
+            info.textContent = ''; info.appendChild(sel);
+            curDev = availableDevices[0];
+        } else if (availableDevices.length === 1){
+            info.textContent = '🎤 ' + (availableDevices[0].label || 'Microphone');
+            curDev = availableDevices[0];
+        } else { info.textContent = '⚠️ 未检测到麦克风'; }
+    } catch(e) { info.textContent = '⚠️ 未授权麦克风'; }
+}
+async function switchDevice(){
+    const sel = document.querySelector('#deviceInfo select');
+    if (!sel) return;
+    curDev = availableDevices.find(d => d.deviceId === sel.value);
+    if (micStream) { micStream.getTracks().forEach(t => t.stop()); micStream = null; }
+}
 
 const $ = id => document.getElementById(id);
 const esc = s => (s||'').replace(/</g,'&lt;');
@@ -162,9 +193,17 @@ function showItem() {
 
 async function setupMic() {
     try {
-        micStream = await navigator.mediaDevices.getUserMedia({audio:{sampleRate:16000,channelCount:1,echoCancellation:true,noiseSuppression:true}});
+        const cid = curDev ? { deviceId: { exact: curDev.deviceId } } : undefined;
+        micStream = await navigator.mediaDevices.getUserMedia({
+            audio: { ...cid, sampleRate: 48000, channelCount: 1, echoCancellation: true, noiseSuppression: true }
+        });
         $('recBtn').disabled = false;
-    } catch(e) { $('statusLine').textContent = '⚠️ 麦克风未授权，无法跟读'; }
+        const info = $('deviceInfo');
+        info.innerHTML = '🎤 麦克风就绪';
+    } catch(e) {
+        $('recBtn').disabled = true;
+        $('deviceInfo').textContent = '⚠️ 麦克风不可用';
+    }
 }
 
 async function playRef() {
@@ -192,13 +231,16 @@ function toggleRec() {
     if (!recording) startRec(); else stopRec();
 }
 
-function startRec() {
-    if (!micStream) return;
-    recording = true; pcmChunks = [];
+async function startRec() {
+    if (!micStream) { await setupMic(); if (!micStream) return; }
+    recording = true; pcmChunks = []; liveRms = 0;
     $('recBtn').classList.add('recording');
     $('recBtn').textContent = '⏹ 完成跟读';
     $('statusLine').textContent = '🔴 录音中，读完点「完成跟读」';
-    audioCtx = new AudioContext({sampleRate:16000});
+    // v1.1.1 iPhone修复: 不强制16k, 用设备原生采样率(服务端重采样), 避免iOS静音输出
+    audioCtx = new AudioContext();
+    try { await audioCtx.resume(); } catch(e) {}
+    recSampleRate = audioCtx.sampleRate;
     const src = audioCtx.createMediaStreamSource(micStream);
     proc = audioCtx.createScriptProcessor(4096,1,1);
     src.connect(proc);
@@ -207,8 +249,16 @@ function startRec() {
     proc.onaudioprocess = e => {
         const input = e.inputBuffer.getChannelData(0);
         const pcm = new Int16Array(input.length);
-        for (let i=0;i<input.length;i++) pcm[i] = Math.max(-32768, Math.min(32767, input[i]*32768));
+        let sum = 0;
+        for (let i=0;i<input.length;i++) {
+            pcm[i] = Math.max(-32768, Math.min(32767, input[i]*32768));
+            sum += input[i]*input[i];
+        }
         pcmChunks.push(pcm);
+        // 实时电平反馈: 让用户看到有没有收到音
+        liveRms = Math.sqrt(sum/input.length);
+        const bars = Math.min(8, Math.round(liveRms*60));
+        $('statusLine').textContent = '🔴 录音中 ' + '▮'.repeat(bars) + '▯'.repeat(8-bars) + (bars===0?' (没收到声音?)':'');
     };
 }
 
@@ -219,9 +269,16 @@ async function stopRec() {
     if (proc) { proc.disconnect(); proc = null; }
     if (audioCtx) { audioCtx.close().catch(()=>{}); audioCtx = null; }
     const total = pcmChunks.reduce((n,c)=>n+c.length, 0);
-    if (total < 1600) { $('statusLine').textContent = '录音太短，再试一次'; return; }
+    if (total < recSampleRate*0.3) { $('statusLine').textContent = '录音太短，再试一次'; return; }
     const all = new Int16Array(total);
     let off = 0; pcmChunks.forEach(c => { all.set(c, off); off += c.length; });
+    // 静音预检: 全程无声就别发了
+    let sum2 = 0; for (let i=0;i<all.length;i+=16) { const v = all[i]/32768; sum2 += v*v; }
+    const overallRms = Math.sqrt(sum2/(all.length/16));
+    if (overallRms < 0.002) {
+        $('statusLine').textContent = '🔇 没有收到声音：检查手机侧边静音开关，靠近麦克风再试';
+        return;
+    }
     let bin = ''; const bytes = new Uint8Array(all.buffer);
     const CH = 0x8000;
     for (let i=0;i<bytes.length;i+=CH) bin += String.fromCharCode.apply(null, bytes.subarray(i, i+CH));
@@ -231,9 +288,9 @@ async function stopRec() {
         const it = queue[idx];
         const d = await fetch(`/api/review/${it.id}/attempt`, {
             method:'POST', headers:{'Content-Type':'application/json'},
-            body: JSON.stringify({audio: btoa(bin)})
+            body: JSON.stringify({audio: btoa(bin), sample_rate: recSampleRate})
         }).then(r=>r.json());
-        if (d.error) { $('statusLine').textContent = '打分失败: ' + d.error; $('recBtn').disabled = false; return; }
+        if (d.error) { $('statusLine').textContent = d.hint || ('打分失败: ' + d.error); $('recBtn').disabled = false; return; }
         tries++;
         showResult(d);
     } catch(e) { $('statusLine').textContent = '打分失败: ' + e.message; }
