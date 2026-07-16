@@ -114,3 +114,12 @@
   "🔴 今日日记缺失 — 必须创建",
   "🔴 任务涉及问题/失败/审计发现，建议提炼到 lessons.md"
 ]}
+{"timestamp":"2026-07-15T23:59:03+0700","check":"L4-audit-v2","agent":"xiaofeng","fixes":0,"shallow_issues":2,"deep_issues":0,"diary_lines":55,"diary_sections":7,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-07-15T23:59:00+0700","check":"L4-audit-v2","agent":"xiaofeng","fixes":1,"shallow_issues":2,"deep_issues":0,"diary_lines":55,"diary_sections":7,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-07-15T23:59:23+0700","check":"L4-audit-v2","agent":"xiaofeng","fixes":0,"shallow_issues":2,"deep_issues":0,"diary_lines":55,"diary_sections":7,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-07-16T00:29:42+0700","check":"post-op","task":"IELTS v1.0.0发布+跟读模块开发启动","score":2,"total":5,"warnings":[
+  "🔴 今日日记缺失 — 必须创建"
+]}
+{"timestamp":"2026-07-16T07:46:26+0700","check":"post-op","task":"IELTS Tutor v1.0.1 移动端自适应优化发布","score":2,"total":5,"warnings":[
+  "🔴 今日日记缺失 — 必须创建"
+]}
