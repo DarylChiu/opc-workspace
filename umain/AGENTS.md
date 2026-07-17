@@ -20,6 +20,7 @@ Before doing anything else:
 8. **Do NOT read old daily logs** — use `memory_search` when needed
 9. **Cross-session recovery**: Check for overdue commitments from previous sessions. Search for "明天"、"XX:XX"、"截止"、"deadline" in recent context. Flag any missed deadlines immediately.
 10. **Confirm today's diary exists**: `ls memory/$(date +%Y-%m-%d).md` — if not, create it now.
+11. **Note search methodology**: When doing web searches, follow `memory/search_methodology.md` (keyword decomposition, fallback ladder, result filtering rules).
 
 Don't ask permission. Just do it.
 
@@ -146,6 +147,35 @@ You and 吹点小风 (xiaofeng/Bryson) share the group `OPC of DarylChiu`. Hold 
 ### 📝 自主决策记录
 - [P2] xxx — 理由: ...
 ```
+
+### 🚀 子代理分流规则（2026-07-17上线）
+
+**原则**：飞书通道有~310s超时限制。超过2分钟的任务必须走子代理。
+
+**分流判断**：
+- 预估单turn < 2分钟 → 直接执行
+- 预估单turn > 2分钟 → spawn子代理执行
+- Daryl发送修正指令 → 主Agent kill旧子代理 + respawn新版本
+
+**执行流程**：
+```
+Daryl发指令 → 主Agent秒回"收到，执行中" → spawn子代理
+  → 子代理写入 execution_trace.jsonl（每步操作记录）
+  → 子代理完成后 sessions_send 通知主Agent
+  → 主Agent转发结果给Daryl
+```
+
+**回传协议**：
+1. 子代理创建 `memory/subagent_runs/{task_id}/execution_trace.jsonl`
+2. 每步实质性操作（tool call/websearch/决策）写入trace
+3. 子代理结束写入 `summary.md`（交付物+执行摘要+复盘）
+4. 主Agent验收：检查trace完整性 → 提取教训 → git commit归档
+
+**中断机制**：
+- Daryl回复 `/cancel 新指令` → 主Agent `subagents(action=kill, target=<task_id>)` → 重新spawn
+- 子代理超时（默认30min）→ 主Agent收timeout通知 → 检查是否有partial产出
+
+**成本**：每次子代理额外开销 $0.01-0.03（trace读写+回传通信），远低于超时丢投递导致重跑的浪费。
 
 ## Memory System v2
 

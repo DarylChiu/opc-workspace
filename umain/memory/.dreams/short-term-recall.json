@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-16T01:10:20.622Z",
+  "updatedAt": "2026-07-17T02:03:14.456Z",
   "entries": {
     "memory:memory/2026-06-08.md:19:38": {
       "key": "memory:memory/2026-06-08.md:19:38",
@@ -1103,18 +1103,21 @@
       "endLine": 62,
       "source": "memory",
       "snippet": "- 之前加的 `plugins.allow: [\"sentinel\"]` 导致 Gateway 重启后只加载 2 个插件 - Daryl 禁用 Sentinel 后 Gateway 无法正常启动 - **根因**: plugins.allow 限制了非 bundled 插件加载 - **修复**: Daryl 手工清除了 plugins.allow 配置 ### Balance Feishu ID 修复 - Balance 的 USER.md 缺少 Daryl 的 Balance 通道 Feishu ID - 已添加 `ou_0d7a57b9a531823aa1edee6874dcbb34` 到 Balance 的 USER.md - 已添加 OPC 看板访问信息到 Balance 的 MEMORY.md ## 09:35-09:45 · M3 项目总线完成 100% ### 完成项目 - **项目总线面板**: 聚合 costs/projects + artifacts?group=project + agents/projects - **成本面板项目拆分**: `/api/costs/projects` 面板，按项目汇总 tokens/cost/sessions，支持模型明细展开 - **产物面板项目分组**: 「按项目分组」切换按钮，显示项目名+文件数，支持 agent 过滤联动 - **Commits**: `8809c5d` (项目总线) + `690decf` (成本+产物) - **M3 进度**: 30% → 100% ✅ ## 全天 · 隔壁隧道稳定性",
-      "recallCount": 1,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.36333366632461545,
-      "maxScore": 0.36333366632461545,
+      "totalScore": 1.090377801656723,
+      "maxScore": 0.37592574357986447,
       "firstRecalledAt": "2026-07-08T08:37:37.416Z",
-      "lastRecalledAt": "2026-07-08T08:37:37.416Z",
+      "lastRecalledAt": "2026-07-17T02:03:14.456Z",
       "queryHashes": [
-        "a9f7ae8b28ff"
+        "a9f7ae8b28ff",
+        "05ea75e6ba3a",
+        "cd96b1060549"
       ],
       "recallDays": [
-        "2026-07-08"
+        "2026-07-08",
+        "2026-07-17"
       ],
       "conceptTags": [
         "gateway",
