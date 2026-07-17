@@ -1,8 +1,15 @@
 # 当前活跃任务
 
-> 最后更新: 2026-07-16 08:55 GMT+7
+> 最后更新: 2026-07-18 00:04 GMT+7
 
 ## 🟢 进行中
+### SearXNG搜索质量迭代 — M1+M2+P0+P1 已交付 (7/17)
+- **M1 SearXNG修复**: Brave API上线 + 6引擎精简 ✅
+- **M2 子代理中断协议**: 4Agent config+AGENTS.md 更新 ✅
+- **P0 自动重启**: keepalive.sh + launchd 守护 ✅
+- **P1 搜索方法论**: methodology.md + 4Agent同步 ✅
+- **等待**: Daryl明早验收
+
 ### Agent自进化基建 — Self L3试点 (7/15启动)
 - **M1-M3 已交付**: SAGE Checker(checker.py) + Reflexion(reflect.sh) + EVOLUTION.md协议 + Self AGENTS.md接入 ✅
 - **测试**: 坏稿FAIL(0/1/1)/好稿PASS(8/9/8),判别力验证通过
