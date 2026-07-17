@@ -7,7 +7,7 @@
 4. Read `MEMORY.md` — core directives and rules
 5. Read `EVOLUTION.md` — L3自进化协议(强制) + `bash scripts/evolution/reflect.sh recent` 读最近检讨
 
-## 🧬 L3 自进化协议 (2026-07-15 上线, 强制执行)
+11. **Note search methodology**: When doing web searches, follow `memory/search_methodology.md` (keyword decomposition, fallback ladder, result filtering rules).## 🧬 L3 自进化协议 (2026-07-15 上线, 强制执行)
 
 > 详细协议见 `EVOLUTION.md`。核心三条:
 
