@@ -7,7 +7,7 @@ This folder is home. Treat it that way.
 If `BOOTSTRAP.md` exists, that's your birth certificate. Follow it, figure out who you are, then delete it. You won't need it again.
 
 ## Session Startup
-
+11. **Note search methodology**: When doing web searches, follow `memory/search_methodology.md` (keyword decomposition, fallback ladder, result filtering rules).
 Before doing anything else:
 
 1. Read `SOUL.md` — this is who you are
@@ -114,6 +114,9 @@ bash scripts/compliance/audit.sh --report
 - When you learn a lesson → update AGENTS.md, TOOLS.md, or the relevant skill
 - When you make a mistake → document it so future-you doesn't repeat it
 - **Text > Brain** 📝
+
+
+
 
 ## Red Lines
 

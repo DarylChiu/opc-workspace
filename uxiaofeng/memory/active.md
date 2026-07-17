@@ -3,12 +3,17 @@
 > 最后更新: 2026-07-16 09:05（响应 Daryl 看板验收 3 处修正）
 
 ## 🟢 进行中
-### IELTS陪练助手 — v1.0.1 验收通过 ✅(7/16)，「跟读模块+训练数据库」待 Daryl 修订开发计划后开工
+### IELTS陪练助手 — v1.0.1 验收通过 ✅(7/16)
 - **v1.0.1 (7/16)**: 手机移动端自适应优化，Daryl 全部验收通过 ✅（含控制条单行+空闲态下拉框修复两轮反馈）
-- **v1.1.0 开发中**（7/16 开工，里程碑汇报制）: M1✅ M2✅ M3✅ M4✅ 压测✅ → v1.1.0 已发布(tag ielts-v1.1.0, f75d5f4)。待: ①Daryl实测验收 ②Daryl给M2 Dashboard需求(数据来源+版面交互) ③洗稿MVP M1修改意见(Daryl编辑中)
-  - M1: review_items/shadow_attempts 两表+6方法+评估自动灌队列；修复评估从未落库bug；历史回填6条
-  - Dashboard Prototype 出来后 Daryl 给「数据来源+版面交互」需求
-- **注意**: ngrok 隧道已切给洗稿MVP（8777），IELTS 本地 8767 继续可用
+
+### IELTS陪练助手 v1.1.0 — ⏸️ 挂起（7/17 Daryl指令）
+- **进度**: M1数据层 ✅ → M2 Dashboard ✅(5eb6075) → M3 跟读闭环 ✅(7/16, 159bd94) → M4 串联验收（未开始）
+- **挂起原因**: Daryl 实测发现交互问题，需后续 Debug 迭代
+  - iPhone 语音输入**不能正常工作**（❌）
+  - Samsung Tab S8 **已 OK 可用**（✅），但交互逻辑有「拖沓」感
+  - Daryl 后续会进入 Debug 迭代模式逐一核对
+- **恢复条件**: Daryl 发起 Debug 迭代会话
+- **技术状态**: 本地 8767 继续可用，ngrok 隧道在洗稿MVP（8777）
 - **雅思** 口语/写作/听力/阅读全线陪练
 - **管线1-IELST Part1**: ✅ v1.0.1 验收通过（延时已优化至 e2e 3-4.5s，7/15）
   - 已完成: 链式流式核心管线、Debug验收模块、评估报告系统、成本追踪、VAD音频采集修复、延时优化、移动端自适应
@@ -19,6 +24,7 @@
 
 ### Loop Engineering（基建 · P0 🔴 事故复盘完成，方向待定）
 - **状态**: 🔴 Sentinel v1 事故复盘完成（7/11 Daryl 对话），方向待定
+- **关联**: 🆕 Kitty 7/16 晚提交基建修复方案 `decision_reports/category_b_infra_fix_plan.md`（类别B·交互run超时丢投递），Daryl 7/17 早上审查中，阶段3涉及Gateway改动（与Loop Engineering的基建方向有交集）
 - **事故**: Sentinel v1 Plugin → $20 API 浪费 + Gateway 反复重启 + 开发效率下降
 - **方案**: Sentinel v2（轻量 before_tool_call hook，只拦 write/edit/exec，零 Gateway 通信）已设计
 - **阻塞**: Daryl 认为基建问题需要更强模型才能从根本上解决，7/12 讨论未发生
