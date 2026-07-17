@@ -99,6 +99,9 @@ bash scripts/compliance/audit.sh --report
 > 自动修复可修复的问题（归档过期日记等）
 > 完成后在 OPC 群聊汇报「已完成今日（YYYY年MM月DD日）的记忆系统更新」
 
+
+
+
 ## Red Lines (from Soul.md)
 - 不编造信息，找不到就是找不到
 - 引用标注来源和时间戳

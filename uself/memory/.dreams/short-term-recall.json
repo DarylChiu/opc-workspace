@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-13T01:44:45.007Z",
+  "updatedAt": "2026-07-17T06:20:51.279Z",
   "entries": {
     "memory:memory/2026-06-22.md:22:34": {
       "key": "memory:memory/2026-06-22.md:22:34",
@@ -616,6 +616,68 @@
         "vietnam-tax",
         "vietnam-tax-home.md",
         "01-financial/tax/pit/pit-vietnam"
+      ]
+    },
+    "memory:memory/2026-07-17.md:1:15": {
+      "key": "memory:memory/2026-07-17.md:1:15",
+      "path": "memory/2026-07-17.md",
+      "startLine": 1,
+      "endLine": 15,
+      "source": "memory",
+      "snippet": "# 2026-07-17 日记 ## 📋 Daryl 设备配置同步 - **来源**: 小枫/Bryson 通过 sessions_send 同步 - **三设备清单**: 1. **iPhone** — iOS，飞书客户端 2. **Samsung Tab S8** — Android (One UI)，平板 3. **Mac** — macOS（桌面端/开发机） - **出差规则**: Daryl 说「出差」= 只带 Samsung Tab S8 + iPhone，**不带 Mac** - **当前状态**: - 雅思陪练助手 iPhone 语音输入有问题 ❌ - Samsung Tab S8 可用 ✅，交互有拖沓感 - v1.1.0 已挂起 - **已记录到**: active.md 设备配置区",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.5161899477243423,
+      "maxScore": 0.5161899477243423,
+      "firstRecalledAt": "2026-07-17T01:58:54.930Z",
+      "lastRecalledAt": "2026-07-17T01:58:54.930Z",
+      "queryHashes": [
+        "ec3cb538b78c"
+      ],
+      "recallDays": [
+        "2026-07-17"
+      ],
+      "conceptTags": [
+        "小枫/bryson",
+        "sessions-send",
+        "桌面端/开发机",
+        "v1.1.0",
+        "active.md",
+        "日记",
+        "daryl",
+        "设备"
+      ]
+    },
+    "memory:memory/2026-07-13.md:56:71": {
+      "key": "memory:memory/2026-07-13.md:56:71",
+      "path": "memory/2026-07-13.md",
+      "startLine": 56,
+      "endLine": 71,
+      "source": "memory",
+      "snippet": "2. 启动时未指定 --home → 跑到空配置目录 `~/Library/Application Support/Syncthing/`（生成新 Device ID 5HVE5XM） 3. 正确配置在 `~/.config/syncthing/`（昨天配对的 6WNEZLD + 平板设备 4YSDKY2 + accavault 文件夹） - 修复：`syncthing serve --home=/Users/zhaoyuzhao/.config/syncthing` → 恢复 6WNEZLD 身份 - 持久化：`launchctl load net.syncthing.syncthing.plist`（RunAtLoad+KeepAlive）→ 开机自启+崩溃自拉起 - 教训：启动 Syncthing 必须显式指定 --home，否则生成并行的空实例 ### Plan A 重构成果（24个树叶节点，1153→3651行，3.2倍） - KHOA DUNG（首例样板）：190→461行，合并 Balance 4份原始报告 - Balance 案例节点（子Agent，10个）：CIT对比/FutureTextile/英联邦/耦合度/哲学/VAS差错四件套/受托支付 - 小枫技术节点（我直接写，10个）：B站/抖音/YouTube + 开发教训1-4 + 协作教训2-3 + 版本号同步 - 不动：电影学/Loan-Automation/CSS（小枫确认已达标）；IFRS/IAS/VAS/ACCA（Daryl确认是树干非树叶） - 链接规范：🔗(树叶→树叶) + 📂(H",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.36510621607303617,
+      "maxScore": 0.36510621607303617,
+      "firstRecalledAt": "2026-07-17T06:20:51.279Z",
+      "lastRecalledAt": "2026-07-17T06:20:51.279Z",
+      "queryHashes": [
+        "b194ce33e349"
+      ],
+      "recallDays": [
+        "2026-07-17"
+      ],
+      "conceptTags": [
+        "library/application",
+        "support/syncthing",
+        "config/syncthing",
+        "users/zhaoyuzhao",
+        "net.syncthing.syncthing.plist",
+        "3.2倍",
+        "b站/抖音/youtube",
+        "开发教训1-4"
       ]
     }
   }
