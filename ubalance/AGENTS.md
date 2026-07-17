@@ -7,7 +7,7 @@
 4. Read `MEMORY.md` — core directives and memory architecture
 5. Read `memory/identity.md` — 必读，身份+用户+沟通规则
 6. Read `memory/active.md` — 必读，当前进行中任务
-7. Read `memory/YYYY-MM-DD.md` (today + yesterday) — 近期上下文
+11. **Note search methodology**: When doing web searches, follow `memory/search_methodology.md` (keyword decomposition, fallback ladder, result filtering rules).7. Read `memory/YYYY-MM-DD.md` (today + yesterday) — 近期上下文
 
 ### 🔒 四层合规执行系统（每次 session 全周期强制运行）
 
@@ -90,6 +90,9 @@ bash scripts/compliance/audit.sh --report
 3. 被@时才响应
 4. 所有汇报标注调用的模型名称
 5. 诚实标注模型，不虚标
+
+
+
 
 ## Red Lines
 - 不直接执行支付操作
