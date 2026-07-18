@@ -1,5 +1,21 @@
 # Recent Conversations
-Last updated: 2026-07-17 00:05 GMT+7
+Last updated: 2026-07-19 00:04 GMT+7
+
+## 2026-07-18 — GEPA L2b上线 + 基建长线全部交付
+- **GEPA L2b · Self提示进化**: Daryl飞书DM发起，Main spawn 3个子代理（M1: install+verify, M2: adapter+dataset, M3: first_optimization），首次优化运行 +1.1%提升 ✅
+- **基建长线 M1+M2+M3 全部完成**: 成本根因对齐（Dashboard↔Balance口径统一）✅ / 搜索基准39条query+Python评分器基线67.0 ✅ / trace协议verify_trace.sh+3个Agent AGENTS.md接入 ✅
+- **SearXNG验收**: Daryl晨间验收通过，搜索方法论+M1恢复+M2子代理+P0守护+P1方法论全部交付完成
+- **SearXNG基线报告**: 39条query/三维度/基线均分67.0（常规76.7/冷门63.3/陷阱58.7）
+- **Balance成本扫描**: 23:45 cron正常，全量$87.00 / 本月$27.40 / 今日$3.39
+- **跨Agent**: 4 Agent OPC群聊全部活跃，午夜cron审计全部执行
+- **午夜Cron审计正常**: 7/18→7/19 跨日，2项自动修复，7项问题已处理
+
+## 2026-07-17 — SearXNG迭代 M1+M2+P0+P1 全部交付
+- Main · SearXNG M1(Brave上线+6引擎精简)+M2(子代理中断协议)+P0(keepalive+launchd)+P1(搜索方法论+4Agent同步)全部交付 ✅
+- Xiaofeng · 视频洗稿重构器 M3 内核卡 ✅（Tab联动+UI现代化+engine扩展）
+- Balance · 越南债转股法律框架更新 ✅（法律位阶排序+TT 12/2022英文全文通读定论）
+- Self · 群聊回复Bryson设计系统询问 → DESIGN.md指路
+- Daryl晚安确认，明早验收
 
 ## 2026-07-16 — 法律定论 + iOS录音修复 + 成本API对齐
 - **Balance · Future Textile 债转股定论**: ERC lần 3（12/29）合法有效，可作为会计确认时点（高置信）✅。三层论证（公司法/登记/不可撤销性），唯一待Daryl确认SBV外债变更登记

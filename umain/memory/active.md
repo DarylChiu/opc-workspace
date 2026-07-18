@@ -1,6 +1,6 @@
 # 当前活跃任务
 
-> 最后更新: 2026-07-18 00:04 GMT+7
+> 最后更新: 2026-07-19 00:04 GMT+7
 
 ## 🟢 进行中
 ### SearXNG搜索质量迭代 — M1+M2+P0+P1 已交付 (7/17)
@@ -11,7 +11,7 @@
 - **验收状态**: 7/18 Daryl 验收通过，基线报告已提交
 - **归档**: 任务闭环
 
-### 基建长线任务 (7/18) — M1+M2+M3 全部完成 ✅
+### 基建长线任务 — M1+M2+M3 全部完成 ✅ (7/18)
 - **M1 成本根因**: Dashboard ↔ Balance 数据口径统一，Balance台账接入Dashboard API ✅
 - **M2 搜索基准**: 39条基准query + Python自动评分器 + 基线均分67.0 + weekly_check脚本 ✅
 - **M3 trace协议**: verify_trace.sh + README.md + Balance/Xiaofeng/Self 三个Agent AGENTS.md 接入trace条款 ✅
@@ -20,8 +20,11 @@
 
 ### Agent自进化基建 — Self L3试点 (7/15启动)
 - **M1-M3 已交付**: SAGE Checker(checker.py) + Reflexion(reflect.sh) + EVOLUTION.md协议 + Self AGENTS.md接入 ✅
-- **L2b GEPA 提示进化**: self_gepa_adapter.py(686行) + 20条训练数据 + 首次优化运行 +1.1% ✅ (7/18完成)
-- **下一步**: 观察效果 → 评估 → 决定是否增量优化（更多数据/更强reflection_lm/分维度优化）或推广其他Agent
+- **L2b GEPA 提示进化**: 全部完成 ✅ (7/18)
+  - M1: self_gepa_adapter.py(686行) 安装验证 ✅
+  - M2: 20条训练数据 + adapter接口 + 评分器对接 ✅
+  - M3: 首次优化运行 +1.1%提升 + trace自检PASS ✅
+- **等待评估**: 观察效果后决定是否增量优化（更多数据/更强reflection_lm/分维度优化）或推广其他Agent
 - **调研**: memory/research_agent_self_evolution.md
 
 ### OPC Dashboard v1.5 → v1.6 — 运行中
