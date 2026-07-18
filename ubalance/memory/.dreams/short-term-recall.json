@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-17T16:51:01.121Z",
+  "updatedAt": "2026-07-18T15:25:00.350Z",
   "entries": {
     "memory:memory/2026-06-10.md:1:29": {
       "key": "memory:memory/2026-06-10.md:1:29",
@@ -442,20 +442,14 @@
       "endLine": 32,
       "source": "memory",
       "snippet": "- 已session_send问Kitty，Kitty回复：当前Workflow只是可视化编辑器，无执行引擎 - 需小枫开发Workflow执行引擎，工时约30-42h - 短期替代：Daryl写「任务模板」说明文件，Balance按模板静默执行全部步骤后一次性回复 ### 🔴 贷款材料整理项目启动（17:24-17:31）⚠️ 此前遗漏，6/25从session恢复 - 17:24 Daryl发送 `贷款材料整理-任务模版.xlsx`，解析为5阶段工作流： ① 从L1-Raw Materials提取发票号/合同号 → ② 关键字在RM-Database中OCR匹配PDF发票+报关单+提单 → ③ 输出关键字段到汇总Excel → ④ 循环全部发票号 → ⑤ 错误标记 - 17:27 发送 `L1-Raw Materials-10,125usd.xlsx`，成功读取：10条发票记录，供应商HUA FENG GROUP，总金额$10,125.75 - 17:31 开始发送RM-Database拆分包（RM-Database-1of 10.zip已接收），后续9个未传完 - ⚠️ post-op.sh关键词太窄→此段未写入日记→6/22暂停时也未同步到active.md - ⏸️ 6/22 Daryl指令暂缓",
-      "recallCount": 41,
+      "recallCount": 51,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 15.254547175765033,
+      "totalScore": 18.936005622148514,
       "maxScore": 0.4238295644521713,
       "firstRecalledAt": "2026-06-26T02:19:50.472Z",
-      "lastRecalledAt": "2026-07-17T16:51:01.121Z",
+      "lastRecalledAt": "2026-07-18T15:25:00.350Z",
       "queryHashes": [
-        "6bc4393abc35",
-        "80fee6937724",
-        "a3a03f7467ef",
-        "4f0269625828",
-        "89be70e74cce",
-        "3ca0c63ccb7f",
         "2038fd86a137",
         "d7949747b73d",
         "2b029283d309",
@@ -481,7 +475,13 @@
         "4d7fa281fcaa",
         "00433621b001",
         "b3b6361d727b",
-        "a220976af47b"
+        "a220976af47b",
+        "29a6aa855ed0",
+        "1570a51fcced",
+        "ea9487caee9b",
+        "5583c17651ce",
+        "4c38fe6873db",
+        "f478237095dc"
       ],
       "recallDays": [
         "2026-06-26",
@@ -493,7 +493,8 @@
         "2026-07-14",
         "2026-07-15",
         "2026-07-16",
-        "2026-07-17"
+        "2026-07-17",
+        "2026-07-18"
       ],
       "conceptTags": [
         "已session-send问kitty",
@@ -887,21 +888,14 @@
       "endLine": 51,
       "source": "memory",
       "snippet": "### 08:56 Daryl指令：终止Hedging任务 - Daryl指令终止越南银行Hedging方案分析任务，已自行处理完毕 - 已从active.md移除，标记为❌终止 ### 09:00 Daryl指令：挂起项目成本监控 - Bryson「视频分析交互workflow」（视频分析MVP v2.0）已结束 - 项目成本监控任务挂起，系统c cron保持运行（基础设施） - 等新开发项目启动后恢复 ### 08:xx 个人所得税咨询案例分析 - Daryl发来docx文件：三个越南外资企业PIT案例 - 初版分析被Daryl批评：「你用的是流氓会计师的角度吗？」 - **核心问题**：分析出发点偏了——满篇在讲怎么「不算税」，而不是「法律怎么规定→合规差距在哪→怎么整改」 - 已向Daryl承认错误，给出修正框架 - 三个案例： - 案例1：A公司外籍员工福利（签证/体检/餐费/宿舍） - 案例2：B公司集团来访差旅 - 案例3：C公司通勤班车 ### 教训 - Daryl纠正：财务分析立场必须是合规导向，不是规避导向 - 标注「规避建议」这种措辞不合适 - 50亿无发票签证费这种大雷应该拉警报而不是轻描淡写 ## 待办 - Git push 失败需后续排查（commit 成功，push 失败）",
-      "recallCount": 34,
+      "recallCount": 49,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 12.735477545857432,
+      "totalScore": 18.311422985792163,
       "maxScore": 0.4124524474143982,
       "firstRecalledAt": "2026-07-11T02:00:43.381Z",
-      "lastRecalledAt": "2026-07-17T16:51:01.121Z",
+      "lastRecalledAt": "2026-07-18T15:25:00.350Z",
       "queryHashes": [
-        "46303ef77bff",
-        "89be70e74cce",
-        "3ca0c63ccb7f",
-        "2038fd86a137",
-        "d7949747b73d",
-        "2b029283d309",
-        "6cd3ed12288f",
         "baf5543d45bf",
         "de5312e9c4c9",
         "54c6cc803b8c",
@@ -922,7 +916,18 @@
         "00433621b001",
         "b3b6361d727b",
         "d6470fd77dc1",
-        "a220976af47b"
+        "a220976af47b",
+        "b21f314daa27",
+        "10c217b8d8f6",
+        "dd98e8c86ef0",
+        "29a6aa855ed0",
+        "935b13407639",
+        "1570a51fcced",
+        "ea9487caee9b",
+        "5583c17651ce",
+        "4c38fe6873db",
+        "d7949747b73d",
+        "f478237095dc"
       ],
       "recallDays": [
         "2026-07-11",
@@ -930,7 +935,8 @@
         "2026-07-14",
         "2026-07-15",
         "2026-07-16",
-        "2026-07-17"
+        "2026-07-17",
+        "2026-07-18"
       ],
       "conceptTags": [
         "已从active.md移除",
@@ -981,23 +987,14 @@
       "endLine": 45,
       "source": "memory",
       "snippet": "### 🟡 OPC看板通知系统 Bug 排查 (13:12-13:30) - Daryl 问有没有收到 dashboard 发来的核实任务状态消息 - Balance 查了全部 session 和记忆系统 → 没有收到 - 通过 sessions_send 联系 Kitty（AgentId=main，又忘了）确认： - **原因**: OPC 看板后台服务有两个 bug 1. Kitty 被跳过: `if (ocAgentId === 'main') return;` 直接 return 2. `--deliver` 没配 `--reply-channel`/`--reply-account`，Agent 回复无处投递 - **修复**: Kitty commit `a8a985a`，服务器已重启 - Daryl 之前在 dashboard 上的操作确实都没触发 Agent 推理 - **教训**: 记住 Kitty 的 AgentId 是 `main`，不是 `kitty`。sessions_send 要用 `agentId=\"main\"` ### 📝 贷款材料自动化整理执行手册 v2.3 撰写 (13:30-14:00) - Daryl 要求做一个轻量 guide MD，让其他 Agent 能照着执行 - 产出: `reports/贷款材料自动化整理-执行手册-v2.3.md` (~24KB, 15 章节) - 包含: 环境搭建、输入验证、8 步执行流程、OCR 内容验证、质检过滤、Outcome1/2 生成、暂停点、常见错误修复、完整规则",
-      "recallCount": 43,
+      "recallCount": 55,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 16.080822512507442,
+      "totalScore": 20.534356123209008,
       "maxScore": 0.39153424501419065,
       "firstRecalledAt": "2026-07-11T02:00:43.381Z",
-      "lastRecalledAt": "2026-07-17T16:51:01.121Z",
+      "lastRecalledAt": "2026-07-18T15:25:00.350Z",
       "queryHashes": [
-        "d7949747b73d",
-        "2b029283d309",
-        "856b78de84ba",
-        "111ffc8dd00d",
-        "6cd3ed12288f",
-        "de5312e9c4c9",
-        "375af2191fe7",
-        "54c6cc803b8c",
-        "6eca883a86c0",
         "2e20c22220f7",
         "b0a44b0cfd91",
         "adb2f9d47695",
@@ -1020,7 +1017,16 @@
         "00433621b001",
         "b3b6361d727b",
         "d6470fd77dc1",
-        "a220976af47b"
+        "a220976af47b",
+        "b21f314daa27",
+        "10c217b8d8f6",
+        "dd98e8c86ef0",
+        "d7949747b73d",
+        "935b13407639",
+        "5583c17651ce",
+        "4c38fe6873db",
+        "6cd3ed12288f",
+        "f478237095dc"
       ],
       "recallDays": [
         "2026-07-11",
@@ -1028,7 +1034,8 @@
         "2026-07-14",
         "2026-07-15",
         "2026-07-16",
-        "2026-07-17"
+        "2026-07-17",
+        "2026-07-18"
       ],
       "conceptTags": [
         "12-13",
@@ -1281,24 +1288,14 @@
       "endLine": 58,
       "source": "memory",
       "snippet": "- 包含: 环境搭建、输入验证、8 步执行流程、OCR 内容验证、质检过滤、Outcome1/2 生成、暂停点、常见错误修复、完整规则速查表 - 状态: ✅ 完成，等 Daryl 验收 ### 🔴 active.md 结构重整 (15:00) - **Daryl 纠正**: IPO 审计底稿学习任务从未交付，我之前发消息说「已于 6/8 交付闭环」完全错误 - **根因**: active.md 结构混乱，IPO 审计底稿出现两次（进行中+学习阶段），dashboard 同步时误读为活跃任务 - **修复**: 1. 合并「进行中（续）」+「学习阶段」+「待跟进」+「上次任务」→ 统一归入「⏸️ 暂停/等待」 2. 所有等待 Daryl 的任务全部从「进行中」移除 3. 「进行中」现在只保留真正活跃的：Future Textile 攻防 + 贷款材料整理 - **新规则**: 挂起/等待 Daryl 的任务不算 In Progress，不准出现在「进行中」下 - **教训**: Dashboard 通知前必须验证任务真实状态，不能自作主张标「交付闭环」 ## 待办 / 遗留 - 🔴 FutureTextile 第三轮攻击9-12 等待 Daryl 防御 - 📝 贷款材料执行手册等 Daryl 验收反馈 - 无其他紧急遗留任务",
-      "recallCount": 43,
+      "recallCount": 54,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 16.34151466488838,
+      "totalScore": 20.487994018197053,
       "maxScore": 0.4112776666879654,
       "firstRecalledAt": "2026-07-13T03:20:59.829Z",
-      "lastRecalledAt": "2026-07-17T16:51:01.121Z",
+      "lastRecalledAt": "2026-07-18T15:25:00.350Z",
       "queryHashes": [
-        "856b78de84ba",
-        "111ffc8dd00d",
-        "6cd3ed12288f",
-        "de5312e9c4c9",
-        "375af2191fe7",
-        "54c6cc803b8c",
-        "6eca883a86c0",
-        "2e20c22220f7",
-        "b0a44b0cfd91",
-        "adb2f9d47695",
         "6536de400518",
         "643f67822c04",
         "691957f4e62a",
@@ -1320,14 +1317,25 @@
         "b3b6361d727b",
         "d6470fd77dc1",
         "a220976af47b",
-        "d7949747b73d"
+        "d7949747b73d",
+        "b21f314daa27",
+        "dd98e8c86ef0",
+        "29a6aa855ed0",
+        "935b13407639",
+        "1570a51fcced",
+        "ea9487caee9b",
+        "5583c17651ce",
+        "4c38fe6873db",
+        "6cd3ed12288f",
+        "f478237095dc"
       ],
       "recallDays": [
         "2026-07-13",
         "2026-07-14",
         "2026-07-15",
         "2026-07-16",
-        "2026-07-17"
+        "2026-07-17",
+        "2026-07-18"
       ],
       "conceptTags": [
         "outcome1/2",
@@ -1347,24 +1355,26 @@
       "endLine": 30,
       "source": "memory",
       "snippet": "# 2026-07-04 日记 ## 🕛 Cron 审计 (00:04 7/4) - **审计结果**: 1 自动修复 + 5 浅层 + 2 深层 ### 审计发现与归因 - ⚠️ 日记过短（4行）+ 6 个活跃 session → 深层问题 - 📌 **归因: 午夜边界误报**（与 7/3 相同的模式）。6 个 session 中 2 个为 cron 审计任务（Balance + xiaofeng），3 个为 7/3 晚间交互（Kitty Dashboard 确认、OPC 群聊），1 个为 Balance 7/3 active.md 重整会话。实际无 7/4 实质性新事件 - ⚠️ Git push 失败 → 待修复 ### 修复记录 - 🔧 骨架日记已替换为本日记（审计脚本自动创建→手动填充） - 🔧 7/3 晚间 session 交叉验证确认无遗漏内容 ### 7/3 回顾 - 日记 57 行，内容充实，涵盖： - OPC 看板通知系统 Bug 排查与修复 - 贷款材料自动化整理执行手册 v2.3 撰写 - active.md 结构重整（Daryl 纠正 IPO 任务误报） - 晚间：Kitty 确认 Dashboard sync 机制、OPC 群聊互动 - 无遗漏需补充内容 ## 今日事件 ### 08:56 Daryl指令：终止Hedging任务 - Daryl指令终止越南银行Hedging方案分析任务，已自行处理完毕 - 已从active.md移除，标记为❌终止 ### 09:00 Daryl指令：挂起项目成本监控 - Br",
-      "recallCount": 5,
+      "recallCount": 6,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.8682453215122221,
+      "totalScore": 2.2376322597265244,
       "maxScore": 0.3839115113019943,
       "firstRecalledAt": "2026-07-13T09:21:02.383Z",
-      "lastRecalledAt": "2026-07-17T15:51:32.651Z",
+      "lastRecalledAt": "2026-07-18T04:51:01.547Z",
       "queryHashes": [
         "d25cb1659a59",
         "be0f8ae6ad1a",
         "61724e26e321",
         "3eba64329f11",
-        "a220976af47b"
+        "a220976af47b",
+        "935b13407639"
       ],
       "recallDays": [
         "2026-07-13",
         "2026-07-16",
-        "2026-07-17"
+        "2026-07-17",
+        "2026-07-18"
       ],
       "conceptTags": [
         "7/4",
@@ -1424,18 +1434,20 @@
       "endLine": 24,
       "source": "memory",
       "snippet": "# 2026-07-06 日记 ## 🕛 Cron 审计 (00:15 7/6) - **审计结果**: 1 自动修复 + 6 浅层 + 2 深层 - **已知模式**: 2 个活跃 session（balance cron + xiaofeng cron）→ 午夜边界误报，与 7/3、7/4、7/5 相同 - **修复**: 日记骨架填充、active.md 时间戳更新 ## 7/5 回顾 - Balance 无实质性工作，仅有 cron 审计 - 其他 Agent（main/xiaofeng/self）有飞书活动，非 Balance 职责范围 ## 今日事件 - **13:23** 记忆系统 v3 project 文件已部署，Self 通知填写 project_Balance.md - **13:30** project_Balance.md 已创建并填写完毕，按 🟢/🟡/🔵/⚪ 四区块格式 - 进行中: Future Textile × Wellname 利息处理方案（第三轮攻防67%） - 规划中: IPO审计底稿/AI Workflow测试流/成本归集模型/会计差错调整 - 已完成: 8个项目 - 归档: 2个项目 - **13:23** Q3开发周期正式启动，10月4日验收日已对齐 ## 待办 - 等待 Daryl 完成 Future Textile 第三轮攻击9-12防御 - 等待 Daryl 下一步财务分析任务指派",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.36488460302352904,
+      "totalScore": 0.716864538192749,
       "maxScore": 0.36488460302352904,
       "firstRecalledAt": "2026-07-13T09:21:02.383Z",
-      "lastRecalledAt": "2026-07-13T09:21:02.383Z",
+      "lastRecalledAt": "2026-07-18T04:51:06.673Z",
       "queryHashes": [
-        "d25cb1659a59"
+        "d25cb1659a59",
+        "d10e9941dfde"
       ],
       "recallDays": [
-        "2026-07-13"
+        "2026-07-13",
+        "2026-07-18"
       ],
       "conceptTags": [
         "7/6",
@@ -1455,20 +1467,22 @@
       "endLine": 14,
       "source": "memory",
       "snippet": "# 2026-06-12 日记 > ⚠️ 补记日记 | 置信度：中等（基于active.md记录和前后日记反推） ## 事件 - 14:00 视频分析MVP项目成本监控启动（Balance监督角色） - 18:15 Daryl指令暂停视频MVP成本监控 - 无财务分析类新任务 - active.md 最后更新于本日 14:15 ## 备注 - 视频MVP监控为小枫（Bryson/Balance交叉监督）任务 - 本日无Daryl财务方向直接交互",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.7427203953266144,
+      "totalScore": 1.097509953379631,
       "maxScore": 0.3826539099216461,
       "firstRecalledAt": "2026-07-13T09:21:02.383Z",
-      "lastRecalledAt": "2026-07-17T15:21:09.519Z",
+      "lastRecalledAt": "2026-07-18T04:51:06.673Z",
       "queryHashes": [
         "d25cb1659a59",
-        "3eba64329f11"
+        "3eba64329f11",
+        "d10e9941dfde"
       ],
       "recallDays": [
         "2026-07-13",
-        "2026-07-17"
+        "2026-07-17",
+        "2026-07-18"
       ],
       "conceptTags": [
         "基于active.md记录和前后日记反推",
@@ -1519,24 +1533,26 @@
       "endLine": 45,
       "source": "memory",
       "snippet": "- 按Agent: Bryson $57.23, Kitty $49.57, Balance $3.33, Self $2.83 - ⚠️ 降级写文件 — Kitty session_send超时，cost_daily.json已就位 ## 🕘 09:20 Daryl回归，JGL并购项目暂告段落 - **Daryl反馈**: v1.0框架的PIT 0.1%税率有误，正确是20%（非上市公司股权转让，成本可确定） - **Balance纠错**: 承认错误——把「成本无法确定时的0.1%兜底税率」当成了通用税率 - **Daryl方案**: 发送了完整Word方案（两方案对比），方案2（先分红再转让）可节省75%税负（$99k→$2.5k） - **关键教训**: Daryl提醒——做的是战略层面，不需要把细枝末节拓展开。以后分析要注意分寸，不代替部门执行判断 - **归档**: `reports/并购KHOA_DUNG-方案-20260713-Daryl原稿.docx` - **项目状态**: ⏸️ 暂告段落，正式推进时再启动 ## 📋 昨日续接事项（7/12 → 7/13） 以下任务仍等待Daryl反馈/数据： ### 🔴 JGL收购KHOA DUNG并购框架 - **状态**: v1.0框架已交付，等待8项关键信息确认 - **产出**: `reports/JGL-KHOA_DUNG-并购框架-v1.0-20260710.md` ### 🔴 车辆费用专项分析 - **状态**: ⏳ 待Daryl发送详细数据 ### 🟡 Future Textile ×",
-      "recallCount": 6,
+      "recallCount": 7,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 2.2578649908304214,
+      "totalScore": 2.618021327257156,
       "maxScore": 0.40066754817962646,
       "firstRecalledAt": "2026-07-14T02:03:08.771Z",
-      "lastRecalledAt": "2026-07-15T15:00:52.187Z",
+      "lastRecalledAt": "2026-07-18T04:51:01.547Z",
       "queryHashes": [
         "baf5543d45bf",
         "2e20c22220f7",
         "4b4b776c40fb",
         "5fbdf8c286fb",
         "d29b6adcb190",
-        "feb0b3535fd2"
+        "feb0b3535fd2",
+        "935b13407639"
       ],
       "recallDays": [
         "2026-07-14",
-        "2026-07-15"
+        "2026-07-15",
+        "2026-07-18"
       ],
       "conceptTags": [
         "57.23",
@@ -1986,6 +2002,99 @@
         "00-00",
         "攻击7-12",
         "12-13"
+      ]
+    },
+    "memory:memory/2026-07-08.md:1:16": {
+      "key": "memory:memory/2026-07-08.md:1:16",
+      "path": "memory/2026-07-08.md",
+      "startLine": 1,
+      "endLine": 16,
+      "source": "memory",
+      "snippet": "# 2026-07-08 日记 ## 🕛 00:02 每日记忆归档审计 - **触发**: Cron 兜底审计 `bash scripts/compliance/audit.sh --report` - **审计结果**: - ❌ 7/8日记缺失 → 🔧 已自动创建骨架 - ❌ active.md 47h未更新 → 🔧 已更新 - ❌ 7/8日记骨架（Cron刚创建，预期行为） - ❌ 日记过短但有9个活跃session → 实为7/7的session跨午夜误报 - ⚠️ Git push失败 → 重试后正常 - ❌ 7/7日记为骨架 → 🔧 已从session历史补全 - **修复项**: 3项（7/7日记补全 + 7/8日记更新 + active.md时间戳） - **备注**: 9个活跃session中大部分为其他Agent的cron+日常会话，本日记为午夜创建属正常现象 ## ⏳ 当日活动（运行中，待补充）",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.36625658869743344,
+      "maxScore": 0.36625658869743344,
+      "firstRecalledAt": "2026-07-18T04:51:06.673Z",
+      "lastRecalledAt": "2026-07-18T04:51:06.673Z",
+      "queryHashes": [
+        "d10e9941dfde"
+      ],
+      "recallDays": [
+        "2026-07-18"
+      ],
+      "conceptTags": [
+        "scripts/compliance/audit.sh",
+        "7/8日记缺失",
+        "active.md",
+        "7/8日记骨架",
+        "实为7/7的session跨午夜误报",
+        "7/7日记为骨架",
+        "7/7日记补全",
+        "7/8日记更新"
+      ]
+    },
+    "memory:memory/2026-07-18.md:1:25": {
+      "key": "memory:memory/2026-07-18.md:1:25",
+      "path": "memory/2026-07-18.md",
+      "startLine": 1,
+      "endLine": 25,
+      "source": "memory",
+      "snippet": "# 2026-07-18 日记 ## 🕛 00:02 每日记忆归档审计（Cron） - **触发**: 23:59 Cron 兜底审计 `bash scripts/compliance/audit.sh --report` - **日期**: 周六，市场休市 - **审计结果**: - ❌ 今日日记缺失 → 🔧 已自动创建骨架，现补充为完整日记 - ✅ 昨天日记存在 (110行) — 7/17日记内容完整 - ❌ active.md 37h未更新 → 🔧 已刷新时间戳（任务状态无变化，全部等待Daryl反馈） - ℹ️ lessons.md 无需今日更新 - 🔧 归档 2026-06-17.md → `memory/archive/` - ✅ MEMORY.md 39行，符合规范 - ⚠️ 日记骨架检测触发 — 正常（刚过午夜，当日无事件） - ⚠️ 20个活跃session — 实为7/17日间活动，午夜交叉属正常 - ⚠️ SAGE checker + Reflexion journal 不存在 → 基建刚上线，待后续部署 - ✅ Git push: 实际成功（审计报告误报失败，重试验证通过） - **修复项**: 2项自动修复 + 日记补充 + active.md刷新 - **成本仪表盘**: ✅ fresh_api_ok | 今日 $10.94 | 本月 $23.69 | 全量 $83.29 ## 📊 午夜成本快照（7/17余额结转） - 全量: $83.29 | 本月: $23.69 | 今日: $10.94 -",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.35443002879619595,
+      "maxScore": 0.35443002879619595,
+      "firstRecalledAt": "2026-07-18T04:51:06.673Z",
+      "lastRecalledAt": "2026-07-18T04:51:06.673Z",
+      "queryHashes": [
+        "d10e9941dfde"
+      ],
+      "recallDays": [
+        "2026-07-18"
+      ],
+      "conceptTags": [
+        "scripts/compliance/audit.sh",
+        "7/17日记内容完整",
+        "active.md",
+        "lessons.md",
+        "memory/archive",
+        "memory.md",
+        "实为7/17日间活动",
+        "active.md刷新"
+      ]
+    },
+    "memory:memory/2026-07-12.md:1:31": {
+      "key": "memory:memory/2026-07-12.md:1:31",
+      "path": "memory/2026-07-12.md",
+      "startLine": 1,
+      "endLine": 31,
+      "source": "memory",
+      "snippet": "# 2026-07-12 日记 ## 🕛 00:01 每日记忆归档审计（Cron） - **触发**: 23:59 Cron 兜底审计 `bash scripts/compliance/audit.sh --report` - **审计结果**: - ❌ 7/12日记缺失 → 🔧 已自动创建骨架 - ✅ 昨天日记存在 (51行) — 7/11日记内容完整 - ✅ active.md 新鲜 - ✅ lessons.md 无需今日更新 - 🔧 归档 2026-06-11.md → `memory/archive/` - ✅ MEMORY.md 39行，符合规范 - ⚠️ 日记过短但有11个活跃session → 午夜0点正常现象（多数为昨日残留 + 跨夜 + cron审计session） - ❌ 7/12日记骨架 → 🔧 已补充内容（本条目） - ✅ 项目清单一致 - ❌ Git push 失败 → 已知持续问题（branch protection），非新问题 - **修复项**: 日记骨架 → 内容补充完成 | 2026-06-11.md → 已归档 - **备注**: 午夜0点当日无实质活动，日记接近骨架属正常 ## 📋 昨日续接事项（7/11 → 7/12） 以下任务从7/11结转，等待今天进展： ### 🔴 JGL收购KHOA DUNG并购框架 - **状态**: v1.0框架已交付 Daryl - **待确认**: 行业、估值、代持协议、代持人身份等8项关键信息 - **产出**: `reports/JGL-KHO",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.35127441585063934,
+      "maxScore": 0.35127441585063934,
+      "firstRecalledAt": "2026-07-18T04:51:06.673Z",
+      "lastRecalledAt": "2026-07-18T04:51:06.673Z",
+      "queryHashes": [
+        "d10e9941dfde"
+      ],
+      "recallDays": [
+        "2026-07-18"
+      ],
+      "conceptTags": [
+        "scripts/compliance/audit.sh",
+        "7/12日记缺失",
+        "7/11日记内容完整",
+        "active.md",
+        "lessons.md",
+        "memory/archive",
+        "memory.md",
+        "7/12日记骨架"
       ]
     }
   }

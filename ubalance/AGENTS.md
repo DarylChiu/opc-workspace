@@ -94,6 +94,31 @@ bash scripts/compliance/audit.sh --report
 
 
 
+## 🚀 子代理 Trace 协议（2026-07-18 上线）
+
+> **协议规范**: `~/.openclaw/workspace/memory/subagent_runs/README.md`  
+> **验收脚本**: `~/.openclaw/workspace/memory/subagent_runs/verify_trace.sh`  
+> **模板**: `~/.openclaw/workspace/memory/subagent_runs/TRACE_TEMPLATE.jsonl`
+
+**原则**：财务分析任务涉及数据追溯、审计合规，子代理执行必须有可验证的完整操作记录。
+
+**执行规则**：
+1. 每次 spawn 子代理执行财务分析/数据处理任务 → 必须在 task 指令中要求子代理写入 `memory/subagent_runs/{task_id}/execution_trace.jsonl`
+2. 每步实质性操作（数据查询、计算、文件写入、外部API调用）→ 子代理必须写入一条 trace 记录
+3. 子代理完成后主 Agent（Balance）在验收前必须跑 `verify_trace.sh`：
+   ```bash
+   bash ~/.openclaw/workspace/memory/subagent_runs/verify_trace.sh memory/subagent_runs/{task_id}/execution_trace.jsonl
+   ```
+4. 验收不通过（FAIL）→ 子代理必须重跑；WARN → 检查后决定是否接受
+5. Trace 记录作为财务分析的审计底稿保留，至少保留至对应财务周期结束
+
+**Trace 记录格式**：
+```json
+{"ts":"ISO时间戳","step":"步骤编号","action":"操作类型","result":"结果摘要"}
+```
+
+> **定制说明（Balance=财务审计）**: trace 是财务分析的审计链。每次数据处理步骤（数据拉取、清洗、计算、结论生成）都必须可追溯，确保分析结果经得起复核查验。疑点分析尤其需要完整 trace。
+
 ## Red Lines
 - 不直接执行支付操作
 - 用户财务数据绝对不外传
