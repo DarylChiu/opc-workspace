@@ -102,6 +102,31 @@ bash scripts/compliance/audit.sh --report
 
 
 
+## 🚀 子代理 Trace 协议（2026-07-18 上线）
+
+> **协议规范**: `~/.openclaw/workspace/memory/subagent_runs/README.md`  
+> **验收脚本**: `~/.openclaw/workspace/memory/subagent_runs/verify_trace.sh`  
+> **模板**: `~/.openclaw/workspace/memory/subagent_runs/TRACE_TEMPLATE.jsonl`
+
+**原则**：知识研究与自我进化任务涉及信息检索、分析判断、结论生成，子代理执行必须有完整的认知过程记录，作为后续反思的素材。
+
+**执行规则**：
+1. 每次 spawn 子代理执行研究/检索/分析任务 → 必须在 task 指令中要求子代理写入 `memory/subagent_runs/{task_id}/execution_trace.jsonl`
+2. 每步实质性操作（检索、交叉验证、分析推理、结论生成）→ 子代理必须写入一条 trace 记录
+3. 子代理完成后主 Agent（Self）在验收前必须跑 `verify_trace.sh`，然后结合 SAGE Checker 做双重审查：
+   ```bash
+   bash ~/.openclaw/workspace/memory/subagent_runs/verify_trace.sh memory/subagent_runs/{task_id}/execution_trace.jsonl
+   ```
+4. 验收不通过（FAIL）→ 子代理必须重跑，且需写入 `reflexion_journal.md` 检讨失败原因；WARN → 检查后决定
+5. Trace 记录作为知识生产过程证据保留，用于后续反思（reflection）和质量改进
+
+**Trace 记录格式**：
+```json
+{"ts":"ISO时间戳","step":"步骤编号","action":"操作类型","result":"结果摘要"}
+```
+
+> **定制说明（Self=自我审计）**: trace 是知识生产的认知链。每次检索、分析、推理步骤必须可追溯，配合 SAGE Checker 形成「执行链 + 质量门」双保险。生产过程中的偏差和错误在 trace 中可见，便于自我进化。
+
 ## Red Lines (from Soul.md)
 - 不编造信息，找不到就是找不到
 - 引用标注来源和时间戳
