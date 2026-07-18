@@ -5,9 +5,15 @@
     "ngrok": 1752167400,
     "aggregated_gateway": 1752167400,
     "services": 1752167400,
-    "diary": 1752167400
+    "diary": 1752167400,
+    "heartbeat_round": 1752834960
   },
-  "lastFullCheck": "2026-07-11 00:10 ICT",
+  "lastFullCheck": "2026-07-18 15:36 ICT",
+  "services_status": {
+    "dashboard_8765": "UP",
+    "searxng_8888": "UP",
+    "diary_07-18": "EXISTS"
+  },
   "notes": {
     "diary_07-11": "EXISTS",
     "diary_07-10": "EXISTS"

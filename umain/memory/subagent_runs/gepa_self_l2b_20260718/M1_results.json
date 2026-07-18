@@ -1,0 +1,18 @@
+{
+  "deepseek-chat": {
+    "model": "deepseek/deepseek-chat",
+    "success": true,
+    "elapsed_s": 8.2,
+    "best_prompt": "You are a helpful assistant. Answer questions concisely and accurately.",
+    "best_score": 1.0,
+    "error": null
+  },
+  "deepseek-v4-pro": {
+    "model": "deepseek/deepseek-v4-pro",
+    "success": true,
+    "elapsed_s": 42.6,
+    "best_prompt": "You are a helpful assistant. Answer questions concisely and accurately.",
+    "best_score": 1.0,
+    "error": null
+  }
+}

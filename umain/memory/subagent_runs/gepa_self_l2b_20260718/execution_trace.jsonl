@@ -1,0 +1,12 @@
+{"ts": "2026-07-18T22:43:39.589171+07:00", "step": "phase1_start", "message": "Loading adapter and preparing data"}
+{"ts": "2026-07-18T22:43:39.590128+07:00", "step": "phase1_data", "total_training": 20, "research_report_tasks": 5, "research_ids": ["bench-01", "bench-02", "bench-03", "bench-04", "bench-05"], "baseline_score": 0.583}
+{"ts": "2026-07-18T22:43:39.590199+07:00", "step": "phase2_baseline_start", "n_items": 5}
+{"ts": "2026-07-18T22:44:34.282703+07:00", "step": "phase1_start", "message": "Loading adapter and preparing data"}
+{"ts": "2026-07-18T22:44:34.285688+07:00", "step": "phase1_data", "total_training": 20, "research_report_tasks": 5, "research_ids": ["bench-01", "bench-02", "bench-03", "bench-04", "bench-05"], "baseline_score": 0.583}
+{"ts": "2026-07-18T22:44:34.285929+07:00", "step": "phase2_baseline_start", "n_items": 5}
+{"ts": "2026-07-18T22:46:55.427939+07:00", "step": "phase2_baseline_done", "label": "baseline", "n_items": 5, "avg_score": 0.654, "dimension_averages": {"traceability": 6.0, "structure": 7.8, "rigor": 6.0}, "pass_rate": "0/5", "per_task": [{"task": "分析AI Agent在知识管理领域的应用趋势（2024-2026）", "score": 0.695, "scores": {"traceability": 7, "structure": 8, "rigor": 6}, "verdict": "FAIL"}, {"task": "总结2026年上半年大模型在代码生成方向的关键进展", "score": 0.555, "scores": {"traceability": 4, "structure": 8, "rigor": 5}, "verdict": "FAIL"}, {"task": "对比RAG和长上下文Window两种方案在问答场景的优劣", "score": 0.695, "scores": {"traceability": 6, "structure": 8, "rigor": 7}, "verdict": "FAIL"}, {"task": "分析越南电商市场2026年发展趋势", "score": 0.63, "scores": {"traceability": 6, "structure": 7, "rigor": 6}, "verdict": "FAIL"}, {"task": "评估Prompt Engineering对LLM输出质量的边际效应", "score": 0.695, "scores": {"traceability": 7, "structure": 8, "rigor": 6}, "verdict": "FAIL"}]}
+{"ts": "2026-07-18T22:46:55.429212+07:00", "step": "phase3_start", "n_train": 5, "n_val": 5, "seed_prompt_len": 361}
+{"ts": "2026-07-18T22:46:55.431890+07:00", "step": "phase3_error", "error": "cache_evaluation_storage='disk' requires run_dir in EngineConfig", "elapsed_sec": 0.0}
+{"ts": "2026-07-18T22:48:08.402255+07:00", "step": "start", "training_count": 20}
+{"ts": "2026-07-18T23:20:16.779320+07:00", "step": "phase3_done", "elapsed_sec": 1928.4, "best_score": null, "optimized_prompt_len": 4437, "total_metric_calls": 51, "num_iterations": null}
+{"ts": "2026-07-18T23:23:08.714326+07:00", "step": "phase4_done", "delta": 0.007, "delta_pct": 1.1, "verdict": "PASS"}
