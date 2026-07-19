@@ -1,5 +1,11 @@
 # 经验教训精华
 
+### 🔴 2026-07-19 Cron 提醒双 bug：时区错 + 投递无路由 → Daryl 没收到 7:00 验收提醒
+- **Bug 1**: schedule `0 0 19 7 *` 按 UTC 心算（00:00 UTC=07:00 GMT+7），但系统按本地时区跑 → 凌晨0点触发
+- **Bug 2**: isolated cron 用 announce->last 投递，无 last 路由直接 fail-closed，Feishu 必须显式 target `user:<openId>`
+- **Bug 3（最隐蔽）**: heartbeat 日记写了「已向Daryl推送报告」但实际未送达 —— 写日记 ≠ 送达用户
+- **规则**: 建 cron 必须 (1) 显式声明时区或用本地时间写表达式 (2) 显式 Feishu target (3) 建完用 `openclaw cron list` 验证 next 触发时间是否符合预期 (4) 对时间敏感的提醒，首次触发后要能在下一次 session 验证「status 是否 ok」
+
 ### 🔴 2026-07-07 Agent映射表必须用权威来源
 - **问题**: 系统级任务时 session_send 发错了人（发给算点小账而非忧郁小猫），混淆了 Agent 对应关系
 - **规则**: 系统级任务（调度/查所有Agent）执行前必读 `memory/agent-mapping.md`，用飞书显示名汇报

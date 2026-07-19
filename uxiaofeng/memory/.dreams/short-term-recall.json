@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-18T01:08:31.390Z",
+  "updatedAt": "2026-07-19T01:02:52.077Z",
   "entries": {
     "memory:memory/archive/2026-03-24.md:138:171": {
       "key": "memory:memory/archive/2026-03-24.md:138:171",
@@ -790,13 +790,13 @@
       "endLine": 29,
       "source": "memory",
       "snippet": "# 2026-06-16 记忆 ## 视频分析交互Workflow（全天） ### 基础搭建 - 基于「百万工作室」AI工具的75帧深度功能分析 - 三栏布局：视频+对白卡片 / 分析面板 / 标记管理 - 完整流水线：yt-dlp下载 → Whisper STT（本地免费）→ DeepSeek分析 - 视频↔对白双向联动（播放高亮+点击跳转） - 竖屏/横屏自适应布局 - 公网：https://unwhispering-imani-digitately.ngrok-free.dev（端口8777） ### 标记系统 - 多类型标记（🪝好钩子/⭐金句/↗转折点） - 标记 Tab：汇总视图 + 💾保存/🗑️清空/📋导出 - 对白卡片悬停标记 + ✕ 删除 - 切换视频链接时自动保存上一视频标记到素材库 ### 素材库 - 左侧48px侧边栏（🖥️操作台 / 📚素材库） - localStorage 持久化，表格展示（链接/平台/类型/日期） - 点击恢复已分析视频的所有数据 ### MVP 深度分析融合（Daryl 需求 · 下午） - 项目命名：视频分析交互Workflow - Tab 重构：结构拆解→脚本解析（四幕分析+张力评分+情绪曲线+叙事技巧） - Tab 重构：知识卡→镜头&声音（镜头推断/光线色彩/声音设计/导演风格） - 复刻模板增强：新增可复用元素（脚本模式/Hook技巧/话题切入/爆款因素） - 导出升级：完整报告 Markdown",
-      "recallCount": 22,
+      "recallCount": 23,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 9.163872122764587,
+      "totalScore": 9.584265485405922,
       "maxScore": 0.4743679583072662,
       "firstRecalledAt": "2026-06-17T02:21:04.677Z",
-      "lastRecalledAt": "2026-07-18T01:08:23.941Z",
+      "lastRecalledAt": "2026-07-18T17:13:32.540Z",
       "queryHashes": [
         "56093675ea1a",
         "106e4b599293",
@@ -819,7 +819,8 @@
         "88e7e5c1c3be",
         "20eaeaf135e4",
         "d9486942062f",
-        "1d8632518a44"
+        "1d8632518a44",
+        "c37b6bd68364"
       ],
       "recallDays": [
         "2026-06-17",
@@ -836,7 +837,8 @@
         "2026-06-30",
         "2026-07-03",
         "2026-07-05",
-        "2026-07-18"
+        "2026-07-18",
+        "2026-07-19"
       ],
       "conceptTags": [
         "yt-dlp下载",
@@ -2558,18 +2560,20 @@
       "endLine": 44,
       "source": "memory",
       "snippet": "- 问题1、问题3：**代码已修复并部署**，待 Daryl 实测验收 - 问题2：昨晚已部署 Piper high 主引擎，同样待验收 - ⚠️ 遗留：venv 用的是 python3.14，之前误用系统 python 启动会 ModuleNotFoundError，已记录 ## 视频分析 — Daryl 飞书视频分析（10:42 AM） - Daryl 在飞书发来一条短视频，要求分析「融合了哪些电影的哪些桥段」 - **卡点**: OpenRouter 额度耗尽（$740/$740），Gemini key 失效 → 视觉层（画面/花字/镜头）无法分析 - **替代方案**: 本地 Whisper 提取完整对白（零成本）+ Web检索 + 影史知识 - **结论**: 内核=港版《春娇与志明》(彭浩翔式市井对白+志明×春娇人物动力学)，外壳=日版《花束般的恋爱》(佐佐木命名+清冷影像美学)，融合可行因为共享「现实主义反浪漫」DNA - **产出**: 完整报告存档 `video_analyzer_app/reports/chunjiao_sasaki_analysis.md` - **待 Daryl 定**: ① OpenRouter 是否充值补视觉层 ② 溯源逻辑是否给到洗稿MVP信心 - 本条本身就是「内核洗稿」黄金样本（拆解情感内核→保骨换皮→重新缝合） ## 内核提取深度研究 — 洗稿MVP M1 Schema v2（下午 15:00）",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.35453298091888424,
-      "maxScore": 0.35453298091888424,
+      "totalScore": 0.7740644246339797,
+      "maxScore": 0.4195314437150955,
       "firstRecalledAt": "2026-07-16T07:07:28.283Z",
-      "lastRecalledAt": "2026-07-16T07:07:28.283Z",
+      "lastRecalledAt": "2026-07-18T17:13:32.540Z",
       "queryHashes": [
-        "f3f7d3a636ac"
+        "f3f7d3a636ac",
+        "c37b6bd68364"
       ],
       "recallDays": [
-        "2026-07-16"
+        "2026-07-16",
+        "2026-07-19"
       ],
       "conceptTags": [
         "router",
@@ -2713,19 +2717,21 @@
       "endLine": 29,
       "source": "memory",
       "snippet": "# 2026-06-16 记忆 ## 视频分析交互Workflow（全天） ### 基础搭建 - 基于「百万工作室」AI工具的75帧深度功能分析 - 三栏布局：视频+对白卡片 / 分析面板 / 标记管理 - 完整流水线：yt-dlp下载 → Whisper STT（本地免费）→ DeepSeek分析 - 视频↔对白双向联动（播放高亮+点击跳转） - 竖屏/横屏自适应布局 - 公网：https://unwhispering-imani-digitately.ngrok-free.dev（端口8777） ### 标记系统 - 多类型标记（🪝好钩子/⭐金句/↗转折点） - 标记 Tab：汇总视图 + 💾保存/🗑️清空/📋导出 - 对白卡片悬停标记 + ✕ 删除 - 切换视频链接时自动保存上一视频标记到素材库 ### 素材库 - 左侧48px侧边栏（🖥️操作台 / 📚素材库） - localStorage 持久化，表格展示（链接/平台/类型/日期） - 点击恢复已分析视频的所有数据 ### MVP 深度分析融合（Daryl 需求 · 下午） - 项目命名：视频分析交互Workflow - Tab 重构：结构拆解→脚本解析（四幕分析+张力评分+情绪曲线+叙事技巧） - Tab 重构：知识卡→镜头&声音（镜头推断/光线色彩/声音设计/导演风格） - 复刻模板增强：新增可复用元素（脚本模式/Hook技巧/话题切入/爆款因素） - 导出升级：完整报告 Markdown",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.8717050731182099,
+      "totalScore": 1.2920984357595444,
       "maxScore": 0.4583387404680252,
       "firstRecalledAt": "2026-07-18T01:08:23.873Z",
-      "lastRecalledAt": "2026-07-18T01:08:23.941Z",
+      "lastRecalledAt": "2026-07-18T17:13:32.540Z",
       "queryHashes": [
         "d9486942062f",
-        "1d8632518a44"
+        "1d8632518a44",
+        "c37b6bd68364"
       ],
       "recallDays": [
-        "2026-07-18"
+        "2026-07-18",
+        "2026-07-19"
       ],
       "conceptTags": [
         "yt-dlp下载",
@@ -2807,18 +2813,20 @@
       "endLine": 40,
       "source": "memory",
       "snippet": "2. 卡片设计是**按视频**一张卡，缩略版只显示 L0+L1+关键L5，展开版显示完整 L0-L5 - ngrok 已从 8767(IELTS) 切回 8777(视频分析)，静态域名不变 - index.html 修改： - Sidebar「内核卡」按钮从 `window.open` 改为 `switchView+switchTab` - 新增 Tab「🧬 内核卡」 - 新增 renderKernelTab/escHtml/toggleKernelCard/renderKernelDetail 函数 - 新增 CSS：kernel-video-card（缩略头/展开详情），kd-grid/kd-beat-table 等 - kernel_card.html 保留但不再单独入口 ## 09:30 M1-拓展 a/c/d 开发 + 10轮压力测试 - Daryl 指出 provenance 验证是 M1 的质量修复，不是 M2 - M2 = 洗稿重构器（待 Daryl 定义需求） - M1-拓展拆解：a/c/d 不依赖搜索 → 立即开工，b/e 等 Kitty 修 SearXNG - 完成： - `provenance/engine.py`: query_builder（4维度拆关键词+中英双通道+精炼策略）+ filter（黑白名单+置信度评分）+ search_offline（离线电影库匹配） - `provenance/classic_film_db.json`: 10部电影×28个节拍离线参考库 - `provenance/test_s",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.38918524682521816,
-      "maxScore": 0.38918524682521816,
+      "totalScore": 0.8132559925317764,
+      "maxScore": 0.4240707457065582,
       "firstRecalledAt": "2026-07-18T01:08:31.390Z",
-      "lastRecalledAt": "2026-07-18T01:08:31.390Z",
+      "lastRecalledAt": "2026-07-18T17:13:32.540Z",
       "queryHashes": [
-        "eae540d83c2c"
+        "eae540d83c2c",
+        "c37b6bd68364"
       ],
       "recallDays": [
-        "2026-07-18"
+        "2026-07-18",
+        "2026-07-19"
       ],
       "conceptTags": [
         "l0-l5",
@@ -2829,6 +2837,161 @@
         "kd-grid/kd-beat-table",
         "kernel-card.html",
         "m1-拓展"
+      ]
+    },
+    "memory:memory/2026-07-15.md:51:65": {
+      "key": "memory:memory/2026-07-15.md:51:65",
+      "path": "memory/2026-07-15.md",
+      "startLine": 51,
+      "endLine": 65,
+      "source": "memory",
+      "snippet": "- **待 Daryl 确认**：深度方向和schema框架是否对路 ## 跟读模块 + 训练数据库（v0.9.1→v1.0）方案 - 7/14 已完成 Grill-me 十问全部锁定，方案存 `ielts_tutor/docs/DEV_PLAN_shadowing_dashboard.md` - 等 Daryl 管线1最终验收通过后正式开工 ## IELTS Tutor 管线1 — v1.0.0 发布 🎉（晚间冲刺） - **延迟优化 P0+P1**: STT small.en+beam5→base.en+beam1→small.en+beam1（口音回调），LLM max_tokens 800→450。实测 ASR 4-8s→0.3-1.5s，e2e ~10s→3-4.5s - **WS断线自动重连**: 指数退避×5，主动结束不误触发（Daryl拒绝心跳保活，只要重连） - **卡死事故诊断**: 平板WS掉线无重连→冻结；评估其实已算出并缓存（HTTP兜底生效） - **前端布局调整**（两轮，第一轮理解错了）: 麦克风状态→标题栏最右；DEBUG+链式流式徽章→成本右边 - **VAD敏感度**: 1.3→1.6（降误触发） - **Git发布**: 本地 commit 1eb1b77 + tag ielts-v1.0.0；直推 origin 遇\"unrelated histories\"（已知基建问题，未force），改走 opc-workspace 共享仓库 Xiaofeng/ielts_tutor 备份推送成功 (2836709) - **明日**: 正式开",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.409826448559761,
+      "maxScore": 0.409826448559761,
+      "firstRecalledAt": "2026-07-18T17:13:32.506Z",
+      "lastRecalledAt": "2026-07-18T17:13:32.506Z",
+      "queryHashes": [
+        "7a8108c833d4"
+      ],
+      "recallDays": [
+        "2026-07-19"
+      ],
+      "conceptTags": [
+        "备份",
+        "v0.9.1",
+        "v1.0",
+        "7/14",
+        "grill-me",
+        "v1.0.0",
+        "small.en",
+        "base.en"
+      ]
+    },
+    "memory:memory/2026-07-16.md:1:16": {
+      "key": "memory:memory/2026-07-16.md:1:16",
+      "path": "memory/2026-07-16.md",
+      "startLine": 1,
+      "endLine": 16,
+      "source": "memory",
+      "snippet": "# 2026-07-16 日记 ## IELTS Tutor v1.0.1 — 手机移动端自适应优化（Daryl 07:34 指令） Daryl 早上指令：做手机移动端页面自适应优化，版号 1.0.1。上午完成并发布。 ### 改动内容（`frontend/index.html` + `VERSION`） - **移动端布局（≤820px media query）**：`.main` 由左右两栏改纵向堆叠，对话区优先占满；右侧 Assessment/Debug 面板变成**底部可折叠面板**（收起时只剩 tab 条，点 tab 展开/收起，展开高 44dvh） - **智能折叠联动**：开始对话→自动收起面板（对话区最大化）；评估出分→自动展开并切到 Assessment tab - **触控优化**：按钮/tab 最小 42px 触控目标；select 字号 16px（防 iOS 聚焦自动放大）；`touch-action:manipulation` 防双击缩放；去 tap 高亮 - **视口适配**：`100dvh`（地址栏收缩不跳动）+ `viewport-fit=cover` + `safe-area-inset-bottom`（刘海屏）；`overscroll-behavior:none` - **控制条**：移动端 flex-wrap 换行，select 各占一半，成本显示居中 - **版本号动态化**：标题从写死的 \"v2.0\" 改为从 `/api/health` 动态读取，页面+`<title>` 都显示 v1.0.1 ### 验收（图像模型不可用 →",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4051987767219543,
+      "maxScore": 0.4051987767219543,
+      "firstRecalledAt": "2026-07-18T17:13:32.506Z",
+      "lastRecalledAt": "2026-07-18T17:13:32.506Z",
+      "queryHashes": [
+        "7a8108c833d4"
+      ],
+      "recallDays": [
+        "2026-07-19"
+      ],
+      "conceptTags": [
+        "v1.0.1",
+        "1.0.1",
+        "frontend/index.html",
+        "assessment/debug",
+        "展开/收起",
+        "按钮/tab",
+        "touch-action",
+        "viewport-fit"
+      ]
+    },
+    "memory:memory/2026-07-03.md:1:20": {
+      "key": "memory:memory/2026-07-03.md:1:20",
+      "path": "memory/2026-07-03.md",
+      "startLine": 1,
+      "endLine": 20,
+      "source": "memory",
+      "snippet": "# 2026-07-03 日记 ## Debug 面板整合进主前端 - **起因**: Daryl 发现 debug 面板（/debug）是独立页面，不符合预期——应该整合在 IELTS Tutor v2.0 主前端内 - **Daryl 需求**: - Debug 模块放在 Assessment 右边，同一个页面 - 通过 DEBUG_MODE 控制可见性 - 完成后 debug 模块不可见，需要验收新功能时再调出来 - **完成**: 将 debug-panel/index.html 的功能整合进 frontend/index.html - 右侧面板增加 tab 系统：📊 Assessment | 🔍 Debug - Debug tab 通过探测 `/debug/sessions` 路由自动判断是否可见 - 会话开始时自动连接 debug WebSocket - 保留 pipeline 可视化、诊断、详情、历史、导出功能 - **文件**: `ielts_tutor/frontend/index.html` (44547 bytes) - **待验收**: 需要 Daryl 重启服务器后测试 ## 早间沟通 - Daryl 反馈 debug 页面\"查看可用会话\"显示空——因为虽然服务器开着但还没启动过会话 - 解释了 debug 追踪器只在 WebSocket 会话启动时创建",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.39346976578235626,
+      "maxScore": 0.39346976578235626,
+      "firstRecalledAt": "2026-07-18T17:13:32.506Z",
+      "lastRecalledAt": "2026-07-18T17:13:32.506Z",
+      "queryHashes": [
+        "7a8108c833d4"
+      ],
+      "recallDays": [
+        "2026-07-19"
+      ],
+      "conceptTags": [
+        "v2.0",
+        "debug-mode",
+        "debug-panel/index.html",
+        "frontend/index.html",
+        "debug/sessions",
+        "ielts-tutor/frontend/index.html",
+        "日记",
+        "debug"
+      ]
+    },
+    "memory:memory/2026-07-13.md:1:24": {
+      "key": "memory:memory/2026-07-13.md:1:24",
+      "path": "memory/2026-07-13.md",
+      "startLine": 1,
+      "endLine": 24,
+      "source": "memory",
+      "snippet": "# 2026-07-13 日记 ## 周维护（补做） - 周日维护未执行，周一早上 heartbeat 补做 - **归档**: 2026-06-12.md → archive/（31天） - **lessons.md**: 新增 Sentinel v1 事故复盘教训 - **identity.md**: 验证通过，信息准确 - **active.md**: 检查无过期任务，状态正常 ## IELTS Tutor v2.0 — TTS 吞音/粘连修复（方案B） - **问题**（Daryl 反馈）: TTS 读长句或连续多问时，个别词有\"粘连感/吞音\" - **根因诊断**: 1. 逐句独立 `k.create()` 合成 → Kokoro 跨句韵律上下文丢失，句子边界冷启动 2. 前端逐句拼接播放几乎零间隙 → 前句尾辅音直撞后句首元音（听感=吞音） 3. speed=0.9 拉慢 + 82M 小模型长句音素压缩叠加 - **修复（方案B · Daryl 批准）**: 句尾静音填充 - 新增 `_pcm_with_tail_silence()` helper + `TTS_TAIL_SILENCE_MS`（默认 300ms，env 可调） - Kokoro（主）和 Piper（备）合成 PCM 末尾各追加 300ms 静音 - `backend/server.py` L182 区 - **验证**: 端到端确认 tts_speak 输出比原始 Kokoro 长 300ms ✅；helper 单测 0/200/300/400ms 全通过 ✅ - **",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3917812675237655,
+      "maxScore": 0.3917812675237655,
+      "firstRecalledAt": "2026-07-18T17:13:32.506Z",
+      "lastRecalledAt": "2026-07-18T17:13:32.506Z",
+      "queryHashes": [
+        "7a8108c833d4"
+      ],
+      "recallDays": [
+        "2026-07-19"
+      ],
+      "conceptTags": [
+        "lessons.md",
+        "identity.md",
+        "active.md",
+        "v2.0",
+        "吞音/粘连修复",
+        "粘连感/吞音",
+        "k.create",
+        "0.9"
+      ]
+    },
+    "memory:memory/2026-07-08.md:1:24": {
+      "key": "memory:memory/2026-07-08.md:1:24",
+      "path": "memory/2026-07-08.md",
+      "startLine": 1,
+      "endLine": 24,
+      "source": "memory",
+      "snippet": "# 2026-07-08 日记 ## 全天 · 隧道稳定性验证 - PATH 修复后 tunnel 稳定运行 13h+（09:40 → 22:37），看门狗零干预 - 对比昨天：全天手动重启 10+ 次 ← **看门狗方案已验证有效** ## Bug修复 · Whisper 超时问题 - Daryl 反馈语音转录中途截断 - 根因：whisper small.en 处理超过 8s 被 kill，文本丢弃 - 修复：超时 8s→15s，超时时保留已输出的部分文本 - Git: commit `fix: whisper超时从8s→15s + 超时时捕获部分输出` ## 审计 · 成本仪表盘数据源问题 - Balance 发现看板读 `sessions.json`（10-15 条快照），实际应为 `.jsonl` 全量解析 - 误差对比：dashboard $0.10 vs .jsonl $37.05 vs 真实账单 ~$85 - Kitty 7/7 成本 $25.73，其中 Claude Opus 4.8（OpenRouter）$23.49 是大头 - 根因：jsonl 的 cost 字段也是估算值，真实账单只有 API Billing 接口能拿到 - 方案：短期切数据源到 .jsonl，长期接入 DeepSeek/OpenRouter Billing API ## Cron 链 - 00:04~00:07: 多个 agent 的每日记忆归档 cron - 23:30: 就寝确认 - 23:59: 本 cron 每日记忆归档",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3532540798187256,
+      "maxScore": 0.3532540798187256,
+      "firstRecalledAt": "2026-07-19T01:02:52.077Z",
+      "lastRecalledAt": "2026-07-19T01:02:52.077Z",
+      "queryHashes": [
+        "44147fad0a40"
+      ],
+      "recallDays": [
+        "2026-07-19"
+      ],
+      "conceptTags": [
+        "router",
+        "small.en",
+        "sessions.json",
+        "10-15",
+        "0.10",
+        "37.05",
+        "7/7",
+        "25.73"
       ]
     }
   }
