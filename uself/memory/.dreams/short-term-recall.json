@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-17T06:20:51.279Z",
+  "updatedAt": "2026-07-19T07:21:07.737Z",
   "entries": {
     "memory:memory/2026-06-22.md:22:34": {
       "key": "memory:memory/2026-06-22.md:22:34",
@@ -174,18 +174,20 @@
       "endLine": 25,
       "source": "memory",
       "snippet": "# 2026-06-27 日记（星期六） ## 关键事件 ### 记忆 Cron 审计（00:05） - 执行 audit.sh --report - 当日日记缺失 → 自动创建骨架（已修复为完整内容） - **9 个活跃 session 告警**: 经核实均为 6/26 残留或 Cron 自身进程，午夜边界 false positive - 审计 flag 2 深层 + 3 浅层均为边界误报机制触发的已知模式 - 补充完整日记后状态正常 ## 当日状态 - 🕐 午夜刚开始，暂无实质业务活动 - 昨日（6/26）日记完整（20 行），记忆系统健康 ## 进行中项目 - ACCA F1 知识库建设 - VAS 知识树 + 跨境对比网络 - OPC看板方法论卡片集成（待 Daryl 确认方向） ## 等待 Daryl - [ ] 确认 OPC看板方法论卡片集成方向 - [ ] 发送第一批手写笔记 + 录音 - [ ] 确认心理学域子分类",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.35638075768947597,
+      "totalScore": 0.7117204993963241,
       "maxScore": 0.35638075768947597,
       "firstRecalledAt": "2026-06-28T16:00:41.416Z",
-      "lastRecalledAt": "2026-06-28T16:00:41.416Z",
+      "lastRecalledAt": "2026-07-19T07:20:50.182Z",
       "queryHashes": [
-        "4897c34c4feb"
+        "4897c34c4feb",
+        "43625fa9b225"
       ],
       "recallDays": [
-        "2026-06-28"
+        "2026-06-28",
+        "2026-07-19"
       ],
       "conceptTags": [
         "网络",
@@ -374,18 +376,22 @@
       "endLine": 21,
       "source": "memory",
       "snippet": "# 2026-07-03 日记 ## 🕛 午夜 Cron 记忆归档审计（00:04） - 审计通过，午夜边界误报已确认无需处理 - Git pull 失败为预期（workspace-self 无 remote） ## 🕤 03-AI-Tech 知识树全貌汇报（09:46） - **触发**: Daryl 在飞书 DM 要求汇总「6月22日至今」的 03-AI-Tech 知识树 - **交付**: 完整树结构 + 藤蔓交叉点图 + 汇总表 - 工程开发经验（视频分析交互Workflow）/ 贷款材料自动化 / 电影学方法论 三大模块 - 三条共享藤蔓：自动化管线设计 / prompt 工程策略 / 迭代流程管理 - 总计 43 文件（含 01-Financial 侧 VAS + Cross-Border + IFRS-IAS） - **来源标注**: Bryson 归档（工程开发）、Balance 实操（贷款材料自动化）、Daryl×Self 辩论（电影学方法论） ## 🌙 Daryl 身体不适（22:03 OPC群） - Daryl 在 OPC 群聊中表示「我感觉我身体不行了，怎么办」@忧郁小猫 - 小枫（吹点小风）立即回应关心，询问具体症状 - 主 Agent（Kitty）判断未被直接@，保持静默（NO_REPLY） ## 当日其他 Agent 活动 - **Balance**: 与 Daryl 飞书 DM 中重组 OPC Dashboard active.md，将等待类任务从「进行中」移入「⏸️ 暂停/等待」，仅保留 Future Textile",
-      "recallCount": 1,
+      "recallCount": 4,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.36229974329471587,
-      "maxScore": 0.36229974329471587,
+      "totalScore": 1.4540953427553176,
+      "maxScore": 0.3714947134256363,
       "firstRecalledAt": "2026-07-09T02:05:30.461Z",
-      "lastRecalledAt": "2026-07-09T02:05:30.461Z",
+      "lastRecalledAt": "2026-07-19T07:20:55.560Z",
       "queryHashes": [
-        "1842053952cb"
+        "1842053952cb",
+        "d46130833956",
+        "43625fa9b225",
+        "a05d59aa5eae"
       ],
       "recallDays": [
-        "2026-07-09"
+        "2026-07-09",
+        "2026-07-19"
       ],
       "conceptTags": [
         "workspace-self",
@@ -678,6 +684,162 @@
         "3.2倍",
         "b站/抖音/youtube",
         "开发教训1-4"
+      ]
+    },
+    "memory:memory/2026-06-24.md:1:25": {
+      "key": "memory:memory/2026-06-24.md:1:25",
+      "path": "memory/2026-06-24.md",
+      "startLine": 1,
+      "endLine": 25,
+      "source": "memory",
+      "snippet": "# 2026-06-24 日记 ## 关键事件 ### 记忆 Cron 审计（00:02） - 执行 audit.sh --report - 发现问题：今日日记缺失（创建骨架）、active.md 超过 31h 未更新（刷新时间戳） - 修复完成 ### 当日无 Daryl 直接交互 - DM session 无新消息 - 群聊无实质工作对话（仅 cron 定时汇报「已完成今日（2026年06月25日）的记忆系统更新」17:02） ## 当前状态 - 记忆系统运行正常 - OPC 看板方法论卡片集成方案待 Daryl 确认（6/23 遗留） - VAS 知识树 + 跨境对比网络持续建设中 - 各域初始化（心理学、音乐）待 Daryl 确认子分类 ## 待跟进（继承 6/23） - Daryl 确认 OPC 看板集成方向 - Daryl 继续验收 Vault - Circular 99/2025 全文待获取验证 - 心理学域子分类待确认",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7145964622497558,
+      "maxScore": 0.3603456348180771,
+      "firstRecalledAt": "2026-07-19T07:20:45.401Z",
+      "lastRecalledAt": "2026-07-19T07:20:50.182Z",
+      "queryHashes": [
+        "d46130833956",
+        "43625fa9b225"
+      ],
+      "recallDays": [
+        "2026-07-19"
+      ],
+      "conceptTags": [
+        "网络",
+        "audit.sh",
+        "active.md",
+        "6/23",
+        "99/2025",
+        "日记",
+        "关键",
+        "事件"
+      ]
+    },
+    "memory:memory/2026-07-03.md:18:23": {
+      "key": "memory:memory/2026-07-03.md:18:23",
+      "path": "memory/2026-07-03.md",
+      "startLine": 18,
+      "endLine": 23,
+      "source": "memory",
+      "snippet": "- 主 Agent（Kitty）判断未被直接@，保持静默（NO_REPLY） ## 当日其他 Agent 活动 - **Balance**: 与 Daryl 飞书 DM 中重组 OPC Dashboard active.md，将等待类任务从「进行中」移入「⏸️ 暂停/等待」，仅保留 Future Textile 攻防 + 贷款材料整理为进行中 - **小枫**: 诊断确认 sessions_send 回复不会变成飞书 DM 的根因，Kitty 计划改服务端用飞书 SDK 发 DM",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.35945442616939544,
+      "maxScore": 0.35945442616939544,
+      "firstRecalledAt": "2026-07-19T07:20:45.401Z",
+      "lastRecalledAt": "2026-07-19T07:20:45.401Z",
+      "queryHashes": [
+        "d46130833956"
+      ],
+      "recallDays": [
+        "2026-07-19"
+      ],
+      "conceptTags": [
+        "no-reply",
+        "active.md",
+        "暂停/等待",
+        "sessions-send",
+        "kitty",
+        "判断",
+        "直接",
+        "保持"
+      ]
+    },
+    "memory:memory/archive/2026-06-18.md:1:36": {
+      "key": "memory:memory/archive/2026-06-18.md:1:36",
+      "path": "memory/archive/2026-06-18.md",
+      "startLine": 1,
+      "endLine": 36,
+      "source": "memory",
+      "snippet": "# 2026-06-18 日记 ## 关键事件 ### Daryl 重新充值通知 - Daryl 通知已充值，要求重新执行记忆 Cron 任务 ### 记忆 Cron 审计（00:23） - 执行 audit.sh --report - 发现：今日日记缺失 → 已创建本文件 - 其余检查通过 ### 前期回顾（6/14-6/17 今日归档） #### OPC 机制基建规范上线 - 小风汇编 v2.0，覆盖 8 大维度 - Daryl 逐项确认，即日起生效 - Hooks 机制自检系统（L0-L4）全面启用 - 每周日互相审计 #### OPC 统一 Git 仓库 - 推送到 github.com/DarylChiu/opc-workspace - Self/ 目录：ACCA Vault (39文件) + 合规脚本 (4) + 记忆系统文档 + 项目摘要 - 提交方式：scripts/self-git #### 合规修复汇总 - SOUL.md 新增 T0 数字资产保护 + 必须执行机制 - plist 部署到 LaunchAgents - 本地 workspace git init (91文件) - 日记补记 6/11-6/13 ## 待跟进 - ACCA Vault 内容待 Daryl 提供教材后填充 - 心理学域、音乐域知识树待启动 - 本周日互相审计",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3616160243749618,
+      "maxScore": 0.3616160243749618,
+      "firstRecalledAt": "2026-07-19T07:20:50.182Z",
+      "lastRecalledAt": "2026-07-19T07:20:50.182Z",
+      "queryHashes": [
+        "43625fa9b225"
+      ],
+      "recallDays": [
+        "2026-07-19"
+      ],
+      "conceptTags": [
+        "audit.sh",
+        "6/14-6/17",
+        "v2.0",
+        "l0-l4",
+        "scripts/self-git",
+        "soul.md",
+        "6/11-6/13",
+        "日记"
+      ]
+    },
+    "memory:memory/2026-07-17.md:1:25": {
+      "key": "memory:memory/2026-07-17.md:1:25",
+      "path": "memory/2026-07-17.md",
+      "startLine": 1,
+      "endLine": 25,
+      "source": "memory",
+      "snippet": "# 2026-07-17 日记 ## 📋 Daryl 设备配置同步 - **来源**: 小枫/Bryson 通过 sessions_send 同步 - **三设备清单**: 1. **iPhone** — iOS，飞书客户端 2. **Samsung Tab S8** — Android (One UI)，平板 3. **Mac** — macOS（桌面端/开发机） - **出差规则**: Daryl 说「出差」= 只带 Samsung Tab S8 + iPhone，**不带 Mac** - **当前状态**: - 雅思陪练助手 iPhone 语音输入有问题 ❌ - Samsung Tab S8 可用 ✅，交互有拖沓感 - v1.1.0 已挂起 - **已记录到**: active.md 设备配置区 ### 13:2x · 周度知识树\"树叶\"收集（Daryl DM 指令） - 经 sessions_send 询问 Bryson（runId 1da00327）+ Balance（runId 438bd05f），收集 10 片候选树叶 - Bryson 5 片：IELTS 移动端适配+验收教训 / edit工具错位教训 / Playwright验收脚本模板 / 内核卡schema v2+provenance教训 - Balance 5 片：ND253/2026 PIT目录（已落盘）/ 债转股时点法律框架 / IRC-ERC合规判断+判断书模板 / 外资控制模型 / 财务负责人自保框架 - SAGE Checker：两轮 FAIL 后修改，第三轮 PA",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.35740794241428375,
+      "maxScore": 0.35740794241428375,
+      "firstRecalledAt": "2026-07-19T07:20:55.560Z",
+      "lastRecalledAt": "2026-07-19T07:20:55.560Z",
+      "queryHashes": [
+        "a05d59aa5eae"
+      ],
+      "recallDays": [
+        "2026-07-19"
+      ],
+      "conceptTags": [
+        "小枫/bryson",
+        "sessions-send",
+        "桌面端/开发机",
+        "v1.1.0",
+        "active.md",
+        "nd253/2026",
+        "irc-erc合规判断",
+        "日记"
+      ]
+    },
+    "memory:memory/2026-07-17.md:20:31": {
+      "key": "memory:memory/2026-07-17.md:20:31",
+      "path": "memory/2026-07-17.md",
+      "startLine": 20,
+      "endLine": 31,
+      "source": "memory",
+      "snippet": "- SAGE Checker：两轮 FAIL 后修改，第三轮 PASS (9/9/8) - 已向 Daryl 汇报，待确认：L5 放置位置 + 其余 9 片落盘授权 ### 14:0x · 周度树叶落盘完成 - B1+B2: `IELTS移动端适配.md` (5KB，04-多平台适配/) - B3: `教训6-edit工具多处替换错位.md` (4.2KB，开发教训序列) - B4: `Playwright响应式验收脚本模板.md` (5.8KB，06-模板库/) - L2+L3+L4: `越南债转股-法律框架_实务判断_控制模型.md` (11.2KB，Debt-to-Equity/，Balance撰写+Self核验) - 所有 Home.md 索引已更新，git commit 73fa01e - 未落盘：B5(provenance gap)/L1(PIT回写待做)/L5(自保框架待Daryl确认位置) - Daryl 13:57 指令，约14:30 交付完成",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.35518236160278316,
+      "maxScore": 0.35518236160278316,
+      "firstRecalledAt": "2026-07-19T07:21:07.737Z",
+      "lastRecalledAt": "2026-07-19T07:21:07.737Z",
+      "queryHashes": [
+        "ad468cdebe34"
+      ],
+      "recallDays": [
+        "2026-07-19"
+      ],
+      "conceptTags": [
+        "9/9/8",
+        "ielts移动端适配.md",
+        "04-多平台适配",
+        "教训6-edit工具多处替换错位.md",
+        "4.2kb",
+        "playwright响应式验收脚本模板.md",
+        "5.8kb",
+        "06-模板库"
       ]
     }
   }
