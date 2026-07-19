@@ -8,7 +8,7 @@ import json, os, sys
 from datetime import datetime
 
 HOME = os.path.expanduser('~')
-OUTPUT_DIR = os.path.join(HOME, 'opc-workspace', 'Kitty', 'opc-dashboard', 'data')
+OUTPUT_DIR = os.path.join(HOME, 'WorkBuddy', 'Claw', 'opc-dashboard', 'data')
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, 'cost_daily.json')
 
 # 读取全量扫描结果
