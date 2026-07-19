@@ -253,8 +253,9 @@ def phase3_optimize(adapter: SelfGEPAAdapter, train_items: list, val_items: list
     )
 
     # Create LiteLLM language model for reflection
+    # Round 2: 从 deepseek-chat 升级到 v4-flash，提升反思质量
     reflection_lm = make_litellm_lm(
-        "deepseek/deepseek-chat",
+        "deepseek/deepseek-v4-flash",
         api_key=os.environ.get("DEEPSEEK_API_KEY"),
         temperature=0.7,
     )
@@ -278,9 +279,10 @@ def phase3_optimize(adapter: SelfGEPAAdapter, train_items: list, val_items: list
         tracking=tracking_cfg,
     )
 
-    print("\n[Phase 3] Starting GEPA optimization...")
+    print("\n[Phase 3] Starting GEPA optimization (Round 2)...")
     print(f"  Config: max_metric_calls={engine_cfg.max_metric_calls}")
-    print(f"  Reflection LM: deepseek/deepseek-chat")
+    print(f"  Reflection LM: deepseek/deepseek-v4-flash (upgraded from chat)")
+    print(f"  Prompt limit: ≤2000 chars (防止认知过载)")
     print(f"  Train size: {len(train_items)}, Val size: {len(val_items)}")
 
     t0 = time.time()
@@ -291,8 +293,8 @@ def phase3_optimize(adapter: SelfGEPAAdapter, train_items: list, val_items: list
             batch_evaluator=batch_eval_fn,
             dataset=train_items,
             valset=val_items,
-            objective="提高研究报告类输出的SAGE三维评分（traceability/structure/rigor加权分），尤其是来源可追溯性和逻辑严谨性",
-            background="Self是一个知识管理Agent，需要输出严谨的研究报告。当前prompt已包含来源标注、推测标注、置信度等要求，但可能在具体执行时不够明确。优化目标：让prompt更具体、更有操作性。",
+            objective="提高研究报告类输出的SAGE三维评分（traceability/structure/rigor加权分）。优化后的system_prompt不得超过2000字符——超过2000字的候选必须拒绝。所有改进必须落在2000字以内，避免认知过载导致rigor下降。",
+            background="Self是一个知识管理Agent，输出严谨的研究报告。上轮优化用deepseek-chat做反思导致过拟合（4437字prompt，+1.1%）。本轮换v4-flash反思、限制prompt≤2000字，聚焦核心规则+关键正反例。",
             config=config,
         )
         elapsed = time.time() - t0

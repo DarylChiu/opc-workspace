@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-18T13:40:01.163Z",
+  "updatedAt": "2026-07-19T00:02:55.147Z",
   "entries": {
     "memory:memory/2026-06-08.md:19:38": {
       "key": "memory:memory/2026-06-08.md:19:38",
@@ -894,26 +894,28 @@
       "endLine": 66,
       "source": "memory",
       "snippet": "## 18:50 · OPC看板 v1.4 完成 ✅ - Daryl 将「OPC看板v1.4」移至 In Progress → 完成三项需求 - **主次优先级视觉分层**：P0-P3 四级，左侧色条+徽章+创建时可选 - **Bryson 雅思陪练补全**：ielts_tutor 加入扫描优先级，产物 3→7 - **symlink 清理**：移除 opc-workspace 中旧 ielts_tutor_v2.0 副本 - Commit v1.4 + tag ## 状态概览 - 🔴 M2 全模块验收完毕 ✅ → v1.5 生产模式 - OPC 看板 v1.4 并入 v1.5 - 验收报告已生成 `decision_reports/m2_acceptance_report_2026-07-05.md` - 7 月基建方向（Agent自进化 + Loop Engineering）待 Daryl 启动确认 - ✅ M2 全部模块验收完毕 + v1.4 完成 - 待办: Agent版本变更通知 - 雅思陪练 v2.0 收尾中 - 7 月基建方向（Agent自进化 + Loop Engineering）待 Daryl 启动确认",
-      "recallCount": 6,
+      "recallCount": 7,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 2.409069302678108,
+      "totalScore": 2.7999082088470457,
       "maxScore": 0.44552976489067075,
       "firstRecalledAt": "2026-07-06T01:12:01.162Z",
-      "lastRecalledAt": "2026-07-16T01:10:20.622Z",
+      "lastRecalledAt": "2026-07-19T00:02:55.147Z",
       "queryHashes": [
         "af4fa58d2480",
         "f8aac1c4eb69",
         "7c926c8f68f2",
         "32c589b9a581",
         "230b4b00be19",
-        "48b5eabf8dd9"
+        "48b5eabf8dd9",
+        "f152bb3d3c45"
       ],
       "recallDays": [
         "2026-07-06",
         "2026-07-07",
         "2026-07-12",
-        "2026-07-16"
+        "2026-07-16",
+        "2026-07-19"
       ],
       "conceptTags": [
         "v1.4",
@@ -1153,25 +1155,27 @@
       "endLine": 32,
       "source": "memory",
       "snippet": "- 17:00 OPC Dashboard 服务挂掉（进程异常退出）→ 重启 - 17:05 tunnel 过期 → 重建（charm-functioning-donna-time.trycloudflare.com） - 22:37 tunnel 再次挂+服务进程异常退出 → 全栈重启 - 23:00 Gateway 重启（Sentinel 插件加载）→ OPC Dashboard 被带下线 → 再次全栈重启 - ⚠️ 今天累计 8 次 tunnel 重建，临时隧道完全不适合长期使用 ## 状态概览 - 各 Agent 处于待命状态 - 7 月基建方向（Agent自进化 + Loop Engineering）已在 Daryl 与 Bryson 讨论中推进 - OPC 看板 v1.5 运行中 - M2 全部模块验收完毕",
-      "recallCount": 6,
+      "recallCount": 7,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 2.4352081686258313,
+      "totalScore": 2.8114114761352536,
       "maxScore": 0.4152030527591705,
       "firstRecalledAt": "2026-07-11T04:42:08.555Z",
-      "lastRecalledAt": "2026-07-16T01:10:20.622Z",
+      "lastRecalledAt": "2026-07-19T00:02:55.147Z",
       "queryHashes": [
         "03ae1fc4cf49",
         "3524490ccf2a",
         "32c589b9a581",
         "230b4b00be19",
         "7508206e087e",
-        "48b5eabf8dd9"
+        "48b5eabf8dd9",
+        "f152bb3d3c45"
       ],
       "recallDays": [
         "2026-07-11",
         "2026-07-12",
-        "2026-07-16"
+        "2026-07-16",
+        "2026-07-19"
       ],
       "conceptTags": [
         "gateway",
@@ -2040,6 +2044,37 @@
         "7/1-7/14",
         "67.65",
         "8.05"
+      ]
+    },
+    "memory:memory/archive/2026-06-16.md:1:23": {
+      "key": "memory:memory/archive/2026-06-16.md:1:23",
+      "path": "memory/archive/2026-06-16.md",
+      "startLine": 1,
+      "endLine": 23,
+      "source": "memory",
+      "snippet": "# 2026-06-16 工作日志 ## OPC看板交互系统 M2 开发 - 16:57 Daryl在群聊确认：直接开始M2，完成后一起给迭代意见 - 17:00-17:40 完成M2全部3个模块开发 ### 实现内容 - **Panel C · Workflow编辑器**: 纯Vanilla JS实现可拖拽节点+SVG连线画布，支持节点属性编辑（Agent/估时/实际/状态），左侧项目列表+保存到JSON - **Panel D · 成本仪表盘**: 直接从4个Agent的sessions.json文件读取统计，显示Agent分解柱状图+模型使用统计 - **Panel E · 沙箱任务**: 容器状态（openclaw sandbox list）+ 近期56条任务历史（openclaw tasks list） - **后端新增**: /api/workflows (GET/POST), /api/costs (cache 2min), /api/sandbox-tasks (cache 30s) - **任务操作增强**: pending/in-progress任务卡片hover显示开始/完成/删除按钮 ### 技术决策 - [P2] Workflow不用React Flow CDN（兼容性复杂），改用Vanilla JS原生拖拽+SVG连线 → 理由：零依赖、加载快、功能够用 - [P2] 成本数据不用openclaw status --usage（超时），改用直接读sessions.json → 理由：响应快、数据准确、不消耗额外LLM Token - [P3]",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.36434704065322876,
+      "maxScore": 0.36434704065322876,
+      "firstRecalledAt": "2026-07-19T00:02:55.147Z",
+      "lastRecalledAt": "2026-07-19T00:02:55.147Z",
+      "queryHashes": [
+        "f152bb3d3c45"
+      ],
+      "recallDays": [
+        "2026-07-19"
+      ],
+      "conceptTags": [
+        "00-17",
+        "agent/估时/实际/状态",
+        "直接从4个agent的sessions.json文件读取统计",
+        "api/workflows",
+        "get/post",
+        "api/costs",
+        "api/sandbox-tasks",
+        "改用直接读sessions.json"
       ]
     }
   }
