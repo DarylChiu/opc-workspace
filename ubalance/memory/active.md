@@ -3,6 +3,19 @@
 > 最后更新: 2026-07-20 00:05 GMT+7 (Balance: 每日记忆归档审计，7/19周日无新活动，全部任务等待Daryl反馈)
 
 ## 🔧 进行中
+### 🆕 二级市场基本面分析框架项目 (2026-07-20启动)
+- **目标**: 建立招股说明书解读框架，作为二级市场投资的基本面分析基础
+- **框架文件**: `data/prospectus_analysis_framework.md` (v1.0，五层分析体系+30项红旗清单+行业KPI矩阵)
+- **首个标的**: 长鑫科技(CXMT) — 科创板IPO，DRAM，2026.5.27过会
+- **解读报告**: `reports/CXMT-IPO-解读报告-v1.0-20260720.md`
+- **Daryl指示**: 这是长期项目而非一次性任务，他会看完后讨论精进框架
+- **框架改进TODO**(待Daryl讨论后执行):
+  - 半导体行业KPI模板（晶圆产能/良率/制程节点等）
+  - 周期位置判断独立子维度
+  - 少数股东权益红旗（归母比例异常低）
+  - DRAM价格监控机制
+  - 海外可比公司会计准则差异处理
+
 ### 贷款材料整理 — ✅ v2.7.0 定版 (2026-07-15 Daryl指令，工作流阶段性冻结)
 - **输入**: Toshiba硬盘 `HUATEX贷款材料/` | L1-Raw Materials-Year2023 (322发票) | RM-Database/2023 (仅THÁNG 1-10)
 - **7/14 Daryl两次纠正**: ①读内容不看文件名 ②一切从L1出发（详见 lessons.md）
@@ -25,7 +38,8 @@
   - ✅ 兜底文件已推送 `~/opc-workspace/Kitty/opc-dashboard/data/cost_daily.json`
 - **待办**:
   - ✅ 7/15 与Kitty对账: live端点(~/WorkBuddy/Claw/opc-dashboard, PID 12926)已并入全量jsonl扫描; 差异源=台账append-only+扫描范围(.trash/backups), 零成本调用两边都不计
-  - ⏳ [P1] 接 OpenRouter 官方账单API做外部真值锚点（台账$281 vs 官网实际仍可能对不齐）
+  - ✅ 7/20 Kitty修复: COST_DAILY_BALANCE_FILE路径硬编码→动态BASE路径，Dashboard正确读取台账数据
+  - ⏳ [P1] 接 OpenRouter 官方账单API做外部真值锚点
 - **脚本**: `scripts/full_cost_scan.py` + `scripts/generate_cost_daily.py`
 
 ## ✅ 已完成
