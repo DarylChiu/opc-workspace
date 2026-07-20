@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-19T07:21:07.737Z",
+  "updatedAt": "2026-07-20T08:35:23.446Z",
   "entries": {
     "memory:memory/2026-06-22.md:22:34": {
       "key": "memory:memory/2026-06-22.md:22:34",
@@ -840,6 +840,37 @@
         "playwright响应式验收脚本模板.md",
         "5.8kb",
         "06-模板库"
+      ]
+    },
+    "memory:memory/2026-07-15.md:11:25": {
+      "key": "memory:memory/2026-07-15.md:11:25",
+      "path": "memory/2026-07-15.md",
+      "startLine": 11,
+      "endLine": 25,
+      "source": "memory",
+      "snippet": "- 22:15 Kitty 独立核实完毕：①无下游读取 compliance-audit.jsonl（Dashboard 数据源是自己的 data/*.json，M5合规面板不存在），bugfix 安全保留 ②117条错位历史先不迁，等 Daryl 拍板 ③Balance/小枫已由 Kitty 通知 ## 凌晨记忆审计 (00:08) - Cron 触发每日记忆审计，发现问题： 1. active.md 39h 未更新 → 已刷新时间戳至 00:08 2. 7/14 日记过短（11行）vs 20个活跃 session → 已从 session 历史充实为完整日记（TTS方案B/成本对账/项目看板刷新/项目状态修正） 3. 7/15 日记本文件为骨架 → 已升级为真实内容 4. 归档 2026-06-14.md → archive/ - Git 本地备份完成（7 files changed, 144 insertions, 78 deletions） - 成本仪表盘正常：今日 $2.11 | 本月 $8.70 | 全量 $68.30 | API 正常 ## 待办 - 无新任务指派 - 进行中任务（关联方与股东借款知识树、ACCA F1、VAS知识树、OPC方法论卡片）待 Daryl 反馈后推进",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.36432509422302245,
+      "maxScore": 0.36432509422302245,
+      "firstRecalledAt": "2026-07-20T08:35:23.446Z",
+      "lastRecalledAt": "2026-07-20T08:35:23.446Z",
+      "queryHashes": [
+        "95b792ba4f83"
+      ],
+      "recallDays": [
+        "2026-07-20"
+      ],
+      "conceptTags": [
+        "备份",
+        "compliance-audit.jsonl",
+        "3balance/小枫已由",
+        "active.md",
+        "7/14",
+        "tts方案b/成本对账/项目看板刷新/项目状态修正",
+        "7/15",
+        "2.11"
       ]
     }
   }
