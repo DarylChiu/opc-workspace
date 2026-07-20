@@ -1,8 +1,8 @@
 # Project Dashboard — main（忧郁小猫）
 
-> 最后编译: 2026-07-19 00:30 +07:00
+> 最后编译: 2026-07-20 07:00 +07:00
 > 负责人: Kitty | Agent ID: main
-> 下轮更新: 2026-07-19 07:00
+> 下轮更新: 2026-07-20 13:00
 
 ---
 
@@ -23,9 +23,9 @@
 | 总进度 | 92% |
 | 启动日期 | 2026-06-08 |
 | 预计交付 | 2026-08-10 |
-| 本周进展 | 7/18 成本数据一致性修复M1交付：Dashboard 使用 Balance 台账+调整作为权威月度数据（commit 9254000）；根因定位完成（扫描范围差异 + Sentinel $20调整 + cost_daily.json路径不一致） |
-| 下周计划 | M4 剩余：override过期机制 + 系统消息过滤 + cost_daily.json路径对齐 + Agent「约定版本」字段 |
-| 阻塞项 | cost_daily.json路径不一致（Balance写入旧副本，待通知Balance修复） |
+| 本周进展 | 7/18 成本数据一致性修复M1交付：Dashboard 使用 Balance 台账+调整作为权威月度数据；7/19 cost_daily.json 路径不一致已修复（Balance 输出已切换至 Dashboard 实时目录） |
+| 下周计划 | M4 剩余：override过期机制 + 系统消息过滤 + Agent「约定版本」字段 |
+| 阻塞项 | 无 |
 
 #### 里程碑
 
@@ -59,7 +59,7 @@
 |------|------|------|------|
 | 7/16 | status_overrides 无过期机制 | 已消失任务残留为鬼数据（红框/绿框） | M4 加入 override 自动过期逻辑 + 系统消息过滤 |
 | 7/16 | 成本 API 数据差异 | dashboard 与 Balance 月份统计不一致 | ✅ 7/18 M1已修复：数据源统一为Balance台账+调整 |
-| 7/18 | cost_daily.json 路径不一致 | Balance写入旧Dashboard副本，运行中Dashboard读不到 | 待通知Balance修复路径 |
+| 7/18 | cost_daily.json 路径不一致 | Balance写入旧Dashboard副本，运行中Dashboard读不到 | ✅ 7/19 Balance已修复 |
 
 ---
 
@@ -70,13 +70,13 @@
 | 项目ID | agent-self-evolution |
 | 状态 | 🟢 active |
 | 优先级 | P1 |
-| 当前阶段 | M4 · 观察期评估（7/15-7/22）+ L2b GEPA提示进化已交付 |
-| 阶段进度 | 57% |
-| 总进度 | 72% |
+| 当前阶段 | M4 · 观察期评估（7/15-7/22），GEPA L2b已弃用 |
+| 阶段进度 | 40% |
+| 总进度 | 65% |
 | 启动日期 | 2026-07-15 |
 | 预计交付 | 2026-07-22（观察期评估） |
-| 本周进展 | L2b GEPA提示进化全部交付（7/18）：self_gepa_adapter.py(686行)+20条训练数据+首次优化运行+1.1%提升+trace自检PASS；子代理合计~67min, ~$0.17；观察期D1-D4持续，SAGE/Reflexion尚无实质触发 |
-| 下周计划 | 观察期结束（7/22）→ 评估效果 → 决定是否增量优化或推广其他Agent |
+| 本周进展 | 7/19 GEPA L2b 正式弃用（Daryl指令）：Round 2 换 v4-flash 反思 -8.3%，5条训练数据信号太弱/任务LM到顶/SAGE方差大，ROI为负；SAGE Checker + Reflexion 基础设施保留；观察期持续，尚无实质触发 |
+| 下周计划 | 观察期结束（7/22）→ 评估效果 → 决定是否推广 Reflexion 至其他 Agent |
 | 阻塞项 | 无 |
 
 #### 里程碑
@@ -86,7 +86,13 @@
 | M1 · SAGE Checker | 🟢 done | 100% | 7/15 ✅ |
 | M2 · Reflexion 脚本 | 🟢 done | 100% | 7/15 ✅ |
 | M3 · EVOLUTION.md 协议 + Self 接入 | 🟢 done | 100% | 7/15 ✅ |
-| M4 · 观察期评估（L2/推广决策） | 🟡 in_progress | 57% | 7/22 |
+| M4 · 观察期评估（L2/推广决策） | 🟡 in_progress | 40% | 7/22 |
+
+#### 关键决策
+
+| 日期 | 决策 | 级别 | 状态 |
+|------|------|------|------|
+| 7/19 | GEPA L2b 正式弃用（Round 2 -8.3%、训练数据不足、ROI为负）；SAGE + Reflexion 保留 | P1 | ✅ Daryl确认 |
 
 ---
 

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-19T00:02:55.147Z",
+  "updatedAt": "2026-07-20T09:08:20.098Z",
   "entries": {
     "memory:memory/2026-06-08.md:19:38": {
       "key": "memory:memory/2026-06-08.md:19:38",
@@ -584,13 +584,13 @@
       "endLine": 7,
       "source": "memory",
       "snippet": "# 2026-06-22 工作日志 ## 00:01 每日记忆归档 Cron 触发 - 审计修复：昨日日记缺失 → 已创建 - 当前无新需求或变更 - active_tasks: Workflow编辑器渲染仍在等待Daryl实测",
-      "recallCount": 7,
+      "recallCount": 8,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 2.5919615685939785,
+      "totalScore": 2.9549496412277216,
       "maxScore": 0.40362003147602077,
       "firstRecalledAt": "2026-07-02T09:33:43.192Z",
-      "lastRecalledAt": "2026-07-18T09:07:05.482Z",
+      "lastRecalledAt": "2026-07-20T09:08:20.098Z",
       "queryHashes": [
         "30b6c84f8664",
         "cdd161ca80af",
@@ -598,13 +598,15 @@
         "6914e401ba84",
         "cd567dd5a403",
         "0deefc791542",
-        "e340b73612cf"
+        "e340b73612cf",
+        "3c84453456dc"
       ],
       "recallDays": [
         "2026-07-02",
         "2026-07-13",
         "2026-07-15",
-        "2026-07-18"
+        "2026-07-18",
+        "2026-07-20"
       ],
       "conceptTags": [
         "active-tasks",
@@ -787,25 +789,27 @@
       "endLine": 32,
       "source": "memory",
       "snippet": "2. 需要持久化的后台进程必须用 nohup + disown，不能用 exec background 3. Daryl 明确表达不满（\"走点心\"、\"跟你开发挺糟心\"）——效率和质量是第一要求 - 隧道就绪: trycloudflare + loca.lt 双活, HTTP 200 ✅ - Daryl 决定明早继续验收 ## 状态概览 - 7/1 全天无 Daryl 活动，等待 7 月工作计划确认 - 🔴 M2 Agent状态面板 验收中（隧道就绪，明早继续） - 视频分析v1.1.2（属 Xiaofeng）待验收 - 7月基建方向（Agent自进化 + Loop Engineering）待 Daryl 启动确认 - OPC看板 v1.4 待开发 - 雅思陪练v2.0 收尾中",
-      "recallCount": 6,
+      "recallCount": 7,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 2.405497521162033,
+      "totalScore": 2.775401994585991,
       "maxScore": 0.4297795921564102,
       "firstRecalledAt": "2026-07-04T01:20:18.687Z",
-      "lastRecalledAt": "2026-07-18T13:26:18.310Z",
+      "lastRecalledAt": "2026-07-20T08:35:15.598Z",
       "queryHashes": [
         "595134602aad",
         "b611e323b71c",
         "07a016a7320a",
         "4ce31933802a",
         "117c1bff8a4b",
-        "d3fdbfc50849"
+        "d3fdbfc50849",
+        "05c50d9fc97b"
       ],
       "recallDays": [
         "2026-07-04",
         "2026-07-06",
-        "2026-07-18"
+        "2026-07-18",
+        "2026-07-20"
       ],
       "conceptTags": [
         "loca.lt",
@@ -825,23 +829,25 @@
       "endLine": 41,
       "source": "memory",
       "snippet": "- 提出方案: 禁掉生活提醒cron / 或只解决Agent间NO_REPLY路由问题 - 等待Daryl决策 ## ~10:00 M2验收环境就绪 - 隧道更新: https://pod-recorded-clarity-collections.trycloudflare.com - 私发Daryl完整验收进度: M1✅ M2a-d全部开发就绪待验收 ## ~14:00 Xiaofeng 视频分析 v1.1.0 交付 - 5项迭代全量完成: ①对白滚动条 ②Sidebar左置全高 ③顶栏精简+进度条 ④Tab重构 ⑤商业数据抓取 - B站API+YouTube页面解析 → /api/commerce端点 - 版号: 1.0.0→1.1.0，awaiting Daryl验收 ## 🔜 今日待续 - [ ] Daryl 提供 8765 server.js 路径 → 合入 M2 Agent状态面板 - [ ] Daryl 选择 Agent 自进化深入方向 - [ ] Daryl 决定是否禁掉生活提醒cron - [ ] Daryl 验收 M2 + 视频分析 v1.1.0 - [ ] MEMORY.md 精简 ## 活动记录 <!-- day events below -->",
-      "recallCount": 4,
+      "recallCount": 5,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.60823135972023,
+      "totalScore": 1.9732722371816633,
       "maxScore": 0.4236052393913269,
       "firstRecalledAt": "2026-07-04T01:20:18.687Z",
-      "lastRecalledAt": "2026-07-18T13:26:18.310Z",
+      "lastRecalledAt": "2026-07-20T08:35:15.598Z",
       "queryHashes": [
         "595134602aad",
         "07a016a7320a",
         "117c1bff8a4b",
-        "d3fdbfc50849"
+        "d3fdbfc50849",
+        "05c50d9fc97b"
       ],
       "recallDays": [
         "2026-07-04",
         "2026-07-06",
-        "2026-07-18"
+        "2026-07-18",
+        "2026-07-20"
       ],
       "conceptTags": [
         "或只解决agent间no-reply路由问题",
@@ -894,13 +900,13 @@
       "endLine": 66,
       "source": "memory",
       "snippet": "## 18:50 · OPC看板 v1.4 完成 ✅ - Daryl 将「OPC看板v1.4」移至 In Progress → 完成三项需求 - **主次优先级视觉分层**：P0-P3 四级，左侧色条+徽章+创建时可选 - **Bryson 雅思陪练补全**：ielts_tutor 加入扫描优先级，产物 3→7 - **symlink 清理**：移除 opc-workspace 中旧 ielts_tutor_v2.0 副本 - Commit v1.4 + tag ## 状态概览 - 🔴 M2 全模块验收完毕 ✅ → v1.5 生产模式 - OPC 看板 v1.4 并入 v1.5 - 验收报告已生成 `decision_reports/m2_acceptance_report_2026-07-05.md` - 7 月基建方向（Agent自进化 + Loop Engineering）待 Daryl 启动确认 - ✅ M2 全部模块验收完毕 + v1.4 完成 - 待办: Agent版本变更通知 - 雅思陪练 v2.0 收尾中 - 7 月基建方向（Agent自进化 + Loop Engineering）待 Daryl 启动确认",
-      "recallCount": 7,
+      "recallCount": 8,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 2.7999082088470457,
+      "totalScore": 3.1957940638065336,
       "maxScore": 0.44552976489067075,
       "firstRecalledAt": "2026-07-06T01:12:01.162Z",
-      "lastRecalledAt": "2026-07-19T00:02:55.147Z",
+      "lastRecalledAt": "2026-07-20T01:57:47.916Z",
       "queryHashes": [
         "af4fa58d2480",
         "f8aac1c4eb69",
@@ -908,14 +914,16 @@
         "32c589b9a581",
         "230b4b00be19",
         "48b5eabf8dd9",
-        "f152bb3d3c45"
+        "f152bb3d3c45",
+        "5260ee572112"
       ],
       "recallDays": [
         "2026-07-06",
         "2026-07-07",
         "2026-07-12",
         "2026-07-16",
-        "2026-07-19"
+        "2026-07-19",
+        "2026-07-20"
       ],
       "conceptTags": [
         "v1.4",
@@ -997,18 +1005,20 @@
       "endLine": 24,
       "source": "memory",
       "snippet": "# 2026-06-05 工作日志 ## WorkBuddy深度调研（Daryl授权直接查看本机安装） ### 关键发现 - WorkBuddy = 腾讯CodeBuddy的桌面AI Agent产品 - 底层引擎：Electron + CodeBuddy CLI（fork自Claude Code类架构） - 默认模型：DeepSeek-V4-Pro（从进程参数确认） - 本地数据库：SQLite（workbuddy.db） - 已配置渠道：飞书Bot、微信公众号、微信CrawBot ### 核心架构分析 1. **工具链**：Read/Write/Edit/Bash/WebFetch/WebSearch/Skill/SkillManage/TaskCreate/ImageGen/Agent/TeamCreate/SendMessage + MCP tools 2. **MCP集成**：connector-proxy（HTTP MCP server，本地端口） - 内置tools: preview_url, open_result_view, connect_cloud_service, deliver_attachments, workbuddy_cloudstudio_deploy - Ardot设计工具（Figma-like）: 20+ ardot_* tools 3. **Skill系统**：与OpenClaw类似的SKILL.md结构，但有更完整的生态（60+官方plugins） 4. **部署系统**：CloudStudio Deploy - 一键将",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.4283899575471878,
+      "totalScore": 0.7848698496818542,
       "maxScore": 0.4283899575471878,
       "firstRecalledAt": "2026-07-06T01:25:44.285Z",
-      "lastRecalledAt": "2026-07-06T01:25:44.285Z",
+      "lastRecalledAt": "2026-07-20T09:01:47.258Z",
       "queryHashes": [
-        "4ce31933802a"
+        "4ce31933802a",
+        "e37f4fab9d2a"
       ],
       "recallDays": [
-        "2026-07-06"
+        "2026-07-06",
+        "2026-07-20"
       ],
       "conceptTags": [
         "deepseek-v4-pro",
@@ -1615,18 +1625,20 @@
       "endLine": 38,
       "source": "memory",
       "snippet": "- Daryl 在 OPC 群聊通知：身体疲惫，今晚停止验收 - 当前两个核心项目进入收尾阶段： - **OPC看板交互系统** → v1.3.2 产物模块已验收，v1.4 待主次优先级视觉分层 - **雅思陪练助手v2.0** → 归属 Xiaofeng/Bryson，验收进行中 - **7月基建重点方向**: - 🧬 **Agent自进化**: Agent 从经验中自动改进（情景记忆注入/合规自进化/跨Agent经验池） - 🔁 **Loop Engineering**: 建立自动化 开发→验证→反馈 闭环，减少 Daryl 手动验收负担 - **Daryl 当前瓶颈**: 每天验收 4 个 Agent 项目 + 调整方向，身体压力太大 - **基建核心目标**: - 开发流程自动化 → Daryl 只需确认关键决策 - 释放 Daryl 时间 → 专注与 Self/恨点小己 搭建 OPC 知识网络体系（ACCA 架构） - Daryl @了 吹点小风 和我，要求各自保存验收进度 ## 状态概览 - 昨天（6/29）已完成 v1.3.2 产物模块验收、Self 路径诊断 - 今天 Daryl 验收了部分项目（具体细节待各 Agent 补充），21:00 提前休息 - 待办：v1.4 主次优先级视觉分层、Agent 版本变更通知机制 - **新增待办**: 7月基建规划 — Agent自进化 + Loop Engineering",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.35613794922828673,
+      "totalScore": 0.7066497474908828,
       "maxScore": 0.35613794922828673,
       "firstRecalledAt": "2026-07-18T13:26:07.644Z",
-      "lastRecalledAt": "2026-07-18T13:26:07.644Z",
+      "lastRecalledAt": "2026-07-20T08:35:15.598Z",
       "queryHashes": [
-        "117c1bff8a4b"
+        "117c1bff8a4b",
+        "05c50d9fc97b"
       ],
       "recallDays": [
-        "2026-07-18"
+        "2026-07-18",
+        "2026-07-20"
       ],
       "conceptTags": [
         "网络",
@@ -2075,6 +2087,100 @@
         "api/costs",
         "api/sandbox-tasks",
         "改用直接读sessions.json"
+      ]
+    },
+    "memory:memory/2026-07-15.md:27:47": {
+      "key": "memory:memory/2026-07-15.md:27:47",
+      "path": "memory/2026-07-15.md",
+      "startLine": 27,
+      "endLine": 47,
+      "source": "memory",
+      "snippet": "## 状态概览 - **active.md**: 更新至 7/14，任务无实质变更 - **日记链**: 2026-06-1 → 2026-07-15 完整 - **Git**: 本地 92 commits ahead（remote 未配置，已知问题） - **成本**: 全量 $68.30 | 本月 $8.70 | 今日 $2.11 - **OPC Dashboard**: v1.6 运行正常 (localhost:8765) ## 多 Agent 审计协调 - **Self**: 审计修复完成（7/14日记充实 + active时间戳 + Git）→ OPC 已发送 - **Balance**: 审计 + Git push 成功（91 commits积压清除）→ OPC 已发送 - **xiaofeng**: TTS 吞音条目状态更新 ✅ → OPC 已发送 - **main (本Agent)**: 骨架日记填充 + Git commit ## 13:50 · Self L3自进化基建上线 ✅ - Daryl拍板: 给Self开发L3(SAGE Checker + Reflexion),不碰L4 - 交付: checker.py(三维审查:来源/结构/逻辑,DeepSeek判分,JSONL留痕) + reflect.sh(检讨写/读/检索) + EVOLUTION.md协议 + Self的AGENTS.md接入 - 测试: 坏稿FAIL(0/1/1) / 好稿PASS(8/9/8),判别力验证通过 - 已git commit到workspace-self + 已通知Se",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.8067393004894257,
+      "maxScore": 0.4273324191570282,
+      "firstRecalledAt": "2026-07-20T09:01:32.972Z",
+      "lastRecalledAt": "2026-07-20T09:01:47.258Z",
+      "queryHashes": [
+        "a974f14c47df",
+        "e37f4fab9d2a"
+      ],
+      "recallDays": [
+        "2026-07-20"
+      ],
+      "conceptTags": [
+        "active.md",
+        "7/14",
+        "2026-06-1",
+        "68.30",
+        "8.70",
+        "2.11",
+        "v1.6",
+        "7/14日记充实"
+      ]
+    },
+    "memory:memory/2026-07-17.md:38:48": {
+      "key": "memory:memory/2026-07-17.md:38:48",
+      "path": "memory/2026-07-17.md",
+      "startLine": 38,
+      "endLine": 48,
+      "source": "memory",
+      "snippet": "### 项目文件更新 - Main (07:00): 新增 Self L3 试点 + Dashboard 进展 + crontab 解除阻塞 - Self (19:00): 时间戳刷新，本周进展补入 audit.sh 自进化对账升级 ## 状态概览 - **active.md**: 更新至 7/16 08:55 - **OPC Dashboard**: v1.6 正常运行 (localhost:8765) - **Git**: remote 未配置（push 失败已知），本地 commit 正常 - **SAGE/Reflexion**: checker-log.jsonl 和 reflexion_journal.md 尚未生成（基建上线但无实质性交付触发） - **各 Agent**: 心跳正常，待命状态",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3624017149209976,
+      "maxScore": 0.3624017149209976,
+      "firstRecalledAt": "2026-07-20T09:01:32.972Z",
+      "lastRecalledAt": "2026-07-20T09:01:32.972Z",
+      "queryHashes": [
+        "a974f14c47df"
+      ],
+      "recallDays": [
+        "2026-07-20"
+      ],
+      "conceptTags": [
+        "audit.sh",
+        "active.md",
+        "7/16",
+        "v1.6",
+        "sage/reflexion",
+        "checker-log.jsonl",
+        "reflexion-journal.md",
+        "项目"
+      ]
+    },
+    "memory:memory/2026-07-18.md:55:70": {
+      "key": "memory:memory/2026-07-18.md:55:70",
+      "path": "memory/2026-07-18.md",
+      "startLine": 55,
+      "endLine": 70,
+      "source": "memory",
+      "snippet": "### Self · 群聊回复 + 项目刷新 - 回复Bryson设计系统询问 → DESIGN.md指路 - 19:00项目文件刷新：树叶收集+ACCA Vault 183+知识库23=206文件 ### 跨Agent协同 - Xiaofeng设备配置同步 → 三个Agent OPC群聊session全部送达（Gateway负载高，重试后成功） - Main子代理trace协议测试验证通过 ✅ ## 状态概览 - **active.md**: 最后更新 7/16 08:55 → 本次审计刷新 - **OPC Dashboard v1.6**: 正常运行 (localhost:8765) - **Git**: remote未配置（push失败已知），本地commit正常 - **SAGE/Reflexion**: checker-log.jsonl 和 reflexion_journal.md 尚未生成（基建上线但无实质性交付触发） - **各Agent**: 心跳正常，待命状态 - **SearXNG**: Brave API可用，keepalive+launchd守护正常",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3557247638702392,
+      "maxScore": 0.3557247638702392,
+      "firstRecalledAt": "2026-07-20T09:01:32.972Z",
+      "lastRecalledAt": "2026-07-20T09:01:32.972Z",
+      "queryHashes": [
+        "a974f14c47df"
+      ],
+      "recallDays": [
+        "2026-07-20"
+      ],
+      "conceptTags": [
+        "gateway",
+        "design.md指路",
+        "active.md",
+        "7/16",
+        "v1.6",
+        "sage/reflexion",
+        "checker-log.jsonl",
+        "reflexion-journal.md"
       ]
     }
   }
