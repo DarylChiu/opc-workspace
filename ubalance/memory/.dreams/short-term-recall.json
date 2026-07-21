@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-20T15:51:10.220Z",
+  "updatedAt": "2026-07-21T16:20:57.063Z",
   "entries": {
     "memory:memory/2026-06-10.md:1:29": {
       "key": "memory:memory/2026-06-10.md:1:29",
@@ -890,17 +890,14 @@
       "endLine": 51,
       "source": "memory",
       "snippet": "### 08:56 Daryl指令：终止Hedging任务 - Daryl指令终止越南银行Hedging方案分析任务，已自行处理完毕 - 已从active.md移除，标记为❌终止 ### 09:00 Daryl指令：挂起项目成本监控 - Bryson「视频分析交互workflow」（视频分析MVP v2.0）已结束 - 项目成本监控任务挂起，系统c cron保持运行（基础设施） - 等新开发项目启动后恢复 ### 08:xx 个人所得税咨询案例分析 - Daryl发来docx文件：三个越南外资企业PIT案例 - 初版分析被Daryl批评：「你用的是流氓会计师的角度吗？」 - **核心问题**：分析出发点偏了——满篇在讲怎么「不算税」，而不是「法律怎么规定→合规差距在哪→怎么整改」 - 已向Daryl承认错误，给出修正框架 - 三个案例： - 案例1：A公司外籍员工福利（签证/体检/餐费/宿舍） - 案例2：B公司集团来访差旅 - 案例3：C公司通勤班车 ### 教训 - Daryl纠正：财务分析立场必须是合规导向，不是规避导向 - 标注「规避建议」这种措辞不合适 - 50亿无发票签证费这种大雷应该拉警报而不是轻描淡写 ## 待办 - Git push 失败需后续排查（commit 成功，push 失败）",
-      "recallCount": 68,
+      "recallCount": 74,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 25.46559271514417,
+      "totalScore": 27.699003958702104,
       "maxScore": 0.4124524474143982,
       "firstRecalledAt": "2026-07-11T02:00:43.381Z",
-      "lastRecalledAt": "2026-07-20T15:51:10.220Z",
+      "lastRecalledAt": "2026-07-21T15:20:56.902Z",
       "queryHashes": [
-        "9f3885d1c58d",
-        "4d7fa281fcaa",
-        "00433621b001",
         "b3b6361d727b",
         "d6470fd77dc1",
         "a220976af47b",
@@ -929,7 +926,10 @@
         "cbab8b5c25b7",
         "801a30779361",
         "a7ef27d87f59",
-        "5be3ef30d9a6"
+        "5be3ef30d9a6",
+        "6cd3ed12288f",
+        "f89cc9b709ed",
+        "f298ccadf4de"
       ],
       "recallDays": [
         "2026-07-11",
@@ -940,7 +940,8 @@
         "2026-07-17",
         "2026-07-18",
         "2026-07-19",
-        "2026-07-20"
+        "2026-07-20",
+        "2026-07-21"
       ],
       "conceptTags": [
         "已从active.md移除",
@@ -991,16 +992,14 @@
       "endLine": 45,
       "source": "memory",
       "snippet": "### 🟡 OPC看板通知系统 Bug 排查 (13:12-13:30) - Daryl 问有没有收到 dashboard 发来的核实任务状态消息 - Balance 查了全部 session 和记忆系统 → 没有收到 - 通过 sessions_send 联系 Kitty（AgentId=main，又忘了）确认： - **原因**: OPC 看板后台服务有两个 bug 1. Kitty 被跳过: `if (ocAgentId === 'main') return;` 直接 return 2. `--deliver` 没配 `--reply-channel`/`--reply-account`，Agent 回复无处投递 - **修复**: Kitty commit `a8a985a`，服务器已重启 - Daryl 之前在 dashboard 上的操作确实都没触发 Agent 推理 - **教训**: 记住 Kitty 的 AgentId 是 `main`，不是 `kitty`。sessions_send 要用 `agentId=\"main\"` ### 📝 贷款材料自动化整理执行手册 v2.3 撰写 (13:30-14:00) - Daryl 要求做一个轻量 guide MD，让其他 Agent 能照着执行 - 产出: `reports/贷款材料自动化整理-执行手册-v2.3.md` (~24KB, 15 章节) - 包含: 环境搭建、输入验证、8 步执行流程、OCR 内容验证、质检过滤、Outcome1/2 生成、暂停点、常见错误修复、完整规则",
-      "recallCount": 72,
+      "recallCount": 78,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 26.897643432021155,
+      "totalScore": 29.14752173721792,
       "maxScore": 0.3970182240009308,
       "firstRecalledAt": "2026-07-11T02:00:43.381Z",
-      "lastRecalledAt": "2026-07-20T15:51:10.220Z",
+      "lastRecalledAt": "2026-07-21T15:20:56.902Z",
       "queryHashes": [
-        "61724e26e321",
-        "9f3885d1c58d",
         "87e0028dabd5",
         "4d7fa281fcaa",
         "00433621b001",
@@ -1030,7 +1029,9 @@
         "cbab8b5c25b7",
         "f298ccadf4de",
         "801a30779361",
-        "5be3ef30d9a6"
+        "5be3ef30d9a6",
+        "f89cc9b709ed",
+        "86d31b9366a1"
       ],
       "recallDays": [
         "2026-07-11",
@@ -1041,7 +1042,8 @@
         "2026-07-17",
         "2026-07-18",
         "2026-07-19",
-        "2026-07-20"
+        "2026-07-20",
+        "2026-07-21"
       ],
       "conceptTags": [
         "12-13",
@@ -1300,22 +1302,14 @@
       "endLine": 58,
       "source": "memory",
       "snippet": "- 包含: 环境搭建、输入验证、8 步执行流程、OCR 内容验证、质检过滤、Outcome1/2 生成、暂停点、常见错误修复、完整规则速查表 - 状态: ✅ 完成，等 Daryl 验收 ### 🔴 active.md 结构重整 (15:00) - **Daryl 纠正**: IPO 审计底稿学习任务从未交付，我之前发消息说「已于 6/8 交付闭环」完全错误 - **根因**: active.md 结构混乱，IPO 审计底稿出现两次（进行中+学习阶段），dashboard 同步时误读为活跃任务 - **修复**: 1. 合并「进行中（续）」+「学习阶段」+「待跟进」+「上次任务」→ 统一归入「⏸️ 暂停/等待」 2. 所有等待 Daryl 的任务全部从「进行中」移除 3. 「进行中」现在只保留真正活跃的：Future Textile 攻防 + 贷款材料整理 - **新规则**: 挂起/等待 Daryl 的任务不算 In Progress，不准出现在「进行中」下 - **教训**: Dashboard 通知前必须验证任务真实状态，不能自作主张标「交付闭环」 ## 待办 / 遗留 - 🔴 FutureTextile 第三轮攻击9-12 等待 Daryl 防御 - 📝 贷款材料执行手册等 Daryl 验收反馈 - 无其他紧急遗留任务",
-      "recallCount": 75,
+      "recallCount": 86,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 28.487486979365343,
-      "maxScore": 0.41761653423309325,
+      "totalScore": 32.65770780146122,
+      "maxScore": 0.42628733515739436,
       "firstRecalledAt": "2026-07-13T03:20:59.829Z",
-      "lastRecalledAt": "2026-07-20T15:51:10.220Z",
+      "lastRecalledAt": "2026-07-21T16:20:57.063Z",
       "queryHashes": [
-        "00433621b001",
-        "b3b6361d727b",
-        "d6470fd77dc1",
-        "a220976af47b",
-        "d7949747b73d",
-        "b21f314daa27",
-        "dd98e8c86ef0",
-        "29a6aa855ed0",
         "935b13407639",
         "1570a51fcced",
         "ea9487caee9b",
@@ -1339,7 +1333,15 @@
         "cbab8b5c25b7",
         "f298ccadf4de",
         "801a30779361",
-        "5be3ef30d9a6"
+        "5be3ef30d9a6",
+        "80da01fcb587",
+        "f89cc9b709ed",
+        "40017d68fb08",
+        "7e0d204a50ca",
+        "9f38fe720e3d",
+        "86d31b9366a1",
+        "d7949747b73d",
+        "b75b01650727"
       ],
       "recallDays": [
         "2026-07-13",
@@ -1349,7 +1351,8 @@
         "2026-07-17",
         "2026-07-18",
         "2026-07-19",
-        "2026-07-20"
+        "2026-07-20",
+        "2026-07-21"
       ],
       "conceptTags": [
         "outcome1/2",
@@ -1410,13 +1413,13 @@
       "endLine": 17,
       "source": "memory",
       "snippet": "# 2026-06-23 ## 记忆Cron - 00:00 每日审计归档：补建当日日记，Git备份 ## 当日概况 - 无Daryl主动任务触发，静默日 - 等待中的任务： - 越南会计差错调整：等待Daryl提供具体错误清单 - 影刀RPA调研方案（方案C）：等待Daryl反馈 - 多文件批量处理方案：等待Daryl确认是否启动Workflow引擎 - 合规系统正常运行 ## 备注 - 23:59 Cron触发审计，跨日至6/24 00:00:18执行 - active.md最后更新于本日00:00",
-      "recallCount": 10,
+      "recallCount": 12,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 3.747360405325889,
+      "totalScore": 4.542122545838356,
       "maxScore": 0.4140465676784515,
       "firstRecalledAt": "2026-07-13T09:21:02.383Z",
-      "lastRecalledAt": "2026-07-20T15:21:04.501Z",
+      "lastRecalledAt": "2026-07-21T16:20:57.063Z",
       "queryHashes": [
         "d25cb1659a59",
         "643f67822c04",
@@ -1427,7 +1430,9 @@
         "d6470fd77dc1",
         "b3ab243e7f22",
         "89be70e74cce",
-        "a7ef27d87f59"
+        "a7ef27d87f59",
+        "9f38fe720e3d",
+        "b75b01650727"
       ],
       "recallDays": [
         "2026-07-13",
@@ -1435,7 +1440,8 @@
         "2026-07-16",
         "2026-07-17",
         "2026-07-19",
-        "2026-07-20"
+        "2026-07-20",
+        "2026-07-21"
       ],
       "conceptTags": [
         "备份",
@@ -2275,6 +2281,104 @@
         "底稿",
         "学习",
         "任务"
+      ]
+    },
+    "memory:memory/archive/2026-06-20.md:21:32": {
+      "key": "memory:memory/archive/2026-06-20.md:21:32",
+      "path": "memory/archive/2026-06-20.md",
+      "startLine": 21,
+      "endLine": 32,
+      "source": "memory",
+      "snippet": "- 已session_send问Kitty，Kitty回复：当前Workflow只是可视化编辑器，无执行引擎 - 需小枫开发Workflow执行引擎，工时约30-42h - 短期替代：Daryl写「任务模板」说明文件，Balance按模板静默执行全部步骤后一次性回复 ### 🔴 贷款材料整理项目启动（17:24-17:31）⚠️ 此前遗漏，6/25从session恢复 - 17:24 Daryl发送 `贷款材料整理-任务模版.xlsx`，解析为5阶段工作流： ① 从L1-Raw Materials提取发票号/合同号 → ② 关键字在RM-Database中OCR匹配PDF发票+报关单+提单 → ③ 输出关键字段到汇总Excel → ④ 循环全部发票号 → ⑤ 错误标记 - 17:27 发送 `L1-Raw Materials-10,125usd.xlsx`，成功读取：10条发票记录，供应商HUA FENG GROUP，总金额$10,125.75 - 17:31 开始发送RM-Database拆分包（RM-Database-1of 10.zip已接收），后续9个未传完 - ⚠️ post-op.sh关键词太窄→此段未写入日记→6/22暂停时也未同步到active.md - ⏸️ 6/22 Daryl指令暂缓",
+      "recallCount": 7,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 2.6377800613641735,
+      "maxScore": 0.3972909271717071,
+      "firstRecalledAt": "2026-07-21T02:21:42.626Z",
+      "lastRecalledAt": "2026-07-21T16:20:57.063Z",
+      "queryHashes": [
+        "f89cc9b709ed",
+        "f298ccadf4de",
+        "d7949747b73d",
+        "9f38fe720e3d",
+        "ea9487caee9b",
+        "b75b01650727"
+      ],
+      "recallDays": [
+        "2026-07-21"
+      ],
+      "conceptTags": [
+        "已session-send问kitty",
+        "工时约30-42h",
+        "24-17",
+        "6/25从session恢复",
+        "贷款材料整理-任务模版.xlsx",
+        "从l1-raw",
+        "materials提取发票号/合同号",
+        "关键字在rm-database中ocr匹配pdf发票"
+      ]
+    },
+    "memory:memory/2026-07-17.md:22:52": {
+      "key": "memory:memory/2026-07-17.md:22:52",
+      "path": "memory/2026-07-17.md",
+      "startLine": 22,
+      "endLine": 52,
+      "source": "memory",
+      "snippet": "- 按模型: deepseek-r1 $51.06 / deepseek-v4-pro $20.21 / claude-sonnet-4.5 $0.64 / claude-3.7-sonnet $0.15 ## 🔧 08:51 Daryl设备配置同步（来自小枫/Bryson） - **来源**: 小枫 inter-session message → Balance - **Daryl三设备**: 1. iPhone — iOS，飞书客户端 2. Samsung Tab S8 — Android (One UI)，平板 3. Mac — macOS，桌面端/开发机 - **出差规则**: Daryl说出差 = 只带 Tab S8 + iPhone（不带Mac） - **影响**: 后续技术方案需三端适配，移动端优先 - ✅ 已写入 `memory/identity.md` ## 🔧 14:50 Heartbeat检查 - **汇率**: USD/VND mid-market 26,253.72 (xe.com, 01:00 UTC) — 无异常波动 - **Git**: ✅ push成功 (52 files, 此前审计报告失败已修复) - **L0合规**: ✅ 通过 | **L3合规**: 2/5 (心跳查询类，正常) - **活跃任务**: 全部等待Daryl反馈，无新指令 ## 🔧 15:24 Heartbeat检查 - **汇率**: USD/VND ~26,260-26,281 (多个数据源)，较上午14:50的26,253.72波动+0.1%，",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.37602316737174984,
+      "maxScore": 0.37602316737174984,
+      "firstRecalledAt": "2026-07-21T10:51:18.960Z",
+      "lastRecalledAt": "2026-07-21T10:51:18.960Z",
+      "queryHashes": [
+        "86d31b9366a1"
+      ],
+      "recallDays": [
+        "2026-07-21"
+      ],
+      "conceptTags": [
+        "deepseek-r1",
+        "51.06",
+        "deepseek-v4-pro",
+        "20.21",
+        "claude-sonnet-4.5",
+        "0.64",
+        "claude-3.7-sonnet",
+        "0.15"
+      ]
+    },
+    "memory:memory/2026-07-17.md:46:80": {
+      "key": "memory:memory/2026-07-17.md:46:80",
+      "path": "memory/2026-07-17.md",
+      "startLine": 46,
+      "endLine": 80,
+      "source": "memory",
+      "snippet": "## 🔧 16:20 Heartbeat检查 - **汇率**: USD/VND 26,253.72 — 与14:50一致，无波动 - **待处理Daryl问题**: 无 - **活跃任务**: 全部等待Daryl反馈，状态不变 ## 🔧 17:50 Heartbeat检查 - **汇率**: USD/VND 26,294.48 (xe.com, 16:21 GMT+7)，较早盘26,253.72波动+0.16%，无异常 - **L0合规**: ✅ OK - **待处理Daryl问题**: 无 - **活跃任务**: 全部等待Daryl反馈，状态不变 ## 🔧 18:50 Heartbeat检查 - **汇率**: USD/VND 26,294.48 — 与17:50一致，无波动 - **待处理Daryl问题**: 无 - **活跃任务**: 全部等待Daryl反馈，状态不变 ## 🔧 19:20 Heartbeat检查 - **汇率**: USD/VND 26,294.48 (xe.com, 09:21 UTC) — 与18:50一致，无波动 - **L2合规**: ✅ P2 PASS - **待处理Daryl问题**: 无 - **活跃任务**: 全部等待Daryl反馈，状态不变 ## 🔧 20:20 Heartbeat检查 - **汇率**: USD/VND 26,294.48 (19:20快照) — 盘后无波动 - **待处理Daryl问题**: 无 - **活跃任务**: 全部等待Daryl反馈，状态不变 ## 🔧 21:50 Heartbeat",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3542034924030304,
+      "maxScore": 0.3542034924030304,
+      "firstRecalledAt": "2026-07-21T10:51:18.960Z",
+      "lastRecalledAt": "2026-07-21T10:51:18.960Z",
+      "queryHashes": [
+        "86d31b9366a1"
+      ],
+      "recallDays": [
+        "2026-07-21"
+      ],
+      "conceptTags": [
+        "usd/vnd",
+        "253.72",
+        "294.48",
+        "xe.com",
+        "253.72波动",
+        "0.16",
+        "heartbeat",
+        "检查"
       ]
     }
   }
