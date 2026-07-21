@@ -1,5 +1,19 @@
 # Recent Conversations
-Last updated: 2026-07-19 00:04 GMT+7
+Last updated: 2026-07-22 00:05 GMT+7
+
+## 2026-07-21 — Mac mini重启备份 + Maker-Checker上线 + 自进化暂停
+- **20:31 · Mac mini重启前全Agent记忆备份**: Daryl OPC群通知即将重启，main 通知 xiaofeng/Balance/Self 各自备份，exec不可用（EAGAIN）故跳过git操作
+- **Maker-Checker审查协议上线** (Self专属): 对抗性审查子Agent(Gemini Flash) + 三维打分，最多2轮重审
+- **Agent自进化基建暂停**: Daryl 7/21 指令整体暂停，GEPA类项目严禁再开发
+- **成本**: Balance 00:02 全量扫描 $92.43 | 本月 $32.84 | 今日 $3.84
+- **午夜Cron审计正常**: 7/20→7/21 跨日，3项自动修复，日记充实完成
+
+## 2026-07-20 — 成本路径修复 + 项目文件刷新
+- **17:00 · Dashboard成本路径修复**: main 发现 Dashboard 的 COST_DAILY_BALANCE_FILE 指向旧路径，Balance 实际写新路径，导致7/19以来数据未刷新。修复一行路径常量+重启server即可对齐
+- **项目文件刷新**: 07:00 四个Agent (main/xiaofeng/balance/self) 全部完成 project_*.md 刷新
+- **Xiaofeng 视频编辑 v4.0**: 终版交付 Bryson，三层情感漏斗方案，成本降至 ~$0.01-0.03/次
+- **OPC 群消息**: main 推送决策清单（三模型混合方案/自进化方向/7月预算告警），xiaofeng 推送阻塞项清单
+- **午夜Cron审计正常**: 7/19→7/20 跨日，骨架日记充实完成
 
 ## 2026-07-18 — GEPA L2b上线 + 基建长线全部交付
 - **GEPA L2b · Self提示进化**: Daryl飞书DM发起，Main spawn 3个子代理（M1: install+verify, M2: adapter+dataset, M3: first_optimization），首次优化运行 +1.1%提升 ✅
