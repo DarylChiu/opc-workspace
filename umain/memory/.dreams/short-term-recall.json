@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-20T09:08:20.098Z",
+  "updatedAt": "2026-07-21T09:37:09.775Z",
   "entries": {
     "memory:memory/2026-06-08.md:19:38": {
       "key": "memory:memory/2026-06-08.md:19:38",
@@ -584,13 +584,13 @@
       "endLine": 7,
       "source": "memory",
       "snippet": "# 2026-06-22 工作日志 ## 00:01 每日记忆归档 Cron 触发 - 审计修复：昨日日记缺失 → 已创建 - 当前无新需求或变更 - active_tasks: Workflow编辑器渲染仍在等待Daryl实测",
-      "recallCount": 8,
+      "recallCount": 10,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 2.9549496412277216,
+      "totalScore": 3.6609181523323056,
       "maxScore": 0.40362003147602077,
       "firstRecalledAt": "2026-07-02T09:33:43.192Z",
-      "lastRecalledAt": "2026-07-20T09:08:20.098Z",
+      "lastRecalledAt": "2026-07-21T09:37:09.775Z",
       "queryHashes": [
         "30b6c84f8664",
         "cdd161ca80af",
@@ -599,14 +599,16 @@
         "cd567dd5a403",
         "0deefc791542",
         "e340b73612cf",
-        "3c84453456dc"
+        "3c84453456dc",
+        "e27545e5e0a3"
       ],
       "recallDays": [
         "2026-07-02",
         "2026-07-13",
         "2026-07-15",
         "2026-07-18",
-        "2026-07-20"
+        "2026-07-20",
+        "2026-07-21"
       ],
       "conceptTags": [
         "active-tasks",
@@ -1240,19 +1242,21 @@
       "endLine": 22,
       "source": "memory",
       "snippet": "# 2026-07-11 日记 ## 00:03 · 午夜 Cron 审计 (7/10→7/11 跨日) - `audit.sh --report` 运行，发现 5 个浅层问题 + 2 个深层问题 - **已修复**: July 10 白天活动补全（Daryl查阅active.md + Balance成本确认） - **已修复**: recent_conversations 增加 July 10 条目 - **已修复**: 本日记从骨架→完整 - **已知问题**: git remote 未配置（本地 commit 正常，push 失败） - **活跃任务**: Sentinel M2.3 Gateway重启验证 / OPC Dashboard v1.6 运行中 ## 状态概览 - **active.md**: 新鲜 (14h，7/7 更新)，任务清晰 - **日记链**: 7/1-7/11 完整无断档 - **项目文件**: project_main/xiaofeng/Balance/Self.md 均有更新 - **Git**: 本地 commit 正常，remote 未配置（已知） - **成本**: 全量 $104.58 | 本月 $45.27 | 昨日 $2.90 ## 待关注 - [ ] Sentinel Gateway 重启后验证 (M2.3) — 从 7/9 结转 - [ ] git remote 配置 - [ ] Crontab 手动安装（项目cron被系统拦截）",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.7671526759862899,
+      "totalScore": 1.1221168875694274,
       "maxScore": 0.39025809764862057,
       "firstRecalledAt": "2026-07-12T17:07:59.896Z",
-      "lastRecalledAt": "2026-07-13T13:37:03.525Z",
+      "lastRecalledAt": "2026-07-21T03:07:10.466Z",
       "queryHashes": [
         "cdd161ca80af",
-        "9e126ef47c5d"
+        "9e126ef47c5d",
+        "54b87b3ba35c"
       ],
       "recallDays": [
-        "2026-07-13"
+        "2026-07-13",
+        "2026-07-21"
       ],
       "conceptTags": [
         "gateway",
@@ -2034,18 +2038,20 @@
       "endLine": 20,
       "source": "memory",
       "snippet": "# 2026-07-14 日记 ## 00:03 · 午夜 Cron 审计 (7/13→7/14 跨日) - `audit.sh --report` 运行，发现 6 个浅层问题 + 2 个深层问题 - **已修复**: 骨架日记创建 / 2026-06-13.md 归档 / active.md 时间戳更新 - **已知问题**: git remote 未配置（本地 commit 正常，push 失败） - **Session 活动**: 20 个活跃 session（跨日边界正常现象） ## 状态概览 - **active.md**: 已更新至 7/14，任务无实质变更 - **日记链**: 7/1-7/14 完整无断档 - **Git**: 本地 commit 正常，remote 未配置（已知） - **成本**: 全量 $67.65 | 本月 $8.05 | 今日 $2.83 - **OPC Dashboard**: v1.6 运行正常 (localhost:8765) ## 待关注 - [ ] Sentinel Gateway 重启后验证 (M2.3) — 从 7/9 结转 - [ ] git remote 配置 - [ ] Crontab 手动安装（项目cron被系统拦截）",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.3850364536046982,
+      "totalScore": 0.7384841918945313,
       "maxScore": 0.3850364536046982,
       "firstRecalledAt": "2026-07-18T13:39:51.349Z",
-      "lastRecalledAt": "2026-07-18T13:39:51.349Z",
+      "lastRecalledAt": "2026-07-21T03:07:10.466Z",
       "queryHashes": [
-        "827479f494b1"
+        "827479f494b1",
+        "54b87b3ba35c"
       ],
       "recallDays": [
-        "2026-07-18"
+        "2026-07-18",
+        "2026-07-21"
       ],
       "conceptTags": [
         "gateway",
@@ -2096,19 +2102,21 @@
       "endLine": 47,
       "source": "memory",
       "snippet": "## 状态概览 - **active.md**: 更新至 7/14，任务无实质变更 - **日记链**: 2026-06-1 → 2026-07-15 完整 - **Git**: 本地 92 commits ahead（remote 未配置，已知问题） - **成本**: 全量 $68.30 | 本月 $8.70 | 今日 $2.11 - **OPC Dashboard**: v1.6 运行正常 (localhost:8765) ## 多 Agent 审计协调 - **Self**: 审计修复完成（7/14日记充实 + active时间戳 + Git）→ OPC 已发送 - **Balance**: 审计 + Git push 成功（91 commits积压清除）→ OPC 已发送 - **xiaofeng**: TTS 吞音条目状态更新 ✅ → OPC 已发送 - **main (本Agent)**: 骨架日记填充 + Git commit ## 13:50 · Self L3自进化基建上线 ✅ - Daryl拍板: 给Self开发L3(SAGE Checker + Reflexion),不碰L4 - 交付: checker.py(三维审查:来源/结构/逻辑,DeepSeek判分,JSONL留痕) + reflect.sh(检讨写/读/检索) + EVOLUTION.md协议 + Self的AGENTS.md接入 - 测试: 坏稿FAIL(0/1/1) / 好稿PASS(8/9/8),判别力验证通过 - 已git commit到workspace-self + 已通知Se",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.8067393004894257,
+      "totalScore": 1.1920509815216065,
       "maxScore": 0.4273324191570282,
       "firstRecalledAt": "2026-07-20T09:01:32.972Z",
-      "lastRecalledAt": "2026-07-20T09:01:47.258Z",
+      "lastRecalledAt": "2026-07-21T03:24:34.357Z",
       "queryHashes": [
         "a974f14c47df",
-        "e37f4fab9d2a"
+        "e37f4fab9d2a",
+        "ed6b27a3f0ed"
       ],
       "recallDays": [
-        "2026-07-20"
+        "2026-07-20",
+        "2026-07-21"
       ],
       "conceptTags": [
         "active.md",
