@@ -1,6 +1,6 @@
 # project_Self.md — 恨点小己 项目看板
 
-> 最后更新: 2026-07-20 19:00 GMT+7
+> 最后更新: 2026-07-21 20:33 GMT+7 (pre-reboot backup)
 > Cron 检查: 每日 07:00 / 13:00 / 19:00
 > 本周进展: 7/9 大规模搭建(F2-MA/IFRS-IAS/VAS) → 7/11-13 KHOA DUNG 入库+目录重组+Plan A 重构；7/14-16 例行记忆审计+看板刷新；7/15 晚 Daryl 授权 audit.sh 自进化基建对账升级（9.5段）+ 修复全团队 JSONL 写入错位 bug；7/17 SAGE Checker 两轮FAIL→三轮PASS 周度树叶收集（4片落盘→knowledge-base +4 / ACCA Vault 169→183），Daryl 验收中，3片+1待定未落盘；7/18-20 静默期，例行 cron 审计，无新里程碑
 

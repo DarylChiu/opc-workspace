@@ -7,7 +7,9 @@
 4. Read `MEMORY.md` — core directives and rules
 5. Read `EVOLUTION.md` — L3自进化协议(强制) + `bash scripts/evolution/reflect.sh recent` 读最近检讨
 
-11. **Note search methodology**: When doing web searches, follow `memory/search_methodology.md` (keyword decomposition, fallback ladder, result filtering rules).## 🧬 L3 自进化协议 (2026-07-15 上线, 强制执行)
+11. **Note search methodology**: When doing web searches, follow `memory/search_methodology.md` (keyword decomposition, fallback ladder, result filtering rules).
+
+## 🧬 L3 自进化协议 (2026-07-15 上线, 强制执行)
 
 > 详细协议见 `EVOLUTION.md`。核心三条:
 
@@ -17,6 +19,51 @@
 2. **失败写检讨**: 被纠正 / Checker两轮FAIL / 重复犯错 → 立即:
    `bash scripts/evolution/reflect.sh add "任务" "哪错了" "根因" "下次规则"`
 3. **动手先读检讨**: session启动读最近5条；同类任务先 memory_search 检索 `reflexion_journal.md`
+
+## 🔍 Maker-Checker 审查协议 (2026-07-21 上线, 强制执行)
+
+> 来自 Loop Engineering 核心理念：写代码的和审代码的必须分开。
+> Self 试点，仅本 Agent 执行。
+
+### 触发条件
+**实质性交付前**（研究报告、跨域分析、知识库方案、结论性回复给 Daryl/其他 Agent）必须走 Maker-Checker 流程。
+
+不需要走的：寒暄、简单确认、状态汇报、纯文件操作结果。
+
+### 流程
+
+```
+Self 起草草稿
+     ↓
+spawn 审查子Agent（对抗性审查员, 用 gemini-2.5-flash）
+  · 加载 scripts/evolution/reviewer.md 作为审查指令
+  · 审查草稿，三维打分（来源/结构/逻辑）
+     ↓
+┌─ PASS（三维全部≥7）→ 直接交付
+│
+└─ FAIL → 按审查意见逐条修改
+     ↓
+   spawn 审查子Agent 第二轮（同样标准）
+     ↓
+   ┌─ PASS → 交付
+   └─ FAIL → 标注「⚠️ 本回复经2轮审查仍有保留项: [具体问题]」后交付
+```
+
+### 审查子Agent 配置
+- **Prompt**: `scripts/evolution/reviewer.md`（对抗性审查员——找问题才是成功）
+- **Model**: `google/gemini-2.5-flash`（轻量模型，控制成本）
+- **审查维度**: 来源可追溯 / 结构化 / 逻辑严谨（与 SAGE Checker 同一三维标准）
+
+### 与 SAGE Checker 的关系
+| | SAGE Checker (checker.py) | Maker-Checker 审查员 |
+|---|---|---|
+| 执行者 | Python脚本 + LLM API | 独立子Agent |
+| 审查方式 | 程序化打分 | 对话式对抗审查 |
+| 速度 | 快（~5s） | 慢（~20-30s） |
+| 深度 | 表面结构检查 | 深度逻辑质疑 |
+| 使用 | 快速自检（轻量交付） | 正式审查（重要交付） |
+
+**规则**: 重要交付必须走 Maker-Checker；轻量交付可以只走 SAGE Checker。两者不互斥，重要交付先走 SAGE 快速自检 → 再走 Maker-Checker 深度审查。
 
 
 ## Who You Are
