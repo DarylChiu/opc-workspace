@@ -1,0 +1,413 @@
+{
+  "L0_source": {
+    "title": "探店潮汕美食，体验匠人精神与地道风味。",
+    "director": "未知",
+    "type": "视频",
+    "era": "当代",
+    "culture_context": "潮汕美食文化",
+    "genre": "美食探店",
+    "medium": "短视频",
+    "duration": "未知",
+    "language": "粤语"
+  },
+  "L1_narrative_skeleton": {
+    "hero_journey_phase": "启程",
+    "plot_beats": [
+      {
+        "label": "引发事件",
+        "timestamp": "00:00",
+        "description": "介绍同行者和苏师傅，决定探店"
+      },
+      {
+        "label": "升级",
+        "timestamp": "00:30",
+        "description": "到厨房观看炒鱼片，体验镬气"
+      },
+      {
+        "label": "危机",
+        "timestamp": "01:30",
+        "description": "误以为茶水是酒，差点喝错"
+      },
+      {
+        "label": "解决",
+        "timestamp": "02:00",
+        "description": "继续探店，前往西华路老濠江"
+      },
+      {
+        "label": "高潮",
+        "timestamp": "02:30",
+        "description": "展示冰柜中的高档食材，如158斤龙趸"
+      }
+    ],
+    "time_structure": "线性",
+    "emotional_arc_shape": "上升",
+    "pov": "第一人称（主持人视角）"
+  },
+  "L2_characters": {
+    "characters": [
+      {
+        "name": "春华",
+        "jung_archetype": "探索者",
+        "archetype_conflict": "探索者 vs 照顾者——渴望新奇体验与知识，但被同伴的照顾行为（如催促吃菜）拉回现实，驱动其既主动探索又被动接受引导。",
+        "surface_want": "品尝地道潮汕美食，体验匠人技艺。",
+        "deep_need": "通过美食探索获得身份认同与归属感（如对“广州亲戚”的调侃）。",
+        "core_fear": "被排除在群体之外，失去与同伴的联结。",
+        "arc": {
+          "start": "被动跟随，对美食好奇但缺乏主动。",
+          "catalyst": "苏师傅的炒鱼片表演和镬气讲解。",
+          "end": "主动参与互动（如数秒、惊叹），融入群体，获得短暂归属感。"
+        }
+      },
+      {
+        "name": "同伴（小话痨）",
+        "jung_archetype": "愚者",
+        "archetype_conflict": "愚者 vs 英雄——表面嬉笑打闹、插科打诨，实则暗中推动叙事进程（如介绍苏师傅、催促春华），用幽默掩盖引导者的角色。",
+        "surface_want": "搞笑、调侃，享受轻松氛围。",
+        "deep_need": "通过玩笑维持群体和谐，确保体验顺利进行。",
+        "core_fear": "严肃或尴尬的沉默，失去控制感。",
+        "arc": {
+          "start": "活跃气氛的搞笑者。",
+          "catalyst": "春华的“土包子”反应。",
+          "end": "成功引导春华体验美食，强化了群体纽带。"
+        }
+      },
+      {
+        "name": "苏师傅（苏仔）",
+        "jung_archetype": "智者",
+        "archetype_conflict": "智者 vs 创造者——传授传统技艺（炒鱼片、镬气），但通过表演性烹饪（数秒、跑步上菜）展现创造力，冲突在于传承与创新的平衡。",
+        "surface_want": "展示厨艺，让食客品尝最佳状态。",
+        "deep_need": "获得认可，证明传统技艺的价值。",
+        "core_fear": "技艺被忽视或失传。",
+        "arc": {
+          "start": "专注烹饪的师傅。",
+          "catalyst": "春华等人的惊叹和提问。",
+          "end": "成功传递了镬气的精髓，获得满足感。"
+        }
+      }
+    ],
+    "inter_character_dynamic": "春华（探索者）与同伴（愚者）形成互补：同伴用幽默引导，春华用好奇回应，共同推动体验。苏师傅（智者）作为权威，与两人形成知识传授与接收的关系。整体动态从陌生到默契，随美食体验深化而增强联结。"
+  },
+  "L3_resonance_engine": {
+    "tapped_needs_fears": [
+      "归属感：通过共享美食体验建立群体认同",
+      "对真实性的渴望：在快餐文化中寻找传统匠人精神",
+      "对死亡的恐惧：通过食物保存技艺对抗遗忘与消逝",
+      "对自主的追求：打破常规用餐方式（厨房煮厨房吃）"
+    ],
+    "core_existential_dilemma": "传统技艺的传承与创新之间的悖论：既要保持原汁原味，又必须适应现代口味与效率，否则面临消亡。",
+    "mytheme_opposition": {
+      "binary": "传统 vs 现代",
+      "mediation": "故事通过展示厨师在几秒内完成生炒鱼片的高超技艺，同时强调‘镬气’这一传统概念，将现代快节奏与古老技艺结合，暗示传统可以通过极致专业在现代存活。"
+    },
+    "katharsis": {
+      "aroused_emotions": [
+        "怜悯：对即将失传的技艺和匠人命运的同情",
+        "恐惧：对文化记忆被遗忘的焦虑"
+      ],
+      "release_path": "观众通过观看厨师精准操作和品尝瞬间的满足感，释放了对传统消逝的焦虑，获得‘技艺仍在传承’的慰藉。",
+      "cognitive_update": "观众看清了自己对‘真实体验’的渴望——在标准化世界中，我们渴望不可复制的、充满人情味的瞬间。"
+    },
+    "drive_tension": {
+      "eros": "生本能表现为对美食的热爱、分享的快乐、师徒传承的联结（如苏仔继承父亲衣钵）。",
+      "thanatos": "死本能表现为对传统技艺可能失传的焦虑、食材的有限性（如158斤龙趸的稀有）、时间流逝（几秒内必须食用）。",
+      "dynamic": "两者拉锯构成叙事动力：每一道菜的制作都是对抗遗忘的仪式，而品尝的瞬间则是对生命力的肯定。"
+    }
+  },
+  "L5_beat_library": {
+    "beats": [
+      {
+        "id": "beat_001",
+        "name": "引入第三者",
+        "motif": "第三者/朋友",
+        "narrative_slot": "setup",
+        "positional_function": "建立人物关系，制造悬念和幽默",
+        "psychological_mechanism": "通过玩笑式称呼引发好奇，为后续人物出场铺垫",
+        "dependencies": {
+          "prerequisite_beats": [],
+          "enabling_beats": [
+            "beat_002"
+          ]
+        },
+        "coupling_degree": "loose",
+        "emotion_target": "好奇、轻松",
+        "provenance": {
+          "level": "复刻",
+          "source_work": "常见美食探店视频",
+          "evidence": "开场介绍同行伙伴，制造互动"
+        },
+        "replaceable_params": {
+          "character": "朋友/嘉宾",
+          "setting": "任何探店场景",
+          "era": "当代",
+          "visual_style": "手持跟拍"
+        }
+      },
+      {
+        "id": "beat_002",
+        "name": "介绍苏师傅",
+        "motif": "匠人/传承",
+        "narrative_slot": "setup",
+        "positional_function": "建立权威人物，铺垫专业背景",
+        "psychological_mechanism": "通过‘三世祖’、‘继承衣钵’等词强化传统与专业感",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_001"
+          ],
+          "enabling_beats": [
+            "beat_003"
+          ]
+        },
+        "coupling_degree": "medium",
+        "emotion_target": "期待、信任",
+        "provenance": {
+          "level": "同构",
+          "source_work": "《舌尖上的中国》等美食纪录片",
+          "evidence": "强调家族传承和技艺"
+        },
+        "replaceable_params": {
+          "character": "任何匠人师傅",
+          "setting": "厨房或餐厅",
+          "era": "当代",
+          "visual_style": "中景介绍"
+        }
+      },
+      {
+        "id": "beat_003",
+        "name": "宣布特殊就餐方式",
+        "motif": "厨房煮厨房吃",
+        "narrative_slot": "setup",
+        "positional_function": "制造独特体验预期，强化现场感",
+        "psychological_mechanism": "打破常规就餐模式，引发观众好奇",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_002"
+          ],
+          "enabling_beats": [
+            "beat_004"
+          ]
+        },
+        "coupling_degree": "tight",
+        "emotion_target": "惊喜、期待",
+        "provenance": {
+          "level": "复刻",
+          "source_work": "常见探店视频",
+          "evidence": "直接对话宣布"
+        },
+        "replaceable_params": {
+          "character": "主持人",
+          "setting": "厨房",
+          "era": "当代",
+          "visual_style": "对话镜头"
+        }
+      },
+      {
+        "id": "beat_004",
+        "name": "炒鱼片计时",
+        "motif": "计时/镬气",
+        "narrative_slot": "develop",
+        "positional_function": "展示技艺细节，制造紧张感",
+        "psychological_mechanism": "通过倒计时强化‘镬气’概念，让观众感受时间紧迫",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_003"
+          ],
+          "enabling_beats": [
+            "beat_005"
+          ]
+        },
+        "coupling_degree": "tight",
+        "emotion_target": "紧张、赞叹",
+        "provenance": {
+          "level": "同构",
+          "source_work": "《风味人间》等美食纪录片",
+          "evidence": "精确计时展示烹饪过程"
+        },
+        "replaceable_params": {
+          "character": "师傅",
+          "setting": "厨房灶台",
+          "era": "当代",
+          "visual_style": "特写计时+动作"
+        }
+      },
+      {
+        "id": "beat_005",
+        "name": "品尝鱼片",
+        "motif": "镬气/口感",
+        "narrative_slot": "payoff",
+        "positional_function": "验证技艺成果，满足期待",
+        "psychological_mechanism": "通过‘几秒内吃’、‘自然熟’等解释，让观众相信口感最佳",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_004"
+          ],
+          "enabling_beats": [
+            "beat_006"
+          ]
+        },
+        "coupling_degree": "tight",
+        "emotion_target": "满足、向往",
+        "provenance": {
+          "level": "复刻",
+          "source_work": "常见美食视频",
+          "evidence": "主持人品尝并评价"
+        },
+        "replaceable_params": {
+          "character": "主持人",
+          "setting": "厨房或餐桌",
+          "era": "当代",
+          "visual_style": "特写咀嚼+表情"
+        }
+      },
+      {
+        "id": "beat_006",
+        "name": "假装茶水实为酒",
+        "motif": "乌龙/反转",
+        "narrative_slot": "turn",
+        "positional_function": "制造幽默转折，调节节奏",
+        "psychological_mechanism": "利用观众预期（茶水）与实际（酒）的落差产生笑点",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_005"
+          ],
+          "enabling_beats": [
+            "beat_007"
+          ]
+        },
+        "coupling_degree": "loose",
+        "emotion_target": "惊喜、好笑",
+        "provenance": {
+          "level": "联想",
+          "source_work": "常见整蛊桥段",
+          "evidence": "对话中揭示真相"
+        },
+        "replaceable_params": {
+          "character": "师傅/主持人",
+          "setting": "餐桌",
+          "era": "当代",
+          "visual_style": "反应镜头"
+        }
+      },
+      {
+        "id": "beat_007",
+        "name": "打包带走",
+        "motif": "打包/广州亲戚",
+        "narrative_slot": "coda",
+        "positional_function": "收尾，强化地域文化特色",
+        "psychological_mechanism": "通过‘有食有拎’的俗语，让观众感受到人情味和实惠",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_006"
+          ],
+          "enabling_beats": []
+        },
+        "coupling_degree": "loose",
+        "emotion_target": "温馨、亲切",
+        "provenance": {
+          "level": "复刻",
+          "source_work": "常见探店结尾",
+          "evidence": "主持人打包并解释"
+        },
+        "replaceable_params": {
+          "character": "主持人",
+          "setting": "餐厅门口",
+          "era": "当代",
+          "visual_style": "中景"
+        }
+      },
+      {
+        "id": "beat_008",
+        "name": "介绍老濠江",
+        "motif": "潮汕/贵价",
+        "narrative_slot": "setup",
+        "positional_function": "为下一段探店铺垫，制造期待",
+        "psychological_mechanism": "通过‘最贵’、‘丰俭由人’等词引发好奇和想象",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_007"
+          ],
+          "enabling_beats": [
+            "beat_009"
+          ]
+        },
+        "coupling_degree": "medium",
+        "emotion_target": "期待、好奇",
+        "provenance": {
+          "level": "复刻",
+          "source_work": "常见探店视频",
+          "evidence": "主持人介绍餐厅背景"
+        },
+        "replaceable_params": {
+          "character": "主持人",
+          "setting": "街道或餐厅外",
+          "era": "当代",
+          "visual_style": "远景+中景"
+        }
+      },
+      {
+        "id": "beat_009",
+        "name": "展示冰柜食材",
+        "motif": "靓货/龙趸",
+        "narrative_slot": "develop",
+        "positional_function": "展示食材高级感，强化期待",
+        "psychological_mechanism": "通过‘158斤龙趸’等夸张数据制造震撼",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_008"
+          ],
+          "enabling_beats": []
+        },
+        "coupling_degree": "loose",
+        "emotion_target": "惊叹、向往",
+        "provenance": {
+          "level": "同构",
+          "source_work": "《人生一串》等美食纪录片",
+          "evidence": "特写食材并强调重量"
+        },
+        "replaceable_params": {
+          "character": "主持人/师傅",
+          "setting": "冰柜前",
+          "era": "当代",
+          "visual_style": "特写+手持"
+        }
+      }
+    ],
+    "dependency_graph": {
+      "chains": [
+        {
+          "name": "引入→介绍→特殊就餐→炒鱼片→品尝",
+          "beats": [
+            "beat_001",
+            "beat_002",
+            "beat_003",
+            "beat_004",
+            "beat_005"
+          ],
+          "invariant_reason": "必须先建立人物和背景，才能展示技艺，最后品尝验证"
+        },
+        {
+          "name": "品尝→乌龙→打包",
+          "beats": [
+            "beat_005",
+            "beat_006",
+            "beat_007"
+          ],
+          "invariant_reason": "乌龙发生在品尝后，打包是收尾"
+        },
+        {
+          "name": "打包→新店介绍→食材展示",
+          "beats": [
+            "beat_007",
+            "beat_008",
+            "beat_009"
+          ],
+          "invariant_reason": "过渡到新店，先介绍再展示食材"
+        }
+      ]
+    }
+  },
+  "_meta": {
+    "task_id": "f90a3708",
+    "title": "探店潮汕美食，体验匠人精神与地道风味。",
+    "video_url": "/video/bb3f01d84a0f.mp4"
+  }
+}

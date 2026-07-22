@@ -1,0 +1,328 @@
+{
+  "L0_source": {
+    "title": "展示面应内外兼修，六分法则指导有效提升",
+    "director": "未知",
+    "type": "教程",
+    "era": "当代",
+    "culture_context": "中国社交媒体文化",
+    "genre": "情感、生活、讽刺",
+    "medium": "短视频",
+    "duration": "未知",
+    "language": "中文"
+  },
+  "L1_narrative_skeleton": {
+    "hero_journey_phase": "启蒙",
+    "plot_beats": [
+      {
+        "label": "引发事件",
+        "timestamp": "00:00",
+        "description": "指出常见错误展示面行为（如展示敲代码、有钱）"
+      },
+      {
+        "label": "升级",
+        "timestamp": "00:30",
+        "description": "区分低级展示面（单一）与高级展示面（方方面面）"
+      },
+      {
+        "label": "危机",
+        "timestamp": "01:00",
+        "description": "列举错误展示面例子（半身果照、秀车标等）并指出其后果"
+      },
+      {
+        "label": "解决",
+        "timestamp": "02:00",
+        "description": "提出六分法则：6分以下向外求（外在调整），6分以上向内求（内在提升）"
+      },
+      {
+        "label": "高潮",
+        "timestamp": "03:00",
+        "description": "具体说明向内求的细节（口音、表情管理、体味、穿搭比例等）"
+      },
+      {
+        "label": "解决",
+        "timestamp": "04:30",
+        "description": "总结建议：先完成再完美"
+      }
+    ],
+    "time_structure": "线性",
+    "emotional_arc_shape": "上升",
+    "pov": "第一人称（主播视角）"
+  },
+  "L2_characters": {
+    "characters": [
+      {
+        "name": "主播",
+        "jung_archetype": "智者/照顾者",
+        "archetype_conflict": "智者vs照顾者——智者追求真相与效率，直接指出问题；照顾者希望温和委婉，避免伤害。冲突驱动主播从委婉转向一针见血，以效率优先。",
+        "surface_want": "帮助观众提升展示面，获得异性青睐。",
+        "deep_need": "确立自身权威，通过提供真实、有效的建议获得认可与价值感。",
+        "core_fear": "自己的建议被忽视或无效，失去影响力。",
+        "arc": {
+          "start": "主播以委婉方式给出建议，但发现效果不佳。",
+          "catalyst": "每天面对十几个咨询者，委婉导致沟通低效，对方听不懂。",
+          "end": "主播转向一针见血的直接风格，强调“先完成再完美”，更注重效率与结果。"
+        }
+      },
+      {
+        "name": "低展示面者（隐含角色）",
+        "jung_archetype": "愚者/破坏者",
+        "archetype_conflict": "愚者vs破坏者——愚者天真地以为展示单一外在（如车标、果照）就能吸引人，破坏者则无意中破坏自身形象，吸引低质量对象。",
+        "surface_want": "通过展示物质或外表快速吸引异性。",
+        "deep_need": "获得真正的认可与连接，但方法错误导致适得其反。",
+        "core_fear": "不被看见或不被重视，所以用夸张方式博取关注。",
+        "arc": {
+          "start": "低展示面者依赖虚假人设（如秀车标、果照）。",
+          "catalyst": "主播指出这种展示吸引来的对象“懂的都懂”，暗示质量低。",
+          "end": "未明确改变，但暗示应转向“整体状态”展示。"
+        }
+      },
+      {
+        "name": "6分以下者（隐含角色）",
+        "jung_archetype": "探索者/孤儿",
+        "archetype_conflict": "探索者vs孤儿——探索者渴望提升但不知方向，孤儿感到孤立无援，缺乏指导。",
+        "surface_want": "提升形象以吸引异性。",
+        "deep_need": "获得基础自信与归属感，避免被嘲笑。",
+        "core_fear": "因形象差而被排斥或忽视。",
+        "arc": {
+          "start": "综合形象未达标，向外求，但可能盲目尝试。",
+          "catalyst": "主播给出“6分以下向外求”的明确指导（换发型、穿搭）。",
+          "end": "开始从基础做起，逐步获得分数。"
+        }
+      },
+      {
+        "name": "6分以上者（隐含角色）",
+        "jung_archetype": "英雄/统治者",
+        "archetype_conflict": "英雄vs统治者——英雄追求自我完善，统治者希望掌控他人印象，但存在盲区。",
+        "surface_want": "变得更好，吸引更高质量对象。",
+        "deep_need": "克服自身盲区（如口音、表情），实现内外一致。",
+        "core_fear": "因微小缺陷而功亏一篑，被暗中嘲笑。",
+        "arc": {
+          "start": "底子不错但存在盲区，自我感觉良好。",
+          "catalyst": "主播指出口音、表情管理等隐秘问题。",
+          "end": "开始向内求，修正盲区，完成从“好”到“完美”的转变。"
+        }
+      }
+    ],
+    "inter_character_dynamic": "主播作为智者/照顾者，与低展示面者、6分以下者、6分以上者形成指导与被指导关系。低展示面者与6分以下者构成对比：前者错误展示，后者基础不足。6分以上者与低展示面者形成镜像：都有盲区，但前者有基础，后者方向错误。主播通过直接指出问题，推动所有角色从虚假或片面展示转向整体状态提升。"
+  },
+  "L3_resonance_engine": {
+    "tapped_needs_fears": [
+      "归属与认同",
+      "自我价值确认",
+      "对虚假的恐惧",
+      "对暴露缺陷的焦虑",
+      "对社交排斥的恐惧"
+    ],
+    "core_existential_dilemma": "人既渴望通过展示获得认可，又恐惧展示的虚假性导致更深层的孤独与排斥。",
+    "mytheme_opposition": {
+      "binary": "虚假展示 vs 真实自我",
+      "mediation": "故事通过‘六分法则’将对立转化为动态平衡：低分时向外求（承认外在的重要性），高分时向内求（回归真实），从而调解了展示与真实的冲突。"
+    },
+    "katharsis": {
+      "aroused_emotions": [
+        "怜悯（对自身缺陷的同情）",
+        "恐惧（对社交失败的焦虑）"
+      ],
+      "release_path": "观众通过识别自身缺陷（如口音、表情管理）并接受‘先完成再完美’的实用建议，释放了因完美主义导致的焦虑。",
+      "cognitive_update": "观众看清了：自己追求展示的完美，实则是在逃避对真实自我的接纳。"
+    },
+    "drive_tension": {
+      "eros": "生本能表现为对联结的渴望：通过‘六分法则’提升展示面，以吸引他人、建立关系。",
+      "thanatos": "死本能表现为对分离的恐惧：虚假展示导致他人嘲笑、排斥，最终孤独。",
+      "dynamic": "叙事动力源于观众在‘虚假展示（死）’与‘真实提升（生）’之间的拉锯，最终导向‘向内求’的生存策略。"
+    }
+  },
+  "L5_beat_library": {
+    "beats": [
+      {
+        "id": "beat_001",
+        "name": "错误展示面举例",
+        "motif": "展示面误区",
+        "narrative_slot": "setup",
+        "positional_function": "建立问题：指出常见错误做法，引发观众共鸣或反思",
+        "psychological_mechanism": "通过否定错误行为，制造认知冲突，为后续正确方法铺垫",
+        "dependencies": {
+          "prerequisite_beats": [],
+          "enabling_beats": [
+            "beat_002"
+          ]
+        },
+        "coupling_degree": "tight",
+        "emotion_target": "反思、好奇",
+        "provenance": {
+          "level": "复刻",
+          "source_work": "常见情感教程",
+          "evidence": "列举拍帅照、秀车标等典型错误"
+        },
+        "replaceable_params": {
+          "character": "主播",
+          "setting": "书房",
+          "era": "当代",
+          "visual_style": "固定中景"
+        }
+      },
+      {
+        "id": "beat_002",
+        "name": "高级展示面定义",
+        "motif": "展示面本质",
+        "narrative_slot": "develop",
+        "positional_function": "深化概念：区分低级与高级展示面，提出核心观点",
+        "psychological_mechanism": "通过对比强化认知，引导观众认同高级展示面的价值",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_001"
+          ],
+          "enabling_beats": [
+            "beat_003"
+          ]
+        },
+        "coupling_degree": "tight",
+        "emotion_target": "认同、期待",
+        "provenance": {
+          "level": "同构",
+          "source_work": "个人经验",
+          "evidence": "提出'展示方方面面' vs '展示一面'"
+        },
+        "replaceable_params": {
+          "character": "主播",
+          "setting": "书房",
+          "era": "当代",
+          "visual_style": "固定中景"
+        }
+      },
+      {
+        "id": "beat_003",
+        "name": "6分法则引入",
+        "motif": "方法论框架",
+        "narrative_slot": "turn",
+        "positional_function": "转折点：从问题分析转向解决方案，提出核心法则",
+        "psychological_mechanism": "提供清晰分界点，降低认知负荷，增强可操作性",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_002"
+          ],
+          "enabling_beats": [
+            "beat_004",
+            "beat_005"
+          ]
+        },
+        "coupling_degree": "tight",
+        "emotion_target": "豁然开朗、信任",
+        "provenance": {
+          "level": "复刻",
+          "source_work": "常见评分体系",
+          "evidence": "提出6分法则"
+        },
+        "replaceable_params": {
+          "character": "主播",
+          "setting": "书房",
+          "era": "当代",
+          "visual_style": "固定中景"
+        }
+      },
+      {
+        "id": "beat_004",
+        "name": "6分以下向外求",
+        "motif": "外在调整",
+        "narrative_slot": "payoff",
+        "positional_function": "解决低分问题：给出具体行动建议，如发型穿搭",
+        "psychological_mechanism": "提供低门槛行动指南，增强自我效能感",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_003"
+          ],
+          "enabling_beats": []
+        },
+        "coupling_degree": "loose",
+        "emotion_target": "安心、行动欲",
+        "provenance": {
+          "level": "同构",
+          "source_work": "形象改造教程",
+          "evidence": "建议换发型、找穿搭"
+        },
+        "replaceable_params": {
+          "character": "主播",
+          "setting": "书房",
+          "era": "当代",
+          "visual_style": "固定中景"
+        }
+      },
+      {
+        "id": "beat_005",
+        "name": "6分以上向内求",
+        "motif": "内在问题",
+        "narrative_slot": "payoff",
+        "positional_function": "解决高分问题：指出盲区，如口音、表情管理",
+        "psychological_mechanism": "揭示隐藏问题，打破自我认知偏差",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_003"
+          ],
+          "enabling_beats": []
+        },
+        "coupling_degree": "loose",
+        "emotion_target": "惊讶、自省",
+        "provenance": {
+          "level": "联想",
+          "source_work": "咨询案例",
+          "evidence": "举例口音重、表情管理差"
+        },
+        "replaceable_params": {
+          "character": "主播",
+          "setting": "书房",
+          "era": "当代",
+          "visual_style": "固定中景"
+        }
+      },
+      {
+        "id": "beat_006",
+        "name": "总结与行动号召",
+        "motif": "先完成再完美",
+        "narrative_slot": "coda",
+        "positional_function": "收尾：强化核心信息，鼓励行动",
+        "psychological_mechanism": "提供简单口诀，增强记忆与执行力",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_004",
+            "beat_005"
+          ],
+          "enabling_beats": []
+        },
+        "coupling_degree": "loose",
+        "emotion_target": "决心、行动",
+        "provenance": {
+          "level": "复刻",
+          "source_work": "常见励志语",
+          "evidence": "说'先完成再完美'"
+        },
+        "replaceable_params": {
+          "character": "主播",
+          "setting": "书房",
+          "era": "当代",
+          "visual_style": "固定中景"
+        }
+      }
+    ],
+    "dependency_graph": {
+      "chains": [
+        {
+          "name": "问题→定义→法则→应用",
+          "beats": [
+            "beat_001",
+            "beat_002",
+            "beat_003",
+            "beat_004",
+            "beat_005",
+            "beat_006"
+          ],
+          "invariant_reason": "必须先用错误案例建立问题，再定义高级展示面，然后引入6分法则作为转折，最后分别给出内外求的具体方案，总结收尾。顺序不可乱，否则观众无法理解逻辑递进。"
+        }
+      ]
+    }
+  },
+  "_meta": {
+    "task_id": "db1cd217",
+    "title": "",
+    "video_url": "/video/83be69c18b0a.mp4"
+  }
+}

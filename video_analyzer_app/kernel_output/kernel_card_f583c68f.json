@@ -1,0 +1,746 @@
+{
+  "L0_source": {
+    "title": "未知",
+    "director": "未知",
+    "type": "动画短片",
+    "era": "未知",
+    "culture_context": "中国",
+    "genre": "情感, 治愈, 搞笑, 反转",
+    "medium": "动画",
+    "duration": "未知",
+    "language": "中文"
+  },
+  "L1_narrative_skeleton": {
+    "hero_journey_phase": "启程",
+    "plot_beats": [
+      {
+        "label": "引发事件",
+        "timestamp": "开始",
+        "description": "刺猬自我介绍，因尖刺被孤立"
+      },
+      {
+        "label": "升级",
+        "timestamp": "中段",
+        "description": "刺猬尝试融入但屡屡失败，感到孤独"
+      },
+      {
+        "label": "危机",
+        "timestamp": "中后段",
+        "description": "刺猬决定独自坐后排，自嘲是悲剧主角"
+      },
+      {
+        "label": "高潮",
+        "timestamp": "后段",
+        "description": "朋友们用棉花塞包裹刺猬的尖刺，解决物理障碍"
+      },
+      {
+        "label": "解决",
+        "timestamp": "结尾",
+        "description": "刺猬融入集体，感到温暖"
+      }
+    ],
+    "time_structure": "线性",
+    "emotional_arc_shape": "落坑爬出",
+    "pov": "刺猬第一人称视角"
+  },
+  "L2_characters": {
+    "characters": [
+      {
+        "name": "刺猬",
+        "jung_archetype": "孤儿/愚者",
+        "archetype_conflict": "孤儿原型渴望归属与连接，但愚者原型以笨拙、自嘲的方式应对社交，导致表面搞笑实则孤独的张力。",
+        "surface_want": "想要交朋友、融入群体（如主动提供牙签、寻找座位）。",
+        "deep_need": "需要被接纳和感受到安全的情感连接，而不仅仅是物理上的安全距离。",
+        "core_fear": "因自身特质（尖刺）而永远被排斥，成为彻底的局外人。",
+        "arc": {
+          "start": "孤独、自我隔离，认为自己的尖刺是社交障碍，只能靠搞笑自嘲缓解。",
+          "catalyst": "朋友们用棉花塞包裹其尖刺，消除了物理障碍，也象征性地接纳了他的不同。",
+          "end": "从被动接受孤独到主动融入群体，体验到温暖和归属感，意识到自己的特质可以被包容和转化。"
+        }
+      },
+      {
+        "name": "朋友们（群体）",
+        "jung_archetype": "照顾者/创造者",
+        "archetype_conflict": "照顾者原型驱动他们关怀刺猬，但创造者原型以创新方式（棉花塞）解决问题，体现了善意与巧思的结合。",
+        "surface_want": "帮助刺猬不再孤单，让他能安全地参与集体活动。",
+        "deep_need": "通过帮助他人来强化群体凝聚力，并满足自身对包容和创造价值的渴望。",
+        "core_fear": "群体因排斥异类而失去和谐与温暖。",
+        "arc": {
+          "start": "注意到刺猬的孤立，但未直接介入。",
+          "catalyst": "观察到刺猬的困境后，集体策划并实施棉花塞方案。",
+          "end": "成功将刺猬纳入群体，实现了更包容和紧密的集体关系。"
+        }
+      }
+    ],
+    "inter_character_dynamic": "从最初的疏离与试探（刺猬被动，群体观望），到群体主动提供解决方案（照顾者-接受者），最终形成互补与救赎关系：群体通过创造行动治愈了刺猬的孤独，刺猬的接纳也满足了群体对包容和善意的需求。"
+  },
+  "L3_resonance_engine": {
+    "tapped_needs_fears": [
+      "归属",
+      "安全",
+      "联结",
+      "被接纳",
+      "避免伤害他人",
+      "孤独恐惧"
+    ],
+    "core_existential_dilemma": "渴望亲密联结，但自身特质（刺）必然带来伤害，融入意味着放弃自我，保持自我则注定孤独。",
+    "mytheme_opposition": {
+      "binary": "孤立 vs 融入",
+      "mediation": "棉花塞作为象征性媒介，既保留刺（自我本质）又消除伤害，实现‘安全融入’，但暗示这种解决方案是临时、外在的，深层矛盾并未真正解决。"
+    },
+    "katharsis": {
+      "aroused_emotions": [
+        "怜悯",
+        "恐惧",
+        "温暖",
+        "释然"
+      ],
+      "release_path": "观众通过刺猬被接纳的结局释放对自身社交焦虑的恐惧，棉花塞的创意带来幽默与感动，缓解了‘伤害他人’的愧疚感。",
+      "cognitive_update": "观众看清了：真正的接纳不是改变本质，而是找到共存的方式，但这种方式可能只是暂时的妥协。"
+    },
+    "drive_tension": {
+      "eros": "刺猬渴望朋友、主动尝试融入、朋友们的善意帮助，体现爱、联结与生命活力。",
+      "thanatos": "刺猬的刺象征分离与伤害，其孤独处境、自嘲‘高危’、以及‘付朋友费’的无奈，体现死本能与消逝倾向。",
+      "dynamic": "刺猬的孤独（死本能）驱动其寻求联结（生本能），而每次尝试都因刺受挫，形成张力；最终棉花塞暂时调和，但刺依然存在，暗示生与死的永恒拉锯。"
+    }
+  },
+  "L5_beat_library": {
+    "beats": [
+      {
+        "id": "beat_001",
+        "name": "刺猬自我介绍",
+        "motif": "刺猬/牙签",
+        "narrative_slot": "setup",
+        "positional_function": "建立主角刺猬的物理特征（尖刺）和初始社交状态（被孤立），同时用幽默化解尴尬",
+        "psychological_mechanism": "观众通过刺猬的幽默自嘲产生好感，同时意识到其困境",
+        "dependencies": {
+          "prerequisite_beats": [],
+          "enabling_beats": [
+            "beat_002",
+            "beat_003"
+          ]
+        },
+        "coupling_degree": "tight",
+        "emotion_target": "同情+好奇",
+        "provenance": {
+          "level": "同构",
+          "source_work": "常见校园剧开场",
+          "evidence": "新角色自我介绍，引发关注"
+        },
+        "replaceable_params": {
+          "character": "任何有物理缺陷的角色",
+          "setting": "教室",
+          "era": "现代",
+          "visual_style": "动画"
+        }
+      },
+      {
+        "id": "beat_002",
+        "name": "走廊借过",
+        "motif": "尖刺/借过",
+        "narrative_slot": "setup",
+        "positional_function": "展示刺猬在物理空间中的不便，强化其与环境的冲突",
+        "psychological_mechanism": "通过视觉喜剧（尖刺扎人）让观众直观感受刺猬的困扰",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_001"
+          ],
+          "enabling_beats": [
+            "beat_004"
+          ]
+        },
+        "coupling_degree": "tight",
+        "emotion_target": "好笑+同情",
+        "provenance": {
+          "level": "复刻",
+          "source_work": "《刺猬的优雅》",
+          "evidence": "刺猬在人群中穿行的尴尬"
+        },
+        "replaceable_params": {
+          "character": "刺猬",
+          "setting": "走廊",
+          "era": "现代",
+          "visual_style": "动画"
+        }
+      },
+      {
+        "id": "beat_003",
+        "name": "零误伤宣言",
+        "motif": "零误伤",
+        "narrative_slot": "setup",
+        "positional_function": "建立刺猬的内心渴望（不伤害他人），为后续冲突铺垫",
+        "psychological_mechanism": "观众认同刺猬的善良，增加情感投入",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_001"
+          ],
+          "enabling_beats": [
+            "beat_004"
+          ]
+        },
+        "coupling_degree": "loose",
+        "emotion_target": "温暖+期待",
+        "provenance": {
+          "level": "联想",
+          "source_work": "《小王子》",
+          "evidence": "角色内心独白"
+        },
+        "replaceable_params": {
+          "character": "刺猬",
+          "setting": "教室",
+          "era": "现代",
+          "visual_style": "动画"
+        }
+      },
+      {
+        "id": "beat_004",
+        "name": "打招呼与安全距离",
+        "motif": "安全距离",
+        "narrative_slot": "develop",
+        "positional_function": "展示刺猬与同学的互动，强化社交距离的物理障碍",
+        "psychological_mechanism": "通过重复的“安全距离”概念，让观众理解刺猬的孤独",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_002",
+            "beat_003"
+          ],
+          "enabling_beats": [
+            "beat_005"
+          ]
+        },
+        "coupling_degree": "tight",
+        "emotion_target": "心酸+理解",
+        "provenance": {
+          "level": "同构",
+          "source_work": "《社交恐惧症》",
+          "evidence": "角色保持距离"
+        },
+        "replaceable_params": {
+          "character": "刺猬",
+          "setting": "教室",
+          "era": "现代",
+          "visual_style": "动画"
+        }
+      },
+      {
+        "id": "beat_005",
+        "name": "找座位被拒",
+        "motif": "空位/有人",
+        "narrative_slot": "develop",
+        "positional_function": "进一步展示刺猬被排斥，推动其孤独感升级",
+        "psychological_mechanism": "观众产生共情，期待转机",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_004"
+          ],
+          "enabling_beats": [
+            "beat_006"
+          ]
+        },
+        "coupling_degree": "tight",
+        "emotion_target": "沮丧+同情",
+        "provenance": {
+          "level": "复刻",
+          "source_work": "《被嫌弃的松子的一生》",
+          "evidence": "被拒绝的座位"
+        },
+        "replaceable_params": {
+          "character": "刺猬",
+          "setting": "教室",
+          "era": "现代",
+          "visual_style": "动画"
+        }
+      },
+      {
+        "id": "beat_006",
+        "name": "高危独白",
+        "motif": "高危/独处",
+        "narrative_slot": "develop",
+        "positional_function": "刺猬内心独白，揭示其自我认知（高危），深化角色",
+        "psychological_mechanism": "观众完全理解刺猬的处境，情感共鸣达到高点",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_005"
+          ],
+          "enabling_beats": [
+            "beat_007"
+          ]
+        },
+        "coupling_degree": "loose",
+        "emotion_target": "悲伤+认同",
+        "provenance": {
+          "level": "联想",
+          "source_work": "《孤独的美食家》",
+          "evidence": "内心独白"
+        },
+        "replaceable_params": {
+          "character": "刺猬",
+          "setting": "教室",
+          "era": "现代",
+          "visual_style": "动画"
+        }
+      },
+      {
+        "id": "beat_007",
+        "name": "接东西失误",
+        "motif": "接着/对不起",
+        "narrative_slot": "develop",
+        "positional_function": "通过意外事件（接东西失败）展示刺猬的笨拙，增加喜剧元素",
+        "psychological_mechanism": "缓解之前的悲伤，制造轻松节奏",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_006"
+          ],
+          "enabling_beats": [
+            "beat_008"
+          ]
+        },
+        "coupling_degree": "medium",
+        "emotion_target": "好笑+紧张",
+        "provenance": {
+          "level": "同构",
+          "source_work": "《憨豆先生》",
+          "evidence": "笨拙的肢体喜剧"
+        },
+        "replaceable_params": {
+          "character": "刺猬",
+          "setting": "教室",
+          "era": "现代",
+          "visual_style": "动画"
+        }
+      },
+      {
+        "id": "beat_008",
+        "name": "吓到同学",
+        "motif": "吓到/OMG",
+        "narrative_slot": "develop",
+        "positional_function": "刺猬无意中吓到同学，强化其社交障碍",
+        "psychological_mechanism": "观众感到尴尬，同时期待解决方案",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_007"
+          ],
+          "enabling_beats": [
+            "beat_009"
+          ]
+        },
+        "coupling_degree": "tight",
+        "emotion_target": "尴尬+同情",
+        "provenance": {
+          "level": "复刻",
+          "source_work": "《怪兽电力公司》",
+          "evidence": "吓到人的场景"
+        },
+        "replaceable_params": {
+          "character": "刺猬",
+          "setting": "教室",
+          "era": "现代",
+          "visual_style": "动画"
+        }
+      },
+      {
+        "id": "beat_009",
+        "name": "付朋友费想法",
+        "motif": "朋友费",
+        "narrative_slot": "develop",
+        "positional_function": "刺猬自嘲式思考，进一步揭示其孤独和渴望",
+        "psychological_mechanism": "观众感到心酸，同时为后续反转铺垫",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_008"
+          ],
+          "enabling_beats": [
+            "beat_010"
+          ]
+        },
+        "coupling_degree": "loose",
+        "emotion_target": "心酸+期待",
+        "provenance": {
+          "level": "联想",
+          "source_work": "《社交网络》",
+          "evidence": "付费交友的概念"
+        },
+        "replaceable_params": {
+          "character": "刺猬",
+          "setting": "教室",
+          "era": "现代",
+          "visual_style": "动画"
+        }
+      },
+      {
+        "id": "beat_010",
+        "name": "有人让座",
+        "motif": "有位/谢谢你",
+        "narrative_slot": "turn",
+        "positional_function": "转折点：有人主动让座，展示善意，但随后发生意外（扎到），制造反转",
+        "psychological_mechanism": "观众先感到温暖，再因意外而紧张，情绪波动",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_009"
+          ],
+          "enabling_beats": [
+            "beat_011"
+          ]
+        },
+        "coupling_degree": "tight",
+        "emotion_target": "温暖→紧张",
+        "provenance": {
+          "level": "同构",
+          "source_work": "《天使爱美丽》",
+          "evidence": "善意的举动"
+        },
+        "replaceable_params": {
+          "character": "刺猬",
+          "setting": "教室",
+          "era": "现代",
+          "visual_style": "动画"
+        }
+      },
+      {
+        "id": "beat_011",
+        "name": "扎到同学",
+        "motif": "哎呀/对不起",
+        "narrative_slot": "turn",
+        "positional_function": "意外扎到让座同学，强化刺猬的困境，推动其自我放逐",
+        "psychological_mechanism": "观众感到揪心，同情刺猬",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_010"
+          ],
+          "enabling_beats": [
+            "beat_012"
+          ]
+        },
+        "coupling_degree": "tight",
+        "emotion_target": "揪心+同情",
+        "provenance": {
+          "level": "复刻",
+          "source_work": "《刺猬的优雅》",
+          "evidence": "扎到人"
+        },
+        "replaceable_params": {
+          "character": "刺猬",
+          "setting": "教室",
+          "era": "现代",
+          "visual_style": "动画"
+        }
+      },
+      {
+        "id": "beat_012",
+        "name": "后排靠窗独白",
+        "motif": "后排靠窗/主角",
+        "narrative_slot": "develop",
+        "positional_function": "刺猬退到后排靠窗，自嘲是悲剧主角，加深孤独感",
+        "psychological_mechanism": "观众感到悲伤，同时期待救赎",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_011"
+          ],
+          "enabling_beats": [
+            "beat_013"
+          ]
+        },
+        "coupling_degree": "loose",
+        "emotion_target": "悲伤+期待",
+        "provenance": {
+          "level": "联想",
+          "source_work": "《余华小说》",
+          "evidence": "悲剧主角的比喻"
+        },
+        "replaceable_params": {
+          "character": "刺猬",
+          "setting": "教室",
+          "era": "现代",
+          "visual_style": "动画"
+        }
+      },
+      {
+        "id": "beat_013",
+        "name": "大胆想法",
+        "motif": "大胆想法",
+        "narrative_slot": "turn",
+        "positional_function": "刺猬产生一个想法（可能关于棉花塞），但未明说，制造悬念",
+        "psychological_mechanism": "观众好奇，期待后续",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_012"
+          ],
+          "enabling_beats": [
+            "beat_014"
+          ]
+        },
+        "coupling_degree": "medium",
+        "emotion_target": "好奇+希望",
+        "provenance": {
+          "level": "同构",
+          "source_work": "《头脑特工队》",
+          "evidence": "灵光一现"
+        },
+        "replaceable_params": {
+          "character": "刺猬",
+          "setting": "教室",
+          "era": "现代",
+          "visual_style": "动画"
+        }
+      },
+      {
+        "id": "beat_014",
+        "name": "窃窃私语",
+        "motif": "窃窃私语",
+        "narrative_slot": "develop",
+        "positional_function": "同学们在讨论，刺猬以为在说自己，增加焦虑",
+        "psychological_mechanism": "观众感到不安，但实际是善意铺垫",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_013"
+          ],
+          "enabling_beats": [
+            "beat_015"
+          ]
+        },
+        "coupling_degree": "tight",
+        "emotion_target": "焦虑+疑惑",
+        "provenance": {
+          "level": "复刻",
+          "source_work": "《三傻大闹宝莱坞》",
+          "evidence": "窃窃私语场景"
+        },
+        "replaceable_params": {
+          "character": "刺猬",
+          "setting": "教室",
+          "era": "现代",
+          "visual_style": "动画"
+        }
+      },
+      {
+        "id": "beat_015",
+        "name": "接单孤单",
+        "motif": "接单/孤单",
+        "narrative_slot": "develop",
+        "positional_function": "刺猬内心呼唤有人接单他的孤单，强化渴望",
+        "psychological_mechanism": "观众情感共鸣达到顶点",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_014"
+          ],
+          "enabling_beats": [
+            "beat_016"
+          ]
+        },
+        "coupling_degree": "loose",
+        "emotion_target": "孤独+渴望",
+        "provenance": {
+          "level": "联想",
+          "source_work": "《孤独摇滚》",
+          "evidence": "内心呼喊"
+        },
+        "replaceable_params": {
+          "character": "刺猬",
+          "setting": "教室",
+          "era": "现代",
+          "visual_style": "动画"
+        }
+      },
+      {
+        "id": "beat_016",
+        "name": "小惊喜",
+        "motif": "小惊喜",
+        "narrative_slot": "payoff",
+        "positional_function": "同学们为刺猬准备惊喜，反转之前的负面情绪",
+        "psychological_mechanism": "观众感到意外和温暖，情感释放",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_015"
+          ],
+          "enabling_beats": [
+            "beat_017"
+          ]
+        },
+        "coupling_degree": "tight",
+        "emotion_target": "惊喜+感动",
+        "provenance": {
+          "level": "同构",
+          "source_work": "《哆啦A梦》",
+          "evidence": "惊喜礼物"
+        },
+        "replaceable_params": {
+          "character": "刺猬",
+          "setting": "教室",
+          "era": "现代",
+          "visual_style": "动画"
+        }
+      },
+      {
+        "id": "beat_017",
+        "name": "棉花塞礼物",
+        "motif": "棉花塞/礼物",
+        "narrative_slot": "payoff",
+        "positional_function": "揭示礼物是棉花塞，解决刺猬的物理障碍，实现反转",
+        "psychological_mechanism": "观众恍然大悟，感到温暖和治愈",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_016"
+          ],
+          "enabling_beats": [
+            "beat_018"
+          ]
+        },
+        "coupling_degree": "tight",
+        "emotion_target": "感动+治愈",
+        "provenance": {
+          "level": "复刻",
+          "source_work": "《刺猬的优雅》",
+          "evidence": "棉花塞作为解决方案"
+        },
+        "replaceable_params": {
+          "character": "刺猬",
+          "setting": "教室",
+          "era": "现代",
+          "visual_style": "动画"
+        }
+      },
+      {
+        "id": "beat_018",
+        "name": "棉花塞使用演示",
+        "motif": "棉花塞之力",
+        "narrative_slot": "payoff",
+        "positional_function": "同学们演示如何用棉花塞，展示解决方案的有效性",
+        "psychological_mechanism": "观众感到快乐和满足",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_017"
+          ],
+          "enabling_beats": [
+            "beat_019"
+          ]
+        },
+        "coupling_degree": "tight",
+        "emotion_target": "快乐+满足",
+        "provenance": {
+          "level": "同构",
+          "source_work": "《超能陆战队》",
+          "evidence": "演示新能力"
+        },
+        "replaceable_params": {
+          "character": "刺猬",
+          "setting": "教室",
+          "era": "现代",
+          "visual_style": "动画"
+        }
+      },
+      {
+        "id": "beat_019",
+        "name": "不再孤单",
+        "motif": "安全距离/不再孤单",
+        "narrative_slot": "coda",
+        "positional_function": "刺猬终于融入，不再孤单，主题升华",
+        "psychological_mechanism": "观众感到温暖和希望，情感圆满",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_018"
+          ],
+          "enabling_beats": []
+        },
+        "coupling_degree": "tight",
+        "emotion_target": "温暖+感动",
+        "provenance": {
+          "level": "复刻",
+          "source_work": "《夏目友人帐》",
+          "evidence": "融入集体"
+        },
+        "replaceable_params": {
+          "character": "刺猬",
+          "setting": "教室",
+          "era": "现代",
+          "visual_style": "动画"
+        }
+      },
+      {
+        "id": "beat_020",
+        "name": "谢谢朋友",
+        "motif": "谢谢/暖和",
+        "narrative_slot": "coda",
+        "positional_function": "刺猬感谢朋友，情感收尾，留下温暖余韵",
+        "psychological_mechanism": "观众感到治愈和满足",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_019"
+          ],
+          "enabling_beats": []
+        },
+        "coupling_degree": "tight",
+        "emotion_target": "感动+治愈",
+        "provenance": {
+          "level": "同构",
+          "source_work": "《千与千寻》",
+          "evidence": "感谢场景"
+        },
+        "replaceable_params": {
+          "character": "刺猬",
+          "setting": "教室",
+          "era": "现代",
+          "visual_style": "动画"
+        }
+      }
+    ],
+    "dependency_graph": {
+      "chains": [
+        {
+          "name": "刺猬困境建立链",
+          "beats": [
+            "beat_001",
+            "beat_002",
+            "beat_003",
+            "beat_004",
+            "beat_005",
+            "beat_006"
+          ],
+          "invariant_reason": "必须按顺序建立刺猬的物理特征、社交障碍和内心渴望，否则后续反转缺乏基础"
+        },
+        {
+          "name": "意外与自嘲链",
+          "beats": [
+            "beat_007",
+            "beat_008",
+            "beat_009"
+          ],
+          "invariant_reason": "意外事件必须发生在刺猬已经建立困境之后，自嘲则是对意外的反应"
+        },
+        {
+          "name": "善意与挫折链",
+          "beats": [
+            "beat_010",
+            "beat_011",
+            "beat_012"
+          ],
+          "invariant_reason": "善意让座后必须发生扎人意外，才能导致刺猬退到后排，顺序不可逆"
+        },
+        {
+          "name": "希望与反转链",
+          "beats": [
+            "beat_013",
+            "beat_014",
+            "beat_015",
+            "beat_016",
+            "beat_017",
+            "beat_018"
+          ],
+          "invariant_reason": "大胆想法后需要窃窃私语铺垫，然后接单孤单强化渴望，最后惊喜和棉花塞才能形成反转"
+        },
+        {
+          "name": "结局收尾链",
+          "beats": [
+            "beat_019",
+            "beat_020"
+          ],
+          "invariant_reason": "必须先展示不再孤单，再表达感谢，情感递进"
+        }
+      ]
+    }
+  },
+  "_meta": {
+    "task_id": "f583c68f",
+    "title": "刺猬动画（B站测试）",
+    "video_url": ""
+  }
+}

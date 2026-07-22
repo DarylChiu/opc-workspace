@@ -1,0 +1,462 @@
+{
+  "L0_source": {
+    "title": "未命名",
+    "director": "未知",
+    "type": "视频",
+    "era": "当代",
+    "culture_context": "中国广东潮汕美食文化",
+    "genre": "美食探店",
+    "medium": "短视频",
+    "duration": "未知",
+    "language": "粤语"
+  },
+  "L1_narrative_skeleton": {
+    "hero_journey_phase": "启程",
+    "plot_beats": [
+      {
+        "label": "引发事件",
+        "timestamp": "00:00",
+        "description": "博主介绍今天有第三者加入，要去吃稀有食材"
+      },
+      {
+        "label": "升级",
+        "timestamp": "00:30",
+        "description": "到达厨房，师傅准备生炒鱼片，强调几秒出锅"
+      },
+      {
+        "label": "危机",
+        "timestamp": "01:00",
+        "description": "鱼片出锅，必须几秒内入口，否则影响口感"
+      },
+      {
+        "label": "高潮",
+        "timestamp": "01:30",
+        "description": "品尝生炒鱼片，赞叹镬气十足，鱼片完整"
+      },
+      {
+        "label": "解决",
+        "timestamp": "02:00",
+        "description": "转场到下一个餐厅，展示稀有食材如大鲳鱼、龙趸肉"
+      }
+    ],
+    "time_structure": "线性",
+    "emotional_arc_shape": "上升",
+    "pov": "第一人称（博主视角）"
+  },
+  "L2_characters": {
+    "characters": [
+      {
+        "name": "春华",
+        "jung_archetype": "愚者/探索者",
+        "archetype_conflict": "愚者vs探索者——愚者追求即时享乐与轻松氛围，探索者渴望发现稀有美食与知识，两者张力驱动他既享受当下又不断追问细节（如炒鱼片时间）。",
+        "surface_want": "吃到稀有美食，体验新奇",
+        "deep_need": "通过美食探索建立与潮汕文化及师傅的联结，获得归属感",
+        "core_fear": "被排除在核心圈子之外，成为无知的局外人",
+        "arc": {
+          "start": "作为探店博主，以轻松搞笑姿态进入，对潮汕菜了解有限",
+          "catalyst": "苏师傅展示生炒鱼片技艺，并强调镬气与时间，激发其探索欲",
+          "end": "从单纯吃货转变为对烹饪技艺有更深理解的参与者，主动追问细节并融入圈子"
+        }
+      },
+      {
+        "name": "苏仔",
+        "jung_archetype": "统治者/照顾者",
+        "archetype_conflict": "统治者vs照顾者——统治者继承父亲衣钵，掌控厨房与话语权；照顾者通过分享稀有食材与知识来滋养他人。冲突体现在他既强势命令（“别说话”），又细心安排“厨房煮，厨房吃”的体验。",
+        "surface_want": "展示自己的专业与资源，获得认可",
+        "deep_need": "传承潮汕饮食文化，并建立亲密的人际联结",
+        "core_fear": "被看作只是继承父业的“三世祖”，失去个人价值",
+        "arc": {
+          "start": "以自信甚至带点傲慢的姿态带领探店，强调自己与师傅的关系",
+          "catalyst": "春华对生炒鱼片的惊叹与追问，让他感到被尊重",
+          "end": "从炫耀资源转向真诚分享，主动提供二十年普洱，关系更平等"
+        }
+      }
+    ],
+    "inter_character_dynamic": "互补与对抗并存：春华的愚者式好奇与苏仔的统治者式掌控形成张力，但探索者与照顾者原型又促成合作。春华通过提问和惊叹满足苏仔的认可需求，苏仔则通过分享稀有食材和技艺满足春华的探索欲。关系从主客逐渐变为朋友，苏仔最后打包礼物（“广州亲戚，有食有拎”）象征关系深化。"
+  },
+  "L3_resonance_engine": {
+    "tapped_needs_fears": [
+      "归属感",
+      "身份认同",
+      "对稀有/独特体验的渴望",
+      "对传统消逝的焦虑",
+      "对真实性的追求"
+    ],
+    "core_existential_dilemma": "在快速变化的现代社会中，如何保持与传统的真实联结，同时又不被其束缚？",
+    "mytheme_opposition": {
+      "binary": "传统 vs 现代",
+      "mediation": "通过美食体验（生炒鱼片、稀有食材）作为媒介，将传统技艺（镬气、跑步上菜）与现代传播（探店视频、幽默互动）结合，既尊重传统又赋予其当代活力。"
+    },
+    "katharsis": {
+      "aroused_emotions": [
+        "好奇",
+        "愉悦",
+        "怀旧",
+        "对技艺的敬畏"
+      ],
+      "release_path": "观众通过观看角色对传统美食的惊叹与享受，释放对文化失落的焦虑，获得替代性满足。",
+      "cognitive_update": "观众看清了：传统并非僵化的过去，而是可以通过当代实践（如探店、幽默对话）重新激活的活态文化。"
+    },
+    "drive_tension": {
+      "eros": "生本能表现为对美食的渴望、人际联结（朋友间的调侃、与师傅的互动）、对文化传承的积极态度。",
+      "thanatos": "死本能表现为对传统消逝的潜在焦虑（如‘稀有食材’暗示稀缺性）、对时间流逝的敏感（‘几秒内吃’强调短暂性）。",
+      "dynamic": "两者拉锯构成叙事动力：对传统美食的追求（eros）与对其可能消失的担忧（thanatos）交织，推动角色不断探索并即时享受，从而在行动中暂时克服死亡焦虑。"
+    }
+  },
+  "L5_beat_library": {
+    "beats": [
+      {
+        "id": "beat_001",
+        "name": "第三者引入",
+        "motif": "第三者/朋友",
+        "narrative_slot": "setup",
+        "positional_function": "建立人物关系，制造悬念和好奇",
+        "psychological_mechanism": "通过'第三者'的玩笑设定，让观众对即将出现的人物产生兴趣",
+        "dependencies": {
+          "prerequisite_beats": [],
+          "enabling_beats": [
+            "beat_002"
+          ]
+        },
+        "coupling_degree": "loose",
+        "emotion_target": "好奇、轻松",
+        "provenance": {
+          "level": "同构",
+          "source_work": "常见探店视频",
+          "evidence": "开场介绍嘉宾，制造互动"
+        },
+        "replaceable_params": {
+          "character": "苏师傅/苏仔",
+          "setting": "广州",
+          "era": "现代",
+          "visual_style": "手持近景"
+        }
+      },
+      {
+        "id": "beat_002",
+        "name": "稀有食材预告",
+        "motif": "稀有食材",
+        "narrative_slot": "setup",
+        "positional_function": "预告核心卖点，提升期待值",
+        "psychological_mechanism": "稀缺性激发观众好奇和期待",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_001"
+          ],
+          "enabling_beats": [
+            "beat_003"
+          ]
+        },
+        "coupling_degree": "medium",
+        "emotion_target": "期待",
+        "provenance": {
+          "level": "同构",
+          "source_work": "常见美食预告",
+          "evidence": "对话中提到'市面上很少见'"
+        },
+        "replaceable_params": {
+          "character": "",
+          "setting": "",
+          "era": "",
+          "visual_style": ""
+        }
+      },
+      {
+        "id": "beat_003",
+        "name": "厨房煮厨房吃",
+        "motif": "特殊用餐方式",
+        "narrative_slot": "setup",
+        "positional_function": "强调独特体验，增加仪式感",
+        "psychological_mechanism": "打破常规，制造新奇感",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_002"
+          ],
+          "enabling_beats": [
+            "beat_004"
+          ]
+        },
+        "coupling_degree": "medium",
+        "emotion_target": "新奇、期待",
+        "provenance": {
+          "level": "联想",
+          "source_work": "美食纪录片",
+          "evidence": "对话中明确说出"
+        },
+        "replaceable_params": {
+          "character": "",
+          "setting": "厨房",
+          "era": "",
+          "visual_style": ""
+        }
+      },
+      {
+        "id": "beat_004",
+        "name": "生炒鱼片表演",
+        "motif": "生炒鱼片",
+        "narrative_slot": "develop",
+        "positional_function": "展示烹饪过程，突出技艺和食材",
+        "psychological_mechanism": "视觉冲击和计时增加紧张感",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_003"
+          ],
+          "enabling_beats": [
+            "beat_005"
+          ]
+        },
+        "coupling_degree": "tight",
+        "emotion_target": "惊叹、紧张",
+        "provenance": {
+          "level": "复刻",
+          "source_work": "美食纪录片",
+          "evidence": "计时炒鱼片，强调镬气"
+        },
+        "replaceable_params": {
+          "character": "师傅",
+          "setting": "厨房",
+          "era": "",
+          "visual_style": "特写鱼片"
+        }
+      },
+      {
+        "id": "beat_005",
+        "name": "品尝与评价",
+        "motif": "品尝",
+        "narrative_slot": "payoff",
+        "positional_function": "验证美味，满足期待",
+        "psychological_mechanism": "通过品尝和评价，让观众获得替代满足",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_004"
+          ],
+          "enabling_beats": [
+            "beat_006"
+          ]
+        },
+        "coupling_degree": "tight",
+        "emotion_target": "满足、羡慕",
+        "provenance": {
+          "level": "复刻",
+          "source_work": "美食探店",
+          "evidence": "对话中'哇'和评价"
+        },
+        "replaceable_params": {
+          "character": "",
+          "setting": "",
+          "era": "",
+          "visual_style": "特写食物"
+        }
+      },
+      {
+        "id": "beat_006",
+        "name": "茶水误会",
+        "motif": "茶水/酒",
+        "narrative_slot": "turn",
+        "positional_function": "制造小反转，增加趣味",
+        "psychological_mechanism": "意外转折带来幽默",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_005"
+          ],
+          "enabling_beats": [
+            "beat_007"
+          ]
+        },
+        "coupling_degree": "loose",
+        "emotion_target": "好笑、轻松",
+        "provenance": {
+          "level": "联想",
+          "source_work": "常见喜剧桥段",
+          "evidence": "对话中'不是茶水'"
+        },
+        "replaceable_params": {
+          "character": "",
+          "setting": "",
+          "era": "",
+          "visual_style": ""
+        }
+      },
+      {
+        "id": "beat_007",
+        "name": "打包带走",
+        "motif": "打包",
+        "narrative_slot": "coda",
+        "positional_function": "收尾，展示慷慨和满足",
+        "psychological_mechanism": "强化'有食有拎'的满足感",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_006"
+          ],
+          "enabling_beats": []
+        },
+        "coupling_degree": "loose",
+        "emotion_target": "满足、羡慕",
+        "provenance": {
+          "level": "同构",
+          "source_work": "常见探店结尾",
+          "evidence": "对话中'打包'"
+        },
+        "replaceable_params": {
+          "character": "",
+          "setting": "",
+          "era": "",
+          "visual_style": ""
+        }
+      },
+      {
+        "id": "beat_008",
+        "name": "转场预告",
+        "motif": "转场",
+        "narrative_slot": "setup",
+        "positional_function": "过渡到下一场景，保持节奏",
+        "psychological_mechanism": "预告新内容，维持期待",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_007"
+          ],
+          "enabling_beats": [
+            "beat_009"
+          ]
+        },
+        "coupling_degree": "medium",
+        "emotion_target": "期待",
+        "provenance": {
+          "level": "同构",
+          "source_work": "常见转场",
+          "evidence": "对话中'去第二个点'"
+        },
+        "replaceable_params": {
+          "character": "",
+          "setting": "西华路",
+          "era": "",
+          "visual_style": ""
+        }
+      },
+      {
+        "id": "beat_009",
+        "name": "老濠江介绍",
+        "motif": "老濠江",
+        "narrative_slot": "setup",
+        "positional_function": "建立新场景背景，制造期待",
+        "psychological_mechanism": "通过'最贵'等标签提升期待",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_008"
+          ],
+          "enabling_beats": [
+            "beat_010"
+          ]
+        },
+        "coupling_degree": "medium",
+        "emotion_target": "好奇、期待",
+        "provenance": {
+          "level": "同构",
+          "source_work": "常见探店",
+          "evidence": "对话中介绍"
+        },
+        "replaceable_params": {
+          "character": "",
+          "setting": "西华路",
+          "era": "",
+          "visual_style": ""
+        }
+      },
+      {
+        "id": "beat_010",
+        "name": "冰柜展示",
+        "motif": "冰柜/食材",
+        "narrative_slot": "develop",
+        "positional_function": "展示稀有食材，强化价值",
+        "psychological_mechanism": "视觉展示稀有食材，激发欲望",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_009"
+          ],
+          "enabling_beats": [
+            "beat_011"
+          ]
+        },
+        "coupling_degree": "medium",
+        "emotion_target": "惊叹、羡慕",
+        "provenance": {
+          "level": "同构",
+          "source_work": "常见美食展示",
+          "evidence": "对话中'靓货'"
+        },
+        "replaceable_params": {
+          "character": "",
+          "setting": "餐厅",
+          "era": "",
+          "visual_style": "特写食材"
+        }
+      },
+      {
+        "id": "beat_011",
+        "name": "巨型食材展示",
+        "motif": "巨型食材",
+        "narrative_slot": "payoff",
+        "positional_function": "视觉冲击，满足对稀有的期待",
+        "psychological_mechanism": "巨大尺寸带来震撼",
+        "dependencies": {
+          "prerequisite_beats": [
+            "beat_010"
+          ],
+          "enabling_beats": []
+        },
+        "coupling_degree": "tight",
+        "emotion_target": "惊叹",
+        "provenance": {
+          "level": "复刻",
+          "source_work": "美食纪录片",
+          "evidence": "对话中'158斤龙趸'"
+        },
+        "replaceable_params": {
+          "character": "",
+          "setting": "",
+          "era": "",
+          "visual_style": "特写"
+        }
+      }
+    ],
+    "dependency_graph": {
+      "chains": [
+        {
+          "name": "生炒鱼片链",
+          "beats": [
+            "beat_001",
+            "beat_002",
+            "beat_003",
+            "beat_004",
+            "beat_005"
+          ],
+          "invariant_reason": "必须按顺序引入人物、预告、特殊方式、烹饪、品尝，否则期待和满足感无法建立"
+        },
+        {
+          "name": "茶水误会链",
+          "beats": [
+            "beat_005",
+            "beat_006",
+            "beat_007"
+          ],
+          "invariant_reason": "品尝后才有茶水误会，然后打包收尾"
+        },
+        {
+          "name": "第二场景链",
+          "beats": [
+            "beat_008",
+            "beat_009",
+            "beat_010",
+            "beat_011"
+          ],
+          "invariant_reason": "转场后先介绍背景，再展示食材，最后巨型食材作为高潮"
+        }
+      ]
+    }
+  },
+  "_meta": {
+    "task_id": "c222ab1a",
+    "title": "未命名",
+    "video_url": "/video/bb3f01d84a0f.mp4"
+  }
+}
