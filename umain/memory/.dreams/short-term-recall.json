@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-21T09:37:09.775Z",
+  "updatedAt": "2026-07-22T06:38:01.637Z",
   "entries": {
     "memory:memory/2026-06-08.md:19:38": {
       "key": "memory:memory/2026-06-08.md:19:38",
@@ -902,13 +902,13 @@
       "endLine": 66,
       "source": "memory",
       "snippet": "## 18:50 · OPC看板 v1.4 完成 ✅ - Daryl 将「OPC看板v1.4」移至 In Progress → 完成三项需求 - **主次优先级视觉分层**：P0-P3 四级，左侧色条+徽章+创建时可选 - **Bryson 雅思陪练补全**：ielts_tutor 加入扫描优先级，产物 3→7 - **symlink 清理**：移除 opc-workspace 中旧 ielts_tutor_v2.0 副本 - Commit v1.4 + tag ## 状态概览 - 🔴 M2 全模块验收完毕 ✅ → v1.5 生产模式 - OPC 看板 v1.4 并入 v1.5 - 验收报告已生成 `decision_reports/m2_acceptance_report_2026-07-05.md` - 7 月基建方向（Agent自进化 + Loop Engineering）待 Daryl 启动确认 - ✅ M2 全部模块验收完毕 + v1.4 完成 - 待办: Agent版本变更通知 - 雅思陪练 v2.0 收尾中 - 7 月基建方向（Agent自进化 + Loop Engineering）待 Daryl 启动确认",
-      "recallCount": 8,
+      "recallCount": 9,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 3.1957940638065336,
+      "totalScore": 3.582356962561607,
       "maxScore": 0.44552976489067075,
       "firstRecalledAt": "2026-07-06T01:12:01.162Z",
-      "lastRecalledAt": "2026-07-20T01:57:47.916Z",
+      "lastRecalledAt": "2026-07-22T06:17:25.237Z",
       "queryHashes": [
         "af4fa58d2480",
         "f8aac1c4eb69",
@@ -917,7 +917,8 @@
         "230b4b00be19",
         "48b5eabf8dd9",
         "f152bb3d3c45",
-        "5260ee572112"
+        "5260ee572112",
+        "1908384c6613"
       ],
       "recallDays": [
         "2026-07-06",
@@ -925,7 +926,8 @@
         "2026-07-12",
         "2026-07-16",
         "2026-07-19",
-        "2026-07-20"
+        "2026-07-20",
+        "2026-07-22"
       ],
       "conceptTags": [
         "v1.4",
@@ -2189,6 +2191,38 @@
         "sage/reflexion",
         "checker-log.jsonl",
         "reflexion-journal.md"
+      ]
+    },
+    "memory:memory/2026-07-21.md:15:31": {
+      "key": "memory:memory/2026-07-21.md:15:31",
+      "path": "memory/2026-07-21.md",
+      "startLine": 15,
+      "endLine": 31,
+      "source": "memory",
+      "snippet": "- **深层问题 2 项**: 日记内容 vs 20个活跃session不匹配 + 成本仪表盘数据 1452min 未刷新 - **修复**: 日记已从骨架充实为本记录 - **成本**: 今日 $3.84 | 本月 $32.84 | 全量 $92.43（Balance 00:02 全量扫描结果） - **Git**: push 成功，备份 4 文件变更 ## 系统概览 ### 7/20 关键事件回顾 - **Dashboard 成本数据路径修复** (7/20 约17:00): main 发现 Dashboard 的 `COST_DAILY_BALANCE_FILE` 常量指向旧路径 `~/opc-workspace/`，而 Balance 实际写入 `~/WorkBuddy/Claw/opc-dashboard/data/`，导致 Dashboard 一直读取 7/19 过期数据。修复一行路径常量 + 重启 server，数据对齐。 - **成本全量扫描**: Balance 00:02 完整扫描 2006 个 .jsonl，累计 12,466 次调用，全量 $92.43 - **项目文件更新**: 07:00 四个 Agent (main/xiaofeng/balance/self) 全部完成 project_*.md 刷新 - **Xiaofeng 视频编辑 v4.0**: 终版交付 Bryson，三层情感漏斗方案，成本降至 ~$0.01-0.03/次 - **OPC 群消息**: main 推送决策清单（三模型混合方案/自进化方向/7月预算告警），xiaofeng",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7793105602264404,
+      "maxScore": 0.3916596233844757,
+      "firstRecalledAt": "2026-07-22T06:17:25.237Z",
+      "lastRecalledAt": "2026-07-22T06:38:01.637Z",
+      "queryHashes": [
+        "1908384c6613",
+        "9b907d1ab5f7"
+      ],
+      "recallDays": [
+        "2026-07-22"
+      ],
+      "conceptTags": [
+        "备份",
+        "3.84",
+        "32.84",
+        "92.43",
+        "7/20",
+        "cost-daily-balance-file",
+        "opc-workspace",
+        "7/19"
       ]
     }
   }
