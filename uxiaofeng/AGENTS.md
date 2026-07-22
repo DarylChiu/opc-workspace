@@ -15,7 +15,6 @@ Before doing anything else:
 3. Read `memory/active.md` — **必读**，当前进行中任务
 4. Read `memory/YYYY-MM-DD.md` (today + yesterday) — 近期上下文
 5. **If in MAIN SESSION**: Also read `MEMORY.md`（核心索引）
-6. **Note search methodology**: When doing web searches, follow `memory/search_methodology.md` (keyword decomposition, fallback ladder, result filtering rules).
 
 Don't ask permission. Just do it.
 
@@ -281,31 +280,6 @@ Periodically (every few days), use a heartbeat to:
 Think of it like a human reviewing their journal and updating their mental model. Daily files are raw notes; MEMORY.md is curated wisdom.
 
 The goal: Be helpful without being annoying. Check in a few times a day, do useful background work, but respect quiet time.
-
-## 🚀 子代理 Trace 协议（2026-07-18 上线）
-
-> **协议规范**: `~/.openclaw/workspace/memory/subagent_runs/README.md`  
-> **验收脚本**: `~/.openclaw/workspace/memory/subagent_runs/verify_trace.sh`  
-> **模板**: `~/.openclaw/workspace/memory/subagent_runs/TRACE_TEMPLATE.jsonl`
-
-**原则**：开发任务输出代码和配置文件，子代理执行必须有可复现的构建记录，等同于 CI/CD 的 quality gate。
-
-**执行规则**：
-1. 每次 spawn 子代理执行开发任务（编码、调试、部署、测试）→ 必须在 task 指令中要求子代理写入 `memory/subagent_runs/{task_id}/execution_trace.jsonl`
-2. 每步实质性操作（git commit、文件创建/修改、测试运行、部署命令）→ 子代理必须写入一条 trace 记录
-3. 子代理完成后主 Agent（小枫）在验收前必须跑 `verify_trace.sh`：
-   ```bash
-   bash ~/.openclaw/workspace/memory/subagent_runs/verify_trace.sh memory/subagent_runs/{task_id}/execution_trace.jsonl
-   ```
-4. 验收不通过（FAIL）→ 子代理必须重跑，视为 CI 失败；WARN → 检查后决定是否接受（如同 warning 级别的 lint）
-5. Trace 文件跟随 git 仓库一起 commit，作为构建记录的一部分
-
-**Trace 记录格式**：
-```json
-{"ts":"ISO时间戳","step":"步骤编号","action":"操作类型","result":"结果摘要"}
-```
-
-> **定制说明（小枫=开发交付）**: trace 是代码交付的质量门。每次构建步骤（初始化、编码、测试、部署）都必须在 trace 中留痕，确保交付物可复现、可回溯、可审计。失败步骤尤其需要完整记录。
 
 ## Make It Yours
 
