@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>视频分析交互Workflow v1.1.2</title>
+<title>视频分析交互Workflow v1.2.0</title>
 <style>
 :root {
   --bg: #0f0f0f;
@@ -420,95 +420,122 @@ body {
 ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.18); }
 ::-webkit-scrollbar-corner { background: transparent; }
 
-/* ── 内核卡：书签缩略 → 横向展开 ── */
-/* ── 内核卡：多卡片列表 ── */
-.kernel-card-list { display: flex; flex-direction: column; gap: 16px; padding: 16px 0; }
+/* ── 内核卡：竖条书签 250×500 + 展开挤下折叠面板 ── */
+.kernel-card-list { display: flex; flex-direction: column; gap: 14px; padding: 16px 0; }
 
+/* 书签页：250px宽 × 500px高 */
 .kernel-card-item {
+  width: 250px;
   background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px;
-  overflow: hidden; transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, width 0.35s cubic-bezier(0.4,0,0.2,1);
 }
 .kernel-card-item:hover { border-color: var(--accent-dim); }
-.kernel-card-item.expanded { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent-dim); }
+.kernel-card-item.expanded { 
+  border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent-dim);
+  width: 100%;
+}
 
-/* 缩略页：固定尺寸 260×400px，内容溢出可滚 */
-.kernel-card-thumb {
-  width: 260px; max-height: 400px; overflow: hidden;
+/* 书签缩略内容：250×500，点击展开 */
+.kernel-bookmark {
+  width: 250px; height: 500px; overflow: hidden;
   display: flex; flex-direction: column; cursor: pointer;
-  transition: max-height 0.40s cubic-bezier(0.4,0,0.2,1);
+  transition: width 0.35s cubic-bezier(0.4,0,0.2,1), height 0.35s cubic-bezier(0.4,0,0.2,1);
 }
-.kernel-card-item.expanded .kernel-card-thumb { max-height: 86px; }
-
-/* 缩略内容 · 滚轮区域 */
-.kernel-thumb {
-  padding: 16px 14px; display: flex; flex-direction: column;
-  gap: 10px; height: 100%; flex-shrink: 0;
+.kernel-card-item.expanded .kernel-bookmark {
+  width: 100%; height: 60px;
+  flex-direction: row; align-items: center;
 }
-.kernel-thumb .kt-header { display: flex; align-items: flex-start; gap: 10px; flex-shrink: 0; }
-.kernel-thumb .kt-icon { font-size: 28px; flex-shrink: 0; margin-top: 0; }
-.kernel-thumb .kt-header-body { flex: 1; min-width: 0; }
-.kernel-thumb .kt-title { font-size: 14px; font-weight: 700; color: var(--accent); line-height: 1.3; margin-bottom: 2px;
-  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 210px; }
-.kernel-thumb .kt-meta { font-size: 10px; color: var(--text-dim); line-height: 1.4; }
 
-/* 叙事摘要（缩起时不展示） */
-.kernel-thumb .kt-section { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 10px; flex-shrink: 0; }
-.kernel-thumb .kt-section-label { font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
-.kernel-thumb .kt-section-text { font-size: 12px; line-height: 1.4; color: var(--text);
-  overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.kb-inner {
+  padding: 16px; display: flex; flex-direction: column; gap: 8px;
+  height: 100%; flex-shrink: 0;
+}
 
-/* 底层共鸣Hook */
-.kernel-thumb .kt-hook { 
+/* 1. 基础信息 */
+.kb-header { display: flex; align-items: flex-start; gap: 10px; flex-shrink: 0; }
+.kb-header .kb-icon { font-size: 26px; flex-shrink: 0; line-height: 1; margin-top: 2px; }
+.kb-header .kb-body { flex: 1; min-width: 0; }
+.kb-header .kb-title { 
+  font-size: 14px; font-weight: 700; color: var(--accent); line-height: 1.3;
+  overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+}
+.kb-header .kb-meta { 
+  font-size: 10px; color: var(--text-dim); margin-top: 2px; line-height: 1.4;
+  overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+}
+
+/* 顶部横条：展开后的简洁头 */
+.kb-strip {
+  display: none; align-items: center; gap: 10px; padding: 10px 14px;
+  height: 60px; flex-shrink: 0;
+}
+.kernel-card-item.expanded .kb-strip { display: flex; }
+.kb-strip .ks-title { font-size: 14px; font-weight: 700; color: var(--accent);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex:1; }
+.kb-strip .ks-arrow { font-size: 10px; color: var(--text-dim);
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1); }
+.kernel-card-item.expanded .ks-arrow { transform: rotate(90deg); }
+
+/* 2. 叙事结构总结 */
+.kb-narrative {
+  background: linear-gradient(135deg, rgba(59,130,246,0.06) 0%, rgba(99,102,241,0.04) 100%);
+  border: 1px solid rgba(59,130,246,0.14); border-radius: 5px;
+  padding: 9px 10px; flex-shrink: 0;
+}
+.kb-narrative .kb-section-label { 
+  font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
+  color: var(--info, #3b82f6); margin-bottom: 3px;
+}
+.kb-narrative .kb-section-text { 
+  font-size: 11px; line-height: 1.45; color: var(--text-secondary, #a1a1aa);
+  overflow: hidden; text-overflow: ellipsis;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+}
+
+/* 3. 底层共鸣Hooks */
+.kb-hook { 
   background: linear-gradient(135deg, rgba(219,97,162,0.08), rgba(88,166,255,0.05));
   border: 1px solid rgba(219,97,162,0.15); border-radius: 6px;
-  padding: 8px 10px; font-size: 11px; line-height: 1.4; flex-shrink: 0;
+  padding: 8px 10px; flex-shrink: 0;
 }
-.kernel-thumb .kt-hook .hook-label { color: var(--pink); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; }
-.kernel-thumb .kt-hook .hook-text { color: var(--text);
+.kb-hook .kb-hook-label { color: var(--pink); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; }
+.kb-hook .kb-hook-main { font-size: 11px; line-height: 1.45; color: var(--text-secondary, #a1a1aa);
   overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
 
-/* 参考桥段区：带滚轮 */
-.kernel-thumb .kt-beats {
+/* 4. 参考桥段（对白级+架构级，可滚） */
+.kb-beats {
   overflow-y: auto; flex: 1; min-height: 0;
   scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.08) transparent;
   padding-right: 2px;
 }
-.kernel-thumb .kt-beats::-webkit-scrollbar { width: 4px; }
-.kernel-thumb .kt-beats::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.10); border-radius: 2px; }
-.kernel-thumb .kt-beats::-webkit-scrollbar-track { background: transparent; }
-.kernel-thumb .kt-beats .beat-group { margin-bottom: 6px; }
-.kernel-thumb .kt-beats .beat-group-label { font-size: 10px; font-weight: 600; margin-bottom: 2px; }
-.kernel-thumb .kt-beats .beat-group-label.dialogue { color: var(--green); }
-.kernel-thumb .kt-beats .beat-group-label.structure { color: var(--accent); }
-.kernel-thumb .kt-beats .beat-chip {
+.kb-beats::-webkit-scrollbar { width: 4px; }
+.kb-beats::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.10); border-radius: 2px; }
+.kb-beats::-webkit-scrollbar-track { background: transparent; }
+.kb-beats .kb-beat-group { margin-bottom: 6px; }
+.kb-beats .kb-beat-label { font-size: 10px; font-weight: 600; margin-bottom: 2px; }
+.kb-beats .kb-beat-label.dialogue { color: var(--green); }
+.kb-beats .kb-beat-label.structure { color: var(--accent); }
+.kb-beats .kb-beat-chip {
   display: block; padding: 3px 8px; margin: 2px 0;
   border-radius: 6px; font-size: 11px; color: var(--text); line-height: 1.4;
   background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05);
 }
-.kernel-thumb .kt-beats .beat-chip b { color: var(--accent); }
-.chip-conf { 
-  display: inline-block; width: 14px; height: 14px; border-radius: 50%; 
-  font-size: 10px; line-height: 14px; text-align: center; margin-right: 2px;
-  vertical-align: middle;
-}
-.chip-conf.high { background: rgba(63,185,80,.2); color: var(--green); }
-.chip-conf.medium { background: rgba(210,153,29,.2); color: var(--orange); }
-.chip-conf.low { background: rgba(248,81,73,.15); color: var(--red); }
-.chip-conf.unknown { background: rgba(139,148,158,.1); color: var(--dim); }
+.kb-beats .kb-beat-chip b { color: var(--accent); }
 
-/* 底部动作栏 */
-.kernel-thumb .kt-actions {
+/* 书签底部动作区 */
+.kb-footer {
   display: flex; align-items: center; justify-content: space-between;
-  padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.06); flex-shrink: 0;
+  padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.06); flex-shrink: 0;
   font-size: 10px; color: var(--text-dim);
 }
 
-/* 展开详情：向下滑出 */
+/* 展开详情面板：向下滑出，挤走其余卡片 */
 .kernel-card-detail {
   max-height: 0; overflow: hidden;
-  transition: max-height 0.45s cubic-bezier(0.4,0,0.2,1), padding 0.45s ease;
+  transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1);
 }
-.kernel-card-item.expanded .kernel-card-detail { max-height: 2000px; }
+.kernel-card-item.expanded .kernel-card-detail { max-height: 3000px; }
 
 .kernel-detail-inner { padding: 20px 24px; border-top: 1px solid var(--border); }
 .kernel-detail-inner .kd-layer { margin-bottom: 20px; }
@@ -1336,44 +1363,71 @@ async function renderKernelTab() {
       var beats = L5.beats || [];
       
       var vidTitle = kMeta.title || L0.title || '未命名';
-      var typeInfo = [L0.type, L0.genre].filter(Boolean).join(' · ');
+      var genreVal = typeof L0.genre==='string' ? L0.genre : (Array.isArray(L0.genre)?L0.genre.join('、'):'');
+      var metaLine = [L0.type, genreVal, L0.director, L0.culture_context, L0.duration?L0.duration+'s':''].filter(Boolean).join(' · ');
       
+      // 2. 叙事结构
       var journey = L1.hero_journey_phase || '';
       var arc = L1.emotional_arc_shape || '';
+      var structLine = [journey, arc, L1.time_structure, L1.pov].filter(Boolean).join(' · ');
       
+      // 3. 底层共鸣Hooks
       var needsFears = L3.tapped_needs_fears || [];
-      var hookText = needsFears.length > 2 ? needsFears.slice(0,2).join('、') + '…' : needsFears.join('、');
+      var dilemma = L3.core_existential_dilemma || '';
       
-      // 参考桥段过滤：仅展示对白级/架构级中 source_work 非「原创」/非空的节拍
+      // 4. 参考桥段
       var filterBeats = filterRefBeats(beats);
-      var hasRefBeats = filterBeats.dialogue.length > 0 || filterBeats.structure.length > 0;
-      var totalRefCount = filterBeats.dialogue.length + filterBeats.structure.length;
-      var needsBeatScroll = totalRefCount > 6;
+      var hasDialogue = filterBeats.dialogue.length > 0;
+      var hasStruct = filterBeats.structure.length > 0;
+      var totalRef = filterBeats.dialogue.length + filterBeats.structure.length;
       
       html += '<div class="kernel-card-item" id="kci_' + ci + '">' +
-        '<div class="kernel-card-thumb" onclick="toggleKernelCard(' + ci + ')">' +
-          '<div class="kernel-thumb">' +
-            '<div class="kt-header">' +
-              '<div class="kt-icon">🧬</div>' +
-              '<div class="kt-header-body">' +
-                '<div class="kt-title" title="' + escHtml(vidTitle) + '">' + escHtml(vidTitle) + '</div>' +
-                '<div class="kt-meta">' + escHtml(typeInfo) + (L0.director ? ' · ' + escHtml(L0.director) : '') + (L0.duration ? ' · ' + L0.duration + 's' : '') + (L0.culture_context ? ' · ' + escHtml(L0.culture_context) : '') + '</div>' +
+        '<div class="kernel-bookmark" onclick="toggleKernelCard(' + ci + ')">' +
+          '<div class="kb-inner">' +
+            // 1. 基础信息
+            '<div class="kb-header">' +
+              '<span class="kb-icon">🧬</span>' +
+              '<div class="kb-body">' +
+                '<div class="kb-title" title="' + escHtml(vidTitle) + '">' + escHtml(vidTitle) + '</div>' +
+                '<div class="kb-meta">' + escHtml(metaLine) + '</div>' +
               '</div>' +
             '</div>' +
-            '<div class="kt-section">' +
-              '<div class="kt-section-label">叙事结构</div>' +
-              '<div class="kt-section-text">' + escHtml(journey) + (arc ? ' · ' + escHtml(arc) : '') + (L1.time_structure ? ' · ' + escHtml(L1.time_structure) : '') + (L1.pov ? ' · ' + escHtml(L1.pov) : '') + '</div>' +
-            '</div>' +
-            (hookText ? '<div class="kt-hook"><div class="hook-label">🎣 底层共鸣Hook</div><div class="hook-text">' + escHtml(hookText) + '</div></div>' : '') +
-            (hasRefBeats ? buildBeatSection(filterBeats, ci, needsBeatScroll) : '') +
-            '<div class="kt-actions">' +
-              '<span class="kt-expand-text">▶ 展开完整分析</span>' +
-              '<button onclick="event.stopPropagation();useKernelForRewrite(' + ci + ')" style="padding:2px 10px;font-size:11px;background:var(--accent);color:var(--text-inverse);border:1px solid var(--accent);border-radius:4px;cursor:pointer;white-space:nowrap;font-family:inherit">✂️ 洗稿</button>' +
+            // 2. 叙事结构总结
+            (structLine ? '<div class="kb-narrative"><div class="kb-section-label">📐 叙事结构</div><div class="kb-section-text">' + escHtml(structLine) + '</div></div>' : '') +
+            // 3. 底层共鸣Hooks节选
+            (dilemma ? '<div class="kb-hook"><div class="kb-hook-label">🎣 底层共鸣</div>' +
+              '<div class="kb-hook-main">' + escHtml(dilemma.length>80?dilemma.slice(0,80)+'…':dilemma) + '</div></div>' : '') +
+            // 4. 参考桥段
+            ((hasDialogue || hasStruct) ? 
+              '<div class="kb-beats">' +
+                '<div class="kb-beats-header">📖 参考桥段</div>' +
+                (hasDialogue ? '<div class="kb-beat-group"><div class="kb-beat-label dialogue">💬 对白级 ' + filterBeats.dialogue.length + '</div>' +
+                  filterBeats.dialogue.reduce(function(a,b){return a+'<div class="kb-beat-chip"><span class="bc-name">'+escHtml(b.name)+'</span><span class="bc-arrow">←</span><span class="bc-source">'+escHtml((b.provenance||{}).source_work||'?')+'</span></div>';},'') +
+                '</div>' : '') +
+                (hasStruct ? '<div class="kb-beat-group"><div class="kb-beat-label structure">🏗️ 架构级 ' + filterBeats.structure.length + '</div>' +
+                  filterBeats.structure.reduce(function(a,b){return a+'<div class="kb-beat-chip"><span class="bc-name">'+escHtml(b.name)+'</span><span class="bc-arrow">←</span><span class="bc-source">'+escHtml((b.provenance||{}).source_work||'?')+'</span></div>';},'') +
+                '</div>' : '') +
+              '</div>' : '') +
+            // 底部
+            '<div class="kb-footer">' +
+              '<span class="kb-expand-hint">▶ 展开完整分析</span>' +
+              '<button onclick="event.stopPropagation();useKernelForRewrite(' + ci + ')" class="kb-rewrite-btn">✂️ 洗稿</button>' +
             '</div>' +
           '</div>' +
         '</div>' +
+        // 展开后的简洁头
+        '<div class="kb-strip" onclick="toggleKernelCard(' + ci + ')">' +
+          '<span class="kb-icon" style="font-size:18px">🧬</span>' +
+          '<span class="ks-title">' + escHtml(vidTitle) + '</span>' +
+          '<span class="ks-arrow">▶</span>' +
+        '</div>' +
+        // 详情面板
         '<div class="kernel-card-detail">' +
           '<div class="kernel-detail-inner">' + renderKernelDetail(k) + '</div>' +
+          '<div style="padding:0 24px 16px;display:flex;gap:8px">' +
+            '<button onclick="event.stopPropagation();useKernelForRewrite(' + ci + ')" style="padding:4px 16px;font-size:12px;background:var(--accent);color:var(--text-inverse);border:none;border-radius:4px;cursor:pointer;font-family:inherit">✂️ 用此内核洗稿</button>' +
+            '<button onclick="event.stopPropagation();toggleKernelCard(' + ci + ')" style="padding:4px 16px;font-size:12px;background:transparent;color:var(--text-dim);border:1px solid var(--border);border-radius:4px;cursor:pointer;font-family:inherit">▲ 收起</button>' +
+          '</div>' +
         '</div>' +
       '</div>';
     }
@@ -1383,28 +1437,6 @@ async function renderKernelTab() {
   } catch(e) {
     container.innerHTML = '<div class="kernel-empty"><span style="font-size:48px">❌</span><p>加载失败</p><p style="font-size:12px;color:var(--text-dim)">' + escHtml(e.message) + '</p></div>';
   }
-}
-
-// 构建参考桥段 HTML（带分类标签 + 可选滚轮提示）
-function buildBeatSection(catBeats, cardIdx, needsScroll) {
-  var h = '<div class="kt-section"><div class="kt-section-label">📖 参考桥段</div>';
-  h += (needsScroll ? '<div class="kt-beats" style="max-height:160px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,0.08) transparent"><div class="kt-beats-inner">' : '<div class="kt-beats">');
-  if (catBeats.dialogue.length) {
-    h += '<div class="beat-group"><div class="beat-group-label dialogue">💬 对白级 ' + catBeats.dialogue.length + '</div>';
-    catBeats.dialogue.forEach(function(b){
-      h += '<span class="beat-chip"><b>' + escHtml(b.name) + '</b> ← ' + escHtml((b.provenance||{}).source_work||'?') + '</span>';
-    });
-    h += '</div>';
-  }
-  if (catBeats.structure.length) {
-    h += '<div class="beat-group"><div class="beat-group-label structure">🏗️ 架构级 ' + catBeats.structure.length + '</div>';
-    catBeats.structure.forEach(function(b){
-      h += '<span class="beat-chip"><b>' + escHtml(b.name) + '</b> ← ' + escHtml((b.provenance||{}).source_work||'?') + '</span>';
-    });
-    h += '</div>';
-  }
-  h += (needsScroll ? '</div></div>' : '</div>') + '</div>';
-  return h;
 }
 
 // 过滤参考桥段：原创的不展示
@@ -1437,11 +1469,25 @@ function filterRefBeats(beats) {
 }
 
 function toggleKernelCard(idx) {
-  var item = document.getElementById('kci_' + idx);
-  if (!item) return;
-  item.classList.toggle('expanded');
-  var textEl = item.querySelector('.kt-expand-text');
-  if (textEl) textEl.textContent = item.classList.contains('expanded') ? '▼ 收起' : '▶ 展开完整分析';
+  var target = document.getElementById('kci_' + idx);
+  if (!target) return;
+  var wasExpanded = target.classList.contains('expanded');
+  
+  // 收起所有其他卡片
+  var all = document.querySelectorAll('.kernel-card-item');
+  for (var i = 0; i < all.length; i++) {
+    all[i].classList.remove('expanded');
+  }
+  
+  // 如果之前没展开 → 展开它；如果之前展开了 → 收起（toggle）
+  if (!wasExpanded) {
+    target.classList.add('expanded');
+    // 滚动定位：让展开的书签条滚动到可见区域顶部
+    setTimeout(function() {
+      var header = target.querySelector('.kernel-bookmark');
+      if (header) header.scrollIntoView({behavior: 'smooth', block: 'start'});
+    }, 100);
+  }
 }
 
 // 内核卡 → 洗稿重构 Tab 联动（指定卡片）
