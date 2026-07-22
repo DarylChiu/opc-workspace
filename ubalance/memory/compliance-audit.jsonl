@@ -165,3 +165,7 @@
 {"timestamp":"2026-07-21T00:06:24+0700","check":"L4-audit-v2","agent":"balance","fixes":1,"shallow_issues":1,"deep_issues":0,"diary_lines":44,"diary_sections":5,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
 {"timestamp":"2026-07-22T00:03:29+0700","check":"L4-audit-v2","agent":"balance","fixes":3,"shallow_issues":3,"deep_issues":2,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
 {"timestamp":"2026-07-22T00:06:27+0700","check":"L4-audit-v2","agent":"balance","fixes":1,"shallow_issues":0,"deep_issues":0,"diary_lines":45,"diary_sections":5,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-07-23T00:00:13+0700","check":"L4-audit-v2","agent":"balance","fixes":3,"shallow_issues":5,"deep_issues":3,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-07-23T00:03:10+0700","check":"post-op","task":"每日记忆归档审计 2026-07-23","score":3,"total":5,"warnings":[
+  "🔴 任务涉及问题/失败/审计发现，建议提炼到 lessons.md"
+]}
