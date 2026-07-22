@@ -664,7 +664,7 @@ def run_pipeline(transcript: list, video_path: str = None,
 # ═══ 异步任务系统 ═══
 _pending_tasks: dict = {}
 
-def _run_transcribe(task_id: str, url: str):
+def _run_transcribe(task_id: str, url: str, video_title: str = ""):
     """V3 后台线程: 下载 → Gemini 视频分析 → DeepSeek 文本分析 → 全部产出"""
     task_start = time.time()
     def _progress(pct, stage):
@@ -751,9 +751,98 @@ def _run_transcribe(task_id: str, url: str):
                 "run_id": run_id
             }
         }
+        
+        # M3: 自动触发内核提取
+        vt = _pending_tasks.get(task_id, {}).get("video_title", video_title or "")
+        threading.Thread(target=_run_kernel_extraction, args=(task_id, t, analysis, vu, vt),
+                         daemon=True).start()
     except Exception as e:
         import traceback; traceback.print_exc()
         _pending_tasks[task_id] = {"status": "error", "error": str(e)}
+
+
+# ═══ M3: 自动内核提取 ═══
+def _run_kernel_extraction(task_id: str, transcript: list, analysis: dict, video_url: str, video_title: str = ""):
+    """视频分析完成后自动运行内核提取，生成内核卡 JSON"""
+    try:
+        print(f"[KERNEL] 开始自动提取...")
+        _pending_tasks[task_id]["kernel_status"] = "extracting"
+        
+        # 构建分析文本摘要供提取器使用
+        overview = analysis.get("overview", {}) or {}
+        story = analysis.get("story", {}) or {}
+        script_analysis = analysis.get("scriptAnalysis", {}) or {}
+        cinematography = analysis.get("cinematography", {}) or {}
+        
+        # 转写文本
+        text_lines = []
+        for seg in (transcript or []):
+            ts = seg.get("timestamp", "")
+            txt = seg.get("text", "")
+            text_lines.append(f"[{ts}] {txt}")
+        
+        source = f"""# 视频分析报告
+
+## 基本信息
+- 概要: {overview.get('oneLiner','') or story.get('synopsis','')}
+- 类型: {', '.join(story.get('genre',[]) or [])}
+
+## 脚本分析
+- 叙事结构: {json.dumps(script_analysis.get('acts',[]), ensure_ascii=False)[:2000]}
+
+## 对白全文
+{chr(10).join(text_lines[:100])}
+
+## 镜头语言
+- 景别: {cinematography.get('cinematography',{}).get('shotTypes','')}
+- 构图: {cinematography.get('cinematography',{}).get('composition','')}
+"""
+        
+        # 调用提取器
+        from kernel_extractor.extractors import ds_call, LAYER_SYS
+        
+        out_dir = WORKSPACE / "kernel_output"
+        out_dir.mkdir(parents=True, exist_ok=True)
+        
+        # 只跑核心层(L0+L1, L2, L3, L5)，跳过L4节省时间
+        plan = [("L0_L1", 2048), ("L2", 4096), ("L3", 4096), ("L5", 8192)]
+        kernel = {}
+        for layer, mt in plan:
+            try:
+                result = ds_call(LAYER_SYS[layer], source, max_tokens=mt, temperature=0.3)
+                kernel.update(result["data"])
+                print(f"[KERNEL] {layer} OK")
+            except Exception as e:
+                print(f"[KERNEL] {layer} FAILED: {e}")
+        
+        if not kernel:
+            _pending_tasks[task_id]["kernel_status"] = "failed"
+            return
+        
+        # 用真实标题修补贴片 + 存 meta 信息
+        kernel["_meta"] = {"task_id": task_id, "title": video_title, "video_url": video_url}
+        if video_title:
+            kernel.setdefault("L0_source", {})["title"] = video_title
+        elif not kernel.get("L0_source", {}).get("title") or kernel["L0_source"]["title"] == "未知":
+            # 备份方案：从分析概要生成描述性标题
+            synopsis = overview.get('oneLiner', '') or story.get('synopsis', '')
+            if synopsis:
+                kernel.setdefault("L0_source", {})["title"] = synopsis[:50]
+                kernel["_meta"]["title"] = synopsis[:50]
+        
+        # 保存
+        out_name = f"kernel_card_{task_id}.json"
+        json_path = out_dir / out_name
+        json_path.write_text(json.dumps(kernel, ensure_ascii=False, indent=2))
+        
+        _pending_tasks[task_id]["kernel_status"] = "done"
+        _pending_tasks[task_id]["kernel_card"] = out_name
+        print(f"[KERNEL] ✅ 内核卡已生成: {out_name} (标题: {video_title or '(来自分析概要)'})")
+        
+    except Exception as e:
+        import traceback; traceback.print_exc()
+        _pending_tasks[task_id]["kernel_status"] = "failed"
+        print(f"[KERNEL] ❌ 失败: {e}")
 
 
 # ═══ HTTP Server ═══
@@ -768,10 +857,13 @@ class APIHandler(SimpleHTTPRequestHandler):
                     self._json({"error": "缺少url"}, 400); return
                 print(f"[TRANSCRIBE] 启动: {url}")
                 task_id = str(uuid.uuid4())[:8]
+                video_title = body.get("video_title", "")
                 _pending_tasks[task_id] = {"status": "processing", "_start": time.time(),
                     "stage": "⏳ 排队...", "progress": 0}
+                if video_title:
+                    _pending_tasks[task_id]["video_title"] = video_title
                 threading.Thread(target=_run_transcribe,
-                    args=(task_id, url), daemon=True).start()
+                    args=(task_id, url, video_title), daemon=True).start()
                 self._json({"task_id": task_id, "status": "processing"})
             except Exception as e:
                 import traceback; traceback.print_exc()
@@ -787,7 +879,9 @@ class APIHandler(SimpleHTTPRequestHandler):
                     self._json({"status": "not_found",
                                "message": "任务不存在或已过期"})
                 else:
-                    self._json(task)
+                    # 包含内核提取状态
+                    resp = dict(task)
+                    self._json(resp)
             except Exception as e:
                 self._json({"error": str(e)}, 500)
         
@@ -881,6 +975,31 @@ class APIHandler(SimpleHTTPRequestHandler):
             except Exception as e:
                 self._json({"error": str(e), "commerce": {}}, 200)
         
+        elif self.path == "/api/rewrite/run":
+            # M2 洗稿重构器：接收目标设定 → 运行5步缝合工艺 → 返回新脚本
+            try:
+                body = json.loads(self.rfile.read(
+                    int(self.headers.get("Content-Length", 0))))
+                from rewriter.engine import TargetConfig, RewriterEngine
+                
+                target = TargetConfig(
+                    new_ip_name=body.get("new_ip_name", "新短剧"),
+                    new_style=body.get("new_style", "都市爱情"),
+                    new_setting=body.get("new_setting", "现代都市"),
+                    new_era=body.get("new_era", "2020s"),
+                    character_map=body.get("character_map", {}),
+                    scene_map=body.get("scene_map", {}),
+                    tone_shift=body.get("tone_shift", "保持原内核"),
+                    extra_notes=body.get("extra_notes", ""),
+                )
+                
+                engine = RewriterEngine(target)
+                result = engine.run_full_pipeline()
+                self._json(result)
+            except Exception as e:
+                import traceback; traceback.print_exc()
+                self._json({"error": str(e)}, 500)
+        
         elif self.path == "/api/runs":
             try:
                 body = json.loads(self.rfile.read(
@@ -894,6 +1013,21 @@ class APIHandler(SimpleHTTPRequestHandler):
             self._json({"error": "not found"}, 404)
     
     def do_GET(self):
+        # 主页：显式设置编码，兼容 Safari
+        if self.path == "/" or self.path == "/index.html":
+            try:
+                hp = WORKSPACE / "index.html"
+                body = hp.read_bytes()
+                self.send_response(200)
+                self.send_header("Content-Type", "text/html; charset=utf-8")
+                self.send_header("Content-Length", str(len(body)))
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                self.wfile.write(body)
+            except Exception as e:
+                self._json({"error": str(e)}, 500)
+            return
+        
         # 视频文件服务
         if self.path.startswith("/video/"):
             vp = WORKSPACE / "videos" / self.path[7:]
@@ -927,6 +1061,78 @@ class APIHandler(SimpleHTTPRequestHandler):
         if self.path == "/api/runs":
             self._json(query_runs("", 20))
             return
+        if self.path == "/api/kernel_card":
+            # 内核洗稿MVP · M1: 返回全部内核卡
+            try:
+                from urllib.parse import urlparse, parse_qs
+                kd = WORKSPACE / "kernel_output"
+                cards = sorted(kd.glob("*.json"), key=lambda p: p.stat().st_mtime, reverse=True) if kd.exists() else []
+                if cards:
+                    all_cards = []
+                    for c in cards:
+                        try:
+                            d = json.loads(c.read_text())
+                            all_cards.append({"data": d, "name": c.name, "updated": c.stat().st_mtime})
+                        except: pass
+                    self._json({"cards": all_cards})
+                else:
+                    self._json({"cards": []})
+            except Exception as e:
+                self._json({"error": str(e)}, 200)
+            return
+        
+        if self.path.startswith("/api/provenance/verify"):
+            # M1-拓展: provenance 验证
+            try:
+                from urllib.parse import urlparse, parse_qs
+                from provenance.engine import build_queries, search_offline, tokenize_beat
+                
+                qs = parse_qs(urlparse(self.path).query)
+                beat_id = qs.get("beat_id", [None])[0]
+                
+                # 如果指定 beat_id，只验证那一个；否则全量
+                kd = WORKSPACE / "kernel_output"
+                cards = sorted(kd.glob("*.json"), key=lambda p: p.stat().st_mtime, reverse=True)
+                if not cards:
+                    self._json({"error": "no kernel card"}, 200)
+                    return
+                card = json.loads(cards[0].read_text())
+                beats = card.get("L5_beat_library", {}).get("beats", [])
+                
+                results = []
+                for b in beats:
+                    if beat_id and b.get("id") != beat_id:
+                        continue
+                    queries = build_queries(b)
+                    offline = search_offline(b)
+                    offline_conf = "high" if offline and offline[0]["score"]>=10 else ("medium" if offline and offline[0]["score"]>=5 else ("low" if offline else "unknown"))
+                    results.append({
+                        "beat_id": b.get("id"),
+                        "beat_name": b.get("name"),
+                        "queries": queries,
+                        "offline_matches": offline,
+                        "offline_confidence": offline_conf,
+                    })
+                
+                self._json({"results": results, "total": len(results)})
+            except Exception as e:
+                self._json({"error": str(e)}, 200)
+            return
+        
+        if self.path == "/api/rewrite/presets":
+            from rewriter.engine import PRESET_TARGETS
+            try:
+                presets = {}
+                for name, t in PRESET_TARGETS.items():
+                    d = {"new_ip_name": t.new_ip_name, "new_style": t.new_style,
+                         "new_setting": t.new_setting, "new_era": t.new_era,
+                         "character_map": t.character_map, "scene_map": t.scene_map,
+                         "tone_shift": t.tone_shift, "extra_notes": t.extra_notes}
+                    presets[name] = d
+                self._json({"presets": presets})
+            except Exception as e:
+                self._json({"error": str(e)}, 200)
+            return
         
         return super().do_GET()
     
@@ -949,6 +1155,18 @@ class APIHandler(SimpleHTTPRequestHandler):
     def log_message(self, format, *args):
         if "/api/" in str(args):
             print(f"[HTTP] {args[0]}")
+    
+    def guess_type(self, path):
+        """Override to add charset=utf-8 for text files (fix Safari encoding)"""
+        import mimetypes
+        mime, _ = mimetypes.guess_type(path)
+        if mime and mime.startswith('text/'):
+            return mime + '; charset=utf-8'
+        if path.endswith('.js'):
+            return 'application/javascript; charset=utf-8'
+        if path.endswith('.json'):
+            return 'application/json; charset=utf-8'
+        return mime
 
 
 def main():

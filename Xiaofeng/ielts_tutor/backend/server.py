@@ -44,6 +44,7 @@ def _prewarm_models():
     t.start()
 sessions = PersistentSessionManager()
 FRONTEND = os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend", "index.html")
+VOCAB_PAGE = os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend", "vocab.html")
 
 # Cost tracking
 cost_stats = {"stt_calls":0, "tts_calls":0, "tts_chars":0, "ds_input":0, "ds_output":0}
@@ -67,7 +68,16 @@ CRITICAL RULES:
     "ielts_part2": """You are an IELTS examiner doing Part 2 (Long Turn). Give the topic card clearly, give 1 min prep silently, then let candidate speak 1-2 min. Ask 1-2 natural follow-up questions after. Keep your own words minimal.""",
     "ielts_part3": """You are an IELTS examiner doing Part 3. Ask abstract discussion questions. Follow up on answers with deeper questions. Challenge ideas respectfully. Keep questions concise and natural.""",
     "business_pitch": """You are a business English coach for investor pitch practice. Simulate an investor meeting naturally. Ask typical questions investors ask. Give one specific, constructive tip after each answer. Keep it professional but encouraging.""",
-    "free_talk": """You are a friendly English conversation partner. Chat naturally about any topic. Respond with 2-4 sentences. When you notice a grammar error, gently correct it once: 'By the way, we usually say...' Be warm and curious. Ask follow-up questions.""",
+    "free_talk": """You are a thoughtful English conversation partner for deep, natural discussion.
+
+CORE RULES:
+- LISTEN first — let the user drive the topic. Follow their thread, don't redirect to new topics.
+- ENGAGE WITH CONTENT — respond to WHAT they're saying, not HOW they're saying it. Show genuine curiosity about their ideas, opinions, and stories.
+- GO DEEPER, NOT WIDER — ask clarifying or deepening questions about what they just said, rather than shifting to a new subject. "Tell me more about that..." / "What made you feel that way?" / "That's interesting — why do you think that is?"
+- GRAMMAR: Only correct errors that genuinely block understanding. If you do correct, make it brief and natural — never interrupt the flow of conversation for grammar. The goal is connection, not perfection.
+- RESPONSE LENGTH: 3-6 sentences. Give substantive, thoughtful responses — this is a real conversation, not small talk.
+- NEVER say things like "that's great!" or "nice to hear" as filler. If you acknowledge something, make it specific to what they said.
+- Match the user's emotional tone. If they're passionate, match that energy. If they're reflective, slow down with them.""",
 }
 GREETINGS = {
     "ielts_part1": "Good morning. My name is Alex and I'll be your IELTS examiner today. Can you tell me your full name, please?",
@@ -264,6 +274,9 @@ MONITOR_HTML = os.path.join(os.path.dirname(os.path.dirname(__file__)), "fronten
 @app.get("/")
 async def index(): return HTMLResponse(open(FRONTEND).read())
 
+@app.get("/vocab")
+async def vocab_page(): return HTMLResponse(open(VOCAB_PAGE).read())
+
 @app.get("/monitor")
 async def monitor_page():
     if os.path.exists(MONITOR_HTML):
@@ -318,6 +331,11 @@ async def dashboard_reviews(limit: int = 100, status: str = None):
 @app.get("/api/dashboard/history")
 async def dashboard_history(limit: int = 20):
     return {"history": sessions.get_history(limit=min(limit, 100))}
+
+@app.get("/api/dashboard/mode-evals")
+async def dashboard_mode_evals(mode: str, limit: int = 3):
+    """返回指定模式最近N次评估详情（用于训练模式总结展开）"""
+    return {"evals": sessions.get_mode_evals(mode=mode, limit=min(limit, 10))}
 
 # ── v1.1.0 M3: 跟读闭环 Shadowing ──
 SHADOW_HTML = os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend", "shadow.html")
@@ -435,13 +453,36 @@ async def start(req: Request):
 @app.get("/api/session/{sid}/score")
 async def get_session_score(sid: str):
     """HTTP fallback: WS断开时前端轮询取评估结果 (2026-07-15 问题3修复)"""
+    # 1. Check in-memory cache first
     session = sessions.get(sid)
-    if not session:
-        return {"status": "not_found"}
-    sc = session.get("last_score")
-    if sc:
-        return {"status": "ready", "scores": sc}
-    return {"status": "pending"}
+    if session:
+        sc = session.get("last_score")
+        if sc:
+            return {"status": "ready", "scores": sc}
+    
+    # 2. Fallback: query database (covers server restart, ngrok disconnect, etc.)
+    try:
+        import json as _json2
+        conn = sessions._get_db() if hasattr(sessions, '_get_db') else None
+        if not conn:
+            import sqlite3 as _sql, os as _os2
+            db_path = _os2.path.join(_os2.path.dirname(_os2.path.dirname(__file__)), "data", "ielts_tutor.db")
+            conn = _sql.connect(db_path)
+        row = conn.execute(
+            "SELECT overall,fluency,vocabulary,grammar,pronunciation,summary,improvements,highlights FROM evaluations WHERE session_id=?",
+            (sid,)).fetchone()
+        if row:
+            sc = {
+                "overall": row[0], "fluency": row[1], "vocabulary": row[2],
+                "grammar": row[3], "pronunciation": row[4], "summary": row[5],
+                "improvements": _json2.loads(row[6]) if row[6] else [],
+                "highlights": _json2.loads(row[7]) if row[7] else []
+            }
+            return {"status": "ready", "scores": sc}
+    except Exception:
+        pass
+    
+    return {"status": "not_found"}
 
 @app.get("/api/reports")
 async def list_reports():
@@ -454,6 +495,94 @@ from fastapi.staticfiles import StaticFiles
 reports_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "reports")
 os.makedirs(reports_dir, exist_ok=True)
 app.mount("/reports", StaticFiles(directory=reports_dir), name="reports")
+
+# ── Vocabulary API (v1.3) ──
+
+@app.get("/api/vocab/wordlist")
+async def vocab_wordlist():
+    p = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "cefr_b2plus.json")
+    if os.path.exists(p): return json.loads(open(p).read())
+    return []
+
+@app.post("/api/vocab/save")
+async def vocab_save(req: Request):
+    body = await req.json()
+    import sqlite3 as _s
+    db = _s.connect(os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "ielts_tutor.db"))
+    db.execute("""CREATE TABLE IF NOT EXISTS vocabulary (
+        id INTEGER PRIMARY KEY AUTOINCREMENT, word TEXT NOT NULL, source_sentence TEXT,
+        source_speaker TEXT DEFAULT 'tutor', better_expression TEXT, context TEXT,
+        session_id TEXT, created_at TEXT DEFAULT (datetime('now')),
+        practice_count INTEGER DEFAULT 0, mastered INTEGER DEFAULT 0)""")
+    db.execute("INSERT INTO vocabulary (word,source_sentence,source_speaker,better_expression,context,session_id) VALUES (?,?,?,?,?,?)",
+        (body.get("word",""), body.get("source_sentence",""), body.get("source_speaker","tutor"),
+         body.get("better_expression",""), body.get("context",""), body.get("session_id","")))
+    db.commit(); db.close()
+    return {"ok": True}
+
+@app.get("/api/vocab/list")
+async def vocab_list(limit: int = 50, mastered: int = 0):
+    import sqlite3 as _s
+    db = _s.connect(os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "ielts_tutor.db"))
+    db.row_factory = _s.Row
+    rows = db.execute("SELECT * FROM vocabulary WHERE mastered=? ORDER BY created_at DESC LIMIT ?", (mastered, limit)).fetchall()
+    db.close()
+    return {"items": [dict(r) for r in rows]}
+
+@app.delete("/api/vocab/{vid}")
+async def vocab_delete(vid: int):
+    import sqlite3 as _s
+    db = _s.connect(os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "ielts_tutor.db"))
+    db.execute("DELETE FROM vocabulary WHERE id=?", (vid,))
+    db.commit(); db.close()
+    return {"ok": True}
+
+@app.put("/api/vocab/{vid}/practice")
+async def vocab_practice(vid: int):
+    import sqlite3 as _s
+    db = _s.connect(os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "ielts_tutor.db"))
+    db.execute("UPDATE vocabulary SET practice_count=practice_count+1 WHERE id=?", (vid,))
+    db.commit(); db.close()
+    return {"ok": True}
+
+@app.put("/api/vocab/{vid}/master")
+async def vocab_master(vid: int):
+    import sqlite3 as _s
+    db = _s.connect(os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "ielts_tutor.db"))
+    db.execute("UPDATE vocabulary SET mastered=1 WHERE id=?", (vid,))
+    db.commit(); db.close()
+    return {"ok": True}
+
+@app.post("/api/vocab/improve")
+async def vocab_improve(req: Request):
+    body = await req.json()
+    word = body.get("word","")
+    context = body.get("context","")
+    speaker = body.get("speaker","tutor")
+    if not word: return {"suggestions": []}
+    if speaker == "user":
+        prompt = f"""The English learner wrote: "{context}" (focus on: "{word}")
+Suggest 2-3 better or more natural English expressions for "{word}" in this context.
+Return ONLY valid JSON: {{"suggestions":[{{"original":"word","better":"alternative","explanation":"brief Chinese explanation"}}]}}
+Keep explanations in Chinese. Focus on natural, conversational English."""
+    else:
+        prompt = f"""The tutor said: "{context}" (focus on: "{word}")
+Suggest 2-3 synonyms or alternative expressions for "{word}" with a brief Chinese explanation of the nuance.
+Return ONLY valid JSON: {{"suggestions":[{{"original":"word","better":"alternative","explanation":"brief Chinese explanation"}}]}}"""
+    try:
+        async with aiohttp.ClientSession() as s:
+            async with s.post(f"{DEEPSEEK_BASE}/chat/completions",
+                json={"model":"deepseek-chat","messages":[{"role":"user","content":prompt}],"temperature":0.3,"max_tokens":300},
+                headers={"Authorization":f"Bearer {DEEPSEEK_KEY}","Content-Type":"application/json"},
+                timeout=aiohttp.ClientTimeout(10)) as r:
+                data = await r.json()
+                resp = data["choices"][0]["message"]["content"]
+                start = resp.find('{')
+                end = resp.rfind('}') + 1
+                if start >= 0 and end > start: return json.loads(resp[start:end])
+    except Exception as e:
+        logger.error(f"Vocab improve error: {e}")
+    return {"suggestions": []}
 
 # ── Realtime Pipeline Handler (Qwen Omni) ──
 async def handle_realtime(ws: WebSocket, sid: str, session: dict, mode: str, api_key: str):
@@ -702,6 +831,18 @@ async def ws_chat(ws: WebSocket, sid: str):
         transcriber.reset()  # clear buffer for next utterance
         if tracker: await tracker.record_asr(text, conf, (time.time()-stt_t0)*1000, model="faster-whisper-small.en")
         if not text or len(text.strip()) < 2: return
+        # free_talk模式: 过滤STT碎片 (2026-07-22)
+        if mode == "free_talk":
+            stripped = text.strip()
+            fillers = {"you","oh","um","uh","ah","yeah","yep","yes","no","ok","okay",
+                      "hmm","mm","um-hmm","uh-huh","bye","goodbye","thanks","thank you",
+                      "sorry","sorry.","oh.","oh,","no.","no,","wait","wait a minute"}
+            if stripped.lower().rstrip('.,!?') in fillers:
+                logger.info(f"STT[filter]: filler → '{stripped[:40]}'")
+                return
+            if len(stripped) < 25 and not re.search(r'[.!?]$', stripped):
+                logger.info(f"STT[filter]: fragment → '{stripped[:40]}'")
+                return
         logger.info(f"STT: {text[:80]} (conf={conf:.2f})")
         
         user_texts.append(text)
@@ -912,8 +1053,8 @@ FORMAT RULES:
         try: await ws.send_json({"type": "error", "msg": str(e)})
         except: pass
     finally:
-        # Auto-evaluate on disconnect if user spoke
-        if user_texts:
+        # Auto-evaluate on disconnect if user had meaningful conversation (≥10 turns)
+        if user_texts and len(user_texts) >= 10:
             try:
                 logger.info(f"AUTO-EVAL: {sid} {len(user_texts)} texts")
                 all_text = "\n---\n".join(user_texts[-10:])
@@ -944,6 +1085,51 @@ FORMAT RULES:
                 logger.error(f"AUTO-EVAL failed: {e}")
         session["status"] = "ended"
         if tracker: tracker.end_session()
+        
+        # v1.4: 保存上轮最后5轮对话，供下一Session回显 (Daryl 2026-07-22 需求)
+        if user_texts and history:
+            try:
+                _save_last_turns(mode, history)
+            except Exception as e:
+                logger.warning(f"save_last_turns failed: {e}")
+
+# ── Last Turns Persistence (v1.4) ──
+import threading as _threading
+_last_turns_lock = _threading.Lock()
+
+def _get_last_turns_path():
+    return os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "last_turns.json")
+
+def _save_last_turns(mode, history):
+    """保存每个 mode 最后5轮对话（10条消息）"""
+    # Extract last 10 messages (5 user + 5 assistant pairs) excluding system
+    msgs = [m for m in history if m.get("role") != "system"]
+    last10 = msgs[-10:] if len(msgs) >= 10 else msgs
+    
+    with _last_turns_lock:
+        path = _get_last_turns_path()
+        data = {}
+        if os.path.exists(path):
+            try:
+                with open(path) as f:
+                    data = json.load(f)
+            except: pass
+        data[mode] = {"turns": last10, "saved_at": datetime.now().isoformat()}
+        with open(path, 'w') as f:
+            json.dump(data, f, ensure_ascii=False)
+
+@app.get("/api/session/last-turns")
+async def get_last_turns(mode: str = "free_talk"):
+    """返回上轮最后5轮对话，供新Session回显"""
+    path = _get_last_turns_path()
+    if not os.path.exists(path):
+        return {"turns": []}
+    try:
+        with open(path) as f:
+            data = json.load(f)
+        return {"turns": data.get(mode, {}).get("turns", []), "mode": mode, "saved_at": data.get(mode, {}).get("saved_at", "")}
+    except:
+        return {"turns": []}
 
 # ── Debug API Routes (DEBUG_MODE=1 only) ──
 if debug_manager:

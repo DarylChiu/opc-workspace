@@ -19,6 +19,70 @@
   --card-bg: #222;
   --card-hover: #2a2a2a;
   --card-active: #1a2740;
+
+  /* ── OPC 设计系统 v1.0 变量（洗稿重构等新模块使用）── */
+  /* 背景层 */
+  --bg-root: #09090b;
+  --bg-base: #0f0f13;
+  --bg-surface: #18181d;
+  --bg-elevated: #1e1e24;
+  --bg-overlay: #26262e;
+  /* 文字 */
+  --text-primary: #f4f4f6;
+  --text-secondary: #a1a1aa;
+  --text-tertiary: #71717a;
+  --text-inverse: #09090b;
+  /* 强调色 */
+  --accent-primary: #6366f1;
+  --accent-hover: #818cf8;
+  --accent-active: #4f46e5;
+  --accent-subtle: rgba(99, 102, 241, 0.12);
+  --accent-glow: rgba(99, 102, 241, 0.25);
+  /* 语义 */
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --info: #3b82f6;
+  /* 边框 */
+  --border-default: rgba(255, 255, 255, 0.06);
+  --border-subtle: rgba(255, 255, 255, 0.04);
+  --border-strong: rgba(255, 255, 255, 0.10);
+  /* 字体 */
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", "SF Mono", monospace;
+  /* 字号 */
+  --text-xs: 0.6875rem;
+  --text-sm: 0.8125rem;
+  --text-base: 0.9375rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: 2.25rem;
+  /* 字重 */
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  /* 间距 */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  /* 圆角 */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-full: 9999px;
+  /* 过渡 */
+  --transition-fast: 120ms;
+  --transition-base: 200ms;
+  --transition-slow: 300ms;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 body { 
@@ -355,6 +419,295 @@ body {
 ::-webkit-scrollbar-thumb { -webkit-appearance: none; background: rgba(255,255,255,0.08); border-radius: 2px; }
 ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.18); }
 ::-webkit-scrollbar-corner { background: transparent; }
+
+/* ── 内核卡：书签缩略 → 横向展开 ── */
+/* ── 内核卡：多卡片列表 ── */
+.kernel-card-list { display: flex; flex-direction: column; gap: 16px; padding: 16px 0; }
+
+.kernel-card-item {
+  background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px;
+  overflow: hidden; transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.kernel-card-item:hover { border-color: var(--accent-dim); }
+.kernel-card-item.expanded { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent-dim); }
+
+/* 缩略页：固定尺寸 260×400px，内容溢出可滚 */
+.kernel-card-thumb {
+  width: 260px; max-height: 400px; overflow: hidden;
+  display: flex; flex-direction: column; cursor: pointer;
+  transition: max-height 0.40s cubic-bezier(0.4,0,0.2,1);
+}
+.kernel-card-item.expanded .kernel-card-thumb { max-height: 86px; }
+
+/* 缩略内容 · 滚轮区域 */
+.kernel-thumb {
+  padding: 16px 14px; display: flex; flex-direction: column;
+  gap: 10px; height: 100%; flex-shrink: 0;
+}
+.kernel-thumb .kt-header { display: flex; align-items: flex-start; gap: 10px; flex-shrink: 0; }
+.kernel-thumb .kt-icon { font-size: 28px; flex-shrink: 0; margin-top: 0; }
+.kernel-thumb .kt-header-body { flex: 1; min-width: 0; }
+.kernel-thumb .kt-title { font-size: 14px; font-weight: 700; color: var(--accent); line-height: 1.3; margin-bottom: 2px;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 210px; }
+.kernel-thumb .kt-meta { font-size: 10px; color: var(--text-dim); line-height: 1.4; }
+
+/* 叙事摘要（缩起时不展示） */
+.kernel-thumb .kt-section { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 10px; flex-shrink: 0; }
+.kernel-thumb .kt-section-label { font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+.kernel-thumb .kt-section-text { font-size: 12px; line-height: 1.4; color: var(--text);
+  overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+
+/* 底层共鸣Hook */
+.kernel-thumb .kt-hook { 
+  background: linear-gradient(135deg, rgba(219,97,162,0.08), rgba(88,166,255,0.05));
+  border: 1px solid rgba(219,97,162,0.15); border-radius: 6px;
+  padding: 8px 10px; font-size: 11px; line-height: 1.4; flex-shrink: 0;
+}
+.kernel-thumb .kt-hook .hook-label { color: var(--pink); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; }
+.kernel-thumb .kt-hook .hook-text { color: var(--text);
+  overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+
+/* 参考桥段区：带滚轮 */
+.kernel-thumb .kt-beats {
+  overflow-y: auto; flex: 1; min-height: 0;
+  scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.08) transparent;
+  padding-right: 2px;
+}
+.kernel-thumb .kt-beats::-webkit-scrollbar { width: 4px; }
+.kernel-thumb .kt-beats::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.10); border-radius: 2px; }
+.kernel-thumb .kt-beats::-webkit-scrollbar-track { background: transparent; }
+.kernel-thumb .kt-beats .beat-group { margin-bottom: 6px; }
+.kernel-thumb .kt-beats .beat-group-label { font-size: 10px; font-weight: 600; margin-bottom: 2px; }
+.kernel-thumb .kt-beats .beat-group-label.dialogue { color: var(--green); }
+.kernel-thumb .kt-beats .beat-group-label.structure { color: var(--accent); }
+.kernel-thumb .kt-beats .beat-chip {
+  display: block; padding: 3px 8px; margin: 2px 0;
+  border-radius: 6px; font-size: 11px; color: var(--text); line-height: 1.4;
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05);
+}
+.kernel-thumb .kt-beats .beat-chip b { color: var(--accent); }
+.chip-conf { 
+  display: inline-block; width: 14px; height: 14px; border-radius: 50%; 
+  font-size: 10px; line-height: 14px; text-align: center; margin-right: 2px;
+  vertical-align: middle;
+}
+.chip-conf.high { background: rgba(63,185,80,.2); color: var(--green); }
+.chip-conf.medium { background: rgba(210,153,29,.2); color: var(--orange); }
+.chip-conf.low { background: rgba(248,81,73,.15); color: var(--red); }
+.chip-conf.unknown { background: rgba(139,148,158,.1); color: var(--dim); }
+
+/* 底部动作栏 */
+.kernel-thumb .kt-actions {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.06); flex-shrink: 0;
+  font-size: 10px; color: var(--text-dim);
+}
+
+/* 展开详情：向下滑出 */
+.kernel-card-detail {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.45s cubic-bezier(0.4,0,0.2,1), padding 0.45s ease;
+}
+.kernel-card-item.expanded .kernel-card-detail { max-height: 2000px; }
+
+.kernel-detail-inner { padding: 20px 24px; border-top: 1px solid var(--border); }
+.kernel-detail-inner .kd-layer { margin-bottom: 20px; }
+.kernel-detail-inner .kd-layer h4 { 
+  font-size: 14px; color: var(--accent); margin-bottom: 10px;
+  padding-bottom: 6px; border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.kernel-detail-inner .kd-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 8px; }
+.kernel-detail-inner .kd-item { 
+  background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); 
+  border-radius: 6px; padding: 10px 12px; font-size: 12px; line-height: 1.5;
+}
+.kernel-detail-inner .kd-item .kd-label { color: var(--text-dim); font-size: 10px; margin-bottom: 3px; text-transform: uppercase; letter-spacing: 0.5px; }
+.kernel-detail-inner .kd-item .kd-val { color: var(--text); }
+
+/* 节拍表 */
+.kd-beat-table { width: 100%; font-size: 12px; border-collapse: collapse; }
+.kd-beat-table th { text-align: left; padding: 6px 8px; color: var(--text-dim); font-size: 10px; border-bottom: 1px solid var(--border); }
+.kd-beat-table td { padding: 6px 8px; border-bottom: 1px solid rgba(255,255,255,0.03); }
+.kd-beat-table .beat-slot { padding: 1px 6px; border-radius: 8px; font-size: 10px; }
+
+.kernel-empty { text-align: center; padding: 60px 20px; color: var(--text-dim); }
+
+/* ── 洗稿重构器 · OPC 设计系统 v2 ── */
+/* Preset cards */
+.r-preset-card {
+  background: var(--bg-surface, #18181d); border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 6px; padding: 16px; cursor: pointer;
+  transition: all 150ms ease;
+}
+.r-preset-card:hover { border-color: var(--accent,#6366f1); background: rgba(99,102,241,0.06); }
+.r-preset-card.selected { border-color: var(--accent,#6366f1); background: rgba(99,102,241,0.1); }
+
+/* Section card */
+.r-card {
+  background: var(--bg-surface, #18181d); border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 6px;
+}
+
+/* Form elements */
+.r-label {
+  display: block; font-size: 11px; color: var(--text-secondary,#a1a1aa);
+  margin-bottom: 4px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px;
+}
+.r-input {
+  width: 100%; padding: 8px 12px; border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.06); background: var(--bg-base,#0f0f13);
+  color: var(--text-primary,#f4f4f6); font-size: 15px; font-family: inherit;
+  height: 36px; transition: border-color 120ms ease;
+}
+.r-input:focus { border-color: var(--accent,#6366f1); box-shadow: 0 0 0 2px rgba(99,102,241,0.25); outline: none; }
+select.r-input { cursor: pointer; }
+textarea.r-input { height: auto; min-height: 60px; }
+
+/* Primary button */
+.r-btn-primary {
+  padding: 8px 24px; border-radius: 4px; border: none;
+  background: var(--accent,#6366f1); color: #09090b; font-size: 15px;
+  font-weight: 500; cursor: pointer; font-family: inherit;
+  transition: all 120ms ease; height: 40px;
+}
+.r-btn-primary:hover { background: #818cf8; transform: translateY(-1px); }
+.r-btn-primary:active { background: #4f46e5; transform: translateY(0); }
+.r-btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+/* Skeleton */
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+/* ── 洗稿结果分段渲染 · OPC 设计系统 ── */
+.rw-stats-card {
+  background: var(--bg-surface,#18181d); border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-md,6px); padding: var(--space-4,16px); margin-bottom: var(--space-4,16px);
+}
+.rw-stats-card .stat-value {
+  font-size: var(--text-2xl,28px); font-weight: var(--weight-bold,700);
+  font-variant-numeric: tabular-nums; line-height: var(--leading-2xl,1.3);
+}
+
+/* Motif card */
+.rw-motif-card {
+  background: var(--bg-surface,#18181d); border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-md,6px); padding: var(--space-5,20px); margin-bottom: var(--space-4,16px);
+}
+
+/* Collapsible section (progressive disclosure) */
+.rw-collapsible {
+  background: var(--bg-surface,#18181d); border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-md,6px); margin-bottom: var(--space-4,16px);
+  overflow: hidden;
+}
+.rw-collapsible-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: var(--space-3,12px) var(--space-4,16px);
+  cursor: pointer;
+  transition: background var(--transition-fast,120ms) ease;
+  user-select: none;
+}
+.rw-collapsible-header:hover {
+  background: rgba(255,255,255,0.03);
+}
+.rw-collapsible-header .rw-chevron {
+  color: var(--text-tertiary,#71717a); font-size: var(--text-sm,13px);
+  transition: transform var(--transition-fast,120ms) ease;
+}
+.rw-collapsible.open .rw-collapsible-header .rw-chevron {
+  transform: rotate(180deg);
+}
+.rw-collapsible-body {
+  display: none;
+  padding: var(--space-2,8px) var(--space-4,16px) var(--space-4,16px);
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+.rw-collapsible.open .rw-collapsible-body {
+  display: block;
+}
+
+/* Beat row inside structure skeleton */
+.rw-beat-row {
+  padding: var(--space-3,12px); margin-bottom: var(--space-2,8px);
+  background: var(--bg-base,#0f0f13); border: 1px solid rgba(255,255,255,0.04);
+  border-radius: var(--radius-sm,4px);
+  cursor: pointer;
+  transition: all var(--transition-fast,120ms) ease;
+}
+.rw-beat-row:hover {
+  border-color: rgba(255,255,255,0.08); background: var(--bg-elevated,#1e1e24);
+}
+.rw-beat-row .beat-detail {
+  display: none; margin-top: var(--space-3,12px);
+  padding-top: var(--space-3,12px);
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+.rw-beat-row.expanded .beat-detail {
+  display: block;
+}
+
+/* Dependency chain badge */
+.rw-chain-badge {
+  display: inline-flex; align-items: center; gap: var(--space-1,4px);
+  padding: var(--space-1,4px) var(--space-2,8px);
+  background: rgba(99,102,241,0.08); border: 1px solid rgba(99,102,241,0.15);
+  border-radius: var(--radius-full,9999px);
+  font-size: var(--text-xs,11px); color: var(--accent,#6366f1);
+  margin-right: var(--space-2,8px); margin-bottom: var(--space-2,8px);
+}
+
+/* Scene card */
+.rw-scene-card {
+  background: var(--bg-base,#0f0f13); border: 1px solid rgba(255,255,255,0.04);
+  border-radius: var(--radius-sm,4px); padding: var(--space-4,16px);
+  margin-bottom: var(--space-3,12px);
+}
+
+/* Transition card */
+.rw-transition-card {
+  background: var(--bg-base,#0f0f13); border: 1px solid rgba(255,255,255,0.04);
+  border-radius: var(--radius-sm,4px); padding: var(--space-4,16px);
+  margin-bottom: var(--space-3,12px);
+}
+
+/* Theme closure card */
+.rw-theme-card {
+  background: var(--bg-surface,#18181d); border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-md,6px); padding: var(--space-4,16px);
+  margin-bottom: var(--space-4,16px);
+  border-left: 3px solid var(--accent,#6366f1);
+}
+
+/* Expandable script section */
+.rw-script-toggle {
+  width: 100%; padding: var(--space-3,12px) var(--space-4,16px);
+  cursor: pointer; border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-sm,4px);
+  background: var(--bg-surface,#18181d); color: var(--text-secondary,#a1a1aa);
+  font-size: var(--text-sm,13px); font-family: inherit;
+  transition: all var(--transition-fast,120ms) ease;
+  text-align: center;
+}
+.rw-script-toggle:hover {
+  background: var(--bg-elevated,#1e1e24); color: var(--text-primary,#f4f4f6);
+}
+
+/* Tag / badge pills */
+.rw-tag {
+  display: inline-flex; align-items: center;
+  padding: 2px var(--space-2,8px); border-radius: var(--radius-full,9999px);
+  font-size: var(--text-xs,11px); font-weight: var(--weight-medium,500);
+  margin-right: var(--space-1,4px);
+}
+.rw-tag.coupling-tight { background: rgba(239,68,68,0.1); color: var(--danger,#ef4444); }
+.rw-tag.coupling-loose { background: rgba(245,158,11,0.1); color: var(--warning,#f59e0b); }
+.rw-tag.slot-setup { background: rgba(34,197,94,0.1); color: var(--success,#22c55e); }
+.rw-tag.slot-turn { background: rgba(239,68,68,0.1); color: var(--danger,#ef4444); }
+.rw-tag.slot-payoff { background: rgba(99,102,241,0.12); color: var(--accent,#6366f1); }
+.rw-tag.slot-develop { background: rgba(59,130,246,0.1); color: var(--info,#3b82f6); }
+.rw-tag.slot-coda { background: rgba(255,255,255,0.06); color: var(--text-tertiary,#71717a); }
 </style>
 </head>
 <body>
@@ -373,9 +726,9 @@ body {
   <!-- 预留扩展位 -->
   <div class="sidebar-divider"></div>
   <div class="sidebar-section-label">扩展</div>
-  <div class="sidebar-item" style="opacity:0.3;pointer-events:none" title="即将上线">
-    <span class="si-icon">🧠</span>
-    <span class="si-label">洗稿工坊</span>
+  <div class="sidebar-item" onclick="switchView('workbench');switchTab('kernel')" title="内核洗稿">
+    <span class="si-icon">🧬</span>
+    <span class="si-label">内核卡</span>
   </div>
   <div class="sidebar-item" style="opacity:0.3;pointer-events:none" title="即将上线">
     <span class="si-icon">🎯</span>
@@ -434,6 +787,8 @@ body {
         <div class="tab" onclick="switchTab('cinematography')">🎥 镜头&声音</div>
         <div class="tab" onclick="switchTab('template')">📋 复刻模板</div>
         <div class="tab" onclick="switchTab('notes')">📝 标记及笔记 <span class="badge" id="marksBadge">0</span></div>
+        <div class="tab" onclick="switchTab('kernel')">🧬 内核卡</div>
+        <div class="tab" onclick="switchTab('rewrite')">✂️ 洗稿重构</div>
       </div>
       <div class="analysis-content" id="analysisContent">
         <div class="empty-state">
@@ -943,6 +1298,264 @@ function renderNotesTab() {
   container.innerHTML = html;
 }
 
+// ── 内核卡 Tab（视频级卡片：缩略/展开）──
+async function renderKernelTab() {
+  const container = document.getElementById('analysisContent');
+  container.innerHTML = '<div class="kernel-empty"><span style="font-size:32px">⏳</span><p>加载内核数据...</p></div>';
+  
+  try {
+    const r = await fetch('/api/kernel_card');
+    if (!r.ok) throw new Error('API error');
+    const d = await r.json();
+    const cards = d.cards || [];
+    if (!cards.length) {
+      container.innerHTML = '<div class="kernel-empty"><span style="font-size:48px">📭</span><p>暂无内核卡</p><p style="font-size:12px;color:var(--text-dim)">分析视频后内核卡会自动生成</p></div>';
+      return;
+    }
+    
+    // 联动数据：用最新卡喂洗稿重构
+    const latest = cards[0].data;
+    const L0latest = latest.L0_source || {};
+    const _meta = latest._meta || {};
+    const titleBest = _meta.title || L0latest.title || '未命名';
+    window._kernelForRewrite = {
+      title: titleBest,
+      style: L0latest.director || L0latest.type || '',
+      setting: L0latest.culture_context || L0latest.director || ''
+    };
+    
+    var html = '<div class="kernel-card-list">';
+    for (var ci = 0; ci < cards.length; ci++) {
+      var cardItem = cards[ci];
+      var k = cardItem.data;
+      var kMeta = k._meta || {};
+      var L0 = k.L0_source || {};
+      var L1 = k.L1_narrative_skeleton || {};
+      var L3 = k.L3_resonance_engine || {};
+      var L5 = k.L5_beat_library || {};
+      var beats = L5.beats || [];
+      
+      var vidTitle = kMeta.title || L0.title || '未命名';
+      var typeInfo = [L0.type, L0.genre].filter(Boolean).join(' · ');
+      
+      var journey = L1.hero_journey_phase || '';
+      var arc = L1.emotional_arc_shape || '';
+      
+      var needsFears = L3.tapped_needs_fears || [];
+      var hookText = needsFears.length > 2 ? needsFears.slice(0,2).join('、') + '…' : needsFears.join('、');
+      
+      // 参考桥段过滤：仅展示对白级/架构级中 source_work 非「原创」/非空的节拍
+      var filterBeats = filterRefBeats(beats);
+      var hasRefBeats = filterBeats.dialogue.length > 0 || filterBeats.structure.length > 0;
+      var totalRefCount = filterBeats.dialogue.length + filterBeats.structure.length;
+      var needsBeatScroll = totalRefCount > 6;
+      
+      html += '<div class="kernel-card-item" id="kci_' + ci + '">' +
+        '<div class="kernel-card-thumb" onclick="toggleKernelCard(' + ci + ')">' +
+          '<div class="kernel-thumb">' +
+            '<div class="kt-header">' +
+              '<div class="kt-icon">🧬</div>' +
+              '<div class="kt-header-body">' +
+                '<div class="kt-title" title="' + escHtml(vidTitle) + '">' + escHtml(vidTitle) + '</div>' +
+                '<div class="kt-meta">' + escHtml(typeInfo) + (L0.director ? ' · ' + escHtml(L0.director) : '') + (L0.duration ? ' · ' + L0.duration + 's' : '') + (L0.culture_context ? ' · ' + escHtml(L0.culture_context) : '') + '</div>' +
+              '</div>' +
+            '</div>' +
+            '<div class="kt-section">' +
+              '<div class="kt-section-label">叙事结构</div>' +
+              '<div class="kt-section-text">' + escHtml(journey) + (arc ? ' · ' + escHtml(arc) : '') + (L1.time_structure ? ' · ' + escHtml(L1.time_structure) : '') + (L1.pov ? ' · ' + escHtml(L1.pov) : '') + '</div>' +
+            '</div>' +
+            (hookText ? '<div class="kt-hook"><div class="hook-label">🎣 底层共鸣Hook</div><div class="hook-text">' + escHtml(hookText) + '</div></div>' : '') +
+            (hasRefBeats ? buildBeatSection(filterBeats, ci, needsBeatScroll) : '') +
+            '<div class="kt-actions">' +
+              '<span class="kt-expand-text">▶ 展开完整分析</span>' +
+              '<button onclick="event.stopPropagation();useKernelForRewrite(' + ci + ')" style="padding:2px 10px;font-size:11px;background:var(--accent);color:var(--text-inverse);border:1px solid var(--accent);border-radius:4px;cursor:pointer;white-space:nowrap;font-family:inherit">✂️ 洗稿</button>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="kernel-card-detail">' +
+          '<div class="kernel-detail-inner">' + renderKernelDetail(k) + '</div>' +
+        '</div>' +
+      '</div>';
+    }
+    html += '</div>';
+    
+    container.innerHTML = html;
+  } catch(e) {
+    container.innerHTML = '<div class="kernel-empty"><span style="font-size:48px">❌</span><p>加载失败</p><p style="font-size:12px;color:var(--text-dim)">' + escHtml(e.message) + '</p></div>';
+  }
+}
+
+// 构建参考桥段 HTML（带分类标签 + 可选滚轮提示）
+function buildBeatSection(catBeats, cardIdx, needsScroll) {
+  var h = '<div class="kt-section"><div class="kt-section-label">📖 参考桥段</div>';
+  h += (needsScroll ? '<div class="kt-beats" style="max-height:160px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,0.08) transparent"><div class="kt-beats-inner">' : '<div class="kt-beats">');
+  if (catBeats.dialogue.length) {
+    h += '<div class="beat-group"><div class="beat-group-label dialogue">💬 对白级 ' + catBeats.dialogue.length + '</div>';
+    catBeats.dialogue.forEach(function(b){
+      h += '<span class="beat-chip"><b>' + escHtml(b.name) + '</b> ← ' + escHtml((b.provenance||{}).source_work||'?') + '</span>';
+    });
+    h += '</div>';
+  }
+  if (catBeats.structure.length) {
+    h += '<div class="beat-group"><div class="beat-group-label structure">🏗️ 架构级 ' + catBeats.structure.length + '</div>';
+    catBeats.structure.forEach(function(b){
+      h += '<span class="beat-chip"><b>' + escHtml(b.name) + '</b> ← ' + escHtml((b.provenance||{}).source_work||'?') + '</span>';
+    });
+    h += '</div>';
+  }
+  h += (needsScroll ? '</div></div>' : '</div>') + '</div>';
+  return h;
+}
+
+// 过滤参考桥段：原创的不展示
+function filterRefBeats(beats) {
+  var dialogue = [], structure = [];
+  for (var i = 0; i < beats.length; i++) {
+    var b = beats[i];
+    var name = b.name || '';
+    var motif = b.motif || '';
+    var combined = name + motif;
+    var prov = b.provenance || {};
+    var src = prov.source_work || '';
+    var level = prov.level || '';
+    
+    // 情感级不展示
+    var emoKw = ['微笑','眼神','感动','流泪','哭泣','拥抱','沉默','叹息','凝望','相视'];
+    if (emoKw.some(function(k){return name.includes(k)})) continue;
+    
+    // 对白级/架构级，但 source_work 是「原创」→ 跳过
+    if (src === '原创' && level.includes('原创')) continue;
+    
+    // 分类
+    var dialKw = ['对白','台词','对话','争吵','质问','劝慰','对峙','交谈','回答','提问','说','聊','喊','点烟'];
+    var structKw = ['开场','引入','建立','铺垫','转折','高潮','结局','场景','镜头','跟拍','旁白','独行','徘徊','等待','相遇'];
+    if (dialKw.some(function(k){return combined.includes(k)})) { dialogue.push(b); }
+    else if (structKw.some(function(k){return combined.includes(k)})) { structure.push(b); }
+    else { structure.push(b); }
+  }
+  return { dialogue: dialogue, structure: structure };
+}
+
+function toggleKernelCard(idx) {
+  var item = document.getElementById('kci_' + idx);
+  if (!item) return;
+  item.classList.toggle('expanded');
+  var textEl = item.querySelector('.kt-expand-text');
+  if (textEl) textEl.textContent = item.classList.contains('expanded') ? '▼ 收起' : '▶ 展开完整分析';
+}
+
+// 内核卡 → 洗稿重构 Tab 联动（指定卡片）
+function useKernelForRewrite(idx) {
+  // 目前用最新卡数据
+  switchTab('rewrite');
+}
+
+// ── 验证溯源（已移除，保留空壳兼容旧引用）──
+var _verifyCache = null;
+async function verifyProvenance(silent) { /* 已在卡片加载时自动标注，此功能简化 */ }
+
+function escHtml(s) {
+  if (!s) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// 展开详情 · 优先级排序（重点→逻辑）
+const KD_SECTIONS = [
+  {key:'L5_beat_library', label:'🎬 核心桥段节拍库', prio:1, note:'参考来源 + 依赖拓扑 + 替换参数'},
+  {key:'L3_resonance_engine', label:'🧠 深层共鸣引擎', prio:1, note:'存在困境 · 基本需求 · Katharsis机制'},
+  {key:'L2_characters', label:'👤 人物心理原型', prio:2, note:'荣格原型 · 表面欲求/深层需求 · 角色弧线'},
+  {key:'L1_narrative_skeleton', label:'📐 叙事结构骨架', prio:2, note:'英雄之旅 · 情感曲线 · 叙事视角'},
+  {key:'L4_cinematic_grammar', label:'🎥 视觉语法编码', prio:2, note:'空间/色彩/声音/运镜编码'},
+  {key:'L0_source', label:'📋 作品基本信息', prio:2, note:'类型 · 语境 · 技术参数'},
+];
+
+function renderKernelDetail(k) {
+  var h = '';
+  KD_SECTIONS.filter(function(s){return s.prio===1}).forEach(function(sec){
+    var d = k[sec.key]; if (!d) return;
+    h += '<div class="kd-layer"><h4>'+sec.label+' <span style="font-size:10px;color:var(--text-dim);font-weight:normal">'+sec.note+'</span></h4>';
+    h += renderSectionContent(sec.key, d);
+    h += '</div>';
+  });
+  KD_SECTIONS.filter(function(s){return s.prio===2}).forEach(function(sec){
+    var d = k[sec.key]; if (!d) return;
+    h += '<div class="kd-layer"><h4>'+sec.label+' <span style="font-size:10px;color:var(--text-dim);font-weight:normal">'+sec.note+'</span></h4>';
+    h += renderSectionContent(sec.key, d);
+    h += '</div>';
+  });
+  return h;
+}
+
+function renderSectionContent(lk, d) {
+  if (lk === 'L0_source') {
+    return '<div class="kd-grid">'+
+      '<div class="kd-item"><div class="kd-label">作品/导演</div><div class="kd-val">'+escHtml(d.title||'?')+' · '+escHtml(d.director||'?')+'</div></div>'+
+      '<div class="kd-item"><div class="kd-label">类型/语境</div><div class="kd-val">'+escHtml(d.type||'?')+' · '+escHtml(d.genre||'?')+' · '+escHtml(d.culture_context||'?')+'</div></div>'+
+      '<div class="kd-item"><div class="kd-label">技术参数</div><div class="kd-val">'+escHtml(d.medium||'?')+' · '+(d.duration||'?')+'s · '+escHtml(d.language||'?')+'</div></div>'+
+    '</div>';
+  } else if (lk === 'L1_narrative_skeleton') {
+    return '<div class="kd-grid">'+
+      '<div class="kd-item"><div class="kd-label">英雄之旅阶段</div><div class="kd-val">'+escHtml(d.hero_journey_phase||'?')+'</div></div>'+
+      '<div class="kd-item"><div class="kd-label">情感曲线</div><div class="kd-val">'+escHtml(d.emotional_arc_shape||'?')+'</div></div>'+
+      '<div class="kd-item"><div class="kd-label">时间/视角</div><div class="kd-val">'+escHtml(d.time_structure||'?')+' · '+escHtml(d.pov||'?')+'</div></div>'+
+      (d.plot_beats||[]).map(function(b){return '<div class="kd-item"><div class="kd-label">'+escHtml(b.label)+'</div><div class="kd-val">'+escHtml(b.description||'')+'<br><span style="color:var(--text-dim);font-size:10px">'+escHtml(b.timestamp||'')+'</span></div></div>';}).join('')+
+    '</div>';
+  } else if (lk === 'L2_characters') {
+    return '<div class="kd-grid">'+(d.characters||[]).map(function(c){
+      return '<div class="kd-item">'+
+        '<div class="kd-label">'+escHtml(c.name)+' · '+escHtml(c.jung_archetype||'?')+'</div>'+
+        '<div class="kd-val">'+
+          '<div>想要: '+escHtml(c.surface_want||'?')+'</div>'+
+          '<div>需要: '+escHtml(c.deep_need||'?')+'</div>'+
+          '<div>恐惧: '+escHtml(c.core_fear||'?')+'</div>'+
+          (c.arc?'<div style="font-size:10px;color:var(--accent);margin-top:2px">弧线: '+escHtml(c.arc.start||'?')+' → '+escHtml(c.arc.catalyst||'?')+' → '+escHtml(c.arc.end||'?')+'</div>':'')+
+        '</div></div>';
+    }).join('')+
+    (d.inter_character_dynamic?'<div class="kd-item"><div class="kd-label">角色间动力</div><div class="kd-val">'+escHtml(d.inter_character_dynamic)+'</div></div>':'')+
+    '</div>';
+  } else if (lk === 'L3_resonance_engine') {
+    return '<div class="kd-grid">'+
+      '<div class="kd-item"><div class="kd-label">⚡ 存在困境</div><div class="kd-val" style="color:var(--accent);font-weight:600">'+escHtml(d.core_existential_dilemma||'?')+'</div></div>'+
+      '<div class="kd-item"><div class="kd-label">底层共鸣Hook</div><div class="kd-val">'+(d.tapped_needs_fears||[]).map(function(t){return '<span style="display:inline-block;padding:2px 8px;margin:2px;border-radius:8px;font-size:10px;background:rgba(219,97,162,.1);color:var(--pink)">'+escHtml(t)+'</span>';}).join(' ')+'</div></div>'+
+      '<div class="kd-item"><div class="kd-label">神话素二元对立</div><div class="kd-val">'+escHtml((d.mytheme_opposition||{}).binary||'?')+' → '+escHtml((d.mytheme_opposition||{}).mediation||'')+'</div></div>'+
+      (d.katharsis?'<div class="kd-item"><div class="kd-label">Katharsis</div><div class="kd-val">情绪: '+(d.katharsis.aroused_emotions||[]).map(function(e){return '<span style="display:inline-block;padding:2px 8px;margin:2px;border-radius:8px;font-size:10px;background:rgba(210,153,29,.1);color:var(--orange)">'+escHtml(e)+'</span>';}).join(' ')+'<br>释放: '+escHtml(d.katharsis.release_path||'')+'<br>认知更新: '+escHtml(d.katharsis.cognitive_update||'')+'</div></div>':'')+
+      (d.drive_tension?'<div class="kd-item"><div class="kd-label">驱力拉锯</div><div class="kd-val">Eros: '+escHtml(d.drive_tension.eros||'')+'<br>Thanatos: '+escHtml(d.drive_tension.thanatos||'')+'<br><span style="color:var(--text-dim)">'+escHtml(d.drive_tension.dynamic||'')+'</span></div></div>':'')+
+    '</div>';
+  } else if (lk === 'L4_cinematic_grammar') {
+    return '<div class="kd-grid">'+
+      (d.visual_metaphors||[]).map(function(m){return '<div class="kd-item"><div class="kd-label">视觉隐喻: '+escHtml(m.image)+'</div><div class="kd-val">'+escHtml(m.psychological_meaning||'')+'</div></div>';}).join('')+
+      (d.spatial_coding||[]).map(function(s){return '<div class="kd-item"><div class="kd-label">空间: '+escHtml(s.space)+'</div><div class="kd-val">'+escHtml(s.emotional_tag||'')+' · '+escHtml(s.camera_style||'')+'</div></div>';}).join('')+
+      (d.temporal_coding?'<div class="kd-item"><div class="kd-label">时间编码</div><div class="kd-val">'+escHtml(d.temporal_coding)+'</div></div>':'')+
+      (d.sound_coding?'<div class="kd-item"><div class="kd-label">声音编码</div><div class="kd-val">BGM: '+escHtml(d.sound_coding.bgm_logic||'')+'<br>环境音: '+escHtml(d.sound_coding.ambient_sound_function||'')+'</div></div>':'')+
+    '</div>';
+  } else if (lk === 'L5_beat_library') {
+    var beats = d.beats||[], chains = (d.dependency_graph||{}).chains||[];
+    var slotBg = {setup:'rgba(88,166,255,.15)',develop:'rgba(63,185,80,.15)',turn:'rgba(210,153,29,.15)',payoff:'rgba(219,97,162,.15)',coda:'rgba(139,148,158,.15)'};
+    var slotColor = {setup:'var(--accent)',develop:'var(--green)',turn:'var(--orange)',payoff:'var(--pink)',coda:'var(--dim)'};
+    var hh = '<div class="kd-grid" style="grid-template-columns:1fr">'+
+      '<div class="kd-item"><div class="kd-label">📊 完整节拍清单 ('+beats.length+'条)</div>'+
+      '<table class="kd-beat-table"><thead><tr><th>ID</th><th>名称</th><th>叙事功能</th><th>槽位</th><th>耦合度</th><th>参考来源</th><th>替换参数</th></tr></thead><tbody>'+
+      beats.map(function(b){
+        var p = b.provenance || {};
+        var rp = b.replaceable_params || {};
+        return '<tr>'+
+          '<td style="color:var(--accent);font-family:monospace">'+escHtml(b.id)+'</td>'+
+          '<td><b>'+escHtml(b.name)+'</b><br><span style="font-size:10px;color:var(--text-dim)">'+escHtml(b.motif||'')+'</span></td>'+
+          '<td style="font-size:11px">'+escHtml(b.positional_function||'')+'</td>'+
+          '<td><span class="beat-slot" style="background:'+(slotBg[b.narrative_slot]||'rgba(139,148,158,.15)')+';color:'+(slotColor[b.narrative_slot]||'var(--dim)')+'">'+escHtml(b.narrative_slot||'')+'</span></td>'+
+          '<td>'+escHtml(b.coupling_degree||'')+'</td>'+
+          '<td style="font-size:11px">'+escHtml(p.source_work||'?')+'<br><span style="font-size:10px;color:var(--text-dim)">'+escHtml(p.level||'')+'</span></td>'+
+          '<td style="font-size:10px;color:var(--text-dim)">角色:'+escHtml(rp.character||'')+'<br>场景:'+escHtml(rp.setting||'')+'<br>风格:'+escHtml(rp.visual_style||'')+'</td>'+
+        '</tr>';
+      }).join('')+
+      '</tbody></table></div>'+
+      (chains.length?'<div class="kd-item"><div class="kd-label">🔗 锁死依赖链</div>'+chains.map(function(c){return '<div style="padding:4px 0;font-size:12px"><strong>'+escHtml(c.name)+'</strong>: '+(c.beats||[]).map(function(b){return '<span style="color:var(--accent);font-family:monospace">'+escHtml(b)+'</span>';}).join(' → ')+'<br><span style="color:var(--text-dim);font-size:10px">'+escHtml(c.invariant_reason||'')+'</span></div>';}).join('')+'</div>':'')+
+    '</div>';
+    return hh;
+  }
+  return '';
+}
+
 // ── 导出 ──
 function exportMarks() {
   if (marks.length === 0) { alert('还没有标记内容'); return; }
@@ -999,12 +1612,16 @@ async function exportFullReport() {
 
 // ── Tab 切换 (v1.1.0: 去掉「标记」tab，新顺序) ──
 function switchTab(tab) {
-  const tabNames = ['overview','script','cinematography','template','notes'];
+  const tabNames = ['overview','script','cinematography','template','notes','kernel','rewrite'];
   document.querySelectorAll('.tab').forEach((t,i) => {
     t.classList.toggle('active', tabNames[i] === tab);
   });
   if (tab === 'notes') {
     renderNotesTab();
+  } else if (tab === 'kernel') {
+    renderKernelTab();
+  } else if (tab === 'rewrite') {
+    renderRewriteTab();
   } else {
     renderTabContent(tab);
   }
@@ -1476,7 +2093,7 @@ async function analyzeFromUrl() {
     const resp1 = await fetch('/api/transcribe', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({url: url})
+      body: JSON.stringify({url: url, video_title: currentVideoTitle || ''})
     });
     const startResult = await resp1.json();
     if (startResult.error) {
@@ -1500,7 +2117,14 @@ async function analyzeFromUrl() {
       });
       const task = await pollResp.json();
       
-      if (task.status === 'done') { result = task.result; break; }
+      if (task.status === 'done') {
+        result = task.result;
+        // M3: 内核提取自动进行中
+        if (task.kernel_status === 'extracting') {
+          setStatus('running', '🧬 正在生成内核卡...');
+        }
+        break;
+      }
       if (task.status === 'error') throw new Error(task.error || '分析失败');
       
       // 进度显示：server 数据优先，fallback 用时间估算
@@ -1549,6 +2173,28 @@ async function analyzeFromUrl() {
       analysisData._tokenStats = ts;
       analysisData._runId = result.run_id || '';
       setStatus('done', `✅ 分析完成 · ⏱ ${totalElapsed}s`);
+      // M3: 提示内核卡正在生成
+      if (taskId) {
+        setTimeout(function(){
+          setStatus('done', '✅ 分析完成 · 🧬 内核卡生成中...');
+          // 轮询内核提取状态
+          var kernelPoll=setInterval(async function(){
+            try{
+              var kr=await fetch('/api/task',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({task_id:taskId})});
+              var kd=await kr.json();
+              if(kd.kernel_status==='done'){
+                clearInterval(kernelPoll);
+                setStatus('done','✅ 分析完成 · 🧬 内核卡已就绪');
+                // 清除缓存，下次打开内核卡Tab会重新加载
+                window._verifyCache=null;
+              }else if(kd.kernel_status==='failed'){
+                clearInterval(kernelPoll);
+                setStatus('done','✅ 分析完成 · ⚠️ 内核卡生成失败');
+              }
+            }catch(e){clearInterval(kernelPoll)}
+          },3000);
+        },1000);
+      }
       // 异步拉取商业数据
       fetchCommerce();
       renderTabContent('overview');
@@ -1579,5 +2225,7 @@ loadLibrary();
 loadDemo();
 renderTabContent('overview');
 </script>
+<script src="/rewrite_ui.js"></script>
+
 </body>
 </html>

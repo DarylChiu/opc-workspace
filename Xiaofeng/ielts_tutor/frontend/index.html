@@ -126,6 +126,10 @@ body {
 .msg.system { align-self:center; color:var(--muted); font-size:11px; padding:4px 8px; background:var(--bg); border-radius:6px; }
 .msg .speaker { font-size:10px; color:var(--muted); display:block; }
 .msg .time { font-size:9px; color:var(--muted); margin-top:2px; text-align:right; }
+.history-msg { opacity:0.7; }
+.history-msg .time { color:var(--accent2); font-style:italic; }
+.session-divider { align-self:center; text-align:center; width:100%; padding:6px 0; margin:8px 0; }
+.session-divider span { background:var(--accent); color:#fff; padding:4px 14px; border-radius:12px; font-size:11px; font-weight:600; }
 .empty-state { text-align:center; color:var(--muted); padding:60px 20px; font-size:14px; line-height:1.6; }
 .overall { text-align:center; padding:8px; background:var(--bg); border-radius:8px; }
 .overall .num { font-size:28px; font-weight:800; color:var(--gold); }
@@ -223,6 +227,40 @@ audio { display:none; }
 .debug-history-item .dstatus { font-size:12px; flex-shrink:0; }
 
 .debug-no-session { text-align:center; color:var(--muted); font-size:11px; padding:30px 10px; line-height:1.5; }
+
+/* ── 词汇学习模块 v1.3 ── */
+.vocab-highlight { background:rgba(251,191,36,0.18); border-bottom:1.5px dashed rgba(251,191,36,0.4); border-radius:2px; padding:0 1px; cursor:pointer; transition:background .15s; }
+.vocab-highlight:hover { background:rgba(251,191,36,0.35); }
+.msg.selection-active { border:2px solid var(--green) !important; box-shadow:0 0 12px rgba(34,197,94,0.25); }
+.msg.selection-active .speaker { opacity:0; height:0; overflow:hidden; }
+.msg.selection-active .time { display:none; }
+.word-token { display:inline-block; padding:2px 5px; margin:1px; border-radius:4px; cursor:pointer; transition:all .12s; font-size:inherit; border:1.5px solid transparent; }
+.word-token:hover { background:rgba(255,255,255,0.08); border-color:var(--muted); }
+.word-token.selected { background:var(--green); color:#000; border-color:var(--green); font-weight:600; }
+.word-token.punctuation { cursor:default; padding:2px 1px; }
+.word-token.punctuation:hover { background:transparent; border-color:transparent; }
+.improve-card { position:fixed; bottom:80px; left:50%; transform:translateX(-50%); width:92%; max-width:420px; background:var(--card-bg); border:1px solid var(--card-border); border-radius:14px; padding:14px; z-index:100; box-shadow:0 8px 32px rgba(0,0,0,0.5); animation:slideUp .25s ease-out; }
+@keyframes slideUp { from{opacity:0;transform:translateX(-50%) translateY(20px);} to{opacity:1;transform:translateX(-50%) translateY(0);} }
+.improve-card h4 { margin:0 0 8px; font-size:13px; color:var(--green); }
+.improve-card .selected-word { font-size:11px; color:var(--muted); margin-bottom:10px; }
+.improve-card .suggestions { display:flex; flex-direction:column; gap:8px; }
+.improve-card .sug-item { display:flex; align-items:center; gap:8px; padding:8px 10px; background:rgba(255,255,255,0.03); border-radius:8px; border:1px solid rgba(255,255,255,0.06); }
+.improve-card .sug-arrow { color:var(--green); font-size:14px; flex-shrink:0; }
+.improve-card .sug-content { flex:1; min-width:0; }
+.improve-card .sug-original { font-size:11px; color:var(--muted); text-decoration:line-through; }
+.improve-card .sug-better { font-size:14px; font-weight:600; color:#fff; }
+.improve-card .sug-explanation { font-size:10px; color:var(--muted); margin-top:2px; }
+.improve-card .sug-save { flex-shrink:0; background:var(--green); color:#000; border:none; border-radius:6px; padding:4px 10px; font-size:11px; font-weight:600; cursor:pointer; }
+.improve-card .sug-save:active { opacity:0.7; }
+.improve-card .card-close { position:absolute; top:8px; right:10px; background:none; border:none; color:var(--muted); font-size:16px; cursor:pointer; }
+.improve-card .loading-text { text-align:center; color:var(--muted); font-size:12px; padding:12px; }
+.selection-toolbar { display:none; position:fixed; bottom:20px; left:50%; transform:translateX(-50%); z-index:99; background:var(--card-bg); border:1px solid var(--card-border); border-radius:24px; padding:6px 14px; gap:10px; align-items:center; box-shadow:0 4px 20px rgba(0,0,0,0.4); }
+.selection-toolbar.show { display:flex; animation:slideUp .2s ease-out; }
+.selection-toolbar .sel-info { font-size:11px; color:var(--muted); }
+.selection-toolbar .sel-btn { background:var(--green); color:#000; border:none; border-radius:16px; padding:6px 16px; font-size:12px; font-weight:600; cursor:pointer; }
+.selection-toolbar .sel-cancel { background:transparent; color:var(--muted); border:1px solid var(--card-border); border-radius:16px; padding:5px 12px; font-size:11px; cursor:pointer; }
+.vocab-toast { position:fixed; bottom:140px; left:50%; transform:translateX(-50%); background:var(--green); color:#000; padding:8px 18px; border-radius:20px; font-size:12px; font-weight:600; z-index:200; animation:toastIn .3s ease-out; }
+@keyframes toastIn { from{opacity:0;transform:translateX(-50%) translateY(10px);} to{opacity:1;transform:translateX(-50%) translateY(0);} }
 
 /* ═══ Mobile Responsive (v1.0.1) ═══ */
 html { -webkit-text-size-adjust:100%; }
@@ -713,6 +751,26 @@ async function tryReconnect(){
 // ═══════════════════════════════════════════
 async function startSession(){
     const mode=document.getElementById('modeSelect').value;
+    
+    // v1.4: 加载上轮最后5轮对话，回显在聊天区并标记分界线
+    try {
+        const lt = await fetch(`/api/session/last-turns?mode=${mode}`).then(r=>r.json());
+        if (lt.turns && lt.turns.length > 0) {
+            const t = document.getElementById('transcript');
+            const empty = t.querySelector('.empty-state'); if (empty) empty.remove();
+            const div = document.createElement('div');
+            div.className = 'msg session-divider';
+            div.innerHTML = '<span>🆕 New session is below</span>';
+            t.appendChild(div);
+            // 渲染历史气泡（可交互，复用 addMsg 逻辑但标记为历史）
+            for (const m of lt.turns) {
+                const role = m.role === 'user' ? 'user' : 'tutor';
+                const cls = m.role === 'user' ? '' : 'tutor';
+                addMsg(role, m.content, cls, true);
+            }
+        }
+    } catch(e) { console.warn('Last turns load failed:', e); }
+    
     const d=await api('POST','/api/session/start',{mode,pipeline:document.getElementById('pipelineSelect').value});
     sid=d.session_id;
     sessionEnding=false; reconnectAttempts=0;
@@ -1127,14 +1185,19 @@ function setStatus(c,txt){
     document.getElementById('statusText').textContent=txt;
 }
 
-function addMsg(role,text,cls){
+function addMsg(role,text,cls,isHistory=false){
     const t=document.getElementById('transcript');
     const em=t.querySelector('.empty-state'); if(em) em.remove();
     const d=document.createElement('div');
-    d.className='msg '+(cls||role);
+    d.className='msg '+(cls||role)+(isHistory?' history-msg':'');
     const speaker=role==='user'?'🧑 You':role==='tutor'?'🎓 Examiner':'';
-    d.innerHTML=`<span class="speaker">${speaker}</span>${text.replace(/</g,'&lt;')}<div class="time">${new Date().toLocaleTimeString()}</div>`;
+    const timeLabel = isHistory ? '📝 上轮对话' : new Date().toLocaleTimeString();
+    d.innerHTML=`<span class="speaker">${speaker}</span>${text.replace(/</g,'&lt;')}<div class="time">${timeLabel}</div>`;
     t.appendChild(d); t.scrollTop=t.scrollHeight;
+    // 历史消息也需要做词汇高亮，且需要标记避免重复处理
+    if (isHistory && role === 'tutor') {
+        setTimeout(() => { if (!d.dataset.vocabProcessed) { d.dataset.vocabProcessed = '1'; highlightVocab(d); } }, 100);
+    }
 }
 
 function showPartial(text){
@@ -1255,6 +1318,165 @@ async function updateCosts(){
 }
 setInterval(updateCosts,30000);
 updateCosts();
+
+// ═══════════════════════════════════════════
+// 词汇学习模块 (v1.3)
+// ═══════════════════════════════════════════
+let vocabSet = new Set();
+let vocabLoaded = false;
+let selectionActive = false;
+let selectedTokens = [];
+let activeSelectionBubble = null;
+let originalBubbleHTML = null;
+
+async function loadVocabSet() {
+    try { const resp = await fetch('/api/vocab/wordlist'); const words = await resp.json(); words.forEach(w => vocabSet.add(w.toLowerCase())); vocabLoaded = true; console.log('[Vocab] loaded', vocabSet.size, 'B2+ words'); } catch(e) { console.warn('[Vocab] load failed'); }
+}
+loadVocabSet();
+
+function isLearningWord(word) {
+    const clean = word.replace(/[^a-zA-Z-]/g, '').toLowerCase();
+    if (!clean || clean.length < 2) return false;
+    const stopwords = new Set(['the','a','an','is','are','was','were','be','been','being','have','has','had','do','does','did','will','would','shall','should','may','might','can','could','i','you','he','she','it','we','they','me','him','her','us','them','my','your','his','its','our','their','mine','yours','hers','ours','theirs','this','that','these','those','am','not','no','yes','so','if','but','or','and','for','nor','on','at','to','by','from','in','of','with','as','than','then','also','just','only','now','very','too','well','much','many','some','any','each','all','both','few','more','most','other','same','such','up','out','about','into','over','after','before','between','under','again','here','there','when','where','why','how','which','who','what','one','two','go','get','make','know','think','see','say','like','come','want','look','use','find','give','tell','work','call','try','ask','need','feel','become','leave','put','mean','keep','let','seem','take','way','day','thing','lot','people','time','year','world','life','hand','part','place','case','week','number','group','problem','fact','man','woman','child','eye','first','last','long','great','little','own','old','right','big','high','different','small','large','next','early','young','important','public','bad','good','new','able','sure','back','still','already','always','never','often','quite','really','usually','far','even','today','yet','yeah','ok','okay','hmm','um','uh','actually','basically','literally','honestly','pretty','kind','sort','bit','really','thing','stuff']);
+    if (stopwords.has(clean)) return false;
+    return vocabSet.has(clean);
+}
+
+const _origAddMsg = addMsg;
+addMsg = function(role, text, cls) {
+    _origAddMsg.call(this, role, text, cls);
+    const t = document.getElementById('transcript');
+    const msgs = t.querySelectorAll('.msg');
+    if (msgs.length === 0) return;
+    const lastMsg = msgs[msgs.length - 1];
+    if (lastMsg.dataset.vocabProcessed) return;
+    lastMsg.dataset.vocabProcessed = '1';
+    highlightVocab(lastMsg);
+};
+
+function highlightVocab(msgEl) {
+    if (!vocabLoaded && vocabSet.size === 0) return;
+    const walker = document.createTreeWalker(msgEl, NodeFilter.SHOW_TEXT, null, false);
+    const textNodes = []; while (walker.nextNode()) textNodes.push(walker.currentNode);
+    textNodes.forEach(node => {
+        if (node.parentElement && (node.parentElement.classList.contains('speaker') || node.parentElement.classList.contains('time') || node.parentElement.classList.contains('vocab-highlight'))) return;
+        const text = node.textContent; const words = text.split(/(\s+)/); const frag = document.createDocumentFragment();
+        words.forEach(part => {
+            if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+            const clean = part.replace(/[^a-zA-Z-]/g, '');
+            if (clean && isLearningWord(clean)) { const span = document.createElement('span'); span.className = 'vocab-highlight'; span.textContent = part; frag.appendChild(span); }
+            else { frag.appendChild(document.createTextNode(part)); }
+        });
+        node.parentNode.replaceChild(frag, node);
+    });
+}
+
+let longPressTimer = null;
+document.getElementById('transcript').addEventListener('touchstart', function(e) {
+    const msg = e.target.closest('.msg'); if (!msg || selectionActive) return;
+    longPressTimer = setTimeout(() => enterSelectionMode(msg), 500);
+}, {passive: false});
+document.getElementById('transcript').addEventListener('touchend', function() { if (longPressTimer) { clearTimeout(longPressTimer); longPressTimer = null; } });
+document.getElementById('transcript').addEventListener('touchmove', function() { if (longPressTimer) { clearTimeout(longPressTimer); longPressTimer = null; } });
+document.getElementById('transcript').addEventListener('contextmenu', function(e) {
+    const msg = e.target.closest('.msg'); if (!msg || selectionActive) return;
+    e.preventDefault(); enterSelectionMode(msg);
+});
+
+function enterSelectionMode(msgEl) {
+    if (selectionActive) exitSelectionMode();
+    selectionActive = true; activeSelectionBubble = msgEl; originalBubbleHTML = msgEl.innerHTML; selectedTokens = [];
+    msgEl.classList.add('selection-active');
+    const walker = document.createTreeWalker(msgEl, NodeFilter.SHOW_TEXT, null, false);
+    const textNodes = []; while (walker.nextNode()) textNodes.push(walker.currentNode);
+    const fragment = document.createDocumentFragment();
+    textNodes.forEach(node => {
+        if (node.parentElement && (node.parentElement.classList.contains('speaker') || node.parentElement.classList.contains('time'))) return;
+        const words = node.textContent.split(/(\s+|[.,!?;:'"()])/).filter(w => w.length > 0);
+        words.forEach(w => {
+            const span = document.createElement('span'); span.className = 'word-token';
+            if (/^[.,!?;:'"()]$/.test(w)) { span.className += ' punctuation'; span.textContent = w; }
+            else if (/^\s+$/.test(w)) { span.textContent = w; span.className += ' punctuation'; }
+            else { span.textContent = w; span.dataset.word = w.replace(/[^a-zA-Z-]/g, '').toLowerCase(); span.addEventListener('click', () => toggleToken(span)); if (span.dataset.word && isLearningWord(span.dataset.word)) { span.style.borderColor = 'rgba(251,191,36,0.5)'; } }
+            fragment.appendChild(span);
+        });
+    });
+    msgEl.innerHTML = ''; msgEl.appendChild(fragment); showSelectionToolbar();
+}
+
+function toggleToken(span) {
+    if (span.classList.contains('punctuation')) return;
+    span.classList.toggle('selected'); const idx = selectedTokens.indexOf(span);
+    if (idx >= 0) selectedTokens.splice(idx, 1); else selectedTokens.push(span);
+    updateToolbarInfo();
+}
+
+function showSelectionToolbar() {
+    let toolbar = document.getElementById('selectionToolbar');
+    if (!toolbar) {
+        toolbar = document.createElement('div'); toolbar.id = 'selectionToolbar'; toolbar.className = 'selection-toolbar';
+        toolbar.innerHTML = '<span class="sel-info" id="selInfo">Tap words to select</span><button class="sel-cancel" onclick="exitSelectionMode()">✕</button><button class="sel-btn" id="selImproveBtn" onclick="showImproveCard()" disabled>🔍 Find better expression</button>';
+        document.body.appendChild(toolbar);
+    }
+    setTimeout(() => toolbar.classList.add('show'), 50);
+}
+
+function updateToolbarInfo() {
+    const info = document.getElementById('selInfo'); const btn = document.getElementById('selImproveBtn');
+    if (selectedTokens.length === 0) { info.textContent = 'Tap words to select'; btn.disabled = true; }
+    else { const w = selectedTokens.map(t => t.textContent.trim()).join(' '); info.textContent = 'Selected: "' + w.substring(0, 30) + (w.length>30?'...':'') + '"'; btn.disabled = false; }
+}
+
+function exitSelectionMode() {
+    selectionActive = false; selectedTokens = [];
+    if (activeSelectionBubble && originalBubbleHTML) { activeSelectionBubble.classList.remove('selection-active'); activeSelectionBubble.innerHTML = originalBubbleHTML; highlightVocab(activeSelectionBubble); activeSelectionBubble = null; originalBubbleHTML = null; }
+    const toolbar = document.getElementById('selectionToolbar'); if (toolbar) toolbar.classList.remove('show');
+    const card = document.getElementById('improveCard'); if (card) card.remove();
+}
+
+document.addEventListener('click', function(e) {
+    if (!selectionActive) return;
+    if (!e.target.closest('.msg.selection-active') && !e.target.closest('#selectionToolbar') && !e.target.closest('#improveCard')) exitSelectionMode();
+});
+
+async function showImproveCard() {
+    if (selectedTokens.length === 0) return;
+    const words = selectedTokens.map(t => t.textContent.trim()).filter(w => w).join(' ');
+    const bubbleText = activeSelectionBubble ? Array.from(activeSelectionBubble.querySelectorAll('.word-token')).map(t => t.textContent).join('') : words;
+    const isUserBubble = activeSelectionBubble && activeSelectionBubble.classList.contains('user');
+    let card = document.getElementById('improveCard'); if (card) card.remove();
+    card = document.createElement('div'); card.id = 'improveCard'; card.className = 'improve-card';
+    card.innerHTML = '<button class="card-close" onclick="this.parentElement.remove()">✕</button><h4>🔍 Better Expression</h4><div class="selected-word">Focus: "' + words + '"</div><div class="loading-text">Searching better alternatives...</div>';
+    document.body.appendChild(card);
+    try {
+        const resp = await fetch('/api/vocab/improve', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({word:words, context:bubbleText, speaker:isUserBubble?'user':'tutor'}) });
+        const data = await resp.json(); renderImproveCard(card, words, bubbleText, data, isUserBubble);
+    } catch(e) { card.querySelector('.loading-text').textContent = 'Failed to load suggestions.'; }
+}
+
+function renderImproveCard(card, word, context, data, isUserBubble) {
+    const suggestions = data.suggestions || [];
+    if (suggestions.length === 0) { card.innerHTML = '<button class="card-close" onclick="this.parentElement.remove()">✕</button><h4>🔍 Better Expression</h4><div class="selected-word">"' + word + '"</div><div class="loading-text">No suggestions found.</div>'; return; }
+    const title = isUserBubble ? '💡 Better ways to say it' : '📖 Similar expressions';
+    card.innerHTML = '<button class="card-close" onclick="this.parentElement.remove()">✕</button><h4>' + title + '</h4><div class="selected-word">Focus: "' + word + '"</div><div class="suggestions">' + suggestions.map(s => '<div class="sug-item"><span class="sug-arrow">→</span><div class="sug-content"><div class="sug-original">' + (s.original||word) + '</div><div class="sug-better">' + s.better + '</div><div class="sug-explanation">' + (s.explanation||'') + '</div></div><button class="sug-save" onclick="saveVocab(event, \'' + (s.better||'').replace(/'/g,"\\'") + '\', \'' + (s.explanation||'').replace(/'/g,"\\'") + '\', \'' + context.replace(/'/g,"\\'") + '\')">📚 Save</button></div>').join('') + '</div>';
+}
+
+async function saveVocab(e, word, explanation, sentence) {
+    e.stopPropagation(); const btn = e.target; btn.textContent = '✓ Saved'; btn.disabled = true;
+    setTimeout(() => { btn.textContent = '📚 Save'; btn.disabled = false; }, 1500);
+    try {
+        await fetch('/api/vocab/save', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({word:word, source_sentence:sentence, source_speaker:activeSelectionBubble&&activeSelectionBubble.classList.contains('user')?'user':'tutor', better_expression:explanation, context:sentence}) });
+        showToast('📚 Saved: ' + word);
+    } catch(e) { btn.textContent = 'Retry'; btn.disabled = false; }
+}
+
+function showToast(msg) { const existing = document.querySelector('.vocab-toast'); if (existing) existing.remove(); const toast = document.createElement('div'); toast.className = 'vocab-toast'; toast.textContent = msg; document.body.appendChild(toast); setTimeout(() => toast.remove(), 2000); }
+
+// Auto-select mode from URL param (v1.4 Dashboard integration)
+(function(){
+    const m = new URLSearchParams(location.search).get('mode');
+    if (m) { const sel = document.getElementById('modeSelect'); if (sel) { sel.value = m; document.getElementById('startBtn').disabled = false; } }
+})();
 </script>
 </body>
 </html>

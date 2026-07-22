@@ -127,10 +127,10 @@ let availableDevices = [], curDev = null;
 
 // ── 设备选择 ──
 async function detectDevices(){
+    const info = $('deviceInfo');
     try{
         const devs = await navigator.mediaDevices.enumerateDevices();
         availableDevices = devs.filter(d => d.kind === 'audioinput' && d.deviceId && d.label);
-        const info = $('deviceInfo');
         if (availableDevices.length > 1){
             const sel = document.createElement('select');
             sel.style.cssText = 'background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:3px;font-size:11px;padding:2px 4px;max-width:140px;margin-left:4px';

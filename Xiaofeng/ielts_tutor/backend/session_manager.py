@@ -257,9 +257,12 @@ class PersistentSessionManager:
         return [dict(r) for r in rows]
 
     def get_progress_stats(self, days=30):
-        """Dashboard 周期统计：分数趋势 + 练习日历 + 汇总卡"""
+        """Dashboard 周期统计：分数趋势 + 练习日历 + 汇总卡
+        智能降级: 如果近期窗口为空, 回退到全量数据展示"""
         conn = _get_db()
         cutoff = f"-{int(days)} days"
+        
+        # Trend: 先查近期, 为空则回退全量
         trend = [dict(r) for r in conn.execute("""
             SELECT substr(e.created_at,1,10) AS day, s.mode,
                    e.overall, e.fluency, e.vocabulary, e.grammar, e.pronunciation,
@@ -268,11 +271,26 @@ class PersistentSessionManager:
             WHERE e.overall IS NOT NULL AND e.overall > 0
               AND e.created_at >= datetime('now', 'localtime', ?)
             ORDER BY e.created_at""", (cutoff,)).fetchall()]
+        if not trend:
+            trend = [dict(r) for r in conn.execute("""
+                SELECT substr(e.created_at,1,10) AS day, s.mode,
+                       e.overall, e.fluency, e.vocabulary, e.grammar, e.pronunciation,
+                       e.session_id, e.report_path
+                FROM evaluations e JOIN sessions s ON s.id=e.session_id
+                WHERE e.overall IS NOT NULL AND e.overall > 0
+                ORDER BY e.created_at""").fetchall()]
+        
+        # Calendar: 同上
         calendar = [dict(r) for r in conn.execute("""
             SELECT substr(created_at,1,10) AS day, COUNT(*) AS count
             FROM sessions
             WHERE created_at >= datetime('now', 'localtime', ?)
             GROUP BY day ORDER BY day""", (cutoff,)).fetchall()]
+        if not calendar:
+            calendar = [dict(r) for r in conn.execute("""
+                SELECT substr(created_at,1,10) AS day, COUNT(*) AS count
+                FROM sessions GROUP BY day ORDER BY day""").fetchall()]
+        
         week = conn.execute("""
             SELECT COUNT(*) AS sessions_7d,
                    (SELECT COUNT(*) FROM evaluations WHERE overall>0 AND created_at >= datetime('now','localtime','-7 days')) AS evals_7d,
@@ -313,6 +331,32 @@ class PersistentSessionManager:
         rows = conn.execute(q, params).fetchall()
         conn.close()
         return [dict(r) for r in rows]
+
+    def get_mode_evals(self, mode, limit=3):
+        """返回指定模式最近N次评估详情（含 overall、summary、improvements 数量）"""
+        conn = _get_db()
+        rows = conn.execute("""
+            SELECT s.id, s.mode, s.created_at,
+                   e.overall, e.fluency, e.vocabulary, e.grammar, e.pronunciation,
+                   e.summary, e.improvements, e.highlights
+            FROM sessions s
+            LEFT JOIN evaluations e ON s.id = e.session_id
+            WHERE s.mode = ? AND e.overall IS NOT NULL
+            ORDER BY s.created_at DESC LIMIT ?
+        """, (mode, limit)).fetchall()
+        conn.close()
+        results = []
+        for r in rows:
+            d = dict(r)
+            # Parse JSON fields
+            for f in ('improvements', 'highlights'):
+                if d.get(f):
+                    try:
+                        import json as _j
+                        d[f + '_count'] = len(_j.loads(d[f]))
+                    except: d[f + '_count'] = 0
+            results.append(d)
+        return results
 
     def get_weakness_profile(self, limit=50):
         """跨会话薄弱点统计"""
