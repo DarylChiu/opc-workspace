@@ -170,3 +170,10 @@
   "🔴 任务涉及问题/失败/审计发现，建议提炼到 lessons.md"
 ]}
 {"timestamp":"2026-07-23T00:04:47+0700","check":"L4-audit-v2","agent":"balance","fixes":1,"shallow_issues":2,"deep_issues":1,"diary_lines":40,"diary_sections":4,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-07-23T00:06:44+0700","check":"L4-audit-v2","agent":"balance","fixes":1,"shallow_issues":0,"deep_issues":0,"diary_lines":40,"diary_sections":4,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-07-23T09:23:50+0700","check":"post-op","task":"越南差旅费管理办法v1.0.3审阅完成，Daryl指令归档","score":2,"total":5,"warnings":[
+  "🔴 active.md 需更新 — 有新任务变更但 9 小时未动"
+]}
+{"timestamp":"2026-07-23T11:20:31+0700","check":"post-op","task":"华特公司章程v2.0初稿拟定+中文对照输出","score":3,"total":5,"warnings":[
+  ""
+]}
