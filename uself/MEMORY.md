@@ -6,6 +6,7 @@
 
 ## Config
 - 月预算: $20 | 模型: deepseek-v4-pro | 五大领域: 财务/金融/AI技术/音乐/心理学
+- **审批规则 (2026-07-23)**: 单项项目/任务预算超过 $1.5 需Daryl审批
 - **Obsidian Vault**: `/Users/zhaoyuzhao/Desktop/ACCA-Knowledge-Network/` (Daryl 使用的正式 Vault，所有 IAS/IFRS 知识网络写入此路径，不是 workspace-self 副本)
 
 ## Team & Comms

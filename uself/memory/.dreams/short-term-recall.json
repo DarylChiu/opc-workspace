@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-20T08:35:23.446Z",
+  "updatedAt": "2026-07-23T14:33:21.690Z",
   "entries": {
     "memory:memory/2026-06-22.md:22:34": {
       "key": "memory:memory/2026-06-22.md:22:34",
@@ -283,18 +283,20 @@
       "endLine": 38,
       "source": "memory",
       "snippet": "## 🕘 关联方与股东借款知识树搭建（09:27–09:35） - **触发**: Daryl 纠正知识树搭建方法 + 要求「关联方/股东借款」案例加入知识树并同步 Obsidian + Git - **方法论纠正**: - 收到树叶不能直接贴到 01-Financial → 先 websearch 确认管辖准则 → 准则=树干 - 财务有 IASB 种好的树（乔木），顺着主干爬即可 → 之前跳步是偷懒 - 技术没有统一锚点 → 用藤蔓模式（多附着点、交叉生长、不强制分层） - **产出**: - IFRS-IAS/IAS-24 关联方披露（定义/披露条款/贷款映射） - IFRS-IAS/IFRS-9 关联方贷款（FV初始计量/低于市场利率/ECL） - IFRS-IAS/IAS-32 债股分类（substance over form/股东贷款权益分类） - VAS/VAS-26 关联方披露（对标IAS 24/标注体系缺口） - Cross-Border-Home 新增专题 Hub - VAS-Home 加入 VAS 26 - FutureTextile-Wellname 案例反向链接到准则节点 - **Git**: commit 988cd48 (52 files, +3342/-9)，push 失败 — Gitea localhost:3000 未运行 - **合规**: L0 启动通过 / post-op 3/5（active+日记正常）",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.4551227748394012,
-      "maxScore": 0.4551227748394012,
+      "totalScore": 1.073950015328416,
+      "maxScore": 0.6188272404890148,
       "firstRecalledAt": "2026-07-03T07:48:20.930Z",
-      "lastRecalledAt": "2026-07-03T07:48:20.930Z",
+      "lastRecalledAt": "2026-07-23T14:33:21.690Z",
       "queryHashes": [
-        "983783c9bf99"
+        "983783c9bf99",
+        "5fdb3d8bd977"
       ],
       "recallDays": [
-        "2026-07-03"
+        "2026-07-03",
+        "2026-07-23"
       ],
       "conceptTags": [
         "关联方/股东借款",
