@@ -1,5 +1,14 @@
 # Recent Conversations
-Last updated: 2026-07-22 00:05 GMT+7
+Last updated: 2026-07-24 00:08 GMT+7
+
+## 2026-07-23 — 搞钱群成立 + 章程v2.1 + Xiaofeng Dashboard v1.3.0
+- **搞钱群成立**: Daryl 创建飞书群，main/xiaofeng/self 自我介绍，外部成员加入
+- **Balance · 章程 v2.1**: 华特公司章程越南语纯净版交付（3处修改，关联交易门槛已删）
+- **Xiaofeng · Dashboard v1.3.0**: 修复 `/dashboard` 路由 + SSE实时数据流，检讨服务验证习惯
+- **成本数据对齐**: Daryl DM main 确认 Balance 通知路径问题，数据已用双源扫描一致
+- **Self**: 知识网络体系介绍给俊毅 / 项目刷新 / 网关重启 + 配置生效
+- **成本**: 今日 $4.86 | 本月 $49.10 | 全量 $108.69 | Top Bryson $3.22
+- **午夜Cron审计正常**: 7/22→7/23 跨日
 
 ## 2026-07-21 — Mac mini重启备份 + Maker-Checker上线 + 自进化暂停
 - **20:31 · Mac mini重启前全Agent记忆备份**: Daryl OPC群通知即将重启，main 通知 xiaofeng/Balance/Self 各自备份，exec不可用（EAGAIN）故跳过git操作
