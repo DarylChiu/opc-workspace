@@ -76,3 +76,18 @@
 - **根因**: 父容器 `.transcript-col` 不是 flex 容器且无高度约束，子元素的 `flex:1` 无参考高度
 - **修复**: 父容器加 `display:flex; flex-direction:column; flex:1; min-height:0` — 四个属性缺一不可
 - **教训**: flex 子元素要 overflow 生效，整条祖先链都必须有 `min-height:0`
+
+## 2026-07-23 · 提测前必须自检（血的教训）
+- **教训**: 开发完成后跳过端到端自检直接给 Daryl 验收，结果 [object Promise] 这种低级 Bug 浪费他 1-2 小时
+- **根因**: 急于交付、功能贪多(32h 硬塞半天)、流程缺 checklist
+- **修复**: 建立 L5 交付前质量自检（5 项强制检查），嵌入 AGENTS.md + TOOLS.md
+- **铁规**: 任一项不通过，先修再提测，不要把 Daryl 当 Debugger
+
+## 2026-07-23 · async/await 陷阱
+- `async function` 返回 Promise，不能用同步方式赋给 innerHTML
+- `render()` async 后，`navigateTo()` 也要 async
+- 测试方法: 打开页面检查是否显示 `[object Promise]`
+
+## 2026-07-23 · Cloudflare Tunnel 不稳定
+- 免费 tunnel ERR 1033 频繁出现，TLS 握手完成但无法连接 origin
+- 替代方案: localtunnel (`lt --port`) 或直接 localhost（同机器）
