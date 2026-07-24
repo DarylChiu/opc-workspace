@@ -1,5 +1,13 @@
 # Recent Conversations
-Last updated: 2026-07-24 00:08 GMT+7
+Last updated: 2026-07-25 00:03 GMT+7
+
+## 2026-07-24 — Balance SOP v2.0 + Self任务审计 + 成本验证 + 音乐边界检测
+- **Balance · 应付采购入账SOP v2.0**: 三部门分读结构 + 5x2矩阵 + 🔴🟠🟢三色单据分级，9案例折叠，等待 Daryl 审阅
+- **Self · 任务全景审计**: 发现active.md与project_Self.md不一致，2个假待办挂了20天（关联方借款/VAS知识树），清理完成。5个决策阻塞项等待 Daryl 拍板
+- **Main · 成本API验证**: 确认 `/api/costs` JSONL全量扫描已正常工作，Balance cost_daily.json 作为权威源合并，数据对齐 $111.28
+- **Xiaofeng · 音乐边界检测**: 404Hz/Sova1 "I NEED YOU" 仅QQ音乐有，待 Daryl 下载提供文件
+- **Cron**: 4 Agent 项目刷新 + 记忆归档 + 成本扫描 + methodology cards 备份全部正常
+- **成本**: 今日 $2.35 | 本月 $51.68 | 全量 $111.28 | Kitty $28.12 Bryson $29.65
 
 ## 2026-07-23 — 搞钱群成立 + 章程v2.1 + Xiaofeng Dashboard v1.3.0
 - **搞钱群成立**: Daryl 创建飞书群，main/xiaofeng/self 自我介绍，外部成员加入
