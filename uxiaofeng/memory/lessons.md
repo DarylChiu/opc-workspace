@@ -91,3 +91,10 @@
 ## 2026-07-23 · Cloudflare Tunnel 不稳定
 - 免费 tunnel ERR 1033 频繁出现，TLS 握手完成但无法连接 origin
 - 替代方案: localtunnel (`lt --port`) 或直接 localhost（同机器）
+
+## 2026-07-24 · 项目版本管理混乱导致数字资产丢失
+- **教训**: 同一项目存在多个副本（ielts_tutor/ vs Xiaofeng/ielts_tutor/）极易混淆
+- **教训**: git rebase 前必须确保所有改动已 commit，否则工作目录修改全部丢失
+- **教训**: 项目必须有唯一权威版本标记（PROJECT_MANIFEST.md），注明活跃目录、活跃DB、废弃副本
+- **教训**: 废弃副本必须标记 DEPRECATED.md，防止误用
+- **教训**: Daryl 的 7/21 重设计工作在 Xiaofeng/ 子目录里，rebse 后 rush 恢复主目录时遗漏了子目录里的文件
