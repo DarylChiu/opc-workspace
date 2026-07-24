@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-23T17:09:08.576Z",
+  "updatedAt": "2026-07-24T01:30:59.975Z",
   "entries": {
     "memory:memory/2026-06-08.md:19:38": {
       "key": "memory:memory/2026-06-08.md:19:38",
@@ -906,13 +906,13 @@
       "endLine": 66,
       "source": "memory",
       "snippet": "## 18:50 · OPC看板 v1.4 完成 ✅ - Daryl 将「OPC看板v1.4」移至 In Progress → 完成三项需求 - **主次优先级视觉分层**：P0-P3 四级，左侧色条+徽章+创建时可选 - **Bryson 雅思陪练补全**：ielts_tutor 加入扫描优先级，产物 3→7 - **symlink 清理**：移除 opc-workspace 中旧 ielts_tutor_v2.0 副本 - Commit v1.4 + tag ## 状态概览 - 🔴 M2 全模块验收完毕 ✅ → v1.5 生产模式 - OPC 看板 v1.4 并入 v1.5 - 验收报告已生成 `decision_reports/m2_acceptance_report_2026-07-05.md` - 7 月基建方向（Agent自进化 + Loop Engineering）待 Daryl 启动确认 - ✅ M2 全部模块验收完毕 + v1.4 完成 - 待办: Agent版本变更通知 - 雅思陪练 v2.0 收尾中 - 7 月基建方向（Agent自进化 + Loop Engineering）待 Daryl 启动确认",
-      "recallCount": 10,
+      "recallCount": 11,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 3.9967014759778974,
+      "totalScore": 4.370030969381332,
       "maxScore": 0.44552976489067075,
       "firstRecalledAt": "2026-07-06T01:12:01.162Z",
-      "lastRecalledAt": "2026-07-23T00:00:27.147Z",
+      "lastRecalledAt": "2026-07-24T01:30:59.975Z",
       "queryHashes": [
         "af4fa58d2480",
         "f8aac1c4eb69",
@@ -923,7 +923,8 @@
         "f152bb3d3c45",
         "5260ee572112",
         "1908384c6613",
-        "e5bd7d38155b"
+        "e5bd7d38155b",
+        "db95a0eb1646"
       ],
       "recallDays": [
         "2026-07-06",
@@ -933,7 +934,8 @@
         "2026-07-19",
         "2026-07-20",
         "2026-07-22",
-        "2026-07-23"
+        "2026-07-23",
+        "2026-07-24"
       ],
       "conceptTags": [
         "v1.4",
@@ -1175,13 +1177,13 @@
       "endLine": 32,
       "source": "memory",
       "snippet": "- 17:00 OPC Dashboard 服务挂掉（进程异常退出）→ 重启 - 17:05 tunnel 过期 → 重建（charm-functioning-donna-time.trycloudflare.com） - 22:37 tunnel 再次挂+服务进程异常退出 → 全栈重启 - 23:00 Gateway 重启（Sentinel 插件加载）→ OPC Dashboard 被带下线 → 再次全栈重启 - ⚠️ 今天累计 8 次 tunnel 重建，临时隧道完全不适合长期使用 ## 状态概览 - 各 Agent 处于待命状态 - 7 月基建方向（Agent自进化 + Loop Engineering）已在 Daryl 与 Bryson 讨论中推进 - OPC 看板 v1.5 运行中 - M2 全部模块验收完毕",
-      "recallCount": 7,
+      "recallCount": 8,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 2.8114114761352536,
+      "totalScore": 3.205219283699989,
       "maxScore": 0.4152030527591705,
       "firstRecalledAt": "2026-07-11T04:42:08.555Z",
-      "lastRecalledAt": "2026-07-19T00:02:55.147Z",
+      "lastRecalledAt": "2026-07-24T01:30:59.975Z",
       "queryHashes": [
         "03ae1fc4cf49",
         "3524490ccf2a",
@@ -1189,13 +1191,15 @@
         "230b4b00be19",
         "7508206e087e",
         "48b5eabf8dd9",
-        "f152bb3d3c45"
+        "f152bb3d3c45",
+        "db95a0eb1646"
       ],
       "recallDays": [
         "2026-07-11",
         "2026-07-12",
         "2026-07-16",
-        "2026-07-19"
+        "2026-07-19",
+        "2026-07-24"
       ],
       "conceptTags": [
         "gateway",
@@ -2328,6 +2332,37 @@
         "记录",
         "context",
         "推断"
+      ]
+    },
+    "memory:memory/archive/2026-06-19.md:1:30": {
+      "key": "memory:memory/archive/2026-06-19.md:1:30",
+      "path": "memory/archive/2026-06-19.md",
+      "startLine": 1,
+      "endLine": 30,
+      "source": "memory",
+      "snippet": "# 2026-06-19 工作日志 ## 00:00 每日记忆归档 Cron 触发 - 审计发现：日记缺失 + active_tasks 39h 未更新 → 已修复 ## 全天：OPC看板 Workflow 编辑器问题排查与架构迭代 ### 问题发现 (19:40) - Daryl反馈：Workflow模块点击后空白，三个需求一个都没看到 - 根因：备份回滚时丢失了v2改动，编辑器退回到原始版本 ### 修复尝试历程 1. **修复v2代码** → 语法正确但不渲染（白屏） 2. **添加错误捕获** → import语句被放在ES模块最前面导致违反规范 3. **Vite构建方案** → 自包含bundle但仍是type=module，浏览器不加载 4. **完全回退到5805b9c** → 原始版本也用importmap+module，同病 5. **最终方案** → 普通script标签(UMD React) + 动态import(ReactFlow) - 文件：`opc-dashboard/workflow-editor.html` (624行, 30KB) - 架构：0个ES模块, 0个importmap - 进度：Step 1-4 加载追踪，红色错误提示栏 - 待Daryl明天实测验证 ### 隧道管理 - 8765(OPC看板) → cake-marking-metals-miscellaneous.trycloudflare.com (PID 51360) - 8777(视频分析) → supreme-hall-blanket-",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3611266314983368,
+      "maxScore": 0.3611266314983368,
+      "firstRecalledAt": "2026-07-24T01:30:59.975Z",
+      "lastRecalledAt": "2026-07-24T01:30:59.975Z",
+      "queryHashes": [
+        "db95a0eb1646"
+      ],
+      "recallDays": [
+        "2026-07-24"
+      ],
+      "conceptTags": [
+        "备份",
+        "active-tasks",
+        "1-4",
+        "supreme-hall-blanket",
+        "工作",
+        "日志",
+        "每日",
+        "记忆"
       ]
     }
   }
