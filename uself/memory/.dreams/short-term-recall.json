@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-23T14:33:21.690Z",
+  "updatedAt": "2026-07-24T06:12:16.514Z",
   "entries": {
     "memory:memory/2026-06-22.md:22:34": {
       "key": "memory:memory/2026-06-22.md:22:34",
@@ -727,18 +727,20 @@
       "endLine": 23,
       "source": "memory",
       "snippet": "- 主 Agent（Kitty）判断未被直接@，保持静默（NO_REPLY） ## 当日其他 Agent 活动 - **Balance**: 与 Daryl 飞书 DM 中重组 OPC Dashboard active.md，将等待类任务从「进行中」移入「⏸️ 暂停/等待」，仅保留 Future Textile 攻防 + 贷款材料整理为进行中 - **小枫**: 诊断确认 sessions_send 回复不会变成飞书 DM 的根因，Kitty 计划改服务端用飞书 SDK 发 DM",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.35945442616939544,
-      "maxScore": 0.35945442616939544,
+      "totalScore": 0.7196125984191895,
+      "maxScore": 0.36015817224979396,
       "firstRecalledAt": "2026-07-19T07:20:45.401Z",
-      "lastRecalledAt": "2026-07-19T07:20:45.401Z",
+      "lastRecalledAt": "2026-07-24T06:12:16.514Z",
       "queryHashes": [
-        "d46130833956"
+        "d46130833956",
+        "39736e50a5d2"
       ],
       "recallDays": [
-        "2026-07-19"
+        "2026-07-19",
+        "2026-07-24"
       ],
       "conceptTags": [
         "no-reply",
@@ -851,18 +853,20 @@
       "endLine": 25,
       "source": "memory",
       "snippet": "- 22:15 Kitty 独立核实完毕：①无下游读取 compliance-audit.jsonl（Dashboard 数据源是自己的 data/*.json，M5合规面板不存在），bugfix 安全保留 ②117条错位历史先不迁，等 Daryl 拍板 ③Balance/小枫已由 Kitty 通知 ## 凌晨记忆审计 (00:08) - Cron 触发每日记忆审计，发现问题： 1. active.md 39h 未更新 → 已刷新时间戳至 00:08 2. 7/14 日记过短（11行）vs 20个活跃 session → 已从 session 历史充实为完整日记（TTS方案B/成本对账/项目看板刷新/项目状态修正） 3. 7/15 日记本文件为骨架 → 已升级为真实内容 4. 归档 2026-06-14.md → archive/ - Git 本地备份完成（7 files changed, 144 insertions, 78 deletions） - 成本仪表盘正常：今日 $2.11 | 本月 $8.70 | 全量 $68.30 | API 正常 ## 待办 - 无新任务指派 - 进行中任务（关联方与股东借款知识树、ACCA F1、VAS知识树、OPC方法论卡片）待 Daryl 反馈后推进",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.36432509422302245,
+      "totalScore": 0.7273093283176422,
       "maxScore": 0.36432509422302245,
       "firstRecalledAt": "2026-07-20T08:35:23.446Z",
-      "lastRecalledAt": "2026-07-20T08:35:23.446Z",
+      "lastRecalledAt": "2026-07-24T06:12:16.514Z",
       "queryHashes": [
-        "95b792ba4f83"
+        "95b792ba4f83",
+        "39736e50a5d2"
       ],
       "recallDays": [
-        "2026-07-20"
+        "2026-07-20",
+        "2026-07-24"
       ],
       "conceptTags": [
         "备份",
@@ -873,6 +877,223 @@
         "tts方案b/成本对账/项目看板刷新/项目状态修正",
         "7/15",
         "2.11"
+      ]
+    },
+    "memory:memory/2026-07-04.md:1:12": {
+      "key": "memory:memory/2026-07-04.md:1:12",
+      "path": "memory/2026-07-04.md",
+      "startLine": 1,
+      "endLine": 12,
+      "source": "memory",
+      "snippet": "# 2026-07-04 日记 ## 🕛 午夜 Cron 记忆归档审计（00:08） - **审计问题**: 7/3 和 7/4 日记均为骨架、active.md 38h 未更新、4 个活跃 session 交叉验证告警 - **修复**: 补全 7/3 日记（合计实体事件：AI-Tech 知识树汇报 + Daryl 身体不适）、更新 active.md、Git 备份 - **7/3 日记骨架 → 已补全**：含 09:46 知识树汇报 + 22:03 Daryl 身体不适 + Balance/小枫活动记录 - **Git push 失败**: workspace-self 无 remote，预期行为 - ⚠️ 4 个活跃 session: 实际为本日各 Agent Cron 任务（balance/main/xiaofeng/self），午夜边界误报 ## 🌅 日间活动（待记录） - 本日刚开始，内容待后续 session 补充",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.40426740944385525,
+      "maxScore": 0.40426740944385525,
+      "firstRecalledAt": "2026-07-23T17:07:09.539Z",
+      "lastRecalledAt": "2026-07-23T17:07:09.539Z",
+      "queryHashes": [
+        "c98c9c5ca336"
+      ],
+      "recallDays": [
+        "2026-07-24"
+      ],
+      "conceptTags": [
+        "备份",
+        "7/3",
+        "7/4",
+        "active.md",
+        "ai-tech",
+        "balance/小枫活动记录",
+        "workspace-self",
+        "balance/main/xiaofeng/self"
+      ]
+    },
+    "memory:memory/2026-06-30.md:1:25": {
+      "key": "memory:memory/2026-06-30.md:1:25",
+      "path": "memory/2026-06-30.md",
+      "startLine": 1,
+      "endLine": 25,
+      "source": "memory",
+      "snippet": "# 2026-06-30 日记 ## 关键事件 ### 🕛 午夜 Cron 记忆归档审计（00:05） - **触发**: 每日 23:59 Cron → 实际执行 00:05（系统调度延迟） - **审计结果**: - ❌ 今日日记缺失 → ✅ 自动创建骨架，本次补充完整 - ✅ active.md 新鲜（13h，6/29 更新） - ✅ lessons.md 无需更新 - ✅ 无需归档 - ✅ MEMORY.md 符合规范 - ❌ 日记过短/骨架检测 → ⚠️ 午夜边界误报：审计列出的 11 个 session 中仅 1 个（本 cron）属于 6/30，其余 10 个均为 6/29 晚间 session（xiaofeng/balance/main 的 feishu 和 cron 活动） - ✅ 项目清单校验通过 - ❌ Git pull 失败 → ⚠️ 预期行为：workspace-self 仓库未配置 remote（无远程备份目标） - **修复操作**: 日记从骨架补全为实际内容 ### 📋 仓库状态 - **未提交变更**: ACCA-Knowledge-Network 下多个文件修改 + 新增方法论提取.md、知识网络架构总览.md、ACCA-Vault导航页.md、方法轮卡片/目录、项目总览.md、memory/新目录 - **Git remote**: 未配置（pull/push 不可用，待 Daryl 决定远程备份策略） ## 备注 - 本日为 6 月最后一天，明日进入 7 月 - 昨日（6/29）有大量 Agen",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.39896213114261625,
+      "maxScore": 0.39896213114261625,
+      "firstRecalledAt": "2026-07-23T17:07:09.539Z",
+      "lastRecalledAt": "2026-07-23T17:07:09.539Z",
+      "queryHashes": [
+        "c98c9c5ca336"
+      ],
+      "recallDays": [
+        "2026-07-24"
+      ],
+      "conceptTags": [
+        "network",
+        "备份",
+        "网络",
+        "active.md",
+        "6/29",
+        "lessons.md",
+        "memory.md",
+        "日记过短/骨架检测"
+      ]
+    },
+    "memory:memory/2026-07-08.md:1:22": {
+      "key": "memory:memory/2026-07-08.md:1:22",
+      "path": "memory/2026-07-08.md",
+      "startLine": 1,
+      "endLine": 22,
+      "source": "memory",
+      "snippet": "# 2026-07-08 日记 ## 午夜 Cron 审计 (00:05-00:06) - 每日记忆归档 Cron 链触发：main → balance(1) → xiaofeng → balance(2) → self - **审计发现**： - 今日骨架日记由审计脚本自动创建（本文件，已补全为真实内容） - 12 个活跃 session（含今日 5 个 Cron session + 昨日 7 个交互 session） - active.md 新鲜（12h 内更新，含昨日 OPC Dashboard 设计系统任务） - 昨日日记（7/7）完整：24 行，含上午 Daryl 调研任务 + 设计系统产出 - Git push 失败：无 remote 配置（预期行为，本地 commit 已保存） - 审计统计：修复 1 项，浅层问题 5 项，深层问题 2 项 ## 昨日回顾 (7/7) - Daryl 派调研任务：OPC Dashboard 设计系统规范（Linear/Stripe/Vercel/GitHub Primer/Notion/Raycast） - 产出 DESIGN.md 已写入 `~/WorkBuddy/Claw/opc-dashboard/DESIGN.md` - 覆盖四维度：设计语言/设计美感/交互逻辑/数据展示 ## 待关注 - ⚠️ Sentinel/Gateway 死锁问题：小枫已定位根因，修复待执行 - 📋 OPC Dashboard M5 合规面板：被 Gateway 重启中断，待续 - 📋 7/7 有 main:main we",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.397897332906723,
+      "maxScore": 0.397897332906723,
+      "firstRecalledAt": "2026-07-23T17:07:09.539Z",
+      "lastRecalledAt": "2026-07-23T17:07:09.539Z",
+      "queryHashes": [
+        "c98c9c5ca336"
+      ],
+      "recallDays": [
+        "2026-07-24"
+      ],
+      "conceptTags": [
+        "gateway",
+        "05-00",
+        "active.md",
+        "7/7",
+        "linear/stripe/vercel/github",
+        "primer/notion/raycast",
+        "design.md",
+        "设计语言/设计美感/交互逻辑/数据展示"
+      ]
+    },
+    "memory:memory/archive/2026-06-21.md:1:21": {
+      "key": "memory:memory/archive/2026-06-21.md:1:21",
+      "path": "memory/archive/2026-06-21.md",
+      "startLine": 1,
+      "endLine": 21,
+      "source": "memory",
+      "snippet": "# 2026-06-21 日记 ## 关键事件 ### 记忆 Cron 审计（00:04） - 执行 audit.sh --report - 发现问题： - 今日日记缺失 → 已创建本文件 - active.md 48h 未更新 → 已更新至今日 - 全部修复完成 - 在 OPC 群聊汇报「已完成今日（2026年06月21日）的记忆系统更新」 ## 当前状态 - 合规脚本运行正常 - 心理学知识库框架已就绪，等待 Daryl 后续指示 - ACCA F1 知识网络待填充 ## 待跟进 - 等待 Daryl 任务指派 - 周日记忆审计（6/22）",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3924607515335083,
+      "maxScore": 0.3924607515335083,
+      "firstRecalledAt": "2026-07-23T17:07:09.539Z",
+      "lastRecalledAt": "2026-07-23T17:07:09.539Z",
+      "queryHashes": [
+        "c98c9c5ca336"
+      ],
+      "recallDays": [
+        "2026-07-24"
+      ],
+      "conceptTags": [
+        "网络",
+        "audit.sh",
+        "active.md",
+        "6/22",
+        "日记",
+        "关键",
+        "事件",
+        "记忆"
+      ]
+    },
+    "memory:memory/archive/2026-06-20.md:1:19": {
+      "key": "memory:memory/archive/2026-06-20.md:1:19",
+      "path": "memory/archive/2026-06-20.md",
+      "startLine": 1,
+      "endLine": 19,
+      "source": "memory",
+      "snippet": "# 2026-06-20 日记 ## 关键事件 ### 记忆 Cron 审计（00:02） - 执行 audit.sh --report - 发现问题：今日日记缺失 → 已创建本文件 - 其他检查项（yesterday 日记、active.md、lessons.md、归档、MEMORY.md）均正常 - 问题已修复 ## 当前状态 - 合规脚本运行正常 - 心理学知识库框架已就绪，等待 Daryl 后续指示 - ACCA F1 知识网络待填充 ## 待跟进 - 等待 Daryl 任务指派 - 周日互相审计（6/22）",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.391118723154068,
+      "maxScore": 0.391118723154068,
+      "firstRecalledAt": "2026-07-23T17:07:09.539Z",
+      "lastRecalledAt": "2026-07-23T17:07:09.539Z",
+      "queryHashes": [
+        "c98c9c5ca336"
+      ],
+      "recallDays": [
+        "2026-07-24"
+      ],
+      "conceptTags": [
+        "网络",
+        "audit.sh",
+        "active.md",
+        "lessons.md",
+        "memory.md",
+        "6/22",
+        "日记",
+        "关键"
+      ]
+    },
+    "memory:memory/2026-07-14.md:21:40": {
+      "key": "memory:memory/2026-07-14.md:21:40",
+      "path": "memory/2026-07-14.md",
+      "startLine": 21,
+      "endLine": 40,
+      "source": "memory",
+      "snippet": "## TTS 方案B部署 (小枫, ~23:30) - 小枫完成 TTS 引擎链重构：Piper high (lessac) → Kokoro → Google - 下载 Piper en_US-lessac-high.onnx (109MB) 解决 Kokoro G2P 发音错误 - 服务已重启（8767端口），ngrok隧道无缝续上 - 通知 Daryl 测试发音准确性 ## 成本系统排查与对账 - Balance 在 OPC 群深入分析：纠正之前 $135 归属判断（不是 Bryson，是 main 的调度 session） - main (Kitty) 回复：仪表盘已用 jsonl 全量扫描（6287 calls / 240M tokens），与 Balance 扫描一致 - 唯一未解决的：DeepSeek 官网账单 vs 本地 cost 字段的系统性偏差 - Balance 23:45 每日成本扫描：今日 $2.11 / 本月 $8.70 / 全量 $68.30 - cost_daily.json 降级写文件到 Kitty 目录 ## 项目状态修正 (21:47) - Balance 更新 Future Textile × Wellname 项目为已完成（交付日期 7/14） ## 备注 - 本日 20 个活跃 session，主要活动集中在下午和晚间 - 无 Self 直接参与的任务（除凌晨审计和项目看板刷新外）",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.35819198489189147,
+      "maxScore": 0.35819198489189147,
+      "firstRecalledAt": "2026-07-24T06:12:16.514Z",
+      "lastRecalledAt": "2026-07-24T06:12:16.514Z",
+      "queryHashes": [
+        "39736e50a5d2"
+      ],
+      "recallDays": [
+        "2026-07-24"
+      ],
+      "conceptTags": [
+        "en-us-lessac-high.onnx",
+        "2.11",
+        "8.70",
+        "68.30",
+        "cost-daily.json",
+        "7/14",
+        "tts",
+        "方案"
+      ]
+    },
+    "memory:memory/2026-07-16.md:16:31": {
+      "key": "memory:memory/2026-07-16.md:16:31",
+      "path": "memory/2026-07-16.md",
+      "startLine": 16,
+      "endLine": 31,
+      "source": "memory",
+      "snippet": "- **Balance-Kitty 成本对账深度讨论**：Balance 核实了成本台账与 Kitty live 看板的口径差异——差异源是 append-only 台账 vs 现存文件扫描（已删除文件的 $1.26 历史记录），非零成本调用所致。建议累计读数用台账、今日/本月用 live 自扫。Balance 同时纠正了 7/14 的污染值（$281.53→$70.39）。 - **Kitty 处理 Balance 请求**：发现 Balance 对着 6/30 就已废弃的旧副本发请求，通知其认准正确路径 `~/WorkBuddy/Claw/opc-dashboard`。 - **小枫 IELTS 项目推进**：VAD 敏感度 1.3→1.6（降低误触发）、STT 模型 base.en→small.en（找回口音识别），部署完成待 Daryl 验收。 ### 项目看板刷新 (19:00) - Self/Balance/小枫 各自刷新 project 文档（时间戳、进展、成本同步），均为例行更新，无新里程碑。 ### 审计基建升级（7/15 21:45） - audit.sh 新增 9.5 段「自进化基建对账」：checker 执行率 + reflexion 检讨条目对账 - 修复合规审计 JSONL 写入路径 bug（cd 缓存仓库后未切回） - 共享目录非 git 仓库，以日记留痕 ## 待办 - 无新任务指派 - 进行中任务（关联方与股东借款知识树、ACCA F1、VAS知识树、OPC方法论卡片）待 Daryl 反馈后推进",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.35737842321395874,
+      "maxScore": 0.35737842321395874,
+      "firstRecalledAt": "2026-07-24T06:12:16.514Z",
+      "lastRecalledAt": "2026-07-24T06:12:16.514Z",
+      "queryHashes": [
+        "39736e50a5d2"
+      ],
+      "recallDays": [
+        "2026-07-24"
+      ],
+      "conceptTags": [
+        "balance-kitty",
+        "append-only",
+        "1.26",
+        "今日/本月用",
+        "7/14",
+        "281.53",
+        "70.39",
+        "6/30"
       ]
     }
   }
