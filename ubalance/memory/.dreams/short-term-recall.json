@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-22T04:16:09.253Z",
+  "updatedAt": "2026-07-25T00:02:07.478Z",
   "entries": {
     "memory:memory/2026-06-10.md:1:29": {
       "key": "memory:memory/2026-06-10.md:1:29",
@@ -1468,20 +1468,22 @@
       "endLine": 24,
       "source": "memory",
       "snippet": "# 2026-07-06 日记 ## 🕛 Cron 审计 (00:15 7/6) - **审计结果**: 1 自动修复 + 6 浅层 + 2 深层 - **已知模式**: 2 个活跃 session（balance cron + xiaofeng cron）→ 午夜边界误报，与 7/3、7/4、7/5 相同 - **修复**: 日记骨架填充、active.md 时间戳更新 ## 7/5 回顾 - Balance 无实质性工作，仅有 cron 审计 - 其他 Agent（main/xiaofeng/self）有飞书活动，非 Balance 职责范围 ## 今日事件 - **13:23** 记忆系统 v3 project 文件已部署，Self 通知填写 project_Balance.md - **13:30** project_Balance.md 已创建并填写完毕，按 🟢/🟡/🔵/⚪ 四区块格式 - 进行中: Future Textile × Wellname 利息处理方案（第三轮攻防67%） - 规划中: IPO审计底稿/AI Workflow测试流/成本归集模型/会计差错调整 - 已完成: 8个项目 - 归档: 2个项目 - **13:23** Q3开发周期正式启动，10月4日验收日已对齐 ## 待办 - 等待 Daryl 完成 Future Textile 第三轮攻击9-12防御 - 等待 Daryl 下一步财务分析任务指派",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.716864538192749,
-      "maxScore": 0.36488460302352904,
+      "totalScore": 1.103589490056038,
+      "maxScore": 0.38672495186328887,
       "firstRecalledAt": "2026-07-13T09:21:02.383Z",
-      "lastRecalledAt": "2026-07-18T04:51:06.673Z",
+      "lastRecalledAt": "2026-07-25T00:02:07.478Z",
       "queryHashes": [
         "d25cb1659a59",
-        "d10e9941dfde"
+        "d10e9941dfde",
+        "70c159385832"
       ],
       "recallDays": [
         "2026-07-13",
-        "2026-07-18"
+        "2026-07-18",
+        "2026-07-25"
       ],
       "conceptTags": [
         "7/6",
@@ -1538,18 +1540,20 @@
       "endLine": 33,
       "source": "memory",
       "snippet": "# 2026-07-11 日记 ## 🕛 00:01 每日记忆归档审计（Cron） - **触发**: 23:59 Cron 兜底审计 `bash scripts/compliance/audit.sh --report` - **审计结果**: - ❌ 7/11日记缺失 → 🔧 已自动创建骨架 - ✅ active.md 新鲜 (0h) - ✅ lessons.md 无需今日更新 - ✅ MEMORY.md 39行，符合规范 - ⚠️ 日记过短但有13个活跃session → 午夜0点正常现象（多数为昨日残留+s Cron审计session） - ❌ 7/11日记骨架 → 🔧 已补充内容（本条目） - ✅ 项目清单一致 - ✅ Git push 重试成功（审计脚本首次push失败，手动重试OK） - **修复项**: 日记骨架 → 内容补充完成 | Git push → 重试成功 - **备注**: 午夜0点当日无实质活动，日记接近骨架属正常 ## 📋 昨日续接事项（7/10 → 7/11） 以下任务从7/10结转，等待今天进展： ### 🔴 JGL收购KHOA DUNG并购框架 - **状态**: v1.0框架已交付 Daryl - **待确认**: 行业、估值、代持协议、代持人身份等8项关键信息 - **产出**: `reports/JGL-KHOA_DUNG-并购框架-v1.0-20260710.md` ### 🔴 车辆费用专项分析 - **状态**: ⏳ 待Daryl发送详细数据 - **备注**: 与JGL项目完全",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.35895998477935787,
-      "maxScore": 0.35895998477935787,
+      "totalScore": 0.7319057285785675,
+      "maxScore": 0.3729457437992096,
       "firstRecalledAt": "2026-07-13T09:21:02.383Z",
-      "lastRecalledAt": "2026-07-13T09:21:02.383Z",
+      "lastRecalledAt": "2026-07-25T00:02:07.478Z",
       "queryHashes": [
-        "d25cb1659a59"
+        "d25cb1659a59",
+        "70c159385832"
       ],
       "recallDays": [
-        "2026-07-13"
+        "2026-07-13",
+        "2026-07-25"
       ],
       "conceptTags": [
         "scripts/compliance/audit.sh",
@@ -2115,18 +2119,20 @@
       "endLine": 31,
       "source": "memory",
       "snippet": "# 2026-07-12 日记 ## 🕛 00:01 每日记忆归档审计（Cron） - **触发**: 23:59 Cron 兜底审计 `bash scripts/compliance/audit.sh --report` - **审计结果**: - ❌ 7/12日记缺失 → 🔧 已自动创建骨架 - ✅ 昨天日记存在 (51行) — 7/11日记内容完整 - ✅ active.md 新鲜 - ✅ lessons.md 无需今日更新 - 🔧 归档 2026-06-11.md → `memory/archive/` - ✅ MEMORY.md 39行，符合规范 - ⚠️ 日记过短但有11个活跃session → 午夜0点正常现象（多数为昨日残留 + 跨夜 + cron审计session） - ❌ 7/12日记骨架 → 🔧 已补充内容（本条目） - ✅ 项目清单一致 - ❌ Git push 失败 → 已知持续问题（branch protection），非新问题 - **修复项**: 日记骨架 → 内容补充完成 | 2026-06-11.md → 已归档 - **备注**: 午夜0点当日无实质活动，日记接近骨架属正常 ## 📋 昨日续接事项（7/11 → 7/12） 以下任务从7/11结转，等待今天进展： ### 🔴 JGL收购KHOA DUNG并购框架 - **状态**: v1.0框架已交付 Daryl - **待确认**: 行业、估值、代持协议、代持人身份等8项关键信息 - **产出**: `reports/JGL-KHO",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.35127441585063934,
-      "maxScore": 0.35127441585063934,
+      "totalScore": 0.7270020574331284,
+      "maxScore": 0.375727641582489,
       "firstRecalledAt": "2026-07-18T04:51:06.673Z",
-      "lastRecalledAt": "2026-07-18T04:51:06.673Z",
+      "lastRecalledAt": "2026-07-25T00:02:07.478Z",
       "queryHashes": [
-        "d10e9941dfde"
+        "d10e9941dfde",
+        "70c159385832"
       ],
       "recallDays": [
-        "2026-07-18"
+        "2026-07-18",
+        "2026-07-25"
       ],
       "conceptTags": [
         "scripts/compliance/audit.sh",
@@ -2515,6 +2521,68 @@
         "7/22自身活动尚未开始",
         "贷款",
         "材料"
+      ]
+    },
+    "memory:memory/archive/2026-06-18.md:1:16": {
+      "key": "memory:memory/archive/2026-06-18.md:1:16",
+      "path": "memory/archive/2026-06-18.md",
+      "startLine": 1,
+      "endLine": 16,
+      "source": "memory",
+      "snippet": "# 2026-06-18 ## 项目归档 - 完成 Balance 全部项目成果归档到 opc-workspace - 初始提交 4c45d4c：7份核心规范+四层合规脚本+记忆系统+项目文档+财务底稿 - 升级提交 e0eaa87：audit.sh 增加 Git 自动备份步骤 ## 记忆Cron - 00:23 执行审计：初始化 Git repo 缓存，日记已补，active.md 已更新 ## 当前状态 - 实时成本追踪系统：生产运行中 - Hedging方案分析：等待Daryl敞口数据 - IPO审计底稿：学习内化中 - 项目成本归集模型：框架讨论完成，等待落地",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.37736767828464507,
+      "maxScore": 0.37736767828464507,
+      "firstRecalledAt": "2026-07-25T00:02:07.478Z",
+      "lastRecalledAt": "2026-07-25T00:02:07.478Z",
+      "queryHashes": [
+        "70c159385832"
+      ],
+      "recallDays": [
+        "2026-07-25"
+      ],
+      "conceptTags": [
+        "备份",
+        "opc-workspace",
+        "audit.sh",
+        "active.md",
+        "项目",
+        "归档",
+        "完成",
+        "balance"
+      ]
+    },
+    "memory:memory/2026-07-22.md:42:63": {
+      "key": "memory:memory/2026-07-22.md:42:63",
+      "path": "memory/2026-07-22.md",
+      "startLine": 42,
+      "endLine": 63,
+      "source": "memory",
+      "snippet": "- **贷款材料**: 暂停挂起，v2.7.0还不够好，这周会再迭代 - **OPC成本仪表盘**: 作为OPC基建类工作，不再在项目汇报中展示，日常审计保持即可 ### 11:15 · 执行完成 - ✅ active.md状态已更新（Future Textile→已归档 / 二级市场+贷款→暂停 / OPC→基础设施类） - ✅ **Future Textile最终归档**: `reports/归档-FutureTextile利息豁免攻防-完整链路-20260722.md` - 完整覆盖5个阶段：问题起源(豁免)→攻防对抗(12条攻击)→方案转折(可转换工具)→生效日争议(IRC vs ERC)→落地实操 - 呈现了长流程推进的完整路径：推进→发现问题→收集依据→解决问题 - 8条可迁移教训 - 📌 等待Daryl两个新任务 - 模型: deepseek/deepseek-v4-pro ## 📋 状态总结 - **周三**: Daryl已清理任务，准备接新任务 - **当前活跃**: 无（等待新任务） - **暂停**: 二级市场框架、贷款材料、JGL并购、IPO审计底稿、AI Workflow、成本归集、影刀RPA、多文件处理、会计差错 - **基础设施运维**: OPC成本仪表盘（cron自动） - **下次事件**: 23:45 成本扫描cron + 23:59 记忆审计cron ## 🕚 23:45 成本全量扫描（Cron） - **扫描**: full_cost_scan.py v2 append-only台账 - **全量**: $103.",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3727697342634201,
+      "maxScore": 0.3727697342634201,
+      "firstRecalledAt": "2026-07-25T00:02:07.478Z",
+      "lastRecalledAt": "2026-07-25T00:02:07.478Z",
+      "queryHashes": [
+        "70c159385832"
+      ],
+      "recallDays": [
+        "2026-07-25"
+      ],
+      "conceptTags": [
+        "v2.7.0还不够好",
+        "active.md状态已更新",
+        "deepseek/deepseek-v4-pro",
+        "full-cost-scan.py",
+        "append-only台账",
+        "贷款",
+        "材料",
+        "暂停"
       ]
     }
   }
