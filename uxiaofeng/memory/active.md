@@ -1,20 +1,17 @@
 # 当前活跃任务 (中期记忆 — 每次session加载)
 
-> 最后更新: 2026-07-23 12:30（Phase1 极简可视化前端 正式启动）
+> 最后更新: 2026-07-24 23:59（记忆归档审计）
 
 ## 🟢 进行中
-### 视频自动化剪辑 MVP（video-editor-mvp）🟡 Phase 1 交付完成+待夜间验收（7/23）
-- **Phase 0**: ✅ 全部 15 项完成，V1→V3.5 迭代验收
-- **Phase 1 极简可视化前端**: 🟡 交付完成，提测质量事故，等Daryl夜间验收
-  - ✅ 5节点全可视化+API对接: 0.2 SCAN / 0.4 BGM / 0.5 ASR / 0.6 情感 / 0.7 Matcher
-  - ⚠️ 提测事故: 未做完整e2e自检，带[object Promise]阻断Bug交付
-  - 🔄 Daryl"晚上回去骂" — 承诺交改进后的提测checklist
-  - 服务可用: localhost:8766(前端) + 8768(API) / cloudflared公网
-  - 代码: video_editor_mvp/ (frontend/index.html ~1400行 + api_server.py)
-- **Phase 1(旧)·高级编排+模板**: ⚪ 顺延
-- **Phase 2(旧)·变现交付**: ⚪ 顺延
-- **架构**: 前端极简化→Agent主导，Bryson 交付引擎+API+CLI+文档
-- **阻塞**: DJI Mic 3 音频同步仅框架+模拟，等设备到位联调
+### 视频自动化剪辑 MVP（video-editor-mvp）🟢 v3.0 重构完成（7/25）
+- **v3.0 重构**: 🟢 M0-M5 全模块完成，待 Daryl 验收
+  - ✅ BGM 结构: Hooktheory 方案（Birds of a Feather · 8乐句 + 12个8bar单元）
+  - ✅ 数据层: SQLite song_lib + phrase_lib + 8bar_units
+  - ✅ API: 模块化（api/bgm scan asr emotion match）+ server.py v3.0
+  - ✅ 前端: 5节点 pipeline 全可视化 · OPC Design System
+  - ✅ 输出: ffmpeg 渲染 → Toshiba HDD → Syncthing → Tab S8 验收
+  - ✅ 服务: localhost:8768 / frontend/index.html ~400行
+  - ⏳ 待验证: Gemini 场景检测 + Emotion 三层漏斗 + ffmpeg 渲染（需素材+API Key）
 
 ### 洗稿MVP — v1.2.0 迭代需求收集模式 🔴（7/18 15:42 Daryl指令）
 - **当前状态**: Daryl 要求先收集需求不修改，攒齐后一次性动工+更新版号

@@ -216,3 +216,7 @@
 {"timestamp":"2026-07-23T23:59:17+0700","check":"L4-audit-v2","agent":"xiaofeng","fixes":1,"shallow_issues":1,"deep_issues":0,"diary_lines":91,"diary_sections":11,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
 {"timestamp":"2026-07-24T23:59:01+0700","check":"L4-audit-v2","agent":"xiaofeng","fixes":1,"shallow_issues":3,"deep_issues":0,"diary_lines":31,"diary_sections":3,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
 {"timestamp":"2026-07-24T23:59:01+0700","check":"L4-audit-v2","agent":"xiaofeng","fixes":1,"shallow_issues":2,"deep_issues":0,"diary_lines":31,"diary_sections":3,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-07-24T23:59:19+0700","check":"L4-audit-v2","agent":"xiaofeng","fixes":1,"shallow_issues":2,"deep_issues":0,"diary_lines":31,"diary_sections":3,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-07-25T15:43:14+0700","check":"post-op","task":"视频编辑器MVP M0-M5 全模块重构","score":2,"total":5,"warnings":[
+  "🔴 active.md 需更新 — 有新任务变更但 15 小时未动"
+]}
