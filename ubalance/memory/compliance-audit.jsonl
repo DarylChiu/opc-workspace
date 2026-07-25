@@ -194,3 +194,7 @@
 {"timestamp":"2026-07-25T11:07:48+0700","check":"post-op","task":"应付采购SOP框架v3.0交付，主线切换为确认→计量→记录→期末处理的会计确认链","score":2,"total":5,"warnings":[
   "🔴 active.md 需更新 — 有新任务变更但 21 小时未动"
 ]}
+{"timestamp":"2026-07-26T00:01:36+0700","check":"L4-audit-v2","agent":"balance","fixes":3,"shallow_issues":4,"deep_issues":2,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-07-26T00:02:20+0700","check":"post-op","task":"每日记忆归档审计 2026-07-26","score":3,"total":5,"warnings":[
+  "🔴 任务涉及问题/失败/审计发现，建议提炼到 lessons.md"
+]}
