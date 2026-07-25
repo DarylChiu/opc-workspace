@@ -100,3 +100,8 @@
 {"timestamp":"2026-07-24T00:08:08+0700","check":"post-op","task":"每日记忆归档审计","score":3,"total":5,"warnings":[
   "🔴 任务涉及问题/失败/审计发现，建议提炼到 lessons.md"
 ]}
+{"timestamp":"2026-07-25T00:06:09+0700","check":"L4-audit-v2","agent":"self","fixes":3,"shallow_issues":6,"deep_issues":3,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-07-25T00:07:22+0700","check":"post-op","task":"每日记忆归档审计 2026-07-25","score":2,"total":5,"warnings":[
+  "🔴 今日日记疑似 Cron 骨架（16行, 3段落, 仅Cron事件）— 必须补充实际内容",
+  "🔴 任务涉及问题/失败/审计发现，建议提炼到 lessons.md"
+]}

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-24T06:12:16.514Z",
+  "updatedAt": "2026-07-25T12:00:24.089Z",
   "entries": {
     "memory:memory/2026-06-22.md:22:34": {
       "key": "memory:memory/2026-06-22.md:22:34",
@@ -540,18 +540,20 @@
       "endLine": 53,
       "source": "memory",
       "snippet": "- 更新索引：02-Finance/Home.md、Cross-Border-Home.md、active.md ### 08:55 Daryl 指出遗漏 — 受托支付通道 - Daryl 指出 KHOA DUNG 案例中受托支付通道结构被遗漏——不是税务附属细节，是独立的融资结构知识点 - 路径：`02-Finance/Capital-Raising/Bank-Loan/Project-Loan/受托支付通道.md` - 覆盖：受托支付合规逻辑 / 壳公司通道模式 / 税务风险（VAT-CIT-转让定价-PIT联动）/ vs流贷vs自付对比 - 交叉引用：KHOA DUNG 案例新增反向链接 → 受托支付通道 - 02-Finance/Home.md 新增 Capital-Raising 节点 - 另两个遗漏点 Daryl 未展开，说「先这样吧」待后续补 ## 19:47 Daryl DM — Syncthing + Obsidian 平板部署支持 - Daryl 在三星平板上配置 Syncthing，Create 按钮灰色不可点击 - 诊断：未勾选共享设备（黄色圆点→需点击变为勾选状态） - 解决后 Daryl 追问：351 files 只显示 1MB？怎么打开？ - 回复：纯 Markdown 文本库 1.9MB 属正常（175个.md文件无附件）；需安装 Obsidian APK - 提供 GitHub Releases APK 下载路径 + vault 打开路径指引 - 结果：同步 100% 完成，Daryl 后续自行安装 Obsidian ## 今日状态 -",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.3617259442806244,
+      "totalScore": 0.715356034040451,
       "maxScore": 0.3617259442806244,
       "firstRecalledAt": "2026-07-13T00:58:28.977Z",
-      "lastRecalledAt": "2026-07-13T00:58:28.977Z",
+      "lastRecalledAt": "2026-07-25T07:52:45.168Z",
       "queryHashes": [
-        "b65ed672215b"
+        "b65ed672215b",
+        "ffd12fb904cb"
       ],
       "recallDays": [
-        "2026-07-13"
+        "2026-07-13",
+        "2026-07-25"
       ],
       "conceptTags": [
         "02-finance/home.md",
@@ -853,20 +855,22 @@
       "endLine": 25,
       "source": "memory",
       "snippet": "- 22:15 Kitty 独立核实完毕：①无下游读取 compliance-audit.jsonl（Dashboard 数据源是自己的 data/*.json，M5合规面板不存在），bugfix 安全保留 ②117条错位历史先不迁，等 Daryl 拍板 ③Balance/小枫已由 Kitty 通知 ## 凌晨记忆审计 (00:08) - Cron 触发每日记忆审计，发现问题： 1. active.md 39h 未更新 → 已刷新时间戳至 00:08 2. 7/14 日记过短（11行）vs 20个活跃 session → 已从 session 历史充实为完整日记（TTS方案B/成本对账/项目看板刷新/项目状态修正） 3. 7/15 日记本文件为骨架 → 已升级为真实内容 4. 归档 2026-06-14.md → archive/ - Git 本地备份完成（7 files changed, 144 insertions, 78 deletions） - 成本仪表盘正常：今日 $2.11 | 本月 $8.70 | 全量 $68.30 | API 正常 ## 待办 - 无新任务指派 - 进行中任务（关联方与股东借款知识树、ACCA F1、VAS知识树、OPC方法论卡片）待 Daryl 反馈后推进",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.7273093283176422,
-      "maxScore": 0.36432509422302245,
+      "totalScore": 1.095908698439598,
+      "maxScore": 0.36859937012195587,
       "firstRecalledAt": "2026-07-20T08:35:23.446Z",
-      "lastRecalledAt": "2026-07-24T06:12:16.514Z",
+      "lastRecalledAt": "2026-07-25T12:00:24.089Z",
       "queryHashes": [
         "95b792ba4f83",
-        "39736e50a5d2"
+        "39736e50a5d2",
+        "df9ca25df11b"
       ],
       "recallDays": [
         "2026-07-20",
-        "2026-07-24"
+        "2026-07-24",
+        "2026-07-25"
       ],
       "conceptTags": [
         "备份",
@@ -948,18 +952,20 @@
       "endLine": 22,
       "source": "memory",
       "snippet": "# 2026-07-08 日记 ## 午夜 Cron 审计 (00:05-00:06) - 每日记忆归档 Cron 链触发：main → balance(1) → xiaofeng → balance(2) → self - **审计发现**： - 今日骨架日记由审计脚本自动创建（本文件，已补全为真实内容） - 12 个活跃 session（含今日 5 个 Cron session + 昨日 7 个交互 session） - active.md 新鲜（12h 内更新，含昨日 OPC Dashboard 设计系统任务） - 昨日日记（7/7）完整：24 行，含上午 Daryl 调研任务 + 设计系统产出 - Git push 失败：无 remote 配置（预期行为，本地 commit 已保存） - 审计统计：修复 1 项，浅层问题 5 项，深层问题 2 项 ## 昨日回顾 (7/7) - Daryl 派调研任务：OPC Dashboard 设计系统规范（Linear/Stripe/Vercel/GitHub Primer/Notion/Raycast） - 产出 DESIGN.md 已写入 `~/WorkBuddy/Claw/opc-dashboard/DESIGN.md` - 覆盖四维度：设计语言/设计美感/交互逻辑/数据展示 ## 待关注 - ⚠️ Sentinel/Gateway 死锁问题：小枫已定位根因，修复待执行 - 📋 OPC Dashboard M5 合规面板：被 Gateway 重启中断，待续 - 📋 7/7 有 main:main we",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.397897332906723,
+      "totalScore": 0.748480561375618,
       "maxScore": 0.397897332906723,
       "firstRecalledAt": "2026-07-23T17:07:09.539Z",
-      "lastRecalledAt": "2026-07-23T17:07:09.539Z",
+      "lastRecalledAt": "2026-07-25T12:00:24.089Z",
       "queryHashes": [
-        "c98c9c5ca336"
+        "c98c9c5ca336",
+        "df9ca25df11b"
       ],
       "recallDays": [
-        "2026-07-24"
+        "2026-07-24",
+        "2026-07-25"
       ],
       "conceptTags": [
         "gateway",
@@ -1041,18 +1047,20 @@
       "endLine": 40,
       "source": "memory",
       "snippet": "## TTS 方案B部署 (小枫, ~23:30) - 小枫完成 TTS 引擎链重构：Piper high (lessac) → Kokoro → Google - 下载 Piper en_US-lessac-high.onnx (109MB) 解决 Kokoro G2P 发音错误 - 服务已重启（8767端口），ngrok隧道无缝续上 - 通知 Daryl 测试发音准确性 ## 成本系统排查与对账 - Balance 在 OPC 群深入分析：纠正之前 $135 归属判断（不是 Bryson，是 main 的调度 session） - main (Kitty) 回复：仪表盘已用 jsonl 全量扫描（6287 calls / 240M tokens），与 Balance 扫描一致 - 唯一未解决的：DeepSeek 官网账单 vs 本地 cost 字段的系统性偏差 - Balance 23:45 每日成本扫描：今日 $2.11 / 本月 $8.70 / 全量 $68.30 - cost_daily.json 降级写文件到 Kitty 目录 ## 项目状态修正 (21:47) - Balance 更新 Future Textile × Wellname 项目为已完成（交付日期 7/14） ## 备注 - 本日 20 个活跃 session，主要活动集中在下午和晚间 - 无 Self 直接参与的任务（除凌晨审计和项目看板刷新外）",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.35819198489189147,
+      "totalScore": 0.7126034677028656,
       "maxScore": 0.35819198489189147,
       "firstRecalledAt": "2026-07-24T06:12:16.514Z",
-      "lastRecalledAt": "2026-07-24T06:12:16.514Z",
+      "lastRecalledAt": "2026-07-25T12:00:24.089Z",
       "queryHashes": [
-        "39736e50a5d2"
+        "39736e50a5d2",
+        "df9ca25df11b"
       ],
       "recallDays": [
-        "2026-07-24"
+        "2026-07-24",
+        "2026-07-25"
       ],
       "conceptTags": [
         "en-us-lessac-high.onnx",
@@ -1072,18 +1080,20 @@
       "endLine": 31,
       "source": "memory",
       "snippet": "- **Balance-Kitty 成本对账深度讨论**：Balance 核实了成本台账与 Kitty live 看板的口径差异——差异源是 append-only 台账 vs 现存文件扫描（已删除文件的 $1.26 历史记录），非零成本调用所致。建议累计读数用台账、今日/本月用 live 自扫。Balance 同时纠正了 7/14 的污染值（$281.53→$70.39）。 - **Kitty 处理 Balance 请求**：发现 Balance 对着 6/30 就已废弃的旧副本发请求，通知其认准正确路径 `~/WorkBuddy/Claw/opc-dashboard`。 - **小枫 IELTS 项目推进**：VAD 敏感度 1.3→1.6（降低误触发）、STT 模型 base.en→small.en（找回口音识别），部署完成待 Daryl 验收。 ### 项目看板刷新 (19:00) - Self/Balance/小枫 各自刷新 project 文档（时间戳、进展、成本同步），均为例行更新，无新里程碑。 ### 审计基建升级（7/15 21:45） - audit.sh 新增 9.5 段「自进化基建对账」：checker 执行率 + reflexion 检讨条目对账 - 修复合规审计 JSONL 写入路径 bug（cd 缓存仓库后未切回） - 共享目录非 git 仓库，以日记留痕 ## 待办 - 无新任务指派 - 进行中任务（关联方与股东借款知识树、ACCA F1、VAS知识树、OPC方法论卡片）待 Daryl 反馈后推进",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.35737842321395874,
-      "maxScore": 0.35737842321395874,
+      "totalScore": 0.7205150097608566,
+      "maxScore": 0.36313658654689784,
       "firstRecalledAt": "2026-07-24T06:12:16.514Z",
-      "lastRecalledAt": "2026-07-24T06:12:16.514Z",
+      "lastRecalledAt": "2026-07-25T12:00:24.089Z",
       "queryHashes": [
-        "39736e50a5d2"
+        "39736e50a5d2",
+        "df9ca25df11b"
       ],
       "recallDays": [
-        "2026-07-24"
+        "2026-07-24",
+        "2026-07-25"
       ],
       "conceptTags": [
         "balance-kitty",
@@ -1094,6 +1104,68 @@
         "281.53",
         "70.39",
         "6/30"
+      ]
+    },
+    "memory:memory/2026-06-28.md:1:31": {
+      "key": "memory:memory/2026-06-28.md:1:31",
+      "path": "memory/2026-06-28.md",
+      "startLine": 1,
+      "endLine": 31,
+      "source": "memory",
+      "snippet": "# 2026-06-28 日记（星期日） ## 关键事件 ### 记忆 Cron 审计（00:03） - 执行 audit.sh --report - 发现 4 浅层 + 2 深层问题，1 项已自动修复（日记骨架创建） - **7 个活跃 session 告警**: 午夜边界 false positive（6/27 残留进程），与 6/27 同日模式一致 - active.md 更新 timestamp（上次 6/25 → 今 6/28） - 日记从骨架补全为真实内容 ## 当日状态 - 审计结果：修复后全部问题已关闭 ### 知识库分类决策（22:57 · Daryl 指令） - **贷款材料自动化处理** 从 02-金融 移除，归入 03-AI技术 - 原因：实操型自动化案例，非财务理论 - 定位：与视频分析交互Workflow 同级平铺，作为另一个「AI驱动的财务处理自动化」项目 - 已创建: `knowledge-base/03-AI技术/贷款材料自动化处理/README.md` - 完整工作流: Balance v2.1，含 OCR 内容验证管线、质检规则引擎、2 批次处理记录 ## 进行中项目 - ACCA F1 知识库建设（20 章节全部完成，待 Daryl 验收） - VAS 知识树 + 跨境对比网络 - OPC看板方法论卡片集成（待 Daryl 确认方向） ## 等待 Daryl - [ ] 确认 OPC看板方法论卡片集成方向 - [ ] 发送第一批手写笔记 + 录音 - [ ] 确认心理学域子分类",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3556563168764114,
+      "maxScore": 0.3556563168764114,
+      "firstRecalledAt": "2026-07-25T12:00:24.089Z",
+      "lastRecalledAt": "2026-07-25T12:00:24.089Z",
+      "queryHashes": [
+        "df9ca25df11b"
+      ],
+      "recallDays": [
+        "2026-07-25"
+      ],
+      "conceptTags": [
+        "网络",
+        "audit.sh",
+        "6/27",
+        "active.md",
+        "6/25",
+        "6/28",
+        "02-金融",
+        "03-ai技术"
+      ]
+    },
+    "memory:memory/2026-07-13.md:67:81": {
+      "key": "memory:memory/2026-07-13.md:67:81",
+      "path": "memory/2026-07-13.md",
+      "startLine": 67,
+      "endLine": 81,
+      "source": "memory",
+      "snippet": "- 链接规范：🔗(树叶→树叶) + 📂(Home页导航) 彻底拆分 + type/parent 元数据 ### 12:00+ Balance 任务交接：FutureTextile 债转股生效日增量 - Balance DM 交接：将 2026-07-14 债转股生效日争议（Topic1）合并进既有树叶 - 读取卡片 `案例卡片-FutureTextile利息资本化-债转股生效日-20260714.md` - 新增内容：三方立场（A&C=IRC日 / Daryl定论=ERC日 / Balance判断）+ 关键判据（IRC与ERC是否同期）+ 2条可迁移教训（确认vs计量分离 / 跟审计师=安全拆精确） - 结果：241→300行（+59），已遵循合并不新建原则 ## 今日状态 - 周一 12:00+，Plan A 全面重构完成，共 25 个树叶节点（含 FutureTextile 二次更新） - Syncthing 已 launchctl 持久化，平板同步链路正常 - 🔗 链接规范标准已确立并全面应用 - active.md 待办项：OPC看板方法论卡片集成、关联方知识树案例挂载（Daryl 未催） - ⚠️ Git remote 问题持续",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.35212239921092986,
+      "maxScore": 0.35212239921092986,
+      "firstRecalledAt": "2026-07-25T12:00:24.089Z",
+      "lastRecalledAt": "2026-07-25T12:00:24.089Z",
+      "queryHashes": [
+        "df9ca25df11b"
+      ],
+      "recallDays": [
+        "2026-07-25"
+      ],
+      "conceptTags": [
+        "type/parent",
+        "active.md",
+        "规范",
+        "树叶",
+        "home",
+        "导航",
+        "彻底",
+        "type"
       ]
     }
   }
