@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-24T02:20:39.506Z",
+  "updatedAt": "2026-07-26T10:53:40.788Z",
   "entries": {
     "memory:memory/archive/2026-03-24.md:138:171": {
       "key": "memory:memory/archive/2026-03-24.md:138:171",
@@ -2555,6 +2555,192 @@
         "v1.0",
         "v2.0",
         "0.2/0.4/0.5/0.6/0.7"
+      ]
+    },
+    "memory:memory/2026-07-26.md:1:22": {
+      "key": "memory:memory/2026-07-26.md:1:22",
+      "path": "memory/2026-07-26.md",
+      "startLine": 1,
+      "endLine": 22,
+      "source": "memory",
+      "snippet": "# 2026-07-26 日记（周日） ## 11:54 心跳 — 周日常规维护（第二轮） - HEARTBEAT.md 周日维护清单执行： - ✅ active.md 检查: 无过期任务，所有任务状态准确（等待Daryl验收/输入） - ✅ 日记归档: 截止6/26，无需归档 - ✅ lessons.md 更新: 新增 7/22 共享仓库git rebase风险教训 - ✅ identity.md 验证: 信息准确，核心方向可微调但需Daryl确认 - L5 audit.sh 扫描: 成本数据过期(710min)·SAGE基建未上线·日记偏短(11行) → 已修复日记 - 全部活跃任务等待 Daryl 验收/输入状态，无异常 - 周末安静，无紧急事项 ## 09:53 心跳 — 周日常规维护 - HEARTBEAT.md 周日维护清单执行： - ✅ 归档过期日记: 2026-06-25.md → archive/（31天，>30天阈值） - ✅ active.md 更新: IELTS 状态从\"等待验收(7/22)\"更新为\"等待验收(7/25更新)\"，记录昨晚两个Bug修复 - ✅ lessons.md 新增: DeepSeek API 模型名废弃教训 - ✅ identity.md 验证: 信息准确，无需修改 - 跨 Session 同步: Main+我飞书OPC群昨晚确认4个cloudflared隧道就绪，所有cron今早正常运行，无遗漏工作 - 全部活跃任务等待 Daryl 验收/输入状态，无异常 - 周末上午安静，无紧急事项",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3720104545354843,
+      "maxScore": 0.3720104545354843,
+      "firstRecalledAt": "2026-07-26T10:53:40.788Z",
+      "lastRecalledAt": "2026-07-26T10:53:40.788Z",
+      "queryHashes": [
+        "bf5dc238aaca"
+      ],
+      "recallDays": [
+        "2026-07-26"
+      ],
+      "conceptTags": [
+        "heartbeat.md",
+        "active.md",
+        "等待daryl验收/输入",
+        "截止6/26",
+        "lessons.md",
+        "7/22",
+        "identity.md",
+        "audit.sh"
+      ]
+    },
+    "memory:memory/2026-07-04.md:1:18": {
+      "key": "memory:memory/2026-07-04.md:1:18",
+      "path": "memory/2026-07-04.md",
+      "startLine": 1,
+      "endLine": 18,
+      "source": "memory",
+      "snippet": "# 2026-07-04 日记 ## Daryl 活动 - **21:41** Daryl 询问下午时段（15:00-21:41）API Token 消耗情况 - 回复：仅 Kitty 活跃（2 sessions, ~534k ctx tokens, ~$1.07），其他三个 Agent（Bryson/Balance/Self）全部 idle - **23:30** 睡前提醒（涂软膏+整理床铺）→ **23:59** 确认就寝 ## Agent 活动 - **Self**: 核查 VAS 知识树+跨境对比网络任务状态，确认 6/22 已实质完成，active.md 仍列「进行中」属簿记滞后 - **Balance**: 处理越南 VAT 税务表单（Circular 80/2021），OCR + 逻辑验证通过 - **Main CLI**: 心跳检测（Daryl 不活跃 → HEARTBEAT_OK） - **Cron jobs**: Self methodology-cards Git 备份、各 Agent 每日记忆归档均正常执行 ## 系统状态 - 4 Agent 体系运行正常 - 无新增任务或变更 - 当日总消耗 ~$1.5 以内",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3665556192398071,
+      "maxScore": 0.3665556192398071,
+      "firstRecalledAt": "2026-07-26T10:53:40.788Z",
+      "lastRecalledAt": "2026-07-26T10:53:40.788Z",
+      "queryHashes": [
+        "bf5dc238aaca"
+      ],
+      "recallDays": [
+        "2026-07-26"
+      ],
+      "conceptTags": [
+        "备份",
+        "网络",
+        "00-21",
+        "1.07",
+        "bryson/balance/self",
+        "6/22",
+        "active.md",
+        "80/2021"
+      ]
+    },
+    "memory:memory/archive/2026-06-13.md:1:12": {
+      "key": "memory:memory/archive/2026-06-13.md:1:12",
+      "path": "memory/archive/2026-06-13.md",
+      "startLine": 1,
+      "endLine": 12,
+      "source": "memory",
+      "snippet": "# 2026-06-13 日记 ## 概述 安静日，无用户主动交互。 ## 系统活动 - 各 Agent 无实质性工作对话 - 无新项目启动或状态变更 ## 备注 - active.md 中「已交付（运行观察期 → 6月13日周日验收）」为预定验收日期，因无交互自然推迟",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3651012301445007,
+      "maxScore": 0.3651012301445007,
+      "firstRecalledAt": "2026-07-26T10:53:40.788Z",
+      "lastRecalledAt": "2026-07-26T10:53:40.788Z",
+      "queryHashes": [
+        "bf5dc238aaca"
+      ],
+      "recallDays": [
+        "2026-07-26"
+      ],
+      "conceptTags": [
+        "active.md",
+        "日记",
+        "概述",
+        "安静",
+        "用户",
+        "主动",
+        "交互",
+        "系统"
+      ]
+    },
+    "memory:memory/2026-07-01.md:1:30": {
+      "key": "memory:memory/2026-07-01.md:1:30",
+      "path": "memory/2026-07-01.md",
+      "startLine": 1,
+      "endLine": 30,
+      "source": "memory",
+      "snippet": "# 2026-07-01 日记 ## 〇、今日概况 - 7月第一天，Q3 启动 - 主要事件：Self Agent 归档 Balance 发送的 FutureTextile × Wellname 股东借款利息案例 - 本 session 全天无活跃对话，仅午夜 Cron 审计 ## 一、跨 Agent 活动 ### Self Agent — 知识树归档 - **15:52 GMT+7**: Self 收到 Balance 的 FutureTextile × Wellname 股东借款利息案例攻防总结 - **归档位置**: `ACCA-Knowledge-Network/01-Financial/Cross-Border/FutureTextile-Wellname-Shareholder-Loan-Interest.md` - **核心洞察**: 法律概念选择决定税务结果 — waiver vs condition precedent - **提取方法论**: 6条可复用方法论（已记录到 workspace-self/memory/） - **已同步索引**: Cross-Border-Home.md - **后续**: 方法论去重合并到 lessons.md（待办） ### Balance Agent — 案例攻防报告 - **15:50 GMT+7**: 完成 FutureTextile × Wellname 案例6轮攻防验证 - 方案已通过 Daryl 确认（可转换借款+附条件利息 = 零税务敞口） ## 二、系统状态 - Git remote 未配置，pull",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.36393502354621887,
+      "maxScore": 0.36393502354621887,
+      "firstRecalledAt": "2026-07-26T10:53:40.788Z",
+      "lastRecalledAt": "2026-07-26T10:53:40.788Z",
+      "queryHashes": [
+        "bf5dc238aaca"
+      ],
+      "recallDays": [
+        "2026-07-26"
+      ],
+      "conceptTags": [
+        "network",
+        "workspace-self/memory",
+        "cross-border-home.md",
+        "lessons.md",
+        "日记",
+        "今日",
+        "概况",
+        "第一"
+      ]
+    },
+    "memory:memory/archive/2026-06-21.md:1:28": {
+      "key": "memory:memory/archive/2026-06-21.md:1:28",
+      "path": "memory/archive/2026-06-21.md",
+      "startLine": 1,
+      "endLine": 28,
+      "source": "memory",
+      "snippet": "# 2026-06-21 记忆 ## 周日集中工作日 - Daryl召集全员汇报项目阻塞项 - 我错误地将已交接的 OPC看板 列入需求列表 - Daryl纠正：OPC看板交互系统上周已移交 Kitty ## 记忆修正 - active.md: OPC总控看板从\"待启动\"→\"已交接\" - 根因: 未及时同步跨session变更 ## 当前待决策项（3项） 1. 视频分析 10fps 降本策略 2. IELTS陪练重构方案选型 3. 视频分析交互Workflow下一阶段方向 ## 胭脂扣辩论总结接收 (6/22凌晨) - Self agent 发来 Daryl 与 Self 关于《胭脂扣》(关锦鹏, 1987) 的多轮辩论总结 - 文档已存档: knowledge-base/film-analysis/胭脂扣-辩论总结-2026-06-21.md - 将用于增强 Workflow 的脚本解析和导演风格模块 - 核心方法论: 角色功能阶段化、叙事功能vs状态分离、弧线验证、Hook-陷阱双层结构、结尾沉默功能分析 - 交互设计启示: 支持「辩论模式」而非强行收敛答案 ## 每日记忆审计 ✅ (23:59) - audit.sh --report 全项通过 - 日记/active/lessons/MEMORY 均健康 - OPC群聊汇报已发送",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.36101998686790465,
+      "maxScore": 0.36101998686790465,
+      "firstRecalledAt": "2026-07-26T10:53:40.788Z",
+      "lastRecalledAt": "2026-07-26T10:53:40.788Z",
+      "queryHashes": [
+        "bf5dc238aaca"
+      ],
+      "recallDays": [
+        "2026-07-26"
+      ],
+      "conceptTags": [
+        "active.md",
+        "6/22凌晨",
+        "hook-陷阱双层结构",
+        "audit.sh",
+        "日记/active/lessons/memory",
+        "记忆",
+        "周日",
+        "集中"
+      ]
+    },
+    "memory:memory/2026-07-05.md:1:24": {
+      "key": "memory:memory/2026-07-05.md:1:24",
+      "path": "memory/2026-07-05.md",
+      "startLine": 1,
+      "endLine": 24,
+      "source": "memory",
+      "snippet": "# 2026-07-05 日记 ## Daryl 活动 - **10:17** Daryl 指令：继续\"雅思陪练助手v2.0\"项目验收 - **10:20** 重启服务器（DEBUG_MODE=1），完成验收准备 ## Agent 活动 - **Bryson**: 重启服务器启用 DEBUG_MODE，验证所有 debug 端点 + ngrok 公网可访问 - **10:40** 更新 `memory/active.md`：视频分析交互Workflow 条目从 10fpsVision(旧)→V3 Gemini原生视频(当前)，标记为已验收；合并重复的「下一阶段」section；清理过时描述 - **15:00** 修复 IELTS v2.0 音频采集 Bug：VAD 校准域不匹配(AnalyserNode频域 vs PCM时域) + ScriptProcessor 无下游连接 + iPhone 低电平三重叠加导致 0 turns。修复：统一 PCM 校准 + 零增益保活 + 静音滚动缓冲超时强制 flush + 手动发送增强 - **15:28** IELTS v2.0 延时优化 V1 + V2: 1. ASR: PCM→FLAC 压缩 + useEnhanced=False 2. TTS: 流式逐句发送，首块音频回调 3. LLM: max_tokens 200→80，上下文 17 条消息 4. 终止评估: asyncio.Task cancel + finally 块 auto-eval 兜底 5. 重复提问: 系统 prompt 加主题清单追踪 +",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.353472626209259,
+      "maxScore": 0.353472626209259,
+      "firstRecalledAt": "2026-07-26T10:53:40.788Z",
+      "lastRecalledAt": "2026-07-26T10:53:40.788Z",
+      "queryHashes": [
+        "bf5dc238aaca"
+      ],
+      "recallDays": [
+        "2026-07-26"
+      ],
+      "conceptTags": [
+        "雅思陪练助手v2.0",
+        "debug-mode",
+        "memory/active.md",
+        "v2.0",
+        "max-tokens",
+        "asyncio.task",
+        "auto-eval",
+        "日记"
       ]
     }
   }
