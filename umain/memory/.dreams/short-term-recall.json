@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-24T01:30:59.975Z",
+  "updatedAt": "2026-07-26T01:43:46.961Z",
   "entries": {
     "memory:memory/2026-06-08.md:19:38": {
       "key": "memory:memory/2026-06-08.md:19:38",
@@ -1177,13 +1177,13 @@
       "endLine": 32,
       "source": "memory",
       "snippet": "- 17:00 OPC Dashboard 服务挂掉（进程异常退出）→ 重启 - 17:05 tunnel 过期 → 重建（charm-functioning-donna-time.trycloudflare.com） - 22:37 tunnel 再次挂+服务进程异常退出 → 全栈重启 - 23:00 Gateway 重启（Sentinel 插件加载）→ OPC Dashboard 被带下线 → 再次全栈重启 - ⚠️ 今天累计 8 次 tunnel 重建，临时隧道完全不适合长期使用 ## 状态概览 - 各 Agent 处于待命状态 - 7 月基建方向（Agent自进化 + Loop Engineering）已在 Daryl 与 Bryson 讨论中推进 - OPC 看板 v1.5 运行中 - M2 全部模块验收完毕",
-      "recallCount": 8,
+      "recallCount": 9,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 3.205219283699989,
+      "totalScore": 3.569413492083549,
       "maxScore": 0.4152030527591705,
       "firstRecalledAt": "2026-07-11T04:42:08.555Z",
-      "lastRecalledAt": "2026-07-24T01:30:59.975Z",
+      "lastRecalledAt": "2026-07-26T01:43:46.961Z",
       "queryHashes": [
         "03ae1fc4cf49",
         "3524490ccf2a",
@@ -1192,14 +1192,16 @@
         "7508206e087e",
         "48b5eabf8dd9",
         "f152bb3d3c45",
-        "db95a0eb1646"
+        "db95a0eb1646",
+        "aeb8ee670c55"
       ],
       "recallDays": [
         "2026-07-11",
         "2026-07-12",
         "2026-07-16",
         "2026-07-19",
-        "2026-07-24"
+        "2026-07-24",
+        "2026-07-26"
       ],
       "conceptTags": [
         "gateway",
