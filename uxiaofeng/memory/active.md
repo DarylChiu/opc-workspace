@@ -20,7 +20,11 @@
 - **历史**: M2 开发计划提交（7/17 14:00）、内核卡价值命题质疑（7/17 10:33）、SearXNG 修复 ✅（7/17）
 
 ## ⏸️ 挂起
-### IELTS陪练助手 — v1.3.0 开发完毕，⏸️ 等待Daryl晚间验收（7/22）
+### IELTS陪练助手 — v1.3.0 开发完毕，⏸️ 等待Daryl晚间验收（7/25更新）
+- **7/25晚**: Daryl 调试中发现两个Bug，已修复：
+  - DeepSeek API 模型名废弃 deepseek-chat → deepseek-v4-pro（旧名导致LLM乱码）
+  - 跟读模块 JS null safe 兜底（deviceInfo DOM不存在时报错）
+- Daryl 刷新后继续测试中
 - **v1.3.0 变更**: free_talk深度对话优化 + 词汇学习模块 + 训练库Dashboard重构
   - free_talk: VAD思考窗口 / STT碎片过滤 / 提示词重写 / LLM max_tokens 500→700
   - 词汇: 对话气泡长按选词→同义表达卡片→收录 / B2+词表预高亮 / 复习页

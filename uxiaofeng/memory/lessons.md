@@ -92,6 +92,12 @@
 - 免费 tunnel ERR 1033 频繁出现，TLS 握手完成但无法连接 origin
 - 替代方案: localtunnel (`lt --port`) 或直接 localhost（同机器）
 
+## 2026-07-25 · DeepSeek API 模型名废弃导致 LLM 乱码
+- **问题**: 旧模型名 `deepseek-chat` 已被废弃，API 可能返回乱码/无效响应
+- **影响**: IELTS 陪练助手的 LLM 对话、评估功能全部异常
+- **修复**: 全局替换为 `deepseek-v4-pro`
+- **教训**: API 模型名不是永久的；服务商可能直接废弃旧名称而非优雅降级；应定期检查 API 文档确认模型名有效性
+
 ## 2026-07-24 · 项目版本管理混乱导致数字资产丢失
 - **教训**: 同一项目存在多个副本（ielts_tutor/ vs Xiaofeng/ielts_tutor/）极易混淆
 - **教训**: git rebase 前必须确保所有改动已 commit，否则工作目录修改全部丢失

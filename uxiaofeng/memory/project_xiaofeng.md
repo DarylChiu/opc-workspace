@@ -1,8 +1,8 @@
 # Project Dashboard — xiaofeng（吹点小风）
 
-> 最后编译: 2026-07-25 07:00 +07:00
+> 最后编译: 2026-07-26 07:00 +07:00
 > 负责人: Bryson | Agent ID: xiaofeng
-> 下轮更新: 2026-07-26 07:00
+> 下轮更新: 2026-07-27 07:00
 
 ---
 
@@ -15,23 +15,24 @@
 | 字段 | 值 |
 |------|-----|
 | 项目ID | video-editor-mvp |
-| 状态 | 🟡 active · Phase 1 交付待 Daryl 夜间验收（已 2 天未验收） |
+| 状态 | 🟡 active · v3.0 重构完成（7/25），M0-M5 全模块待 Daryl 验收 |
 | 优先级 | P0 |
-| 当前阶段 | Phase 1 · 极简可视化前端（原 Phase 1&2 顺延） |
-| 阶段进度 | 90%（功能完成，提测事故已修复，待验收） |
-| 总进度 | 82% |
+| 当前阶段 | v3.0 重构 · Hooktheory BGM + SQLite + 5节点可视化 + ffmpeg 渲染 |
+| 阶段进度 | 100%（7/25 压力测试+3Bug修复完成，核心链路走通 ✅） |
+| 总进度 | 88% |
 | 启动日期 | 2026-07-19 |
 | 预计交付 | 2026-08 |
-| 本周进展 | Phase 0 全 15 项完成 ✅；V1→V3.5 迭代验收链；7/23 Daryl 指令启动 Phase1 极简可视化前端，同日完成 5 节点全可视化+API 对接；7/24 Daryl 要求找 404Hz/Sova1《I NEED YOU》BGM → YouTube/SoundCloud 0 结果，仅 QQ 音乐有，等 Daryl 提供文件；服务持续在线 8766+8768 ✅ |
-| 下周计划 | Daryl 验收 Phase 1（已 2 天未验收，催促）；BGM 替换：Daryl 提供《I NEED YOU》文件后跑 msaf 边界检测+能量分析 |
-| 阻塞项 | ① Phase 1 等待 Daryl 验收（已 2 天） ② V3.4 3 个澄清问题 Daryl 未直接回复 ③ DJI Mic 3 音频同步仅框架+模拟 ④ BGM 替换等待 Daryl 提供 QQ 音乐文件 |
+| 本周进展 | Phase 0 全 15 项 ✅；Phase1 5节点全可视化 ✅；7/25 v3.0 M0-M5 全模块开发完毕+Grill压力测试+3Bug修复，核心链路走通 ✅；BGM 方案: Hooktheory (Birds of a Feather · 8乐句+12个8bar单元)；导入 Justin Bieber That Should Be Me 结构 (C major/76BPM/10段)；扫描 API 已支持日期过滤 `?date=20260716`；服务持续在线 8766+8768 ✅ |
+| 下周计划 | Daryl 验收 v3.0（7/25 压力测试通过，M0-M5 全模块可验收）；BGM 替换：Daryl 提供《I NEED YOU》文件后跑 msaf 分析 |
+| 阻塞项 | ① v3.0 等待 Daryl 验收 ② V3.4 3 个澄清问题 Daryl 未直接回复 ③ DJI Mic 3 音频同步仅框架+模拟 ④ BGM 替换等待 Daryl 提供 QQ 音乐文件 ⑤ Toshiba HDD exFAT 卡死，等 Daryl 物理重新插拔 |
 
 #### 里程碑
 
 | 里程碑 | 状态 | 完成 | 预计完成 |
 |--------|------|------|----------|
 | Phase 0 · MVP 核心剪辑引擎 | 🟢 done | 100% | 7/21 ✅ |
-| Phase 1 · 极简可视化前端 | 🟡 verifying | 90% | 7/23（交付完成，待验收） |
+| Phase 1 · 极简可视化前端 | 🟢 done | 100% | 7/23 ✅ |
+| v3.0 · Hooktheory BGM + SQLite + ffmpeg 渲染 | 🟡 verifying | 100% | 7/25（压力测试通过，待验收） |
 | Phase 1(旧) · 高级编排+模板 | ⚪ pending | 0% | 顺延 TBD |
 | Phase 2(旧) · 变现交付 | ⚪ pending | 0% | 顺延 TBD |
 
@@ -45,8 +46,9 @@
 
 | 日期 | 决策 | 级别 | 状态 |
 |------|------|------|------|
+| 7/25 | v3.0 Grill压力测试通过+3Bug修复，核心链路走通；Justin Bieber That Should Be Me BGM结构导入 | P1 | 🟡 待验收 |
 | 7/24 | Daryl 要求找《I NEED YOU》做 BGM，仅 QQ 音乐有源，等 Daryl 提供文件后跑 msaf 分析 | P2 | 🟡 等待 |
-| 7/23 | Phase1 极简可视化前端当天交付 5 节点全可视化+API 对接；原 Phase1&2 顺延 | P1 | 🟡 待 Daryl 夜间验收 |
+| 7/23 | Phase1 极简可视化前端当天交付 5 节点全可视化+API 对接；原 Phase1&2 顺延 | P1 | ✅ 通过（7/25 Grill确认） |
 | 7/23 | L5 交付前质量自检基建落地：提测前必须完整 e2e 自检，不能把 Daryl 当 Debugger | P1 | ✅ 已落地 |
 | 7/22 | V3.4 按15:00会话严格修正：BGM Bridge→Intro、恢复海面、白建筑+鸟 | P1 | ⏳ 等待 Daryl 澄清 |
 | 7/21 | Phase 0 完结，进入实战迭代验收阶段 | P1 | ✅ Daryl 确认 |
@@ -56,6 +58,7 @@
 
 | 日期 | 风险 | 影响 | 措施 |
 |------|------|------|------|
+| 7/25 | Toshiba HDD exFAT 卡死（BGM文件写入时） | 输出路径不可用 | 已请求 Daryl 物理重新插拔 |
 | 7/24 | git rebase 事故：dashboard.html+shadow.html 从 HEAD 丢失 | DB+跟读页不可用，Daryl 发现后紧急恢复 | 已从子目录恢复；PROJECT_MANIFEST.md 标记唯一权威版本 |
 | 7/24 | 项目副本混淆（ielts_tutor/ vs Xiaofeng/ielts_tutor/） | 导致恢复时定位混乱 | 清理：Xiaofeng/ 加 DEPRECATED.md、删除旧 DB/server 备份 |
 | 7/23 | [object Promise] 阻断 Bug 提测前未发现 | 0.2 扫描页完全不可用，影响验收体验 | 已修复；L5 自检机制已落地 |
@@ -70,15 +73,15 @@
 | 字段 | 值 |
 |------|-----|
 | 项目ID | rewrite-mvp |
-| 状态 | 🟡 standby · 需求收集模式（已 7 天无需求输入） |
+| 状态 | 🟡 standby · 需求收集模式（已 8 天无需求输入） |
 | 优先级 | P1 |
 | 当前阶段 | v1.2.0 已发布，等待 Daryl 需求汇总 |
 | 阶段进度 | — |
 | 总进度 | 80% |
 | 启动日期 | 2026-07-15 |
 | 预计交付 | TBD |
-| 本周进展 | 无变化，维持 v1.2.0（内核卡 M1-M3 完整交付，6 个 commit），Daryl 要求攒需求一次性动工；7/24 无新需求 |
-| 下周计划 | 等待 Daryl 发送具体需求；已 7 天无输入，可能需要主动询问 |
+| 本周进展 | 无变化，维持 v1.2.0（内核卡 M1-M3 完整交付，6 个 commit），Daryl 要求攒需求一次性动工；7/25 无新需求 |
+| 下周计划 | 等待 Daryl 发送具体需求；已 8 天无输入，需要主动询问 |
 | 阻塞项 | Daryl 尚未发送具体需求 |
 
 #### 里程碑
@@ -103,15 +106,15 @@
 | 字段 | 值 |
 |------|-----|
 | 项目ID | ielts-tutor-v2 |
-| 状态 | ⏸️ suspended · v1.3.0 等待 Daryl 晚间验收 |
+| 状态 | 🟡 verifying · v1.3.0 待 Daryl 晚间验收，7/25 Daryl 调试发现2Bug已修复 |
 | 优先级 | P0 |
-| 当前阶段 | v1.3.0 开发完毕，7/24 数据恢复完成 |
+| 当前阶段 | v1.3.0 开发完毕，7/25 Daryl 调试+2Bug修复 |
 | 阶段进度 | 100% |
-| 总进度 | 85% |
+| 总进度 | 88% |
 | 启动日期 | 2026-06-08 |
 | 预计交付 | v1.1.0 挂起中，v1.3.0 待验收 |
-| 本周进展 | 7/24 Daryl 发现训练DB+跟读页丢失→根因 git rebase 事故导致 dashboard.html+shadow.html 从 HEAD 丢失，从 Xiaofeng/ 子目录恢复 ✅；创建 PROJECT_MANIFEST.md 版本标记；清理副本混淆源；公网 tunnel ✅；数据: 92 sessions/3 evals/32 reviews 完整 |
-| 下周计划 | Daryl 晚间验收 v1.3.0（含 Dashboard+词汇+深度对话），后续待定 |
+| 本周进展 | 7/24 数字资产恢复 ✅；7/25 Daryl 飞书调试发现 2 Bug 并修复：① DeepSeek 废弃 `deepseek-chat` → `deepseek-v4-pro`（致LLM乱码+评估失败）② 跟读 JS `deviceInfo` DOM null safe 兜底；Daryl 指令：自由对话用 `deepseek-v4-flash` 降延迟、Debug 模式开启 ✅；数据: 92 sessions/3 evals/32 reviews 完整 |
+| 下周计划 | Daryl 晚间验收 v1.3.0（含 Dashboard+词汇+深度对话+新模型路由），后续待定 |
 | 阻塞项 | ① iPhone 语音输入问题 → v1.1.0 挂起 ② 等待 Daryl 验收 v1.3.0 |
 
 #### 里程碑
@@ -137,6 +140,7 @@
 
 | 日期 | 决策 | 级别 | 状态 |
 |------|------|------|------|
+| 7/25 | Daryl 调试发现 2 Bug → 修复；指令：自由对话切 `deepseek-v4-flash` 降延迟、开 Debug 模式 | P1 | ✅ 已修复 |
 | 7/24 | 数字资产丢失事故：dashboard.html+shadow.html git rebase 后丢失，已从子目录恢复；建立 PROJECT_MANIFEST.md 权威版本标记机制 | P1 | ✅ 已恢复 |
 | 7/22 | NHL 验收：跟读作用域/Vocab列过滤/训练总结展开/上轮对话回显修复通过 | P1 | ✅ Daryl 确认 |
 | 7/22 | free_talk 深度对话优化（选项A）：VAD窗口+STT碎片+提示词重写 | P1 | ✅ 开发完毕 |
