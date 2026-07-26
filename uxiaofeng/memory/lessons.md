@@ -98,6 +98,12 @@
 - **修复**: 全局替换为 `deepseek-v4-pro`
 - **教训**: API 模型名不是永久的；服务商可能直接废弃旧名称而非优雅降级；应定期检查 API 文档确认模型名有效性
 
+## 2026-07-22 · OPC 多 Agent 共享仓库 git rebase 极高风险
+- **问题**: git pull --rebase 触发 59 个 commit 跨多 Agent 目录的大规模冲突，rebase 卡死后 abort 被 SIGKILL
+- **根因**: 多 Agent 各自维护 memory/ + scripts/ 等共享文件，频繁交叉提交导致 rebase 冲突不可避免
+- **修复**: `git checkout -f main && git reset --hard origin/main` 强制恢复，已修改但未 push 的日记文件从心跳内容重建
+- **教训**: **共享仓库优先用 merge 策略**，`git pull --rebase` 在多人/多 Agent 环境下是定时炸弹；push 前必须 commit 所有修改
+
 ## 2026-07-24 · 项目版本管理混乱导致数字资产丢失
 - **教训**: 同一项目存在多个副本（ielts_tutor/ vs Xiaofeng/ielts_tutor/）极易混淆
 - **教训**: git rebase 前必须确保所有改动已 commit，否则工作目录修改全部丢失
