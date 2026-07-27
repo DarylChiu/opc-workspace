@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-26T17:03:11.576Z",
+  "updatedAt": "2026-07-27T09:01:02.611Z",
   "entries": {
     "memory:memory/2026-06-08.md:19:38": {
       "key": "memory:memory/2026-06-08.md:19:38",
@@ -906,13 +906,13 @@
       "endLine": 66,
       "source": "memory",
       "snippet": "## 18:50 · OPC看板 v1.4 完成 ✅ - Daryl 将「OPC看板v1.4」移至 In Progress → 完成三项需求 - **主次优先级视觉分层**：P0-P3 四级，左侧色条+徽章+创建时可选 - **Bryson 雅思陪练补全**：ielts_tutor 加入扫描优先级，产物 3→7 - **symlink 清理**：移除 opc-workspace 中旧 ielts_tutor_v2.0 副本 - Commit v1.4 + tag ## 状态概览 - 🔴 M2 全模块验收完毕 ✅ → v1.5 生产模式 - OPC 看板 v1.4 并入 v1.5 - 验收报告已生成 `decision_reports/m2_acceptance_report_2026-07-05.md` - 7 月基建方向（Agent自进化 + Loop Engineering）待 Daryl 启动确认 - ✅ M2 全部模块验收完毕 + v1.4 完成 - 待办: Agent版本变更通知 - 雅思陪练 v2.0 收尾中 - 7 月基建方向（Agent自进化 + Loop Engineering）待 Daryl 启动确认",
-      "recallCount": 11,
+      "recallCount": 12,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 4.370030969381332,
+      "totalScore": 4.742385202646256,
       "maxScore": 0.44552976489067075,
       "firstRecalledAt": "2026-07-06T01:12:01.162Z",
-      "lastRecalledAt": "2026-07-24T01:30:59.975Z",
+      "lastRecalledAt": "2026-07-27T09:01:02.548Z",
       "queryHashes": [
         "af4fa58d2480",
         "f8aac1c4eb69",
@@ -924,7 +924,8 @@
         "5260ee572112",
         "1908384c6613",
         "e5bd7d38155b",
-        "db95a0eb1646"
+        "db95a0eb1646",
+        "c8607702f301"
       ],
       "recallDays": [
         "2026-07-06",
@@ -935,7 +936,8 @@
         "2026-07-20",
         "2026-07-22",
         "2026-07-23",
-        "2026-07-24"
+        "2026-07-24",
+        "2026-07-27"
       ],
       "conceptTags": [
         "v1.4",
@@ -1742,18 +1744,20 @@
       "endLine": 25,
       "source": "memory",
       "snippet": "- **发现漏项**: xiaofeng AGENTS.md 缺方法论引用 → 当场补上 ✅ - **教训**: 交付宣称前应逐项grep验证，不能靠印象 ## 09:35-12:55 · 基建长线任务 ①②③ 全部完成 ✅ - Daryl 指令：M1成本根因 + M2搜索基准 + M3 trace协议，串行执行，里程碑汇报 - **M1 (42min)**: 成本不一致根因 — Dashboard与Balance双方扫描同组文件结果完全一致($71.63)，差异来自Sentinel $20调整(仅Dashboard有)+Balance append-only台账(保留已删session)+cost_daily.json路径分裂。修复：Dashboard接入Balance台账+调整 → 本月$43.70对齐 ✅ - 遗留：cost_daily.json路径需通知Balance修改（Daryl待授权） - **M2 (7min)**: SearXNG基准测试 — 39条query/三维度/Python评分器v1.1，基线均分67.0(常规76.7/冷门63.3/陷阱58.7)。Brave对英文精准、中越语有百科污染。weekly_check.sh已写，crontab安装遇macOS权限阻塞待手动操作 - **M3 (4min)**: trace协议标准化 — verify_trace.sh(PASS/WARN/FAIL三级)+README.md+Balance/Xiaofeng/Self三个Agent AGENTS.md各新增5条trace条款，M3自身trace自检PAS",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.36762801110744475,
+      "totalScore": 0.7233521491289139,
       "maxScore": 0.36762801110744475,
       "firstRecalledAt": "2026-07-18T13:26:18.211Z",
-      "lastRecalledAt": "2026-07-18T13:26:18.211Z",
+      "lastRecalledAt": "2026-07-27T09:01:02.611Z",
       "queryHashes": [
-        "be41a8364f54"
+        "be41a8364f54",
+        "2f8de4d15052"
       ],
       "recallDays": [
-        "2026-07-18"
+        "2026-07-18",
+        "2026-07-27"
       ],
       "conceptTags": [
         "agents.md",
@@ -2216,21 +2220,23 @@
       "endLine": 31,
       "source": "memory",
       "snippet": "- **深层问题 2 项**: 日记内容 vs 20个活跃session不匹配 + 成本仪表盘数据 1452min 未刷新 - **修复**: 日记已从骨架充实为本记录 - **成本**: 今日 $3.84 | 本月 $32.84 | 全量 $92.43（Balance 00:02 全量扫描结果） - **Git**: push 成功，备份 4 文件变更 ## 系统概览 ### 7/20 关键事件回顾 - **Dashboard 成本数据路径修复** (7/20 约17:00): main 发现 Dashboard 的 `COST_DAILY_BALANCE_FILE` 常量指向旧路径 `~/opc-workspace/`，而 Balance 实际写入 `~/WorkBuddy/Claw/opc-dashboard/data/`，导致 Dashboard 一直读取 7/19 过期数据。修复一行路径常量 + 重启 server，数据对齐。 - **成本全量扫描**: Balance 00:02 完整扫描 2006 个 .jsonl，累计 12,466 次调用，全量 $92.43 - **项目文件更新**: 07:00 四个 Agent (main/xiaofeng/balance/self) 全部完成 project_*.md 刷新 - **Xiaofeng 视频编辑 v4.0**: 终版交付 Bryson，三层情感漏斗方案，成本降至 ~$0.01-0.03/次 - **OPC 群消息**: main 推送决策清单（三模型混合方案/自进化方向/7月预算告警），xiaofeng",
-      "recallCount": 3,
+      "recallCount": 4,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.2369612842798232,
+      "totalScore": 1.614519366621971,
       "maxScore": 0.45765072405338286,
       "firstRecalledAt": "2026-07-22T06:17:25.237Z",
-      "lastRecalledAt": "2026-07-23T00:00:27.147Z",
+      "lastRecalledAt": "2026-07-27T09:01:02.548Z",
       "queryHashes": [
         "1908384c6613",
         "9b907d1ab5f7",
-        "e5bd7d38155b"
+        "e5bd7d38155b",
+        "c8607702f301"
       ],
       "recallDays": [
         "2026-07-22",
-        "2026-07-23"
+        "2026-07-23",
+        "2026-07-27"
       ],
       "conceptTags": [
         "备份",
@@ -2367,6 +2373,37 @@
         "日志",
         "每日",
         "记忆"
+      ]
+    },
+    "memory:memory/2026-07-24.md:1:22": {
+      "key": "memory:memory/2026-07-24.md:1:22",
+      "path": "memory/2026-07-24.md",
+      "startLine": 1,
+      "endLine": 22,
+      "source": "memory",
+      "snippet": "# 2026-07-24 日记 ## 07:00-19:00 · 系统定时任务 - **07:00**: main/xiaofeng/balance 项目文件刷新正常 - **19:00**: Self 项目文件刷新正常 - **Heartbeat**: 4 Agent 全天心跳正常（心跳已瘦身，仅 HEARTBEAT_OK） ## Balance · 应付采购入账SOP v2.0 交付 - **交付**: v2.0 框架迭代完成，生成 `应付采购入账SOP框架-v2.0-20260724.md` - **三部门分读**: Part A(财务部入账规则/分录/税务) → Part B(采购部单据流/职责表) → Part C(全部可看) - **5x2总览矩阵**: 10条独立SOP整合为一张矩阵表，差异🟡高亮 - **三色单据分级**: 🔴外部证据(缺则不能入账) 🟠精准度+内控必需 🟢内部审批归档 - **深度展开**: 原材料(成本链/暂估/多SKU/进口单证) + 委外(4场景) - **9个案例**: 折叠进📎附件 - **等待**: Daryl 审阅 - **当前活跃**: 差旅费标准 + 越南财务体系SOP ## Self · 任务全景审计 - **发现**: active.md 与 project_Self.md 不一致，2个任务标记\"进行中\"实际已完成20天 - 关联方与股东借款知识树: 7/3 Daryl mark done - VAS知识树+跨境对比: 7/4 Daryl mark done - **诊断**: 5个决策阻塞项等待",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3535646677017212,
+      "maxScore": 0.3535646677017212,
+      "firstRecalledAt": "2026-07-27T09:01:02.611Z",
+      "lastRecalledAt": "2026-07-27T09:01:02.611Z",
+      "queryHashes": [
+        "2f8de4d15052"
+      ],
+      "recallDays": [
+        "2026-07-27"
+      ],
+      "conceptTags": [
+        "00-19",
+        "main/xiaofeng/balance",
+        "heartbeat-ok",
+        "v2.0",
+        "应付采购入账sop框架-v2.0-20260724.md",
+        "财务部入账规则/分录/税务",
+        "采购部单据流/职责表",
+        "成本链/暂估/多sku/进口单证"
       ]
     }
   }
