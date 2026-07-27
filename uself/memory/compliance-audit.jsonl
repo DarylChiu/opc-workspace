@@ -110,3 +110,8 @@
 {"timestamp":"2026-07-26T15:46:04+0700","check":"post-op","task":"本周4Agent知识树叶收集汇报","score":2,"total":5,"warnings":[
   "🔴 今日日记疑似 Cron 骨架（15行, 3段落, 仅Cron事件）— 必须补充实际内容"
 ]}
+{"timestamp":"2026-07-27T00:06:02+0700","check":"L4-audit-v2","agent":"self","fixes":3,"shallow_issues":8,"deep_issues":5,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-07-27T14:00:44+0700","check":"post-op","task":"修复05-心理学重复目录，迁移电影学内容至05-Psychology","score":0,"total":5,"warnings":[
+  "🟡 考虑更新 active.md — 有任务修改且已 13 小时",
+  "🔴 今日日记疑似 Cron 骨架（10行, 1段落, 仅Cron事件）— 必须补充实际内容"
+]}
