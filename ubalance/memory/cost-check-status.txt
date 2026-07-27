@@ -1,1 +1,1 @@
-stale_api_ok|数据过期（984分钟前）
+stale_api_ok|数据过期（1430分钟前）
