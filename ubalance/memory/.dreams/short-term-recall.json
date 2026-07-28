@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-28T04:34:30.556Z",
+  "updatedAt": "2026-07-28T17:01:47.007Z",
   "entries": {
     "memory:memory/2026-06-10.md:1:29": {
       "key": "memory:memory/2026-06-10.md:1:29",
@@ -1379,13 +1379,13 @@
       "endLine": 30,
       "source": "memory",
       "snippet": "# 2026-07-04 日记 ## 🕛 Cron 审计 (00:04 7/4) - **审计结果**: 1 自动修复 + 5 浅层 + 2 深层 ### 审计发现与归因 - ⚠️ 日记过短（4行）+ 6 个活跃 session → 深层问题 - 📌 **归因: 午夜边界误报**（与 7/3 相同的模式）。6 个 session 中 2 个为 cron 审计任务（Balance + xiaofeng），3 个为 7/3 晚间交互（Kitty Dashboard 确认、OPC 群聊），1 个为 Balance 7/3 active.md 重整会话。实际无 7/4 实质性新事件 - ⚠️ Git push 失败 → 待修复 ### 修复记录 - 🔧 骨架日记已替换为本日记（审计脚本自动创建→手动填充） - 🔧 7/3 晚间 session 交叉验证确认无遗漏内容 ### 7/3 回顾 - 日记 57 行，内容充实，涵盖： - OPC 看板通知系统 Bug 排查与修复 - 贷款材料自动化整理执行手册 v2.3 撰写 - active.md 结构重整（Daryl 纠正 IPO 任务误报） - 晚间：Kitty 确认 Dashboard sync 机制、OPC 群聊互动 - 无遗漏需补充内容 ## 今日事件 ### 08:56 Daryl指令：终止Hedging任务 - Daryl指令终止越南银行Hedging方案分析任务，已自行处理完毕 - 已从active.md移除，标记为❌终止 ### 09:00 Daryl指令：挂起项目成本监控 - Br",
-      "recallCount": 9,
+      "recallCount": 10,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 3.3847928822040556,
+      "totalScore": 3.7548381090164185,
       "maxScore": 0.4260600477457046,
       "firstRecalledAt": "2026-07-13T09:21:02.383Z",
-      "lastRecalledAt": "2026-07-21T17:50:56.604Z",
+      "lastRecalledAt": "2026-07-28T17:01:47.007Z",
       "queryHashes": [
         "d25cb1659a59",
         "be0f8ae6ad1a",
@@ -1394,7 +1394,8 @@
         "a220976af47b",
         "935b13407639",
         "431aa87c5b26",
-        "8544a2a56000"
+        "8544a2a56000",
+        "428d10408272"
       ],
       "recallDays": [
         "2026-07-13",
@@ -1402,7 +1403,8 @@
         "2026-07-17",
         "2026-07-18",
         "2026-07-19",
-        "2026-07-22"
+        "2026-07-22",
+        "2026-07-29"
       ],
       "conceptTags": [
         "7/4",
@@ -2032,18 +2034,20 @@
       "endLine": 31,
       "source": "memory",
       "snippet": "# 2026-07-03 日记 ## 🕛 Cron 审计 (00:02 7/3) - **审计结果**: 0 自动修复 + 2 浅层 + 1 深层 ### 审计发现与归因 - ⚠️ 日记过短（10行）+ 9 个活跃 session → 深层问题 - 📌 **归因: 午夜边界误报**。5 个 session 为各 Agent 的 cron 审计任务，1 个为 pre-midnight webchat，均为 7/2 延续。Cross-validation 在 00:00 天然有此问题（与 7/2 00:00 审计相同） - ⚠️ Git pull 失败 → 📌 **归因: exit code 敏感度误报**，实测 `Already up to date`，实际成功 ### 午夜边界说明 - 审计脚本 session-diary 交叉验证依赖「今天」的活动 session 计数 - 00:00-00:30 时段所有 cron 审计任务同时触发 → 计数虚高 - 实际无 7/3 新事件，diary 正常 ### Git 状态 - ✅ pull: Already up to date - ✅ 无本地变更需 push ## 昨日回顾 (7/2) - 日记 59 行，内容充实 - FutureTextile 第三轮攻击（攻击7-12），攻击7&8 被 Daryl 确认已死 - 记忆系统重大故障诊断与修复（三脚本骨架检测增强） ## 主要事件 ### 🟡 OPC看板通知系统 Bug 排查 (13:12-13:30) - Daryl 问有没有收到 dashboard 发",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.3782596170902252,
+      "totalScore": 0.7453660875558853,
       "maxScore": 0.3782596170902252,
       "firstRecalledAt": "2026-07-16T09:24:29.816Z",
-      "lastRecalledAt": "2026-07-16T09:24:29.816Z",
+      "lastRecalledAt": "2026-07-28T17:01:47.007Z",
       "queryHashes": [
-        "61724e26e321"
+        "61724e26e321",
+        "428d10408272"
       ],
       "recallDays": [
-        "2026-07-16"
+        "2026-07-16",
+        "2026-07-29"
       ],
       "conceptTags": [
         "7/3",
@@ -2620,6 +2624,99 @@
         "bgm前端交互设计grill-me继续",
         "1.43成本合理",
         "254/2026"
+      ]
+    },
+    "memory:memory/2026-07-29.md:1:6": {
+      "key": "memory:memory/2026-07-29.md:1:6",
+      "path": "memory/2026-07-29.md",
+      "startLine": 1,
+      "endLine": 6,
+      "source": "memory",
+      "snippet": "# 2026-07-29 日记 ## ⚠️ Cron 审计自动创建（内容待补充） - 本日记由 23:59 Cron 自动创建，当日内容未记录 - 需从 session 历史补充实际事件",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.39008984863758084,
+      "maxScore": 0.39008984863758084,
+      "firstRecalledAt": "2026-07-28T17:01:47.007Z",
+      "lastRecalledAt": "2026-07-28T17:01:47.007Z",
+      "queryHashes": [
+        "428d10408272"
+      ],
+      "recallDays": [
+        "2026-07-29"
+      ],
+      "conceptTags": [
+        "日记",
+        "cron",
+        "审计",
+        "自动",
+        "创建",
+        "内容",
+        "补充",
+        "当日"
+      ]
+    },
+    "memory:memory/2026-07-05.md:1:21": {
+      "key": "memory:memory/2026-07-05.md:1:21",
+      "path": "memory/2026-07-05.md",
+      "startLine": 1,
+      "endLine": 21,
+      "source": "memory",
+      "snippet": "# 2026-07-05 日记 ## 🕛 Cron 审计 (00:00 7/5) - **审计结果**: 1 自动修复 + 5 浅层 + 2 深层 ### 审计发现与归因 - ⚠️ 日记过短（4行）+ 11 个活跃 session → 深层问题 - 📌 **归因: 午夜边界误报**（已知模式，与 7/3、7/4 相同）。11 个 session 全部为 7/4 晚间活动，无 7/5 实质性新事件 - 7/4 日记已含 50 行详细记录，无需补充 - ⚠️ Git push 失败 → 后续手动验证已成功（Everything up-to-date），可能审计脚本首次 push 后已自动重试成功 ### 修复记录 - 🔧 骨架日记已替换为本日记（审计脚本自动创建→手动填充） - 🔧 7/4 晚间 session 交叉验证确认无遗漏内容 ## 今日事件 > 00:00 刚进入 7/5，尚无实际事件。本日内容待后续补充。 ## 待办 - 无",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.37862880527973175,
+      "maxScore": 0.37862880527973175,
+      "firstRecalledAt": "2026-07-28T17:01:47.007Z",
+      "lastRecalledAt": "2026-07-28T17:01:47.007Z",
+      "queryHashes": [
+        "428d10408272"
+      ],
+      "recallDays": [
+        "2026-07-29"
+      ],
+      "conceptTags": [
+        "7/5",
+        "7/3",
+        "7/4",
+        "up-to-date",
+        "日记",
+        "cron",
+        "审计",
+        "结果"
+      ]
+    },
+    "memory:memory/archive/2026-06-16.md:1:13": {
+      "key": "memory:memory/archive/2026-06-16.md:1:13",
+      "path": "memory/archive/2026-06-16.md",
+      "startLine": 1,
+      "endLine": 13,
+      "source": "memory",
+      "snippet": "# 2026-06-16 记忆 ## 关键事件 ### 每日记忆归档审计 - 00:06 Cron触发每日审计 - 修复：创建今日日记（审计前缺失） - 状态：✅ 审计通过 ## 状态 - 合规系统: ✅ 运行中 - Cron审计: ✅ 已执行",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3678278237581253,
+      "maxScore": 0.3678278237581253,
+      "firstRecalledAt": "2026-07-28T17:01:47.007Z",
+      "lastRecalledAt": "2026-07-28T17:01:47.007Z",
+      "queryHashes": [
+        "428d10408272"
+      ],
+      "recallDays": [
+        "2026-07-29"
+      ],
+      "conceptTags": [
+        "记忆",
+        "关键",
+        "事件",
+        "每日",
+        "归档",
+        "审计",
+        "cron",
+        "触发"
       ]
     }
   }
