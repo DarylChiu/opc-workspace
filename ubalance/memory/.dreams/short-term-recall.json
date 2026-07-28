@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-25T00:02:07.478Z",
+  "updatedAt": "2026-07-28T04:34:30.556Z",
   "entries": {
     "memory:memory/2026-06-10.md:1:29": {
       "key": "memory:memory/2026-06-10.md:1:29",
@@ -890,15 +890,14 @@
       "endLine": 51,
       "source": "memory",
       "snippet": "### 08:56 Daryl指令：终止Hedging任务 - Daryl指令终止越南银行Hedging方案分析任务，已自行处理完毕 - 已从active.md移除，标记为❌终止 ### 09:00 Daryl指令：挂起项目成本监控 - Bryson「视频分析交互workflow」（视频分析MVP v2.0）已结束 - 项目成本监控任务挂起，系统c cron保持运行（基础设施） - 等新开发项目启动后恢复 ### 08:xx 个人所得税咨询案例分析 - Daryl发来docx文件：三个越南外资企业PIT案例 - 初版分析被Daryl批评：「你用的是流氓会计师的角度吗？」 - **核心问题**：分析出发点偏了——满篇在讲怎么「不算税」，而不是「法律怎么规定→合规差距在哪→怎么整改」 - 已向Daryl承认错误，给出修正框架 - 三个案例： - 案例1：A公司外籍员工福利（签证/体检/餐费/宿舍） - 案例2：B公司集团来访差旅 - 案例3：C公司通勤班车 ### 教训 - Daryl纠正：财务分析立场必须是合规导向，不是规避导向 - 标注「规避建议」这种措辞不合适 - 50亿无发票签证费这种大雷应该拉警报而不是轻描淡写 ## 待办 - Git push 失败需后续排查（commit 成功，push 失败）",
-      "recallCount": 76,
+      "recallCount": 77,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 28.444631192088146,
+      "totalScore": 28.85437492430212,
       "maxScore": 0.4124524474143982,
       "firstRecalledAt": "2026-07-11T02:00:43.381Z",
-      "lastRecalledAt": "2026-07-22T00:20:57.409Z",
+      "lastRecalledAt": "2026-07-28T04:34:30.556Z",
       "queryHashes": [
-        "d6470fd77dc1",
         "a220976af47b",
         "b21f314daa27",
         "10c217b8d8f6",
@@ -929,7 +928,8 @@
         "6cd3ed12288f",
         "f89cc9b709ed",
         "f298ccadf4de",
-        "27b99b9b5cb0"
+        "27b99b9b5cb0",
+        "eccc07a0790e"
       ],
       "recallDays": [
         "2026-07-11",
@@ -942,7 +942,8 @@
         "2026-07-19",
         "2026-07-20",
         "2026-07-21",
-        "2026-07-22"
+        "2026-07-22",
+        "2026-07-28"
       ],
       "conceptTags": [
         "已从active.md移除",
@@ -993,15 +994,14 @@
       "endLine": 45,
       "source": "memory",
       "snippet": "### 🟡 OPC看板通知系统 Bug 排查 (13:12-13:30) - Daryl 问有没有收到 dashboard 发来的核实任务状态消息 - Balance 查了全部 session 和记忆系统 → 没有收到 - 通过 sessions_send 联系 Kitty（AgentId=main，又忘了）确认： - **原因**: OPC 看板后台服务有两个 bug 1. Kitty 被跳过: `if (ocAgentId === 'main') return;` 直接 return 2. `--deliver` 没配 `--reply-channel`/`--reply-account`，Agent 回复无处投递 - **修复**: Kitty commit `a8a985a`，服务器已重启 - Daryl 之前在 dashboard 上的操作确实都没触发 Agent 推理 - **教训**: 记住 Kitty 的 AgentId 是 `main`，不是 `kitty`。sessions_send 要用 `agentId=\"main\"` ### 📝 贷款材料自动化整理执行手册 v2.3 撰写 (13:30-14:00) - Daryl 要求做一个轻量 guide MD，让其他 Agent 能照着执行 - 产出: `reports/贷款材料自动化整理-执行手册-v2.3.md` (~24KB, 15 章节) - 包含: 环境搭建、输入验证、8 步执行流程、OCR 内容验证、质检过滤、Outcome1/2 生成、暂停点、常见错误修复、完整规则",
-      "recallCount": 79,
+      "recallCount": 80,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 29.51718557178976,
-      "maxScore": 0.3970182240009308,
+      "totalScore": 29.91752152442934,
+      "maxScore": 0.4003359526395798,
       "firstRecalledAt": "2026-07-11T02:00:43.381Z",
-      "lastRecalledAt": "2026-07-21T20:20:55.855Z",
+      "lastRecalledAt": "2026-07-28T04:34:30.556Z",
       "queryHashes": [
-        "4d7fa281fcaa",
         "00433621b001",
         "b3b6361d727b",
         "d6470fd77dc1",
@@ -1032,7 +1032,8 @@
         "5be3ef30d9a6",
         "f89cc9b709ed",
         "86d31b9366a1",
-        "27b99b9b5cb0"
+        "27b99b9b5cb0",
+        "eccc07a0790e"
       ],
       "recallDays": [
         "2026-07-11",
@@ -1045,7 +1046,8 @@
         "2026-07-19",
         "2026-07-20",
         "2026-07-21",
-        "2026-07-22"
+        "2026-07-22",
+        "2026-07-28"
       ],
       "conceptTags": [
         "12-13",
@@ -1065,22 +1067,24 @@
       "endLine": 49,
       "source": "memory",
       "snippet": "## 📝 08:58 Daryl要求更新v2.5操作手册 - **触发**: Daryl飞书消息「把贷款材料自动化整理-v2.5的操作手册更新后通过飞书发给我」 - **执行**: 1. 收集v2.5处理报告/审计清单/process_results.json/OCR报告 2. 对照v2.3报告梳理版本演进 3. 编写10章节完整操作手册 4. 飞书回复发送完整手册 - **产出**: `reports/贷款材料自动化整理-v2.5-操作手册.md` (7KB) - **模型**: deepseek-v4-pro ## 📝 10:15 JGL收购KHOA DUNG并购框架 - **触发**: Daryl接新项目，要求websearch+做并购框架 - **交付**: `reports/JGL-KHOA_DUNG-并购框架-v1.0-20260710.md` - **框架内容**: 定价风险地图(R1-R3) + 税负框架(CIT Law 2025 2%新政) + 4路径对比(A/B/C/D) + 推荐路径A(0.1% PIT) + 8项待确认信息 - **关键结论**: 税筹重心全在越南端(香港零CGT)，首推代持人直接转让利用个人PIT 0.1% ## 📝 10:30 Daryl交代车辆费用专项分析 - Daryl在忙手上公司的车辆费用分析报告 - 与JGL并购项目完全独立 - ⏳ 明天发详细数据 ## 📊 23:45 每日成本扫描（Cron） - **状态**: ⚠️ 已降级写文件，Kitty未确认 - **扫描结果**: - 今日: $",
-      "recallCount": 3,
+      "recallCount": 4,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.1941571295261382,
+      "totalScore": 1.5799584120512007,
       "maxScore": 0.4462838917970657,
       "firstRecalledAt": "2026-07-11T02:00:43.381Z",
-      "lastRecalledAt": "2026-07-16T02:05:36.615Z",
+      "lastRecalledAt": "2026-07-28T04:34:30.556Z",
       "queryHashes": [
         "46303ef77bff",
         "4b4b776c40fb",
-        "d54d321eaa7d"
+        "d54d321eaa7d",
+        "eccc07a0790e"
       ],
       "recallDays": [
         "2026-07-11",
         "2026-07-15",
-        "2026-07-16"
+        "2026-07-16",
+        "2026-07-28"
       ],
       "conceptTags": [
         "daryl要求更新v2.5操作手册",
@@ -1964,18 +1968,20 @@
       "endLine": 28,
       "source": "memory",
       "snippet": "# 2026-07-10 日记 ## 🕛 00:02 每日记忆归档审计 - **触发**: Cron 兜底审计 `bash scripts/compliance/audit.sh --report` - **审计结果**: - ❌ 7/10日记缺失 → 🔧 已自动创建骨架 - ✅ active.md 新鲜 (12h) - ✅ lessons.md 无需今日更新 - ✅ 无需归档 (<30天) - ✅ MEMORY.md 39行，符合规范 - ⚠️ 日记过短但有11个活跃session → 午夜0点正常现象，session多为昨日跨夜残留 + cron审计session - ❌ 7/10日记骨架 → 🔧 已补充内容（本条目） - ✅ 项目清单一致 - ❌ Git push 失败 → 待检查修复 - **修复项**: 日记骨架 → 内容补充完成 - **备注**: 午夜0点当日无实质活动，日记接近骨架属正常 ## 📋 昨日待续事项（7/9） - **贷款材料 v2.4**: 等待Daryl徒弟完整反馈后批量重跑 - **Future Textile × Wellname**: 攻击9-12 待Daryl防御 - **每日成本推送Cron**: 23:45正常执行，Kitty未确认（sessions_send超时降级写文件） - **Git push**: GitHub branch protection 持续拒绝，需Daryl处置 ## 📝 08:58 Daryl要求更新v2.5操作手册 - **触发**: Daryl飞书消息「把",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.3848268985748291,
+      "totalScore": 0.7636129587888718,
       "maxScore": 0.3848268985748291,
       "firstRecalledAt": "2026-07-16T09:24:29.816Z",
-      "lastRecalledAt": "2026-07-16T09:24:29.816Z",
+      "lastRecalledAt": "2026-07-28T04:34:30.556Z",
       "queryHashes": [
-        "61724e26e321"
+        "61724e26e321",
+        "eccc07a0790e"
       ],
       "recallDays": [
-        "2026-07-16"
+        "2026-07-16",
+        "2026-07-28"
       ],
       "conceptTags": [
         "scripts/compliance/audit.sh",
@@ -2583,6 +2589,37 @@
         "贷款",
         "材料",
         "暂停"
+      ]
+    },
+    "memory:memory/2026-07-27.md:39:59": {
+      "key": "memory:memory/2026-07-27.md:39:59",
+      "path": "memory/2026-07-27.md",
+      "startLine": 39,
+      "endLine": 59,
+      "source": "memory",
+      "snippet": "- 全部为系统自动任务，Daryl无新增用户消息 ## ⌛ 昨日(7/26)关键回顾 - **应付采购SOP v4.0**: 等待Daryl审阅中，无新增活动 - **Daryl-Self互动**: Self更新了Vault (心理学/电影学/Home.md + 树叶完整版)、Syncthing确认运行 - **Daryl-Xiaofeng互动**: BGM前端交互设计grill-me继续，Daryl回复「卡片只显示歌名」 - **OPC隧道**: main确认serveo持久隧道正常 (opc-darylchiu.serveousercontent.com) - **低活动周日**: $1.43成本合理 ## 🕚 11:25 Daryl周一工作任务同步 - **Daryl本周4天（周五起休假）** - **四大任务**: 1. 仓储专项检查：上周五突击检查→出报告模板+盘点SOP供财务部小朋友执行 2. 应付采购SOP继续打磨：Daryl会找采购部同事拿范本案例 3. 2026上半年税务检查：跟审计师对审计计划，定制审计程序 4. **出口计税汇率新规（已完成初版）**: NĐ 252+254/2026 → 出口报关单汇率替代交易日银行汇率 - Balance角色定位: Daryl的财务工作副手 ## 📝 任务4：出口计税汇率新规 - **产出**: `reports/出口计税汇率新规调研-20260727.md`（初版已完成） - **结论**: Daryl判断无本质冲突——发票汇率=报关单汇率，入账=交易日汇率（报关日=交易日时对齐）",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.39160976409912107,
+      "maxScore": 0.39160976409912107,
+      "firstRecalledAt": "2026-07-28T04:34:30.556Z",
+      "lastRecalledAt": "2026-07-28T04:34:30.556Z",
+      "queryHashes": [
+        "eccc07a0790e"
+      ],
+      "recallDays": [
+        "2026-07-28"
+      ],
+      "conceptTags": [
+        "7/26",
+        "v4.0",
+        "daryl-self互动",
+        "心理学/电影学/home.md",
+        "daryl-xiaofeng互动",
+        "bgm前端交互设计grill-me继续",
+        "1.43成本合理",
+        "254/2026"
       ]
     }
   }
