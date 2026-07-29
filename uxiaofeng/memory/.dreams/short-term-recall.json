@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-28T08:26:53.116Z",
+  "updatedAt": "2026-07-29T10:54:37.629Z",
   "entries": {
     "memory:memory/archive/2026-03-24.md:138:171": {
       "key": "memory:memory/archive/2026-03-24.md:138:171",
@@ -2778,6 +2778,37 @@
         "启用/排除切换",
         "歌曲库浏览/选择",
         "bgm/素材"
+      ]
+    },
+    "memory:memory/2026-07-26.md:19:27": {
+      "key": "memory:memory/2026-07-26.md:19:27",
+      "path": "memory/2026-07-26.md",
+      "startLine": 19,
+      "endLine": 27,
+      "source": "memory",
+      "snippet": "- HEARTBEAT.md 周日维护：active.md 检查 ✅ · 日记归档 ✅ · lessons.md 更新 ✅ · identity.md 验证 ✅ - L5 audit.sh 扫描正常 - 归档 2026-06-25.md → archive/ ## ⚠️ 日记质量自省（7/27 补记） - 上周日的心跳日记只写了「周末安静，无紧急事项」 - 实际做了：给 Self 写 P1-P7 知识树叶 + Daryl Grill-me 继续 - 根因：Cron 只看 OPC 群是否有 Daryl 新任务，不查 DM 和 inter-session 的实际工作",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3614436864852905,
+      "maxScore": 0.3614436864852905,
+      "firstRecalledAt": "2026-07-29T10:54:37.629Z",
+      "lastRecalledAt": "2026-07-29T10:54:37.629Z",
+      "queryHashes": [
+        "4e24ae0702e5"
+      ],
+      "recallDays": [
+        "2026-07-29"
+      ],
+      "conceptTags": [
+        "heartbeat.md",
+        "active.md",
+        "lessons.md",
+        "identity.md",
+        "audit.sh",
+        "7/27",
+        "p1-p7",
+        "grill-me"
       ]
     }
   }
