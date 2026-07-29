@@ -1,17 +1,20 @@
 # 当前活跃任务 (中期记忆 — 每次session加载)
 
-> 最后更新: 2026-07-27 17:53（补写日记，任务状态未变）
+> 最后更新: 2026-07-28 23:59（隧道修复+每日审计）
 
 ## 🟢 进行中
 ### 视频自动化剪辑 MVP（video-editor-mvp）🟢 v3.0 重构完成（7/25）
-- **v3.0 重构**: 🟢 M0-M5 全模块完成，待 Daryl 验收
+- **v3.0 重构**: 🟡 M0-M5 全模块完成，Daryl 已开始交互（7/28）
   - ✅ BGM 结构: Hooktheory 方案（Birds of a Feather · 8乐句 + 12个8bar单元）
   - ✅ 数据层: SQLite song_lib + phrase_lib + 8bar_units
   - ✅ API: 模块化（api/bgm scan asr emotion match）+ server.py v3.0
   - ✅ 前端: 5节点 pipeline 全可视化 · OPC Design System
   - ✅ 输出: ffmpeg 渲染 → Toshiba HDD → Syncthing → Tab S8 验收
   - ✅ 服务: localhost:8768 / frontend/index.html ~400行
+  - ✅ **7/28 修复**: 前端 API 路径从 localhost:8768 改为相对路径，隧道可正常访问
+  - 🔗 隧道: `https://coral-katie-senator-urw.trycloudflare.com/frontend/index.html`
   - ⏳ 待验证: Gemini 场景检测 + Emotion 三层漏斗 + ffmpeg 渲染（需素材+API Key）
+  - ⏳ 待 Daryl 提交交互需求 ✍️
 
 ### 洗稿MVP — v1.2.0 迭代需求收集模式 🔴（7/18 15:42 Daryl指令）
 - **当前状态**: Daryl 要求先收集需求不修改，攒齐后一次性动工+更新版号
