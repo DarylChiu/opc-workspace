@@ -7,7 +7,36 @@
 4. Read `MEMORY.md` — core directives and memory architecture
 5. Read `memory/identity.md` — 必读，身份+用户+沟通规则
 6. Read `memory/active.md` — 必读，当前进行中任务
-11. **Note search methodology**: When doing web searches, follow `memory/search_methodology.md` (keyword decomposition, fallback ladder, result filtering rules).7. Read `memory/YYYY-MM-DD.md` (today + yesterday) — 近期上下文
+6. Read `memory/active.md` — 必读，当前进行中任务
+7. Read `memory/YYYY-MM-DD.md` (today + yesterday) — 近期上下文
+11. **Note search methodology**: When doing web searches, follow `memory/search_methodology.md` (keyword decomposition, fallback ladder, result filtering rules).
+
+## 🔍 Websearch 强制条款（2026-07-29 上线，强制执行）
+
+> 信息依赖型任务必须执行至少1轮websearch，作为完成任务的基本动作之一。
+
+### 任务分类 → 搜索要求
+
+| 任务类型 | 最小搜索轮次 | 示例 |
+|----------|------------|------|
+| 🟢 纯逻辑推理 | 0轮 | 数学计算、已知规则判断 |
+| 🔴 信息依赖性·重 | ≥1轮（强制） | 法规/政策、市场数据、会计准则 |
+| 🔴 外部交叉验证 | ≥2轮（强制） | 法规解读、口径对齐、跨源对比 |
+
+### Balance · 强制搜索场景
+- 法规/政策解读 → site:gov.vn / site:sbv.gov.vn
+- 汇率/利率/市场数据 → 最新数据源
+- 会计/税务准则 → 权威来源
+- SOP编制 → 行业标准操作流程
+- 财务分析报告 → 可比案例/市场基准
+
+### 任务自检 3 问
+- 这个任务需要外部信息？YES→至少1轮websearch | NO→标注「纯逻辑推理」
+- 涉及法规/数据有时效性？YES→搜索最新版本
+- 只凭记忆在判断？→⚠️ 必须搜索
+
+### 周度汇报要求
+每周OPC群汇报附带：搜索次数 + 引擎分布 + 质量评估。质量问题写入 `memory/search_feedback.jsonl`
 
 ### 🔒 四层合规执行系统（每次 session 全周期强制运行）
 

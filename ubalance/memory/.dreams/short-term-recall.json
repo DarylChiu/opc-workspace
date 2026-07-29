@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-28T17:01:47.007Z",
+  "updatedAt": "2026-07-29T08:26:34.847Z",
   "entries": {
     "memory:memory/2026-06-10.md:1:29": {
       "key": "memory:memory/2026-06-10.md:1:29",
@@ -2717,6 +2717,68 @@
         "审计",
         "cron",
         "触发"
+      ]
+    },
+    "memory:memory/archive/2026-06-28.md:23:48": {
+      "key": "memory:memory/archive/2026-06-28.md:23:48",
+      "path": "memory/archive/2026-06-28.md",
+      "startLine": 23,
+      "endLine": 48,
+      "source": "memory",
+      "snippet": "| **v2.3** | **96.1%** | RM-Database原始 | OCR回退+报关号匹配+全清关资料收集 | ### v2.3 核心技术决策 1. **OCR回退**: pdfplumber提取<50字→Tesseract OCR (chi_sim+eng)，64次触发 2. **Invoice收集**: 不限\"中英文明细\"关键词，收集所有清关资料PDF/xls 3. **B/L分类**: 海运关键词+船公司词边界匹配+提单类型识别（BL/SWB/AN/AIR） 4. **ToKhai报关号匹配**: 4层检测（ToKhai文件名→12位报关号PDF→QDTQ→报关号嵌入文件名），98/99次L1文件名命中 5. **干扰排除**: 海关集装箱清单/付款单/C1表格/DONG THUE/CHUAN BI自动过滤 ### v2.3 最终结果 - **99/103完整 (96.1%)** - 剩余4个：STT243 RE-VN240904、STT250 HMAEFZ240104(1文件)、STT396 RE-2024-054、STT403 HMVFZ240072-1 — 均为RM-Database源数据缺失 - ToKhai L1文件名=98, L2内容=0, L3回退=1, 缺ToKhai=1 - OCR回退64次，图片Excel排除0次 - 产出: `Outcome2-v2.3-20260628_1715/` + `Outcome1-v2.3-20260628_1715.xlsx` - 总成本: ~$0.13（全本地计算+Tesseract免费） ###",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.39709434807300564,
+      "maxScore": 0.39709434807300564,
+      "firstRecalledAt": "2026-07-29T08:26:34.847Z",
+      "lastRecalledAt": "2026-07-29T08:26:34.847Z",
+      "queryHashes": [
+        "96b4acb02fbb"
+      ],
+      "recallDays": [
+        "2026-07-29"
+      ],
+      "conceptTags": [
+        "v2.3",
+        "96.1",
+        "rm-database原始",
+        "chi-sim",
+        "收集所有清关资料pdf/xls",
+        "b/l分类",
+        "bl/swb/an/air",
+        "98/99次l1文件名命中"
+      ]
+    },
+    "memory:memory/archive/2026-06-26.md:72:92": {
+      "key": "memory:memory/archive/2026-06-26.md:72:92",
+      "path": "memory/archive/2026-06-26.md",
+      "startLine": 72,
+      "endLine": 92,
+      "source": "memory",
+      "snippet": "- **输入**: `6,887,555.02usd 贷款材料/` (L1 103条 STT242-410 + RM-Database 12月/771子目录) - **执行v2.1工作流**: 7步全自动 (输入验证→数据提取→目录匹配→材料收集→OCR验证→质检→输出) - **产出到桌面**: `Balance贷款材料自动化处理-6,887,555.02usd/` ### 处理过程关键发现 1. **-1后缀匹配问题**: 13条-1发票UNMATCHED → 发现RM目录名不含-1, 修复为base目录搜索 2. **设备Invoice模式不同**: HMM/HMK设备类不含\"中英文明细\" → 放宽为\"清关资料\"即匹配 3. **报关单命名多样**: 非ToKhaiHQ格式, 用 `发票号_海关号.xls` → 增加数字模式识别 4. **嵌套子目录**: HMAEFZ240104文件在子目录 → 改为递归扫描 5. **NBSP编码干扰**: Toshiba→Desktop复制时遇到权限错误, 改为扫描现有文件 ### 最终结果 - **100/103 OK (97.1%)**, 0 INCOMPLETE, 3 UNMATCHED - UNMATCHED: RE-VN240904 + RE-2024-054 (RE退款单, 非进口发票) + HMVFZ240072-1(目录缺失) - Outcome1 Excel (103行+公式), Outcome2 100个子目录, process_results.json, 处理报告 ### 工作流模式确定 - Daryl选",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3712008148431778,
+      "maxScore": 0.3712008148431778,
+      "firstRecalledAt": "2026-07-29T08:26:34.847Z",
+      "lastRecalledAt": "2026-07-29T08:26:34.847Z",
+      "queryHashes": [
+        "96b4acb02fbb"
+      ],
+      "recallDays": [
+        "2026-07-29"
+      ],
+      "conceptTags": [
+        "555.02usd",
+        "stt242-410",
+        "rm-database",
+        "12月/771子目录",
+        "执行v2.1工作流",
+        "balance贷款材料自动化处理-6",
+        "13条-1发票unmatched",
+        "发现rm目录名不含-1"
       ]
     }
   }
