@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-29T08:26:34.847Z",
+  "updatedAt": "2026-07-29T17:06:59.469Z",
   "entries": {
     "memory:memory/2026-06-10.md:1:29": {
       "key": "memory:memory/2026-06-10.md:1:29",
@@ -1240,22 +1240,24 @@
       "endLine": 52,
       "source": "memory",
       "snippet": "- 7/7峰值$25.05(opera-4.8覆写), 7/9今日$5.85正常 - **兜底文件**: 已写 `/tmp/cost_daily_report.json` + Kitty dashboard `cost_daily.json` - **Kitty通知**: ⚠️已降级写文件，Kitty未确认（sessions_send 30s超时） - **API验证**: http://localhost:8765/api/costs ✅ 正常响应，`_source:jsonl-full-scan` - **状态**: 降级（数据完整，仅Kitty通知未收到回复）",
-      "recallCount": 3,
+      "recallCount": 4,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.348769500851631,
+      "totalScore": 1.7259495705366132,
       "maxScore": 0.5055625557899475,
       "firstRecalledAt": "2026-07-12T00:43:43.858Z",
-      "lastRecalledAt": "2026-07-19T07:28:21.838Z",
+      "lastRecalledAt": "2026-07-29T17:06:59.469Z",
       "queryHashes": [
         "8988082d78fa",
         "f8aa6a942abc",
-        "40df1164c044"
+        "40df1164c044",
+        "f7b50af32234"
       ],
       "recallDays": [
         "2026-07-12",
         "2026-07-16",
-        "2026-07-19"
+        "2026-07-19",
+        "2026-07-30"
       ],
       "conceptTags": [
         "7/7峰值",
@@ -2193,18 +2195,20 @@
       "endLine": 37,
       "source": "memory",
       "snippet": "## 📊 午夜成本快照（7/17余额结转） - 全量: $83.29 | 本月: $23.69 | 今日: $10.94 - 按Agent: Bryson $66.65 / Kitty $5.63 / Balance $6.62 / Self $4.11 - 按模型: deepseek-r1 $51.06 / deepseek-v4-pro $31.44 / claude-sonnet-4.5 $0.64 / claude-3.7-sonnet $0.15 ## 🕛 23:45 成本全量扫描（Cron） - **扫描结果**: 1560个.jsonl, 台账10,911调用(新增701), 全量去重 - **全量**: $86.9965 | **本月**: $27.3983 | **今日**: $3.3937 - **Token**: 597,449,109 | **API调用**: 10,911 - **按Agent**: Bryson $68.60(月$13.97/日$1.82) | Balance $7.20(月$5.10/日$0.36) | Kitty $6.79(月$5.16/日$1.03) | Self $4.41(月$3.17/日$0.18) - **按模型**: deepseek-r1 $51.06 | deepseek-v4-pro $35.15 | claude-sonnet-4.5 $0.64 | claude-3.7-sonnet $0.15 - **⚠️ Kitty推送**: sessions_send 30s超时未回复 → 降级写文件，兜底数据",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.42140066623687744,
+      "totalScore": 0.7825446963310241,
       "maxScore": 0.42140066623687744,
       "firstRecalledAt": "2026-07-19T07:28:21.838Z",
-      "lastRecalledAt": "2026-07-19T07:28:21.838Z",
+      "lastRecalledAt": "2026-07-29T17:06:59.469Z",
       "queryHashes": [
-        "40df1164c044"
+        "40df1164c044",
+        "f7b50af32234"
       ],
       "recallDays": [
-        "2026-07-19"
+        "2026-07-19",
+        "2026-07-30"
       ],
       "conceptTags": [
         "7/17余额结转",
@@ -2779,6 +2783,130 @@
         "balance贷款材料自动化处理-6",
         "13条-1发票unmatched",
         "发现rm目录名不含-1"
+      ]
+    },
+    "memory:memory/2026-07-28.md:36:57": {
+      "key": "memory:memory/2026-07-28.md:36:57",
+      "path": "memory/2026-07-28.md",
+      "startLine": 36,
+      "endLine": 57,
+      "source": "memory",
+      "snippet": "- **4× Cron心跳支线** (各Agent cron heartbeat子进程) - **2× Feishu群聊** (xiaofeng + main) - **1× Self Vault更新** (Syncthing + Git) - **1× methodology-cards备份** (self cron) - 全部为系统自动任务，Daryl无新增用户消息 ## 📊 7/28 23:45 成本全量扫描（Cron:521a3db3） - **状态**: ⚠️ 已降级写文件，Kitty未确认（30s超时） - **文件**: `~/opc-workspace/Kitty/opc-dashboard/data/cost_daily.json` 已写入 - **今日**: $0.423 | **本月**: $60.033 | **全量累计**: $119.631 - **按Agent**: Bryson $88.748 / Balance $12.728 / Kitty $10.841 / Self $7.314 - **按模型**: deepseek-v4-pro $67.781 / deepseek-r1 $51.063 / claude-sonnet-4.5 $0.638 / claude-3.7-sonnet $0.15 - **扫描规模**: 2822 .jsonl / 去重17,854次API调用 / 11.13亿Token - **API状态**: /api/costs 仍在使用旧数据源（Kitty OPC看板 $_liveScan=$97.9 vs B",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.40185993611812587,
+      "maxScore": 0.40185993611812587,
+      "firstRecalledAt": "2026-07-29T17:06:59.469Z",
+      "lastRecalledAt": "2026-07-29T17:06:59.469Z",
+      "queryHashes": [
+        "f7b50af32234"
+      ],
+      "recallDays": [
+        "2026-07-30"
+      ],
+      "conceptTags": [
+        "备份",
+        "methodology-cards备份",
+        "7/28",
+        "0.423",
+        "60.033",
+        "119.631",
+        "88.748",
+        "12.728"
+      ]
+    },
+    "memory:memory/2026-07-20.md:57:70": {
+      "key": "memory:memory/2026-07-20.md:57:70",
+      "path": "memory/2026-07-20.md",
+      "startLine": 57,
+      "endLine": 70,
+      "source": "memory",
+      "snippet": "- **API验证**: ✅ `http://localhost:8765/api/costs` 正常响应 (200) - **Kitty同步**: ⚠️ **已降级写文件**（30s超时无回复），兜底数据已写入 `~/opc-dashboard/data/cost_daily.json` - **备注**: 747线已就位两次推送均超时，Kitty需主动拉取jsonl全量扫描数据更新看板 - **模型**: deepseek/deepseek-v4-pro ## 🕐 23:50 Kitty回复 — OPC Dashboard路径修复确认 ✅ - **触发**: Kitty通过sessions_send回复，已修复 `/api/costs` 端点 - **根因**: `COST_DAILY_BALANCE_FILE` 常量指向旧路径 `~/opc-workspace/Kitty/opc-dashboard/data/`，实际写入 `~/WorkBuddy/Claw/opc-dashboard/data/cost_daily.json` - **修复**: 改为 `path.join(BASE, 'data', 'cost_daily.json')` 动态路径 - **验证**: API返回数据与台账一致 | 全量$92.43 | 本月$32.84 | 今日$3.84 ✅ - **数据源**: jsonl-full-scan + Balance ledger交叉参考 | Monthly优先台账数据(24h有效) - **Kitty同步**: ✅ 已确认修复，看板数据正确 -",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3912952750921249,
+      "maxScore": 0.3912952750921249,
+      "firstRecalledAt": "2026-07-29T17:06:59.469Z",
+      "lastRecalledAt": "2026-07-29T17:06:59.469Z",
+      "queryHashes": [
+        "f7b50af32234"
+      ],
+      "recallDays": [
+        "2026-07-30"
+      ],
+      "conceptTags": [
+        "8765/api/costs",
+        "deepseek/deepseek-v4-pro",
+        "kitty通过sessions-send回复",
+        "api/costs",
+        "cost-daily-balance-file",
+        "path.join",
+        "cost-daily.json",
+        "92.43"
+      ]
+    },
+    "memory:memory/2026-07-19.md:38:58": {
+      "key": "memory:memory/2026-07-19.md:38:58",
+      "path": "memory/2026-07-19.md",
+      "startLine": 38,
+      "endLine": 58,
+      "source": "memory",
+      "snippet": "- **API验证**: ✅ `http://localhost:8765/api/costs` 正常响应，`_balanceLedger` 已含本次扫描数据 - ⚠️ **已降级写文件，Kitty未确认**（sessions_send超时30s无回复） - **对比午夜快照**: 全量 $87.00→$88.27 (+$1.27) | 本月 $27.40→$28.67 (+$1.27) | 今日重置归零后累计 $0.94 ## 🕚 23:50 心跳重扫 + 路径修正 - **触发**: 23:50 心跳poll，发现23:45扫描兜底文件写入了废弃路径 - **重新扫描**: 1,793个.jsonl | 11,592调用（新增21笔） - 💰 今日: **$0.988** | 本月: **$28.719** | 全量: **$88.317** - Token: 616,611,232 | API调用: 11,592 - **🔧 路径修正**: `generate_cost_daily.py` OUTPUT_DIR 从废弃 `opc-workspace/Kitty` → 正确 `WorkBuddy/Claw/opc-dashboard` - **兜底文件**: ✅ 已写入正确路径 `~/WorkBuddy/Claw/opc-dashboard/data/cost_daily.json` - **Kitty推送**: ⚠️ 再次超时（30s），降级文件已就位 - **API验证**: ✅ localhost:8765 正常（显示23:45数据，差异$0.05）",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.377445575594902,
+      "maxScore": 0.377445575594902,
+      "firstRecalledAt": "2026-07-29T17:06:59.469Z",
+      "lastRecalledAt": "2026-07-29T17:06:59.469Z",
+      "queryHashes": [
+        "f7b50af32234"
+      ],
+      "recallDays": [
+        "2026-07-30"
+      ],
+      "conceptTags": [
+        "8765/api/costs",
+        "sessions-send超时30s无回复",
+        "87.00",
+        "88.27",
+        "1.27",
+        "27.40",
+        "28.67",
+        "0.94"
+      ]
+    },
+    "memory:memory/2026-07-20.md:40:59": {
+      "key": "memory:memory/2026-07-20.md:40:59",
+      "path": "memory/2026-07-20.md",
+      "startLine": 40,
+      "endLine": 59,
+      "source": "memory",
+      "snippet": "- **内容**: 基于CXMT招股书，五层分析体系（行业→业务→财务→治理→估值）+ 30项红旗扫描 - **状态**: 报告已交付，但后续暂停——话题非常大，需Daryl全面沟通从业经验后才能深入 - **模型**: deepseek/deepseek-v4-pro ## 📝 状态总结 - **周日无安排**: 所有任务等待Daryl反馈 - **主要待办**: 贷款材料整理v2.7.0等Daryl抽查反馈 / Future Textile利息攻防等Daryl防御回复 / CXMT报告已交付等待讨论 - **下次事件**: 次日00:00 Cron审计 - **Kitty同步**: ⚠️ 降级文件已就位，超时未确认，待Kitty主动拉取 ## 🕐 23:45 每日成本全量扫描 — 推送Kitty - **触发**: Cron 成本全量扫描 `full_cost_scan.py` - **扫描结果**: 2006个.jsonl | 新增874条调用 | 累计12,466次 - **今日**: $3.84 | **本月**: $32.84 | **全量**: $92.43 - **Tokens**: 663,005,823 - **按Agent**: Bryson $71.50 / Balance $8.19 / Kitty $7.80 / Self $4.94 - **按模型**: deepseek-r1 $51.06 / deepseek-v4-pro $40.58 / claude-sonnet-4.5 $0.64 - **API验证**: ✅ `http://l",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.37375701069831846,
+      "maxScore": 0.37375701069831846,
+      "firstRecalledAt": "2026-07-29T17:06:59.469Z",
+      "lastRecalledAt": "2026-07-29T17:06:59.469Z",
+      "queryHashes": [
+        "f7b50af32234"
+      ],
+      "recallDays": [
+        "2026-07-30"
+      ],
+      "conceptTags": [
+        "deepseek/deepseek-v4-pro",
+        "贷款材料整理v2.7.0等daryl抽查反馈",
+        "full-cost-scan.py",
+        "2006个.jsonl",
+        "3.84",
+        "32.84",
+        "92.43",
+        "71.50"
       ]
     }
   }
