@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-29T02:30:02.731Z",
+  "updatedAt": "2026-07-30T06:52:59.236Z",
   "entries": {
     "memory:memory/2026-06-08.md:19:38": {
       "key": "memory:memory/2026-06-08.md:19:38",
@@ -906,13 +906,13 @@
       "endLine": 66,
       "source": "memory",
       "snippet": "## 18:50 · OPC看板 v1.4 完成 ✅ - Daryl 将「OPC看板v1.4」移至 In Progress → 完成三项需求 - **主次优先级视觉分层**：P0-P3 四级，左侧色条+徽章+创建时可选 - **Bryson 雅思陪练补全**：ielts_tutor 加入扫描优先级，产物 3→7 - **symlink 清理**：移除 opc-workspace 中旧 ielts_tutor_v2.0 副本 - Commit v1.4 + tag ## 状态概览 - 🔴 M2 全模块验收完毕 ✅ → v1.5 生产模式 - OPC 看板 v1.4 并入 v1.5 - 验收报告已生成 `decision_reports/m2_acceptance_report_2026-07-05.md` - 7 月基建方向（Agent自进化 + Loop Engineering）待 Daryl 启动确认 - ✅ M2 全部模块验收完毕 + v1.4 完成 - 待办: Agent版本变更通知 - 雅思陪练 v2.0 收尾中 - 7 月基建方向（Agent自进化 + Loop Engineering）待 Daryl 启动确认",
-      "recallCount": 13,
+      "recallCount": 14,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 5.136924564838409,
+      "totalScore": 5.524781990051269,
       "maxScore": 0.44552976489067075,
       "firstRecalledAt": "2026-07-06T01:12:01.162Z",
-      "lastRecalledAt": "2026-07-29T01:40:35.947Z",
+      "lastRecalledAt": "2026-07-30T06:52:59.236Z",
       "queryHashes": [
         "af4fa58d2480",
         "f8aac1c4eb69",
@@ -926,7 +926,8 @@
         "e5bd7d38155b",
         "db95a0eb1646",
         "c8607702f301",
-        "ca7a32f634d8"
+        "ca7a32f634d8",
+        "702b2e257357"
       ],
       "recallDays": [
         "2026-07-06",
@@ -939,7 +940,8 @@
         "2026-07-23",
         "2026-07-24",
         "2026-07-27",
-        "2026-07-29"
+        "2026-07-29",
+        "2026-07-30"
       ],
       "conceptTags": [
         "v1.4",
@@ -2232,23 +2234,25 @@
       "endLine": 31,
       "source": "memory",
       "snippet": "- **深层问题 2 项**: 日记内容 vs 20个活跃session不匹配 + 成本仪表盘数据 1452min 未刷新 - **修复**: 日记已从骨架充实为本记录 - **成本**: 今日 $3.84 | 本月 $32.84 | 全量 $92.43（Balance 00:02 全量扫描结果） - **Git**: push 成功，备份 4 文件变更 ## 系统概览 ### 7/20 关键事件回顾 - **Dashboard 成本数据路径修复** (7/20 约17:00): main 发现 Dashboard 的 `COST_DAILY_BALANCE_FILE` 常量指向旧路径 `~/opc-workspace/`，而 Balance 实际写入 `~/WorkBuddy/Claw/opc-dashboard/data/`，导致 Dashboard 一直读取 7/19 过期数据。修复一行路径常量 + 重启 server，数据对齐。 - **成本全量扫描**: Balance 00:02 完整扫描 2006 个 .jsonl，累计 12,466 次调用，全量 $92.43 - **项目文件更新**: 07:00 四个 Agent (main/xiaofeng/balance/self) 全部完成 project_*.md 刷新 - **Xiaofeng 视频编辑 v4.0**: 终版交付 Bryson，三层情感漏斗方案，成本降至 ~$0.01-0.03/次 - **OPC 群消息**: main 推送决策清单（三模型混合方案/自进化方向/7月预算告警），xiaofeng",
-      "recallCount": 4,
+      "recallCount": 5,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.614519366621971,
+      "totalScore": 2.008181893825531,
       "maxScore": 0.45765072405338286,
       "firstRecalledAt": "2026-07-22T06:17:25.237Z",
-      "lastRecalledAt": "2026-07-27T09:01:02.548Z",
+      "lastRecalledAt": "2026-07-30T06:52:59.236Z",
       "queryHashes": [
         "1908384c6613",
         "9b907d1ab5f7",
         "e5bd7d38155b",
-        "c8607702f301"
+        "c8607702f301",
+        "702b2e257357"
       ],
       "recallDays": [
         "2026-07-22",
         "2026-07-23",
-        "2026-07-27"
+        "2026-07-27",
+        "2026-07-30"
       ],
       "conceptTags": [
         "备份",
@@ -2365,18 +2369,20 @@
       "endLine": 30,
       "source": "memory",
       "snippet": "# 2026-06-19 工作日志 ## 00:00 每日记忆归档 Cron 触发 - 审计发现：日记缺失 + active_tasks 39h 未更新 → 已修复 ## 全天：OPC看板 Workflow 编辑器问题排查与架构迭代 ### 问题发现 (19:40) - Daryl反馈：Workflow模块点击后空白，三个需求一个都没看到 - 根因：备份回滚时丢失了v2改动，编辑器退回到原始版本 ### 修复尝试历程 1. **修复v2代码** → 语法正确但不渲染（白屏） 2. **添加错误捕获** → import语句被放在ES模块最前面导致违反规范 3. **Vite构建方案** → 自包含bundle但仍是type=module，浏览器不加载 4. **完全回退到5805b9c** → 原始版本也用importmap+module，同病 5. **最终方案** → 普通script标签(UMD React) + 动态import(ReactFlow) - 文件：`opc-dashboard/workflow-editor.html` (624行, 30KB) - 架构：0个ES模块, 0个importmap - 进度：Step 1-4 加载追踪，红色错误提示栏 - 待Daryl明天实测验证 ### 隧道管理 - 8765(OPC看板) → cake-marking-metals-miscellaneous.trycloudflare.com (PID 51360) - 8777(视频分析) → supreme-hall-blanket-",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.3611266314983368,
-      "maxScore": 0.3611266314983368,
+      "totalScore": 0.7774313867092133,
+      "maxScore": 0.41630475521087645,
       "firstRecalledAt": "2026-07-24T01:30:59.975Z",
-      "lastRecalledAt": "2026-07-24T01:30:59.975Z",
+      "lastRecalledAt": "2026-07-30T06:52:59.236Z",
       "queryHashes": [
-        "db95a0eb1646"
+        "db95a0eb1646",
+        "702b2e257357"
       ],
       "recallDays": [
-        "2026-07-24"
+        "2026-07-24",
+        "2026-07-30"
       ],
       "conceptTags": [
         "备份",
