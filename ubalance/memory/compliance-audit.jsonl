@@ -237,3 +237,7 @@
 {"timestamp":"2026-07-30T09:18:31+0700","check":"post-op","task":"应付采购入账SOP v5.0 第三章中越双语翻译","score":3,"total":5,"warnings":[
   ""
 ]}
+{"timestamp":"2026-07-31T00:00:10+0700","check":"L4-audit-v2","agent":"balance","fixes":3,"shallow_issues":4,"deep_issues":2,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-07-31T00:02:23+0700","check":"post-op","task":"每日记忆归档审计","score":3,"total":5,"warnings":[
+  "🔴 任务涉及问题/失败/审计发现，建议提炼到 lessons.md"
+]}

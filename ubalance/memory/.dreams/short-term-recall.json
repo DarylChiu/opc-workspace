@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-29T17:06:59.469Z",
+  "updatedAt": "2026-07-30T17:01:14.661Z",
   "entries": {
     "memory:memory/2026-06-10.md:1:29": {
       "key": "memory:memory/2026-06-10.md:1:29",
@@ -1381,13 +1381,13 @@
       "endLine": 30,
       "source": "memory",
       "snippet": "# 2026-07-04 日记 ## 🕛 Cron 审计 (00:04 7/4) - **审计结果**: 1 自动修复 + 5 浅层 + 2 深层 ### 审计发现与归因 - ⚠️ 日记过短（4行）+ 6 个活跃 session → 深层问题 - 📌 **归因: 午夜边界误报**（与 7/3 相同的模式）。6 个 session 中 2 个为 cron 审计任务（Balance + xiaofeng），3 个为 7/3 晚间交互（Kitty Dashboard 确认、OPC 群聊），1 个为 Balance 7/3 active.md 重整会话。实际无 7/4 实质性新事件 - ⚠️ Git push 失败 → 待修复 ### 修复记录 - 🔧 骨架日记已替换为本日记（审计脚本自动创建→手动填充） - 🔧 7/3 晚间 session 交叉验证确认无遗漏内容 ### 7/3 回顾 - 日记 57 行，内容充实，涵盖： - OPC 看板通知系统 Bug 排查与修复 - 贷款材料自动化整理执行手册 v2.3 撰写 - active.md 结构重整（Daryl 纠正 IPO 任务误报） - 晚间：Kitty 确认 Dashboard sync 机制、OPC 群聊互动 - 无遗漏需补充内容 ## 今日事件 ### 08:56 Daryl指令：终止Hedging任务 - Daryl指令终止越南银行Hedging方案分析任务，已自行处理完毕 - 已从active.md移除，标记为❌终止 ### 09:00 Daryl指令：挂起项目成本监控 - Br",
-      "recallCount": 10,
+      "recallCount": 11,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 3.7548381090164185,
+      "totalScore": 4.119533810019493,
       "maxScore": 0.4260600477457046,
       "firstRecalledAt": "2026-07-13T09:21:02.383Z",
-      "lastRecalledAt": "2026-07-28T17:01:47.007Z",
+      "lastRecalledAt": "2026-07-30T17:01:14.661Z",
       "queryHashes": [
         "d25cb1659a59",
         "be0f8ae6ad1a",
@@ -1397,7 +1397,8 @@
         "935b13407639",
         "431aa87c5b26",
         "8544a2a56000",
-        "428d10408272"
+        "428d10408272",
+        "00ccaefb2624"
       ],
       "recallDays": [
         "2026-07-13",
@@ -1406,7 +1407,8 @@
         "2026-07-18",
         "2026-07-19",
         "2026-07-22",
-        "2026-07-29"
+        "2026-07-29",
+        "2026-07-31"
       ],
       "conceptTags": [
         "7/4",
@@ -1476,22 +1478,24 @@
       "endLine": 24,
       "source": "memory",
       "snippet": "# 2026-07-06 日记 ## 🕛 Cron 审计 (00:15 7/6) - **审计结果**: 1 自动修复 + 6 浅层 + 2 深层 - **已知模式**: 2 个活跃 session（balance cron + xiaofeng cron）→ 午夜边界误报，与 7/3、7/4、7/5 相同 - **修复**: 日记骨架填充、active.md 时间戳更新 ## 7/5 回顾 - Balance 无实质性工作，仅有 cron 审计 - 其他 Agent（main/xiaofeng/self）有飞书活动，非 Balance 职责范围 ## 今日事件 - **13:23** 记忆系统 v3 project 文件已部署，Self 通知填写 project_Balance.md - **13:30** project_Balance.md 已创建并填写完毕，按 🟢/🟡/🔵/⚪ 四区块格式 - 进行中: Future Textile × Wellname 利息处理方案（第三轮攻防67%） - 规划中: IPO审计底稿/AI Workflow测试流/成本归集模型/会计差错调整 - 已完成: 8个项目 - 归档: 2个项目 - **13:23** Q3开发周期正式启动，10月4日验收日已对齐 ## 待办 - 等待 Daryl 完成 Future Textile 第三轮攻击9-12防御 - 等待 Daryl 下一步财务分析任务指派",
-      "recallCount": 3,
+      "recallCount": 4,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.103589490056038,
+      "totalScore": 1.4846961557865144,
       "maxScore": 0.38672495186328887,
       "firstRecalledAt": "2026-07-13T09:21:02.383Z",
-      "lastRecalledAt": "2026-07-25T00:02:07.478Z",
+      "lastRecalledAt": "2026-07-30T17:01:14.661Z",
       "queryHashes": [
         "d25cb1659a59",
         "d10e9941dfde",
-        "70c159385832"
+        "70c159385832",
+        "00ccaefb2624"
       ],
       "recallDays": [
         "2026-07-13",
         "2026-07-18",
-        "2026-07-25"
+        "2026-07-25",
+        "2026-07-31"
       ],
       "conceptTags": [
         "7/6",
@@ -2131,20 +2135,22 @@
       "endLine": 31,
       "source": "memory",
       "snippet": "# 2026-07-12 日记 ## 🕛 00:01 每日记忆归档审计（Cron） - **触发**: 23:59 Cron 兜底审计 `bash scripts/compliance/audit.sh --report` - **审计结果**: - ❌ 7/12日记缺失 → 🔧 已自动创建骨架 - ✅ 昨天日记存在 (51行) — 7/11日记内容完整 - ✅ active.md 新鲜 - ✅ lessons.md 无需今日更新 - 🔧 归档 2026-06-11.md → `memory/archive/` - ✅ MEMORY.md 39行，符合规范 - ⚠️ 日记过短但有11个活跃session → 午夜0点正常现象（多数为昨日残留 + 跨夜 + cron审计session） - ❌ 7/12日记骨架 → 🔧 已补充内容（本条目） - ✅ 项目清单一致 - ❌ Git push 失败 → 已知持续问题（branch protection），非新问题 - **修复项**: 日记骨架 → 内容补充完成 | 2026-06-11.md → 已归档 - **备注**: 午夜0点当日无实质活动，日记接近骨架属正常 ## 📋 昨日续接事项（7/11 → 7/12） 以下任务从7/11结转，等待今天进展： ### 🔴 JGL收购KHOA DUNG并购框架 - **状态**: v1.0框架已交付 Daryl - **待确认**: 行业、估值、代持协议、代持人身份等8项关键信息 - **产出**: `reports/JGL-KHO",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.7270020574331284,
+      "totalScore": 1.0898293286561966,
       "maxScore": 0.375727641582489,
       "firstRecalledAt": "2026-07-18T04:51:06.673Z",
-      "lastRecalledAt": "2026-07-25T00:02:07.478Z",
+      "lastRecalledAt": "2026-07-30T17:01:14.661Z",
       "queryHashes": [
         "d10e9941dfde",
-        "70c159385832"
+        "70c159385832",
+        "00ccaefb2624"
       ],
       "recallDays": [
         "2026-07-18",
-        "2026-07-25"
+        "2026-07-25",
+        "2026-07-31"
       ],
       "conceptTags": [
         "scripts/compliance/audit.sh",
@@ -2699,18 +2705,20 @@
       "endLine": 13,
       "source": "memory",
       "snippet": "# 2026-06-16 记忆 ## 关键事件 ### 每日记忆归档审计 - 00:06 Cron触发每日审计 - 修复：创建今日日记（审计前缺失） - 状态：✅ 审计通过 ## 状态 - 合规系统: ✅ 运行中 - Cron审计: ✅ 已执行",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.3678278237581253,
+      "totalScore": 0.7350133180618286,
       "maxScore": 0.3678278237581253,
       "firstRecalledAt": "2026-07-28T17:01:47.007Z",
-      "lastRecalledAt": "2026-07-28T17:01:47.007Z",
+      "lastRecalledAt": "2026-07-30T17:01:14.661Z",
       "queryHashes": [
-        "428d10408272"
+        "428d10408272",
+        "00ccaefb2624"
       ],
       "recallDays": [
-        "2026-07-29"
+        "2026-07-29",
+        "2026-07-31"
       ],
       "conceptTags": [
         "记忆",
@@ -2907,6 +2915,37 @@
         "32.84",
         "92.43",
         "71.50"
+      ]
+    },
+    "memory:memory/archive/2026-06-15.md:1:13": {
+      "key": "memory:memory/archive/2026-06-15.md:1:13",
+      "path": "memory/archive/2026-06-15.md",
+      "startLine": 1,
+      "endLine": 13,
+      "source": "memory",
+      "snippet": "# 2026-06-15 记忆 ## 关键事件 ### 每日记忆归档审计 - 00:00 Cron触发每日审计 - 修复：创建今日日记（审计前缺失） - 状态：✅ 审计通过 ## 状态 - 合规系统: ✅ 运行中 - Cron审计: ✅ 已执行",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.361355859041214,
+      "maxScore": 0.361355859041214,
+      "firstRecalledAt": "2026-07-30T17:01:14.661Z",
+      "lastRecalledAt": "2026-07-30T17:01:14.661Z",
+      "queryHashes": [
+        "00ccaefb2624"
+      ],
+      "recallDays": [
+        "2026-07-31"
+      ],
+      "conceptTags": [
+        "记忆",
+        "关键",
+        "事件",
+        "每日",
+        "归档",
+        "审计",
+        "cron",
+        "触发"
       ]
     }
   }
