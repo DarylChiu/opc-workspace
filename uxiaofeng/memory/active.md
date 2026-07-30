@@ -1,6 +1,6 @@
 # 当前活跃任务 (中期记忆 — 每次session加载)
 
-> 最后更新: 2026-07-28 23:59（隧道修复+每日审计）
+> 最后更新: 2026-07-30 00:01（每日审计 · 7/29日记补全）
 
 ## 🟢 进行中
 ### 视频自动化剪辑 MVP（video-editor-mvp）🟢 v3.0 重构完成（7/25）
@@ -12,9 +12,11 @@
   - ✅ 输出: ffmpeg 渲染 → Toshiba HDD → Syncthing → Tab S8 验收
   - ✅ 服务: localhost:8768 / frontend/index.html ~400行
   - ✅ **7/28 修复**: 前端 API 路径从 localhost:8768 改为相对路径，隧道可正常访问
-  - 🔗 隧道: `https://coral-katie-senator-urw.trycloudflare.com/frontend/index.html`
+  - 🔗 旧隧道: `coral-katie-senator-urw` (可能已掉线)
+  - 🚇 **新隧道 (7/30)**: `https://scanner-valves-domain-traveling.trycloudflare.com/frontend/index.html`
+  - ✅ **BGM节点v2 完成** (7/30): 歌曲卡片/音频播放器/乐句播放+和弦弹窗/ffmpeg乐句连接
   - ⏳ 待验证: Gemini 场景检测 + Emotion 三层漏斗 + ffmpeg 渲染（需素材+API Key）
-  - ⏳ 待 Daryl 提交交互需求 ✍️
+  - ⏳ Daryl 要求先不动，等他把剩余模块需求全部写出再一次性迭代（7/30最后指令）
 
 ### 洗稿MVP — v1.2.0 迭代需求收集模式 🔴（7/18 15:42 Daryl指令）
 - **当前状态**: Daryl 要求先收集需求不修改，攒齐后一次性动工+更新版号
