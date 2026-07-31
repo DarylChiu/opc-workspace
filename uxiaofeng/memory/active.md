@@ -13,10 +13,11 @@
   - ✅ 服务: localhost:8768 / frontend/index.html ~400行
   - ✅ **7/28 修复**: 前端 API 路径从 localhost:8768 改为相对路径，隧道可正常访问
   - 🔗 旧隧道: `coral-katie-senator-urw` (可能已掉线)
-  - 🚇 **新隧道 (7/30)**: `https://scanner-valves-domain-traveling.trycloudflare.com/frontend/index.html`
+  - 🚇 **最新隧道 (7/31)**: `https://degree-human-intro-airports.trycloudflare.com/frontend/index.html`（旧地址 scanner-valves-domain-traveling 已过期）
   - ✅ **BGM节点v2 完成** (7/30): 歌曲卡片/音频播放器/乐句播放+和弦弹窗/ffmpeg乐句连接
   - ⏳ 待验证: Gemini 场景检测 + Emotion 三层漏斗 + ffmpeg 渲染（需素材+API Key）
-  - ⏳ Daryl 要求先不动，等他把剩余模块需求全部写出再一次性迭代（7/30最后指令）
+  - ⏳ Daryl 7/30指令：先不动，等他把剩余模块需求全部写出再一次性迭代
+  - 🆕 **7/31**: Daryl 飞书发送 01-素材扫描 模块改造需求（4项），小风已回复可行性评估（~3.5h，全部可行），等待Daryl确认2个前置问题
 
 ### 洗稿MVP — v1.2.0 迭代需求收集模式 🔴（7/18 15:42 Daryl指令）
 - **当前状态**: Daryl 要求先收集需求不修改，攒齐后一次性动工+更新版号

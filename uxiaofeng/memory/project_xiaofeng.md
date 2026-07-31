@@ -1,8 +1,8 @@
 # Project Dashboard — xiaofeng（吹点小风）
 
-> 最后编译: 2026-07-30 07:01 +07:00
+> 最后编译: 2026-07-31 07:00 +07:00
 > 负责人: Bryson | Agent ID: xiaofeng
-> 下轮更新: 2026-07-31 07:00
+> 下轮更新: 2026-08-01 07:00
 
 ---
 
@@ -15,16 +15,16 @@
 | 字段 | 值 |
 |------|-----|
 | 项目ID | video-editor-mvp |
-| 状态 | 🟡 active · v3.0 重构完成（7/25），M0-M5 全模块完成，7/29 Daryl 预热交互需求但 session 截止 |
+| 状态 | 🟡 active · v3.0 重构完成（7/25），M0-M5 全模块完成，7/30 Daryl 发送 BGM 节点交互需求并完成 v2 |
 | 优先级 | P0 |
 | 当前阶段 | v3.0 重构 · Hooktheory BGM + SQLite + 5节点可视化 + ffmpeg 渲染 |
 | 阶段进度 | 100%（7/25 压力测试+3Bug修复完成，核心链路走通 ✅） |
 | 总进度 | 88% |
 | 启动日期 | 2026-07-19 |
 | 预计交付 | 2026-08 |
-| 上周进展 | Phase 0 全 15 项 ✅；Phase1 5节点全可视化 ✅；7/25 v3.0 M0-M5 全模块开发完毕+Grill压力测试+3Bug修复，核心链路走通 ✅；BGM 方案: Hooktheory (Birds of a Feather · 8乐句+12个8bar单元)；导入 Justin Bieber That Should Be Me 结构 (C major/76BPM/10段)；7/26 Daryl Grill-me Q1 BGM歌库节点→卡片精简到仅显示歌名 ✅；7/28 飞书隧道修复：前端 API 路径 localhost→相对路径，隧道正常访问 ✅；7/29 Daryl 联系预热交互需求，session 截止前未输出具体需求 ⏳ |
-| 本周计划 | 等待 Daryl 继续 7/29 中断的交互需求输入后执行迭代；BGM 替换：Daryl 提供《I NEED YOU》文件后跑 msaf 分析；Toshiba HDD exFAT 修复（Daryl 物理重新插拔） |
-| 阻塞项 | ① v3.0 等待 Daryl 提交交互需求 ② V3.4 3 个澄清问题 Daryl 未直接回复 ③ DJI Mic 3 音频同步仅框架+模拟 ④ BGM 替换等待 Daryl 提供 QQ 音乐文件 ⑤ Toshiba HDD exFAT 卡死，等 Daryl 物理重新插拔 |
+| 上周进展 | Phase 0 全 15 项 ✅；Phase1 5节点全可视化 ✅；7/25 v3.0 M0-M5 全模块开发完毕+Grill压力测试+3Bug修复，核心链路走通 ✅；BGM 方案: Hooktheory (Birds of a Feather · 8乐句+12个8bar单元)；导入 Justin Bieber That Should Be Me 结构 (C major/76BPM/10段)；7/26 Daryl Grill-me Q1 BGM歌库节点→卡片精简到仅显示歌名 ✅；7/28 飞书隧道修复 ✅；7/30 Daryl 发送 BGM 交互需求→BGM节点v2 完成：歌曲卡片/音频播放器/乐句播放+和弦弹窗/ffmpeg乐句连接 ✅ |
+| 本周计划 | Daryl 指令：先不动，等把剩余模块交互需求全部写出后一次性迭代；BGM 替换：Daryl 提供《I NEED YOU》文件后跑 msaf 分析；Toshiba HDD exFAT 修复（Daryl 物理重新插拔） |
+| 阻塞项 | ① Daryl 指令：暂时不动，等全部模块交互需求写出后一次性迭代 ② V3.4 3 个澄清问题 Daryl 未直接回复 ③ DJI Mic 3 音频同步仅框架+模拟 ④ BGM 替换等待 Daryl 提供 QQ 音乐文件 ⑤ Toshiba HDD exFAT 卡死，等 Daryl 物理重新插拔 |
 
 #### 里程碑
 
@@ -32,7 +32,7 @@
 |--------|------|------|----------|
 | Phase 0 · MVP 核心剪辑引擎 | 🟢 done | 100% | 7/21 ✅ |
 | Phase 1 · 极简可视化前端 | 🟢 done | 100% | 7/23 ✅ |
-| v3.0 · Hooktheory BGM + SQLite + ffmpeg 渲染 | 🟡 verifying | 100% | 7/25（压力测试通过，待验收） |
+| v3.0 · Hooktheory BGM + SQLite + ffmpeg 渲染 | 🟡 verifying | 100% | 7/30 BGM节点v2完成，待剩余模块需求 |
 | Phase 1(旧) · 高级编排+模板 | ⚪ pending | 0% | 顺延 TBD |
 | Phase 2(旧) · 变现交付 | ⚪ pending | 0% | 顺延 TBD |
 
@@ -54,6 +54,7 @@
 | 7/22 | V3.4 按15:00会话严格修正：BGM Bridge→Intro、恢复海面、白建筑+鸟 | P1 | ⏳ 等待 Daryl 澄清 |
 | 7/21 | Phase 0 完结，进入实战迭代验收阶段 | P1 | ✅ Daryl 确认 |
 | 7/19 | 变现加速器定位：16:9+9:16双格式，BGM驱动编排+三层情感漏斗 | P1 | ✅ Daryl 确认 |
+| 7/30 | BGM节点v2 完成：歌曲卡片/音频播放器/乐句播放+和弦弹窗/ffmpeg乐句连接；隧道 scanner-valves-domain-traveling.trycloudflare.com；Daryl 指令暂不动，等全部需求一次性迭代 | P1 | ✅ 完成 |
 | 7/28 | 飞书隧道修复：前端 API 路径 localhost→相对路径，隧道确认可用，Daryl 开始提交交互需求 | P1 | ✅ 已修复 |
 
 #### 风险/问题
@@ -75,15 +76,15 @@
 | 字段 | 值 |
 |------|-----|
 | 项目ID | rewrite-mvp |
-| 状态 | 🟡 standby · 需求收集模式（已 12 天无需求输入） |
+| 状态 | 🟡 standby · 需求收集模式（已 13 天无需求输入） |
 | 优先级 | P1 |
 | 当前阶段 | v1.2.0 已发布，等待 Daryl 需求汇总 |
 | 阶段进度 | — |
 | 总进度 | 80% |
 | 启动日期 | 2026-07-15 |
 | 预计交付 | TBD |
-| 上周进展 | 无变化，维持 v1.2.0（内核卡 M1-M3 完整交付，6 个 commit），Daryl 要求攒需求一次性动工；7/26-29 无新需求 |
-| 本周计划 | 等待 Daryl 发送具体需求；已 12 天无输入，视情况主动询问 |
+| 上周进展 | 无变化，维持 v1.2.0（内核卡 M1-M3 完整交付，6 个 commit），Daryl 要求攒需求一次性动工；7/30 无新需求 |
+| 本周计划 | 等待 Daryl 发送具体需求；已 13 天无输入 |
 | 阻塞项 | Daryl 尚未发送具体需求 |
 
 #### 里程碑
@@ -108,15 +109,15 @@
 | 字段 | 值 |
 |------|-----|
 | 项目ID | ielts-tutor-v2 |
-| 状态 | 🟡 verifying · v1.3.0 待 Daryl 晚间验收，7/25 Daryl 调试发现2Bug已修复（已等 4 天） |
+| 状态 | 🟡 verifying · v1.3.0 待 Daryl 晚间验收，7/25 Daryl 调试发现2Bug已修复（已等 5 天） |
 | 优先级 | P0 |
 | 当前阶段 | v1.3.0 开发完毕，7/25 Daryl 调试+2Bug修复 |
 | 阶段进度 | 100% |
 | 总进度 | 88% |
 | 启动日期 | 2026-06-08 |
 | 预计交付 | v1.1.0 挂起中，v1.3.0 待验收 |
-| 上周进展 | 7/24 数字资产恢复 ✅；7/25 Daryl 飞书调试发现 2 Bug 并修复：① DeepSeek 废弃 `deepseek-chat` → `deepseek-v4-pro`（致LLM乱码+评估失败）② 跟读 JS `deviceInfo` DOM null safe 兜底；Daryl 指令：自由对话用 `deepseek-v4-flash` 降延迟、Debug 模式开启 ✅；7/26-29 无晚间验收活动；数据: 92 sessions/3 evals/32 reviews 完整 |
-| 本周计划 | Daryl 晚间验收 v1.3.0（含 Dashboard+词汇+深度对话+新模型路由）；已等 4 天，后续待定 |
+| 上周进展 | 7/24 数字资产恢复 ✅；7/25 Daryl 飞书调试发现 2 Bug 并修复：① DeepSeek 废弃 `deepseek-chat` → `deepseek-v4-pro`（致LLM乱码+评估失败）② 跟读 JS `deviceInfo` DOM null safe 兜底；Daryl 指令：自由对话用 `deepseek-v4-flash` 降延迟、Debug 模式开启 ✅；7/30 无晚间验收活动；数据: 92 sessions/3 evals/32 reviews 完整 |
+| 本周计划 | Daryl 晚间验收 v1.3.0（含 Dashboard+词汇+深度对话+新模型路由）；已等 5 天，后续待定 |
 | 阻塞项 | ① iPhone 语音输入问题 → v1.1.0 挂起 ② 等待 Daryl 验收 v1.3.0 |
 
 #### 里程碑
@@ -164,14 +165,14 @@
 | 字段 | 值 |
 |------|-----|
 | 项目ID | loop-engineering |
-| 状态 | ⏸️ suspended · 方向待定（已 19 天无进展） |
+| 状态 | ⏸️ suspended · 方向待定（已 20 天无进展） |
 | 优先级 | P0 |
 | 当前阶段 | Sentinel v1 事故复盘完成（7/11） |
 | 阶段进度 | 10% |
 | 总进度 | 10% |
 | 启动日期 | 2026-07-06 |
 | 预计交付 | TBD |
-| 上周进展 | 无进展；7/26-29 无活动 |
+| 上周进展 | 无进展；7/30 无活动 |
 | 本周计划 | 等待 Daryl 发起讨论 |
 | 阻塞项 | ① Daryl 未发起讨论 ② Sentinel v2 方案已设计但未批复 |
 
