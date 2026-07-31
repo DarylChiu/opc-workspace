@@ -1,6 +1,6 @@
 # 当前活跃任务
 
-> 最后更新: 2026-07-30 13:50 GMT+7 (SOP第一阶段归档，费用报销MVP workflow上线OPC看板)
+> 最后更新: 2026-07-31 10:45 GMT+7 (费用报销MVP v0.2.0交付)
 
 ## 🔧 基础设施（运维中，非项目汇报）
 ### OPC成本仪表盘 — append-only台账
@@ -41,14 +41,16 @@
 - **参考**: `reports/仓储专项检查报告-华特-20260724.md`
 - **此前框架**: `reports/仓储专项检查-整改模板与SOP-20260727.md`
 
-### 🟢 费用报销体系搭建MVP（2026-07-29启动）★ACTIVE
-- **状态**: Phase 1进行中，Daryl 7/30早上已试用并反馈交互问题
-- **交付**: PRD v1.1 + 数据模型v1.1 + 越南发票识别手册 + 全栈MVP（后端API+前端界面+OCR+分类器+凭证生成）
-- **7/30修复**: ①发票列表交互：添加详情模态框（点击卡片→查看/编辑类型、金额、供应商、OCR原文）+ 可调整报销金额（≠发票金额）+ DELETE接口 ②凭证预览：HTML表格视图（可切换原始CSV）+ 下载按钮
-- **技术栈**: Python http.server + SQLite + Vanilla JS + Tesseract + Cloudflare Tunnel
-- **API成本**: ~.20 (DeepSeek V4 Pro)，如切Claude前端则-7
-- **对标**: 汇联易核心功能子集
-- **下一动作**: 等待Daryl进一步测试反馈
+### 🟢 费用报销体系搭建MVP v0.2.0（2026-07-29启动）★DELIVERED 7/31
+- **状态**: v0.2.0已交付，Daryl 16:00验收
+- **v0.2.0交付内容**:
+  - 分类器v2.0: 供应商优先匹配（解决Golden Central Hotel误判）+ 16字段结构化提取 + pretax/VAT/total三值分离
+  - 凭证模块v2.0: 智能分组（出差票据自动合并）+ VAT分离借方行(费用+进项税) + 多借多贷 + 发票交互链接
+  - 服务端v2.0: /api/voucher/generate-v2 /preview-v2 /groups /invoice-links 四个新端点
+  - 前端v2.0: 卡式布局+ VAT拆分明细 + 智能分组预览 + 凭证行可点击跳转发票详情
+- **技术栈**: Python http.server + SQLite + Vanilla JS + Tesseract
+- **服务端口**: http://localhost:8770
+- **下一动作**: 等待Daryl验收反馈
 
 ### ⏸️ 出口计税汇率新规调研 — 任务4 (2026-07-27)
 - **产出**: `reports/出口计税汇率新规调研-20260727.md` v1.0
