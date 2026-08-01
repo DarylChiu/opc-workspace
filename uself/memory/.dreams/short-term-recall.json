@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-31T04:57:21.683Z",
+  "updatedAt": "2026-08-01T12:00:34.554Z",
   "entries": {
     "memory:memory/2026-06-22.md:22:34": {
       "key": "memory:memory/2026-06-22.md:22:34",
@@ -1232,20 +1232,23 @@
       "endLine": 11,
       "source": "memory",
       "snippet": "# 2026-07-25 日记 ## 🕖 项目看板定时更新 (19:00) - 系统定时任务触发 project_Self.md 状态同步 ## 🕛 午夜 Cron 记忆审计 (00:05) - `audit.sh --report` 运行：自动修复 3 项（创建本日记、归档 2026-06-24.md、Git 备份推送） - 浅层问题 6 + 深层问题 3：active.md 已刷新、成本数据过期（Balance 兜底文件已有，非阻塞）、SAGE Checker 零运行（无实质性交付） - 7/24 日记充实（补充白天事件：Self任务审计/Balance SOP v2.0/小枫BGM搜索等） - Git 备份推送 ✅",
-      "recallCount": 2,
+      "recallCount": 4,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.7860468417406081,
+      "totalScore": 1.5060932368040085,
       "maxScore": 0.42696112394332886,
       "firstRecalledAt": "2026-07-28T12:00:24.258Z",
-      "lastRecalledAt": "2026-07-28T17:07:34.817Z",
+      "lastRecalledAt": "2026-08-01T12:00:34.554Z",
       "queryHashes": [
         "15900e654e06",
-        "de0fa4062512"
+        "de0fa4062512",
+        "f5697d5f335c",
+        "adcd8d43ce1b"
       ],
       "recallDays": [
         "2026-07-28",
-        "2026-07-29"
+        "2026-07-29",
+        "2026-08-01"
       ],
       "conceptTags": [
         "备份",
@@ -1318,6 +1321,37 @@
         "4.86",
         "49.10",
         "108.69"
+      ]
+    },
+    "memory:memory/2026-07-28.md:1:21": {
+      "key": "memory:memory/2026-07-28.md:1:21",
+      "path": "memory/2026-07-28.md",
+      "startLine": 1,
+      "endLine": 21,
+      "source": "memory",
+      "snippet": "# 2026-07-28 日记 ## 🕛 午夜 Cron 记忆审计 (00:05) - `audit.sh --report` 运行：自动修复 3 项（创建本日记、归档 2026-06-27.md、Git 备份推送） - 浅层问题：active.md 24h未更新（已刷新）、7/27-7/28 日记骨架（午夜边界正常误报）、SAGE Checker零运行（无实质性交付） - 成本仪表盘：数据由Balance兜底扫描文件提供，API正常 - Git 备份推送 ✅ ## 🌅 日间活动 - 全天无 Daryl 交互，静默维护日 - 19:00：项目看板定时刷新（`project_Self.md` 更新时间戳至 7/28 19:00，本周进展补充，成本标注待午夜审计） - methodology-cards 每日 Git 备份（无新变更） ## 📊 其他 Agent 活动记录 - **Balance**: 仓储突击检查 SOP B+C 部分交付（docx 18KB，含25个标准动作+汇报模板+整改跟踪表+升级规则）；华特公司章程与出口计税汇率调研完成 - **小枫**: OPC Dashboard 隧道访问修复（前端 API 地址从 localhost:8768 改为相对路径，`coral-katie-senator-urw.trycloudflare.com` 验证通过）；BGM 搜索功能开发中 ## 备注 - 7/27 完成大量工作（3棵知识树部署+10片树叶+周度深度汇总），7/28 自然休整日 - 成本数据待午夜 Cron 审计更新",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3602346301078796,
+      "maxScore": 0.3602346301078796,
+      "firstRecalledAt": "2026-08-01T12:00:34.554Z",
+      "lastRecalledAt": "2026-08-01T12:00:34.554Z",
+      "queryHashes": [
+        "adcd8d43ce1b"
+      ],
+      "recallDays": [
+        "2026-08-01"
+      ],
+      "conceptTags": [
+        "备份",
+        "audit.sh",
+        "active.md",
+        "7/27-7/28",
+        "project-self.md",
+        "7/28",
+        "methodology-cards",
+        "7/27"
       ]
     }
   }
