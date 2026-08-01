@@ -13,7 +13,7 @@
   - ✅ 服务: localhost:8768 / frontend/index.html ~400行
   - ✅ **7/28 修复**: 前端 API 路径从 localhost:8768 改为相对路径，隧道可正常访问
   - 🔗 旧隧道: `coral-katie-senator-urw` (可能已掉线)
-  - 🚇 **最新隧道 (7/31)**: `https://degree-human-intro-airports.trycloudflare.com/frontend/index.html`（旧地址 scanner-valves-domain-traveling 已过期）
+  - 🚇 **最新隧道 (8/1)**: `https://synthesis-ent-hawaii-booth.trycloudflare.com/frontend/index.html`（旧地址 degree-human-intro-airports 已过期）
   - ✅ **BGM节点v2 完成** (7/30): 歌曲卡片/音频播放器/乐句播放+和弦弹窗/ffmpeg乐句连接
   - ⏳ 待验证: Gemini 场景检测 + Emotion 三层漏斗 + ffmpeg 渲染（需素材+API Key）
   - ⏳ Daryl 7/30指令：先不动，等他把剩余模块需求全部写出再一次性迭代
