@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-31T02:53:25.960Z",
+  "updatedAt": "2026-08-01T10:14:27.889Z",
   "entries": {
     "memory:memory/2026-06-10.md:1:29": {
       "key": "memory:memory/2026-06-10.md:1:29",
@@ -2201,20 +2201,22 @@
       "endLine": 37,
       "source": "memory",
       "snippet": "## 📊 午夜成本快照（7/17余额结转） - 全量: $83.29 | 本月: $23.69 | 今日: $10.94 - 按Agent: Bryson $66.65 / Kitty $5.63 / Balance $6.62 / Self $4.11 - 按模型: deepseek-r1 $51.06 / deepseek-v4-pro $31.44 / claude-sonnet-4.5 $0.64 / claude-3.7-sonnet $0.15 ## 🕛 23:45 成本全量扫描（Cron） - **扫描结果**: 1560个.jsonl, 台账10,911调用(新增701), 全量去重 - **全量**: $86.9965 | **本月**: $27.3983 | **今日**: $3.3937 - **Token**: 597,449,109 | **API调用**: 10,911 - **按Agent**: Bryson $68.60(月$13.97/日$1.82) | Balance $7.20(月$5.10/日$0.36) | Kitty $6.79(月$5.16/日$1.03) | Self $4.41(月$3.17/日$0.18) - **按模型**: deepseek-r1 $51.06 | deepseek-v4-pro $35.15 | claude-sonnet-4.5 $0.64 | claude-3.7-sonnet $0.15 - **⚠️ Kitty推送**: sessions_send 30s超时未回复 → 降级写文件，兜底数据",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.7825446963310241,
+      "totalScore": 1.1648176103830337,
       "maxScore": 0.42140066623687744,
       "firstRecalledAt": "2026-07-19T07:28:21.838Z",
-      "lastRecalledAt": "2026-07-29T17:06:59.469Z",
+      "lastRecalledAt": "2026-08-01T00:02:14.147Z",
       "queryHashes": [
         "40df1164c044",
-        "f7b50af32234"
+        "f7b50af32234",
+        "91f79f6acb43"
       ],
       "recallDays": [
         "2026-07-19",
-        "2026-07-30"
+        "2026-07-30",
+        "2026-08-01"
       ],
       "conceptTags": [
         "7/17余额结转",
@@ -2948,6 +2950,288 @@
         "审计",
         "cron",
         "触发"
+      ]
+    },
+    "memory:memory/2026-07-29.md:26:49": {
+      "key": "memory:memory/2026-07-29.md:26:49",
+      "path": "memory/2026-07-29.md",
+      "startLine": 26,
+      "endLine": 49,
+      "source": "memory",
+      "snippet": "- 午夜审计归档（7/28凌晨） - 7/27成本完结快照（$119.05累计 / 本月$59.45） - 7/28 23:45 成本全量扫描（累计$119.63 / 今日$0.423） - 成本数据源不一致问题（OPC看板 vs Balance台账差$21.73） - Daryl 当日无用户消息（全部为系统自动任务） ## 🕛 23:45 成本全量扫描（Cron 每日） - **触发**: 521a3db3-f1b8-4fd8-9140-529947dd7098 - **扫描结果**: - 扫描 2,897 个 .jsonl 文件，台账 18,355 调用（新增 451） - 累计 $122.26 | 本月 $62.66 | 今日 $2.45 - Token: 1,147,351,129 | API调用: 18,355 - 按Agent: Bryson $88.86 | Balance $14.40 | Kitty $11.39 | Self $7.60 - 按模型: deepseek-v4-pro $70.40 (84%) | deepseek-r1 $51.06 (16%) - **兜底文件**: ✅ 已写入 `opc-dashboard/data/cost_daily.json` - **Kitty通知**: ⚠️已降级写文件，Kitty未确认（sessions_send 30秒超时） - **API验证**: ✅ localhost:8765/api/costs 响应正常，_balanceLedger 数据已生效 - **模型*",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.390329110622406,
+      "maxScore": 0.390329110622406,
+      "firstRecalledAt": "2026-08-01T00:02:14.147Z",
+      "lastRecalledAt": "2026-08-01T00:02:14.147Z",
+      "queryHashes": [
+        "91f79f6acb43"
+      ],
+      "recallDays": [
+        "2026-08-01"
+      ],
+      "conceptTags": [
+        "7/28凌晨",
+        "7/27成本完结快照",
+        "119.05累计",
+        "59.45",
+        "7/28",
+        "119.63",
+        "0.423",
+        "21.73"
+      ]
+    },
+    "memory:memory/2026-07-22.md:88:103": {
+      "key": "memory:memory/2026-07-22.md:88:103",
+      "path": "memory/2026-07-22.md",
+      "startLine": 88,
+      "endLine": 103,
+      "source": "memory",
+      "snippet": "- **降级文件已就位**: ✅ cost_daily.json 已写入 - **备注**: 7/22是本月第二高日成本（仅次于7/17的$11.26），Bryson占比最高（$4.15，主要为deepseek-r1） ## 16:49 · Dashboard 成本端点对齐确认（Kitty通知） - server.js `refreshCostFromJsonl()` 已改为以 `cost_daily.json` 为权威数据源 - dailyData 使用 `daily_last7`，_liveScan 保留交叉验证 - 全量对齐: $103.64 / 14,715 calls / 月$44.04 / 日$5.93 - 差距根因: Dashboard scan 漏了 cron/子代理/心跳 session 的 jsonl，且 280 条 usage.cost.total=0 被 drop - 以后 cost_daily.json 新鲜（<24h）即可直接用 ## 💰 今日成本 - **收盘**: 今日$5.93（7/22全天） - 主要驱动力: Bryson $4.15 (70%) + Balance $1.41 (24%) - 模型: deepseek-v4-pro $51.79累计 / deepseek-r1 $51.06累计 - 模型: deepseek/deepseek-v4-pro",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.38860971629619595,
+      "maxScore": 0.38860971629619595,
+      "firstRecalledAt": "2026-08-01T00:02:14.147Z",
+      "lastRecalledAt": "2026-08-01T00:02:14.147Z",
+      "queryHashes": [
+        "91f79f6acb43"
+      ],
+      "recallDays": [
+        "2026-08-01"
+      ],
+      "conceptTags": [
+        "cost-daily.json",
+        "7/22是本月第二高日成本",
+        "仅次于7/17的",
+        "11.26",
+        "4.15",
+        "主要为deepseek-r1",
+        "server.js",
+        "daily-last7"
+      ]
+    },
+    "memory:memory/2026-07-28.md:19:42": {
+      "key": "memory:memory/2026-07-28.md:19:42",
+      "path": "memory/2026-07-28.md",
+      "startLine": 19,
+      "endLine": 42,
+      "source": "memory",
+      "snippet": "- **深层问题**: 2项（成本数据过期标记 + 日记骨架检测）→ 均为跨日边界误报，非实质问题 - **模型**: deepseek/deepseek-v4-pro ## 📊 7/27 完结成本快照 - **来源**: OPC API /api/costs + 23:45 jsonl全量扫描 `cost_daily.json` - **累计**: $119.05 | **本月**: $59.45 | **昨日(7/27)**: $2.06 - **按Agent**: Bryson $88.57 / Balance $12.49 / Kitty $10.72 / Self $7.27 - **按模型**: deepseek-v4-pro $67.20 / deepseek-r1 $51.06 / claude-sonnet-4.5 $0.64 / claude-3.7-sonnet $0.15 - **本月预算**: Kitty 291%($29.09/10) | Bryson 226%($33.94/15) | Balance 52%($10.40/20) | Self 121%($6.03/5) - **近7日**: 7/21 $4.88 | 7/22 $6.12 | 7/23 $5.10 | 7/24 $2.49 | 7/25 $3.95 | 7/26 $1.63 | 7/27 $2.06 ## 🔍 20个活动Session说明（审计误报正常化） 7/27午夜至7/28凌晨的20个session均为系统自动任务，非用户活动： - **4× Cron审计** (b",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.37878612279891966,
+      "maxScore": 0.37878612279891966,
+      "firstRecalledAt": "2026-08-01T00:02:14.147Z",
+      "lastRecalledAt": "2026-08-01T00:02:14.147Z",
+      "queryHashes": [
+        "91f79f6acb43"
+      ],
+      "recallDays": [
+        "2026-08-01"
+      ],
+      "conceptTags": [
+        "deepseek/deepseek-v4-pro",
+        "7/27",
+        "api/costs",
+        "cost-daily.json",
+        "119.05",
+        "59.45",
+        "2.06",
+        "88.57"
+      ]
+    },
+    "memory:memory/2026-07-22.md:1:29": {
+      "key": "memory:memory/2026-07-22.md:1:29",
+      "path": "memory/2026-07-22.md",
+      "startLine": 1,
+      "endLine": 29,
+      "source": "memory",
+      "snippet": "# 2026-07-22 日记 · 周三 ## 🕛 00:03 每日记忆归档审计（Cron） - **触发**: 23:59 Cron 兜底审计 `bash scripts/compliance/audit.sh --report` - **审计结果**: - ❌ 今日日记缺失 → 🔧 已自动创建骨架 - ✅ 昨天日记存在 (71行) — 7/21日记内容完整 - ✅ active.md 新鲜 (24h内，7/21更新) - ℹ️ lessons.md 无需今日更新 - 🔧 归档 2026-06-21.md → `memory/archive/` - ✅ MEMORY.md 39行，符合规范 - ❌ 日记过短 + 骨架检测 → 🔧 已手动补充为完整日记（本文件） - ✅ 项目清单与session一致 - ✅ 成本数据新鲜（1分钟前） - ⚠️ SAGE checker + Reflexion journal 不存在 → 基建刚上线，待部署 - ✅ Git push 成功 - **修复项**: 3项（创建日记+归档过期日记+日记补充完整） - **浅层问题**: 3项（SAGE+Reflexion基建缺失×2 + 日记过短→已修复） - **深层问题**: 2项（日记骨架检测→已修复，其余为午夜边界已知误报） - **模型**: deepseek/deepseek-v4-pro ## 📊 午夜成本快照（7/21→7/22结转） - **成本扫描**: full_cost_scan.py v2 append-only台账 -",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.37405716776847836,
+      "maxScore": 0.37405716776847836,
+      "firstRecalledAt": "2026-08-01T00:02:14.147Z",
+      "lastRecalledAt": "2026-08-01T00:02:14.147Z",
+      "queryHashes": [
+        "91f79f6acb43"
+      ],
+      "recallDays": [
+        "2026-08-01"
+      ],
+      "conceptTags": [
+        "scripts/compliance/audit.sh",
+        "7/21日记内容完整",
+        "active.md",
+        "7/21更新",
+        "lessons.md",
+        "memory/archive",
+        "memory.md",
+        "deepseek/deepseek-v4-pro"
+      ]
+    },
+    "memory:memory/2026-07-24.md:1:26": {
+      "key": "memory:memory/2026-07-24.md:1:26",
+      "path": "memory/2026-07-24.md",
+      "startLine": 1,
+      "endLine": 26,
+      "source": "memory",
+      "snippet": "# 2026-07-24 日记 · 周五 ## 🕛 00:00 每日记忆归档审计（Cron） - **触发**: 23:59 Cron 兜底审计 `bash scripts/compliance/audit.sh --report` - **审计结果**: - ❌ 今日日记缺失 → 🔧 已创建骨架（本文件） - ✅ 昨天日记存在 (68行) — 7/23日记内容完整 - ✅ active.md 新鲜 (14h) - ℹ️ lessons.md 无需今日更新 - 🔧 归档 2026-06-23.md → `memory/archive/` - ✅ MEMORY.md 39行，符合规范 - ❌ 日记过短（骨架）→ 🔧 已手动补充为完整日记 - ❌ 成本数据过期（1433分钟前）→ 🔧 cost scan已重跑，数据新鲜 - ⚠️ SAGE checker + Reflexion journal 不存在 → 基建刚上线，待部署 - ✅ Git push 成功 - **修复项**: 3项（创建日记+归档过期日记+日记补充完整） - **浅层问题**: 4项（成本过期→已修复，SAGE+Reflexion×2基建缺失，日记骨架→已修复） - **深层问题**: 2项（成本过期根因→已修复，日记骨架→已修复） - **模型**: deepseek/deepseek-v4-pro ## 📊 午夜成本快照（7/23→7/24结转） - **扫描结果**: 累计$108.79 | 本月$49.19 | 今日$0.00（刚过午夜）| Toke",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3733091950416565,
+      "maxScore": 0.3733091950416565,
+      "firstRecalledAt": "2026-08-01T00:02:14.147Z",
+      "lastRecalledAt": "2026-08-01T00:02:14.147Z",
+      "queryHashes": [
+        "91f79f6acb43"
+      ],
+      "recallDays": [
+        "2026-08-01"
+      ],
+      "conceptTags": [
+        "scripts/compliance/audit.sh",
+        "7/23日记内容完整",
+        "active.md",
+        "lessons.md",
+        "memory/archive",
+        "memory.md",
+        "deepseek/deepseek-v4-pro",
+        "7/23"
+      ]
+    },
+    "memory:memory/2026-07-31.md:61:79": {
+      "key": "memory:memory/2026-07-31.md:61:79",
+      "path": "memory/2026-07-31.md",
+      "startLine": 61,
+      "endLine": 79,
+      "source": "memory",
+      "snippet": "- **模型**: deepseek/deepseek-v4-pro ## 🕙 10:00-10:45 费用报销MVP v0.2.0 全栈改造交付 - **触发**: Daryl 追问「开发汇报呢？」，确认7/30晚22:43已讨论v0.2.0方向 - **执行**: 搜索所有session记录确认无已有代码→全栈重写4模块 - **交付内容**: 1. 分类器v2.0: 供应商优先匹配 + 16字段提取 + pretax/VAT/total三值分离 2. 凭证v2.0: 智能分组（住宿锚点优先）+ VAT分离 + 多借多贷 + 发票链接 3. 服务端v2.0: 4个新endpoint (generate-v2/preview-v2/groups/invoice-links) 4. 前端v2.0: VAT卡式明细 + 分组预览 + 凭证行点击跳转 - **测试**: Golden Central Hotel误判修复✅ | 智能分组3票合并✅ | VAT分离平衡✅ - **服务**: http://localhost:8770 v0.2.0 running - **模型**: deepseek/deepseek-v4-pro ## ⚠️ 已知待处理 - SAGE checker + Reflexion journal：基建上线但日志文件尚未生成 - 成本仪表盘数据过期 → 下次 23:45 全量扫描自动修复 - expense_mvp v0.2.0 等待Daryl下午16:00验收",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7540018409490585,
+      "maxScore": 0.388552388548851,
+      "firstRecalledAt": "2026-08-01T10:14:27.781Z",
+      "lastRecalledAt": "2026-08-01T10:14:27.889Z",
+      "queryHashes": [
+        "9cb38ef7e0c6",
+        "22afa9b85b81"
+      ],
+      "recallDays": [
+        "2026-08-01"
+      ],
+      "conceptTags": [
+        "deepseek/deepseek-v4-pro",
+        "00-10",
+        "v0.2.0",
+        "确认7/30晚22",
+        "43已讨论v0.2.0方向",
+        "分类器v2.0",
+        "pretax/vat/total三值分离",
+        "凭证v2.0"
+      ]
+    },
+    "memory:memory/2026-07-31.md:45:66": {
+      "key": "memory:memory/2026-07-31.md:45:66",
+      "path": "memory/2026-07-31.md",
+      "startLine": 45,
+      "endLine": 66,
+      "source": "memory",
+      "snippet": "- 凭证模块 v2.0：智能分组（出差合并/独立凭证）+ 多借多贷 + VAT显示 + 发票交互链接 - 前端改版：卡式布局 + 凭证展开发票详情 - **状态**: Daryl 已确认「先开写，明天交付」 - **产出目录**: `expense_mvp/` (6个模块全量改动) - **待确认模块**: 费用分摊规则、报销汇总表格式（Daryl 后续拍板） ### 🔴 JGL收购KHOA DUNG并购框架 - Daryl 未反馈，继续等待 ## 🕖 07:01 项目看板定时更新 - **触发**: 系统定时任务·记忆系统v3（project_Balance.md 23h未更新） - **更新内容**: 1. 费用报销MVP — 大幅刷新：Phase 1全栈MVP已上线(7/30)、Daryl已试用、v0.2.0迭代中(7/31交付)、里程碑M2 done/M3 in_progress、阶段进度25%→60% 2. 越南财务体系SOP — v5.0中越双语7/30已交付、M1 v4.0→v5.0 done、阶段进度30%→50% 3. 成本数据刷新: 全量$124.43/本月$64.83/Balance $15.72（7/30 23:45全量扫描） 4. 仓储/差旅费/JGL等：小幅进展更新 - **模型**: deepseek/deepseek-v4-pro ## 🕙 10:00-10:45 费用报销MVP v0.2.0 全栈改造交付 - **触发**: Daryl 追问「开发汇报呢？」，确认7/30晚22:43已讨论v0.2.0方向 -",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7205960780382157,
+      "maxScore": 0.3618101209402084,
+      "firstRecalledAt": "2026-08-01T10:14:27.781Z",
+      "lastRecalledAt": "2026-08-01T10:14:27.889Z",
+      "queryHashes": [
+        "9cb38ef7e0c6",
+        "22afa9b85b81"
+      ],
+      "recallDays": [
+        "2026-08-01"
+      ],
+      "conceptTags": [
+        "v2.0",
+        "出差合并/独立凭证",
+        "expense-mvp",
+        "project-balance.md",
+        "7/30",
+        "v0.2.0迭代中",
+        "7/31交付",
+        "done/m3"
+      ]
+    },
+    "memory:memory/2026-07-30.md:23:44": {
+      "key": "memory:memory/2026-07-30.md:23:44",
+      "path": "memory/2026-07-30.md",
+      "startLine": 23,
+      "endLine": 44,
+      "source": "memory",
+      "snippet": "- ❌ 成本数据过期（~1440分钟前，cost_daily.json是7/29 00:05的）→ 手动刷新 - ⚠️ SAGE checker + Reflexion journal 缺失 → 基建待完善 - **修复操作**: - 运行 `full_cost_scan.py` 写入 `~/opc-workspace/Kitty/opc-dashboard/data/cost_daily.json` - 最新成本: 累计 $122.36 | 本月 $62.76 | 今日 $0.00 - Token: 1,148,603,881 | API调用: 18,393 - 按Agent: Bryson $88.89 | Balance $14.42 | Kitty $11.46 | Self $7.60 - **模型**: deepseek/deepseek-v4-pro ## 🕗 08:30 费用报销MVP交互修复 - **触发**: Daryl试用反馈两个交互问题 - **问题1**: 发票列表不能点击查看详情、不能调整报销金额、不能删除 - **问题2**: 凭证预览只显示原始CSV，没有可读的HTML格式 - **修复**: 1. 添加详情模态框：点击费用卡片→查看/编辑类型、报销金额、供应商、日期、OCR原文 2. 新增 DELETE /api/expense/{id} 接口 3. 凭证预览：HTML表格视图（可切换原始CSV）+ 下载按钮 4. 扩展 PUT /api/expense/{id} 支持更多可编辑字段 - **模型**",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7157055288553238,
+      "maxScore": 0.35818397402763363,
+      "firstRecalledAt": "2026-08-01T10:14:27.781Z",
+      "lastRecalledAt": "2026-08-01T10:14:27.889Z",
+      "queryHashes": [
+        "9cb38ef7e0c6",
+        "22afa9b85b81"
+      ],
+      "recallDays": [
+        "2026-08-01"
+      ],
+      "conceptTags": [
+        "cost-daily.json是7/29",
+        "full-cost-scan.py",
+        "122.36",
+        "62.76",
+        "0.00",
+        "88.89",
+        "14.42",
+        "11.46"
+      ]
+    },
+    "memory:memory/2026-07-31.md:23:48": {
+      "key": "memory:memory/2026-07-31.md:23:48",
+      "path": "memory/2026-07-31.md",
+      "startLine": 23,
+      "endLine": 48,
+      "source": "memory",
+      "snippet": "- ✅ 昨天日记存在 (56行) - ✅ active.md 新鲜 (10h) - ℹ️ lessons.md 无需今日更新 - ✅ 无需归档（上次已完成6/30归档） - ✅ MEMORY.md 39行，符合规范 - ✅ 日记长度正常（38行），session活动覆盖通过 - ✅ 近3天日记无骨架问题 - ✅ 项目清单一致 - ❌ 成本数据过期（1440分钟前）→ 🔧 已自动刷新 - ⚠️ SAGE checker-log + Reflexion journal 缺失 → 基建待完善 - **修复项**: 1项自动修复（成本仪表盘数据刷新） - **Git备份**: ✅ push 成功（5 files changed） - **浅层问题**: 1（成本过期→已修复）| **深层问题**: 0 - **L0启动验证**: ✅ OK（6/6通过） ## 📋 昨日结转事项（7/30 → 7/31） ### 🔴 费用报销MVP v0.2.0 迭代 — Daryl 明日验收 - **触发**: 7/30 晚 Daryl 飞机上讨论需求，22:43 确认方向 - **核心改动**: - OCR引擎 v2.0：预处理管线 + 结构化16字段提取 - 分类器 v2.0：供应商优先匹配（解决 Golden Central Hotel 误判类问题） - 凭证模块 v2.0：智能分组（出差合并/独立凭证）+ 多借多贷 + VAT显示 + 发票交互链接 - 前端改版：卡式布局 + 凭证展开发票详情 - **状态**: Daryl 已确",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3716101199388504,
+      "maxScore": 0.3716101199388504,
+      "firstRecalledAt": "2026-08-01T10:14:27.889Z",
+      "lastRecalledAt": "2026-08-01T10:14:27.889Z",
+      "queryHashes": [
+        "22afa9b85b81"
+      ],
+      "recallDays": [
+        "2026-08-01"
+      ],
+      "conceptTags": [
+        "备份",
+        "active.md",
+        "lessons.md",
+        "上次已完成6/30归档",
+        "memory.md",
+        "checker-log",
+        "6/6通过",
+        "7/30"
       ]
     }
   }
