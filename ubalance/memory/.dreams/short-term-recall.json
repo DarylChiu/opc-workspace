@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-01T10:14:27.889Z",
+  "updatedAt": "2026-08-02T08:58:31.872Z",
   "entries": {
     "memory:memory/2026-06-10.md:1:29": {
       "key": "memory:memory/2026-06-10.md:1:29",
@@ -2804,18 +2804,20 @@
       "endLine": 57,
       "source": "memory",
       "snippet": "- **4× Cron心跳支线** (各Agent cron heartbeat子进程) - **2× Feishu群聊** (xiaofeng + main) - **1× Self Vault更新** (Syncthing + Git) - **1× methodology-cards备份** (self cron) - 全部为系统自动任务，Daryl无新增用户消息 ## 📊 7/28 23:45 成本全量扫描（Cron:521a3db3） - **状态**: ⚠️ 已降级写文件，Kitty未确认（30s超时） - **文件**: `~/opc-workspace/Kitty/opc-dashboard/data/cost_daily.json` 已写入 - **今日**: $0.423 | **本月**: $60.033 | **全量累计**: $119.631 - **按Agent**: Bryson $88.748 / Balance $12.728 / Kitty $10.841 / Self $7.314 - **按模型**: deepseek-v4-pro $67.781 / deepseek-r1 $51.063 / claude-sonnet-4.5 $0.638 / claude-3.7-sonnet $0.15 - **扫描规模**: 2822 .jsonl / 去重17,854次API调用 / 11.13亿Token - **API状态**: /api/costs 仍在使用旧数据源（Kitty OPC看板 $_liveScan=$97.9 vs B",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.40185993611812587,
+      "totalScore": 0.7576041638851165,
       "maxScore": 0.40185993611812587,
       "firstRecalledAt": "2026-07-29T17:06:59.469Z",
-      "lastRecalledAt": "2026-07-29T17:06:59.469Z",
+      "lastRecalledAt": "2026-08-01T17:04:13.248Z",
       "queryHashes": [
-        "f7b50af32234"
+        "f7b50af32234",
+        "4f4868a2cc4f"
       ],
       "recallDays": [
-        "2026-07-30"
+        "2026-07-30",
+        "2026-08-02"
       ],
       "conceptTags": [
         "备份",
@@ -3114,19 +3116,21 @@
       "endLine": 79,
       "source": "memory",
       "snippet": "- **模型**: deepseek/deepseek-v4-pro ## 🕙 10:00-10:45 费用报销MVP v0.2.0 全栈改造交付 - **触发**: Daryl 追问「开发汇报呢？」，确认7/30晚22:43已讨论v0.2.0方向 - **执行**: 搜索所有session记录确认无已有代码→全栈重写4模块 - **交付内容**: 1. 分类器v2.0: 供应商优先匹配 + 16字段提取 + pretax/VAT/total三值分离 2. 凭证v2.0: 智能分组（住宿锚点优先）+ VAT分离 + 多借多贷 + 发票链接 3. 服务端v2.0: 4个新endpoint (generate-v2/preview-v2/groups/invoice-links) 4. 前端v2.0: VAT卡式明细 + 分组预览 + 凭证行点击跳转 - **测试**: Golden Central Hotel误判修复✅ | 智能分组3票合并✅ | VAT分离平衡✅ - **服务**: http://localhost:8770 v0.2.0 running - **模型**: deepseek/deepseek-v4-pro ## ⚠️ 已知待处理 - SAGE checker + Reflexion journal：基建上线但日志文件尚未生成 - 成本仪表盘数据过期 → 下次 23:45 全量扫描自动修复 - expense_mvp v0.2.0 等待Daryl下午16:00验收",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.7540018409490585,
+      "totalScore": 1.1345901578664779,
       "maxScore": 0.388552388548851,
       "firstRecalledAt": "2026-08-01T10:14:27.781Z",
-      "lastRecalledAt": "2026-08-01T10:14:27.889Z",
+      "lastRecalledAt": "2026-08-02T08:58:31.872Z",
       "queryHashes": [
         "9cb38ef7e0c6",
-        "22afa9b85b81"
+        "22afa9b85b81",
+        "4a29d1c89aa5"
       ],
       "recallDays": [
-        "2026-08-01"
+        "2026-08-01",
+        "2026-08-02"
       ],
       "conceptTags": [
         "deepseek/deepseek-v4-pro",
@@ -3146,19 +3150,21 @@
       "endLine": 66,
       "source": "memory",
       "snippet": "- 凭证模块 v2.0：智能分组（出差合并/独立凭证）+ 多借多贷 + VAT显示 + 发票交互链接 - 前端改版：卡式布局 + 凭证展开发票详情 - **状态**: Daryl 已确认「先开写，明天交付」 - **产出目录**: `expense_mvp/` (6个模块全量改动) - **待确认模块**: 费用分摊规则、报销汇总表格式（Daryl 后续拍板） ### 🔴 JGL收购KHOA DUNG并购框架 - Daryl 未反馈，继续等待 ## 🕖 07:01 项目看板定时更新 - **触发**: 系统定时任务·记忆系统v3（project_Balance.md 23h未更新） - **更新内容**: 1. 费用报销MVP — 大幅刷新：Phase 1全栈MVP已上线(7/30)、Daryl已试用、v0.2.0迭代中(7/31交付)、里程碑M2 done/M3 in_progress、阶段进度25%→60% 2. 越南财务体系SOP — v5.0中越双语7/30已交付、M1 v4.0→v5.0 done、阶段进度30%→50% 3. 成本数据刷新: 全量$124.43/本月$64.83/Balance $15.72（7/30 23:45全量扫描） 4. 仓储/差旅费/JGL等：小幅进展更新 - **模型**: deepseek/deepseek-v4-pro ## 🕙 10:00-10:45 费用报销MVP v0.2.0 全栈改造交付 - **触发**: Daryl 追问「开发汇报呢？」，确认7/30晚22:43已讨论v0.2.0方向 -",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.7205960780382157,
-      "maxScore": 0.3618101209402084,
+      "totalScore": 1.1055773109197617,
+      "maxScore": 0.384981232881546,
       "firstRecalledAt": "2026-08-01T10:14:27.781Z",
-      "lastRecalledAt": "2026-08-01T10:14:27.889Z",
+      "lastRecalledAt": "2026-08-02T08:58:31.872Z",
       "queryHashes": [
         "9cb38ef7e0c6",
-        "22afa9b85b81"
+        "22afa9b85b81",
+        "4a29d1c89aa5"
       ],
       "recallDays": [
-        "2026-08-01"
+        "2026-08-01",
+        "2026-08-02"
       ],
       "conceptTags": [
         "v2.0",
@@ -3178,19 +3184,21 @@
       "endLine": 44,
       "source": "memory",
       "snippet": "- ❌ 成本数据过期（~1440分钟前，cost_daily.json是7/29 00:05的）→ 手动刷新 - ⚠️ SAGE checker + Reflexion journal 缺失 → 基建待完善 - **修复操作**: - 运行 `full_cost_scan.py` 写入 `~/opc-workspace/Kitty/opc-dashboard/data/cost_daily.json` - 最新成本: 累计 $122.36 | 本月 $62.76 | 今日 $0.00 - Token: 1,148,603,881 | API调用: 18,393 - 按Agent: Bryson $88.89 | Balance $14.42 | Kitty $11.46 | Self $7.60 - **模型**: deepseek/deepseek-v4-pro ## 🕗 08:30 费用报销MVP交互修复 - **触发**: Daryl试用反馈两个交互问题 - **问题1**: 发票列表不能点击查看详情、不能调整报销金额、不能删除 - **问题2**: 凭证预览只显示原始CSV，没有可读的HTML格式 - **修复**: 1. 添加详情模态框：点击费用卡片→查看/编辑类型、报销金额、供应商、日期、OCR原文 2. 新增 DELETE /api/expense/{id} 接口 3. 凭证预览：HTML表格视图（可切换原始CSV）+ 下载按钮 4. 扩展 PUT /api/expense/{id} 支持更多可编辑字段 - **模型**",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.7157055288553238,
-      "maxScore": 0.35818397402763363,
+      "totalScore": 1.0743103861808776,
+      "maxScore": 0.35860485732555386,
       "firstRecalledAt": "2026-08-01T10:14:27.781Z",
-      "lastRecalledAt": "2026-08-01T10:14:27.889Z",
+      "lastRecalledAt": "2026-08-02T08:58:31.872Z",
       "queryHashes": [
         "9cb38ef7e0c6",
-        "22afa9b85b81"
+        "22afa9b85b81",
+        "4a29d1c89aa5"
       ],
       "recallDays": [
-        "2026-08-01"
+        "2026-08-01",
+        "2026-08-02"
       ],
       "conceptTags": [
         "cost-daily.json是7/29",
@@ -3210,18 +3218,20 @@
       "endLine": 48,
       "source": "memory",
       "snippet": "- ✅ 昨天日记存在 (56行) - ✅ active.md 新鲜 (10h) - ℹ️ lessons.md 无需今日更新 - ✅ 无需归档（上次已完成6/30归档） - ✅ MEMORY.md 39行，符合规范 - ✅ 日记长度正常（38行），session活动覆盖通过 - ✅ 近3天日记无骨架问题 - ✅ 项目清单一致 - ❌ 成本数据过期（1440分钟前）→ 🔧 已自动刷新 - ⚠️ SAGE checker-log + Reflexion journal 缺失 → 基建待完善 - **修复项**: 1项自动修复（成本仪表盘数据刷新） - **Git备份**: ✅ push 成功（5 files changed） - **浅层问题**: 1（成本过期→已修复）| **深层问题**: 0 - **L0启动验证**: ✅ OK（6/6通过） ## 📋 昨日结转事项（7/30 → 7/31） ### 🔴 费用报销MVP v0.2.0 迭代 — Daryl 明日验收 - **触发**: 7/30 晚 Daryl 飞机上讨论需求，22:43 确认方向 - **核心改动**: - OCR引擎 v2.0：预处理管线 + 结构化16字段提取 - 分类器 v2.0：供应商优先匹配（解决 Golden Central Hotel 误判类问题） - 凭证模块 v2.0：智能分组（出差合并/独立凭证）+ 多借多贷 + VAT显示 + 发票交互链接 - 前端改版：卡式布局 + 凭证展开发票详情 - **状态**: Daryl 已确",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.3716101199388504,
+      "totalScore": 0.7421178698539734,
       "maxScore": 0.3716101199388504,
       "firstRecalledAt": "2026-08-01T10:14:27.889Z",
-      "lastRecalledAt": "2026-08-01T10:14:27.889Z",
+      "lastRecalledAt": "2026-08-02T08:58:31.872Z",
       "queryHashes": [
-        "22afa9b85b81"
+        "22afa9b85b81",
+        "4a29d1c89aa5"
       ],
       "recallDays": [
-        "2026-08-01"
+        "2026-08-01",
+        "2026-08-02"
       ],
       "conceptTags": [
         "备份",
