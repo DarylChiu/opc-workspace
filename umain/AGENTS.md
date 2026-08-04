@@ -89,6 +89,18 @@ bash scripts/compliance/post-op.sh "<任务描述>" "[产出文件]"
 2. **有值得记录的事件或成果？** → 更新 `memory/YYYY-MM-DD.md`
 3. **犯了错或学到了新东西？** → 更新 `memory/` (learning_*/incident_*)
 
+#### L4 · 基建组件交付必测（2026-08-04 Daryl指令，强制执行）
+> 任何新基建组件交付前必须跑基准测试，量化运行损耗与成本，防过度控制：
+```bash
+python3 scripts/evolution/bench_evolution.py
+```
+> **成本红线（超标即不可交付）**:
+> - 注入 token ≤500/任务（当前实测 ~50）
+> - 单任务检索耗时 <1s（当前实测 ~37ms）
+> - 单任务 API 成本 = $0（纯本地，无 LLM 调用）
+> - 每周基建成本 <$0.05（当前 ~1次蒸馏调用）
+> 基准数据: `memory/evolution/bench_report.jsonl`（周度 launchd 自动记录）
+
 #### L4 · 每日 23:59 Cron 兜底审计
 ```bash
 bash scripts/compliance/audit.sh --report

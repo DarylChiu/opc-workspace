@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-03T08:01:33.909Z",
+  "updatedAt": "2026-08-04T16:47:00.589Z",
   "entries": {
     "memory:memory/2026-06-08.md:19:38": {
       "key": "memory:memory/2026-06-08.md:19:38",
@@ -1056,20 +1056,22 @@
       "endLine": 48,
       "source": "memory",
       "snippet": "- [ ] 累积阈值触发测试 (write > 20, dirs > 3) - [ ] 审计日志生成验证 - [ ] 夜间降级逻辑验证（23:00-08:00） ## 后续任务 - [ ] pre-op.sh 对齐新边界（添加 Sentinel 协同说明） - [ ] OPC 看板 M3 剩余: 成本面板项目拆分 + 产物项目分组 (30%) - [ ] OPC 看板 M2.3 合规仪表板接入 - [ ] Sentinel 试运行 1 周 → 指标评估 → M2 迭代 ## 09:00-09:28 · OPC看板 M3 项目总线开发 ### 已完成 - **项目总线面板**: 新 nav 按钮 + HTML 面板 + 完整 JS 渲染逻辑 - **数据聚合**: 调用 `/api/costs/projects` + `/api/artifacts?group=project` + `/api/agents/projects` - **交互功能**: 项目卡片展示(里程碑/产物/成本)、展开详情(里程碑列表+成本明细+产物清单)、跨面板快捷链接 - **侧边栏 badge**: 项目总线计数刷新 - **Commit**: `8809c5d` M3: 项目总线面板 — 跨项目深度集成 (212 insertions) - **M3 进度**: 30% → 70% ### Gateway 问题排查 - 之前加的 `plugins.allow: [\"sentinel\"]` 导致 Gateway 重启后只加载 2 个插件 - Daryl 禁用 Sentinel 后 Gateway",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.7770875245332718,
+      "totalScore": 1.1558223068714142,
       "maxScore": 0.4020851373672485,
       "firstRecalledAt": "2026-07-07T11:17:49.124Z",
-      "lastRecalledAt": "2026-07-29T01:40:35.947Z",
+      "lastRecalledAt": "2026-08-04T04:46:37.303Z",
       "queryHashes": [
         "7c926c8f68f2",
-        "ca7a32f634d8"
+        "ca7a32f634d8",
+        "a09616f08efb"
       ],
       "recallDays": [
         "2026-07-07",
-        "2026-07-29"
+        "2026-07-29",
+        "2026-08-04"
       ],
       "conceptTags": [
         "gateway",
@@ -1560,18 +1562,20 @@
       "endLine": 26,
       "source": "memory",
       "snippet": "# 2026-06-08 记忆记录 ## OPC看板交互系统开发 ### M1完成（全部8个模块） - HTML骨架：暗色主题 + 8面板导航 + 响应式，Kitty完成 - 任务看板：三列拖拽 + 新建任务弹窗 + JSON持久化，Kitty完成 - 产物追踪面板：文件扫描 + 类型过滤 + 预览跳转，Kitty完成 - 预览面板：iframe + 文件列表，Kitty完成 - 项目进度：里程碑时间线 + 风险卡片，Kitty完成 - Agent状态面板：`/api/agents` → `openclaw status` 实时数据，Bryson完成 - server.py后端：Python http.server + API端点，Bryson重写 - agent_bridge.js：30s轮询Agent状态，Bryson完成 - 沙箱接口预留：`OPC.registerSandboxUpdater()` + 占位面板 ### Daryl验收反馈修改 - Agent状态+任务合并面板：4个Agent卡片，每个下方显示待办/进行中/最近完成三列，完成可链产物追踪 - 左侧菜单重排：A.Agent状态和任务 → B.产物与预览 → C.成本仪表盘 → D.沙箱任务 - 问题：双Agent同时修改导致协调混乱，Daryl不满。后续约定：Kitty维护前端(index.html)，Bryson维护后端(server.py/sandbox/scripts) ### M2分工 - Bryson：Cloudflare Tunnel + 启动脚本(nohup/stop/restart)",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.4082972288131714,
+      "totalScore": 0.7778828948736191,
       "maxScore": 0.4082972288131714,
       "firstRecalledAt": "2026-07-16T01:10:20.622Z",
-      "lastRecalledAt": "2026-07-16T01:10:20.622Z",
+      "lastRecalledAt": "2026-08-04T16:47:00.589Z",
       "queryHashes": [
-        "48b5eabf8dd9"
+        "48b5eabf8dd9",
+        "6f0c48bdd545"
       ],
       "recallDays": [
-        "2026-07-16"
+        "2026-07-16",
+        "2026-08-04"
       ],
       "conceptTags": [
         "api/agents",
@@ -2313,18 +2317,20 @@
       "endLine": 50,
       "source": "memory",
       "snippet": "- Bryson待办「ngrok备用隧道安装」「Agent自进化」→ 已通知移除 - Balance「车辆费用专项分析」→ Balance有7/10来源记录，将DM Daryl核对A/B ### 教训 - status_overrides 无过期机制 → 覆盖已消失任务变鬼数据。M4需做: override对不在active.md的任务自动失效 - openclaw cron系统消息([系统定时任务·...])混入done任务列表，需过滤(M4) ### 其他 - 早上验收前置检查: 07:00 cron正常(main更新), API四文件解析正常, serveo隧道06:40掉线被看门狗自动重建(HTTP 200) - 图像分析工具Google API key失效 → 改用tesseract OCR+像素框检测定位红绿框 ✅",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.39639166593551634,
+      "totalScore": 0.7568113386631011,
       "maxScore": 0.39639166593551634,
       "firstRecalledAt": "2026-07-23T02:20:53.055Z",
-      "lastRecalledAt": "2026-07-23T02:20:53.055Z",
+      "lastRecalledAt": "2026-08-04T03:52:56.095Z",
       "queryHashes": [
-        "ba22a9276bd0"
+        "ba22a9276bd0",
+        "a0c093a4e669"
       ],
       "recallDays": [
-        "2026-07-23"
+        "2026-07-23",
+        "2026-08-04"
       ],
       "conceptTags": [
         "balance有7/10来源记录",
@@ -2379,20 +2385,22 @@
       "endLine": 30,
       "source": "memory",
       "snippet": "# 2026-06-19 工作日志 ## 00:00 每日记忆归档 Cron 触发 - 审计发现：日记缺失 + active_tasks 39h 未更新 → 已修复 ## 全天：OPC看板 Workflow 编辑器问题排查与架构迭代 ### 问题发现 (19:40) - Daryl反馈：Workflow模块点击后空白，三个需求一个都没看到 - 根因：备份回滚时丢失了v2改动，编辑器退回到原始版本 ### 修复尝试历程 1. **修复v2代码** → 语法正确但不渲染（白屏） 2. **添加错误捕获** → import语句被放在ES模块最前面导致违反规范 3. **Vite构建方案** → 自包含bundle但仍是type=module，浏览器不加载 4. **完全回退到5805b9c** → 原始版本也用importmap+module，同病 5. **最终方案** → 普通script标签(UMD React) + 动态import(ReactFlow) - 文件：`opc-dashboard/workflow-editor.html` (624行, 30KB) - 架构：0个ES模块, 0个importmap - 进度：Step 1-4 加载追踪，红色错误提示栏 - 待Daryl明天实测验证 ### 隧道管理 - 8765(OPC看板) → cake-marking-metals-miscellaneous.trycloudflare.com (PID 51360) - 8777(视频分析) → supreme-hall-blanket-",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.7774313867092133,
+      "totalScore": 1.1653623074293136,
       "maxScore": 0.41630475521087645,
       "firstRecalledAt": "2026-07-24T01:30:59.975Z",
-      "lastRecalledAt": "2026-07-30T06:52:59.236Z",
+      "lastRecalledAt": "2026-08-04T16:47:00.589Z",
       "queryHashes": [
         "db95a0eb1646",
-        "702b2e257357"
+        "702b2e257357",
+        "6f0c48bdd545"
       ],
       "recallDays": [
         "2026-07-24",
-        "2026-07-30"
+        "2026-07-30",
+        "2026-08-04"
       ],
       "conceptTags": [
         "备份",
@@ -2625,6 +2633,68 @@
         "工作",
         "日志",
         "每日"
+      ]
+    },
+    "memory:memory/2026-07-05.md:34:53": {
+      "key": "memory:memory/2026-07-05.md:34:53",
+      "path": "memory/2026-07-05.md",
+      "startLine": 34,
+      "endLine": 53,
+      "source": "memory",
+      "snippet": "3. 更新 `server.py`：Workflow 保存/部署事件增加 `interactionProtocol` 元数据 + changed node IDs 4. 更新 `types.ts`：新增 `InteractionProtocol` 接口 + `WorkflowChangeEvent` 扩展 5. 更新 `App.tsx`：节点编辑侧边栏增加交互协议提醒（保存按钮上方） 6. 规则文件同步到 4 个 Agent workspace（Kitty/Bryson/Balance/Self） 7. TypeScript 预存 null-handling 问题修复 - **前端 build**：✅ 通过（98ms） - **状态**：等待 Daryl 测试验收 ## 16:30 · M2 剩余模块验收通过 ✅ → v1.3.6 - Daryl 将「M2 剩余模块」移至 In Progress → 立即验收 - 成本仪表盘 ✅：API 200，4 Agent 月成本完整（$2.84/月，Kitty $0.50 Bryson $1.93 Balance $0.13 Self $0.28），实时 sessions.json 数据源，系统成本已过滤 - 沙箱任务 ✅：API 200，126 条任务历史全覆盖，30s TTL - 隧道修复：旧 cloudflared 隧道过期（HTTP 000）→ 重启，新 URL `abc-submission-snake-fed.trycloudflare.com` - Git commit v1.3.6 + tag - *",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3869748532772064,
+      "maxScore": 0.3869748532772064,
+      "firstRecalledAt": "2026-08-04T04:46:37.303Z",
+      "lastRecalledAt": "2026-08-04T04:46:37.303Z",
+      "queryHashes": [
+        "a09616f08efb"
+      ],
+      "recallDays": [
+        "2026-08-04"
+      ],
+      "conceptTags": [
+        "server.py",
+        "保存/部署事件增加",
+        "types.ts",
+        "app.tsx",
+        "kitty/bryson/balance/self",
+        "null-handling",
+        "v1.3.6",
+        "2.84/月"
+      ]
+    },
+    "memory:memory/archive/2026-06-17.md:1:28": {
+      "key": "memory:memory/archive/2026-06-17.md:1:28",
+      "path": "memory/archive/2026-06-17.md",
+      "startLine": 1,
+      "endLine": 28,
+      "source": "memory",
+      "snippet": "# 2026-06-17 工作日志 ## 08:07 Daryl指令：Workflow需求梳理 + 视频分析MVP部署 - 调用了 `deepseek/deepseek-v4-pro` - 梳理了Workflow全部已确认需求（文件: memory/project_opc_dashboard.md） - 以Bryson的\"视频分析MVP V3.1\"为例部署完整Workflow到OPC看板 - 9节点、9连线、并行分支、预估72h - 部署路径: opc-dashboard/data/workflows.json - 服务器运行中 localhost:8765，API正常返回 ## 10:28 OPC统一Git仓库上线 - 仓库: https://github.com/DarylChiu/opc-workspace - Kitty/ 目录已归档：统一规范文档+Hooks自检系统+6/14-17记忆+全部项目代码 - commit: 8a71070 Kitty: 归档统一规范文档+Hooks自检系统+6/14-6/17项目成果 - 后续每日23:59 Cron任务同步 git push 记忆到仓库 ## 10:30 Workflow编辑器重建 - 修复了6/16 vanilla JS重写丢失6/12迭代需求的问题 - 用React Flow 12.3重建了workflow-editor.html - 实现：项目列表/节点折叠/水平排列/触发方式/连线逻辑/手动保存 - Cloudflare Tunnel: https://sen-going-relations-loose.t",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3637517124414444,
+      "maxScore": 0.3637517124414444,
+      "firstRecalledAt": "2026-08-04T16:47:00.589Z",
+      "lastRecalledAt": "2026-08-04T16:47:00.589Z",
+      "queryHashes": [
+        "6f0c48bdd545"
+      ],
+      "recallDays": [
+        "2026-08-04"
+      ],
+      "conceptTags": [
+        "deepseek/deepseek-v4-pro",
+        "memory/project-opc-dashboard.md",
+        "v3.1",
+        "6/14-17记忆",
+        "6/14-6/17项目成果",
+        "修复了6/16",
+        "js重写丢失6/12迭代需求的问题",
+        "12.3重建了workflow-editor.html"
       ]
     }
   }

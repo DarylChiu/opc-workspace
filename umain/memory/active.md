@@ -1,8 +1,17 @@
 # 当前活跃任务
 
-> 最后更新: 2026-08-04 00:02 GMT+7
+> 最后更新: 2026-08-04 16:30 GMT+7
 
 ## 🟢 进行中
+### 🆕 OPC自进化基建L1 — M0+M1 已交付 (8/4)
+- **M0 信号捕获** ✅: capture_correction.sh(4类信号) + distill_patterns.py(周度LLM蒸馏) + launchd周日22:00
+- **M1 失败模式库** ✅: failure_patterns.json(trigger+embedding) + rules_table.json(4规则) + embed_patterns.py(1536维) + retrieve_patterns.py(三层检索)
+- **种子数据**: 4条模式(设计语言/git/搜索/数据来源)，来自Daryl历史纠错
+- **回归测试**: 4/4通过 · **commit**: 7bf03311
+- **⚠️ 试点范围**: 仅Self生效（Daryl指令8/4），main/balance/xiaofeng已回退
+- **⚠️ 成本红线**: 注入≤500tokens/任务，检索<1s，单任务API$0 → bench_evolution.py周度基准(实测37ms/50tokens/$0)
+- **M2 任务级注入**: 待启动（任务边界触发检索→注入上下文，状态机设计已确认）
+
 ### Websearch 全面升级 v2.0 — M0+M1+M2+M3 全部完成 ✅ (7/29)
 - **M0 基建侧**: 4Agent AGENTS.md 新增搜索强制条款 ✅
 - **M1 引擎精简**: SearXNG 5→3引擎(google+ddg+bing)，Brave独立API路由 ✅
@@ -45,6 +54,10 @@
 - **M3 完成**: 项目总线面板 + 成本项目拆分 + 产物项目分组
 - **管理**: `cd /Users/zhaoyuzhao/WorkBuddy/Claw/opc-dashboard && bash manage.sh {start|stop|restart|status|logs}`
 
+### 🆕 Dashboard M4 · Agent版本变更通知 — 🟡 进行中 (8/4)
+- OPC看板Agent卡片增加「约定版本」字段，机制变更时自动通知对应Agent
+- Daryl 已推入 In Progress，制定开发计划中
+
 ## ✅ 已完成
 ### Maker-Checker 审查协议 — Self试点 ✅ (7/21 上线)
 - **范围**: 仅 Self(恨点小己)，其他Agent不动
@@ -65,9 +78,7 @@
 - 成本仪表盘：启动加载快照 + 过期自动刷新 ✅
 
 ## 🔵 待办
-### Agent版本变更通知（并入 Dashboard M4）
-- OPC看板Agent卡片增加「约定版本」字段
-- 机制变更时自动通知对应Agent
+### ~~Agent版本变更通知（并入 Dashboard M4）~~ → 🟡 进行中 (8/4 Daryl 推入)
 
 ### Self · Daryl 决策阻塞项 (7/24)
 - OPC看板方法论卡片集成方向确认

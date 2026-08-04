@@ -1,0 +1,56 @@
+{
+  "version": "1.1",
+  "description": "关键规则表 — 确定性注入规则：命中即100%注入，不走向量检索。来源：Daryl历史反复强调的教训",
+  "note": "inject_by 支持 category(推荐,稳定) / id(精确) 两种引用方式",
+  "rules": [
+    {
+      "id": "rule-001",
+      "name": "前端设计语言与交互逻辑",
+      "trigger": {
+        "project": "opc-dashboard",
+        "task_type": ["前端", "UI", "样式", "交互", "前端修改", "界面", "看板"]
+      },
+      "inject_by": {"category": "frontend_design"},
+      "note": "Daryl反复强调：设计必须遵循设计语言和交互逻辑，不能凭感觉改样式",
+      "severity": "high",
+      "source": "daryl_repeated_correction",
+      "created": "2026-08-04"
+    },
+    {
+      "id": "rule-002",
+      "name": "Git强制管理",
+      "trigger": {
+        "task_type": ["开发", "代码", "修改文件", "脚本", "部署", "git"]
+      },
+      "inject_by": {"category": "git_compliance"},
+      "note": "T0铁律：写代码前先git init+commit，无例外",
+      "severity": "critical",
+      "source": "daryl_directive_2026-06-15",
+      "created": "2026-08-04"
+    },
+    {
+      "id": "rule-003",
+      "name": "信息依赖任务强制搜索",
+      "trigger": {
+        "task_type": ["调研", "搜索", "信息依赖", "市场对标", "技术选型", "外部验证", "websearch"]
+      },
+      "inject_by": {"category": "search_quality"},
+      "note": "AGENTS.md强制条款：信息依赖型任务必须≥1轮websearch，外部交叉验证≥2轮",
+      "severity": "high",
+      "source": "agenda_2026-07-29",
+      "created": "2026-08-04"
+    },
+    {
+      "id": "rule-004",
+      "name": "来源可追溯",
+      "trigger": {
+        "task_type": ["汇报", "分析", "调研", "方案", "报告"]
+      },
+      "inject_by": {"category": "data_provenance"},
+      "note": "所有数据/结论必须标注来源，禁止裸结论",
+      "severity": "medium",
+      "source": "maker_checker_standard",
+      "created": "2026-08-04"
+    }
+  ]
+}
