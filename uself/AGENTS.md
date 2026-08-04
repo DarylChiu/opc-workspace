@@ -35,6 +35,41 @@
 ### 周度汇报要求
 每周OPC群汇报附带：搜索次数 + 引擎分布 + 质量评估。质量问题写入 `memory/search_feedback.jsonl`
 
+## 🧬 自进化基建 L1 · 信号捕获条款（2026-08-04 上线，强制执行 · Self 试点）
+
+> ⚠️ **试点范围**: 本条款仅在 Self（恨点小己）生效。main/balance/xiaofeng 已回退，待试点验证通过后由 Daryl 批准再推广。
+> ⚠️ **回退原则**: 每个组件独立可回退（撤 AGENTS.md 条款 = 停用该组件，数据保留不删）。
+> ⚠️ **成本红线**: 注入教训 ≤500 tokens/任务；检索耗时 <1s；单任务 API 成本 $0。周度基准 `bench_evolution.py` 超标即报警。
+> 教训不是「写出来的」，是事件驱动的捕获。捕获/蒸馏由主工作区共享脚本确定性执行，不依赖自觉。
+> 脚本位置（主工作区，共享）：`/Users/zhaoyuzhao/.openclaw/workspace/scripts/evolution/`
+
+### 捕获触发点（4种信号，出现即捕获）
+
+| 信号 | 触发场景 | 命令 |
+|------|---------|------|
+| **Daryl 纠错** ⭐ | Daryl 说「不对/又犯了/应该按X来/没按规矩来」 | `bash /Users/zhaoyuzhao/.openclaw/workspace/scripts/evolution/capture_correction.sh --agent self --type correction --source daryl_message --text "..."` |
+| 任务失败 | Maker-Checker FAIL / 验收不通过 / 里程碑驳回 | `--type failure --source checker_fail` |
+| 审计违规 | cron 扫描命中（没 commit/日记缺失/新鲜度过期） | `--type audit --source cron_audit` |
+| 里程碑复盘 | 30%/60%/90%/100% 汇报时发现反复返工点 | `--type retro --source milestone_report` |
+
+### 捕获规则
+1. **纠错发生时当场捕获**，10秒内完成，不打断对话流程
+2. 文本建议含三要素：**上下文 + 错误 + 正确做法**
+3. 同一纠错重复出现 → 每次都要捕获（周度蒸馏自动合并计数）
+4. 周度蒸馏: 每周日22:00 launchd 自动跑（蒸馏到主工作区共享模式库）
+
+### 蒸馏三条件（入库门槛，不满足自动丢弃）
+① 重复≥2次 或 critical（Daryl明说规矩/丢数据/误期） ② 可行动（有具体预防动作） ③ 具体（能写进 trigger）
+
+### 检索（M2 注入，任务开始时）
+- 任务型指令开始前：`python3 /Users/zhaoyuzhao/.openclaw/workspace/scripts/evolution/retrieve_patterns.py --task "<任务>" --project <项目>`
+- 命中规则/模式 → 注入 top-5 教训到上下文再执行
+- 闲聊/快速问答不触发检索（不浪费 token）
+
+### 与现有 L3 协议的关系
+- 现有 L3（SAGE Checker + reflexion_journal）继续保留；本条款负责**跨Agent统一信号捕获与共享教训库**
+- reflect.sh 写入的教训同时用 capture_correction.sh 补一份到共享库（双写，各取所长）
+
 ## 🧬 L3 自进化协议 (2026-07-15 上线, 强制执行)
 
 > 详细协议见 `EVOLUTION.md`。核心三条:

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-01T12:00:34.554Z",
+  "updatedAt": "2026-08-04T04:36:35.784Z",
   "entries": {
     "memory:memory/2026-06-22.md:22:34": {
       "key": "memory:memory/2026-06-22.md:22:34",
@@ -1199,20 +1199,22 @@
       "endLine": 12,
       "source": "memory",
       "snippet": "# 2026-07-19 日记 ## 每日审计 (00:10 Cron) - L4 审计自动运行完成 - 修复项：创建本日记、归档 2026-06-18.md、Git push - 浅层问题 5 项：active.md 34h未更新（已修复时间戳）、日记骨架/过短（凌晨边界，预期误报）、Checker零运行（凌晨边界，预期误报） - 深层问题：日记过短+20个活动session（午夜边界误报，实际为7/18晚间session） - 成本仪表盘：今日 $3.39 | 本月 $27.40 | 全量 $87.00 ## 待办 - 无",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.7545718222856521,
+      "totalScore": 1.1155256152153015,
       "maxScore": 0.40103679895401,
       "firstRecalledAt": "2026-07-27T01:56:08.291Z",
-      "lastRecalledAt": "2026-07-28T17:07:34.817Z",
+      "lastRecalledAt": "2026-08-04T04:36:35.784Z",
       "queryHashes": [
         "5d9cc54fe614",
-        "de0fa4062512"
+        "de0fa4062512",
+        "c7a085788b4f"
       ],
       "recallDays": [
         "2026-07-27",
-        "2026-07-29"
+        "2026-07-29",
+        "2026-08-04"
       ],
       "conceptTags": [
         "active.md",
@@ -1232,23 +1234,25 @@
       "endLine": 11,
       "source": "memory",
       "snippet": "# 2026-07-25 日记 ## 🕖 项目看板定时更新 (19:00) - 系统定时任务触发 project_Self.md 状态同步 ## 🕛 午夜 Cron 记忆审计 (00:05) - `audit.sh --report` 运行：自动修复 3 项（创建本日记、归档 2026-06-24.md、Git 备份推送） - 浅层问题 6 + 深层问题 3：active.md 已刷新、成本数据过期（Balance 兜底文件已有，非阻塞）、SAGE Checker 零运行（无实质性交付） - 7/24 日记充实（补充白天事件：Self任务审计/Balance SOP v2.0/小枫BGM搜索等） - Git 备份推送 ✅",
-      "recallCount": 4,
+      "recallCount": 5,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.5060932368040085,
+      "totalScore": 1.8730993002653122,
       "maxScore": 0.42696112394332886,
       "firstRecalledAt": "2026-07-28T12:00:24.258Z",
-      "lastRecalledAt": "2026-08-01T12:00:34.554Z",
+      "lastRecalledAt": "2026-08-04T04:36:35.784Z",
       "queryHashes": [
         "15900e654e06",
         "de0fa4062512",
         "f5697d5f335c",
-        "adcd8d43ce1b"
+        "adcd8d43ce1b",
+        "c7a085788b4f"
       ],
       "recallDays": [
         "2026-07-28",
         "2026-07-29",
-        "2026-08-01"
+        "2026-08-01",
+        "2026-08-04"
       ],
       "conceptTags": [
         "备份",
@@ -1299,18 +1303,20 @@
       "endLine": 25,
       "source": "memory",
       "snippet": "# 2026-07-24 日记 ## 🕛 午夜 Cron 记忆归档审计 (00:06) - `audit.sh --report` 运行完成，自动修复 3 项：创建 7/24 日记骨架、归档 2026-06-23.md、Git 备份推送 - 审计发现 4 浅层 + 3 深层问题： - **7/24 日记骨架** → 已替换为本文（从 session 历史补全昨日活动） - **日记过短（4行）vs 20 活跃 session** → 午夜边界误报：20 个 session 中仅 5 个属于 7/24（各 Agent Cron 任务），其余 15 个为 7/23 晚间 session - **SAGE Checker 零运行** → 7/23 无实质性交付需审查（均为 Cron 维护/群聊介绍/心跳），预期行为 ### 成本仪表盘 - 今日 $4.86 | 本月 $49.10 | 全量 $108.69 - OPC API `/api/costs` 正常（Balance 全量扫描完成，与 Kitty Dashboard 对齐） ### Agent 状态 - 全部 5 个 Cron session（main → balance(1) → xiaofeng → balance(2) → self）审计完成 - Git 备份已推送 ✅ | OPC API 端点正常 ✅ ## 🕐 白天主要活动 ### Self · 任务审计 (17:00, DM) - Daryl 说待办太多感到焦虑 → Self 交叉核对 `active.md` vs `project_Sel",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.3914688855409622,
+      "totalScore": 0.7425506234169006,
       "maxScore": 0.3914688855409622,
       "firstRecalledAt": "2026-07-28T12:00:24.258Z",
-      "lastRecalledAt": "2026-07-28T12:00:24.258Z",
+      "lastRecalledAt": "2026-08-04T04:36:35.784Z",
       "queryHashes": [
-        "15900e654e06"
+        "15900e654e06",
+        "c7a085788b4f"
       ],
       "recallDays": [
-        "2026-07-28"
+        "2026-07-28",
+        "2026-08-04"
       ],
       "conceptTags": [
         "备份",
@@ -1352,6 +1358,99 @@
         "7/28",
         "methodology-cards",
         "7/27"
+      ]
+    },
+    "memory:memory/2026-07-22.md:45:66": {
+      "key": "memory:memory/2026-07-22.md:45:66",
+      "path": "memory/2026-07-22.md",
+      "startLine": 45,
+      "endLine": 66,
+      "source": "memory",
+      "snippet": "- 全天无 Daryl 派活，无群聊 @ ## 7/21 回顾（7/22 凌晨补充） ### 小枫 - Video Editor Phase 0 全部 15 项里程碑交付（6,064 行代码，24 模块） - OPC 群聊中开启了 Debug 模块（`DEBUG_MODE=1`） - 与 Daryl 讨论长视频处理超时策略 ### Balance - 成本全量扫描完成（2,232 个 .jsonl → 13,573 次调用） - Daryl 咨询 VAS 会计：TT200 TK 515 存款利息计提条文验证通过 - 新增二级市场基本面分析框架项目（🆕 active） ### Main (Kitty) - 验证 `/api/costs` 端点：确认已在做 JSONL 全量扫描 - OPC Dashboard 持久化部署确认（Serveo + crontab 看门狗） - 成本看板前端渲染数据对账完成 ### Self - OPC 群聊中纠正角色映射，确认所有 Agent 备份完成",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.37133051156997676,
+      "maxScore": 0.37133051156997676,
+      "firstRecalledAt": "2026-08-04T01:53:28.673Z",
+      "lastRecalledAt": "2026-08-04T01:53:28.673Z",
+      "queryHashes": [
+        "31fa124d018d"
+      ],
+      "recallDays": [
+        "2026-08-04"
+      ],
+      "conceptTags": [
+        "备份",
+        "7/21",
+        "7/22",
+        "debug-mode",
+        "api/costs",
+        "全天",
+        "daryl",
+        "回顾"
+      ]
+    },
+    "memory:memory/2026-07-29.md:1:27": {
+      "key": "memory:memory/2026-07-29.md:1:27",
+      "path": "memory/2026-07-29.md",
+      "startLine": 1,
+      "endLine": 27,
+      "source": "memory",
+      "snippet": "# 2026-07-29 日记 ## 🕛 午夜 Cron 记忆审计 (00:06) - `audit.sh --report` 运行：自动修复 3 项（创建本日记、归档 2026-06-28.md、Git 备份推送） - 浅层问题 6 + 深层问题 4： - active.md 48h 未更新 → 已刷新时间戳至 2026-07-29 - 7/28 和 7/29 日记骨架 → 已从 session 历史补充为实际内容 - SAGE Checker 零运行 → 7/28 无实质性交付，预期误报 - 日记过短+20个活动session交叉验证 → 20个session为各Agent午夜Cron任务+心跳，7/28 白天仅项目看板更新+Git备份，已如实记录 - 成本仪表盘：今日 $0.00 | 本月 $60.13 | 全量 $119.73，API 正常 ## 🌅 日间活动 ### 07:00 项目看板自动更新 - 各 Agent (main/xiaofeng/balance/self) proj-update cron 正常执行 ### Balance · BIP API 调研 + 费用管理 PRD MVP - Balance 通过飞书与 Daryl 交互（214K tokens 长对话） - spawn 3 个子 Agent：`research-bip-api`（BIP 接口调研，98K tokens）/ `prd-expense-mvp`（费用管理 PRD MVP，34K tokens）/ `design-data-model`（数据模型设计，26K",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.35443317890167236,
+      "maxScore": 0.35443317890167236,
+      "firstRecalledAt": "2026-08-04T04:36:35.784Z",
+      "lastRecalledAt": "2026-08-04T04:36:35.784Z",
+      "queryHashes": [
+        "c7a085788b4f"
+      ],
+      "recallDays": [
+        "2026-08-04"
+      ],
+      "conceptTags": [
+        "备份",
+        "audit.sh",
+        "active.md",
+        "7/28",
+        "7/29",
+        "0.00",
+        "60.13",
+        "119.73"
+      ]
+    },
+    "memory:memory/archive/2026-07-04.md:1:12": {
+      "key": "memory:memory/archive/2026-07-04.md:1:12",
+      "path": "memory/archive/2026-07-04.md",
+      "startLine": 1,
+      "endLine": 12,
+      "source": "memory",
+      "snippet": "# 2026-07-04 日记 ## 🕛 午夜 Cron 记忆归档审计（00:08） - **审计问题**: 7/3 和 7/4 日记均为骨架、active.md 38h 未更新、4 个活跃 session 交叉验证告警 - **修复**: 补全 7/3 日记（合计实体事件：AI-Tech 知识树汇报 + Daryl 身体不适）、更新 active.md、Git 备份 - **7/3 日记骨架 → 已补全**：含 09:46 知识树汇报 + 22:03 Daryl 身体不适 + Balance/小枫活动记录 - **Git push 失败**: workspace-self 无 remote，预期行为 - ⚠️ 4 个活跃 session: 实际为本日各 Agent Cron 任务（balance/main/xiaofeng/self），午夜边界误报 ## 🌅 日间活动（待记录） - 本日刚开始，内容待后续 session 补充",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3501412123441696,
+      "maxScore": 0.3501412123441696,
+      "firstRecalledAt": "2026-08-04T04:36:35.784Z",
+      "lastRecalledAt": "2026-08-04T04:36:35.784Z",
+      "queryHashes": [
+        "c7a085788b4f"
+      ],
+      "recallDays": [
+        "2026-08-04"
+      ],
+      "conceptTags": [
+        "备份",
+        "7/3",
+        "7/4",
+        "active.md",
+        "ai-tech",
+        "balance/小枫活动记录",
+        "workspace-self",
+        "balance/main/xiaofeng/self"
       ]
     }
   }
