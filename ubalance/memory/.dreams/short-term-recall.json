@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-02T08:58:31.872Z",
+  "updatedAt": "2026-08-04T16:47:44.635Z",
   "entries": {
     "memory:memory/2026-06-10.md:1:29": {
       "key": "memory:memory/2026-06-10.md:1:29",
@@ -1174,20 +1174,22 @@
       "endLine": 23,
       "source": "memory",
       "snippet": "# 2026-07-09 日记 ## 🕛 00:01 每日记忆归档审计 - **触发**: Cron 兜底审计 `bash scripts/compliance/audit.sh --report` - **审计结果**: - ❌ 7/9日记缺失 → 🔧 已自动创建骨架 - ✅ active.md 新鲜 (23h) - ❌ 7/9日记骨架（Cron刚创建，午夜正常现象） - ❌ 日记过短但有2个活跃session → 实为跨午夜cron session误报 - ❌ Git pull失败（opc-workspace-cache未staged changes）→ 🔧 已rebase并修复冲突 - ❌ Git push失败 → GitHub branch protection拒绝（非本端问题，需Daryl处置） - ⚠️ 6/8日记 → 🔧 已归档到archive/ - **修复项**: 2项（日记骨架创建 + 过期日记归档）+ Git冲突手动修复 - **备注**: 午夜0点当日无实质活动，日记为骨架属正常。2个活跃session均为cron审计session（Balance+小枫） ## 🕘 09:05 OPC看板成本统计 — .jsonl全量解析上线 - **Daryl指令**: 让看板改用.jsonl全量解析，输出正确的成本统计表 - **执行**: 创建 `scripts/full_cost_scan.py`，更新 `opc_dashboard/server.py`，生成 `cost_live.json` - **结果**: 全量$",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.8635209113359451,
+      "totalScore": 1.3011890769004821,
       "maxScore": 0.43876980543136596,
       "firstRecalledAt": "2026-07-11T16:50:21.879Z",
-      "lastRecalledAt": "2026-07-12T00:43:43.858Z",
+      "lastRecalledAt": "2026-08-04T16:47:44.635Z",
       "queryHashes": [
         "484161ac125b",
-        "8988082d78fa"
+        "8988082d78fa",
+        "25d17722079f"
       ],
       "recallDays": [
         "2026-07-11",
-        "2026-07-12"
+        "2026-07-12",
+        "2026-08-04"
       ],
       "conceptTags": [
         "scripts/compliance/audit.sh",
@@ -1381,13 +1383,13 @@
       "endLine": 30,
       "source": "memory",
       "snippet": "# 2026-07-04 日记 ## 🕛 Cron 审计 (00:04 7/4) - **审计结果**: 1 自动修复 + 5 浅层 + 2 深层 ### 审计发现与归因 - ⚠️ 日记过短（4行）+ 6 个活跃 session → 深层问题 - 📌 **归因: 午夜边界误报**（与 7/3 相同的模式）。6 个 session 中 2 个为 cron 审计任务（Balance + xiaofeng），3 个为 7/3 晚间交互（Kitty Dashboard 确认、OPC 群聊），1 个为 Balance 7/3 active.md 重整会话。实际无 7/4 实质性新事件 - ⚠️ Git push 失败 → 待修复 ### 修复记录 - 🔧 骨架日记已替换为本日记（审计脚本自动创建→手动填充） - 🔧 7/3 晚间 session 交叉验证确认无遗漏内容 ### 7/3 回顾 - 日记 57 行，内容充实，涵盖： - OPC 看板通知系统 Bug 排查与修复 - 贷款材料自动化整理执行手册 v2.3 撰写 - active.md 结构重整（Daryl 纠正 IPO 任务误报） - 晚间：Kitty 确认 Dashboard sync 机制、OPC 群聊互动 - 无遗漏需补充内容 ## 今日事件 ### 08:56 Daryl指令：终止Hedging任务 - Daryl指令终止越南银行Hedging方案分析任务，已自行处理完毕 - 已从active.md移除，标记为❌终止 ### 09:00 Daryl指令：挂起项目成本监控 - Br",
-      "recallCount": 11,
+      "recallCount": 12,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 4.119533810019493,
+      "totalScore": 4.4976098239421844,
       "maxScore": 0.4260600477457046,
       "firstRecalledAt": "2026-07-13T09:21:02.383Z",
-      "lastRecalledAt": "2026-07-30T17:01:14.661Z",
+      "lastRecalledAt": "2026-08-04T02:26:10.188Z",
       "queryHashes": [
         "d25cb1659a59",
         "be0f8ae6ad1a",
@@ -1398,7 +1400,8 @@
         "431aa87c5b26",
         "8544a2a56000",
         "428d10408272",
-        "00ccaefb2624"
+        "00ccaefb2624",
+        "6c7c8bf5f934"
       ],
       "recallDays": [
         "2026-07-13",
@@ -1408,7 +1411,8 @@
         "2026-07-19",
         "2026-07-22",
         "2026-07-29",
-        "2026-07-31"
+        "2026-07-31",
+        "2026-08-04"
       ],
       "conceptTags": [
         "7/4",
@@ -1478,24 +1482,26 @@
       "endLine": 24,
       "source": "memory",
       "snippet": "# 2026-07-06 日记 ## 🕛 Cron 审计 (00:15 7/6) - **审计结果**: 1 自动修复 + 6 浅层 + 2 深层 - **已知模式**: 2 个活跃 session（balance cron + xiaofeng cron）→ 午夜边界误报，与 7/3、7/4、7/5 相同 - **修复**: 日记骨架填充、active.md 时间戳更新 ## 7/5 回顾 - Balance 无实质性工作，仅有 cron 审计 - 其他 Agent（main/xiaofeng/self）有飞书活动，非 Balance 职责范围 ## 今日事件 - **13:23** 记忆系统 v3 project 文件已部署，Self 通知填写 project_Balance.md - **13:30** project_Balance.md 已创建并填写完毕，按 🟢/🟡/🔵/⚪ 四区块格式 - 进行中: Future Textile × Wellname 利息处理方案（第三轮攻防67%） - 规划中: IPO审计底稿/AI Workflow测试流/成本归集模型/会计差错调整 - 已完成: 8个项目 - 归档: 2个项目 - **13:23** Q3开发周期正式启动，10月4日验收日已对齐 ## 待办 - 等待 Daryl 完成 Future Textile 第三轮攻击9-12防御 - 等待 Daryl 下一步财务分析任务指派",
-      "recallCount": 4,
+      "recallCount": 5,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.4846961557865144,
-      "maxScore": 0.38672495186328887,
+      "totalScore": 1.878356784582138,
+      "maxScore": 0.39366062879562375,
       "firstRecalledAt": "2026-07-13T09:21:02.383Z",
-      "lastRecalledAt": "2026-07-30T17:01:14.661Z",
+      "lastRecalledAt": "2026-08-04T02:26:10.188Z",
       "queryHashes": [
         "d25cb1659a59",
         "d10e9941dfde",
         "70c159385832",
-        "00ccaefb2624"
+        "00ccaefb2624",
+        "6c7c8bf5f934"
       ],
       "recallDays": [
         "2026-07-13",
         "2026-07-18",
         "2026-07-25",
-        "2026-07-31"
+        "2026-07-31",
+        "2026-08-04"
       ],
       "conceptTags": [
         "7/6",
@@ -2236,18 +2242,20 @@
       "endLine": 111,
       "source": "memory",
       "snippet": "- **今日成本**: $10.94 | **本月**: $23.69 | **全量**: $83.29 - **按Agent**: Bryson $7.37 / Kitty $2.21 / Balance $0.99 / Self $0.38 - **按模型**: deepseek-r1 $51.06 / deepseek-v4-pro $31.44 / claude-sonnet-4.5 $0.64 / claude-3.7-sonnet $0.15 - **兜底文件**: ✅ 已写入 `~/opc-workspace/Kitty/opc-dashboard/data/cost_daily.json` - **Kitty推送**: ⚠️ 已降级写文件，Kitty未确认（sessions_send 30s超时） - **API验证**: ✅ `localhost:8765/api/costs` 正常响应，数据一致性OK - **状态**: ⚠️ 降级模式 | 文件已就位，Kitty后续可自行更新看板 ## 📝 待关注 - 贷款材料 v2.7.0 定版，等Daryl抽查反馈 - Future Textile × Wellname 攻击9-12 待Daryl防御 - OPC成本仪表盘 append-only台账已上线",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.4139344364404678,
-      "maxScore": 0.4139344364404678,
+      "totalScore": 0.8401984483003615,
+      "maxScore": 0.42626401185989377,
       "firstRecalledAt": "2026-07-19T07:28:21.838Z",
-      "lastRecalledAt": "2026-07-19T07:28:21.838Z",
+      "lastRecalledAt": "2026-08-04T16:47:44.635Z",
       "queryHashes": [
-        "40df1164c044"
+        "40df1164c044",
+        "25d17722079f"
       ],
       "recallDays": [
-        "2026-07-19"
+        "2026-07-19",
+        "2026-08-04"
       ],
       "conceptTags": [
         "10.94",
@@ -2552,20 +2560,22 @@
       "endLine": 16,
       "source": "memory",
       "snippet": "# 2026-06-18 ## 项目归档 - 完成 Balance 全部项目成果归档到 opc-workspace - 初始提交 4c45d4c：7份核心规范+四层合规脚本+记忆系统+项目文档+财务底稿 - 升级提交 e0eaa87：audit.sh 增加 Git 自动备份步骤 ## 记忆Cron - 00:23 执行审计：初始化 Git repo 缓存，日记已补，active.md 已更新 ## 当前状态 - 实时成本追踪系统：生产运行中 - Hedging方案分析：等待Daryl敞口数据 - IPO审计底稿：学习内化中 - 项目成本归集模型：框架讨论完成，等待落地",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.7493629038333893,
+      "totalScore": 1.104160514473915,
       "maxScore": 0.37736767828464507,
       "firstRecalledAt": "2026-07-25T00:02:07.478Z",
-      "lastRecalledAt": "2026-07-31T02:53:25.960Z",
+      "lastRecalledAt": "2026-08-04T16:47:44.455Z",
       "queryHashes": [
         "70c159385832",
-        "f53083736fbc"
+        "f53083736fbc",
+        "0a609873babe"
       ],
       "recallDays": [
         "2026-07-25",
-        "2026-07-31"
+        "2026-07-31",
+        "2026-08-04"
       ],
       "conceptTags": [
         "备份",
@@ -2616,18 +2626,20 @@
       "endLine": 59,
       "source": "memory",
       "snippet": "- 全部为系统自动任务，Daryl无新增用户消息 ## ⌛ 昨日(7/26)关键回顾 - **应付采购SOP v4.0**: 等待Daryl审阅中，无新增活动 - **Daryl-Self互动**: Self更新了Vault (心理学/电影学/Home.md + 树叶完整版)、Syncthing确认运行 - **Daryl-Xiaofeng互动**: BGM前端交互设计grill-me继续，Daryl回复「卡片只显示歌名」 - **OPC隧道**: main确认serveo持久隧道正常 (opc-darylchiu.serveousercontent.com) - **低活动周日**: $1.43成本合理 ## 🕚 11:25 Daryl周一工作任务同步 - **Daryl本周4天（周五起休假）** - **四大任务**: 1. 仓储专项检查：上周五突击检查→出报告模板+盘点SOP供财务部小朋友执行 2. 应付采购SOP继续打磨：Daryl会找采购部同事拿范本案例 3. 2026上半年税务检查：跟审计师对审计计划，定制审计程序 4. **出口计税汇率新规（已完成初版）**: NĐ 252+254/2026 → 出口报关单汇率替代交易日银行汇率 - Balance角色定位: Daryl的财务工作副手 ## 📝 任务4：出口计税汇率新规 - **产出**: `reports/出口计税汇率新规调研-20260727.md`（初版已完成） - **结论**: Daryl判断无本质冲突——发票汇率=报关单汇率，入账=交易日汇率（报关日=交易日时对齐）",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.39160976409912107,
-      "maxScore": 0.39160976409912107,
+      "totalScore": 0.8007828682661056,
+      "maxScore": 0.40917310416698455,
       "firstRecalledAt": "2026-07-28T04:34:30.556Z",
-      "lastRecalledAt": "2026-07-28T04:34:30.556Z",
+      "lastRecalledAt": "2026-08-04T02:26:10.188Z",
       "queryHashes": [
-        "eccc07a0790e"
+        "eccc07a0790e",
+        "6c7c8bf5f934"
       ],
       "recallDays": [
-        "2026-07-28"
+        "2026-07-28",
+        "2026-08-04"
       ],
       "conceptTags": [
         "7/26",
@@ -2837,18 +2849,20 @@
       "endLine": 70,
       "source": "memory",
       "snippet": "- **API验证**: ✅ `http://localhost:8765/api/costs` 正常响应 (200) - **Kitty同步**: ⚠️ **已降级写文件**（30s超时无回复），兜底数据已写入 `~/opc-dashboard/data/cost_daily.json` - **备注**: 747线已就位两次推送均超时，Kitty需主动拉取jsonl全量扫描数据更新看板 - **模型**: deepseek/deepseek-v4-pro ## 🕐 23:50 Kitty回复 — OPC Dashboard路径修复确认 ✅ - **触发**: Kitty通过sessions_send回复，已修复 `/api/costs` 端点 - **根因**: `COST_DAILY_BALANCE_FILE` 常量指向旧路径 `~/opc-workspace/Kitty/opc-dashboard/data/`，实际写入 `~/WorkBuddy/Claw/opc-dashboard/data/cost_daily.json` - **修复**: 改为 `path.join(BASE, 'data', 'cost_daily.json')` 动态路径 - **验证**: API返回数据与台账一致 | 全量$92.43 | 本月$32.84 | 今日$3.84 ✅ - **数据源**: jsonl-full-scan + Balance ledger交叉参考 | Monthly优先台账数据(24h有效) - **Kitty同步**: ✅ 已确认修复，看板数据正确 -",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.3912952750921249,
-      "maxScore": 0.3912952750921249,
+      "totalScore": 0.81702581346035,
+      "maxScore": 0.42573053836822505,
       "firstRecalledAt": "2026-07-29T17:06:59.469Z",
-      "lastRecalledAt": "2026-07-29T17:06:59.469Z",
+      "lastRecalledAt": "2026-08-04T16:47:44.635Z",
       "queryHashes": [
-        "f7b50af32234"
+        "f7b50af32234",
+        "25d17722079f"
       ],
       "recallDays": [
-        "2026-07-30"
+        "2026-07-30",
+        "2026-08-04"
       ],
       "conceptTags": [
         "8765/api/costs",
@@ -2961,18 +2975,20 @@
       "endLine": 49,
       "source": "memory",
       "snippet": "- 午夜审计归档（7/28凌晨） - 7/27成本完结快照（$119.05累计 / 本月$59.45） - 7/28 23:45 成本全量扫描（累计$119.63 / 今日$0.423） - 成本数据源不一致问题（OPC看板 vs Balance台账差$21.73） - Daryl 当日无用户消息（全部为系统自动任务） ## 🕛 23:45 成本全量扫描（Cron 每日） - **触发**: 521a3db3-f1b8-4fd8-9140-529947dd7098 - **扫描结果**: - 扫描 2,897 个 .jsonl 文件，台账 18,355 调用（新增 451） - 累计 $122.26 | 本月 $62.66 | 今日 $2.45 - Token: 1,147,351,129 | API调用: 18,355 - 按Agent: Bryson $88.86 | Balance $14.40 | Kitty $11.39 | Self $7.60 - 按模型: deepseek-v4-pro $70.40 (84%) | deepseek-r1 $51.06 (16%) - **兜底文件**: ✅ 已写入 `opc-dashboard/data/cost_daily.json` - **Kitty通知**: ⚠️已降级写文件，Kitty未确认（sessions_send 30秒超时） - **API验证**: ✅ localhost:8765/api/costs 响应正常，_balanceLedger 数据已生效 - **模型*",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.390329110622406,
-      "maxScore": 0.390329110622406,
+      "totalScore": 0.8394528329372406,
+      "maxScore": 0.44912372231483455,
       "firstRecalledAt": "2026-08-01T00:02:14.147Z",
-      "lastRecalledAt": "2026-08-01T00:02:14.147Z",
+      "lastRecalledAt": "2026-08-04T16:47:44.635Z",
       "queryHashes": [
-        "91f79f6acb43"
+        "91f79f6acb43",
+        "25d17722079f"
       ],
       "recallDays": [
-        "2026-08-01"
+        "2026-08-01",
+        "2026-08-04"
       ],
       "conceptTags": [
         "7/28凌晨",
@@ -3242,6 +3258,161 @@
         "checker-log",
         "6/6通过",
         "7/30"
+      ]
+    },
+    "memory:memory/archive/2026-07-04.md:1:30": {
+      "key": "memory:memory/archive/2026-07-04.md:1:30",
+      "path": "memory/archive/2026-07-04.md",
+      "startLine": 1,
+      "endLine": 30,
+      "source": "memory",
+      "snippet": "# 2026-07-04 日记 ## 🕛 Cron 审计 (00:04 7/4) - **审计结果**: 1 自动修复 + 5 浅层 + 2 深层 ### 审计发现与归因 - ⚠️ 日记过短（4行）+ 6 个活跃 session → 深层问题 - 📌 **归因: 午夜边界误报**（与 7/3 相同的模式）。6 个 session 中 2 个为 cron 审计任务（Balance + xiaofeng），3 个为 7/3 晚间交互（Kitty Dashboard 确认、OPC 群聊），1 个为 Balance 7/3 active.md 重整会话。实际无 7/4 实质性新事件 - ⚠️ Git push 失败 → 待修复 ### 修复记录 - 🔧 骨架日记已替换为本日记（审计脚本自动创建→手动填充） - 🔧 7/3 晚间 session 交叉验证确认无遗漏内容 ### 7/3 回顾 - 日记 57 行，内容充实，涵盖： - OPC 看板通知系统 Bug 排查与修复 - 贷款材料自动化整理执行手册 v2.3 撰写 - active.md 结构重整（Daryl 纠正 IPO 任务误报） - 晚间：Kitty 确认 Dashboard sync 机制、OPC 群聊互动 - 无遗漏需补充内容 ## 今日事件 ### 08:56 Daryl指令：终止Hedging任务 - Daryl指令终止越南银行Hedging方案分析任务，已自行处理完毕 - 已从active.md移除，标记为❌终止 ### 09:00 Daryl指令：挂起项目成本监控 - Br",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3780760139226913,
+      "maxScore": 0.3780760139226913,
+      "firstRecalledAt": "2026-08-04T02:26:10.188Z",
+      "lastRecalledAt": "2026-08-04T02:26:10.188Z",
+      "queryHashes": [
+        "6c7c8bf5f934"
+      ],
+      "recallDays": [
+        "2026-08-04"
+      ],
+      "conceptTags": [
+        "7/4",
+        "7/3",
+        "active.md",
+        "v2.3",
+        "已从active.md移除",
+        "日记",
+        "cron",
+        "审计"
+      ]
+    },
+    "memory:memory/2026-07-27.md:55:78": {
+      "key": "memory:memory/2026-07-27.md:55:78",
+      "path": "memory/2026-07-27.md",
+      "startLine": 55,
+      "endLine": 78,
+      "source": "memory",
+      "snippet": "- Balance角色定位: Daryl的财务工作副手 ## 📝 任务4：出口计税汇率新规 - **产出**: `reports/出口计税汇率新规调研-20260727.md`（初版已完成） - **结论**: Daryl判断无本质冲突——发票汇率=报关单汇率，入账=交易日汇率（报关日=交易日时对齐） - **同事讨论已发起**: Daryl已发群消息 - **模型**: deepseek/deepseek-v4-pro ## 📝 任务1：仓储专项检查 - **产出**: `reports/仓储专项检查-整改模板与SOP-20260727.md` - **Daryl重心**: 保留1/2/4号子表；考核聚焦4类（档案/数据/收发存/分区标识） - **新增**: 整改闭环模板（🔴48h 🟠7日 🟡观察+升级机制）；SOP双轨（A财务/B仓储） - **下步**: Daryl确认后出B型精简版 - **模型**: deepseek/deepseek-v4-pro ## ⚠️ 已知待处理 - SAGE checker + Reflexion journal：基建刚上线，日志文件尚未生成 - Kitty daily series 2026-07-05 值异常：待Kitty排查 - 成本仪表盘 /api/costs 跨日时today字段为null — 7/27凌晨正常行为，23:45扫描后会恢复 ## 📊 23:45 每日成本全量扫描（Cron:521a3db3） - **状态**: ⚠️ 已降级写文件，Kitty未确认（30s超时） - **今日**: $2.06",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3776376277208328,
+      "maxScore": 0.3776376277208328,
+      "firstRecalledAt": "2026-08-04T02:26:10.188Z",
+      "lastRecalledAt": "2026-08-04T02:26:10.188Z",
+      "queryHashes": [
+        "6c7c8bf5f934"
+      ],
+      "recallDays": [
+        "2026-08-04"
+      ],
+      "conceptTags": [
+        "reports/出口计税汇率新规调研-20260727.md",
+        "deepseek/deepseek-v4-pro",
+        "保留1/2/4号子表",
+        "档案/数据/收发存/分区标识",
+        "a财务/b仓储",
+        "api/costs",
+        "7/27凌晨正常行为",
+        "2.06"
+      ]
+    },
+    "memory:memory/2026-07-07.md:1:34": {
+      "key": "memory:memory/2026-07-07.md:1:34",
+      "path": "memory/2026-07-07.md",
+      "startLine": 1,
+      "endLine": 34,
+      "source": "memory",
+      "snippet": "# 2026-07-07 日记 ## 🕛 00:02 每日记忆归档审计 - **触发**: Cron 兜底审计 - **审计脚本**: `bash scripts/compliance/audit.sh --report` - **结果**: - ✅ 日记骨架已创建 - ✅ 昨天日记 (2026-07-06) 存在 (23行) - ✅ active.md 新鲜 (23h) - ✅ lessons.md 无需更新 - ✅ 无需归档 - ✅ MEMORY.md 符合规范 - ⚠️ Git push 失败（重试后正常） - ℹ️ 14个session横跨午夜为正常现象 ## 🖥️ Self — OPC Dashboard 设计系统调研 - **触发**: Kitty 委派 Self 调研 OPC Dashboard 设计规范 - **范围**: Linear · Stripe · Vercel · GitHub Primer · Notion · Raycast 六大平台 - **产出**: `~/WorkBuddy/Claw/opc-dashboard/DESIGN.md`（13KB） - 暗色色彩系统（4层elevation透明层叠） - Inter字体 + JetBrains Mono等宽 - 4px基网格系统 - 组件速查代码（CSS :root变量块复制即用） - 10项迁移检查清单 - **Accent色**: Indigo #6366f1（暗色下蓝紫系） - **置信度**: ⚠️ 部分平台色板用既有知识补全",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3508138120174408,
+      "maxScore": 0.3508138120174408,
+      "firstRecalledAt": "2026-08-04T16:47:44.455Z",
+      "lastRecalledAt": "2026-08-04T16:47:44.455Z",
+      "queryHashes": [
+        "0a609873babe"
+      ],
+      "recallDays": [
+        "2026-08-04"
+      ],
+      "conceptTags": [
+        "scripts/compliance/audit.sh",
+        "active.md",
+        "lessons.md",
+        "memory.md",
+        "日记",
+        "每日",
+        "记忆",
+        "归档"
+      ]
+    },
+    "memory:memory/2026-07-21.md:66:71": {
+      "key": "memory:memory/2026-07-21.md:66:71",
+      "path": "memory/2026-07-21.md",
+      "startLine": 66,
+      "endLine": 71,
+      "source": "memory",
+      "snippet": "- **按模型**: deepseek-r1 $51.06 / deepseek-v4-pro $45.57 / claude-sonnet-4.5 $0.64 - **兜底文件**: ✅ ~/opc-workspace/Kitty/opc-dashboard/data/cost_daily.json 已写入 - **API端点**: ✅ /api/costs 正常（_source: jsonl-full-scan, _balanceLedger已包含） - **sessions_send to Kitty**: ⏱️ 超时(30s)，按降级协议文件已就位 - **备注**: Bryson今日$3.53异常偏高（7/17的$11+后次高），需关注；Kitty看板7/5日有$20异常数据点",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.42978445291519163,
+      "maxScore": 0.42978445291519163,
+      "firstRecalledAt": "2026-08-04T16:47:44.635Z",
+      "lastRecalledAt": "2026-08-04T16:47:44.635Z",
+      "queryHashes": [
+        "25d17722079f"
+      ],
+      "recallDays": [
+        "2026-08-04"
+      ],
+      "conceptTags": [
+        "deepseek-r1",
+        "51.06",
+        "deepseek-v4-pro",
+        "45.57",
+        "claude-sonnet-4.5",
+        "0.64",
+        "api/costs",
+        "jsonl-full-scan"
+      ]
+    },
+    "memory:memory/2026-07-22.md:74:92": {
+      "key": "memory:memory/2026-07-22.md:74:92",
+      "path": "memory/2026-07-22.md",
+      "startLine": 74,
+      "endLine": 92,
+      "source": "memory",
+      "snippet": "- **当日产出**: Future Textile归档 + 差旅费全体系(5文件) + 误餐补贴PIT分析 - **当前活跃**: 差旅费标准（Daryl已定稿v1.0.3，待后续审阅） - **暂停**: 二级市场框架、贷款材料、JGL并购、IPO审计底稿、AI Workflow、成本归集、影刀RPA、多文件处理、会计差错 - **基础设施运维**: OPC成本仪表盘（cron自动） - **下次事件**: 23:45 成本扫描cron + 23:59 记忆审计cron ## 🕚 23:45 成本全量扫描（Cron） - **扫描**: full_cost_scan.py v2 append-only台账 - **全量**: $103.64 | **本月**: $44.04 | **今日**: $5.93 - **Token**: 859,275,106 | **API调用**: 14,715 - **按Agent**: Bryson $79.31 / Balance $10.40 / Kitty $8.54 / Self $5.38 - **按模型**: deepseek-v4-pro $51.79 / deepseek-r1 $51.06 / claude-sonnet-4.5 $0.64 / claude-3.7-sonnet $0.15 - **API端点**: ✅ /api/costs 正常，已返回 Balance ledger 交叉验证数据 - **⚠️ Kitty通知**: sessions_send 30秒超时，已降级写文件到 `~/WorkBuddy/",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4258709371089935,
+      "maxScore": 0.4258709371089935,
+      "firstRecalledAt": "2026-08-04T16:47:44.635Z",
+      "lastRecalledAt": "2026-08-04T16:47:44.635Z",
+      "queryHashes": [
+        "25d17722079f"
+      ],
+      "recallDays": [
+        "2026-08-04"
+      ],
+      "conceptTags": [
+        "daryl已定稿v1.0.3",
+        "full-cost-scan.py",
+        "append-only台账",
+        "103.64",
+        "44.04",
+        "5.93",
+        "79.31",
+        "10.40"
       ]
     }
   }
