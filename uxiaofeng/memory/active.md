@@ -1,6 +1,6 @@
 # 当前活跃任务 (中期记忆 — 每次session加载)
 
-> 最后更新: 2026-08-03 19:53（心跳 · 隧道地址更新）
+> 最后更新: 2026-08-04 23:59（每日审计 · 服务持久化+硬盘故障更新）
 
 ## 🟢 进行中
 ### 视频自动化剪辑 MVP（video-editor-mvp）🟢 v3.0 重构完成（7/25）
@@ -18,6 +18,8 @@
   - ⏳ 待验证: Gemini 场景检测 + Emotion 三层漏斗 + ffmpeg 渲染（需素材+API Key）
   - ⏳ Daryl 7/30指令：先不动，等他把剩余模块需求全部写出再一次性迭代
   - 🆕 **7/31**: Daryl 飞书发送 01-素材扫描 模块改造需求（4项），小风已回复可行性评估（~3.5h，全部可行），等待Daryl确认2个前置问题
+  - 🆕 **8/4**: Daryl 度假回来要求恢复开发；服务已持久化（LaunchAgent: videoeditor/ielts/ngrok，Gateway重启不掉）；隧道 `https://unwhispering-imani-digitately.ngrok-free.dev` ✅
+  - ⚠️ **8/4 阻塞**: TOSHIBA EXT 1TB 硬盘文件系统层卡死（ls 卡 EINTR），需 Daryl 物理重插；watchdog LaunchAgent 每10分钟探测，恢复后自动挂载+前端可用
 
 ### 洗稿MVP — v1.2.0 迭代需求收集模式 🔴（7/18 15:42 Daryl指令）
 - **当前状态**: Daryl 要求先收集需求不修改，攒齐后一次性动工+更新版号
@@ -26,7 +28,7 @@
 - **历史**: M2 开发计划提交（7/17 14:00）、内核卡价值命题质疑（7/17 10:33）、SearXNG 修复 ✅（7/17）
 
 ## ⏸️ 挂起
-### IELTS陪练助手 — v1.3.0 开发完毕，⏸️ 等待Daryl晚间验收（7/25更新）
+### IELTS陪练助手 — v1.3.0 开发完毕，⏸️ 等待Daryl晚间验收（7/25更新 · 8/4服务持久化）
 - **7/25晚**: Daryl 调试中发现两个Bug，已修复：
   - DeepSeek API 模型名废弃 deepseek-chat → deepseek-v4-pro（旧名导致LLM乱码）
   - 跟读模块 JS null safe 兜底（deviceInfo DOM不存在时报错）
@@ -38,6 +40,7 @@
   - 自动评估: ≥10轮对话断开时自动触发LLM评估→入trend+review队列
 - **⚠️ 数据**: 昨晚session 987e4762丢失（重启后启动错误版本导致），已修复版本指向
 - **待验收**: Daryl晚上到家练习口语时一并验收
+- **8/4**: 服务已由 LaunchAgent 持久化（localhost:8767，v1.3.0 ACTIVE，health + dashboard 均 200 ✅）
 - **v1.0.1**: 手机移动端自适应优化，Daryl 全部验收通过 ✅
 - **v1.1.0 挂起原因**: iPhone 语音输入问题 + 交互逻辑拖沓，Daryl 要求暂停转其他任务
   - M1-M3 已完成 ✅（数据层/Dashboard/跟读闭环），M4 串联验收搁置
