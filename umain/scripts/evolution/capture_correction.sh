@@ -17,7 +17,8 @@
 # ============================================================
 set -euo pipefail
 
-WORKSPACE="${WORKSPACE:-/Users/zhaoyuzhao/.openclaw/workspace}"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+WORKSPACE="${WORKSPACE:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
 INBOX="${WORKSPACE}/memory/evolution/corrections_inbox.jsonl"
 TS=$(date +%Y-%m-%dT%H:%M:%S%z)
 

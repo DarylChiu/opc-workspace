@@ -3,6 +3,10 @@
 # 串联阻塞扫描、成本预警、文件新鲜度、搜索质量监控
 set -euo pipefail
 export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"
+# 加载 .env 中的 API 密钥（cron 环境无 shell profile，必须显式 source）
+if [ -f "$HOME/.openclaw/.env" ]; then
+  set -a; source "$HOME/.openclaw/.env"; set +a
+fi
 
 SCRIPTS="/Users/zhaoyuzhao/.openclaw/workspace/scripts/ops_center"
 DATE=$(date +%Y-%m-%d)

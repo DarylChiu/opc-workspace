@@ -21,7 +21,8 @@ import sys
 import urllib.request
 import datetime
 
-WORKSPACE = os.environ.get("WORKSPACE", "/Users/zhaoyuzhao/.openclaw/workspace")
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+WORKSPACE = os.environ.get("WORKSPACE") or os.path.abspath(os.path.join(_SCRIPT_DIR, "..", ".."))
 INBOX = os.path.join(WORKSPACE, "memory/evolution/corrections_inbox.jsonl")
 LIBRARY = os.path.join(WORKSPACE, "memory/evolution/failure_patterns.json")
 

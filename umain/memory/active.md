@@ -1,16 +1,28 @@
 # 当前活跃任务
 
-> 最后更新: 2026-08-04 16:30 GMT+7
+> 最后更新: 2026-08-05 13:00 GMT+7
 
 ## 🟢 进行中
-### 🆕 OPC自进化基建L1 — M0+M1 已交付 (8/4)
+### 🆕 决策自主环（Decision Loop / Loop Engineering）— 已立项，负责人 Kitty (8/5)
+- **项目ID**: decision-loop | 发起: Daryl 8/5 | 负责人/开发权: Kitty (Daryl指定, Bryson移交) | 模型: deepseek-v4-pro
+- **定位**: 决策自主层（建在自进化基建L1之上），减少长线项目对管理决策的依赖
+- **设计基准**: 「只加机制，不加细节限制」（Daryl 8/5 原则，最高准绳）
+- **问题实证**: Bryson 剪辑MVP 三次对齐复盘（含 Daryl 两处纠正）→ 机制缺口五条
+- **核心机制四件套**: 决策状态机(decide.py三分类) + 上报必带默认值 + 周度批量审批 + 需求分层前置节点 + 提问质量门禁
+- **里程碑 M0→M3 (40-80h)**: M0机制冻结(10-14h) → M1决策自主层工具(12-20h) → M2剪辑MVP试点(16-30h) → M3推广+指标化(8-12h)
+- **状态**: 🚀 M0+M1 完成（8/5，commits 069aa1df/ec22d4cb），M2 剪辑MVP 试点待启动
+- **待办**: ①M2 剪辑MVP 试点（16-30h，等 Daryl 指令，可 --grace jianji-mvp 开磨合期）②Bryson 工具链清单待搭
+- **文档**: LOOP_ENGINEERING_PLAN.md（详见该文件）
+
+### 🆕 OPC自进化基建L1 — M0+M1+M2 已交付 (8/4) + Balance试点Phase0影子模式 (8/5)
 - **M0 信号捕获** ✅: capture_correction.sh(4类信号) + distill_patterns.py(周度LLM蒸馏) + launchd周日22:00
 - **M1 失败模式库** ✅: failure_patterns.json(trigger+embedding) + rules_table.json(4规则) + embed_patterns.py(1536维) + retrieve_patterns.py(三层检索)
 - **种子数据**: 4条模式(设计语言/git/搜索/数据来源)，来自Daryl历史纠错
-- **回归测试**: 4/4通过 · **commit**: 7bf03311
-- **⚠️ 试点范围**: 仅Self生效（Daryl指令8/4），main/balance/xiaofeng已回退
+- **回归测试**: 11/11通过 · **commit**: 7bf03311/dfccca86/6175b1ed
+- **⚠️ 试点范围**: Self(8/4指令) + Balance Phase0影子模式(8/5批准)；main/balance已回退注入
 - **⚠️ 成本红线**: 注入≤500tokens/任务，检索<1s，单任务API$0 → bench_evolution.py周度基准(实测37ms/50tokens/$0)
-- **M2 任务级注入**: 待启动（任务边界触发检索→注入上下文，状态机设计已确认）
+- **M2 任务级注入** ✅: classify_task.py(三层信号+状态机) + inject_lessons.py(全量/轻量注入) + task_state.json，11/11回归通过
+- **🆕 Balance Phase0影子模式 (8/5部署, 测试窗口8/5→8/7)**: shadow_inject.py(只记录不注入+独立shadow状态机+fail-open) + shadow_report.py(周五评估) + 种子库7条(4条Balance域蒸馏/补录+3条共享通用) + rules_table含财务路径口径rule-005 + classify_task补充财务域关键词(做/入账/申报/台账等) + AGENTS.md条款；**评估通过才开Phase1低风险任务**
 
 ### Websearch 全面升级 v2.0 — M0+M1+M2+M3 全部完成 ✅ (7/29)
 - **M0 基建侧**: 4Agent AGENTS.md 新增搜索强制条款 ✅
@@ -79,6 +91,12 @@
 
 ## 🔵 待办
 ### ~~Agent版本变更通知（并入 Dashboard M4）~~ → 🟡 进行中 (8/4 Daryl 推入)
+
+### Daryl 8/5 决策：A7/8/9搁置 + B组取消 + C15已做
+- 8月预算调整 / 12G存储清理 / Model Router 提案 → ⚪ 搁置不处理
+- 音乐文件/车辆费用/JGL → ❌ 全部取消
+- C15 搜索基准 → ✅ 已做（8/5：SearXNG路39.9引擎坍塌 + Brave路65.9持平，报告已归档）
+- 🔴 待Daryl确认: Brave接回主搜索路由
 
 ### Self · Daryl 决策阻塞项 (7/24)
 - OPC看板方法论卡片集成方向确认

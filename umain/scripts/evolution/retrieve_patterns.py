@@ -19,7 +19,8 @@ import sys
 import math
 import argparse
 
-WORKSPACE = os.environ.get("WORKSPACE", "/Users/zhaoyuzhao/.openclaw/workspace")
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+WORKSPACE = os.environ.get("WORKSPACE") or os.path.abspath(os.path.join(_SCRIPT_DIR, "..", ".."))
 LIBRARY = os.path.join(WORKSPACE, "memory/evolution/failure_patterns.json")
 RULES = os.path.join(WORKSPACE, "memory/evolution/rules_table.json")
 
@@ -147,11 +148,12 @@ def retrieve(task, project=None, topk=5, debug=False):
         print()
 
     out = results[:topk]
-    for i, p in enumerate(out, 1):
-        reason = reasons[results.index(p)] if p in results else ""
-        print(f"[{i}] {p.get('id')} [{p.get('category')}] sev={p.get('severity')} occ={p.get('occurrences')}")
-        print(f"    {p.get('text', '')[:100]}")
-        print(f"    ↳ {reason}")
+    if debug:
+        for i, p in enumerate(out, 1):
+            reason = reasons[results.index(p)] if p in results else ""
+            print(f"[{i}] {p.get('id')} [{p.get('category')}] sev={p.get('severity')} occ={p.get('occurrences')}")
+            print(f"    {p.get('text', '')[:100]}")
+            print(f"    ↳ {reason}")
 
     # 清理临时标记
     for p in results:

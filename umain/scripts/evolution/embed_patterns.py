@@ -15,7 +15,8 @@ import os
 import sys
 import urllib.request
 
-WORKSPACE = os.environ.get("WORKSPACE", "/Users/zhaoyuzhao/.openclaw/workspace")
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+WORKSPACE = os.environ.get("WORKSPACE") or os.path.abspath(os.path.join(_SCRIPT_DIR, "..", ".."))
 LIBRARY = os.path.join(WORKSPACE, "memory/evolution/failure_patterns.json")
 
 # 复用 OpenClaw memorySearch 的 OpenAI-compatible 通道 (openrouter)

@@ -25,7 +25,7 @@ TEST_QUERIES = [
     ("冷门-法规", "越南 Circular 200 固定资产折旧"),
     ("时效-越南", "2026年7月 越南 个人所得税"),
     ("常规-技术", "Cloudflare Workers Durable Objects SQLite"),
-    ("精确-学术", "site:arxiv.org multi-agent orchestration"),
+    ("精确-学术", "arxiv multi-agent orchestration"),
 ]
 
 TIMEOUT_SEC = 15

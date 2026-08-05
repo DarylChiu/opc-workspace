@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "description": "OPC自进化基建L1 · 失败模式库",
-  "schema_note": "trigger字段设计用于检索匹配，embedding为语义索引",
+  "schema_note": "trigger字段设计用于检索匹配，embedding为语义索引；2026-08-05 起新增修订#4 schema（mechanism/artifact_ref/artifact_state），旧 text/trigger 字段仅兼容存量",
   "patterns": [
     {
       "category": "frontend_design",
@@ -6222,11 +6222,68 @@
         0.01136016845703125,
         -0.0136260986328125
       ]
+    },
+    {
+      "id": "fp-20260805-001",
+      "mechanism": {
+        "behavior_rule": "用户可见内容的对应性必须成立：任何用户会看到的产出（文件名/标签/标题）必须能与用户识别的内容一一对应、可追溯",
+        "failure_analysis": "剪辑MVP 7/31 乱码文件名：日期格式生成的文件名用户无法对号入座（不知道是哪天的第几条视频）→ 需求澄清阻塞 4 天；本质是把产品逻辑问题（对应性/可追溯性）误当格式偏好问题抛给用户",
+        "context_snapshot": {
+          "task_type": "素材/文件名生成",
+          "artifact_ref": {
+            "type": "pointer",
+            "target": "docs/素材命名规范.md",
+            "check": "动手前读当前版本 + 查最后修改时间；若规范缺失(absent)则先建最小命名规范再动手"
+          },
+          "artifact_state": "absent"
+        }
+      },
+      "occurrences": 1,
+      "status": "active",
+      "last_seen": "2026-08-05"
+    },
+    {
+      "id": "fp-20260805-002",
+      "mechanism": {
+        "behavior_rule": "动手改用户可见界面前，必须 grounding 在当前权威视觉参考上（读当前版本 + 查最后修改时间）",
+        "failure_analysis": "opc-dashboard 前端修改凭感觉改 UI → 与既有视觉体系冲突 → 用户视觉混乱（原始失败：有权威参考却不读）；参考物临变时按 changing 分支处理，非失败",
+        "context_snapshot": {
+          "task_type": "前端UI修改",
+          "artifact_ref": {
+            "type": "pointer",
+            "target": "docs/design_language.md",
+            "check": "动手前读当前版本 + 查最后修改时间"
+          },
+          "artifact_state": "stable"
+        }
+      },
+      "occurrences": 2,
+      "status": "active",
+      "last_seen": "2026-08-05"
+    },
+    {
+      "id": "fp-20260805-003",
+      "mechanism": {
+        "behavior_rule": "知识落位前必须对照当前知识树结构：方法论抽取归方法论区，未训练领域知识归领域区，禁止混放",
+        "failure_analysis": "Self 案例：方法论抽取被当成领域知识放入错误位置 → 检索路径断裂 → 个人知识管理混乱（新领域磨合期典型错误，错误只入病理库不耗预算）",
+        "context_snapshot": {
+          "task_type": "个人知识管理/知识树维护",
+          "artifact_ref": {
+            "type": "pointer",
+            "target": "docs/知识树结构.md",
+            "check": "动手前读当前版本 + 查最后修改时间"
+          },
+          "artifact_state": "stable"
+        }
+      },
+      "occurrences": 1,
+      "status": "active",
+      "last_seen": "2026-08-05"
     }
   ],
   "stats": {
-    "total_patterns": 4,
-    "active_patterns": 4,
+    "total_patterns": 7,
+    "active_patterns": 7,
     "resolved_patterns": 0,
     "last_distill": "2026-08-04"
   }
