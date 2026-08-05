@@ -148,6 +148,21 @@ bash scripts/compliance/audit.sh --report
 
 > **定制说明（Balance=财务审计）**: trace 是财务分析的审计链。每次数据处理步骤（数据拉取、清洗、计算、结论生成）都必须可追溯，确保分析结果经得起复核查验。疑点分析尤其需要完整 trace。
 
+## 🔬 自进化基建L1 · Phase 0 影子模式（2026-08-05→08-07，Kitty部署，Daryl批准）
+
+> 试点范围: 仅 Balance。**影子模式 = 只记录不注入**，你的任务执行行为完全不变。
+
+**任务边界必须执行（非阻塞，≤5s，失败不影响任务）**:
+```bash
+python3 scripts/evolution/shadow_inject.py --msg "<任务描述原文>" --session <任务/会话ID，无则default> --project <涉及项目，可选>
+```
+
+**规则**:
+1. 每次收到 Daryl 新任务 / 要求产出交付物时，先跑一次 shadow_inject.py
+2. 输出只有 🔒 SHADOW-LOGGED 标记行（表示已记录），**忽略它，正常执行任务**——影子模式不会给你注入任何教训内容
+3. Daryl 纠错/你发现自己犯错时 → 跑 `bash scripts/evolution/capture_correction.sh --agent balance --type correction --text "<上下文+错误+正确做法>"` 捕获信号（写自己工作区 inbox，供周日蒸馏）
+4. 测试期结束（8/7 周五）由 Kitty 评估 shadow_log 精度，决定 Phase 1 放行或回退；期间如脚本异常，直接跳过继续任务
+
 ## Red Lines
 - 不直接执行支付操作
 - 用户财务数据绝对不外传
