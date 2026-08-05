@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-04T04:36:35.784Z",
+  "updatedAt": "2026-08-05T01:41:33.377Z",
   "entries": {
     "memory:memory/2026-06-22.md:22:34": {
       "key": "memory:memory/2026-06-22.md:22:34",
@@ -1234,25 +1234,27 @@
       "endLine": 11,
       "source": "memory",
       "snippet": "# 2026-07-25 日记 ## 🕖 项目看板定时更新 (19:00) - 系统定时任务触发 project_Self.md 状态同步 ## 🕛 午夜 Cron 记忆审计 (00:05) - `audit.sh --report` 运行：自动修复 3 项（创建本日记、归档 2026-06-24.md、Git 备份推送） - 浅层问题 6 + 深层问题 3：active.md 已刷新、成本数据过期（Balance 兜底文件已有，非阻塞）、SAGE Checker 零运行（无实质性交付） - 7/24 日记充实（补充白天事件：Self任务审计/Balance SOP v2.0/小枫BGM搜索等） - Git 备份推送 ✅",
-      "recallCount": 5,
+      "recallCount": 6,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.8730993002653122,
+      "totalScore": 2.235722836852074,
       "maxScore": 0.42696112394332886,
       "firstRecalledAt": "2026-07-28T12:00:24.258Z",
-      "lastRecalledAt": "2026-08-04T04:36:35.784Z",
+      "lastRecalledAt": "2026-08-04T22:22:27.911Z",
       "queryHashes": [
         "15900e654e06",
         "de0fa4062512",
         "f5697d5f335c",
         "adcd8d43ce1b",
-        "c7a085788b4f"
+        "c7a085788b4f",
+        "9c513359b9e9"
       ],
       "recallDays": [
         "2026-07-28",
         "2026-07-29",
         "2026-08-01",
-        "2026-08-04"
+        "2026-08-04",
+        "2026-08-05"
       ],
       "conceptTags": [
         "备份",
@@ -1451,6 +1453,193 @@
         "balance/小枫活动记录",
         "workspace-self",
         "balance/main/xiaofeng/self"
+      ]
+    },
+    "memory:memory/2026-07-14.md:1:26": {
+      "key": "memory:memory/2026-07-14.md:1:26",
+      "path": "memory/2026-07-14.md",
+      "startLine": 1,
+      "endLine": 26,
+      "source": "memory",
+      "snippet": "# 2026-07-14 日记 ## 凌晨审计 (00:06) - Cron 触发每日记忆审计，自动修复 2 项：创建本日记、归档 2026-06-13.md - Git 本地备份完成 - 昨日（7/13）日记 51 行，active.md 15h 内更新，状态正常 - 成本仪表盘正常：今日 $2.83 | 本月 $8.05 | 全量 $67.65 ## 记忆系统v3 项目看板定时刷新 (17:05–17:10) - 系统定时任务触发，所有Agent刷新 project_*.md： - main: v1.6/M3 状态/里程碑与 active.md 一致 ✅ - balance: 4个进行中项目（成本台账85%、FT-Wellname利息85%、车辆费用5%、贷款材料v2.6 40%）阶段一致 ✅ - xiaofeng: IELTS v2.0 同步 TTS 方案B 阶段10%→15%、总进度68%→70%、阻塞项清空 ✅ - self: 内容基本反映最新工作，刷新时间戳 ✅ ## Kitty 项目看板核对 (16:35) - Balance 核实 Daryl 指出的项目状态不一致： - 贷款材料自动化 v2.6：确认在推进（Step A通关判定+贷款用途分类），从已完成移入进行中 - KHOA DUNG 案例：确认暂告段落，维持规划中/归档，不虚构进度 ## TTS 方案B部署 (小枫, ~23:30) - 小枫完成 TTS 引擎链重构：Piper high (lessac) → Kokoro → Google - 下载 Piper en_US-",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3715837925672531,
+      "maxScore": 0.3715837925672531,
+      "firstRecalledAt": "2026-08-04T22:22:27.911Z",
+      "lastRecalledAt": "2026-08-04T22:22:27.911Z",
+      "queryHashes": [
+        "9c513359b9e9"
+      ],
+      "recallDays": [
+        "2026-08-05"
+      ],
+      "conceptTags": [
+        "备份",
+        "7/13",
+        "active.md",
+        "2.83",
+        "8.05",
+        "67.65",
+        "v1.6/m3",
+        "状态/里程碑与"
+      ]
+    },
+    "memory:memory/2026-07-09.md:1:21": {
+      "key": "memory:memory/2026-07-09.md:1:21",
+      "path": "memory/2026-07-09.md",
+      "startLine": 1,
+      "endLine": 21,
+      "source": "memory",
+      "snippet": "# 2026-07-09 日记 ## 午夜 Cron 审计 (00:08) - 每日记忆归档 Cron 链触发：main → balance(1) → xiaofeng → balance(2) → self - **审计发现**： - 今日骨架日记由审计脚本自动创建（本文件，已补全为真实内容） - 5 个 Cron session：main / balance×2 / xiaofeng / self（无用户交互 session） - active.md 36h 未更新 → 已刷新时间戳至 7/9 00:08 - 7/8 日记完整（21 行） - Git push 失败：无 remote 配置（预期行为，本地 commit 已保存） - 审计统计：修复 1 项，浅层问题 5 项，深层问题 2 项 ## 昨日回顾 (7/8) - 仅 Cron 链归档 session，无新用户交互任务 - 7/7 产出：OPC Dashboard 设计系统规范（DESIGN.md） ## 待关注 - ⚠️ Sentinel/Gateway 死锁问题：小枫已定位根因，修复待执行 - 📋 OPC Dashboard M5 合规面板：被 Gateway 重启中断，待续 - 📋 7/7 有 main:main webchat session 状态为 failed（1.9s 运行），需关注",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.36096441149711606,
+      "maxScore": 0.36096441149711606,
+      "firstRecalledAt": "2026-08-04T22:22:27.911Z",
+      "lastRecalledAt": "2026-08-04T22:22:27.911Z",
+      "queryHashes": [
+        "9c513359b9e9"
+      ],
+      "recallDays": [
+        "2026-08-05"
+      ],
+      "conceptTags": [
+        "gateway",
+        "active.md",
+        "7/9",
+        "7/8",
+        "7/7",
+        "design.md",
+        "sentinel/gateway",
+        "1.9s"
+      ]
+    },
+    "memory:memory/archive/2026-06-30.md:1:25": {
+      "key": "memory:memory/archive/2026-06-30.md:1:25",
+      "path": "memory/archive/2026-06-30.md",
+      "startLine": 1,
+      "endLine": 25,
+      "source": "memory",
+      "snippet": "# 2026-06-30 日记 ## 关键事件 ### 🕛 午夜 Cron 记忆归档审计（00:05） - **触发**: 每日 23:59 Cron → 实际执行 00:05（系统调度延迟） - **审计结果**: - ❌ 今日日记缺失 → ✅ 自动创建骨架，本次补充完整 - ✅ active.md 新鲜（13h，6/29 更新） - ✅ lessons.md 无需更新 - ✅ 无需归档 - ✅ MEMORY.md 符合规范 - ❌ 日记过短/骨架检测 → ⚠️ 午夜边界误报：审计列出的 11 个 session 中仅 1 个（本 cron）属于 6/30，其余 10 个均为 6/29 晚间 session（xiaofeng/balance/main 的 feishu 和 cron 活动） - ✅ 项目清单校验通过 - ❌ Git pull 失败 → ⚠️ 预期行为：workspace-self 仓库未配置 remote（无远程备份目标） - **修复操作**: 日记从骨架补全为实际内容 ### 📋 仓库状态 - **未提交变更**: ACCA-Knowledge-Network 下多个文件修改 + 新增方法论提取.md、知识网络架构总览.md、ACCA-Vault导航页.md、方法轮卡片/目录、项目总览.md、memory/新目录 - **Git remote**: 未配置（pull/push 不可用，待 Daryl 决定远程备份策略） ## 备注 - 本日为 6 月最后一天，明日进入 7 月 - 昨日（6/29）有大量 Agen",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3608206748962402,
+      "maxScore": 0.3608206748962402,
+      "firstRecalledAt": "2026-08-04T22:22:27.911Z",
+      "lastRecalledAt": "2026-08-04T22:22:27.911Z",
+      "queryHashes": [
+        "9c513359b9e9"
+      ],
+      "recallDays": [
+        "2026-08-05"
+      ],
+      "conceptTags": [
+        "network",
+        "备份",
+        "网络",
+        "active.md",
+        "6/29",
+        "lessons.md",
+        "memory.md",
+        "日记过短/骨架检测"
+      ]
+    },
+    "memory:memory/2026-07-30.md:1:15": {
+      "key": "memory:memory/2026-07-30.md:1:15",
+      "path": "memory/2026-07-30.md",
+      "startLine": 1,
+      "endLine": 15,
+      "source": "memory",
+      "snippet": "# 2026-07-30 日记 ## 🕛 午夜 Cron 记忆审计 (00:07) - `audit.sh --report` 运行结果： - 自动修复 3 项：创建本日记、归档 2026-06-29.md、Git 备份推送 - 浅层问题 4 + 深层问题 3 - 7/29 日记为 Cron 骨架，已从 session 历史补充：Balance BIP API调研+费用PRD/子Agent集群、main与Daryl飞书长对话(154K)、Self webchat(97K)、xiaofeng简短对话 - active.md 时间戳已刷新至 2026-07-30 - SAGE Checker 零运行 → 7/29 日间有实质性工作但均为其他Agent执行，Self侧无实质性交付，预期误报 - 20个session交叉验证 → 7个cron任务(含4个午夜归档)+3个proj-update+3个心跳+Balance主对话+3个Balance子Agent+main飞书+Self webchat+xiaofeng飞书，日记已如实覆盖 - 成本仪表盘：今日 $0.00 | 本月 $62.76 | 全量 $122.36，API 正常 ## 🌅 日间活动（待记录） - 本日刚开始，内容待后续 session 补充",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.35984059572219845,
+      "maxScore": 0.35984059572219845,
+      "firstRecalledAt": "2026-08-04T22:22:27.911Z",
+      "lastRecalledAt": "2026-08-04T22:22:27.911Z",
+      "queryHashes": [
+        "9c513359b9e9"
+      ],
+      "recallDays": [
+        "2026-08-05"
+      ],
+      "conceptTags": [
+        "备份",
+        "audit.sh",
+        "7/29",
+        "费用prd/子agent集群",
+        "active.md",
+        "3个proj-update",
+        "0.00",
+        "62.76"
+      ]
+    },
+    "memory:memory/2026-07-07.md:1:21": {
+      "key": "memory:memory/2026-07-07.md:1:21",
+      "path": "memory/2026-07-07.md",
+      "startLine": 1,
+      "endLine": 21,
+      "source": "memory",
+      "snippet": "# 2026-07-07 日记 ## 午夜 Cron 审计 (00:02-00:06) - 每日记忆归档 Cron 触发（balance → main → self） - **审计发现**： - 7/6 日记为骨架（仅 8 行），已从 session 历史补全为完整日记 - 7/6 有 11 个活跃 session：记忆系统 v3 部署 + Gateway/Sentinel 死锁 + Daryl 就寝 - 7/7 骨架日记自动创建（本文件） - Git push 失败：无 remote 配置（预期行为，本地 commit 已保存） - 审计统计：修复 1 项，浅层问题 6 项，深层问题 3 项 ## 上午 (10:48-11:30) - Daryl 派调研任务：OPC Dashboard 设计系统规范 - **调研范围**: Linear / Stripe / Vercel / GitHub Primer / Notion / Raycast - **产出**: `~/WorkBuddy/Claw/opc-dashboard/DESIGN.md`（13KB，完整设计系统规范） - **四个维度**: 设计语言（色板/字体/间距/圆角/阴影）+ 设计美感（留白/层级/秩序）+ 交互逻辑（零学习成本/渐进披露/即时反馈）+ 数据展示（数字对齐/图表极简/信息密度7±2法则） - **关键设计决策**: Indigo accent (#6366f1)、15px 基准字号、4px 网格、边框全用 rgba 白透明、单一 accent 色策略 - SearXNG 部分查询",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.35570527911186217,
+      "maxScore": 0.35570527911186217,
+      "firstRecalledAt": "2026-08-04T22:22:27.911Z",
+      "lastRecalledAt": "2026-08-04T22:22:27.911Z",
+      "queryHashes": [
+        "9c513359b9e9"
+      ],
+      "recallDays": [
+        "2026-08-05"
+      ],
+      "conceptTags": [
+        "gateway",
+        "02-00",
+        "7/6",
+        "gateway/sentinel",
+        "7/7",
+        "48-11",
+        "色板/字体/间距/圆角/阴影",
+        "留白/层级/秩序"
+      ]
+    },
+    "memory:memory/2026-07-27.md:1:23": {
+      "key": "memory:memory/2026-07-27.md:1:23",
+      "path": "memory/2026-07-27.md",
+      "startLine": 1,
+      "endLine": 23,
+      "source": "memory",
+      "snippet": "# 2026-07-27 日记 ## 🕛 午夜 Cron 记忆审计 (00:05) - `audit.sh --report` 运行：自动修复 3 项（创建本日记、归档 2026-06-26.md、Git 备份推送） - 浅层问题 8 + 深层问题 5： - active.md 已刷新时间戳至 2026-07-27 - 7/25 和 7/26 日记从骨架补充为实际内容 - 成本仪表盘数据过期（1440分钟）→ midnight cron 预期行为，非阻塞 - SAGE Checker 零运行 → 排查后确认 7/26 仅 Cron/心跳/项目看板更新/知识树录入，无需要Checker的实质性分析交付 - Git 备份推送 ✅ ## 📋 周度知识树叶深度汇总（周日 16:03 交付，⚠️ 周一补记） - 向 Daryl 交付了本周（7/21-7/26）知识树叶深度汇总，含 7 条方法论原则 + 5 条领域知识 - 编号体系（⚠️ 必须持久化，后续引用依赖此映射）： - P1: 「写完」≠「可用」，真实压测才算（小枫） - P2: 优先搜索已有资源，不自己造轮子（小枫） - P3: Grill-me必须覆盖交互逻辑（小枫） - P4: 不说「重写」，定位问题→最小改动（小枫） - P5: 外置硬盘休眠→加超时+缓存（小枫，未单独做树叶） - P6: SOP=用户实际问题/作者专业知识（Balance） - P7: 权威源+交叉验证+隔离偏差（Kitty） - D1: 开发提测新机制（小枫） - D2: 进口采购六单据合规骨",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.8289533019065857,
+      "maxScore": 0.4183326095342636,
+      "firstRecalledAt": "2026-08-05T01:41:31.772Z",
+      "lastRecalledAt": "2026-08-05T01:41:33.377Z",
+      "queryHashes": [
+        "1d16ce9dc577",
+        "2bf991b42add"
+      ],
+      "recallDays": [
+        "2026-08-05"
+      ],
+      "conceptTags": [
+        "备份",
+        "audit.sh",
+        "active.md",
+        "7/25",
+        "7/26",
+        "cron/心跳/项目看板更新/知识树录入",
+        "7/21-7/26",
+        "grill-me必须覆盖交互逻辑"
       ]
     }
   }

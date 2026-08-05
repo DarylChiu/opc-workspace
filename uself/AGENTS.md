@@ -66,6 +66,25 @@
 - 命中规则/模式 → 注入 top-5 教训到上下文再执行
 - 闲聊/快速问答不触发检索（不浪费 token）
 
+### M2 任务识别状态机（2026-08-05 上线）
+> 判定不是一次性「是/否」，是带状态的分类。每次收到消息时：
+
+```
+python3 /Users/zhaoyuzhao/.openclaw/workspace/scripts/evolution/classify_task.py --msg "<消息>" --session <session_id> --project <项目>
+```
+
+判定结果 → 动作：
+| 判定 | 含义 | 动作 |
+|------|------|------|
+| new_task | 新任务开始 | 全量注入: `inject_lessons.py --msg "<任务>" --mode full --session <id>` |
+| continuation | 同任务延续 | 零注入（教训已在上下文） |
+| deliverable_upgrade | 中途要求产出物(md报告等) | 轻量注入: `inject_lessons.py --msg "<产出>" --mode light --session <id>` |
+| chat | 闲聊 | 零注入 |
+
+- session 参数用会话ID（保证状态机连续性）
+- 信号冲突时脚本自动走 LLM 仲裁兜底
+- 注入文本拼入上下文后再执行任务
+
 ### 与现有 L3 协议的关系
 - 现有 L3（SAGE Checker + reflexion_journal）继续保留；本条款负责**跨Agent统一信号捕获与共享教训库**
 - reflect.sh 写入的教训同时用 capture_correction.sh 补一份到共享库（双写，各取所长）
