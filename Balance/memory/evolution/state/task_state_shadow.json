@@ -1,0 +1,34 @@
+{
+  "sessions": {
+    "agent:balance:feishu:balance:direct:ou_0d7a57b9a531823aa1edee6874dcbb34": {
+      "task_id": "task-20260805084951",
+      "subject": "误餐补贴申请明细表迭代：在H7早餐实报列增加是否招待列，单元格内早餐/午餐/晚餐打钩，实报公式增加互",
+      "type": "文档",
+      "injected_patterns": [],
+      "started_at": "2026-08-05T08:49:51",
+      "msg_count": 1,
+      "subject_hash": "557536bfdf42",
+      "project": "vn-travel-expense-policy"
+    },
+    "balance-20260805-attachment3": {
+      "task_id": "task-20260805111512",
+      "subject": "根据越南差旅费管理办法征集意见稿更新附件3（误餐补贴申请明细表），等待Daryl补充误餐补贴场景",
+      "type": null,
+      "injected_patterns": [],
+      "started_at": "2026-08-05T11:15:12",
+      "msg_count": 1,
+      "subject_hash": "2b4005dafaf0",
+      "project": "越南差旅费管理办法"
+    },
+    "travel-policy-20260806": {
+      "task_id": "task-20260806115654",
+      "subject": "越南差旅费管理办法改动1：城市等级分类体系重构（取消附件2，按34个省级行政单位穷举重做附件1和4.",
+      "type": "开发",
+      "injected_patterns": [],
+      "started_at": "2026-08-06T11:56:54",
+      "msg_count": 1,
+      "subject_hash": "a2f1e9ce71e5",
+      "project": "vn-travel-expense-policy"
+    }
+  }
+}

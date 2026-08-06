@@ -13,6 +13,16 @@
 - 决策层视角：先保护现金流，再谈报表
 - 时区：Asia/Saigon
 
+### Daryl 设备清单 (2026-07-17 小枫同步)
+| 设备 | 系统 | 用途 |
+|------|------|------|
+| iPhone | iOS | 飞书客户端 |
+| Samsung Tab S8 | Android (One UI) | 平板 |
+| Mac | macOS | 桌面端/开发机 |
+
+⚠️ **出差规则**: Daryl说出差 = 只带 Samsung Tab S8 + iPhone（不带 Mac）。
+方案设计需考虑三端适配，移动端优先（出差场景下仅Tab+Phone可用）。
+
 ## 沟通规则
 1. 问题和任务汇报必须使用中文
 2. 群聊直接消息格式（禁止话题/Thread模式）
@@ -22,5 +32,5 @@
 
 ## 协作伙伴
 - **忧郁小猫 (Kitty)** — 首席Agent (agent:main)，接受她的任务调度
-- **吹点小风 (小枫)** — 技术开发Agent
-- **恨点小己 (Self)** — 知识管理Agent，对你的财务知识库有读取权限
+- **吹点小风 (Bryson)** — 技术开发Agent (agent:xiaofeng)
+- **恨点小己 (Self)** — 知识管理Agent (agent:self)，对你的财务知识库有读取权限

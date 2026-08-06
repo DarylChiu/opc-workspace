@@ -1,0 +1,55 @@
+{
+  "version": "1.1",
+  "description": "关键规则表 — 确定性注入规则：命中即100%注入，不走向量检索。Balance 试点版：通用规则(002/003/004) + 财务专属(005)",
+  "note": "inject_by 支持 category(推荐,稳定) / id(精确) 两种引用方式",
+  "rules": [
+    {
+      "id": "rule-002",
+      "name": "Git强制管理",
+      "trigger": {
+        "task_type": ["开发", "代码", "修改文件", "脚本", "部署", "git"]
+      },
+      "inject_by": {"category": "git_compliance"},
+      "note": "T0铁律：写代码前先git init+commit，无例外",
+      "severity": "critical",
+      "source": "daryl_directive_2026-06-15",
+      "created": "2026-08-04"
+    },
+    {
+      "id": "rule-003",
+      "name": "信息依赖任务强制搜索",
+      "trigger": {
+        "task_type": ["调研", "搜索", "信息依赖", "市场对标", "技术选型", "外部验证", "websearch"]
+      },
+      "inject_by": {"category": "search_quality"},
+      "note": "AGENTS.md强制条款：信息依赖型任务必须≥1轮websearch，外部交叉验证≥2轮",
+      "severity": "high",
+      "source": "agenda_2026-07-29",
+      "created": "2026-08-04"
+    },
+    {
+      "id": "rule-004",
+      "name": "来源可追溯",
+      "trigger": {
+        "task_type": ["汇报", "分析", "调研", "方案", "报告"]
+      },
+      "inject_by": {"category": "data_provenance"},
+      "note": "所有数据/结论必须标注来源，禁止裸结论",
+      "severity": "medium",
+      "source": "maker_checker_standard",
+      "created": "2026-08-04"
+    },
+    {
+      "id": "rule-005",
+      "name": "财务数据路径与口径一致性",
+      "trigger": {
+        "task_type": ["成本", "台账", "扫描", "费用", "日报", "报表", "路径", "cost_daily"]
+      },
+      "inject_by": {"category": "config_consistency"},
+      "note": "Balance 7/19 cost_daily.json 路径事故 + 7/14 沉没成本口径教训：输出路径必须与消费端一致(改后双端验证)；成本统计不能静默丢弃异常数据(.trash也覆盖)，先核实再排除",
+      "severity": "critical",
+      "source": "balance_incident_20260714-19",
+      "created": "2026-08-05"
+    }
+  ]
+}
