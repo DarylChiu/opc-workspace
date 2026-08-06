@@ -273,3 +273,7 @@
 {"timestamp":"2026-08-06T00:06:35+0700","check":"L4-audit-v2","agent":"balance","fixes":1,"shallow_issues":2,"deep_issues":2,"diary_lines":5,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
 {"timestamp":"2026-08-06T00:07:55+0700","check":"L4-audit-v2","agent":"balance","fixes":1,"shallow_issues":0,"deep_issues":0,"diary_lines":27,"diary_sections":5,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
 {"timestamp":"2026-08-06T00:08:44+0700","check":"L4-audit-v2","agent":"balance","fixes":1,"shallow_issues":0,"deep_issues":0,"diary_lines":31,"diary_sections":6,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-08-06T00:11:42+0700","check":"L4-audit-v2","agent":"balance","fixes":1,"shallow_issues":0,"deep_issues":0,"diary_lines":31,"diary_sections":6,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-08-06T16:42:31+0700","check":"post-op","task":"越南差旅费管理办法v1.0.6交付","score":1,"total":5,"warnings":[
+  "🔴 active.md 需更新 — 有新任务变更但 23 小时未动"
+]}

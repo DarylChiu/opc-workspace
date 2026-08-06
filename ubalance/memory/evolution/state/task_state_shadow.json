@@ -19,6 +19,16 @@
       "msg_count": 1,
       "subject_hash": "2b4005dafaf0",
       "project": "越南差旅费管理办法"
+    },
+    "travel-policy-20260806": {
+      "task_id": "task-20260806115654",
+      "subject": "越南差旅费管理办法改动1：城市等级分类体系重构（取消附件2，按34个省级行政单位穷举重做附件1和4.",
+      "type": "开发",
+      "injected_patterns": [],
+      "started_at": "2026-08-06T11:56:54",
+      "msg_count": 1,
+      "subject_hash": "a2f1e9ce71e5",
+      "project": "vn-travel-expense-policy"
     }
   }
 }
