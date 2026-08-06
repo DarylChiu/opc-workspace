@@ -1,8 +1,8 @@
 # Project Dashboard — xiaofeng（吹点小风）
 
-> 最后编译: 2026-08-04 07:00 +07:00
+> 最后编译: 2026-08-06 13:00 +07:00
 > 负责人: Bryson | Agent ID: xiaofeng
-> 下轮更新: 2026-08-05 07:00
+> 下轮更新: 2026-08-07 07:00
 
 ---
 
@@ -15,16 +15,16 @@
 | 字段 | 值 |
 |------|-----|
 | 项目ID | video-editor-mvp |
-| 状态 | 🟡 active · v3.0 重构完成（7/25），7/31 Daryl 开始逐模块发送需求→01-素材扫描可行性评估已回复（~3.5h全部可行）；8/1 隧道刷新为 synthesis-ent-hawaii-booth；8/2 无新活动；8/3 隧道再次刷新为 freebsd-present-rome-modes（synthesis-ent-hawaii-booth 已过期） |
+| 状态 | 🟢 active · v4.0 交互版开发中（8/6 M2 决策自主环试点开工，wf01-wf05 冻结为 v4.0 基线）；8/4 服务 LaunchAgent 持久化+隧道恢复 unwhispering-imani-digitately.ngrok-free.dev；8/5 修复 3 个 BUG（launchd PATH/前端 hardcode）+ 自诊断 + 线框先行包 + 机制分层落定 |
 | 优先级 | P0 |
-| 当前阶段 | v3.0 重构 · 模块化交互需求逐个接收中（7/31 已收到 01-素材扫描） |
-| 阶段进度 | 100%（7/25 核心链路走通 ✅）；交互需求第一模块已接收（7/31），等待Daryl确认2个前置问题（已等4天） |
-| 总进度 | 90% |
+| 当前阶段 | v4.0 交互版开发（M2 试点 · 前端开发 60% 节点进行中，预估 8-12h 完成） |
+| 阶段进度 | 核心链路 100%（7/25 ✅）；wf01-wf05 已冻结为 v4.0 基线（8/6）；前端 v4.0 交互版 60% 节点 |
+| 总进度 | 92% |
 | 启动日期 | 2026-07-19 |
 | 预计交付 | 2026-08（视Daryl需求节奏） |
-| 上周进展 | 7/30 BGM节点v2 完成 ✅；7/31 Daryl 飞书发送 01-素材扫描 4 项需求 → 小风回复可行性评估（~3.5h全部可行）+ 隧道刷新；8/1 隧道二次刷新（synthesis-ent-hawaii-booth）→ Daryl 确认可用；8/3 隧道三次刷新（freebsd-present-rome-modes）→ Daryl 飞书直聊重建隧道 ✅ |
-| 本周计划 | 等待 Daryl 确认素材扫描 2 个前置问题（已等4天）；后续模块需求陆续接收中；BGM 替换等待 Daryl 提供《I NEED YOU》文件；隧道 maintenance 按需刷新 |
-| 阻塞项 | ① 等待 Daryl 确认素材扫描 2 个前置问题（根目录范围+日期格式，已等4天） ② DJI Mic 3 音频同步仅框架+模拟 ③ BGM 替换等待 Daryl 提供 QQ 音乐文件 ④ Toshiba HDD exFAT 卡死，等 Daryl 物理重新插拔 |
+| 上周进展 | 8/4 服务持久化（LaunchAgent: videoeditor/ielts/ngrok，Gateway 重启不掉）+ 隧道恢复 unwhispering-imani-digitately ✅；TOSHIBA 硬盘卡死→Daryl 18:10 重插，watchdog 误报 BUG 修复（launchd PATH 缺 timeout，70+ 次误报）；8/5 修复 3 BUG（素材时长 0 / ASR 仅前 3 个 / 看护误报，根因=launchd 极简 PATH + 前端 hardcode）→ 素材扫描解阻（21 组素材可用）；产出自诊断 SELF_DIAGNOSIS_20260805 + 线框先行包 wf01-wf05（含素材可读化/重命名需求）；Daryl 纠正归因→「用户思维」机制沉淀；三个颠覆性方案→Kitty 评估→机制分层落定；8/5 Loop Engineering 移交 Kitty（更名「决策自主环」，M2 试点=剪辑MVP）；8/6 M2 试点开工：wf01-wf05 冻结 v4.0 基线，前端 v4.0 交互版开发中（60% 节点，预估 8-12h） |
+| 本周计划 | 完成前端 v4.0 交互版（预估 8-12h）；ASR/情感/匹配模块按线框先行流程推进；隧道 maintenance 按需刷新 |
+| 阻塞项 | ① ~~TOSHIBA 硬盘卡死~~ ✅ 已恢复（8/5 修复看护+时长 BUG，21 组素材可扫） ② ~~素材扫描 2 前置问题~~ ✅ Daryl 已确认（8/5 核实，wf01 带默认方案冻结） ③ DJI Mic 3 音频同步仅框架+模拟（待设备联调） ④ BGM 替换等待 Daryl 提供《I NEED YOU》文件 |
 
 #### 里程碑
 
@@ -32,7 +32,8 @@
 |--------|------|------|----------|
 | Phase 0 · MVP 核心剪辑引擎 | 🟢 done | 100% | 7/21 ✅ |
 | Phase 1 · 极简可视化前端 | 🟢 done | 100% | 7/23 ✅ |
-| v3.0 · Hooktheory BGM + SQLite + ffmpeg 渲染 | 🟡 verifying | 100% | 7/31 开始逐个接收模块交互需求 |
+| v3.0 · Hooktheory BGM + SQLite + ffmpeg 渲染 | 🟢 done | 100% | 8/6 冻结为 v4.0 基线 ✅ |
+| v4.0 · M2 决策自主环试点（wf01-wf05 交互版） | 🟡 in-progress | 60% | 8/6 开工，预估 8-12h 后前端完成 |
 | Phase 1(旧) · 高级编排+模板 | ⚪ pending | 0% | 顺延 TBD |
 | Phase 2(旧) · 变现交付 | ⚪ pending | 0% | 顺延 TBD |
 
@@ -41,7 +42,7 @@
 | 月份 | 预算 | 实际 | 差额 |
 |------|------|------|------|
 | 2026-07 | $20 | ~$6 | +$14 |
-| 2026-08 | $20 | ~$0 | +$20 |
+| 2026-08 | $20 | ~$0.5 | +$19.5 |
 
 #### 关键决策
 
@@ -57,7 +58,12 @@
 | 7/19 | 变现加速器定位：16:9+9:16双格式，BGM驱动编排+三层情感漏斗 | P1 | ✅ Daryl 确认 |
 | 8/3 | 隧道三次刷新：synthesis-ent-hawaii-booth → freebsd-present-rome-modes（前隧道已过期），飞书直聊重建 ✅ | P2 | ✅ 完成 |
 | 8/1 | 隧道二次刷新：degree-human-intro-airports → synthesis-ent-hawaii-booth，Daryl 确认可用 | P2 | ✅ 完成 |
-| 7/31 | Daryl 开始逐模块发送交互需求（01-素材扫描 4项）；小风回复可行性评估 ~3.5h 全部可行；隧道刷新为 degree-human-intro-airports.trycloudflare.com | P1 | 🟡 等待 Daryl 确认前置问题 |
+| 8/6 | M2 试点开工：wf01-wf05 冻结为 v4.0 基线；前端 v4.0 交互版开发中（60% 节点，预估 8-12h） | P0 | 🟡 进行中 |
+| 8/5 | Loop Engineering 移交 Kitty（更名「决策自主环」），M2 试点=剪辑MVP；Bryson 只保留剪辑MVP 开发 | P0 | ✅ 移交完成 |
+| 8/5 | 机制分层落定：方向级→Daryl 确认；细节级→用户替身+决策账本自主（三方案经 Kitty 评估后取舍） | P1 | ✅ 已落定 |
+| 8/5 | Daryl 纠正自诊断归因：真根因=Grill-me 交互逻辑问太少+实现自我简化+把产品逻辑问题当格式偏好问 → 「用户思维」三层检查清单入 workflow-rules | P1 | ✅ 已固化 |
+| 8/5 | 素材扫描解阻：watchdog 误报/时长0/ASR前3 三 BUG 修复（launchd PATH + 前端 hardcode 根因），21 组素材可用 | P1 | ✅ 已修复 |
+| 7/31 | Daryl 开始逐模块发送交互需求（01-素材扫描 4项）；小风回复可行性评估 ~3.5h 全部可行；隧道刷新为 degree-human-intro-airports.trycloudflare.com | P1 | ✅ Daryl 已确认（8/5 核实） |
 | 7/30 | BGM节点v2 完成：歌曲卡片/音频播放器/乐句播放+和弦弹窗/ffmpeg乐句连接；隧道 scanner-valves-domain-traveling.trycloudflare.com；Daryl 指令暂不动，等全部需求一次性迭代 | P1 | ✅ 完成 |
 | 7/28 | 飞书隧道修复：前端 API 路径 localhost→相对路径，隧道确认可用，Daryl 开始提交交互需求 | P1 | ✅ 已修复 |
 
@@ -65,7 +71,9 @@
 
 | 日期 | 风险 | 影响 | 措施 |
 |------|------|------|------|
-| 7/25 | Toshiba HDD exFAT 卡死（BGM文件写入时） | 输出路径不可用 | 已请求 Daryl 物理重新插拔 |
+| 8/6 | workspace 指针丢失事故（8/4 openclaw.json 重写删 workspace 字段）→ 会话读错工作区短暂失忆 | 记忆系统可用性 | Kitty 已修复（4 agent 显式写死 workspace）；空壳工作区已隔离归档 workspace-xiaofeng.orphan-20260806 |
+| 8/5 | launchd 托管服务默认 PATH 极简（无 /opt/homebrew/bin） | 素材时长/缩略图/ASR 返回空 | 双保险修复：server.py 补 PATH + shutil.which 绝对路径 + plist EnvironmentVariables |
+| 7/25 | Toshiba HDD exFAT 卡死（BGM文件写入时） | 输出路径不可用 | 已请求 Daryl 物理重新插拔 → 8/5 恢复 ✅ |
 | 7/24 | git rebase 事故：dashboard.html+shadow.html 从 HEAD 丢失 | DB+跟读页不可用，Daryl 发现后紧急恢复 | 已从子目录恢复；PROJECT_MANIFEST.md 标记唯一权威版本 |
 | 7/24 | 项目副本混淆（ielts_tutor/ vs Xiaofeng/ielts_tutor/） | 导致恢复时定位混乱 | 清理：Xiaofeng/ 加 DEPRECATED.md、删除旧 DB/server 备份 |
 | 7/23 | [object Promise] 阻断 Bug 提测前未发现 | 0.2 扫描页完全不可用，影响验收体验 | 已修复；L5 自检机制已落地 |
@@ -80,15 +88,15 @@
 | 字段 | 值 |
 |------|-----|
 | 项目ID | rewrite-mvp |
-| 状态 | 🟡 standby · 需求收集模式（已 17 天无需求输入，自 7/18 v1.2.0 发布起） |
+| 状态 | 🟡 standby · 需求收集模式（已 19 天无需求输入，自 7/18 v1.2.0 发布起） |
 | 优先级 | P1 |
 | 当前阶段 | v1.2.0 已发布，等待 Daryl 需求汇总 |
 | 阶段进度 | — |
 | 总进度 | 80% |
 | 启动日期 | 2026-07-15 |
 | 预计交付 | TBD |
-| 上周进展 | 无变化，维持 v1.2.0（内核卡 M1-M3 完整交付，6 个 commit）；7/30-8/3 无新需求 |
-| 本周计划 | 等待 Daryl 发送具体需求；已 17 天无输入 |
+| 上周进展 | 无变化，维持 v1.2.0（内核卡 M1-M3 完整交付，6 个 commit）；8/4-8/6 无新需求 |
+| 本周计划 | 等待 Daryl 发送具体需求；已 19 天无输入 |
 | 阻塞项 | Daryl 尚未发送具体需求 |
 
 #### 里程碑
@@ -114,14 +122,14 @@
 | 字段 | 值 |
 |------|-----|
 | 项目ID | ielts-tutor-v2 |
-| 状态 | 🟡 verifying · v1.3.0 待 Daryl 晚间验收，7/25 Daryl 调试发现2Bug已修复（已等 10 天，7/30-8/3 无晚间练习） |
+| 状态 | 🟡 verifying · v1.3.0 待 Daryl 晚间验收，7/25 调试 2Bug 已修复（已等 12 天，8/4-8/6 无晚间练习；8/4 服务 LaunchAgent 持久化 localhost:8767 ACTIVE；8/5 OPC看板v1.6 同步 wf_ielts_tutor_v130 工作流） |
 | 优先级 | P0 |
 | 当前阶段 | v1.3.0 开发完毕，7/25 Daryl 调试+2Bug修复 |
 | 阶段进度 | 100% |
 | 总进度 | 88% |
 | 启动日期 | 2026-06-08 |
 | 预计交付 | v1.1.0 挂起中，v1.3.0 待验收 |
-| 上周进展 | 7/25 Daryl 飞书调试发现 2 Bug 并修复 ✅：① DeepSeek 废弃 `deepseek-chat` → `deepseek-v4-pro` ② 跟读 JS null safe 兜底；Daryl 指令：自由对话切 `deepseek-v4-flash` + Debug 模式开启 ✅；7/30-8/3 无晚间验收活动 |
+| 上周进展 | 7/25 Daryl 飞书调试发现 2 Bug 并修复 ✅：① DeepSeek 废弃 `deepseek-chat` → `deepseek-v4-pro` ② 跟读 JS null safe 兜底；Daryl 指令：自由对话切 `deepseek-v4-flash` + Debug 模式开启 ✅；8/4 服务 LaunchAgent 持久化（ai.openclaw.ielts，localhost:8767，health+dashboard 均 200）；8/5 OPC看板v1.6 同步 wf_ielts_tutor_v130 11 节点工作流（投资人展示准备）；8/4-8/6 无晚间验收活动 |
 | 本周计划 | Daryl 晚间验收 v1.3.0；已等 10 天无晚间练习，后续待定 |
 | 阻塞项 | ① iPhone 语音输入问题 → v1.1.0 挂起 ② 等待 Daryl 验收 v1.3.0 |
 
@@ -181,9 +189,9 @@
 | 总进度 | 10% |
 | 启动日期 | 2026-07-06 |
 | 预计交付 | TBD |
-| 上周进展 | 无进展；7/30-8/3 无活动 |
-| 本周计划 | 等待 Daryl 发起讨论 |
-| 阻塞项 | ① Daryl 未发起讨论 ② Sentinel v2 方案已设计但未批复 |
+| 上周进展 | 无进展；8/5 已正式移交 Kitty，条目冻结 |
+| 本周计划 | —（由 Kitty 维护） |
+| 阻塞项 | ① 已移交，不再由 Bryson 跟进 |
 
 #### 里程碑
 
@@ -221,7 +229,7 @@
 | 总进度 | 80% |
 | 启动日期 | 2026-06-14 |
 | 预计交付 | TBD |
-| 上周进展 | 无变化，维持现有能力；7/26-8/3 无活动 |
+| 上周进展 | 无变化，维持现有能力；8/4-8/6 无活动 |
 | 本周计划 | 不投入新开发 |
 | 阻塞项 | 无 |
 

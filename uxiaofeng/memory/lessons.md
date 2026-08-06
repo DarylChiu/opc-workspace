@@ -117,3 +117,10 @@
 - **教训**: 项目必须有唯一权威版本标记（PROJECT_MANIFEST.md），注明活跃目录、活跃DB、废弃副本
 - **教训**: 废弃副本必须标记 DEPRECATED.md，防止误用
 - **教训**: Daryl 的 7/21 重设计工作在 Xiaofeng/ 子目录里，rebse 后 rush 恢复主目录时遗漏了子目录里的文件
+
+## 2026-08-06 · workspace 指针丢失导致失忆（重大）
+- **问题**: 8/4 openclaw.json 重写时 agents.list 的 workspace 字段被删 → 新会话回退默认 `workspace-xiaofeng` 空壳（IDENTITY.md 空模板）→ 我 11:03 误诊「身份没落盘」
+- **真相**: 真工作区 `xiaofeng_workspace` 6/28 就写好了 Bryson/吹点小风；根因是指针丢失，不是身份没记录
+- **失职点**: session 启动时没核对记忆完整性（identity.md/active.md/日记数量），读到的记忆异常单薄时没有警觉
+- **修复**: Kitty 11:11 恢复 4 agent workspace 指针并重启 gateway；我 11:57 补跨工作区同步（shell 归档+orphan 标记）
+- **教训**: ①启动必核对记忆文件完整性，发现异常立即上报而非自我解释 ②一个 Agent 只能有一个工作区，出现双工作区=配置事故 ③核心配置变更（openclaw.json）后必须验证 workspace 指针
