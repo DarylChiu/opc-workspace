@@ -1,0 +1,107 @@
+# 当前活跃任务 (中期记忆 — 每次session加载)
+
+> 最后更新: 2026-08-03 19:53（心跳 · 隧道地址更新）
+
+## 🟢 进行中
+### 视频自动化剪辑 MVP（video-editor-mvp）🟢 v3.0 重构完成（7/25）
+- **v3.0 重构**: 🟡 M0-M5 全模块完成，Daryl 已开始交互（7/28）
+  - ✅ BGM 结构: Hooktheory 方案（Birds of a Feather · 8乐句 + 12个8bar单元）
+  - ✅ 数据层: SQLite song_lib + phrase_lib + 8bar_units
+  - ✅ API: 模块化（api/bgm scan asr emotion match）+ server.py v3.0
+  - ✅ 前端: 5节点 pipeline 全可视化 · OPC Design System
+  - ✅ 输出: ffmpeg 渲染 → Toshiba HDD → Syncthing → Tab S8 验收
+  - ✅ 服务: localhost:8768 / frontend/index.html ~400行
+  - ✅ **7/28 修复**: 前端 API 路径从 localhost:8768 改为相对路径，隧道可正常访问
+  - 🔗 旧隧道: `coral-katie-senator-urw` (可能已掉线)
+  - 🚇 **最新隧道 (8/3)**: `https://freebsd-present-rome-modes.trycloudflare.com/frontend/index.html`（旧地址 synthesis-ent-hawaii-booth 已过期）
+  - ✅ **BGM节点v2 完成** (7/30): 歌曲卡片/音频播放器/乐句播放+和弦弹窗/ffmpeg乐句连接
+  - ⏳ 待验证: Gemini 场景检测 + Emotion 三层漏斗 + ffmpeg 渲染（需素材+API Key）
+  - ⏳ Daryl 7/30指令：先不动，等他把剩余模块需求全部写出再一次性迭代
+  - 🆕 **7/31**: Daryl 飞书发送 01-素材扫描 模块改造需求（4项），小风已回复可行性评估（~3.5h，全部可行），等待Daryl确认2个前置问题
+
+### 洗稿MVP — v1.2.0 迭代需求收集模式 🔴（7/18 15:42 Daryl指令）
+- **当前状态**: Daryl 要求先收集需求不修改，攒齐后一次性动工+更新版号
+- **Daryl 尚未发送具体需求**，等待中
+- **已发布**: v1.2.0（内核卡 M1-M3 完整交付，6个commit迭代链）
+- **历史**: M2 开发计划提交（7/17 14:00）、内核卡价值命题质疑（7/17 10:33）、SearXNG 修复 ✅（7/17）
+
+## ⏸️ 挂起
+### IELTS陪练助手 — v1.3.0 开发完毕，⏸️ 等待Daryl晚间验收（7/25更新）
+- **7/25晚**: Daryl 调试中发现两个Bug，已修复：
+  - DeepSeek API 模型名废弃 deepseek-chat → deepseek-v4-pro（旧名导致LLM乱码）
+  - 跟读模块 JS null safe 兜底（deviceInfo DOM不存在时报错）
+- Daryl 刷新后继续测试中
+- **v1.3.0 变更**: free_talk深度对话优化 + 词汇学习模块 + 训练库Dashboard重构
+  - free_talk: VAD思考窗口 / STT碎片过滤 / 提示词重写 / LLM max_tokens 500→700
+  - 词汇: 对话气泡长按选词→同义表达卡片→收录 / B2+词表预高亮 / 复习页
+  - Dashboard: 14天趋势+6周日历双栏 / To Improve Sentence+Vocab分拆 / 模式总结
+  - 自动评估: ≥10轮对话断开时自动触发LLM评估→入trend+review队列
+- **⚠️ 数据**: 昨晚session 987e4762丢失（重启后启动错误版本导致），已修复版本指向
+- **待验收**: Daryl晚上到家练习口语时一并验收
+- **v1.0.1**: 手机移动端自适应优化，Daryl 全部验收通过 ✅
+- **v1.1.0 挂起原因**: iPhone 语音输入问题 + 交互逻辑拖沓，Daryl 要求暂停转其他任务
+  - M1-M3 已完成 ✅（数据层/Dashboard/跟读闭环），M4 串联验收搁置
+  - Debug 模式已确认正常（7/17 ~21:17-21:43）
+  - iOS 回退完成，平板测试正面反馈（7/17 ~21:43 Daryl 👍）
+  - 恢复条件：Daryl 进入 Debug 迭代模式逐一核对
+- **管线1-IELST Part1**: ✅ v1.0.1 验收通过（e2e 3-4.5s）
+- **管线2-Qwen Omni**: ❄️ 冻结
+- **注意**: ngrok 已切给洗稿MVP（8777），IELTS 本地 8767 继续可用
+
+### Loop Engineering（基建 · P0 🔴 事故复盘完成，方向待定）
+- **状态**: 🔴 Sentinel v1 事故复盘完成（7/11 Daryl 对话），方向待定
+- **事故**: Sentinel v1 Plugin → $20 API 浪费 + Gateway 反复重启 + 开发效率下降
+- **方案**: Sentinel v2（轻量 before_tool_call hook，只拦 write/edit/exec，零 Gateway 通信）已设计
+- **阻塞**: Daryl 认为基建问题需要更强模型才能从根本上解决，7/12 讨论未发生
+- **方向**: 决策矩阵延伸，短链→长链，P2/P3 自主执行（原计划 M1-M3 时间线已过期）
+- **状态**: ⏸️ 等待 Daryl 发起讨论
+
+### 视频分析交互Workflow 🎬
+- **状态**: 🟡 拓展节点「内核洗稿MVP」启动中（7/15 Daryl 确认交叉开发模式）
+- **⚠️ 7/22 Daryl决策**: 长视频分析优化（超时+分段策略）取消——变现平台抖音/小红书偏爱短视频，长视频分析价值不够高
+- **交叉开发模式**（7/15 确立）: 雅思验收门控期间 → 开发洗稿MVP中午可验收小里程碑；两项目分session隔离防上下文污染
+- **待输入**: Daryl 的洗稿构想+参考案例（未发）
+- **里程碑**: v1.0 MVP → v1.1 商业数据+Tab → v1.2 Gemini V3 原生视频 ✅ (7/4)
+- **成本**: ~$0.0025/次分析
+- **地址**: https://unwhispering-imani-digitately.ngrok-free.dev (端口8777，7/16 ngrok已从8767切至8777，Daryl验收洗稿MVP M1中)
+- **代码**: video_analyzer_app/
+
+## ✅ 已完成
+### M2 开发计划（Daryl 7/5 指令 → 7/16 Daryl 看板验收认定完成 ✅）
+- **P0 延时优化** ✅(7/15): ASR 4-8s→0.3-1.5s，e2e ~10s→3-4.5s，达标
+- **P1 管线2 Qwen Omni**: 按决策冻结（重启触发条件存档 DEV_PLAN 附录A），随 M2 关闭
+- **P2 评估面板 UI** ✅: 7/15 布局调整 + 7/16 v1.0.1 移动端自适应
+- **P2 Part 2/3**: 基础模式已上线，深度模式归入后续里程碑（看板 M3）
+- **7/14晚测试三问题** ✅ 全部修复并验收: TTS引擎翻转Piper主、长句软60s/硬90s断句、评估HTTP兜底+轮询
+- **TTS 吞音/粘连** ✅: 方案B（句尾300ms静音填充），随 v1.0.0 验收
+
+### IELTS陪练助手v2.0 M1 交付清单
+| 模块 | 状态 | 完成度 |
+|------|------|--------|
+| 管线1 链式流式核心 | ✅ | 100% |
+| 配置管理 + API Key | ✅ | 100% |
+| SQLite 会话持久化 | ✅ | 100% |
+| HTML 评估报告 | ✅ | 100% |
+| Debug 验收模块 | ✅ | 90% |
+| VAD + 音频采集修复 | ✅ | 100% |
+| 成本追踪 Dashboard | ✅ | 100% |
+| OPC 看板接入 | ✅ | 100% |
+| 管线2 Qwen Omni 对接 | ❌ 冻结 | 30% |
+
+## 🔵 待办
+
+### ~/opc-workspace 本地仓库卡死 rebase（7/16发现）
+- 卡在 6/24 interactive rebase 中间态，每日 auto-backup 在 detached HEAD 上提交
+- 推送暂用临时 sparse clone 绕过；待与 Daryl/Kitty 确认修复方式
+
+### 硬件语音助手(MCU)开发
+- 规划阶段
+
+### 内核驱动洗稿MVP
+- 待视频分析下一阶段确认
+
+## 📦 历史归档项目（看板忽略此段）
+- 抖音视频分析MVP（B站/douyin 下载器+分析，2026年4月）→ 已归档
+- 语音转录测试(STT) → 已归档
+- 投资者路演短语库 → 已归档
+- ngrok 备用隧道 / Agent自进化 → 7/16 Daryl 看板验收确认非现存任务，已从待办移除
