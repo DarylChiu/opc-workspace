@@ -1,5 +1,12 @@
 # 经验教训精华
 
+## 🔴 2026-07-27 Cron日记空洞症 — 「重要的不保存，废话写一堆」
+- **问题**: 7/26-27 日记全是「周末安静」「周一平静」模板废话。实际做了：给Self写P1-P7知识树叶、服务器事故复盘、Daryl Grill-me继续——这些实质性产出日记一个字没记
+- **根因**: Cron 只检查「OPC群有没有Daryl发新任务」，没任务就写「安静」。不看 DM/inter-session 里的实际工作
+- **Daryl教训**：日记重在记录「我今天做了什么」，不是「今天有没有新任务」
+- **修复方向**: Cron 必须遍历当天所有 session，提取实质性产出后才写日记；不允许出现「安静的一天」
+- **适用**: 所有 Agent 的 Cron/日记逻辑
+
 ### 2026-06-25 合规自动化盲区：讨论/辩论/指令类交互被忽略
 - **问题**: post-op.sh 关键词只匹配「完成/交付/修复」类，Daryl 的指令下达、架构讨论、方案辩论全被归为「查询类」跳过
 - **发现者**: Self 先诊断，Daryl 要求全员检查 → 确认我也有同样问题
@@ -76,3 +83,44 @@
 - **根因**: 父容器 `.transcript-col` 不是 flex 容器且无高度约束，子元素的 `flex:1` 无参考高度
 - **修复**: 父容器加 `display:flex; flex-direction:column; flex:1; min-height:0` — 四个属性缺一不可
 - **教训**: flex 子元素要 overflow 生效，整条祖先链都必须有 `min-height:0`
+
+## 2026-07-23 · 提测前必须自检（血的教训）
+- **教训**: 开发完成后跳过端到端自检直接给 Daryl 验收，结果 [object Promise] 这种低级 Bug 浪费他 1-2 小时
+- **根因**: 急于交付、功能贪多(32h 硬塞半天)、流程缺 checklist
+- **修复**: 建立 L5 交付前质量自检（5 项强制检查），嵌入 AGENTS.md + TOOLS.md
+- **铁规**: 任一项不通过，先修再提测，不要把 Daryl 当 Debugger
+
+## 2026-07-23 · async/await 陷阱
+- `async function` 返回 Promise，不能用同步方式赋给 innerHTML
+- `render()` async 后，`navigateTo()` 也要 async
+- 测试方法: 打开页面检查是否显示 `[object Promise]`
+
+## 2026-07-23 · Cloudflare Tunnel 不稳定
+- 免费 tunnel ERR 1033 频繁出现，TLS 握手完成但无法连接 origin
+- 替代方案: localtunnel (`lt --port`) 或直接 localhost（同机器）
+
+## 2026-07-25 · DeepSeek API 模型名废弃导致 LLM 乱码
+- **问题**: 旧模型名 `deepseek-chat` 已被废弃，API 可能返回乱码/无效响应
+- **影响**: IELTS 陪练助手的 LLM 对话、评估功能全部异常
+- **修复**: 全局替换为 `deepseek-v4-pro`
+- **教训**: API 模型名不是永久的；服务商可能直接废弃旧名称而非优雅降级；应定期检查 API 文档确认模型名有效性
+
+## 2026-07-22 · OPC 多 Agent 共享仓库 git rebase 极高风险
+- **问题**: git pull --rebase 触发 59 个 commit 跨多 Agent 目录的大规模冲突，rebase 卡死后 abort 被 SIGKILL
+- **根因**: 多 Agent 各自维护 memory/ + scripts/ 等共享文件，频繁交叉提交导致 rebase 冲突不可避免
+- **修复**: `git checkout -f main && git reset --hard origin/main` 强制恢复，已修改但未 push 的日记文件从心跳内容重建
+- **教训**: **共享仓库优先用 merge 策略**，`git pull --rebase` 在多人/多 Agent 环境下是定时炸弹；push 前必须 commit 所有修改
+
+## 2026-07-24 · 项目版本管理混乱导致数字资产丢失
+- **教训**: 同一项目存在多个副本（ielts_tutor/ vs Xiaofeng/ielts_tutor/）极易混淆
+- **教训**: git rebase 前必须确保所有改动已 commit，否则工作目录修改全部丢失
+- **教训**: 项目必须有唯一权威版本标记（PROJECT_MANIFEST.md），注明活跃目录、活跃DB、废弃副本
+- **教训**: 废弃副本必须标记 DEPRECATED.md，防止误用
+- **教训**: Daryl 的 7/21 重设计工作在 Xiaofeng/ 子目录里，rebse 后 rush 恢复主目录时遗漏了子目录里的文件
+
+## 2026-08-06 · workspace 指针丢失导致失忆（重大）
+- **问题**: 8/4 openclaw.json 重写时 agents.list 的 workspace 字段被删 → 新会话回退默认 `workspace-xiaofeng` 空壳（IDENTITY.md 空模板）→ 我 11:03 误诊「身份没落盘」
+- **真相**: 真工作区 `xiaofeng_workspace` 6/28 就写好了 Bryson/吹点小风；根因是指针丢失，不是身份没记录
+- **失职点**: session 启动时没核对记忆完整性（identity.md/active.md/日记数量），读到的记忆异常单薄时没有警觉
+- **修复**: Kitty 11:11 恢复 4 agent workspace 指针并重启 gateway；我 11:57 补跨工作区同步（shell 归档+orphan 标记）
+- **教训**: ①启动必核对记忆文件完整性，发现异常立即上报而非自我解释 ②一个 Agent 只能有一个工作区，出现双工作区=配置事故 ③核心配置变更（openclaw.json）后必须验证 workspace 指针
