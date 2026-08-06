@@ -1,12 +1,47 @@
 # Project Dashboard — main（忧郁小猫）
 
-> 最后编译: 2026-08-04 07:00 +07:00
+> 最后编译: 2026-08-06 07:00 +07:00
 > 负责人: Kitty | Agent ID: main
-> 下轮更新: 2026-08-04 13:00
+> 下轮更新: 2026-08-06 13:00
 
 ---
 
 ## 🟢 进行中项目
+
+---
+
+### 决策自主环（Decision Loop / Loop Engineering）
+
+| 字段 | 值 |
+|------|-----|
+| 项目ID | decision-loop |
+| 状态 | 🟢 active |
+| 优先级 | P0 |
+| 当前阶段 | M0+M1 已交付（8/5），M2 剪辑MVP 试点待启动 |
+| 阶段进度 | M0 100% / M1 100% / M2 0% |
+| 启动日期 | 2026-08-05 |
+| 预计交付 | M0→M3 共 40-80h；M2 等 Daryl 指令 |
+| 本周进展 | 8/5 Daryl 立项、指定 Kitty 负责人（Bryson 移交）；M0 机制冻结（需求分级模板/提问质量门禁/教训病理Schema#4/错误预算规则#5 + AGENTS.md M0条款 + jianji-mvp workflow 方向确认前置节点 + 模式库3条种子病理，patterns 4→7）；M1 决策自主层工具 5/5（decide.py 三分类零LLM 13/13 + decision_ledger 账本 + error_budget 周度预算 P0拦截/降档/磨合期 + daily_exception_report + review_batch 周度批量审批），22 用例全绿，commits 069aa1df/ec22d4cb；四Agent 颠覆性思路征集整合（用户定方向、细节全归AI、控制→定价审计、经验可遗忘） |
+| 下周计划 | M2 剪辑MVP 试点（16-30h，可 --grace jianji-mvp 开磨合期）待 Daryl 指令；Bryson 工具链清单（mechanism_toolchain_requirements.md，~6h）待搭 |
+| 阻塞项 | M2 等 Daryl 指令启动；wf01 A/A 与 ASR 交互需求待 Daryl 回复 |
+
+#### 里程碑
+
+| 里程碑 | 状态 | 完成 | 预计完成 |
+|--------|------|------|----------|
+| M0 · 机制冻结（三分类/默认值/例外上报/错误预算/门禁） | 🟢 done | 100% | 8/5 ✅ |
+| M1 · 决策自主层工具（decide/ledger/budget/exception/review） | 🟢 done | 100% | 8/5 ✅ |
+| M2 · 剪辑MVP 试点（Bryson 协作） | ⚪ pending | 0% | 等 Daryl 指令 |
+| M3 · 推广+指标化 | ⚪ pending | 0% | — |
+
+#### 关键决策
+
+| 日期 | 决策 | 级别 | 状态 |
+|------|------|------|------|
+| 8/5 | 「只加机制，不加细节限制」为最高准绳（Daryl 原则） | P1 | ✅ 已确认 |
+| 8/5 | 决策分层：方向级仍确认（唯一不可逆决策），细节级替身+账本自主；Bryson 方案3完全体撤回 | P1 | ✅ 已确认 |
+| 8/5 | 用户替身按显式任务建，只从可核实会话/反馈蒸馏，标注证据来源+置信度 | P1 | ✅ 已确认 |
+| 8/5 | 错误预算周度循环（0.1/1/10 分级，P0 直接拦截），磨合期 2-4 周内错误只入病理库 | P1 | ✅ 已确认 |
 
 ---
 
@@ -21,7 +56,7 @@
 | 阶段进度 | M0 100% / M1 100% / M2 100% / Balance Phase0 进行中 |
 | 启动日期 | 2026-08-04 |
 | 预计交付 | 8/7 周五 Phase0评估 → Phase1决策 |
-| 本周进展 | 8/4 Daryl批准启动，M0+M1+M2全部交付；8/5 Daryl批准Balance为第二试点，部署Phase0影子模式（shadow_inject只记录不注入+shadow_report评估+种子库7条+财务域关键词），回归11/11通过 |
+| 本周进展 | 8/4 Daryl批准启动，M0+M1+M2全部交付（回归11/11，commits 7bf03311/dfccca86/6175b1ed）；8/5 Daryl批准Balance为第二试点，部署Phase0影子模式（shadow_inject只记录不注入+shadow_report周五评估+种子库7条+classify_task财务域关键词+AGENTS.md条款）；8/5-8/7 影子测试窗口运行中，8/6 无异常 |
 | 下周计划 | 8/7 Phase0评估报告 → 决定Phase1低风险任务放行 or 推广Self/其他Agent or 回退 |
 | 阻塞项 | 无 |
 
@@ -54,15 +89,15 @@
 | 项目ID | opc-dashboard |
 | 状态 | 🟢 active |
 | 优先级 | P0 |
-| 当前版本 | v1.6（运行中 @ http://localhost:8765，commit 690decf） |
+| 当前版本 | v1.6 + 产物模块 v1.7.0（运行中 @ http://localhost:8765，commits 690decf/fbcd813） |
 | 当前阶段 | M4 · 生产部署优化 |
 | 阶段进度 | 35% |
 | 总进度 | 92% |
 | 启动日期 | 2026-06-08 |
 | 预计交付 | 2026-08-10 |
-| 本周进展 | 周末至周一(8/2-8/4)系统静默无用户交互，午夜Cron连续3天审计正常；Dashboard运行平稳无异常；8月成本截至8/3：$0.58（3天），全量累计$126.36；Diary+Active均新鲜 |
-| 下周计划 | M4 override过期机制 + 系统消息过滤 + Agent「约定版本」字段；8月预算调整待Daryl确认；12G存储清理方案待Daryl确认；周一待Daryl上线后推进阻塞项 |
-| 阻塞项 | Daryl决策阻塞×3：Self阻塞(OPC看板/卡片审核/ACCA Vault等) + Balance SOP审阅 + Xiaofeng音乐文件提供 |
+| 本周进展 | 8/2-8/5 运行平稳，午夜Cron审计正常；8/5 看板成本端点核查（Balance诉求已实现：jsonl全量扫描3283文件/14216calls解析usage.cost.total，双源合并Balance台账$141.03权威）+ preview ReferenceError修复（commit ea47ba2）；产物模块 v1.7.0 上线（30天剔除/新鲜度加权/每Agent≤15/新文档置顶）；8月成本截至8/5：$15.24（5天），全量累计$141.03 |
+| 下周计划 | M4 override过期机制 + 系统消息过滤 + Agent「约定版本」字段（8/4 Daryl推入In Progress，开发计划制定中）；8月预算调整/12G存储清理 → 8/5 已搁置不处理；待 Daryl 确认：Brave 接回主搜索路由 |
+| 阻塞项 | Daryl决策阻塞：Self阻塞(OPC看板/卡片审核/ACCA Vault等) + Balance SOP审阅（音乐文件/车辆费用/JGL 8/5已取消）；Brave接回主搜索路由待确认（C15基准8/5归档：SearXNG 39.9坍塌/Brave 65.9持平） |
 
 #### 里程碑
 
@@ -79,8 +114,8 @@
 |------|------|------|------|
 | 2026-06 | — | ~$28 | — |
 | 2026-07 | $55 | $66.01 | -$11.01 🔴 |
-| 2026-08 | 待定 | $0.58 | 月初（3天） |
-| 累计 | — | ~$126.36 | 🔴 7月超支20.0% |
+| 2026-08 | 待定 | $15.24 | 月初（5天） |
+| 累计 | — | ~$141.03 | 🔴 7月超支20.0% |
 
 #### 关键决策
 
@@ -93,6 +128,9 @@
 | 7/21 | Agent自进化基建整体暂停，GEPA类项目严禁再开发 | P1 | ✅ 已确认 |
 | 7/23 | 搞钱群成立，main/xiaofeng/self 入群 | P2 | ✅ 已实施 |
 | 7/25 | GEPA教训：AI-on-AI实验不可靠，确定性基础设施（bash+python watchdog级）已验证有效 | P2 | ✅ 已记录 |
+| 8/5 | 成本端点核查：Balance诉求已实现（jsonl全量扫描+双源合并），无需改动 | P2 | ✅ 已实施 |
+| 8/5 | 产物模块 v1.7.0 上线（30天剔除/新鲜度加权/每Agent≤15/新文档置顶） | P2 | ✅ 已实施 |
+| 8/5 | Daryl决策：8月预算/12G存储/Model Router 搁置；音乐文件/车辆费用/JGL 取消；C15 搜索基准已做 | P1 | ✅ 已确认 |
 
 #### 风险/问题
 
@@ -101,6 +139,7 @@
 | 7/16 | status_overrides 无过期机制 | 已消失任务残留为鬼数据（红框/绿框） | M4 加入 override 自动过期逻辑 + 系统消息过滤 |
 | 7/16 | 成本 API 数据差异 | dashboard 与 Balance 月份统计不一致 | ✅ 7/18 M1已修复：数据源统一为Balance台账+调整 |
 | 7/18 | cost_daily.json 路径不一致 | Balance写入旧Dashboard副本，运行中Dashboard读不到 | ✅ 7/19 Balance已修复 |
+| 8/5 | /api/preview ReferenceError（server.js:1085 project未定义） | 看板产物预览崩溃 | ✅ 已修复 commit ea47ba2 |
 
 ---
 
@@ -108,7 +147,7 @@
 
 | 项目名 | 方向 | 优先级 | 预计启动 |
 |--------|------|--------|----------|
-| Loop Engineering | 反馈闭环+持续优化 | P1 | 待 Daryl 确认 |
+| — | 暂无（Loop Engineering 已于 8/5 立项 → decision-loop，见上方进行中） | — | — |
 
 ---
 

@@ -6279,11 +6279,45 @@
       "occurrences": 1,
       "status": "active",
       "last_seen": "2026-08-05"
+    },
+    {
+      "id": "fp-20260806-001",
+      "mechanism": {
+        "behavior_rule": "修改 openclaw.json 等核心配置后，必须校验每个 agent 的 workspace 指针指向活跃工作区（跑 scripts/compliance/check_workspaces.py），禁止依赖默认推导",
+        "failure_analysis": "8/4 配置重写丢失 agents.list 的 workspace 字段 → 新会话落入自动 bootstrap 的空壳工作区 workspace-xiaofeng → Bryson 连自己名字都记不起来（IDENTITY.md 真身 6/28 就在真工作区）",
+        "context_snapshot": {
+          "task_type": "核心配置变更 (openclaw.json / agents 配置)",
+          "artifact_ref": {
+            "type": "pointer",
+            "target": "~/.openclaw/openclaw.json",
+            "check": "改完跑 python3 scripts/compliance/check_workspaces.py --json，0 FAIL 才算完成"
+          },
+          "artifact_state": "changing"
+        }
+      },
+      "trigger": {
+        "项目": "OPC基建",
+        "类型": "核心配置变更",
+        "涉及": "workspace/agent配置"
+      },
+      "keywords": [
+        "workspace",
+        "openclaw.json",
+        "agent配置",
+        "工作区",
+        "配置重写",
+        "默认推导"
+      ],
+      "occurrences": 1,
+      "status": "active",
+      "last_seen": "2026-08-06",
+      "created": "2026-08-06",
+      "source": "incident: xiaofeng 失忆事故 (2026-08-06)"
     }
   ],
   "stats": {
-    "total_patterns": 7,
-    "active_patterns": 7,
+    "total_patterns": 8,
+    "active_patterns": 8,
     "resolved_patterns": 0,
     "last_distill": "2026-08-04"
   }

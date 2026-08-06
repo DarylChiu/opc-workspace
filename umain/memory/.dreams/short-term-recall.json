@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-04T16:47:00.589Z",
+  "updatedAt": "2026-08-06T03:12:11.894Z",
   "entries": {
     "memory:memory/2026-06-08.md:19:38": {
       "key": "memory:memory/2026-06-08.md:19:38",
@@ -2695,6 +2695,130 @@
         "修复了6/16",
         "js重写丢失6/12迭代需求的问题",
         "12.3重建了workflow-editor.html"
+      ]
+    },
+    "memory:memory/2026-08-05.md:83:93": {
+      "key": "memory:memory/2026-08-05.md:83:93",
+      "path": "memory/2026-08-05.md",
+      "startLine": 83,
+      "endLine": 93,
+      "source": "memory",
+      "snippet": "- 补救: 需求分级模板(产品层确认后才进实现层)+交互设计确认=强制前置节点+线框先行+默认方案+24h默认同意+「前5分钟操作」走查 - **Loop Engineering 印证**: 三连败全是决策分类失败(实现层当产品层问/未确认自行拍板/开放问题推给用户) → 决策状态机+默认值+批量审批设计被实证支持 ## Bryson 自诊断转发闭环（09:35） - 收到 Bryson 完整自诊断（SELF_DIAGNOSIS_20260805.md，存于 xiaofeng_workspace/video_editor_mvp/） - 发现 DM 会话(404747eb)已先行完成转发给 Daryl：完整摘要+前端实测+5条机制补丁+Loop Engineering 立项提议（\"要我现在写立项文档吗？\"）——本会话不重复转发，仅确认闭环 - 已回复 Bryson：转发完成、建议他先自跑新纪律（默认方案+线框先行+前5分钟走查）、机制正式生效等 Daryl 点头 - 待办：Daryl 回复 Loop Engineering 立项 → 若批准，把 Bryson 5 条并入立项文档，剪辑MVP 当试点 ## 线框包评审（10:45，Bryson 提交 08b0bff） - wf01-wf05 全部过审。重点 wf02 ASR，2 个必改：①拖边界精度陷阱(6px/s 无法±1s)→改点击切点+步进微调为主交互，拖拽做增强；②场景「截断」会丢内容→改合并相邻低置信度场景保无缝覆盖",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.40765587985515594,
+      "maxScore": 0.40765587985515594,
+      "firstRecalledAt": "2026-08-06T03:12:11.894Z",
+      "lastRecalledAt": "2026-08-06T03:12:11.894Z",
+      "queryHashes": [
+        "02b987b065c5"
+      ],
+      "recallDays": [
+        "2026-08-06"
+      ],
+      "conceptTags": [
+        "实现层当产品层问/未确认自行拍板/开放问题推给用户",
+        "self-diagnosis-20260805.md",
+        "wf01-wf05",
+        "6px/s",
+        "补救",
+        "需求",
+        "分级",
+        "模板"
+      ]
+    },
+    "memory:memory/2026-08-05.md:180:193": {
+      "key": "memory:memory/2026-08-05.md:180:193",
+      "path": "memory/2026-08-05.md",
+      "startLine": 180,
+      "endLine": 193,
+      "source": "memory",
+      "snippet": "- 13:00 Bryson 正式移交「决策自主环」：project_xiaofeng.md 已冻结该条目，一切以 LOOP_ENGINEERING_PLAN.md 为准（负责人 Kitty，M0-M3 40-80h，待 Daryl 批准+看板复核后启动 M0）。已更新 active.md 接管。Bryson 范围=仅剪辑MVP，M2 试点时找他 ## 🚀 16:20 决策自主环 M1 决策自主层工具开发（Daryl 批准直接开始） - **pre-op**: P2 PASS | 子代理 decision-loop-m1（7m15s, 99.8k tokens）| commit ec22d4cb - **交付 5/5**: decide.py（三分类零LLM，13/13=100%）+ decision_ledger（append-only 9字段） + error_budget（分级0.1/1/10，P0拦截exit3，周一重置，--grace磨合期）+ daily_exception_report（三类例外白名单，无例外输出）+ review_batch.sh（周度汇总→reviews/，纠正入口→capture_correction→蒸馏闭环） - **测试**: 22 用例全绿（decide 13 + budget 6 + ledger 3）| 4 jsonl 合法 | bash -n 通过 - **修复 3 bug**: argparse 子命令传参/文案重复字/测试共享临时文件 - **M2 提示**: 剪辑MVP 可 --grace jianji-mvp 开磨",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.38438131511211393,
+      "maxScore": 0.38438131511211393,
+      "firstRecalledAt": "2026-08-06T03:12:11.894Z",
+      "lastRecalledAt": "2026-08-06T03:12:11.894Z",
+      "queryHashes": [
+        "02b987b065c5"
+      ],
+      "recallDays": [
+        "2026-08-06"
+      ],
+      "conceptTags": [
+        "project-xiaofeng.md",
+        "loop-engineering-plan.md",
+        "m0-m3",
+        "40-80h",
+        "active.md",
+        "pre-op",
+        "decision-loop-m1",
+        "99.8k"
+      ]
+    },
+    "memory:memory/2026-08-05.md:175:184": {
+      "key": "memory:memory/2026-08-05.md:175:184",
+      "path": "memory/2026-08-05.md",
+      "startLine": 175,
+      "endLine": 184,
+      "source": "memory",
+      "snippet": "- Bryson 撤回方案3完全体（承认7/23=实现降级非流程问题，「根本用不了」不是「确认太多」）；收回「明天交付」 - 落定分层：方向级（交互范式/根目录/模块范围）→ Daryl 确认（唯一不可逆决策）；细节级 → 替身+账本自主；决策账本=选择/理由/备选+一键回滚 - 用户替身按显式任务建：只从可核实会话/反馈蒸馏，标注证据来源+置信度；记录缺失本身作为替身第一条输入 - 待 Daryl 拍板：①wf01 A/A（方向级）②ASR交互需求 ③机制分层进 Loop Engineering - 12:45 Bryson 工具链需求清单就绪（mechanism_toolchain_requirements.md, commit 9a83085）：账本JSONL模型+回滚点+rollback CLI+替身蒸馏接口，~6h，试点挂素材扫描 - 13:00 Bryson 正式移交「决策自主环」：project_xiaofeng.md 已冻结该条目，一切以 LOOP_ENGINEERING_PLAN.md 为准（负责人 Kitty，M0-M3 40-80h，待 Daryl 批准+看板复核后启动 M0）。已更新 active.md 接管。Bryson 范围=仅剪辑MVP，M2 试点时找他 ## 🚀 16:20 决策自主环 M1 决策自主层工具开发（Daryl 批准直接开始） - **pre-op**: P2 PASS | 子代理 decision-loop-m1（7m15s, 99.8k tokens）| commit ec22d4cb",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.36889637708663936,
+      "maxScore": 0.36889637708663936,
+      "firstRecalledAt": "2026-08-06T03:12:11.894Z",
+      "lastRecalledAt": "2026-08-06T03:12:11.894Z",
+      "queryHashes": [
+        "02b987b065c5"
+      ],
+      "recallDays": [
+        "2026-08-06"
+      ],
+      "conceptTags": [
+        "承认7/23",
+        "交互范式/根目录/模块范围",
+        "选择/理由/备选",
+        "只从可核实会话/反馈蒸馏",
+        "a/a",
+        "project-xiaofeng.md",
+        "loop-engineering-plan.md",
+        "m0-m3"
+      ]
+    },
+    "memory:memory/2026-08-05.md:62:78": {
+      "key": "memory:memory/2026-08-05.md:62:78",
+      "path": "memory/2026-08-05.md",
+      "startLine": 62,
+      "endLine": 78,
+      "source": "memory",
+      "snippet": "- **教训(重要)**: 杀进程前必须查 crontab（watchdog/*@reboot）和 WorkBuddy/Claw/opc-dashboard 目录，不能只看 launchd + workspace 脚本。隧道基础设施归 xiaofeng 的 watchdog 体系管，动之前先问。 ## 🔍 09:00 C15 搜索基准测试（Daryl指令）+ 重大发现 - **Daryl指令**: A7/8/9搁置、B组取消、C15搜索基准立马做 - **结果**: SearXNG路今天39.9(暴跌) | Brave API路65.9(持平基线67.0) - **根因**: 引擎可用性坍塌——google 400封/ddg CAPTCHA封/bing返回垃圾(直连bing查Kubernetes→台湾乐透站!)/brave 7/30因配额从SearXNG移除(8月配额已重置) - **8/3的0.0**: keepalive误用系统Python缺msgspec（db56cbfe已修） - **结论**: 质量没劣化，是路由引擎死了；Brave API完好 - **待Daryl确认**: Brave接回主路由 / SearXNG加新引擎 / 周度抽检恢复 - 报告: searxng-deploy/benchmark/benchmark_report_20260805.md ## 🔄 10:00 Bryson 剪辑MVP机制自诊断（Daryl要求，Loop Engineering输入） - **Daryl反馈**: 两次需求对齐仍理解不深，卡第三次澄清；v3.0前端\"展",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3678435117006302,
+      "maxScore": 0.3678435117006302,
+      "firstRecalledAt": "2026-08-06T03:12:11.894Z",
+      "lastRecalledAt": "2026-08-06T03:12:11.894Z",
+      "queryHashes": [
+        "02b987b065c5"
+      ],
+      "recallDays": [
+        "2026-08-06"
+      ],
+      "conceptTags": [
+        "workbuddy/claw/opc-dashboard",
+        "a7/8/9搁置",
+        "searxng路今天39.9",
+        "api路65.9",
+        "持平基线67.0",
+        "400封/ddg",
+        "captcha封/bing返回垃圾",
+        "7/30因配额从searxng移除"
       ]
     }
   }

@@ -75,6 +75,7 @@ bash scripts/compliance/pre-op.sh "<操作描述>" "[涉及文件]" "[影响范�
 > 自动判定 P0-P3 级别
 > P0→BLOCK（必须请示 Daryl）| P1→CONFIRM（提供方案后请示）| P2/P3→PASS（自主执行）
 > 不跑 pre-op 不准开始复杂操作
+> 🔴 核心配置变更（openclaw.json/agents workspace）必被 P1 CONFIRM 拦截：改后必须跑 `scripts/compliance/check_workspaces.py` 确认 0 FAIL（2026-08-06 失忆事故机制化）
 
 #### L3 · 操作后验证（任务完成时必跑）
 ```bash
