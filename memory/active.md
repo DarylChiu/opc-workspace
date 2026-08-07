@@ -83,6 +83,10 @@
 | 管线2 Qwen Omni 对接 | ❌ 冻结 | 30% |
 
 ## 🔵 待办
+### IELTS陪练助手 — v1.3.0 待 Daryl 验收（⏸️ 挂起中，服务 8767 ACTIVE）
+- v1.3.0 开发完毕，7/25 两 Bug 已修复；等 Daryl 晚间验收（已等 13 天）
+- 服务 LaunchAgent 持久化：localhost:8767 ACTIVE
+
 
 ### ~/opc-workspace 本地仓库卡死 rebase（7/16发现）
 - 卡在 6/24 interactive rebase 中间态，每日 auto-backup 在 detached HEAD 上提交
