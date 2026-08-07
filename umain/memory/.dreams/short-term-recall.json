@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-06T03:12:11.894Z",
+  "updatedAt": "2026-08-07T09:22:23.404Z",
   "entries": {
     "memory:memory/2026-06-08.md:19:38": {
       "key": "memory:memory/2026-06-08.md:19:38",
@@ -2146,21 +2146,23 @@
       "endLine": 47,
       "source": "memory",
       "snippet": "## 状态概览 - **active.md**: 更新至 7/14，任务无实质变更 - **日记链**: 2026-06-1 → 2026-07-15 完整 - **Git**: 本地 92 commits ahead（remote 未配置，已知问题） - **成本**: 全量 $68.30 | 本月 $8.70 | 今日 $2.11 - **OPC Dashboard**: v1.6 运行正常 (localhost:8765) ## 多 Agent 审计协调 - **Self**: 审计修复完成（7/14日记充实 + active时间戳 + Git）→ OPC 已发送 - **Balance**: 审计 + Git push 成功（91 commits积压清除）→ OPC 已发送 - **xiaofeng**: TTS 吞音条目状态更新 ✅ → OPC 已发送 - **main (本Agent)**: 骨架日记填充 + Git commit ## 13:50 · Self L3自进化基建上线 ✅ - Daryl拍板: 给Self开发L3(SAGE Checker + Reflexion),不碰L4 - 交付: checker.py(三维审查:来源/结构/逻辑,DeepSeek判分,JSONL留痕) + reflect.sh(检讨写/读/检索) + EVOLUTION.md协议 + Self的AGENTS.md接入 - 测试: 坏稿FAIL(0/1/1) / 好稿PASS(8/9/8),判别力验证通过 - 已git commit到workspace-self + 已通知Se",
-      "recallCount": 3,
+      "recallCount": 4,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.1920509815216065,
+      "totalScore": 1.545818382501602,
       "maxScore": 0.4273324191570282,
       "firstRecalledAt": "2026-07-20T09:01:32.972Z",
-      "lastRecalledAt": "2026-07-21T03:24:34.357Z",
+      "lastRecalledAt": "2026-08-07T01:08:23.346Z",
       "queryHashes": [
         "a974f14c47df",
         "e37f4fab9d2a",
-        "ed6b27a3f0ed"
+        "ed6b27a3f0ed",
+        "b8d61bb192cd"
       ],
       "recallDays": [
         "2026-07-20",
-        "2026-07-21"
+        "2026-07-21",
+        "2026-08-07"
       ],
       "conceptTags": [
         "active.md",
@@ -2282,22 +2284,24 @@
       "endLine": 41,
       "source": "memory",
       "snippet": "- **OPC 群消息**: main 推送决策清单（三模型混合方案/自进化方向/7月预算告警），xiaofeng 推送阻塞项清单（洗稿MVP/IELTS v2.0/Loop Engineering/AI模型切换） ### 运行状态 - **active.md**: 最后更新 7/21 20:31，重启前备份 - **OPC Dashboard v1.6**: 正常运行 (localhost:8765)，成本数据路径已修复 - **各 Agent 心跳**: 全部正常，HEARTBEAT_OK - **4 Agent 审计 cron**: 全部触发完成（main/xiaofeng/balance/self），均已 OPC 群汇报 - **SearXNG/ngrok**: 正常运行 - **成本数据**: API 正常 (localhost:8765/api/costs) ### ⚠️ 待关注 - **7月预算**: 当前 $32.84 / 预算 $15，超支 119%，待 Daryl 确认预算调整 - **crontab 周度搜索抽检**: 待 Daryl 手动安装（macOS 非交互式权限阻塞） - **重启后 git commit/push**: 待补做",
-      "recallCount": 3,
+      "recallCount": 4,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.199494472146034,
+      "totalScore": 1.5726190418004988,
       "maxScore": 0.4310830682516098,
       "firstRecalledAt": "2026-07-23T00:00:27.147Z",
-      "lastRecalledAt": "2026-08-03T03:04:32.533Z",
+      "lastRecalledAt": "2026-08-07T01:08:23.346Z",
       "queryHashes": [
         "e5bd7d38155b",
         "ca7a32f634d8",
-        "3a0689854065"
+        "3a0689854065",
+        "b8d61bb192cd"
       ],
       "recallDays": [
         "2026-07-23",
         "2026-07-29",
-        "2026-08-03"
+        "2026-08-03",
+        "2026-08-07"
       ],
       "conceptTags": [
         "备份",
@@ -2819,6 +2823,161 @@
         "400封/ddg",
         "captcha封/bing返回垃圾",
         "7/30因配额从searxng移除"
+      ]
+    },
+    "memory:memory/archive/2026-07-02.md:20:32": {
+      "key": "memory:memory/archive/2026-07-02.md:20:32",
+      "path": "memory/archive/2026-07-02.md",
+      "startLine": 20,
+      "endLine": 32,
+      "source": "memory",
+      "snippet": "2. 需要持久化的后台进程必须用 nohup + disown，不能用 exec background 3. Daryl 明确表达不满（\"走点心\"、\"跟你开发挺糟心\"）——效率和质量是第一要求 - 隧道就绪: trycloudflare + loca.lt 双活, HTTP 200 ✅ - Daryl 决定明早继续验收 ## 状态概览 - 7/1 全天无 Daryl 活动，等待 7 月工作计划确认 - 🔴 M2 Agent状态面板 验收中（隧道就绪，明早继续） - 视频分析v1.1.2（属 Xiaofeng）待验收 - 7月基建方向（Agent自进化 + Loop Engineering）待 Daryl 启动确认 - OPC看板 v1.4 待开发 - 雅思陪练v2.0 收尾中",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3501952856779098,
+      "maxScore": 0.3501952856779098,
+      "firstRecalledAt": "2026-08-06T17:14:57.001Z",
+      "lastRecalledAt": "2026-08-06T17:14:57.001Z",
+      "queryHashes": [
+        "350c592b5760"
+      ],
+      "recallDays": [
+        "2026-08-07"
+      ],
+      "conceptTags": [
+        "loca.lt",
+        "7/1",
+        "视频分析v1.1.2",
+        "v1.4",
+        "雅思陪练v2.0",
+        "需要",
+        "持久",
+        "后台"
+      ]
+    },
+    "memory:memory/2026-08-04.md:24:51": {
+      "key": "memory:memory/2026-08-04.md:24:51",
+      "path": "memory/2026-08-04.md",
+      "startLine": 24,
+      "endLine": 51,
+      "source": "memory",
+      "snippet": "- 今日 $3.16 | 本月 $3.92 | 全量 $129.70 - ⚠️ Kitty 今日 $2.71 异常偏高，疑似 Opus 20刀调整项回填 - 兜底文件 cost_daily.json 已写入 ### 🤖 系统例行（8/3） - 07:00 项目看板更新：4 Agent 全员正常刷新 - 19:00 Self 项目看板更新正常 - Heartbeat：4 Agent 全天心跳正常 - Self methodology-cards Git 备份：工作区干净，无需新 commit ### 🌙 午夜 Cron 审计（00:02 8/4） - 审计脚本运行：3项自动修复 - 日记骨架创建、7/4归档、Git备份推送 - active.md 47h 未更新 → 已刷新时间戳 - 成本数据标记过期（午夜正常，Balance已推送最新数据） ## 💰 成本快照（8/4 00:00） - 8/3: $3.16 | 本月(Aug): $3.92 | 全量: $129.70 - 各Agent 8/3: Kitty $2.71 | 其余合计 $0.45 - ⚠️ Kitty 异常高，疑似 Opus 调整回填，非实时消耗 ## OPC自进化基建L1 · M0+M1 交付 (16:30) ### 背景 Daryl回国度假暴露核心问题：管理者不在→系统停摆。指令推进自进化/Loop Engineering/自主任务基建，核心原则\"时间成本>API成本，停工=亏损\"。 ### 关键设计决策（多轮讨论） 1. **教训形成**: 事件驱动捕获（Daryl纠错/任务失败/审计违规",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.378979155421257,
+      "maxScore": 0.378979155421257,
+      "firstRecalledAt": "2026-08-07T01:08:23.346Z",
+      "lastRecalledAt": "2026-08-07T01:08:23.346Z",
+      "queryHashes": [
+        "b8d61bb192cd"
+      ],
+      "recallDays": [
+        "2026-08-07"
+      ],
+      "conceptTags": [
+        "备份",
+        "3.16",
+        "3.92",
+        "129.70",
+        "2.71",
+        "cost-daily.json",
+        "8/3",
+        "methodology-cards"
+      ]
+    },
+    "memory:memory/2026-07-16.md:1:35": {
+      "key": "memory:memory/2026-07-16.md:1:35",
+      "path": "memory/2026-07-16.md",
+      "startLine": 1,
+      "endLine": 35,
+      "source": "memory",
+      "snippet": "# 2026-07-16 日记 ## 00:04 · 每日记忆归档审计 — 7/15→7/16 跨日 - `audit.sh --report` 运行，自动修复 2 项（创建日记 + 归档 6/15） - **浅层问题 5 项**: 日记骨架检测 + 4 项低严重度 - **深层问题 2 项**: Git pull/push 失败（remote 未配置，已知问题） - **成本**: 今日 $1.79 | 本月 $10.79 | 全量 $70.39 - **OPC Dashboard**: v1.6 运行正常 (localhost:8765)，API 端点正常 - **SAGE Checker + Reflexion**: 基建刚上线，日志文件尚未生成（预期行为） ## 7/15 事件摘要 ### Agent自进化基建 L3 上线 (Self) - Daryl 拍板: SAGE Checker + Reflexion 已交付 - 测试验证: 坏稿 FAIL (0/1/1) / 好稿 PASS (8/9/8) - 观察期 1 周 → 评估效果 → 决定推广方向 ### TTS 方案B (xiaofeng) - Piper en_US-lessac-high.onnx 替代 Kokoro 为主引擎 - 三重 fallback 引擎链就位 ### 成本全量扫描 (Balance) - 6281 calls / 239.9M tokens / $68.30 全量对齐 - cost_daily 路径问题已识别 ### 生活提醒 crontab 安装 - 4 个提醒 (07:2",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.35232678055763245,
+      "maxScore": 0.35232678055763245,
+      "firstRecalledAt": "2026-08-07T01:08:23.346Z",
+      "lastRecalledAt": "2026-08-07T01:08:23.346Z",
+      "queryHashes": [
+        "b8d61bb192cd"
+      ],
+      "recallDays": [
+        "2026-08-07"
+      ],
+      "conceptTags": [
+        "7/15",
+        "7/16",
+        "audit.sh",
+        "6/15",
+        "pull/push",
+        "1.79",
+        "10.79",
+        "70.39"
+      ]
+    },
+    "memory:memory/archive/2026-07-05.md:49:66": {
+      "key": "memory:memory/archive/2026-07-05.md:49:66",
+      "path": "memory/archive/2026-07-05.md",
+      "startLine": 49,
+      "endLine": 66,
+      "source": "memory",
+      "snippet": "## 18:50 · OPC看板 v1.4 完成 ✅ - Daryl 将「OPC看板v1.4」移至 In Progress → 完成三项需求 - **主次优先级视觉分层**：P0-P3 四级，左侧色条+徽章+创建时可选 - **Bryson 雅思陪练补全**：ielts_tutor 加入扫描优先级，产物 3→7 - **symlink 清理**：移除 opc-workspace 中旧 ielts_tutor_v2.0 副本 - Commit v1.4 + tag ## 状态概览 - 🔴 M2 全模块验收完毕 ✅ → v1.5 生产模式 - OPC 看板 v1.4 并入 v1.5 - 验收报告已生成 `decision_reports/m2_acceptance_report_2026-07-05.md` - 7 月基建方向（Agent自进化 + Loop Engineering）待 Daryl 启动确认 - ✅ M2 全部模块验收完毕 + v1.4 完成 - 待办: Agent版本变更通知 - 雅思陪练 v2.0 收尾中 - 7 月基建方向（Agent自进化 + Loop Engineering）待 Daryl 启动确认",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.39254726469516754,
+      "maxScore": 0.39254726469516754,
+      "firstRecalledAt": "2026-08-07T09:22:23.404Z",
+      "lastRecalledAt": "2026-08-07T09:22:23.404Z",
+      "queryHashes": [
+        "0151b4f90a54"
+      ],
+      "recallDays": [
+        "2026-08-07"
+      ],
+      "conceptTags": [
+        "v1.4",
+        "opc看板v1.4",
+        "p0-p3",
+        "ielts-tutor",
+        "opc-workspace",
+        "ielts-tutor-v2.0",
+        "v1.5",
+        "v2.0"
+      ]
+    },
+    "memory:memory/archive/2026-07-06.md:21:32": {
+      "key": "memory:memory/archive/2026-07-06.md:21:32",
+      "path": "memory/archive/2026-07-06.md",
+      "startLine": 21,
+      "endLine": 32,
+      "source": "memory",
+      "snippet": "- 17:00 OPC Dashboard 服务挂掉（进程异常退出）→ 重启 - 17:05 tunnel 过期 → 重建（charm-functioning-donna-time.trycloudflare.com） - 22:37 tunnel 再次挂+服务进程异常退出 → 全栈重启 - 23:00 Gateway 重启（Sentinel 插件加载）→ OPC Dashboard 被带下线 → 再次全栈重启 - ⚠️ 今天累计 8 次 tunnel 重建，临时隧道完全不适合长期使用 ## 状态概览 - 各 Agent 处于待命状态 - 7 月基建方向（Agent自进化 + Loop Engineering）已在 Daryl 与 Bryson 讨论中推进 - OPC 看板 v1.5 运行中 - M2 全部模块验收完毕",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3517094016075134,
+      "maxScore": 0.3517094016075134,
+      "firstRecalledAt": "2026-08-07T09:22:23.404Z",
+      "lastRecalledAt": "2026-08-07T09:22:23.404Z",
+      "queryHashes": [
+        "0151b4f90a54"
+      ],
+      "recallDays": [
+        "2026-08-07"
+      ],
+      "conceptTags": [
+        "gateway",
+        "v1.5",
+        "opc",
+        "dashboard",
+        "服务",
+        "进程",
+        "异常",
+        "退出"
       ]
     }
   }

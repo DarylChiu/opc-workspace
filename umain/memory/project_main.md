@@ -1,8 +1,8 @@
 # Project Dashboard — main（忧郁小猫）
 
-> 最后编译: 2026-08-06 07:00 +07:00
+> 最后编译: 2026-08-07 07:00 +07:00
 > 负责人: Kitty | Agent ID: main
-> 下轮更新: 2026-08-06 13:00
+> 下轮更新: 2026-08-07 13:00
 
 ---
 
@@ -17,13 +17,13 @@
 | 项目ID | decision-loop |
 | 状态 | 🟢 active |
 | 优先级 | P0 |
-| 当前阶段 | M0+M1 已交付（8/5），M2 剪辑MVP 试点待启动 |
-| 阶段进度 | M0 100% / M1 100% / M2 0% |
+| 当前阶段 | M0+M1 已交付（8/5），M2 剪辑MVP 试点进行中（8/6 启动，Bryson 开发 v4.0 前端） |
+| 阶段进度 | M0 100% / M1 100% / M2 30%（Bryson 完成，60% 节点预计 8-12h 后） |
 | 启动日期 | 2026-08-05 |
-| 预计交付 | M0→M3 共 40-80h；M2 等 Daryl 指令 |
-| 本周进展 | 8/5 Daryl 立项、指定 Kitty 负责人（Bryson 移交）；M0 机制冻结（需求分级模板/提问质量门禁/教训病理Schema#4/错误预算规则#5 + AGENTS.md M0条款 + jianji-mvp workflow 方向确认前置节点 + 模式库3条种子病理，patterns 4→7）；M1 决策自主层工具 5/5（decide.py 三分类零LLM 13/13 + decision_ledger 账本 + error_budget 周度预算 P0拦截/降档/磨合期 + daily_exception_report + review_batch 周度批量审批），22 用例全绿，commits 069aa1df/ec22d4cb；四Agent 颠覆性思路征集整合（用户定方向、细节全归AI、控制→定价审计、经验可遗忘） |
-| 下周计划 | M2 剪辑MVP 试点（16-30h，可 --grace jianji-mvp 开磨合期）待 Daryl 指令；Bryson 工具链清单（mechanism_toolchain_requirements.md，~6h）待搭 |
-| 阻塞项 | M2 等 Daryl 指令启动；wf01 A/A 与 ASR 交互需求待 Daryl 回复 |
+| 预计交付 | M0→M3 共 40-80h；M2 预计 8/7-8/8 完成 |
+| 本周进展 | 8/5 Daryl 立项、指定 Kitty 负责人（Bryson 移交）；M0 机制冻结（需求分级模板/提问质量门禁/教训病理Schema#4/错误预算规则#5 + AGENTS.md M0条款 + jianji-mvp workflow 方向确认前置节点 + 模式库3条种子病理，patterns 4→7）；M1 决策自主层工具 5/5（decide.py 三分类零LLM 13/13 + decision_ledger 账本 + error_budget 周度预算 P0拦截/降档/磨合期 + daily_exception_report + review_batch 周度批量审批），22 用例全绿，commits 069aa1df/ec22d4cb；四Agent 颠覆性思路征集整合（用户定方向、细节全归AI、控制→定价审计、经验可遗忘）；8/6 Daryl 拍板启动 M2：试点框架 docs/m2_jianji_pilot.md + 账本种子 dec_20260806_001 落盘，线框 wf01-wf05 冻结（2必改已核验），Bryson 交互方案定稿、完成 30% |
+| 下周计划 | ①跟踪 Bryson M2 60%/90%/100% 汇报节点 ②M2 完成后试点报告（决策次数对比/预算/例外）③Bryson 工具链清单搭设（mechanism_toolchain_requirements.md，~6h） |
+| 阻塞项 | wf01 A/A 与 ASR 交互需求待 Daryl 回复 |
 
 #### 里程碑
 
@@ -31,7 +31,7 @@
 |--------|------|------|----------|
 | M0 · 机制冻结（三分类/默认值/例外上报/错误预算/门禁） | 🟢 done | 100% | 8/5 ✅ |
 | M1 · 决策自主层工具（decide/ledger/budget/exception/review） | 🟢 done | 100% | 8/5 ✅ |
-| M2 · 剪辑MVP 试点（Bryson 协作） | ⚪ pending | 0% | 等 Daryl 指令 |
+| M2 · 剪辑MVP 试点（Bryson 协作） | 🟡 in_progress | 30% | 8/7-8/8 预计 |
 | M3 · 推广+指标化 | ⚪ pending | 0% | — |
 
 #### 关键决策
@@ -42,6 +42,7 @@
 | 8/5 | 决策分层：方向级仍确认（唯一不可逆决策），细节级替身+账本自主；Bryson 方案3完全体撤回 | P1 | ✅ 已确认 |
 | 8/5 | 用户替身按显式任务建，只从可核实会话/反馈蒸馏，标注证据来源+置信度 | P1 | ✅ 已确认 |
 | 8/5 | 错误预算周度循环（0.1/1/10 分级，P0 直接拦截），磨合期 2-4 周内错误只入病理库 | P1 | ✅ 已确认 |
+| 8/6 | M2 剪辑MVP 试点正式启动（Daryl 拍板）：试点框架+账本种子+线框冻结 | P1 | ✅ 已确认 |
 
 ---
 
@@ -89,13 +90,13 @@
 | 项目ID | opc-dashboard |
 | 状态 | 🟢 active |
 | 优先级 | P0 |
-| 当前版本 | v1.6 + 产物模块 v1.7.0（运行中 @ http://localhost:8765，commits 690decf/fbcd813） |
-| 当前阶段 | M4 · 生产部署优化 |
-| 阶段进度 | 35% |
-| 总进度 | 92% |
+| 当前版本 | v1.6 + 产物模块 v1.7.0（运行中 @ http://localhost:8765，commits 690decf/fbcd813/09e38ea） |
+| 当前阶段 | M4 · 生产部署优化 ✅ 全部完成（8/7） |
+| 阶段进度 | 100% |
+| 总进度 | 100%（M4 收官） |
 | 启动日期 | 2026-06-08 |
 | 预计交付 | 2026-08-10 |
-| 本周进展 | 8/2-8/5 运行平稳，午夜Cron审计正常；8/5 看板成本端点核查（Balance诉求已实现：jsonl全量扫描3283文件/14216calls解析usage.cost.total，双源合并Balance台账$141.03权威）+ preview ReferenceError修复（commit ea47ba2）；产物模块 v1.7.0 上线（30天剔除/新鲜度加权/每Agent≤15/新文档置顶）；8月成本截至8/5：$15.24（5天），全量累计$141.03 |
+| 本周进展 | 8/2-8/5 运行平稳；8/5 成本端点核查+preview修复（ea47ba2）+产物模块 v1.7.0（fbcd813）；8/7 M4 收官：③约定版本变更自动DM通知（M4c，commit 09e38ea），至此 M4 三项全完成（①override过期清理✅ ②系统消息过滤✅ ③约定版本变更通知✅）；Daryl 拍板 v1.7 整合「Sidebar项目总线 → 平移到 Agent状态和任务的 project milestone 模块」 |
 | 下周计划 | M4 override过期机制 + 系统消息过滤 + Agent「约定版本」字段（8/4 Daryl推入In Progress，开发计划制定中）；8月预算调整/12G存储清理 → 8/5 已搁置不处理；待 Daryl 确认：Brave 接回主搜索路由 |
 | 阻塞项 | Daryl决策阻塞：Self阻塞(OPC看板/卡片审核/ACCA Vault等) + Balance SOP审阅（音乐文件/车辆费用/JGL 8/5已取消）；Brave接回主搜索路由待确认（C15基准8/5归档：SearXNG 39.9坍塌/Brave 65.9持平） |
 
@@ -106,7 +107,8 @@
 | M1 · 核心看板上线 | 🟢 done | 100% | 6/15 ✅ |
 | M2 · 功能面板（Agent状态/产物预览/Workflow编辑器/成本/沙箱） | 🟢 done | 100% | 6/28 ✅ |
 | M3 · 项目总线集成 | 🟢 done | 100% | 7/25 ✅ |
-| M4 · 生产部署优化 | 🟡 in_progress | 35% | 8/10 |
+| M4 · 生产部署优化（override过期/系统消息过滤/约定版本变更通知） | 🟢 done | 100% | 8/7 ✅ |
+| v1.7 · Sidebar项目总线与project milestone整合 | ⚪ pending | 0% | 8/7 Daryl 拍板，待启动 |
 
 #### 成本归集
 
@@ -114,8 +116,8 @@
 |------|------|------|------|
 | 2026-06 | — | ~$28 | — |
 | 2026-07 | $55 | $66.01 | -$11.01 🔴 |
-| 2026-08 | 待定 | $15.24 | 月初（5天） |
-| 累计 | — | ~$141.03 | 🔴 7月超支20.0% |
+| 2026-08 | 待定 | $16.23 | 月初（7天） |
+| 累计 | — | ~$142.01 | 🔴 7月超支20.0% |
 
 #### 关键决策
 
@@ -130,6 +132,8 @@
 | 7/25 | GEPA教训：AI-on-AI实验不可靠，确定性基础设施（bash+python watchdog级）已验证有效 | P2 | ✅ 已记录 |
 | 8/5 | 成本端点核查：Balance诉求已实现（jsonl全量扫描+双源合并），无需改动 | P2 | ✅ 已实施 |
 | 8/5 | 产物模块 v1.7.0 上线（30天剔除/新鲜度加权/每Agent≤15/新文档置顶） | P2 | ✅ 已实施 |
+| 8/7 | M4 三项全部完成：override过期清理✅ + 系统消息过滤✅ + 约定版本变更自动DM通知（M4c commit 09e38ea）✅ | P2 | ✅ 已实施 |
+| 8/7 | v1.7 整合方向（Daryl 拍板）：Sidebar 项目总线与 Agent状态页 project milestone 重复 → 把 Sidebar 项目总线平移到 Agent状态和任务的 project milestone 模块 | P1 | ✅ 已确认，待启动 |
 | 8/5 | Daryl决策：8月预算/12G存储/Model Router 搁置；音乐文件/车辆费用/JGL 取消；C15 搜索基准已做 | P1 | ✅ 已确认 |
 
 #### 风险/问题

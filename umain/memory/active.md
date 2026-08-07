@@ -16,6 +16,7 @@
 - **文档**: LOOP_ENGINEERING_PLAN.md（详见该文件）
 
 ### 🆕 OPC自进化基建L1 — M0+M1+M2 已交付 (8/4) + Balance试点Phase0影子模式 (8/5)
+- **⏸️ 汇报节奏调整 (8/7 Daryl指令)**: Phase0 评估报告不用专门汇报，这几天监控着即可；**周日(8/9) Daryl 一次性做「是否全面应用」决策** → 周日汇总时需备好 Phase0 评估结果 + 决策自主环 M2 进度
 - **M0 信号捕获** ✅: capture_correction.sh(4类信号) + distill_patterns.py(周度LLM蒸馏) + launchd周日22:00
 - **M1 失败模式库** ✅: failure_patterns.json(trigger+embedding) + rules_table.json(4规则) + embed_patterns.py(1536维) + retrieve_patterns.py(三层检索)
 - **种子数据**: 4条模式(设计语言/git/搜索/数据来源)，来自Daryl历史纠错
