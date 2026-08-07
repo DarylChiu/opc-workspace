@@ -1,28 +1,50 @@
 # 当前活跃任务 (中期记忆 — 每次session加载)
 
-> 最后更新: 2026-07-22 09:56（心跳恢复：git rebase 事故后重建）
+> 最后更新: 2026-08-06 23:59（每日审计 · 工作区指针事故修复+M2试点开工）
 
 ## 🟢 进行中
-### 视频自动化剪辑 MVP（video-editor-mvp）✅ Phase 0 开发完毕，迭代验收中（7/21）
-- **状态**: 🟢 Phase 0 全部 15 项任务完成，Daryl 实战验收中
-- **实战交付**: v1 → v2(53s三幕) → v3(52.6s) → v3.1(50.6s竖拍修复) → **v3.2(54s结束感修复)**
-- **最新**: V3.2 已推送 OPC，日落全景连续 14s 作为 End，素材去重，等待 Daryl 下载验收
-- **V3.1 验收反馈**: ✅9:16修复 ✅BGM衔接 ✅剪辑节奏 | ❌素材重复 ❌结尾无结束感
-- **根因诊断**: Insta360 Go 3S FreeFrame 竖持拍摄，ffmpeg 不自动旋转，已写入检测脚本
-- **代码**: 20 模块 / 6,064 行 / 全导入通过
-- **方向**: 变现加速器，聚焦抖音 16:9+9:16，BGM驱动编排+三层情感漏斗
-- **架构**: 前端极简化→Agent主导，Bryson 交付引擎+API+CLI+文档
-- **阻塞**: DJI Mic 3 音频同步仅框架+模拟，等设备到位联调
-- **代码目录**: Bryson/video-editor-mvp/
+### M2 剪辑MVP 试点（8/6 开工 · Kitty 下发）🟢
+- **8/6**: Daryl 拍板 M2 试点 = 剪辑MVP（决策自主环），wf01-wf05 冻结为 v4.0 基线（2 必改已核验落实）
+- 30% 节点完成：交互方案定稿 + 账本记录；进行中：前端 v4.0 交互版开发（60% 节点预估 8-12h 后）
 
-### 洗稿MVP — v1.2.0 迭代需求收集模式 🔴（7/18 15:42 Daryl指令）
-- **当前状态**: Daryl 要求先收集需求不修改，攒齐后一次性动工+更新版号
-- **Daryl 尚未发送具体需求**，等待中
-- **已发布**: v1.2.0（内核卡 M1-M3 完整交付，6个commit迭代链）
-- **历史**: M2 开发计划提交（7/17 14:00）、内核卡价值命题质疑（7/17 10:33）、SearXNG 修复 ✅（7/17）
+
+### 视频自动化剪辑 MVP（video-editor-mvp）🟢 v3.0 重构完成（7/25）
+- **v3.0 重构**: 🟡 M0-M5 全模块完成，Daryl 已开始交互（7/28）
+  - ✅ BGM 结构: Hooktheory 方案（Birds of a Feather · 8乐句 + 12个8bar单元）
+  - ✅ 数据层: SQLite song_lib + phrase_lib + 8bar_units
+  - ✅ API: 模块化（api/bgm scan asr emotion match）+ server.py v3.0
+  - ✅ 前端: 5节点 pipeline 全可视化 · OPC Design System
+  - ✅ 输出: ffmpeg 渲染 → Toshiba HDD → Syncthing → Tab S8 验收
+  - ✅ 服务: localhost:8768 / frontend/index.html ~400行
+  - ✅ **7/28 修复**: 前端 API 路径从 localhost:8768 改为相对路径，隧道可正常访问
+  - 🔗 旧隧道: `coral-katie-senator-urw` (可能已掉线)
+  - 🚇 **最新隧道 (8/3)**: `https://freebsd-present-rome-modes.trycloudflare.com/frontend/index.html`（旧地址 synthesis-ent-hawaii-booth 已过期）
+  - ✅ **BGM节点v2 完成** (7/30): 歌曲卡片/音频播放器/乐句播放+和弦弹窗/ffmpeg乐句连接
+  - ⏳ 待验证: Gemini 场景检测 + Emotion 三层漏斗 + ffmpeg 渲染（需素材+API Key）
+  - ⏳ Daryl 7/30指令：先不动，等他把剩余模块需求全部写出再一次性迭代
+  - 🆕 **7/31**: Daryl 飞书发送 01-素材扫描 模块改造需求（4项），小风已回复可行性评估（~3.5h，全部可行），等待Daryl确认2个前置问题
+  - 🆕 **8/4**: Daryl 度假回来要求恢复开发；服务已持久化（LaunchAgent: videoeditor/ielts/ngrok，Gateway重启不掉）；隧道 `https://unwhispering-imani-digitately.ngrok-free.dev` ✅
+  - ⚠️ **8/4 阻塞**: TOSHIBA EXT 1TB 硬盘文件系统层卡死（ls 卡 EINTR），需 Daryl 物理重插；watchdog LaunchAgent 每10分钟探测，恢复后自动挂载+前端可用
+
 
 ## ⏸️ 挂起
-### IELTS陪练助手 — v1.0.1 验收通过 ✅(7/16)，v1.1.0 ⏸️ Daryl 指令挂起（7/17 08:45）
+### 洗稿MVP — v1.2.0 已交付 · 需求收集模式（7/18 起，20+ 天无输入）
+- **状态**: ⏸️ standby · 等待 Daryl 发送新需求（v1.2.0 内核卡 M1-M3 已完整交付）
+- **恢复条件**: Daryl 提供具体需求后一次性动工
+
+### IELTS陪练助手 — v1.3.0 开发完毕，⏸️ 等待Daryl晚间验收（7/25更新 · 8/4服务持久化）
+- **7/25晚**: Daryl 调试中发现两个Bug，已修复：
+  - DeepSeek API 模型名废弃 deepseek-chat → deepseek-v4-pro（旧名导致LLM乱码）
+  - 跟读模块 JS null safe 兜底（deviceInfo DOM不存在时报错）
+- Daryl 刷新后继续测试中
+- **v1.3.0 变更**: free_talk深度对话优化 + 词汇学习模块 + 训练库Dashboard重构
+  - free_talk: VAD思考窗口 / STT碎片过滤 / 提示词重写 / LLM max_tokens 500→700
+  - 词汇: 对话气泡长按选词→同义表达卡片→收录 / B2+词表预高亮 / 复习页
+  - Dashboard: 14天趋势+6周日历双栏 / To Improve Sentence+Vocab分拆 / 模式总结
+  - 自动评估: ≥10轮对话断开时自动触发LLM评估→入trend+review队列
+- **⚠️ 数据**: 昨晚session 987e4762丢失（重启后启动错误版本导致），已修复版本指向
+- **待验收**: Daryl晚上到家练习口语时一并验收
+- **8/4**: 服务已由 LaunchAgent 持久化（localhost:8767，v1.3.0 ACTIVE，health + dashboard 均 200 ✅）
 - **v1.0.1**: 手机移动端自适应优化，Daryl 全部验收通过 ✅
 - **v1.1.0 挂起原因**: iPhone 语音输入问题 + 交互逻辑拖沓，Daryl 要求暂停转其他任务
   - M1-M3 已完成 ✅（数据层/Dashboard/跟读闭环），M4 串联验收搁置
@@ -33,25 +55,12 @@
 - **管线2-Qwen Omni**: ❄️ 冻结
 - **注意**: ngrok 已切给洗稿MVP（8777），IELTS 本地 8767 继续可用
 
-### Loop Engineering（基建 · P0 🔴 事故复盘完成，方向待定）
-- **状态**: 🔴 Sentinel v1 事故复盘完成（7/11 Daryl 对话），方向待定
-- **事故**: Sentinel v1 Plugin → $20 API 浪费 + Gateway 反复重启 + 开发效率下降
-- **方案**: Sentinel v2（轻量 before_tool_call hook，只拦 write/edit/exec，零 Gateway 通信）已设计
-- **阻塞**: Daryl 认为基建问题需要更强模型才能从根本上解决，7/12 讨论未发生
-- **方向**: 决策矩阵延伸，短链→长链，P2/P3 自主执行（原计划 M1-M3 时间线已过期）
-- **状态**: ⏸️ 等待 Daryl 发起讨论
-
-### 视频分析交互Workflow 🎬
-- **状态**: 🟡 拓展节点「内核洗稿MVP」启动中（7/15 Daryl 确认交叉开发模式）
-- **⚠️ 7/22 Daryl决策**: 长视频分析优化（超时+分段策略）取消——变现平台抖音/小红书偏爱短视频，长视频分析价值不够高
-- **交叉开发模式**（7/15 确立）: 雅思验收门控期间 → 开发洗稿MVP中午可验收小里程碑；两项目分session隔离防上下文污染
-- **待输入**: Daryl 的洗稿构想+参考案例（未发）
-- **里程碑**: v1.0 MVP → v1.1 商业数据+Tab → v1.2 Gemini V3 原生视频 ✅ (7/4)
-- **成本**: ~$0.0025/次分析
-- **地址**: https://unwhispering-imani-digitately.ngrok-free.dev (端口8777，7/16 ngrok已从8767切至8777，Daryl验收洗稿MVP M1中)
-- **代码**: video_analyzer_app/
-
 ## ✅ 已完成
+### 8/6 工作区指针事故（✅ 已闭环 8/7）
+- 根因: 8/4 openclaw.json 重写删 workspace 字段 → 会话回退空壳工作区失忆
+- 修复: Kitty 写死 4 agent workspace + 空壳合并 + gateway 重启；8/7 验证新会话正确读取真工作区 ✅
+- 教训: 启动必核对记忆完整性；单 Agent 单工作区；openclaw.json 变更后验证指针（已入 lessons.md）
+
 ### M2 开发计划（Daryl 7/5 指令 → 7/16 Daryl 看板验收认定完成 ✅）
 - **P0 延时优化** ✅(7/15): ASR 4-8s→0.3-1.5s，e2e ~10s→3-4.5s，达标
 - **P1 管线2 Qwen Omni**: 按决策冻结（重启触发条件存档 DEV_PLAN 附录A），随 M2 关闭
@@ -82,8 +91,6 @@
 ### 硬件语音助手(MCU)开发
 - 规划阶段
 
-### 内核驱动洗稿MVP
-- 待视频分析下一阶段确认
 
 ## 📦 历史归档项目（看板忽略此段）
 - 抖音视频分析MVP（B站/douyin 下载器+分析，2026年4月）→ 已归档
