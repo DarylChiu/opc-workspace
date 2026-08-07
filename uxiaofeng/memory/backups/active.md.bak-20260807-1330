@@ -7,6 +7,10 @@
 - **8/6**: Daryl 拍板 M2 试点 = 剪辑MVP（决策自主环），wf01-wf05 冻结为 v4.0 基线（2 必改已核验落实）
 - 30% 节点完成：交互方案定稿 + 账本记录；进行中：前端 v4.0 交互版开发（60% 节点预估 8-12h 后）
 
+### ⚠️ 8/6 工作区指针事故（已修复）
+- 根因: 8/4 openclaw.json 重写时 agents.list 的 workspace 字段全被删除 → 新会话回退到空壳工作区导致失忆
+- 修复: Kitty 已显式写死 4 个 agent 的 workspace；空壳记录合并；gateway 重启生效
+- 行动项: [ ] 验证新会话读真工作区 [ ] 同步教训给 Kitty 入模式库
 
 ### 视频自动化剪辑 MVP（video-editor-mvp）🟢 v3.0 重构完成（7/25）
 - **v3.0 重构**: 🟡 M0-M5 全模块完成，Daryl 已开始交互（7/28）
@@ -26,12 +30,13 @@
   - 🆕 **8/4**: Daryl 度假回来要求恢复开发；服务已持久化（LaunchAgent: videoeditor/ielts/ngrok，Gateway重启不掉）；隧道 `https://unwhispering-imani-digitately.ngrok-free.dev` ✅
   - ⚠️ **8/4 阻塞**: TOSHIBA EXT 1TB 硬盘文件系统层卡死（ls 卡 EINTR），需 Daryl 物理重插；watchdog LaunchAgent 每10分钟探测，恢复后自动挂载+前端可用
 
+### 洗稿MVP — v1.2.0 迭代需求收集模式 🔴（7/18 15:42 Daryl指令）
+- **当前状态**: Daryl 要求先收集需求不修改，攒齐后一次性动工+更新版号
+- **Daryl 尚未发送具体需求**，等待中
+- **已发布**: v1.2.0（内核卡 M1-M3 完整交付，6个commit迭代链）
+- **历史**: M2 开发计划提交（7/17 14:00）、内核卡价值命题质疑（7/17 10:33）、SearXNG 修复 ✅（7/17）
 
 ## ⏸️ 挂起
-### 洗稿MVP — v1.2.0 已交付 · 需求收集模式（7/18 起，20+ 天无输入）
-- **状态**: ⏸️ standby · 等待 Daryl 发送新需求（v1.2.0 内核卡 M1-M3 已完整交付）
-- **恢复条件**: Daryl 提供具体需求后一次性动工
-
 ### IELTS陪练助手 — v1.3.0 开发完毕，⏸️ 等待Daryl晚间验收（7/25更新 · 8/4服务持久化）
 - **7/25晚**: Daryl 调试中发现两个Bug，已修复：
   - DeepSeek API 模型名废弃 deepseek-chat → deepseek-v4-pro（旧名导致LLM乱码）
@@ -55,12 +60,25 @@
 - **管线2-Qwen Omni**: ❄️ 冻结
 - **注意**: ngrok 已切给洗稿MVP（8777），IELTS 本地 8767 继续可用
 
-## ✅ 已完成
-### 8/6 工作区指针事故（✅ 已闭环 8/7）
-- 根因: 8/4 openclaw.json 重写删 workspace 字段 → 会话回退空壳工作区失忆
-- 修复: Kitty 写死 4 agent workspace + 空壳合并 + gateway 重启；8/7 验证新会话正确读取真工作区 ✅
-- 教训: 启动必核对记忆完整性；单 Agent 单工作区；openclaw.json 变更后验证指针（已入 lessons.md）
+### Loop Engineering（基建 · P0 🔴 事故复盘完成，方向待定）
+- **状态**: 🔴 Sentinel v1 事故复盘完成（7/11 Daryl 对话），方向待定
+- **事故**: Sentinel v1 Plugin → $20 API 浪费 + Gateway 反复重启 + 开发效率下降
+- **方案**: Sentinel v2（轻量 before_tool_call hook，只拦 write/edit/exec，零 Gateway 通信）已设计
+- **阻塞**: Daryl 认为基建问题需要更强模型才能从根本上解决，7/12 讨论未发生
+- **方向**: 决策矩阵延伸，短链→长链，P2/P3 自主执行（原计划 M1-M3 时间线已过期）
+- **状态**: ⏸️ 等待 Daryl 发起讨论
 
+### 视频分析交互Workflow 🎬
+- **状态**: 🟡 拓展节点「内核洗稿MVP」启动中（7/15 Daryl 确认交叉开发模式）
+- **⚠️ 7/22 Daryl决策**: 长视频分析优化（超时+分段策略）取消——变现平台抖音/小红书偏爱短视频，长视频分析价值不够高
+- **交叉开发模式**（7/15 确立）: 雅思验收门控期间 → 开发洗稿MVP中午可验收小里程碑；两项目分session隔离防上下文污染
+- **待输入**: Daryl 的洗稿构想+参考案例（未发）
+- **里程碑**: v1.0 MVP → v1.1 商业数据+Tab → v1.2 Gemini V3 原生视频 ✅ (7/4)
+- **成本**: ~$0.0025/次分析
+- **地址**: https://unwhispering-imani-digitately.ngrok-free.dev (端口8777，7/16 ngrok已从8767切至8777，Daryl验收洗稿MVP M1中)
+- **代码**: video_analyzer_app/
+
+## ✅ 已完成
 ### M2 开发计划（Daryl 7/5 指令 → 7/16 Daryl 看板验收认定完成 ✅）
 - **P0 延时优化** ✅(7/15): ASR 4-8s→0.3-1.5s，e2e ~10s→3-4.5s，达标
 - **P1 管线2 Qwen Omni**: 按决策冻结（重启触发条件存档 DEV_PLAN 附录A），随 M2 关闭
@@ -83,10 +101,6 @@
 | 管线2 Qwen Omni 对接 | ❌ 冻结 | 30% |
 
 ## 🔵 待办
-### IELTS陪练助手 — v1.3.0 待 Daryl 验收（⏸️ 挂起中，服务 8767 ACTIVE）
-- v1.3.0 开发完毕，7/25 两 Bug 已修复；等 Daryl 晚间验收（已等 13 天）
-- 服务 LaunchAgent 持久化：localhost:8767 ACTIVE
-
 
 ### ~/opc-workspace 本地仓库卡死 rebase（7/16发现）
 - 卡在 6/24 interactive rebase 中间态，每日 auto-backup 在 detached HEAD 上提交
@@ -95,6 +109,8 @@
 ### 硬件语音助手(MCU)开发
 - 规划阶段
 
+### 内核驱动洗稿MVP
+- 待视频分析下一阶段确认
 
 ## 📦 历史归档项目（看板忽略此段）
 - 抖音视频分析MVP（B站/douyin 下载器+分析，2026年4月）→ 已归档
