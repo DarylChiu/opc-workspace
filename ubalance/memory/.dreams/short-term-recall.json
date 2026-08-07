@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-06T04:26:47.624Z",
+  "updatedAt": "2026-08-07T02:32:17.766Z",
   "entries": {
     "memory:memory/2026-06-10.md:1:29": {
       "key": "memory:memory/2026-06-10.md:1:29",
@@ -3791,6 +3791,68 @@
         "赵立峰/武氏金莲/陈剑锋",
         "3/阮氏云",
         "00/12"
+      ]
+    },
+    "memory:memory/archive/2026-06-08.md:26:51": {
+      "key": "memory:memory/archive/2026-06-08.md:26:51",
+      "path": "memory/archive/2026-06-08.md",
+      "startLine": 26,
+      "endLine": 51,
+      "source": "memory",
+      "snippet": "- **优点**: 初级审计师不用翻C6去查TE，强制审计师在每个科目都意识到\"这个差异是否超TE\" #### **【3. Lead Schedule + Supporting Schedule分层设计】** - **三层结构**: ``` R1-LEAD (7张表) → 汇总各公司的工资、社保、公积金 ↓ R1-2 For Disclosure (7张表) → 测算vs账面对比，识别差异 ↓ R1-2 Reasonableness Test (5+44张表) → 逐月逐人工资明细，深度测算 ``` - **优点**: 项目经理只看Lead了解整体，复核经理看到差异后深入Supporting找细节 #### **【4. 多版本迭代保留 (Version Control)** - **三个R1-2版本并存**: - R1-2 For Disclosure (披露版，给招股书用) - R1-2 Reasonableness Test (测算版，审计证据) - R1-2 0117版 (完整版，含2016-2021历史) - **优点**: 保留审计思路演进轨迹，不同受众看不同版本，避免\"改了最终版找不回测算逻辑\" #### **【5. 分类处理的精细化】** - **示例**: R1-2把不缴社保的原因分6类 - 正常 / 自愿放弃社保 / 购买新农合及其他国家保险 / 一次性买断社保 / 退休人员 / 实习生 - **优点**: 每类对应不同法律依据，招股书披露时能精确说明\"自愿放弃占比X%，已取得书面确认\" #### *",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.37462274730205536,
+      "maxScore": 0.37462274730205536,
+      "firstRecalledAt": "2026-08-07T02:32:17.766Z",
+      "lastRecalledAt": "2026-08-07T02:32:17.766Z",
+      "queryHashes": [
+        "f5c64e0a3db8"
+      ],
+      "recallDays": [
+        "2026-08-07"
+      ],
+      "conceptTags": [
+        "r1-lead",
+        "r1-2",
+        "三个r1-2版本并存",
+        "含2016-2021历史",
+        "r1-2把不缴社保的原因分6类",
+        "优点",
+        "初级",
+        "审计"
+      ]
+    },
+    "memory:memory/archive/2026-06-08.md:63:88": {
+      "key": "memory:memory/archive/2026-06-08.md:63:88",
+      "path": "memory/archive/2026-06-08.md",
+      "startLine": 63,
+      "endLine": 88,
+      "source": "memory",
+      "snippet": "- **优点**: 复核时能区分\"这是初步估算还是最终审定数\"，避免误用Planning数据作为Actual结论 #### **【9. 调整分录追踪体系】** - **核心**: B9底稿中有AJE#1、AJE#2、CJE#1、CJE#2列 - **示例**: `Per mgt acct | AJE#1 | AJE#2 | AJE#3 | After AJE | CJE#1 | CJE#2 | Audited` - AJE = Audit Adjusting Entry (审计调整分录) - CJE = Consolidation Adjusting Entry (合并调整分录) - **优点**: 每笔调整都能追溯到具体编号，客户争议时能快速定位\"AJE#3是什么\" #### **【10. 双重质量控制标识】** - **核心**: 底稿有\"编制人\"和\"复核人\"双签名 - **示例**: 编制人: 赵毓钊 | 复核人: 李加圣 | 日期: 2021年7月25日 - **优点**: 责任到人，出问题能追溯，符合审计准则ISQC1的质量控制要求 --- ### **Daryl今天补充的4个要点** #### **【补充1. 表格之间必有勾稽关系】** - **核心原则**: 所有表格数字都必须能追溯到上游或下游表格 - **反例**: 国内很多底稿有\"孤岛数据\"，数字来源不清 - **标准**: Lead Schedule的每个数字都能在Supporting Schedule中找到明细来源 #### **【补充2. 双向视角 — 复核视角 vs 编制人视角】*",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3506074696779251,
+      "maxScore": 0.3506074696779251,
+      "firstRecalledAt": "2026-08-07T02:32:17.766Z",
+      "lastRecalledAt": "2026-08-07T02:32:17.766Z",
+      "queryHashes": [
+        "f5c64e0a3db8"
+      ],
+      "recallDays": [
+        "2026-08-07"
+      ],
+      "conceptTags": [
+        "优点",
+        "复核",
+        "区分",
+        "初步",
+        "估算",
+        "还是",
+        "最终",
+        "审定"
       ]
     }
   }

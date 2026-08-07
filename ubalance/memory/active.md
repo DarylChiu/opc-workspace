@@ -26,6 +26,16 @@
 
 ## 🟢 进行中
 
+### 📋 2026-08-07 Daryl To-Do 案头工作（顺序执行）
+- **任务1 A&C问题咨询二期** ✅ 已完成（docx+正文草稿已交 Daryl，Daryl 自己发邮件）
+  - `reports/A&C_Questions_Batch2_20260807_EN.docx` + `reports/A&C问题咨询-二期-整理底稿-20260807.md`
+  - 9条原始问题→合并6问（4条中越重复）；邮件正文5类；收件人 Mr. Dung；v2修正：Q4改为PIT重点+附件正文对齐5问
+- **任务2 Huaxing Tax Review Audit Plan** ✅ v1.2 已完成交付（docx 已发 Daryl）
+  - `reports/Huaxing-Tax-Review-Audit-Plan-v1.2-20260807.md` + docx（基于合同 HDKT.1.2607.064-KT：A&C乙方、四税种、两阶段）
+  - v1.1：W1访谈重做（Case-driven+引导式+排期压缩）｜v1.2：实质程序改为程序导向（认定→程序→证据→效果，17项）
+  - 方法论沉淀：`reports/OPC-AI财务与内审方法论-v0.2-20260807.md` + `reports/双视图证据网络-财务线资金线设计-v0.1-20260807.md`
+- **任务3 仓储专项检查SOP更新+Checklist+抽样插件** ⏳ 进行中（争执触发：突击盘点占用3人×1-1.5h/周 → 平衡点研究框架 v0.1 已出，待 Daryl 补数据；抽样插件需求待确认）
+
 ### ✅ 误餐补贴申请明细表 v0.5.2 — 锁版受阻，Daryl 自己收尾 (8/4~8/5)
 - **状态**: v0.5.2 已交付但锁版失败（openpyxl 保护默认禁选单元格→整表不能点击），Daryl 决定自己整，**表格迭代到此为止**
 - **根因**: `selectLockedCells/selectUnlockedCells` 默认 False，见 lessons.md 2026-08-05 条目

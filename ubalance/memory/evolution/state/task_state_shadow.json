@@ -1,15 +1,5 @@
 {
   "sessions": {
-    "agent:balance:feishu:balance:direct:ou_0d7a57b9a531823aa1edee6874dcbb34": {
-      "task_id": "task-20260805084951",
-      "subject": "误餐补贴申请明细表迭代：在H7早餐实报列增加是否招待列，单元格内早餐/午餐/晚餐打钩，实报公式增加互",
-      "type": "文档",
-      "injected_patterns": [],
-      "started_at": "2026-08-05T08:49:51",
-      "msg_count": 1,
-      "subject_hash": "557536bfdf42",
-      "project": "vn-travel-expense-policy"
-    },
     "balance-20260805-attachment3": {
       "task_id": "task-20260805111512",
       "subject": "根据越南差旅费管理办法征集意见稿更新附件3（误餐补贴申请明细表），等待Daryl补充误餐补贴场景",
@@ -29,6 +19,26 @@
       "msg_count": 1,
       "subject_hash": "a2f1e9ce71e5",
       "project": "vn-travel-expense-policy"
+    },
+    "balance-to-do-20260807": {
+      "task_id": "task-20260807093248",
+      "subject": "发英文邮件问A&C audit firm 4-5个收集上来的财务税务问题；起草2026年8月17日开",
+      "type": "调研",
+      "injected_patterns": [],
+      "started_at": "2026-08-07T09:32:48",
+      "msg_count": 1,
+      "subject_hash": "9c99c621e2f0",
+      "project": "A&C-questions/huaxing-tax-review/warehouse-inspection"
+    },
+    "balance-methodology-audit-20260807": {
+      "task_id": "task-20260807111445",
+      "subject": "方法论讨论：作为无限算力AI Agent如何做审计（OPC方法论沉淀，不更新Audit Plan）",
+      "type": null,
+      "injected_patterns": [],
+      "started_at": "2026-08-07T11:14:45",
+      "msg_count": 1,
+      "subject_hash": "4b3e30650e8a",
+      "project": "opc-methodology"
     }
   }
 }
