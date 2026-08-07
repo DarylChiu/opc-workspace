@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-05T01:41:33.377Z",
+  "updatedAt": "2026-08-07T17:08:54.643Z",
   "entries": {
     "memory:memory/2026-06-22.md:22:34": {
       "key": "memory:memory/2026-06-22.md:22:34",
@@ -1199,22 +1199,24 @@
       "endLine": 12,
       "source": "memory",
       "snippet": "# 2026-07-19 日记 ## 每日审计 (00:10 Cron) - L4 审计自动运行完成 - 修复项：创建本日记、归档 2026-06-18.md、Git push - 浅层问题 5 项：active.md 34h未更新（已修复时间戳）、日记骨架/过短（凌晨边界，预期误报）、Checker零运行（凌晨边界，预期误报） - 深层问题：日记过短+20个活动session（午夜边界误报，实际为7/18晚间session） - 成本仪表盘：今日 $3.39 | 本月 $27.40 | 全量 $87.00 ## 待办 - 无",
-      "recallCount": 3,
+      "recallCount": 4,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.1155256152153015,
-      "maxScore": 0.40103679895401,
+      "totalScore": 1.5417188853025436,
+      "maxScore": 0.4261932700872421,
       "firstRecalledAt": "2026-07-27T01:56:08.291Z",
-      "lastRecalledAt": "2026-08-04T04:36:35.784Z",
+      "lastRecalledAt": "2026-08-07T17:08:54.643Z",
       "queryHashes": [
         "5d9cc54fe614",
         "de0fa4062512",
-        "c7a085788b4f"
+        "c7a085788b4f",
+        "2530ebdbf285"
       ],
       "recallDays": [
         "2026-07-27",
         "2026-07-29",
-        "2026-08-04"
+        "2026-08-04",
+        "2026-08-08"
       ],
       "conceptTags": [
         "active.md",
@@ -1493,18 +1495,20 @@
       "endLine": 21,
       "source": "memory",
       "snippet": "# 2026-07-09 日记 ## 午夜 Cron 审计 (00:08) - 每日记忆归档 Cron 链触发：main → balance(1) → xiaofeng → balance(2) → self - **审计发现**： - 今日骨架日记由审计脚本自动创建（本文件，已补全为真实内容） - 5 个 Cron session：main / balance×2 / xiaofeng / self（无用户交互 session） - active.md 36h 未更新 → 已刷新时间戳至 7/9 00:08 - 7/8 日记完整（21 行） - Git push 失败：无 remote 配置（预期行为，本地 commit 已保存） - 审计统计：修复 1 项，浅层问题 5 项，深层问题 2 项 ## 昨日回顾 (7/8) - 仅 Cron 链归档 session，无新用户交互任务 - 7/7 产出：OPC Dashboard 设计系统规范（DESIGN.md） ## 待关注 - ⚠️ Sentinel/Gateway 死锁问题：小枫已定位根因，修复待执行 - 📋 OPC Dashboard M5 合规面板：被 Gateway 重启中断，待续 - 📋 7/7 有 main:main webchat session 状态为 failed（1.9s 运行），需关注",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.36096441149711606,
-      "maxScore": 0.36096441149711606,
+      "totalScore": 0.7939194560050964,
+      "maxScore": 0.43295504450798034,
       "firstRecalledAt": "2026-08-04T22:22:27.911Z",
-      "lastRecalledAt": "2026-08-04T22:22:27.911Z",
+      "lastRecalledAt": "2026-08-07T17:08:54.643Z",
       "queryHashes": [
-        "9c513359b9e9"
+        "9c513359b9e9",
+        "2530ebdbf285"
       ],
       "recallDays": [
-        "2026-08-05"
+        "2026-08-05",
+        "2026-08-08"
       ],
       "conceptTags": [
         "gateway",
@@ -1524,18 +1528,20 @@
       "endLine": 25,
       "source": "memory",
       "snippet": "# 2026-06-30 日记 ## 关键事件 ### 🕛 午夜 Cron 记忆归档审计（00:05） - **触发**: 每日 23:59 Cron → 实际执行 00:05（系统调度延迟） - **审计结果**: - ❌ 今日日记缺失 → ✅ 自动创建骨架，本次补充完整 - ✅ active.md 新鲜（13h，6/29 更新） - ✅ lessons.md 无需更新 - ✅ 无需归档 - ✅ MEMORY.md 符合规范 - ❌ 日记过短/骨架检测 → ⚠️ 午夜边界误报：审计列出的 11 个 session 中仅 1 个（本 cron）属于 6/30，其余 10 个均为 6/29 晚间 session（xiaofeng/balance/main 的 feishu 和 cron 活动） - ✅ 项目清单校验通过 - ❌ Git pull 失败 → ⚠️ 预期行为：workspace-self 仓库未配置 remote（无远程备份目标） - **修复操作**: 日记从骨架补全为实际内容 ### 📋 仓库状态 - **未提交变更**: ACCA-Knowledge-Network 下多个文件修改 + 新增方法论提取.md、知识网络架构总览.md、ACCA-Vault导航页.md、方法轮卡片/目录、项目总览.md、memory/新目录 - **Git remote**: 未配置（pull/push 不可用，待 Daryl 决定远程备份策略） ## 备注 - 本日为 6 月最后一天，明日进入 7 月 - 昨日（6/29）有大量 Agen",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.3608206748962402,
-      "maxScore": 0.3608206748962402,
+      "totalScore": 0.7845422595739364,
+      "maxScore": 0.4237215846776962,
       "firstRecalledAt": "2026-08-04T22:22:27.911Z",
-      "lastRecalledAt": "2026-08-04T22:22:27.911Z",
+      "lastRecalledAt": "2026-08-07T17:08:54.643Z",
       "queryHashes": [
-        "9c513359b9e9"
+        "9c513359b9e9",
+        "2530ebdbf285"
       ],
       "recallDays": [
-        "2026-08-05"
+        "2026-08-05",
+        "2026-08-08"
       ],
       "conceptTags": [
         "network",
@@ -1640,6 +1646,99 @@
         "cron/心跳/项目看板更新/知识树录入",
         "7/21-7/26",
         "grill-me必须覆盖交互逻辑"
+      ]
+    },
+    "memory:memory/archive/2026-06-16.md:1:12": {
+      "key": "memory:memory/archive/2026-06-16.md:1:12",
+      "path": "memory/archive/2026-06-16.md",
+      "startLine": 1,
+      "endLine": 12,
+      "source": "memory",
+      "snippet": "# 2026-06-16 日记 ## 关键事件 ### 每日记忆 Cron 审计（00:07） - Cron 触发 audit.sh --report - 发现：今日日记缺失 — 立即创建 - 其余检查项（昨日日记、active.md、lessons.md、归档、MEMORY.md）全部通过 ## 待跟进 - 无新增待办（审计触发的自动修复已完成）",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.44140857160091396,
+      "maxScore": 0.44140857160091396,
+      "firstRecalledAt": "2026-08-07T17:08:54.643Z",
+      "lastRecalledAt": "2026-08-07T17:08:54.643Z",
+      "queryHashes": [
+        "2530ebdbf285"
+      ],
+      "recallDays": [
+        "2026-08-08"
+      ],
+      "conceptTags": [
+        "audit.sh",
+        "active.md",
+        "lessons.md",
+        "memory.md",
+        "日记",
+        "关键",
+        "事件",
+        "每日"
+      ]
+    },
+    "memory:memory/archive/2026-06-17.md:1:14": {
+      "key": "memory:memory/archive/2026-06-17.md:1:14",
+      "path": "memory/archive/2026-06-17.md",
+      "startLine": 1,
+      "endLine": 14,
+      "source": "memory",
+      "snippet": "# 2026-06-17 日记 ## 关键事件 ### 每日记忆 Cron 审计（00:01） - Cron 触发 audit.sh --report - 发现 2 个问题并已修复： 1. 今日日记缺失 → 已创建本文件 2. active.md 37h 未更新 → 已刷新时间戳 - 其余检查项（昨日日记、lessons.md、归档、MEMORY.md）通过 ## 待跟进 - 无新增待办（审计触发的自动修复已完成）",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4328176289796829,
+      "maxScore": 0.4328176289796829,
+      "firstRecalledAt": "2026-08-07T17:08:54.643Z",
+      "lastRecalledAt": "2026-08-07T17:08:54.643Z",
+      "queryHashes": [
+        "2530ebdbf285"
+      ],
+      "recallDays": [
+        "2026-08-08"
+      ],
+      "conceptTags": [
+        "audit.sh",
+        "active.md",
+        "lessons.md",
+        "memory.md",
+        "日记",
+        "关键",
+        "事件",
+        "每日"
+      ]
+    },
+    "memory:memory/archive/2026-07-05.md:1:14": {
+      "key": "memory:memory/archive/2026-07-05.md:1:14",
+      "path": "memory/archive/2026-07-05.md",
+      "startLine": 1,
+      "endLine": 14,
+      "source": "memory",
+      "snippet": "# 2026-07-05 日记 ## 🕛 午夜 Cron 记忆归档审计（00:04） - **审计执行**: audit.sh --report 运行完成 - **自动修复**: 7/5 骨架日记创建 - **浅层问题**: Git pull/push 失败 — workspace-self 无 remote 配置，预期行为 - **深层问题**: - 9 个活跃 session 交叉验证告警 → 午夜边界误报（各 Agent Cron 任务同时触发），与 7/4 模式相同 - 日记骨架检测 → 已补全为真实内容 - **Git 备份**: commit 10fe52f 已创建（无 remote，仅本地） ## 🌅 日间活动（待记录） - 本日刚开始，内容待后续 session 补充",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.42340557277202606,
+      "maxScore": 0.42340557277202606,
+      "firstRecalledAt": "2026-08-07T17:08:54.643Z",
+      "lastRecalledAt": "2026-08-07T17:08:54.643Z",
+      "queryHashes": [
+        "2530ebdbf285"
+      ],
+      "recallDays": [
+        "2026-08-08"
+      ],
+      "conceptTags": [
+        "备份",
+        "audit.sh",
+        "7/5",
+        "pull/push",
+        "workspace-self",
+        "7/4",
+        "日记",
+        "午夜"
       ]
     }
   }
