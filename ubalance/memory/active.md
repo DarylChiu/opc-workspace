@@ -66,8 +66,12 @@
 - **参考**: `reports/仓储专项检查报告-华特-20260724.md`
 - **此前框架**: `reports/仓储专项检查-整改模板与SOP-20260727.md`
 
-### 🟢 费用报销体系搭建MVP v0.2.0（2026-07-29启动）★DELIVERED 7/31
-- **状态**: v0.2.0已交付，Daryl 16:00验收
+### 🟢 费用报销体系搭建MVP v0.3.0（2026-07-29启动）★DELIVERED 8/8 全量修复
+- **状态**: v0.3.0已交付，23项验收问题全量修复（P0×11/P1×7/P2×5）
+- **修复清单**: `expense_mvp/V0.3.0_FIXLIST.md`
+- **关键修复**: 假VAT强拆消除 / 日期识别率提升 / 发票号全链路 / 供应商7/7全对 / 科目越南化(641/642) / 凭证生成崩溃修复 / 15项自动化测试 / launchd托管
+- **服务**: http://localhost:8770 (launchd: com.balance.expense-mvp)
+- **待办**: Daryl远程验收v3.0（隧道: statutes-stores-oil-intended.trycloudflare.com）
 - **v0.2.0交付内容**:
   - 分类器v2.0: 供应商优先匹配（解决Golden Central Hotel误判）+ 16字段结构化提取 + pretax/VAT/total三值分离
   - 凭证模块v2.0: 智能分组（出差票据自动合并）+ VAT分离借方行(费用+进项税) + 多借多贷 + 发票交互链接
