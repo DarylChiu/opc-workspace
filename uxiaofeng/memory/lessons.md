@@ -124,3 +124,11 @@
 - **失职点**: session 启动时没核对记忆完整性（identity.md/active.md/日记数量），读到的记忆异常单薄时没有警觉
 - **修复**: Kitty 11:11 恢复 4 agent workspace 指针并重启 gateway；我 11:57 补跨工作区同步（shell 归档+orphan 标记）
 - **教训**: ①启动必核对记忆文件完整性，发现异常立即上报而非自我解释 ②一个 Agent 只能有一个工作区，出现双工作区=配置事故 ③核心配置变更（openclaw.json）后必须验证 workspace 指针
+
+## 2026-08-08 DeepSeek v4 Thinking 模式坑（IELTS assessment 出不来）
+- **症状**: 评估/评分接口偶尔返回 score=0 或空，日志有 `JSON parse failed, response: ...`，无明显 API 报错
+- **根因**: deepseek-v4-flash/pro 默认开启 Thinking 模式——模型先输出 reasoning_content 再输出 content；max_tokens 被 reasoning 吃光后 content 是残缺 JSON
+- **诊断技巧**: 用真实长度 prompt 复现 API 调用，检查响应里 `reasoning_content` 长度 vs `content` 长度、`finish_reason` 是否 = length
+- **修复**: 请求体加 `"thinking": {"type": "disabled"}`（Chat Completions 格式）；注意 Thinking 模式下 temperature/top_p 等参数无效
+- **自查清单**: 凡要求模型输出 JSON 的调用 → ① 显式 thinking disabled ② max_tokens 至少 600+ ③ 检查 finish_reason 不是 length
+- **连带发现**: server.py 从未调用 add_transcript → 对话记录从不落库，只有评估结果落库；排查"对话丢了"类问题先查这个
