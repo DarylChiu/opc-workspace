@@ -22,6 +22,8 @@
   - ✅ **BGM节点v2 完成** (7/30): 歌曲卡片/音频播放器/乐句播放+和弦弹窗/ffmpeg乐句连接
   - ⏳ 待验证: Gemini 场景检测 + Emotion 三层漏斗 + ffmpeg 渲染（需素材+API Key）
   - ⏳ Daryl 7/30指令：先不动，等他把剩余模块需求全部写出再一次性迭代
+  - ✅ **8/9**: ngrok 隧道已切回 8768（launchd plist 修复，KeepAlive 常驻），公网 https://unwhispering-imani-digitately.ngrok-free.dev 可达
+  - ⏳ 剩余3模块（ASR/情感/匹配）交互需求 Daryl 即将澄清（8/5 线框 wf02/wf03/wf04 为基线）
   - 🆕 **7/31**: Daryl 飞书发送 01-素材扫描 模块改造需求（4项），小风已回复可行性评估（~3.5h，全部可行），等待Daryl确认2个前置问题
   - 🆕 **8/4**: Daryl 度假回来要求恢复开发；服务已持久化（LaunchAgent: videoeditor/ielts/ngrok，Gateway重启不掉）；隧道 `https://unwhispering-imani-digitately.ngrok-free.dev` ✅
   - ⚠️ **8/4 阻塞**: TOSHIBA EXT 1TB 硬盘文件系统层卡死（ls 卡 EINTR），需 Daryl 物理重插；watchdog LaunchAgent 每10分钟探测，恢复后自动挂载+前端可用

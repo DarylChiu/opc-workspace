@@ -132,3 +132,17 @@
 - **修复**: 请求体加 `"thinking": {"type": "disabled"}`（Chat Completions 格式）；注意 Thinking 模式下 temperature/top_p 等参数无效
 - **自查清单**: 凡要求模型输出 JSON 的调用 → ① 显式 thinking disabled ② max_tokens 至少 600+ ③ 检查 finish_reason 不是 length
 - **连带发现**: server.py 从未调用 add_transcript → 对话记录从不落库，只有评估结果落库；排查"对话丢了"类问题先查这个
+
+## 2026-08-07 · STT 识别不准：VAD 参数过激 + beam=1 双重劣化
+- **症状**: IELTS Part1 STT + 跟读 ASR 识别不准（"in my uh" 残句，conf 0.26-0.42）
+- **根因①**: VAD threshold=0.5 + min_silence=600ms + speech_pad=400ms 过激，把口语停顿/轻声当噪音切掉 30-43% 语音（3.6s 删 1.55s / 7.2s 删 2.43s）
+- **根因②**: beam_size=1 是 faster-whisper 质量最低档（当初为延迟优化选的）
+- **修复**: beam 1→3；VAD threshold 0.5→0.35 / min_silence 600→900ms / speech_pad 400→700ms；主对话 STT 与跟读 ASR 共用同一转录器，一处修改两边生效
+- **验证**: TTS 5.2s 短句 + 15s 长句（49词）→ 词级命中 100%，VAD 零误删
+- **教训**: ①STT 识别不准先查 VAD 是否切掉了真实语音，再看 beam_size ②延迟优化不能无脑压 beam=1，质量档要按场景权衡 ③共享转录器=单点修复
+
+## 2026-08-09 · launchd KeepAlive 服务复活 + 隧道端口抢占（ERR_NGROK_334）
+- **症状**: kill 8767 进程后反复复活；8768 隧道启动失败 ERR_NGROK_334（端口被占）
+- **根因**: launchd 服务 `ai.openclaw.ngrok.plist` 配了 KeepAlive=true，8/7 被改成 `ngrok http 8767`（ielts_tutor），且抢占 video-editor 的固定域名 `unwhispering-imani-digitately.ngrok-free.dev`
+- **修复**: plist 还原为 8768，launchctl unload+load 生效；旧配置备份 bak_20260809_8767
+- **教训**: ①launchd KeepAlive=true 的服务 kill 进程无效，必须改 plist 再 unload/load ②固定域名隧道会被其他端口配置抢占，改隧道前先查 launchd ③所有隧道端口改动要同步检查 launchd plist
