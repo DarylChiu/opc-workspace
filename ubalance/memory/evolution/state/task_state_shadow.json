@@ -1,44 +1,34 @@
 {
   "sessions": {
-    "balance-20260805-attachment3": {
-      "task_id": "task-20260805111512",
-      "subject": "根据越南差旅费管理办法征集意见稿更新附件3（误餐补贴申请明细表），等待Daryl补充误餐补贴场景",
-      "type": null,
+    "balance-fs-20260809-0930": {
+      "task_id": "task-20260809093131",
+      "subject": "Daryl要求把财务审核节点输出改为HTML表格形式（一对多：一个审核节点多个报销人多条报销记录），",
+      "type": "前端",
       "injected_patterns": [],
-      "started_at": "2026-08-05T11:15:12",
+      "started_at": "2026-08-09T09:31:31",
       "msg_count": 1,
-      "subject_hash": "2b4005dafaf0",
-      "project": "越南差旅费管理办法"
+      "subject_hash": "778518e2f80e",
+      "project": "expense_mvp"
     },
-    "travel-policy-20260806": {
-      "task_id": "task-20260806115654",
-      "subject": "越南差旅费管理办法改动1：城市等级分类体系重构（取消附件2，按34个省级行政单位穷举重做附件1和4.",
+    "balance-fs-20260809-0940": {
+      "task_id": "task-20260809095616",
+      "subject": "Daryl扩需求：费用报销MVP前端重构为三步流水线（Sidebar/Tab）：①发票生成报销（OC",
+      "type": "前端",
+      "injected_patterns": [],
+      "started_at": "2026-08-09T09:56:16",
+      "msg_count": 1,
+      "subject_hash": "5e5ae0f8a68c",
+      "project": "expense_mvp"
+    },
+    "balance-fs-20260809-p1": {
+      "task_id": "task-20260809205446",
+      "subject": "Daryl拍板：预算方案B+超红线授权（质量优先），验收清单确认无增减，开工Phase1（B0数据模",
       "type": "开发",
       "injected_patterns": [],
-      "started_at": "2026-08-06T11:56:54",
+      "started_at": "2026-08-09T20:54:46",
       "msg_count": 1,
-      "subject_hash": "a2f1e9ce71e5",
-      "project": "vn-travel-expense-policy"
-    },
-    "balance-to-do-20260807": {
-      "task_id": "task-20260807093248",
-      "subject": "发英文邮件问A&C audit firm 4-5个收集上来的财务税务问题；起草2026年8月17日开",
-      "type": "调研",
-      "injected_patterns": [],
-      "started_at": "2026-08-07T09:32:48",
-      "msg_count": 1,
-      "subject_hash": "9c99c621e2f0",
-      "project": "A&C-questions/huaxing-tax-review/warehouse-inspection"
-    },
-    "balance-methodology-audit-20260807": {
-      "task_id": "task-20260807111445",
-      "subject": "方法论讨论：作为无限算力AI Agent如何做审计（OPC方法论沉淀，不更新Audit Plan）",
-      "type": null,
-      "injected_patterns": [],
-      "started_at": "2026-08-07T11:14:45",
-      "msg_count": 1,
-      "subject_hash": "4b3e30650e8a",
-      "project": "opc-methodology"
+      "subject_hash": "daecead4525d",
+      "project": "expense_mvp"
     }
   }
 }
