@@ -1,14 +1,3 @@
 {
-  "sessions": {
-    "self-arch-20260805": {
-      "task_id": "task-20260805170719",
-      "subject": "Balance请求归档越南差旅费管理办法v1.0.5到知识树，归纳总结推理后选择位置并汇报Daryl",
-      "type": "文档",
-      "injected_patterns": [],
-      "started_at": "2026-08-05T17:07:19",
-      "msg_count": 1,
-      "subject_hash": "e277b02ad2bf",
-      "project": "self"
-    }
-  }
+  "sessions": {}
 }
