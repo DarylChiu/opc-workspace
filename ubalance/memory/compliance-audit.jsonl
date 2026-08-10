@@ -288,3 +288,10 @@
 {"timestamp":"2026-08-08T23:59:19+0700","check":"L4-audit-v2","agent":"balance","fixes":1,"shallow_issues":0,"deep_issues":0,"diary_lines":40,"diary_sections":4,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
 {"timestamp":"2026-08-08T23:59:37+0700","check":"L4-audit-v2","agent":"balance","fixes":1,"shallow_issues":0,"deep_issues":0,"diary_lines":40,"diary_sections":4,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
 {"timestamp":"2026-08-09T23:59:21+0700","check":"L4-audit-v2","agent":"balance","fixes":2,"shallow_issues":0,"deep_issues":0,"diary_lines":57,"diary_sections":6,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-08-09T23:59:38+0700","check":"L4-audit-v2","agent":"balance","fixes":1,"shallow_issues":0,"deep_issues":0,"diary_lines":57,"diary_sections":6,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-08-10T14:27:35+0700","check":"post-op","task":"启动v0.3.0演示服务(8771)+trycloudflare隧道给IT演示","score":1,"total":5,"warnings":[
+  "🔴 今日日记缺失 — 必须创建"
+]}
+{"timestamp":"2026-08-10T14:49:21+0700","check":"post-op","task":"v0.4.0前端交互修复(卡片点击详情+OCR16字段展示+分类修正)","score":3,"total":5,"warnings":[
+  ""
+]}

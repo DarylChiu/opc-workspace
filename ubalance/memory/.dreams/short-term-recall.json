@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-09T02:30:10.113Z",
+  "updatedAt": "2026-08-10T07:23:15.353Z",
   "entries": {
     "memory:memory/2026-06-10.md:1:29": {
       "key": "memory:memory/2026-06-10.md:1:29",
@@ -2754,18 +2754,20 @@
       "endLine": 48,
       "source": "memory",
       "snippet": "| **v2.3** | **96.1%** | RM-Database原始 | OCR回退+报关号匹配+全清关资料收集 | ### v2.3 核心技术决策 1. **OCR回退**: pdfplumber提取<50字→Tesseract OCR (chi_sim+eng)，64次触发 2. **Invoice收集**: 不限\"中英文明细\"关键词，收集所有清关资料PDF/xls 3. **B/L分类**: 海运关键词+船公司词边界匹配+提单类型识别（BL/SWB/AN/AIR） 4. **ToKhai报关号匹配**: 4层检测（ToKhai文件名→12位报关号PDF→QDTQ→报关号嵌入文件名），98/99次L1文件名命中 5. **干扰排除**: 海关集装箱清单/付款单/C1表格/DONG THUE/CHUAN BI自动过滤 ### v2.3 最终结果 - **99/103完整 (96.1%)** - 剩余4个：STT243 RE-VN240904、STT250 HMAEFZ240104(1文件)、STT396 RE-2024-054、STT403 HMVFZ240072-1 — 均为RM-Database源数据缺失 - ToKhai L1文件名=98, L2内容=0, L3回退=1, 缺ToKhai=1 - OCR回退64次，图片Excel排除0次 - 产出: `Outcome2-v2.3-20260628_1715/` + `Outcome1-v2.3-20260628_1715.xlsx` - 总成本: ~$0.13（全本地计算+Tesseract免费） ###",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.39709434807300564,
+      "totalScore": 0.785449531674385,
       "maxScore": 0.39709434807300564,
       "firstRecalledAt": "2026-07-29T08:26:34.847Z",
-      "lastRecalledAt": "2026-07-29T08:26:34.847Z",
+      "lastRecalledAt": "2026-08-10T07:23:15.295Z",
       "queryHashes": [
-        "96b4acb02fbb"
+        "96b4acb02fbb",
+        "18ddc90f47c1"
       ],
       "recallDays": [
-        "2026-07-29"
+        "2026-07-29",
+        "2026-08-10"
       ],
       "conceptTags": [
         "v2.3",
@@ -3146,24 +3148,26 @@
       "endLine": 79,
       "source": "memory",
       "snippet": "- **模型**: deepseek/deepseek-v4-pro ## 🕙 10:00-10:45 费用报销MVP v0.2.0 全栈改造交付 - **触发**: Daryl 追问「开发汇报呢？」，确认7/30晚22:43已讨论v0.2.0方向 - **执行**: 搜索所有session记录确认无已有代码→全栈重写4模块 - **交付内容**: 1. 分类器v2.0: 供应商优先匹配 + 16字段提取 + pretax/VAT/total三值分离 2. 凭证v2.0: 智能分组（住宿锚点优先）+ VAT分离 + 多借多贷 + 发票链接 3. 服务端v2.0: 4个新endpoint (generate-v2/preview-v2/groups/invoice-links) 4. 前端v2.0: VAT卡式明细 + 分组预览 + 凭证行点击跳转 - **测试**: Golden Central Hotel误判修复✅ | 智能分组3票合并✅ | VAT分离平衡✅ - **服务**: http://localhost:8770 v0.2.0 running - **模型**: deepseek/deepseek-v4-pro ## ⚠️ 已知待处理 - SAGE checker + Reflexion journal：基建上线但日志文件尚未生成 - 成本仪表盘数据过期 → 下次 23:45 全量扫描自动修复 - expense_mvp v0.2.0 等待Daryl下午16:00验收",
-      "recallCount": 5,
+      "recallCount": 6,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.9009596884250641,
+      "totalScore": 2.256066718697548,
       "maxScore": 0.4069690316915512,
       "firstRecalledAt": "2026-08-01T10:14:27.781Z",
-      "lastRecalledAt": "2026-08-08T03:56:28.124Z",
+      "lastRecalledAt": "2026-08-10T07:23:15.353Z",
       "queryHashes": [
         "9cb38ef7e0c6",
         "22afa9b85b81",
         "4a29d1c89aa5",
         "674cc96ae754",
-        "b39a2c102edc"
+        "b39a2c102edc",
+        "419400245114"
       ],
       "recallDays": [
         "2026-08-01",
         "2026-08-02",
-        "2026-08-08"
+        "2026-08-08",
+        "2026-08-10"
       ],
       "conceptTags": [
         "deepseek/deepseek-v4-pro",
@@ -3217,24 +3221,26 @@
       "endLine": 44,
       "source": "memory",
       "snippet": "- ❌ 成本数据过期（~1440分钟前，cost_daily.json是7/29 00:05的）→ 手动刷新 - ⚠️ SAGE checker + Reflexion journal 缺失 → 基建待完善 - **修复操作**: - 运行 `full_cost_scan.py` 写入 `~/opc-workspace/Kitty/opc-dashboard/data/cost_daily.json` - 最新成本: 累计 $122.36 | 本月 $62.76 | 今日 $0.00 - Token: 1,148,603,881 | API调用: 18,393 - 按Agent: Bryson $88.89 | Balance $14.42 | Kitty $11.46 | Self $7.60 - **模型**: deepseek/deepseek-v4-pro ## 🕗 08:30 费用报销MVP交互修复 - **触发**: Daryl试用反馈两个交互问题 - **问题1**: 发票列表不能点击查看详情、不能调整报销金额、不能删除 - **问题2**: 凭证预览只显示原始CSV，没有可读的HTML格式 - **修复**: 1. 添加详情模态框：点击费用卡片→查看/编辑类型、报销金额、供应商、日期、OCR原文 2. 新增 DELETE /api/expense/{id} 接口 3. 凭证预览：HTML表格视图（可切换原始CSV）+ 下载按钮 4. 扩展 PUT /api/expense/{id} 支持更多可编辑字段 - **模型**",
-      "recallCount": 5,
+      "recallCount": 6,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.8434009611606597,
+      "totalScore": 2.2330726385116577,
       "maxScore": 0.40460125803947444,
       "firstRecalledAt": "2026-08-01T10:14:27.781Z",
-      "lastRecalledAt": "2026-08-08T03:56:28.124Z",
+      "lastRecalledAt": "2026-08-10T07:23:15.295Z",
       "queryHashes": [
         "9cb38ef7e0c6",
         "22afa9b85b81",
         "4a29d1c89aa5",
         "674cc96ae754",
-        "b39a2c102edc"
+        "b39a2c102edc",
+        "18ddc90f47c1"
       ],
       "recallDays": [
         "2026-08-01",
         "2026-08-02",
-        "2026-08-08"
+        "2026-08-08",
+        "2026-08-10"
       ],
       "conceptTags": [
         "cost-daily.json是7/29",
@@ -3254,22 +3260,24 @@
       "endLine": 48,
       "source": "memory",
       "snippet": "- ✅ 昨天日记存在 (56行) - ✅ active.md 新鲜 (10h) - ℹ️ lessons.md 无需今日更新 - ✅ 无需归档（上次已完成6/30归档） - ✅ MEMORY.md 39行，符合规范 - ✅ 日记长度正常（38行），session活动覆盖通过 - ✅ 近3天日记无骨架问题 - ✅ 项目清单一致 - ❌ 成本数据过期（1440分钟前）→ 🔧 已自动刷新 - ⚠️ SAGE checker-log + Reflexion journal 缺失 → 基建待完善 - **修复项**: 1项自动修复（成本仪表盘数据刷新） - **Git备份**: ✅ push 成功（5 files changed） - **浅层问题**: 1（成本过期→已修复）| **深层问题**: 0 - **L0启动验证**: ✅ OK（6/6通过） ## 📋 昨日结转事项（7/30 → 7/31） ### 🔴 费用报销MVP v0.2.0 迭代 — Daryl 明日验收 - **触发**: 7/30 晚 Daryl 飞机上讨论需求，22:43 确认方向 - **核心改动**: - OCR引擎 v2.0：预处理管线 + 结构化16字段提取 - 分类器 v2.0：供应商优先匹配（解决 Golden Central Hotel 误判类问题） - 凭证模块 v2.0：智能分组（出差合并/独立凭证）+ 多借多贷 + VAT显示 + 发票交互链接 - 前端改版：卡式布局 + 凭证展开发票详情 - **状态**: Daryl 已确",
-      "recallCount": 3,
+      "recallCount": 4,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.1758064717054366,
+      "totalScore": 1.5875678777694702,
       "maxScore": 0.4336886018514633,
       "firstRecalledAt": "2026-08-01T10:14:27.889Z",
-      "lastRecalledAt": "2026-08-08T03:56:28.071Z",
+      "lastRecalledAt": "2026-08-10T07:23:15.295Z",
       "queryHashes": [
         "22afa9b85b81",
         "4a29d1c89aa5",
-        "674cc96ae754"
+        "674cc96ae754",
+        "18ddc90f47c1"
       ],
       "recallDays": [
         "2026-08-01",
         "2026-08-02",
-        "2026-08-08"
+        "2026-08-08",
+        "2026-08-10"
       ],
       "conceptTags": [
         "备份",

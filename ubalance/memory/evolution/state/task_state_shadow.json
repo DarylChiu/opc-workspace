@@ -29,6 +29,16 @@
       "msg_count": 1,
       "subject_hash": "daecead4525d",
       "project": "expense_mvp"
+    },
+    "expense-demo-0810": {
+      "task_id": "task-20260810142641",
+      "subject": "把v0.3.0费用报销MVP用8771跑起来并拉trycloudflare隧道给IT同事演示OCR和",
+      "type": "财务",
+      "injected_patterns": [],
+      "started_at": "2026-08-10T14:26:41",
+      "msg_count": 1,
+      "subject_hash": "7332baeb9b68",
+      "project": "expense-reimbursement-mvp"
     }
   }
 }
