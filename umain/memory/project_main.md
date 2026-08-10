@@ -1,8 +1,8 @@
 # Project Dashboard — main（忧郁小猫）
 
-> 最后编译: 2026-08-09 19:00 +07:00
+> 最后编译: 2026-08-10 19:00 +07:00
 > 负责人: Kitty | Agent ID: main
-> 下轮更新: 2026-08-10 07:00
+> 下轮更新: 2026-08-11 07:00
 
 ---
 
@@ -20,8 +20,8 @@
 | 当前阶段 | M0+M1 已交付（8/5），M2 剪辑MVP 试点进行中（Bryson v4.0 前端 60%；8/9 Daryl 开始下发 ASR/情感/MATCHER 模块交互需求，需求侧重新激活） |
 | 阶段进度 | M0 100% / M1 100% / M2 60%（Bryson 前端 v4.0 交互版开发中，总进度 92%） |
 | 启动日期 | 2026-08-05 |
-| 预计交付 | M0→M3 共 40-80h；M2 原预计 8/8-8/9 → 顺延（Daryl 需求下发中，预计 8/10 后） |
-| 本周进展 | 8/5 Daryl 立项、指定 Kitty 负责人（Bryson 移交）；M0 机制冻结（需求分级模板/提问质量门禁/教训病理Schema#4/错误预算规则#5 + AGENTS.md M0条款 + jianji-mvp workflow 方向确认前置节点 + 模式库3条种子病理，patterns 4→7）；M1 决策自主层工具 5/5（decide.py 三分类零LLM 13/13 + decision_ledger 账本 + error_budget 周度预算 P0拦截/降档/磨合期 + daily_exception_report + review_batch 周度批量审批），22 用例全绿，commits 069aa1df/ec22d4cb；四Agent 颠覆性思路征集整合（用户定方向、细节全归AI、控制→定价审计、经验可遗忘）；8/6 Daryl 拍板启动 M2：试点框架 docs/m2_jianji_pilot.md + 账本种子 dec_20260806_001 落盘，线框 wf01-wf05 冻结（2必改已核验），Bryson 交互方案定稿、完成 30%；8/7 核验 Bryson 前端 v4.0 达 60% 节点（8/6 开工后无新进展，xiaofeng 看板确认）；8/9 隧道基建修复（ngrok 固定域名回 8768 视频剪辑前端，雅思陪练改走 cloudflared）；8/9 Daryl 开始下发剩余 3 模块（ASR/情感/MATCHER）交互需求，第 1 条「素材联动+自动识别+补充识别」Bryson 已回复理解待确认 |
+| 预计交付 | M0→M3 共 40-80h；M2 原预计 8/8-8/9 → 顺延（Daryl 需求下发中，预计 8/10+ 视节奏） |
+| 本周进展 | 8/5 Daryl 立项、指定 Kitty 负责人（Bryson 移交）；M0 机制冻结（需求分级模板/提问质量门禁/教训病理Schema#4/错误预算规则#5 + AGENTS.md M0条款 + jianji-mvp workflow 方向确认前置节点 + 模式库3条种子病理，patterns 4→7）；M1 决策自主层工具 5/5（decide.py 三分类零LLM 13/13 + decision_ledger 账本 + error_budget 周度预算 P0拦截/降档/磨合期 + daily_exception_report + review_batch 周度批量审批），22 用例全绿，commits 069aa1df/ec22d4cb；四Agent 颠覆性思路征集整合（用户定方向、细节全归AI、控制→定价审计、经验可遗忘）；8/6 Daryl 拍板启动 M2：试点框架 docs/m2_jianji_pilot.md + 账本种子 dec_20260806_001 落盘，线框 wf01-wf05 冻结（2必改已核验），Bryson 交互方案定稿、完成 30%；8/7 核验 Bryson 前端 v4.0 达 60% 节点（8/6 开工后无新进展，xiaofeng 看板确认）；8/9 隧道基建修复（ngrok 固定域名回 8768 视频剪辑前端，雅思陪练改走 cloudflared）；8/9 Daryl 开始下发剩余 3 模块（ASR/情感/MATCHER）交互需求，第 1 条「素材联动+自动识别+补充识别」Bryson 已回复理解待确认；8/10 无新进展（需求下发节奏待续，M2 保持 60%） |
 | 下周计划 | ①跟踪 Daryl 需求下发节奏 + Bryson M2 90%/100% 汇报节点 ②M2 完成后试点报告（决策次数对比/预算/例外）③Bryson 工具链清单搭设（mechanism_toolchain_requirements.md，~6h）④周日(8/9) 汇总已随自进化L1 一并呈报 M2 进度 |
 | 阻塞项 | wf01 A/A 与 ASR 交互需求待 Daryl 回复 |
 
@@ -55,12 +55,12 @@
 | 项目ID | evolution-l1 |
 | 状态 | 🟢 active |
 | 优先级 | P0 |
-| 当前阶段 | M0+M1+M2 已交付；Balance Phase0 影子测试窗口已结束（8/5-8/7），监控中待 8/9 决策 |
-| 阶段进度 | M0 100% / M1 100% / M2 100% / Balance Phase0 评估中（8/9 Daryl 一次性决策） |
+| 当前阶段 | M0+M1+M2 已交付；Balance Phase0 影子测试窗口已结束（8/5-8/7），监控中，8/9 决策日已过仍未收到决策（截至 8/10 19:00） |
+| 阶段进度 | M0 100% / M1 100% / M2 100% / Balance Phase0 评估中（8/9 Daryl 一次性决策已过，待跟进） |
 | 启动日期 | 2026-08-04 |
-| 预计交付 | 8/9 周日 Daryl 一次性「是否全面应用」决策 |
-| 本周进展 | 8/4 Daryl批准启动，M0+M1+M2全部交付（回归11/11，commits 7bf03311/dfccca86/6175b1ed）；8/5 Daryl批准Balance为第二试点，部署Phase0影子模式（shadow_inject只记录不注入+shadow_report周五评估+种子库7条+classify_task财务域关键词+AGENTS.md条款）；8/5-8/7 影子测试窗口运行完毕无异常；8/7 Daryl 指令：Phase0 评估不专门汇报，这几天监控即可，周日(8/9) 一次性做「是否全面应用」决策；8/8 记忆 Cron consolidated 修复上线（audit-all-report.sh 四 workspace 审计+汇总+群汇报）；8/9 周日决策日，截至 19:00 尚未收到 Daryl 一次性决策，Phase0 评估结果已备好待呈报，监控持续 |
-| 下周计划 | 视 Daryl 8/9 决策结果推进：Phase1 放行 or 推广 or 回退；若未决策则 8/10 跟进提醒 |
+| 预计交付 | 待 Daryl 决策（8/9 决策日已过，8/10-8/11 主动跟进提醒） |
+| 本周进展 | 8/4 Daryl批准启动，M0+M1+M2全部交付（回归11/11，commits 7bf03311/dfccca86/6175b1ed）；8/5 Daryl批准Balance为第二试点，部署Phase0影子模式（shadow_inject只记录不注入+shadow_report周五评估+种子库7条+classify_task财务域关键词+AGENTS.md条款）；8/5-8/7 影子测试窗口运行完毕无异常；8/7 Daryl 指令：Phase0 评估不专门汇报，这几天监控即可，周日(8/9) 一次性做「是否全面应用」决策；8/8 记忆 Cron consolidated 修复上线（audit-all-report.sh 四 workspace 审计+汇总+群汇报）；8/9 周日决策日，截至 19:00 尚未收到 Daryl 一次性决策，Phase0 评估结果已备好待呈报，监控持续；8/10 截至 19:00 仍未收到决策（周一群报到未涉及），继续监控 + 计划主动跟进提醒 |
+| 下周计划 | 视 Daryl 决策结果推进：Phase1 放行 or 推广 or 回退；8/9 决策日已过 → 8/10-8/11 主动跟进提醒并呈报 Phase0 评估结果 |
 | 阻塞项 | 无 |
 
 #### 里程碑
@@ -70,7 +70,7 @@
 | M0 · 信号捕获（纠错/失败/审计/复盘→inbox→周度蒸馏） | 🟢 done | 100% | 8/4 ✅ |
 | M1 · 失败模式库（JSON+规则表+embedding+三层检索） | 🟢 done | 100% | 8/4 ✅ |
 | M2 · 任务级注入（任务边界触发检索→注入上下文） | 🟢 done | 100% | 8/4 ✅ |
-| Balance试点 Phase0（影子模式8/5-8/7，只记录不注入） | 🟡 评估中 | — | 8/9 Daryl 决策 |
+| Balance试点 Phase0（影子模式8/5-8/7，只记录不注入） | 🟡 评估中 | — | 待 Daryl 决策（8/9 已过，8/10 跟进中） |
 
 #### 关键决策
 
@@ -99,9 +99,9 @@
 | 总进度 | 100%（M4 收官） |
 | 启动日期 | 2026-06-08 |
 | 预计交付 | 2026-08-10 |
-| 本周进展 | 8/2-8/5 运行平稳；8/5 成本端点核查+preview修复（ea47ba2）+产物模块 v1.7.0（fbcd813）；8/7 M4 收官：③约定版本变更自动DM通知（M4c，commit 09e38ea），至此 M4 三项全完成（①override过期清理✅ ②系统消息过滤✅ ③约定版本变更通知✅）；Daryl 拍板 v1.7 整合「Sidebar项目总线 → 平移到 Agent状态和任务的 project milestone 模块」；8/7 21:40 全 Agent 看板初始化（Daryl 指令）：通知 xiaofeng/Balance/Self 清过时任务+成本自查，Self 已回复（清理5个过时项目+发现 8/6 团建卡生图 ~$1.0-1.3 未进台账），待 xiaofeng/Balance 回复；8/8 记忆 Cron consolidated 修复上线（audit-all-report.sh 四 workspace 审计+汇总+群汇报，00:16 手动跑通）；8/9 ~08:10 serveo.net 服务端宕机（DNS 可达但 22/443 超时，非映射问题）→ 固定域名 opc-darylchiu.serveousercontent.com 失联；应急上线 cloudflared 备用隧道 searched-chip-belly-consolidation.trycloudflare.com → 8765（公网 HTTP 200 / 0.87s），autossh 持续重连待 serveo 恢复；Balance 顺手修复 .current_tunnel_url 文件 grep 误写 |
-| 下周计划 | v1.7 整合开发（Sidebar 项目总线平移到 project milestone 模块，8/7 拍板待启动）；汇总三 Agent 看板初始化结果给 Daryl；Brave 接回主搜索路由待 Daryl 确认；8/8 起逐项清理四 workspace 审计遗留问题；serveo 恢复后验证固定域名回归、评估 cloudflared 应急隧道持久化 |
-| 阻塞项 | Daryl决策阻塞：Self阻塞(OPC看板/卡片审核/ACCA Vault等) + Balance SOP审阅（音乐文件/车辆费用/JGL 8/5已取消）；Brave接回主搜索路由待确认（C15基准8/5归档：SearXNG 39.9坍塌/Brave 65.9持平）；xiaofeng/Balance 看板初始化回复待收；Self 建议删除其侧旧 gateway cron（1799ac76 禁用态）待处理 |
+| 本周进展 | 8/2-8/5 运行平稳；8/5 成本端点核查+preview修复（ea47ba2）+产物模块 v1.7.0（fbcd813）；8/7 M4 收官：③约定版本变更自动DM通知（M4c，commit 09e38ea），至此 M4 三项全完成（①override过期清理✅ ②系统消息过滤✅ ③约定版本变更通知✅）；Daryl 拍板 v1.7 整合「Sidebar项目总线 → 平移到 Agent状态和任务的 project milestone 模块」；8/7 21:40 全 Agent 看板初始化（Daryl 指令）：通知 xiaofeng/Balance/Self 清过时任务+成本自查，Self 已回复（清理5个过时项目+发现 8/6 团建卡生图 ~$1.0-1.3 未进台账），待 xiaofeng/Balance 回复；8/8 记忆 Cron consolidated 修复上线（audit-all-report.sh 四 workspace 审计+汇总+群汇报，00:16 手动跑通）；8/9 ~08:10 serveo.net 服务端宕机（DNS 可达但 22/443 超时，非映射问题）→ 固定域名 opc-darylchiu.serveousercontent.com 失联；应急上线 cloudflared 备用隧道 searched-chip-belly-consolidation.trycloudflare.com → 8765（公网 HTTP 200 / 0.87s），autossh 持续重连待 serveo 恢复；Balance 顺手修复 .current_tunnel_url 文件 grep 误写；8/10 复核：localhost:8765 正常（HTTP 200），cloudflared 进程存活但旧随机域名已失效（000），serveo 恢复状态待确认；13:08 Daryl 周一报到，4 Agent 全员在线 |
+| 下周计划 | v1.7 整合开发（Sidebar 项目总线平移到 project milestone 模块，8/7 拍板待启动）；汇总三 Agent 看板初始化结果给 Daryl；Brave 接回主搜索路由待 Daryl 确认；8/8 起逐项清理四 workspace 审计遗留问题；serveo 恢复后验证固定域名回归、评估 cloudflared 应急隧道持久化；8/10 复核旧随机域名失效需刷新隧道 URL |
+| 阻塞项 | Daryl决策阻塞：Self阻塞(OPC看板/卡片审核/ACCA Vault等) + Balance SOP审阅（音乐文件/车辆费用/JGL 8/5已取消）；Brave接回主搜索路由待确认（C15基准8/5归档：SearXNG 39.9坍塌/Brave 65.9持平；8/10 08:00 周度抽检 SearXNG 37.0，坍塌持续）；xiaofeng/Balance 看板初始化回复待收；Self 旧 gateway cron 1799ac76 仍启用（8/10 归档确认连续第3天双通道并存，非禁用态），待清理 |
 
 #### 里程碑
 
@@ -119,8 +119,8 @@
 |------|------|------|------|
 | 2026-06 | — | ~$28 | — |
 | 2026-07 | $55 | $66.01 | -$11.01 🔴 |
-| 2026-08 | 待定 | $17.86 | 8/9 止（10天，Balance 台账） |
-| 累计 | — | ~$143.64 | 🔴 7月超支20.0% |
+| 2026-08 | 待定 | $19.93 | 8/10 止（11天，Balance 台账；8/10 检查：今日$0.87） |
+| 累计 | — | ~$145.72 | 🔴 7月超支20.0% |
 
 #### 关键决策
 
@@ -150,7 +150,7 @@
 | 7/18 | cost_daily.json 路径不一致 | Balance写入旧Dashboard副本，运行中Dashboard读不到 | ✅ 7/19 Balance已修复 |
 | 8/5 | /api/preview ReferenceError（server.js:1085 project未定义） | 看板产物预览崩溃 | ✅ 已修复 commit ea47ba2 |
 | 8/7 | 8/6 团建邀请卡 6 张图 OpenRouter 生图 ~$1.0-1.3 未进成本台账（Self 发现） | 看板成本统计低估 | 待 Balance 排查图片生成成本纳入扫描 |
-| 8/9 | serveo.net 服务端宕机（8/9 ~08:10，DNS 可达但 22/443 超时） | OPC 看板固定公网域名失联，平板验收受阻 | ✅ cloudflared 备用隧道已上线（HTTP 200）；autossh 重连中，serveo 恢复后固定域名自动回归 |
+| 8/9 | serveo.net 服务端宕机（8/9 ~08:10，DNS 可达但 22/443 超时） | OPC 看板固定公网域名失联，平板验收受阻 | ✅ 8/9 cloudflared 备用隧道上线（HTTP 200）；8/10 复核旧随机域名已失效（trycloudflare 重启即变），进程存活待刷新 URL；serveo 恢复状态待确认 |
 
 ---
 
@@ -174,6 +174,7 @@
 | 第二期确定性基建 · OPC运营中枢（阻塞扫描+成本预警+新鲜度+搜索质量4模块） | 2026-07-25 | ~7.5h | commit 2dba501c |
 | Websearch 全面升级 v2.0（基建侧强制条款+引擎精简5→3+方法论v2+混合路由+基准持平） | 2026-07-29 | ~4h | commit 4fae35cb |
 | 记忆 Cron consolidated 修复（audit-all-report.sh：四 workspace 审计+汇总+群汇报，23:59 上线） | 2026-08-08 | ~1h | launchd ai.openclaw.daily-memory-check 改指 |
+| 补剂调研组A（VC/葡萄籽OPC/高纯度鱼油 + AKK/镁/NAD+ + 姜黄素/Q10/甜菜根 三部分调研） | 2026-08-09 | ~2h | memory/subagent_runs/supplements_research/ |
 
 ---
 
