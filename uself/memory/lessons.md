@@ -82,3 +82,8 @@
 - **现象**: 8/8 在 OPC 群声称「self 侧旧 gateway cron 1799ac76 为禁用状态」，建议 Kitty 删除；8/9 00:00 该 cron 实际正常触发，证明其从未被禁用
 - **根因**: 未实际核查 cron 配置（`openclaw` 侧状态/launchd/gateway 配置）就基于推测下结论，把「应该被接管」说成了「已禁用」
 - **规则**: 声称任何系统/配置状态（启用/禁用/已部署/已删除）前，必须先实际核查其配置来源；无法核查时标注「未核实，推测」而非断言。跨 Agent 协调信息尤其要谨慎，避免误导他人决策
+
+### 2026-08-11 · workspace-self 本地 git 无 remote 属正常配置，远程备份走缓存仓库
+- **现象**: 8/11 Cron 审计后手动 `git push` 报 fatal: No configured push destination，一度以为是备份故障
+- **根因**: workspace-self 本地仓库仅作本地历史管理（无 remote 属正常）；audit.sh 的远程备份机制是 rsync 同步到 `~/.opc-workspace-cache`（clone 自 github.com:DarylChiu/opc-workspace.git）后 commit + push origin main
+- **规则**: 需要远程备份时，在 `~/.opc-workspace-cache` 执行 rsync + git push；不要在 workspace-self 直接 push。Cron 审计「Git push 成功」指的是缓存仓库的 push
