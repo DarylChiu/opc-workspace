@@ -1,8 +1,8 @@
 # Project Dashboard — xiaofeng（吹点小风）
 
-> 最后编译: 2026-08-10 19:04 +07:00
+> 最后编译: 2026-08-11 19:01 +07:00
 > 负责人: Bryson | Agent ID: xiaofeng
-> 下轮更新: 2026-08-11 07:00
+> 下轮更新: 2026-08-12 07:00
 
 ---
 
@@ -15,11 +15,11 @@
 | 字段 | 值 |
 |------|-----|
 | 项目ID | video-editor-mvp |
-| 状态 | 🟢 active · v4.0 交互版开发中（8/6 M2 决策自主环试点开工，wf01-wf05 冻结为 v4.0 基线）；8/4 服务 LaunchAgent 持久化+隧道恢复 unwhispering-imani-digitately.ngrok-free.dev；8/5 修复 3 个 BUG（launchd PATH/前端 hardcode）+ 自诊断 + 线框先行包 + 机制分层落定；8/6 工作区指针事故闭环（跨工作区同步完成，唯一有效工作区 xiaofeng_workspace）；8/7 OPC 看板 v1.6 同步（项目区保留 ★ACTIVE）+ M2 进度核验 60%；8/9 ngrok 隧道切回 8768（launchd plist 修复，与 IELTS 隧道冲突解除，公网恢复可达）+ Daryl 开始发送 ASR/场景识别模块交互需求（第1条已回复待确认）；8/10 无开发投入（仅例行审计），双隧道复核健康，ASR 需求第1条仍待 Daryl 确认 |
+| 状态 | 🟢 active · v4.0 交互版开发中（8/6 M2 决策自主环试点开工，wf01-wf05 冻结为 v4.0 基线）；8/4 服务 LaunchAgent 持久化+隧道恢复 unwhispering-imani-digitately.ngrok-free.dev；8/5 修复 3 个 BUG（launchd PATH/前端 hardcode）+ 自诊断 + 线框先行包 + 机制分层落定；8/6 工作区指针事故闭环（跨工作区同步完成，唯一有效工作区 xiaofeng_workspace）；8/7 OPC 看板 v1.6 同步（项目区保留 ★ACTIVE）+ M2 进度核验 60%；8/9 ngrok 隧道切回 8768（launchd plist 修复，与 IELTS 隧道冲突解除，公网恢复可达）+ Daryl 开始发送 ASR/场景识别模块交互需求（第1条已回复待确认）；8/10 无开发投入（仅例行审计），双隧道复核健康，ASR 需求第1条仍待 Daryl 确认；8/11 无开发投入（仅心跳），ASR 需求第1条仍未获确认，前端 v4.0 进度持平 |
 | 优先级 | P0 |
 | 当前阶段 | v4.0 交互版开发（M2 试点 · 前端开发 60% 节点进行中，预估 8-12h 完成）；8/9 ASR/场景识别交互需求开始流入（剩余3模块需求澄清启动） |
-| 阶段进度 | 核心链路 100%（7/25 ✅）；wf01-wf05 已冻结为 v4.0 基线（8/6）；前端 v4.0 交互版 60% 节点（8/7 核验，8/6-8/10 无前端开发投入，进度持平；8/9 ASR 需求第1条待 Daryl 确认） |
-| 总进度 | 92%（8/7-8/10 无新增开发投入，持平） |
+| 阶段进度 | 核心链路 100%（7/25 ✅）；wf01-wf05 已冻结为 v4.0 基线（8/6）；前端 v4.0 交互版 60% 节点（8/7 核验，8/6-8/11 无前端开发投入，进度持平；8/9 ASR 需求第1条待 Daryl 确认） |
+| 总进度 | 92%（8/7-8/11 无新增开发投入，持平） |
 | 启动日期 | 2026-07-19 |
 | 预计交付 | 2026-08（视Daryl需求节奏） |
 | 上周进展 | 8/4 服务持久化（LaunchAgent: videoeditor/ielts/ngrok，Gateway 重启不掉）+ 隧道恢复 unwhispering-imani-digitately ✅；TOSHIBA 硬盘卡死→Daryl 18:10 重插，watchdog 误报 BUG 修复（launchd PATH 缺 timeout，70+ 次误报）；8/5 修复 3 BUG（素材时长 0 / ASR 仅前 3 个 / 看护误报，根因=launchd 极简 PATH + 前端 hardcode）→ 素材扫描解阻（21 组素材可用）；产出自诊断 SELF_DIAGNOSIS_20260805 + 线框先行包 wf01-wf05（含素材可读化/重命名需求）；Daryl 纠正归因→「用户思维」机制沉淀；三个颠覆性方案→Kitty 评估→机制分层落定；8/5 Loop Engineering 移交 Kitty（更名「决策自主环」，M2 试点=剪辑MVP）；8/6 M2 试点开工：wf01-wf05 冻结 v4.0 基线，前端 v4.0 交互版开发中（60% 节点，预估 8-12h）；8/7 OPC 看板 v1.6 初始化（项目清理：洗稿/Loop/视频分析移入归档，剪辑MVP 保留 ★ACTIVE）+ M2 进度核验 60%；8/9 ngrok 隧道 8767→8768 切回（根因=launchd ai.openclaw.ngrok.plist KeepAlive 抢固定域名，plist 还原 bak_20260807_8768，旧配置备份 bak_20260809_8767）+ 公网恢复 `unwhispering-imani-digitately.ngrok-free.dev`→8768 ✅（API 3.0.0 + 前端 200）；Daryl 预告并开始发送剩余3模块交互需求（第1条：素材联动+自动识别+补充识别，已回复理解待确认） |
@@ -33,7 +33,7 @@
 | Phase 0 · MVP 核心剪辑引擎 | 🟢 done | 100% | 7/21 ✅ |
 | Phase 1 · 极简可视化前端 | 🟢 done | 100% | 7/23 ✅ |
 | v3.0 · Hooktheory BGM + SQLite + ffmpeg 渲染 | 🟢 done | 100% | 8/6 冻结为 v4.0 基线 ✅ |
-| v4.0 · M2 决策自主环试点（wf01-wf05 交互版） | 🟡 in-progress | 60% | 8/6 开工，8/7 核验 60%；8/7-8/10 无前端开发投入；8/9 ASR 交互需求开始流入（第1条待确认，8/10 仍未回复） |
+| v4.0 · M2 决策自主环试点（wf01-wf05 交互版） | 🟡 in-progress | 60% | 8/6 开工，8/7 核验 60%；8/7-8/11 无前端开发投入；8/9 ASR 交互需求开始流入（第1条待确认，8/11 仍未回复） |
 | Phase 1(旧) · 高级编排+模板 | ⚪ pending | 0% | 顺延 TBD |
 | Phase 2(旧) · 变现交付 | ⚪ pending | 0% | 顺延 TBD |
 
@@ -44,9 +44,9 @@
 | 2026-07 | $20 | ~$6 | +$14 |
 | 2026-08 | $20 | ~$2.15* | +$17.85 |
 
-> *2026-08 实际为 xiaofeng 全项目合计 $2.15（balance ledger 权威源，8/7 看板核对；预算 $15 口径，14%），项目内拆分估算待细化；8/10 系统全量 cost-check：今日 $0.87 / 本月 $19.93 / 累计 $145.72，xiaofeng 项目级拆分仍以 8/7 快照为准。
+> *2026-08 实际为 xiaofeng 全项目合计 $2.15（balance ledger 权威源，8/7 看板核对；预算 $15 口径，14%），项目内拆分估算待细化；8/11 系统全量 cost-check：今日 $0.24 / 本月 $20.24 / 累计 $146.03，xiaofeng 项目级拆分仍以 8/7 快照为准。
 
-#### 本周更新（8/7-8/10）
+#### 本周更新（8/7-8/11）
 
 - 8/7：OPC 看板 v1.6 初始化（Daryl 指令）——项目区清理为仅剩 剪辑MVP★ACTIVE + IELTS；任务清理 12 条；成本核对以 balance ledger 为准（8月 $2.15 / 累计 $91.52 / 742M tokens / 9564 calls）
 - 8/7：ngrok 隧道由 8768 切换至 IELTS 8767（Daryl 练口语），视频编辑器公网入口暂让位；本地 8768 + LaunchAgent 托管不受影响；M2 前端 v4.0 交互版 60% 节点核验
@@ -54,6 +54,7 @@
 - 8/9：ngrok 隧道 8767→8768 切回 ✅（launchd plist 修复，根因 KeepAlive 抢固定域名），公网 `unwhispering-imani-digitately.ngrok-free.dev` 恢复可达；IELTS 改 cloudflared 临时隧道（selling-human-pig-arise.trycloudflare.com）避免再抢域名
 - 8/9：Daryl 开始发送剩余3模块交互需求——第1条 ASR/场景识别（素材联动+自动识别+补充识别），已回复理解待确认；前端 v4.0 开发仍待推进
 - 8/10：无实质开发投入（仅心跳/例行审计）；双隧道复核 ✅——视频剪辑 ngrok 固定域名 200 + API v3.0.0、IELTS cloudflared 临时 URL 200、本地 8768/8767 均 200；ASR 需求第1条仍未获 Daryl 确认
+- 8/11：无实质开发投入（仅心跳）；服务层（videoeditor/ielts/ngrok）全天正常；ASR 需求第1条仍未获 Daryl 确认，前端 v4.0 交互版开发持续待推进（等待 Daryl 确认后动工）
 
 #### 关键决策
 
@@ -100,7 +101,7 @@
 | 字段 | 值 |
 |------|-----|
 | 项目ID | ielts-tutor-v2 |
-| 状态 | 🟡 verifying · v1.3.0 待 Daryl 验收；8/7 Daryl 实际使用练口语（隧道切 8767 + debug 拉起）→ 反馈 STT/ASR 不准 → 当晚修复并实测 100% 词级命中；8/8 修复 assessment 不出评分 Bug（DeepSeek Thinking 模式吞 max_tokens）+ 补数据回填 2f7ae680；8/9 隧道改 cloudflared 临时 URL（selling-human-pig-arise，ngrok 固定域名让给视频剪辑）；8/10 隧道复核 200 仍可达，无新使用反馈；8/4 服务 LaunchAgent 持久化 localhost:8767 ACTIVE；8/5 OPC看板v1.6 同步 wf_ielts_tutor_v130 工作流 |
+| 状态 | 🟡 verifying · v1.3.0 待 Daryl 验收；8/7 Daryl 实际使用练口语（隧道切 8767 + debug 拉起）→ 反馈 STT/ASR 不准 → 当晚修复并实测 100% 词级命中；8/8 修复 assessment 不出评分 Bug（DeepSeek Thinking 模式吞 max_tokens）+ 补数据回填 2f7ae680；8/9 隧道改 cloudflared 临时 URL（selling-human-pig-arise，ngrok 固定域名让给视频剪辑）；8/10 隧道复核 200 仍可达，无新使用反馈；8/11 无新使用反馈（仅心跳），待 Daryl 实战验收；8/4 服务 LaunchAgent 持久化 localhost:8767 ACTIVE；8/5 OPC看板v1.6 同步 wf_ielts_tutor_v130 工作流 |
 | 优先级 | P0 |
 | 当前阶段 | v1.3.0 开发完毕 + 8/7 STT/ASR 修复 + 8/8 assessment 修复（thinking disabled），待 Daryl 实战验收 |
 | 阶段进度 | 100%（含 8/7 STT/ASR 修复，stt_streaming.py 有 .bak_20260807 备份；8/8 ds_chat/ds_stream/vocab 三处加 thinking disabled + 补评估 2f7ae680；commit 待补） |
@@ -131,7 +132,7 @@
 | 累计 | — | ~$23 | — |
 | 2026-08 | $15 | ~$0* | +$15 |
 
-> *8/7 起 IELTS 恢复使用（隧道切换+STT 修复），相关 token 消耗并入 xiaofeng 8月合计 $2.15（balance ledger 权威源）。
+> *8/7 起 IELTS 恢复使用（隧道切换+STT 修复），相关 token 消耗并入 xiaofeng 8月合计（balance ledger 权威源；8/11 全量 cost-check：本月 $20.24 / 累计 $146.03）。
 
 #### 关键决策
 
