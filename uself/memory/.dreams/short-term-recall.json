@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-07T17:08:54.643Z",
+  "updatedAt": "2026-08-12T08:43:00.823Z",
   "entries": {
     "memory:memory/2026-06-22.md:22:34": {
       "key": "memory:memory/2026-06-22.md:22:34",
@@ -1371,18 +1371,20 @@
       "endLine": 66,
       "source": "memory",
       "snippet": "- 全天无 Daryl 派活，无群聊 @ ## 7/21 回顾（7/22 凌晨补充） ### 小枫 - Video Editor Phase 0 全部 15 项里程碑交付（6,064 行代码，24 模块） - OPC 群聊中开启了 Debug 模块（`DEBUG_MODE=1`） - 与 Daryl 讨论长视频处理超时策略 ### Balance - 成本全量扫描完成（2,232 个 .jsonl → 13,573 次调用） - Daryl 咨询 VAS 会计：TT200 TK 515 存款利息计提条文验证通过 - 新增二级市场基本面分析框架项目（🆕 active） ### Main (Kitty) - 验证 `/api/costs` 端点：确认已在做 JSONL 全量扫描 - OPC Dashboard 持久化部署确认（Serveo + crontab 看门狗） - 成本看板前端渲染数据对账完成 ### Self - OPC 群聊中纠正角色映射，确认所有 Agent 备份完成",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.37133051156997676,
+      "totalScore": 0.7238154023885726,
       "maxScore": 0.37133051156997676,
       "firstRecalledAt": "2026-08-04T01:53:28.673Z",
-      "lastRecalledAt": "2026-08-04T01:53:28.673Z",
+      "lastRecalledAt": "2026-08-12T08:43:00.823Z",
       "queryHashes": [
-        "31fa124d018d"
+        "31fa124d018d",
+        "df0c40aa6abb"
       ],
       "recallDays": [
-        "2026-08-04"
+        "2026-08-04",
+        "2026-08-12"
       ],
       "conceptTags": [
         "备份",
