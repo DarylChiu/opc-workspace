@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-09T12:00:39.441Z",
+  "updatedAt": "2026-08-12T01:29:14.955Z",
   "entries": {
     "memory:memory/2026-06-08.md:19:38": {
       "key": "memory:memory/2026-06-08.md:19:38",
@@ -1595,20 +1595,22 @@
       "endLine": 45,
       "source": "memory",
       "snippet": "- 4 个提醒 (07:20/20:00/23:00/23:30) + 审计 + 看门狗 + 项目通知 已就位 ## 状态概览 - **active.md**: 更新至 7/15 - **Git**: remote 未配置（已知，push 跳过） - **SAGE/Reflexion**: 预期下周出首批数据 - **各 Agent**: 待命状态 ## 08:42-09:10 · OPC看板准确度验收 — Daryl截图指出红框/绿框问题 ### 根因分析 1. **红框(已完成未更新Done/里程碑未划线)**: - Kitty自身: active.md 收尾不及时(crontab两项7/15完成仍挂待办) → 已修正 - **隐蔽根因**: data/status_overrides.json 存有 7/3、7/7 Daryl点▶Start产生的旧覆盖(ac_kitty_Agent版本变更通知/ac_kitty_Crontab_手动安装/ac_kitty_M2_剩余模块 → in_progress)，优先级高于active.md同步 → 已备份后清除3条,重启看板生效 - Bryson: 「M2开发计划」未移已完成 + project_xiaofeng.md IELTS M2里程碑未标done → 已sessions_send通知 2. **绿框(不存在的任务)**: 看板不造数据，全部来自各Agent的active.md - Bryson待办「ngrok备用隧道安装」「Agent自进化」→ 已通知移除 - Balance「车辆费用专项分",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.7427172660827637,
+      "totalScore": 1.1095074743032456,
       "maxScore": 0.38701246678829193,
       "firstRecalledAt": "2026-07-18T06:07:04.834Z",
-      "lastRecalledAt": "2026-07-23T02:20:53.055Z",
+      "lastRecalledAt": "2026-08-12T01:29:14.955Z",
       "queryHashes": [
         "0deefc791542",
-        "ba22a9276bd0"
+        "ba22a9276bd0",
+        "90bee24d955f"
       ],
       "recallDays": [
         "2026-07-18",
-        "2026-07-23"
+        "2026-07-23",
+        "2026-08-12"
       ],
       "conceptTags": [
         "备份",
@@ -3108,6 +3110,37 @@
         "wf02-asr.md",
         "wf01-wf05",
         "error-budget"
+      ]
+    },
+    "memory:memory/archive/2026-07-07.md:22:48": {
+      "key": "memory:memory/archive/2026-07-07.md:22:48",
+      "path": "memory/archive/2026-07-07.md",
+      "startLine": 22,
+      "endLine": 48,
+      "source": "memory",
+      "snippet": "- [ ] 累积阈值触发测试 (write > 20, dirs > 3) - [ ] 审计日志生成验证 - [ ] 夜间降级逻辑验证（23:00-08:00） ## 后续任务 - [ ] pre-op.sh 对齐新边界（添加 Sentinel 协同说明） - [ ] OPC 看板 M3 剩余: 成本面板项目拆分 + 产物项目分组 (30%) - [ ] OPC 看板 M2.3 合规仪表板接入 - [ ] Sentinel 试运行 1 周 → 指标评估 → M2 迭代 ## 09:00-09:28 · OPC看板 M3 项目总线开发 ### 已完成 - **项目总线面板**: 新 nav 按钮 + HTML 面板 + 完整 JS 渲染逻辑 - **数据聚合**: 调用 `/api/costs/projects` + `/api/artifacts?group=project` + `/api/agents/projects` - **交互功能**: 项目卡片展示(里程碑/产物/成本)、展开详情(里程碑列表+成本明细+产物清单)、跨面板快捷链接 - **侧边栏 badge**: 项目总线计数刷新 - **Commit**: `8809c5d` M3: 项目总线面板 — 跨项目深度集成 (212 insertions) - **M3 进度**: 30% → 70% ### Gateway 问题排查 - 之前加的 `plugins.allow: [\"sentinel\"]` 导致 Gateway 重启后只加载 2 个插件 - Daryl 禁用 Sentinel 后 Gateway",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3688309550285339,
+      "maxScore": 0.3688309550285339,
+      "firstRecalledAt": "2026-08-12T01:29:14.955Z",
+      "lastRecalledAt": "2026-08-12T01:29:14.955Z",
+      "queryHashes": [
+        "90bee24d955f"
+      ],
+      "recallDays": [
+        "2026-08-12"
+      ],
+      "conceptTags": [
+        "gateway",
+        "00-08",
+        "pre-op.sh",
+        "m2.3",
+        "00-09",
+        "api/costs/projects",
+        "api/artifacts",
+        "api/agents/projects"
       ]
     }
   }
