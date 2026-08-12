@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-10T07:23:15.353Z",
+  "updatedAt": "2026-08-12T06:39:31.823Z",
   "entries": {
     "memory:memory/2026-06-10.md:1:29": {
       "key": "memory:memory/2026-06-10.md:1:29",
@@ -1951,18 +1951,20 @@
       "endLine": 61,
       "source": "memory",
       "snippet": "- **产出**: `reports/JGL-KHOA_DUNG-并购框架-v1.0-20260710.md` ### 🔴 车辆费用专项分析 - **状态**: ⏳ 待Daryl发送详细数据 ### 🟡 Future Textile × Wellname 攻击9-12 - **状态**: ⏳ 待Daryl防御（法律性质/日期链/MLI信号/实质=资本金） ### 🟡 贷款材料 v2.5 - **状态**: 操作手册已交付，等待Daryl徒弟反馈 ## 🕚 23:20+ Kitty确认OPC Dashboard数据同步 ✅ - Kitty确认 `/api/costs` 已使用 jsonl-full-scan，数据与 cost_daily.json 一致 - 今日 $2.83 | 本月 $8.05 | 全量 $67.65 - 全量从早间 $112.97 → $67.65（僵尸session清理后更真实） - Kitty heartbeat隔离生效：单日 $0.53（昨日 $4.33，降88%） - 后续cron推送正常进行 ## 🕚 23:45 每日成本扫描（Cron） - **触发**: 23:45 Cron 全量成本扫描 - **扫描结果**: 417个.jsonl | 0条解析错误 | 全量$67.65 | 本月$8.05 | 今日$2.83 | 190.7M tokens | 5,500次调用 - **按Agent**: Bryson $58.17, Balance $3.67, Self $2.97, Kitty $2.85 - **按模型**: de",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.42329636216163635,
+      "totalScore": 0.786894366145134,
       "maxScore": 0.42329636216163635,
       "firstRecalledAt": "2026-07-16T02:05:36.615Z",
-      "lastRecalledAt": "2026-07-16T02:05:36.615Z",
+      "lastRecalledAt": "2026-08-12T06:39:31.823Z",
       "queryHashes": [
-        "d54d321eaa7d"
+        "d54d321eaa7d",
+        "483854a838c9"
       ],
       "recallDays": [
-        "2026-07-16"
+        "2026-07-16",
+        "2026-08-12"
       ],
       "conceptTags": [
         "攻击9-12",
@@ -4100,6 +4102,68 @@
         "mv9650l.pdf是否为b/l",
         "rm-database有bl2305342010.pdf",
         "fix-v2.py"
+      ]
+    },
+    "memory:memory/2026-08-08.md:1:20": {
+      "key": "memory:memory/2026-08-08.md:1:20",
+      "path": "memory/2026-08-08.md",
+      "startLine": 1,
+      "endLine": 20,
+      "source": "memory",
+      "snippet": "# 2026-08-08 日记 ## ⚠️ Cron 审计自动创建（内容待补充） - 本日记由 23:59 Cron 自动创建，当日内容未记录 - 需从 session 历史补充实际事件 ## 🕐 14:00-15:00 费用报销MVP v0.3.0 全量修复交付 - **触发**: Daryl 远程验收发现 v0.2.0 一大堆问题（大问题1-4 + 补充样本），要求一次性修完 - **问题清单**: 23项 (V0.3.0_FIXLIST.md) | P0×11 / P1×7 / P2×5 - **P0修复**: 1. 无税发票(HÓA ĐƠN BÁN HÀNG)不再强拆8%假VAT — 发票类型检测(vat/sales) 2. 日期识别: 兼容(Date)/(month)/(year)注释 + thang丢重音 + 排除Ký ngày签署日 3. 发票号全链路打通(提取→落库→API→前端卡片) 4. 凭证生成崩溃修复: smart_group排序None防护 + vendor None防护 5. API异常JSON化(try/except包裹所有handler) 6. 供应商提取: 7种越南发票格式全对(含无标签兜底), 标签污染/字段错位修复 7. 金额多列表格: 三列/跨行拆分, 口径一致 8. 科目体系越南化: 6601/6602(中国) → 641/642(Thông tư 200) 9. 卡片科目显示策略: 低置信度显示「待指定科目」 - **P1**: 16字段全量落库(8新列) / 前端卡片加发票号+置信度 / O",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4191141903400421,
+      "maxScore": 0.4191141903400421,
+      "firstRecalledAt": "2026-08-12T01:43:01.203Z",
+      "lastRecalledAt": "2026-08-12T01:43:01.203Z",
+      "queryHashes": [
+        "4009d2262357"
+      ],
+      "recallDays": [
+        "2026-08-12"
+      ],
+      "conceptTags": [
+        "00-15",
+        "v0.3.0",
+        "v0.2.0",
+        "大问题1-4",
+        "v0.3.0-fixlist.md",
+        "vat/sales",
+        "smart-group排序none防护",
+        "try/except包裹所有handler"
+      ]
+    },
+    "memory:memory/archive/2026-07-11.md:25:52": {
+      "key": "memory:memory/archive/2026-07-11.md:25:52",
+      "path": "memory/archive/2026-07-11.md",
+      "startLine": 25,
+      "endLine": 52,
+      "source": "memory",
+      "snippet": "### 🔴 车辆费用专项分析 - **状态**: ⏳ 待Daryl发送详细数据 - **备注**: 与JGL项目完全独立 ### 🟡 Future Textile × Wellname 攻击9-12 - **状态**: ⏳ 待Daryl防御 - **攻击线**: 法律性质/日期链/MLI信号/实质=资本金 ### 🟡 贷款材料 v2.5 - **状态**: 操作手册已交付，等待Daryl徒弟反馈 - **产出**: `reports/贷款材料自动化整理-v2.5-操作手册.md` ## 📊 昨日成本快照（7/10） - 全量: $104.58 | 本月: $44.98 | 今日: $2.90 - 262个.jsonl | 260.6M tokens | 5,568次调用 - 按Agent: Kitty $39.66, Bryson $57.57, Balance $3.36, Self $2.35 ## 🕐 23:45 每日成本扫描（Cron） - **触发**: Cron成本全量扫描 - **扫描结果**: 272个.jsonl | 276.1M tokens | 5,652次调用 | 0解析错误 - **今日**: $5.47 | **本月**: $50.44 | **全量**: $110.04 - **按Agent**: Kitty $45.26(本月$43.63), Bryson $57.26(本月$2.63), Balance $4.43(本月$2.34), Self $3.08(本月$1.84) - **按模型**: R1 $51.06, V4-P",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3738263130187988,
+      "maxScore": 0.3738263130187988,
+      "firstRecalledAt": "2026-08-12T06:39:31.823Z",
+      "lastRecalledAt": "2026-08-12T06:39:31.823Z",
+      "queryHashes": [
+        "483854a838c9"
+      ],
+      "recallDays": [
+        "2026-08-12"
+      ],
+      "conceptTags": [
+        "攻击9-12",
+        "法律性质/日期链/mli信号/实质",
+        "v2.5",
+        "reports/贷款材料自动化整理-v2.5-操作手册.md",
+        "7/10",
+        "104.58",
+        "44.98",
+        "2.90"
       ]
     }
   }

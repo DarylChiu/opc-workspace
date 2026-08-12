@@ -30,7 +30,7 @@
 - 负责人: Kitty (main)
 - 你有访问权限，特别是**成本仪表盘**模块
 - 地址: http://localhost:8765
-- 隧道: https://harvey-houston-activity-anthropology.trycloudflare.com (2026-08-09 更新，serveo 挂后 watchdog 每5分钟重建 CF 回退隧道，URL 随 cloudflared 重启变化，以 cf.log 实测为准)
+- 隧道: https://purple-thumbzilla-investigation-cooperative.trycloudflare.com (2026-08-12 13:45 实测更新；watchdog 每5分钟重建 CF 回退隧道，URL 随 cloudflared 重启变化，以 cf.log 实测为准；备用: https://opc-dashboard-daryl.loca.lt)
 - 成本数据源: 自动从 Agent sessions.json 编译
 - 上报接口: POST /api/report
 - 如果 Daryl 问成本/项目数据，这是你应该查的地方

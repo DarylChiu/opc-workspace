@@ -1,25 +1,5 @@
 {
   "sessions": {
-    "balance-fs-20260809-p1": {
-      "task_id": "task-20260809205446",
-      "subject": "Daryl拍板：预算方案B+超红线授权（质量优先），验收清单确认无增减，开工Phase1（B0数据模",
-      "type": "开发",
-      "injected_patterns": [],
-      "started_at": "2026-08-09T20:54:46",
-      "msg_count": 1,
-      "subject_hash": "daecead4525d",
-      "project": "expense_mvp"
-    },
-    "expense-demo-0810": {
-      "task_id": "task-20260810142641",
-      "subject": "把v0.3.0费用报销MVP用8771跑起来并拉trycloudflare隧道给IT同事演示OCR和",
-      "type": "财务",
-      "injected_patterns": [],
-      "started_at": "2026-08-10T14:26:41",
-      "msg_count": 1,
-      "subject_hash": "7332baeb9b68",
-      "project": "expense-reimbursement-mvp"
-    },
     "huaxing-tax-plan-v12-en": {
       "task_id": "task-20260811144819",
       "subject": "华星税务检查计划docx翻译成英文并润色，用于发邮件给A&C审计所确认审计计划",
@@ -29,6 +9,46 @@
       "msg_count": 1,
       "subject_hash": "89b8e658652a",
       "project": "华星税务检查"
+    },
+    "translation-sop-20260812": {
+      "task_id": "task-20260812081256",
+      "subject": "翻译Daryl发来的仓储突击检查SOP文档",
+      "type": "调研",
+      "injected_patterns": [],
+      "started_at": "2026-08-12T08:12:56",
+      "msg_count": 1,
+      "subject_hash": "1d107cd0327a",
+      "project": "SOP翻译"
+    },
+    "summary-warehouse-inspection": {
+      "task_id": "task-20260812102226",
+      "subject": "仓储专项检查项目总结报告:方法论提取+OPC财务内控体系归属+联动勾稽,websearch深度调研",
+      "type": "调研",
+      "injected_patterns": [],
+      "started_at": "2026-08-12T10:22:26",
+      "msg_count": 1,
+      "subject_hash": "4c1d90a421f1",
+      "project": "warehouse-inspection-sop"
+    },
+    "expense-mvp-verify-20260812": {
+      "task_id": "task-20260812133930",
+      "subject": "检查8771费用报销MVP运行状态+拉trycloudflare隧道供下午验收+准备分析报告架构模板",
+      "type": "调研",
+      "injected_patterns": [],
+      "started_at": "2026-08-12T13:39:30",
+      "msg_count": 1,
+      "subject_hash": "b40a0487305f",
+      "project": "expense_reimbursement_mvp"
+    },
+    "ap-sop-phase2-20260812": {
+      "task_id": "task-20260812161241",
+      "subject": "完善应付采购SOP(Phase2优化),小专题分析报告改明日",
+      "type": "分析",
+      "injected_patterns": [],
+      "started_at": "2026-08-12T16:12:41",
+      "msg_count": 1,
+      "subject_hash": "44dfc078c102",
+      "project": "vn-fin-sop-ap-procurement"
     }
   }
 }
