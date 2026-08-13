@@ -146,3 +146,13 @@
 - **根因**: launchd 服务 `ai.openclaw.ngrok.plist` 配了 KeepAlive=true，8/7 被改成 `ngrok http 8767`（ielts_tutor），且抢占 video-editor 的固定域名 `unwhispering-imani-digitately.ngrok-free.dev`
 - **修复**: plist 还原为 8768，launchctl unload+load 生效；旧配置备份 bak_20260809_8767
 - **教训**: ①launchd KeepAlive=true 的服务 kill 进程无效，必须改 plist 再 unload/load ②固定域名隧道会被其他端口配置抢占，改隧道前先查 launchd ③所有隧道端口改动要同步检查 launchd plist
+
+## 📐 分析类交付底线（2026-08-13 Daryl 指令 · Self 转达）
+- **背景**: Daryl 认知类型 Ni+Te，看分析报告像看 X 光，表面数据堆砌一眼不满意（指令频率调查第一轮只报频率被点名「表面」）
+- **5 条底线**:
+  1. 至少挖两层: 现象 → 结构/模式 → 含义。只报表面结论 = 不合格
+  2. 定义口径: 分析前先给出判断维度（难度分级/长线界定），结论可被质疑
+  3. 找模式不找数据: Ni 型要「数据背后的结构变化」而非数据本身（如: 任务性质从设计+迭代塌缩到执行+救火 > 频率数字）
+  4. 给可执行含义: Te 型要结论能落地，不停在观察层
+  5. 不确定就标注，不迎合
+- **应用**: 所有分析类任务交付前自查这 5 条
