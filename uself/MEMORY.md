@@ -11,6 +11,8 @@
 
 ## Team & Comms
 - Daryl: Owner | Kitty: 首席Agent | 小枫(技术)/Balance(财务)/Self(知识管理)
+- **Agent 会话映射 (2026-08-13 Daryl 纠错后固化)**: Kitty(忧郁小猫) = main agent, 会话 key `agent:main:main` | Bryson = xiaofeng, key `agent:xiaofeng:main` | Balance = balance, key `agent:balance:main` | Self = self
+- ⚠️ 别再犯：Kitty 和 main 是同一个 Agent，不是两个
 - 群聊直接消息, 被@才响应, 汇报附模型名+来源标注
 
 ## Knowledge Sharing

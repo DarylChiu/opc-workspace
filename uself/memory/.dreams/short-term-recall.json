@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-12T08:43:00.823Z",
+  "updatedAt": "2026-08-12T17:14:43.201Z",
   "entries": {
     "memory:memory/2026-06-22.md:22:34": {
       "key": "memory:memory/2026-06-22.md:22:34",
@@ -766,18 +766,20 @@
       "endLine": 36,
       "source": "memory",
       "snippet": "# 2026-06-18 日记 ## 关键事件 ### Daryl 重新充值通知 - Daryl 通知已充值，要求重新执行记忆 Cron 任务 ### 记忆 Cron 审计（00:23） - 执行 audit.sh --report - 发现：今日日记缺失 → 已创建本文件 - 其余检查通过 ### 前期回顾（6/14-6/17 今日归档） #### OPC 机制基建规范上线 - 小风汇编 v2.0，覆盖 8 大维度 - Daryl 逐项确认，即日起生效 - Hooks 机制自检系统（L0-L4）全面启用 - 每周日互相审计 #### OPC 统一 Git 仓库 - 推送到 github.com/DarylChiu/opc-workspace - Self/ 目录：ACCA Vault (39文件) + 合规脚本 (4) + 记忆系统文档 + 项目摘要 - 提交方式：scripts/self-git #### 合规修复汇总 - SOUL.md 新增 T0 数字资产保护 + 必须执行机制 - plist 部署到 LaunchAgents - 本地 workspace git init (91文件) - 日记补记 6/11-6/13 ## 待跟进 - ACCA Vault 内容待 Daryl 提供教材后填充 - 心理学域、音乐域知识树待启动 - 本周日互相审计",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.3616160243749618,
-      "maxScore": 0.3616160243749618,
+      "totalScore": 0.7958986401557921,
+      "maxScore": 0.4342826157808304,
       "firstRecalledAt": "2026-07-19T07:20:50.182Z",
-      "lastRecalledAt": "2026-07-19T07:20:50.182Z",
+      "lastRecalledAt": "2026-08-12T17:14:43.201Z",
       "queryHashes": [
-        "43625fa9b225"
+        "43625fa9b225",
+        "e7718674c309"
       ],
       "recallDays": [
-        "2026-07-19"
+        "2026-07-19",
+        "2026-08-13"
       ],
       "conceptTags": [
         "audit.sh",
@@ -1741,6 +1743,161 @@
         "7/4",
         "日记",
         "午夜"
+      ]
+    },
+    "memory:memory/archive/2026-06-26.md:1:21": {
+      "key": "memory:memory/archive/2026-06-26.md:1:21",
+      "path": "memory/archive/2026-06-26.md",
+      "startLine": 1,
+      "endLine": 21,
+      "source": "memory",
+      "snippet": "# 2026-06-26 日记 ## 关键事件 ### 记忆 Cron 审计（00:10） - 执行 audit.sh --report，当日日记缺失 → 自动创建骨架 - 发现 active.md 关键词缺失：`OPC看板`（使用了带空格版本）和 `知识库`（未使用通用术语） - 已修复 active.md：统一 `OPC看板`（无空格）+ 标注 `知识库` ## 昨日回顾（6/25） - Daryl 群聊追问日记缺失根因 → 诊断 post-op.sh 关键词匹配过窄 - 修复：扩展触发词 + 补全 6/23-6/24 日记 + 新增 Cron 骨架检测 - 全员确认 Agent 映射表：main=Kitty, xiaofeng=Bryson, balance=Balance, self=Self - Bryson 修正配置：删除 hate.json、修正 self.json、新增 main.json ## 当前状态 - 记忆系统合规，今日审计全部通过 - ACCO F1 知识库 + VAS 知识树 + OPC看板方法论卡片三条线持续推进 - 等待 Daryl 确认 OPC看板集成方向 - 等待 Daryl 发送第一批手写笔记 + 录音",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.45230222046375274,
+      "maxScore": 0.45230222046375274,
+      "firstRecalledAt": "2026-08-12T17:14:43.201Z",
+      "lastRecalledAt": "2026-08-12T17:14:43.201Z",
+      "queryHashes": [
+        "e7718674c309"
+      ],
+      "recallDays": [
+        "2026-08-13"
+      ],
+      "conceptTags": [
+        "audit.sh",
+        "active.md",
+        "6/25",
+        "post-op.sh",
+        "6/23-6/24",
+        "hate.json",
+        "self.json",
+        "main.json"
+      ]
+    },
+    "memory:memory/archive/2026-06-24.md:1:25": {
+      "key": "memory:memory/archive/2026-06-24.md:1:25",
+      "path": "memory/archive/2026-06-24.md",
+      "startLine": 1,
+      "endLine": 25,
+      "source": "memory",
+      "snippet": "# 2026-06-24 日记 ## 关键事件 ### 记忆 Cron 审计（00:02） - 执行 audit.sh --report - 发现问题：今日日记缺失（创建骨架）、active.md 超过 31h 未更新（刷新时间戳） - 修复完成 ### 当日无 Daryl 直接交互 - DM session 无新消息 - 群聊无实质工作对话（仅 cron 定时汇报「已完成今日（2026年06月25日）的记忆系统更新」17:02） ## 当前状态 - 记忆系统运行正常 - OPC 看板方法论卡片集成方案待 Daryl 确认（6/23 遗留） - VAS 知识树 + 跨境对比网络持续建设中 - 各域初始化（心理学、音乐）待 Daryl 确认子分类 ## 待跟进（继承 6/23） - Daryl 确认 OPC 看板集成方向 - Daryl 继续验收 Vault - Circular 99/2025 全文待获取验证 - 心理学域子分类待确认",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.43388192653656005,
+      "maxScore": 0.43388192653656005,
+      "firstRecalledAt": "2026-08-12T17:14:43.201Z",
+      "lastRecalledAt": "2026-08-12T17:14:43.201Z",
+      "queryHashes": [
+        "e7718674c309"
+      ],
+      "recallDays": [
+        "2026-08-13"
+      ],
+      "conceptTags": [
+        "网络",
+        "audit.sh",
+        "active.md",
+        "6/23",
+        "99/2025",
+        "日记",
+        "关键",
+        "事件"
+      ]
+    },
+    "memory:memory/archive/2026-07-08.md:1:22": {
+      "key": "memory:memory/archive/2026-07-08.md:1:22",
+      "path": "memory/archive/2026-07-08.md",
+      "startLine": 1,
+      "endLine": 22,
+      "source": "memory",
+      "snippet": "# 2026-07-08 日记 ## 午夜 Cron 审计 (00:05-00:06) - 每日记忆归档 Cron 链触发：main → balance(1) → xiaofeng → balance(2) → self - **审计发现**： - 今日骨架日记由审计脚本自动创建（本文件，已补全为真实内容） - 12 个活跃 session（含今日 5 个 Cron session + 昨日 7 个交互 session） - active.md 新鲜（12h 内更新，含昨日 OPC Dashboard 设计系统任务） - 昨日日记（7/7）完整：24 行，含上午 Daryl 调研任务 + 设计系统产出 - Git push 失败：无 remote 配置（预期行为，本地 commit 已保存） - 审计统计：修复 1 项，浅层问题 5 项，深层问题 2 项 ## 昨日回顾 (7/7) - Daryl 派调研任务：OPC Dashboard 设计系统规范（Linear/Stripe/Vercel/GitHub Primer/Notion/Raycast） - 产出 DESIGN.md 已写入 `~/WorkBuddy/Claw/opc-dashboard/DESIGN.md` - 覆盖四维度：设计语言/设计美感/交互逻辑/数据展示 ## 待关注 - ⚠️ Sentinel/Gateway 死锁问题：小枫已定位根因，修复待执行 - 📋 OPC Dashboard M5 合规面板：被 Gateway 重启中断，待续 - 📋 7/7 有 main:main we",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.43330606222152707,
+      "maxScore": 0.43330606222152707,
+      "firstRecalledAt": "2026-08-12T17:14:43.201Z",
+      "lastRecalledAt": "2026-08-12T17:14:43.201Z",
+      "queryHashes": [
+        "e7718674c309"
+      ],
+      "recallDays": [
+        "2026-08-13"
+      ],
+      "conceptTags": [
+        "gateway",
+        "05-00",
+        "active.md",
+        "7/7",
+        "linear/stripe/vercel/github",
+        "primer/notion/raycast",
+        "design.md",
+        "设计语言/设计美感/交互逻辑/数据展示"
+      ]
+    },
+    "memory:memory/archive/2026-07-07.md:1:21": {
+      "key": "memory:memory/archive/2026-07-07.md:1:21",
+      "path": "memory/archive/2026-07-07.md",
+      "startLine": 1,
+      "endLine": 21,
+      "source": "memory",
+      "snippet": "# 2026-07-07 日记 ## 午夜 Cron 审计 (00:02-00:06) - 每日记忆归档 Cron 触发（balance → main → self） - **审计发现**： - 7/6 日记为骨架（仅 8 行），已从 session 历史补全为完整日记 - 7/6 有 11 个活跃 session：记忆系统 v3 部署 + Gateway/Sentinel 死锁 + Daryl 就寝 - 7/7 骨架日记自动创建（本文件） - Git push 失败：无 remote 配置（预期行为，本地 commit 已保存） - 审计统计：修复 1 项，浅层问题 6 项，深层问题 3 项 ## 上午 (10:48-11:30) - Daryl 派调研任务：OPC Dashboard 设计系统规范 - **调研范围**: Linear / Stripe / Vercel / GitHub Primer / Notion / Raycast - **产出**: `~/WorkBuddy/Claw/opc-dashboard/DESIGN.md`（13KB，完整设计系统规范） - **四个维度**: 设计语言（色板/字体/间距/圆角/阴影）+ 设计美感（留白/层级/秩序）+ 交互逻辑（零学习成本/渐进披露/即时反馈）+ 数据展示（数字对齐/图表极简/信息密度7±2法则） - **关键设计决策**: Indigo accent (#6366f1)、15px 基准字号、4px 网格、边框全用 rgba 白透明、单一 accent 色策略 - SearXNG 部分查询",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.43059271574020386,
+      "maxScore": 0.43059271574020386,
+      "firstRecalledAt": "2026-08-12T17:14:43.201Z",
+      "lastRecalledAt": "2026-08-12T17:14:43.201Z",
+      "queryHashes": [
+        "e7718674c309"
+      ],
+      "recallDays": [
+        "2026-08-13"
+      ],
+      "conceptTags": [
+        "gateway",
+        "02-00",
+        "7/6",
+        "gateway/sentinel",
+        "7/7",
+        "48-11",
+        "色板/字体/间距/圆角/阴影",
+        "留白/层级/秩序"
+      ]
+    },
+    "memory:memory/archive/2026-07-06.md:1:23": {
+      "key": "memory:memory/archive/2026-07-06.md:1:23",
+      "path": "memory/archive/2026-07-06.md",
+      "startLine": 1,
+      "endLine": 23,
+      "source": "memory",
+      "snippet": "# 2026-07-06 日记 ## 午夜审计 (00:16-00:21) - Cron 触发每日记忆归档审计（main/self/balance 三个 Agent） - Git push 失败：无 remote 配置（本地 commit 安全） - 状态：Daryl 自 7/3 晚间身体不适后暂无新任务下达 ## 记忆系统 v3 部署 — OPC 群聊 (12:22-13:30) - **Kitty** 宣布记忆系统 v3 上线：每个 Agent 维护 `memory/project_[AgentID].md` - OPC 看板 Dashboard 将直接抓取渲染，Cron 每日 07:00/13:00/19:00 检查新鲜度 - Daryl 在群里问\"Kitty 你说你发的消息呢？\"——原因是之前的 Grill-me 讨论迁到了 DM，Daryl 以为还在群里 - **Self** 创建并填写 `memory/project_Self.md`：🟢4进行中 / 🟡4规划中 / 🔵5已完成 / ⚪2归档 - Balance、小枫也分别确认创建了各自的 project 文件 ## 傍晚 DM (22:15) - **Daryl → Self**：说太累了，本来想给 ACCA F1 笔记但已经躺下了 - Self 回复：笔记不急，休息优先。\"人犯困时整理的笔记回头自己都看不懂，反而增加整理成本\" ## 晚间开发活动 (23:00-23:59) - **Kitty (main)** 在 OPC Dashboard 推进 M1-M5 开发： - M1-M4 已验证通过",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.42961463928222654,
+      "maxScore": 0.42961463928222654,
+      "firstRecalledAt": "2026-08-12T17:14:43.201Z",
+      "lastRecalledAt": "2026-08-12T17:14:43.201Z",
+      "queryHashes": [
+        "e7718674c309"
+      ],
+      "recallDays": [
+        "2026-08-13"
+      ],
+      "conceptTags": [
+        "16-00",
+        "main/self/balance",
+        "7/3",
+        "22-13",
+        "memory/project",
+        "00/13",
+        "00/19",
+        "grill-me"
       ]
     }
   }

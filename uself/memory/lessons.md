@@ -87,3 +87,14 @@
 - **现象**: 8/11 Cron 审计后手动 `git push` 报 fatal: No configured push destination，一度以为是备份故障
 - **根因**: workspace-self 本地仓库仅作本地历史管理（无 remote 属正常）；audit.sh 的远程备份机制是 rsync 同步到 `~/.opc-workspace-cache`（clone 自 github.com:DarylChiu/opc-workspace.git）后 commit + push origin main
 - **规则**: 需要远程备份时，在 `~/.opc-workspace-cache` 执行 rsync + git push；不要在 workspace-self 直接 push。Cron 审计「Git push 成功」指的是缓存仓库的 push
+
+## 2026-08-13 Daryl 分析深度新规（团队强制）
+- 触发：Daryl 对指令频率调查第一轮（只报频率）不满：「不要用这么浅层的思维就完成后汇报给我，我一眼就不满意」
+- 根因：把「数据罗列」当「分析」。Daryl 是 Ni+Te 型，看报告要的是结构洞察不是数据
+- 规则：分析类任务至少挖两层（现象→结构/模式→含义）；先定义口径；找模式不找数据；给可执行含义；不确定标注不迎合
+- 自查：我设计问题时也要先想「Daryl 会问的下一层问题是什么」——问题设计本身就是分析
+
+## 2026-08-13 Kitty = main（团队映射）
+- 触发：Daryl 纠错「main就是Kitty啊，你又忘了吗？」——我把 Kitty 和 main 当成两个独立 Agent，导致排查方向错误
+- 根因：MEMORY.md 团队清单写的是角色名（Kitty/小枫），没跟 gateway 的 agent id（main/xiaofeng）绑定
+- 规则：团队角色 ↔ agent id 映射必须显式存在于 MEMORY.md；涉及「首席/总协调」的触达 = agent:main:main
