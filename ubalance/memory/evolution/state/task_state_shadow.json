@@ -49,6 +49,16 @@
       "msg_count": 1,
       "subject_hash": "44dfc078c102",
       "project": "vn-fin-sop-ap-procurement"
+    },
+    "2026-08-13-dorm": {
+      "task_id": "task-20260813131433",
+      "subject": "外租宿舍价格合理性分析-退租转租决策辅助：整理租赁合同，统计外租宿舍数量与房间数，列表格列示综合租赁",
+      "type": "分析",
+      "injected_patterns": [],
+      "started_at": "2026-08-13T13:14:33",
+      "msg_count": 1,
+      "subject_hash": "b59400b42269",
+      "project": "外租宿舍分析"
     }
   }
 }
