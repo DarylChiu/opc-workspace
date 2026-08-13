@@ -1,0 +1,223 @@
+# project_Self.md — 恨点小己 项目看板
+
+> 最后更新: 2026-08-13 19:04 GMT+7 (Cron 项目看板定时刷新)
+> Cron 检查: 每日 07:00 / 13:00 / 19:00
+> 本周进展(8/10-8/16新周): 8/13 方法论卡片《Ni/Te决策风格协作指南》确认入库(库存第3张, canonical+库存表+workspace副本更新+git commit, OPC看板产物refresh可见, 已分发Kitty(main)/Bryson/Balance)+Daryl分析深度新规(团队级: 分析类任务挖两层-现象→结构→模式→含义, 定义口径/找模式/可执行含义/不迎合, 已全员同步含Kitty=main纠错落地)+Kitty触达排查(网关注册仅main/xiaofeng/balance/self, Kitty不在本实例运行已如实上报)+Kitty=main纠错(MEMORY.md固化映射表+capture_correction捕获)+Daryl精神状态互动(Bryson指令频率连续4天0新指令/Balance持平, talking cure临床问答标注宣泄≠疗愈Bushman 2002), 成本今日$1.50/本月$21.90/全量$147.69, 8月超支$1.90⚠️, OPC API端点不可达(/api/costs空fresh_api_down)与Balance 8/12扫描一致待Kitty检查看板服务)；8/12 旧gateway cron 1799ac76第五次触发(8/11 23:59→8/12 00:10跨日运行, 自动修复3项含8/12骨架日记创建+7/12归档+Git备份push, 手动补全8/11+8/12日记+刷新active.md(原48h未更新), 连续5天8/8-8/12仍未清理继续等待Kitty; 16:40-17:00 Daryl心理学互动: MBTI三方推断(共识XNTJ, E/I分歧: Self ENTJ主/INTJ备, 小枫ENTJ 70%, Kitty INTJ 70%)+Daryl自曝天蝎座已归档个人资料+交付5项短板分析SAGE PASS(8/9/8); 21:00-23:00心理学深谈夜: 三案例依恋分析(焦虑痴迷/焦虑+迎合/恐惧回避)+真实×热度2×2矩阵(Daryl修正)+一致性检验法+筛选器校准H1-H3待20样本+earned-secure路径, 交付知识树整合判断报告SAGE PASS(8/9/8), 架构变更P1待Daryl确认(新建05-Psychology/依恋理论+人格心理学+案例库脱敏, 学历×MBTI判定暂不入库), 成本今日$0.07/本月$20.36/全量$146.15, 8月预算超支$0.36⚠️)；8/11 旧gateway cron 1799ac76第四次触发(8/10 23:59→8/11 00:00:44跨日运行, 与main consolidated双通道并存, 连续4天8/8-8/11提醒Kitty清理未处理→按8/10约定升级处理; 自动修复3项含8/11骨架日记创建; 当日无实质任务, 成本今日$0.24/本月$20.24/全量$146.03, 8月预算$20已用尽⚠️)；8/10 周一(13:11 OPC群报到Kitty周一召集待命, 19:04 proj-update-self看板刷新, 23:36 heartbeat正常, checker零运行标注放行——无实质交付)；8/9 平板验收检查(08:09 Kitty出门前协调: Syncthing 663文件全同步/0待同步/relay中继正常, 平板端落后~120更新需上线补同步, serveo根因=官方服务故障与本地无关, CF quick tunnel+ngrok备用通道实测正常, .current_tunnel_url脏数据提醒小枫, 帮Balance纠错隧道URL)+Huatex团建日(周日, 无任务依赖)
+> 上周(8/3-8/9)回顾: 8/9 跨日记忆审计(00:02旧gateway cron 1799ac76仍运行, consolidated与旧cron双通道并存, 已再次提醒Kitty清理; 自动修复3项: 本日骨架日记/7/9归档/git备份commit 3827f18+push; 00:05人工复核: 本日记补全+8/8日记补漏proj-update-self+checker零运行标注放行, 成本今日$0.43/本月$17.86/全量$143.64, 周日Huatex团建日无任务依赖)；8/8 午夜consolidated审计(Kitty统一audit-all-report.sh覆盖main/self/balance/xiaofeng四workspace, self 23:59归档cron停用去重, 自跑audit.sh复核修复git备份commit 7d4b829+push, 成本$1.04/$17.35/$143.14)+白天静默维护日+19:04 proj-update-self看板刷新；8/7晚 OPC看板v1.6初始化(Kitty转达Daryl指令: 项目/任务清理+成本核对, active.md删3个已归档项目+2个僵尸任务并备份, project_Self.md🟢区块精简为2项, 发现8/6生图~$1.0-1.3未入账已报Kitty待Balance排查, sessions_send超时但送达已用sessions_history核实)；8/7 午夜Cron审计(自动修复3项: 8/7骨架日记/7/7归档/Git备份推送, 成本$0.93/$16.23/$142.01, 「每日记忆归档」cron疑似重复触发第2日待Daryl/Kitty排查, inter-session送达问题仍观察中, SAGE零运行判定符合预期——无实质性交付)+白天静默维护日；8/3 Daryl假期回归OPC群(未下达新任务, Kitty/小枫/Self响应)+小枫OPC仪表盘v3.0.0部署交付(localhost:8768+公网隧道)+Self全天静默维护；8/4 午夜Cron审计(修复8/3骨架日记充实/active.md刷新/7/4归档, 成本$3.16/$3.92/$129.70)+Daryl私聊确认模型路由保持现状(主deepseek-v4-pro/降级gemini-2.5-flash/嵌入text-embedding-3-small)+Balance越南差旅费管理办法v0.5交付+小枫TOSHIBA硬盘看护部署/Kimi API消费排查+main Kimi调查结论(4 Agent 7/31均未调用Kimi, 嫌疑指向websearch通道)；8/5 午夜Cron审计(自动修复3项: 8/5骨架日记/7/5归档/Git备份推送, 人工充实8/4日记)+成本仪表盘(今日$7.60异常偏高/本月$11.64/全量$137.42, OPC API端点恢复fresh_api_ok)+8/5下午越南差旅费管理办法v1.0.5树叶落盘(Daryl拍板挂财务体系/费用管理/差旅费管理, 落盘5片D6+P8+P9+P10+Excel三坑, 新建费用管理树干承接7/31计划节点, Git commit完成, Daryl Obsidian验收中)；8/6 午夜Cron审计(自动修复3项: 8/6骨架日记/7/6归档/Git备份推送, 成本$3.52回落✅/$15.24/$141.03, 关注「每日记忆归档」cron疑似重复触发待Daryl/Kitty排查)+下午Huatex团建邀请卡任务(周日8/9团建, 正面英文v1.3定稿+背面中文版, 5次生成6张图2K成本~$1.0-1.3待Balance台账跟踪, 教训正反面构图统一已捕获共享教训库)；7/31待落盘项: 费用管理树干已建(8/5承接), IAS 2/VAS 02/VAT-Invoice/内部控制+3片树叶仍待落盘
+> 前周(7/27-8/2)回顾: 7/27 周度树叶深度汇总交付Daryl(7方法论P1-P7+5领域知识D1-D5+编号体系持久化)；7/28 静默维护日+Cron审计正常；7/29 Balance BIP API调研+费用PRD/子Agent集群+各Agent飞书交互+Cron审计(修复3项)；7/30 午夜Cron审计(修复3项)+静默维护日；7/31 Balance本周3项目树叶收集交付(SAGE两轮FAIL+Maker-Checker PASS 22/30, 检讨第8条)+Cron审计；8/1 静默日(成本API 404已知问题)；8/2 静默日($0.21/$0.21/$125.99, 待落盘项未推进)
+
+---
+
+## 🟢 进行中
+
+### ACCA 知识网络维护
+- **启动**: 2026-06-14 (F1 起步)
+- **当前范围**: 已远超 F1 — F2-MA 22章 + IFRS/IAS 27文件 + VAS 23文件 + F1 30+文件 + Cross-Border + M&A
+- **Vault**: `ACCA-Knowledge-Network/` (183 文件, Obsidian, 全英文) + `knowledge-base/` (23 文件)
+- **里程碑**:
+  - [x] F1-BT 全部章节（30+ 文件）
+  - [x] F2-MA 全部章节（22 文件, 2026-07-09）
+  - [x] IFRS/IAS 国际准则重建（27 文件, 2026-07-09）
+  - [x] VAS 越南准则完整建设（23 文件, 2026-07-09）
+  - [x] KHOA DUNG M&A案例入库 + Plan A 重构（7/11-7/13）
+  - [x] 费用管理树干新建（8/5，承接 7/31 计划中「费用管理」准则节点，差旅费管理 Home 挂入）
+  - [ ] Daryl 深度验收 Vault（8/9 平板验收检查：syncthing 同步链路 OK，Mac 663 文件全同步/relay 正常；平板端落后 ~120 更新，需先上线补同步后再验收）
+  - [ ] 心理学域子分类确认（8/12 已交付知识树整合判断报告 SAGE PASS 8/9/8，P1 架构变更待 Daryl 确认）
+  - [ ] 知识库共享部署（只读给所有 Agent）
+
+### OPC看板方法论卡片集成
+- **启动**: 2026-06-21
+- **Workflow**: Daryl 7/5 完成 11 节点类型化流水线（两个 isCore: 提取方法轮 + Self分发 decision 节点）
+- **已完成**: vault 初始化 / 3张卡片（8/13《Ni/Te决策风格协作指南》确认入库并分发全员）/ 技术架构确认 / Workflow 定型
+- **阻塞**: ⏳ 等待 Daryl 确认方向后找 Kitty 开第6模块
+
+### ⚠️ 待办：清理旧 gateway cron 1799ac76（连续 6 天，已升级处理）
+- 8/8—8/13 六次审计均确认该 cron 仍启用（8/13 00:10 第六次触发），与 main consolidated 23:59 双通道并存
+- 已多次提醒 Kitty 删除，尚未处理；8/11 起按约定升级处理（8/13 继续观察等待，必要时上报 Daryl 裁决）
+
+### ⚠️ 待办：OPC API 端点不可达（8/13 发现）
+- 8/13 00:10 审计：`/api/costs` 返回空（fresh_api_down），成本读数沿用 8/12 扫描
+- 与 Balance 8/12 成本扫描发现的看板服务问题一致，待 Kitty 侧检查看板服务状态
+
+---
+
+## 🔵 已完成（2026-07-06 至今）
+
+### Balance 本周3项目树叶收集（2026-07-31，✅ 已交付Daryl，待落盘+待确认5项）
+- Daryl 7/31 凌晨指令：找Balance要本周总结树叶，归档复盘推理，websearch补常识，做好分级树干目录
+- 3项目深度分析：费用报销MVP（7/29-7/31）/ 应付采购SOP v5.0（7/24-7/30）/ 仓储专项检查（7/27-7/28）
+- 审查流程：SAGE Checker 两轮FAIL（追溯性6分）→ Maker-Checker 两轮（FAIL 18/30→PASS 22/30，三维7/8/7）
+- ⚠️ 保留项：websearch对越南法规细节/COSO细节/汇联易对标返回质量差，部分来源标注为训练数据而非实时搜索
+- 检讨：reflect.sh 第8条（websearch瓶颈+追溯性不足）
+- 待Daryl确认：树叶粒度/突击检查SOP时间/案例库补全时间/编号体系选择
+- 待落盘：5新准则节点（IAS 2/VAS 02/VAT-Invoice/费用管理/内部控制）+ 3片树叶写入
+- 模型：deepseek-v4-pro（主）+ gemini-2.5-flash（Maker-Checker审查员）
+
+### 越南差旅费管理办法 v1.0.5 树叶落盘（2026-08-05，✅ 已落盘，Daryl Obsidian 验收中）
+- Balance 请求归档（Daryl 指示）→ Daryl 拍板：#1 挂 `财务体系/费用管理/差旅费管理`，#4 元原则暂不总结
+- 落盘 5 片：D6 差旅费管理 / Excel 自动化交付三坑 / P8 用户文件优先 / P9 单一事实源 / P10 方案确认前置
+- 新建费用管理树干 + 4 处索引更新（财务体系/工程开发经验/开发实践/数据治理 Home），Git commit 完成
+- ⚠️ 复盘教训：inter-session 消息回复后仍须在 Daryl DM 确认送达（已写入 8/5 日记）
+
+### OPC看板 v1.6 初始化（2026-08-07，✅ 已完成）
+- Kitty sessions_send 转达 Daryl 指令：看板 v1.6 项目/任务清理 + 成本核对
+- active.md 清理（备份存 .backup/）：删 3 个已归档/已完成项目（关联方与股东借款/ACCA F1 知识库建设/VAS 知识树+跨境对比网络）+ 2 个僵尸任务（Daryl 笔记区空壳/Hooks 机制跟进）
+- project_Self.md 🟢 进行中精简为 2 项（ACCA 知识网络维护 + OPC看板方法论卡片集成），✅/⚪ 区块保留为历史档案
+- 成本核对：看板 self 口径 8月$3.26/累计$7.50 与认知一致；⚠️ 发现 8/6 生图 ~$1.0-1.3 未入账（看板 8/6 仅 $0.18）→ 已报 Kitty 建议 Balance 排查
+- 顺带上报：balance cron 成本全量扫描 6 failed+1 timed_out；main 1 个 running 僵尸任务（7/5 OPC Dashboard Notification 挂 1 个月）
+- 看板机制：agent cache 每 30 分钟自动重扫 active.md（XX:00/XX:30 对齐）
+
+### Huatex 团建邀请卡（2026-08-06，✅ 已交付归档）
+- Daryl 指示制作周日(8/9)团建邀请卡：Huatex 财务部 · Buffet Poseidon 海鲜自助 · 胡志明 Vincom Plaza Lê Văn Việt
+- 产出：正面英文 v1.3 定稿（含活动信息）+ 背面中文版（华特财务部），3:2 名片比例 2K
+- 迭代：v1.0 → v1.1(pro变体被否) → v1.2(回归+文案修正) → 背面中文 → v1.3(构图统一修正)
+- 成本：5 次生成调用 / 6 张图，估算 ~$1.0-1.3；gemini-3.1-flash-image-preview 费率已记录（1024px≈$0.067，2K≈$0.13，pro 翻倍）；精确账单待 Balance 台账跟踪
+- 教训：正反面成套生成必须统一构图参数（出血/边距/密度）——已捕获共享教训库
+- 模型：deepseek-v4-flash + gemini-3.1-flash-image-preview / gemini-3-pro-image-preview
+
+### 周度知识树树叶收集（2026-07-17 初轮 → 7/27 深度汇总交付）
+- Daryl DM 指令：跨 agent 收集 Bryson + Balance 近期工作关键叶子
+- SAGE Checker 三轮（两轮 FAIL→修改后 PASS 9/9/8）
+- 已落盘 4 片：B1+B2(雅思移动端适配)/B3(edit工具教训)/B4(Playwright验收模板)/L2+L3+L4(越南债转股法律框架)
+- 待 Daryl 确认后落盘：B5(provenance gap)/L1(PIT回写)/L5(财务负责人自保框架，待定位置)
+- Knowledge-base +4 文件，ACCA Vault ~169→183
+- Git: commit 73fa01e
+- 🆕 7/27 向 Daryl 交付本周(7/21-7/26)树叶深度汇总：7条方法论(P1-P7)+5条领域知识(D1-D5)，编号体系已持久化映射
+  - P1: 「写完」≠「可用」需真实压测 | P2: 优先搜索已有资源 | P3: Grill-me覆盖交互逻辑
+  - P4: 不说「重写」定位问题→最小改动 | P5: 外置硬盘休眠→加超时+缓存 | P6: SOP=实际问题/专业知识
+  - P7: 权威源+交叉验证+隔离偏差
+  - D1: 开发提测新机制 | D2: 进口采购六单据合规骨架 | D3: 单据三色分级 | D4: VAT发票校验六要素 | D5: 隧道三层架构
+
+### KHOA DUNG Plan A 重构（2026-07-13）
+- Daryl 反馈知识网络两大问题：树叶细节丢失 + 关联跳转不一致
+- Plan A: 190→461行，合并 Balance 4份原始报告完整内容
+- 新增三阶段税负拆解/6错误完整纠正/现金安全验证/方案演进轨迹
+- 链接规范标准化：🔗(树叶→树叶,8项) + 📂(Home页导航,4项)
+- frontmatter 加 `type: leaf` + `parent: Home` 元数据
+
+### KHOA DUNG 目录重组 + PIT 路径规范（2026-07-12）
+- KHOA DUNG → 02-Finance/M&A/，PIT速查 → 01-Financial/Tax/PIT/PIT-Vietnam/
+- 补建受托支付通道节点（02-Finance/Capital-Raising/Bank-Loan/Project-Loan/）
+- Wikilink 全量修复 + 旧目录迁移说明
+
+### KHOA DUNG M&A案例知识树入库（2026-07-11）
+- Balance 3份报告 → Self 提炼 3 条可复用方法论 + 4 新文件 + 2 索引更新
+
+### ACCA知识库大规模搭建（2026-07-09）
+- F2-MA 22 章节文件 / IFRS/IAS 27 文件（16独立标准+Conceptual Framework 14.7KB）/ VAS 23 文件
+- 三个子 agent 并行执行，质量对标 4-5 级知识深度
+
+### OPC Dashboard 设计系统规范（2026-07-07）
+- Daryl 派调研任务：Linear/Stripe/Vercel/GitHub Primer/Notion/Raycast 六家设计系统
+- 产出 DESIGN.md → `~/WorkBuddy/Claw/opc-dashboard/DESIGN.md`
+- 四维度：设计语言/设计美感/交互逻辑/数据展示
+
+### audit.sh 自进化基建对账升级（2026-07-15）
+- Daryl 授权：新增 9.5 段两项对账（checker 执行率 / FAIL≥2 vs 当日检讨条目），JSONL 增 3 字段
+- 修复原有 bug：步骤10 Git 备份 cd 缓存仓库后未切回，全团队审计 JSONL 长期写错位置（已加 cd $WORKSPACE）
+- Kitty 独立核实：无下游读取受影响，bugfix 安全保留；117条错位历史待 Daryl 拍板
+
+### 记忆系统 v3 — project 文件部署（2026-07-06）
+- Kitty 宣布 v3 上线，Self 创建 project_Self.md
+- Cron 每日 07:00/13:00/19:00 检查新鲜度
+
+### 诺兰《奥德赛》电影学树叶录入（2026-07-26）
+- Daryl 飞书 DM 请求：将四层讨论内容录入知识库
+- 位置：`ACCA-Knowledge-Network/05-Psychology/电影学/`（Home.md + 树叶完整版）
+- Syncthing v2.1.2 同步正常，平板 Obsidian 可查看
+
+---
+
+## ⚪ 归档
+
+### 关联方与股东借款 — 跨体系知识树
+- **完成**: 2026-07-02～07-03 (Daryl marked Done)
+- **产出**: IAS 24 / IFRS 9 / IAS 32 / VAS 26 四节点 + Cross-Border Hub + 案例链接
+- **Git**: commit 988cd48 (Desktop clone)，push 失败（Gitea 未运行）
+- **方法论**: 乔木（财务准则锚点）vs 藤蔓（技术无统一锚点）
+
+### VAS 知识树 + 跨境对比网络
+- **完成**: 2026-06-22～07-04 (Daryl marked Done via OPC Dashboard)
+- **产出**: VAS 5 节点 + 跨境对比 6 节点 + FS-税务耦合度模型
+- Daryl 四条核心结论全部纳入，已向 OPC 群聊汇报
+
+### 03-AI-Tech 知识树全貌汇报
+- **完成**: 2026-07-03
+- **产出**: 完整树结构 + 藤蔓交叉点 + 43 文件汇总
+
+### 视频分析交互Workflow 归档
+- **完成**: 2026-06-29
+- **来源**: Bryson 完整项目归档 (v1.0.0→v1.1.2, 6轮迭代)
+
+### 贷款材料自动化处理 归档 (v2 完整版 + v3 方法论)
+- **完成**: 2026-06-28 → 06-29
+- **来源**: Balance 完整项目归档
+- **产出**: 5 文件 + 8 个可复用方法论
+
+### 知识系统架构设计
+- **完成**: 2026-06-07
+- **产出**: 五领域架构、Obsidian Vault 方案、双树对比网络设计
+
+### 合规系统部署 (L0-L4)
+- **完成**: 2026-06-15
+- **产出**: startup.sh / pre-op.sh / post-op.sh / audit.sh + LaunchAgent plist
+
+---
+
+## 🟡 规划中
+
+### ACCA知识网络深度验收
+- **优先级**: 中 | **依赖**: Daryl 分配验收时间
+
+### 五大领域 — 心理学域初始化
+- **优先级**: 中 | **依赖**: Daryl 确认子分类
+- 8/12 已交付知识树整合判断报告（SAGE PASS 8/9/8），P1 待 Daryl 确认：新建 05-Psychology/依恋理论+人格心理学+案例库（脱敏），学历×MBTI 判定暂不入库
+
+### 五大领域 — 音乐域初始化
+- **优先级**: 低 | **依赖**: 心理学域完成后
+
+### 方法论去重合并
+- FutureTextile-Wellname 案例 6 条可复用方法论 → lessons.md | **优先级**: 低
+
+### 知识库共享部署
+- 知识库完善后共享给所有Agent（只读）| **依赖**: Daryl 验收通过
+
+---
+
+## 📊 知识网络规模
+
+| 模块 | 文件数 | 状态 |
+|:---|:---:|:---|
+| F1-BT | 30+ | ✅ 含考试结构/理论索引/课程衔接图 |
+| F2-MA | 22 | ✅ 含 Mermaid/计算示例/考试热点 |
+| IFRS/IAS | 27 | ✅ 16独立标准 + CF 14.7KB |
+| VAS | 23 | ✅ 完整越南准则体系 |
+| Cross-Border | 9 | ✅ 跨境对比网络 + 案例 |
+| Tax/PIT | 2+ | ✅ PIT速查 + 受托支付 |
+| M&A | 3+ | ✅ KHOA DUNG 案例 |
+| 03-AI-Tech (Vault内) | 8+ | ✅ 视频分析 + 贷款自动化 |
+| knowledge-base | 23 | ✅ 含树叶收集+跨agent经验沉淀 |
+| **合计** | **206** | |
+
+**五大领域**: 财务 / 金融 / AI技术 / 音乐 / 心理学 ← Daryl 确认替代健身
+
+---
+
+## 💰 成本归集
+
+> 数据源: 每日审计仪表盘 (8/13 00:10 跨日审计，8/12 成本扫描数据)
+
+| 维度 | 金额 (USD) |
+|:---|---:|
+| 当日 (8/13) | $1.50 |
+| 本月 (8月) | $21.90 |
+| 全量累计 | $147.69 |
+
+- ⚠️ 月预算 $20，7月已超支 $42.76（313.8%），全量突破 $125；8月已用 $21.90/$20（109.5%，已超支 $1.90），预算触顶，距月末（8/31）尚余 18 天，后续任务优先静默维护，实质交付前须评估成本
+- 7/18 $10.94 / 7/19 $3.39 / 7/20 $0.94 / 7/21 $4.56 / 7/22 $4.59 / 7/23 $0.00（静默日）/ 7/24 $4.86→$2.35（Balance 23:55扫）/ 7/25 $0.00（仅Cron审计）/ 7/26 $3.67 / 7/27 $4.63 / 7/28 $0.00（静默维护日）/ 7/29 $2.63+ / 7/30持续消耗 / 7/31 $0.00（Balance树叶收集）/ 8/1 $0.00（静默日）/ 8/2 $0.21（仅Cron审计费用）/ 8/3 $3.16（Kitty $2.71异常偏高，疑似Opus调整回填）/ 8/4 $7.60（⚠️异常偏高，近7日均值~$2.5，Balance $3.08+Self $2.90贡献，疑似全量重扫波动，8/5观察回落）/ 8/5 $3.52（✅ 回落确认，异常解除）/ 8/6 $0.93（✅ 静默低消耗，团建前维护日）/ 8/7 $1.04（✅ 静默维护日+看板v1.6初始化，⚠️ 8/6生图~$1.0-1.3仍未入账，待Balance排查）/ 8/8 $0.43（✅ 静默维护日+19:04看板刷新，无实质交付）/ 8/9 $0.87（✅ 团建日+平板验收检查+跨日审计，无实质交付）/ 8/10 $0.24（✅ 周一报到+看板刷新，无实质交付，8月预算用尽触顶）/ 8/11 $0.07（✅ 静默日：methodology-cards备份+看板刷新+跨日归档审计，无实质交付，8月预算超支$0.36）/ 8/12 $0.07（✅ 心理学深谈夜+知识树报告交付 SAGE PASS 8/9/8，成本近零）/ 8/13 $1.50（✅ 方法论卡片第3张入库+团队级新规同步+Kitty触达排查，8月超支$1.90⚠️）
+- 主要消耗: 7/9-7/13 知识库大规模搭建 + KHOA DUNG 重构 + 7/17 SAGE Checker 三轮 + 7/18 异常日耗 + 7/21-24 持续性日常消耗
+- 8/1 成本API 404（OPC Dashboard `/api/cost-summary` 端点不可达），读数沿用7/31；8/2 成本读数恢复正常；8/5-8/6 OPC API 端点正常（fresh_api_ok）；8/13 端点再次不可达（/api/costs 空，fresh_api_down），与 Balance 8/12 看板服务问题一致，待 Kitty 检查
+- 8/6 Huatex 邀请卡生图成本 ~$1.0-1.3 为估算（OpenRouter usage API 未见图片入账，疑似 preview 通道特殊计费或统计延迟），已提议纳入 Balance 成本扫描，待确认
+- 数据源: 8/13 00:10 跨日审计（8/12 成本扫描数据，OPC API /api/costs 不可达 fresh_api_down）
+- Daryl 审批规则（7/23 生效）: 单项项目/任务预算超 $1.5 需审批
+- 口径结论（Balance 7/15 核实）: 累计读数以 append-only 台账为准，今日/本月以 live 自扫为准; Kitty 7/22 Dashboard切换至Balance cost_daily.json权威源; 7/24 Balance全量扫描完成($111.28)，三项数据对齐

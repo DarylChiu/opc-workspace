@@ -1,0 +1,161 @@
+{"timestamp":"2026-06-15T00:03:01+0700","check":"L4-audit","fixes":0,"issues":1}
+{"timestamp":"2026-06-15T00:03:34+0700","check":"L4-audit","fixes":0,"issues":0}
+{"timestamp":"2026-06-15T00:05:47+0700","check":"L4-audit","fixes":0,"issues":0}
+{"timestamp":"2026-06-15T10:52:05+0700","check":"L4-audit","fixes":0,"issues":0}
+{"timestamp":"2026-06-15T10:56:14+0700","check":"post-op","task":"Soul.md 写入数字资产保护 T0 规则","score":3,"total":5,"warnings":[
+  ""
+]}
+{"timestamp":"2026-06-15T23:59:00+0700","check":"L4-audit","fixes":0,"issues":0}
+{"timestamp":"2026-06-16T00:08:14+0700","check":"L4-audit","fixes":0,"issues":1}
+{"timestamp":"2026-06-16T00:08:28+0700","check":"L4-audit","fixes":0,"issues":0}
+{"timestamp":"2026-06-16T23:59:02+0700","check":"L4-audit","fixes":0,"issues":1}
+{"timestamp":"2026-06-17T00:02:03+0700","check":"L4-audit","fixes":0,"issues":2}
+{"timestamp":"2026-06-17T00:02:18+0700","check":"L4-audit","fixes":0,"issues":0}
+{"timestamp":"2026-06-17T23:59:05+0700","check":"L4-audit","fixes":0,"issues":0}
+{"timestamp":"2026-06-18T00:23:21+0700","check":"L4-audit","fixes":0,"issues":1}
+{"timestamp":"2026-06-18T00:23:38+0700","check":"L4-audit","fixes":0,"issues":0}
+{"timestamp":"2026-06-18T23:59:04+0700","check":"L4-audit","fixes":0,"issues":1}
+{"timestamp":"2026-06-19T00:02:35+0700","check":"L4-audit","fixes":0,"issues":2}
+{"timestamp":"2026-06-19T00:02:47+0700","check":"L4-audit","fixes":0,"issues":0}
+{"timestamp":"2026-06-19T07:19:03+0700","check":"post-op","task":"创建行为心理学和人格障碍框架文档","score":3,"total":5,"warnings":[
+  ""
+]}
+{"timestamp":"2026-06-19T23:59:02+0700","check":"L4-audit","fixes":0,"issues":0}
+{"timestamp":"2026-06-20T00:02:30+0700","check":"L4-audit","fixes":0,"issues":1}
+{"timestamp":"2026-06-20T00:02:40+0700","check":"L4-audit","fixes":0,"issues":0}
+{"timestamp":"2026-06-20T23:59:00+0700","check":"L4-audit","fixes":0,"issues":1}
+{"timestamp":"2026-06-21T00:05:25+0700","check":"L4-audit","fixes":0,"issues":2}
+{"timestamp":"2026-06-21T00:05:39+0700","check":"L4-audit","fixes":0,"issues":0}
+{"timestamp":"2026-06-22T00:02:05+0700","check":"L4-audit","fixes":0,"issues":1}
+{"timestamp":"2026-06-22T00:02:15+0700","check":"L4-audit","fixes":0,"issues":0}
+{"timestamp":"2026-06-22T16:29:57+0700","check":"post-op","task":"Balance知识网络更新归档：VAS知识树4节点+跨境对比网络3节点创建完成","score":3,"total":5,"warnings":[
+  ""
+]}
+{"timestamp":"2026-06-22T16:33:32+0700","check":"post-op","task":"归纳Balance两份越南会计报告并加入知识网络：新建VAS差错更正实操指南+英联邦全域禁止调查，更新Cross-Border-Home/VAS-Home/VAS-29/CIT-Overprovision关联","score":3,"total":5,"warnings":[
+  ""
+]}
+{"timestamp":"2026-06-23T00:03:26+0700","check":"L4-audit","fixes":0,"issues":1}
+{"timestamp":"2026-06-23T00:03:42+0700","check":"L4-audit","fixes":0,"issues":0}
+{"timestamp":"2026-06-24T00:02:28+0700","check":"L4-audit","fixes":0,"issues":2}
+{"timestamp":"2026-06-24T00:02:42+0700","check":"L4-audit","fixes":0,"issues":0}
+{"timestamp":"2026-06-25T00:01:46+0700","check":"L4-audit","fixes":0,"issues":1}
+{"timestamp":"2026-06-25T00:01:57+0700","check":"L4-audit","fixes":0,"issues":0}
+{"timestamp":"2026-06-25T08:38:49+0700","check":"post-op","task":"Daryl追问日记缺失根因+补全6/23-6/24日记+修复post-op脚本关键词匹配","score":2,"total":5,"warnings":[
+  "🟡 考虑更新 active.md — 有任务修改且已 32 小时"
+]}
+{"timestamp":"2026-06-28T13:49:36+0700","check":"post-op","task":"方法论卡片系统搭建：Obsidian vault + OPC看板集成方案 + AI技术知识树归档","score":2,"total":5,"warnings":[
+  "🔴 active.md 需更新 — 有新任务变更但 13 小时未动"
+]}
+{"timestamp":"2026-06-28T13:50:07+0700","check":"post-op","task":"方法论卡片系统搭建：Obsidian vault + OPC看板集成方案 + AI技术知识树归档","score":3,"total":5,"warnings":[
+  ""
+]}
+{"timestamp":"2026-07-01T22:53:08+0700","check":"post-op","task":"Future Textile-Wellname 股东借款利息处理案例加入知识树","score":3,"total":5,"warnings":[
+  ""
+]}
+{"timestamp":"2026-07-01T22:55:09+0700","check":"post-op","task":"验证并更新Balance的FutureTextile-Wellname案例归档索引","score":2,"total":5,"warnings":[
+  "🟡 考虑更新 active.md — 有任务修改且已 22 小时"
+]}
+{"timestamp":"2026-07-01T22:55:22+0700","check":"post-op","task":"验证并更新Balance的FutureTextile-Wellname案例归档索引","score":3,"total":5,"warnings":[
+  ""
+]}
+{"timestamp":"2026-07-02T09:31:10+0700","check":"post-op","task":"关联方与股东借款知识树搭建 — IAS 24/IFRS 9/IAS 32/VAS 26 四节点+Cross-Border专题Hub页+案例链接更新","score":3,"total":5,"warnings":[
+  ""
+]}
+{"timestamp":"2026-07-07T11:31:39+0700","check":"post-op","task":"OPC Dashboard 设计系统调研 DESIGN.md 编写","score":2,"total":5,"warnings":[
+  "🔴 active.md 需更新 — 有新任务变更但 11 小时未动"
+]}
+{"timestamp":"2026-07-10T00:09:04+0700","check":"post-op","task":"每日记忆归档审计修复","score":3,"total":5,"warnings":[
+  "🔴 任务涉及问题/失败/审计发现，建议提炼到 lessons.md"
+]}
+{"timestamp":"2026-07-11T21:35:15+0700","check":"post-op","task":"KHOA DUNG案例知识树入库：创建案例文件+方法论卡片+PIT速查卡+Vietnam-Tax目录，更新Cross-Border-Home和Knowledge-Map两个索引","score":2,"total":5,"warnings":[
+  "🟡 考虑更新 active.md — 有任务修改且已 21 小时"
+]}
+{"timestamp":"2026-07-13T08:47:36+0700","check":"post-op","task":"按Plan A重构KHOA DUNG案例节点：合并Balance 3份原始报告+链接规范拆分","score":2,"total":5,"warnings":[
+  "🔴 active.md 需更新 — 有新任务变更但 23 小时未动"
+]}
+{"timestamp":"2026-07-14T09:56:07+0700","check":"post-op","task":"合并Balance债转股生效日争议增量到FutureTextile-Wellname树叶","score":2,"total":5,"warnings":[
+  "🔴 今日日记疑似 Cron 骨架（11行, 2段落, 仅Cron事件）— 必须补充实际内容"
+]}
+{"timestamp":"2026-07-15T21:53:55+0700","check":"L4-audit-v2","agent":"self","fixes":0,"shallow_issues":4,"deep_issues":1,"diary_lines":14,"diary_sections":2,"checker_runs_today":4,"checker_fails_today":3,"reflexion_today":3}
+{"timestamp":"2026-07-16T00:07:41+0700","check":"L4-audit-v2","agent":"self","fixes":2,"shallow_issues":6,"deep_issues":3,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-07-17T00:08:03+0700","check":"L4-audit-v2","agent":"self","fixes":2,"shallow_issues":7,"deep_issues":3,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-07-17T08:56:45+0700","check":"post-op","task":"Daryl设备配置同步到知识库","score":4,"total":5,"warnings":[
+  ""
+]}
+{"timestamp":"2026-07-17T22:06:29+0700","check":"L4-audit-v2","agent":"self","fixes":0,"shallow_issues":4,"deep_issues":1,"diary_lines":30,"diary_sections":3,"checker_runs_today":3,"checker_fails_today":2,"reflexion_today":0}
+{"timestamp":"2026-07-18T00:07:54+0700","check":"L4-audit-v2","agent":"self","fixes":2,"shallow_issues":6,"deep_issues":3,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-07-19T00:10:40+0700","check":"L4-audit-v2","agent":"self","fixes":3,"shallow_issues":5,"deep_issues":3,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-07-20T00:05:07+0700","check":"L4-audit-v2","agent":"self","fixes":3,"shallow_issues":4,"deep_issues":3,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-07-21T00:08:02+0700","check":"L4-audit-v2","agent":"self","fixes":3,"shallow_issues":6,"deep_issues":3,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-07-22T00:07:23+0700","check":"L4-audit-v2","agent":"self","fixes":3,"shallow_issues":4,"deep_issues":3,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-07-22T00:07:47+0700","check":"L4-audit-v2","agent":"self","fixes":1,"shallow_issues":3,"deep_issues":3,"diary_lines":5,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-07-22T00:08:20+0700","check":"post-op","task":"每日记忆归档审计","score":3,"total":5,"warnings":[
+  "🔴 任务涉及问题/失败/审计发现，建议提炼到 lessons.md"
+]}
+{"timestamp":"2026-07-23T00:07:34+0700","check":"L4-audit-v2","agent":"self","fixes":3,"shallow_issues":5,"deep_issues":3,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-07-23T00:08:56+0700","check":"post-op","task":"每日记忆归档审计：修复7/22日记+7/23日记+active.md刷新","score":3,"total":5,"warnings":[
+  "🔴 任务涉及问题/失败/审计发现，建议提炼到 lessons.md"
+]}
+{"timestamp":"2026-07-24T00:06:41+0700","check":"L4-audit-v2","agent":"self","fixes":3,"shallow_issues":4,"deep_issues":3,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-07-24T00:08:08+0700","check":"post-op","task":"每日记忆归档审计","score":3,"total":5,"warnings":[
+  "🔴 任务涉及问题/失败/审计发现，建议提炼到 lessons.md"
+]}
+{"timestamp":"2026-07-25T00:06:09+0700","check":"L4-audit-v2","agent":"self","fixes":3,"shallow_issues":6,"deep_issues":3,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-07-25T00:07:22+0700","check":"post-op","task":"每日记忆归档审计 2026-07-25","score":2,"total":5,"warnings":[
+  "🔴 今日日记疑似 Cron 骨架（16行, 3段落, 仅Cron事件）— 必须补充实际内容",
+  "🔴 任务涉及问题/失败/审计发现，建议提炼到 lessons.md"
+]}
+{"timestamp":"2026-07-25T19:00:28+0700","check":"L4-audit-v2","agent":"self","fixes":1,"shallow_issues":3,"deep_issues":2,"diary_lines":16,"diary_sections":3,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-07-26T00:06:41+0700","check":"L4-audit-v2","agent":"self","fixes":3,"shallow_issues":5,"deep_issues":4,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-07-26T15:46:04+0700","check":"post-op","task":"本周4Agent知识树叶收集汇报","score":2,"total":5,"warnings":[
+  "🔴 今日日记疑似 Cron 骨架（15行, 3段落, 仅Cron事件）— 必须补充实际内容"
+]}
+{"timestamp":"2026-07-27T00:06:02+0700","check":"L4-audit-v2","agent":"self","fixes":3,"shallow_issues":8,"deep_issues":5,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-07-27T14:00:44+0700","check":"post-op","task":"修复05-心理学重复目录，迁移电影学内容至05-Psychology","score":0,"total":5,"warnings":[
+  "🟡 考虑更新 active.md — 有任务修改且已 13 小时",
+  "🔴 今日日记疑似 Cron 骨架（10行, 1段落, 仅Cron事件）— 必须补充实际内容"
+]}
+{"timestamp":"2026-07-28T00:05:12+0700","check":"L4-audit-v2","agent":"self","fixes":3,"shallow_issues":5,"deep_issues":3,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-07-29T00:07:05+0700","check":"L4-audit-v2","agent":"self","fixes":3,"shallow_issues":6,"deep_issues":4,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-07-29T19:00:59+0700","check":"post-op","task":"项目看板定时刷新","score":2,"total":5,"warnings":[
+  "🔴 今日日记疑似 Cron 骨架（13行, 2段落, 仅Cron事件）— 必须补充实际内容"
+]}
+{"timestamp":"2026-07-30T00:07:32+0700","check":"L4-audit-v2","agent":"self","fixes":3,"shallow_issues":4,"deep_issues":3,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-07-31T00:06:48+0700","check":"L4-audit-v2","agent":"self","fixes":3,"shallow_issues":5,"deep_issues":3,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-07-31T12:07:27+0700","check":"post-op","task":"Balance本周3项目树叶收集+知识树分级目录汇报交付","score":1,"total":5,"warnings":[
+  "🔴 active.md 需更新 — 有新任务变更但 35 小时未动",
+  "🔴 今日日记疑似 Cron 骨架（5行, 1段落, 仅Cron事件）— 必须补充实际内容",
+  "📝 必须补充今日日记（当前为Cron骨架）: Balance本周3项目树叶收集+知识树分级目录汇报交付"
+]}
+{"timestamp":"2026-08-01T00:07:54+0700","check":"L4-audit-v2","agent":"self","fixes":3,"shallow_issues":5,"deep_issues":3,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-08-02T00:04:55+0700","check":"L4-audit-v2","agent":"self","fixes":3,"shallow_issues":5,"deep_issues":3,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-08-02T00:05:52+0700","check":"L4-audit-v2","agent":"self","fixes":1,"shallow_issues":1,"deep_issues":1,"diary_lines":22,"diary_sections":3,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-08-03T00:07:25+0700","check":"L4-audit-v2","agent":"self","fixes":3,"shallow_issues":5,"deep_issues":3,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-08-04T00:06:45+0700","check":"L4-audit-v2","agent":"self","fixes":3,"shallow_issues":6,"deep_issues":4,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-08-05T00:11:27+0700","check":"L4-audit-v2","agent":"self","fixes":3,"shallow_issues":5,"deep_issues":4,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-08-05T00:12:27+0700","check":"L4-audit-v2","agent":"self","fixes":1,"shallow_issues":1,"deep_issues":1,"diary_lines":18,"diary_sections":4,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-08-06T00:13:52+0700","check":"L4-audit-v2","agent":"self","fixes":3,"shallow_issues":4,"deep_issues":3,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-08-06T00:14:54+0700","check":"L4-audit-v2","agent":"self","fixes":1,"shallow_issues":1,"deep_issues":1,"diary_lines":19,"diary_sections":4,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-08-06T00:15:21+0700","check":"L4-audit-v2","agent":"self","fixes":1,"shallow_issues":1,"deep_issues":1,"diary_lines":19,"diary_sections":4,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-08-07T00:12:29+0700","check":"L4-audit-v2","agent":"self","fixes":3,"shallow_issues":4,"deep_issues":3,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-08-07T00:13:19+0700","check":"L4-audit-v2","agent":"self","fixes":1,"shallow_issues":1,"deep_issues":1,"diary_lines":23,"diary_sections":5,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-08-08T00:15:51+0700","check":"L4-audit-v2","agent":"self","fixes":3,"shallow_issues":5,"deep_issues":4,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-08-08T00:19:01+0700","check":"L4-audit-v2","agent":"self","fixes":1,"shallow_issues":4,"deep_issues":4,"diary_lines":5,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-08-08T00:19:31+0700","check":"L4-audit-v2","agent":"self","fixes":1,"shallow_issues":4,"deep_issues":4,"diary_lines":5,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-08-08T00:20:15+0700","check":"L4-audit-v2","agent":"self","fixes":1,"shallow_issues":1,"deep_issues":1,"diary_lines":15,"diary_sections":3,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-08-08T23:59:20+0700","check":"L4-audit-v2","agent":"self","fixes":1,"shallow_issues":1,"deep_issues":1,"diary_lines":15,"diary_sections":3,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-08-09T00:02:18+0700","check":"L4-audit-v2","agent":"self","fixes":3,"shallow_issues":4,"deep_issues":3,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-08-09T00:07:12+0700","check":"L4-audit-v2","agent":"self","fixes":1,"shallow_issues":1,"deep_issues":1,"diary_lines":16,"diary_sections":3,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-08-09T23:59:20+0700","check":"L4-audit-v2","agent":"self","fixes":0,"shallow_issues":4,"deep_issues":1,"diary_lines":16,"diary_sections":3,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-08-10T00:02:38+0700","check":"L4-audit-v2","agent":"self","fixes":3,"shallow_issues":5,"deep_issues":3,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-08-10T00:09:58+0700","check":"L4-audit-v2","agent":"self","fixes":0,"shallow_issues":1,"deep_issues":1,"diary_lines":17,"diary_sections":3,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-08-10T23:59:19+0700","check":"L4-audit-v2","agent":"self","fixes":1,"shallow_issues":1,"deep_issues":1,"diary_lines":17,"diary_sections":3,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-08-11T00:00:44+0700","check":"L4-audit-v2","agent":"self","fixes":3,"shallow_issues":4,"deep_issues":3,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-08-11T23:59:22+0700","check":"L4-audit-v2","agent":"self","fixes":1,"shallow_issues":4,"deep_issues":3,"diary_lines":6,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-08-12T00:11:09+0700","check":"L4-audit-v2","agent":"self","fixes":3,"shallow_issues":6,"deep_issues":4,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-08-12T23:59:26+0700","check":"L4-audit-v2","agent":"self","fixes":1,"shallow_issues":1,"deep_issues":1,"diary_lines":29,"diary_sections":5,"checker_runs_today":22,"checker_fails_today":12,"reflexion_today":0}
+{"timestamp":"2026-08-13T00:11:24+0700","check":"L4-audit-v2","agent":"self","fixes":3,"shallow_issues":5,"deep_issues":3,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-08-13T00:12:56+0700","check":"L4-audit-v2","agent":"self","fixes":1,"shallow_issues":1,"deep_issues":1,"diary_lines":22,"diary_sections":4,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-08-13T00:13:45+0700","check":"L4-audit-v2","agent":"self","fixes":1,"shallow_issues":2,"deep_issues":1,"diary_lines":22,"diary_sections":4,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-08-13T23:59:23+0700","check":"L4-audit-v2","agent":"self","fixes":1,"shallow_issues":2,"deep_issues":1,"diary_lines":54,"diary_sections":9,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-08-14T00:08:35+0700","check":"L4-audit-v2","agent":"self","fixes":3,"shallow_issues":5,"deep_issues":3,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
