@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-12T01:29:14.955Z",
+  "updatedAt": "2026-08-13T02:27:18.847Z",
   "entries": {
     "memory:memory/2026-06-08.md:19:38": {
       "key": "memory:memory/2026-06-08.md:19:38",
@@ -2248,25 +2248,27 @@
       "endLine": 31,
       "source": "memory",
       "snippet": "- **深层问题 2 项**: 日记内容 vs 20个活跃session不匹配 + 成本仪表盘数据 1452min 未刷新 - **修复**: 日记已从骨架充实为本记录 - **成本**: 今日 $3.84 | 本月 $32.84 | 全量 $92.43（Balance 00:02 全量扫描结果） - **Git**: push 成功，备份 4 文件变更 ## 系统概览 ### 7/20 关键事件回顾 - **Dashboard 成本数据路径修复** (7/20 约17:00): main 发现 Dashboard 的 `COST_DAILY_BALANCE_FILE` 常量指向旧路径 `~/opc-workspace/`，而 Balance 实际写入 `~/WorkBuddy/Claw/opc-dashboard/data/`，导致 Dashboard 一直读取 7/19 过期数据。修复一行路径常量 + 重启 server，数据对齐。 - **成本全量扫描**: Balance 00:02 完整扫描 2006 个 .jsonl，累计 12,466 次调用，全量 $92.43 - **项目文件更新**: 07:00 四个 Agent (main/xiaofeng/balance/self) 全部完成 project_*.md 刷新 - **Xiaofeng 视频编辑 v4.0**: 终版交付 Bryson，三层情感漏斗方案，成本降至 ~$0.01-0.03/次 - **OPC 群消息**: main 推送决策清单（三模型混合方案/自进化方向/7月预算告警），xiaofeng",
-      "recallCount": 5,
+      "recallCount": 6,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 2.008181893825531,
+      "totalScore": 2.3784379273653027,
       "maxScore": 0.45765072405338286,
       "firstRecalledAt": "2026-07-22T06:17:25.237Z",
-      "lastRecalledAt": "2026-07-30T06:52:59.236Z",
+      "lastRecalledAt": "2026-08-13T02:27:18.847Z",
       "queryHashes": [
         "1908384c6613",
         "9b907d1ab5f7",
         "e5bd7d38155b",
         "c8607702f301",
-        "702b2e257357"
+        "702b2e257357",
+        "5149719538bb"
       ],
       "recallDays": [
         "2026-07-22",
         "2026-07-23",
         "2026-07-27",
-        "2026-07-30"
+        "2026-07-30",
+        "2026-08-13"
       ],
       "conceptTags": [
         "备份",
@@ -2391,22 +2393,24 @@
       "endLine": 30,
       "source": "memory",
       "snippet": "# 2026-06-19 工作日志 ## 00:00 每日记忆归档 Cron 触发 - 审计发现：日记缺失 + active_tasks 39h 未更新 → 已修复 ## 全天：OPC看板 Workflow 编辑器问题排查与架构迭代 ### 问题发现 (19:40) - Daryl反馈：Workflow模块点击后空白，三个需求一个都没看到 - 根因：备份回滚时丢失了v2改动，编辑器退回到原始版本 ### 修复尝试历程 1. **修复v2代码** → 语法正确但不渲染（白屏） 2. **添加错误捕获** → import语句被放在ES模块最前面导致违反规范 3. **Vite构建方案** → 自包含bundle但仍是type=module，浏览器不加载 4. **完全回退到5805b9c** → 原始版本也用importmap+module，同病 5. **最终方案** → 普通script标签(UMD React) + 动态import(ReactFlow) - 文件：`opc-dashboard/workflow-editor.html` (624行, 30KB) - 架构：0个ES模块, 0个importmap - 进度：Step 1-4 加载追踪，红色错误提示栏 - 待Daryl明天实测验证 ### 隧道管理 - 8765(OPC看板) → cake-marking-metals-miscellaneous.trycloudflare.com (PID 51360) - 8777(视频分析) → supreme-hall-blanket-",
-      "recallCount": 3,
+      "recallCount": 4,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.1653623074293136,
+      "totalScore": 1.5337533742189406,
       "maxScore": 0.41630475521087645,
       "firstRecalledAt": "2026-07-24T01:30:59.975Z",
-      "lastRecalledAt": "2026-08-04T16:47:00.589Z",
+      "lastRecalledAt": "2026-08-13T02:27:18.847Z",
       "queryHashes": [
         "db95a0eb1646",
         "702b2e257357",
-        "6f0c48bdd545"
+        "6f0c48bdd545",
+        "5149719538bb"
       ],
       "recallDays": [
         "2026-07-24",
         "2026-07-30",
-        "2026-08-04"
+        "2026-08-04",
+        "2026-08-13"
       ],
       "conceptTags": [
         "备份",
@@ -2964,18 +2968,20 @@
       "endLine": 32,
       "source": "memory",
       "snippet": "- 17:00 OPC Dashboard 服务挂掉（进程异常退出）→ 重启 - 17:05 tunnel 过期 → 重建（charm-functioning-donna-time.trycloudflare.com） - 22:37 tunnel 再次挂+服务进程异常退出 → 全栈重启 - 23:00 Gateway 重启（Sentinel 插件加载）→ OPC Dashboard 被带下线 → 再次全栈重启 - ⚠️ 今天累计 8 次 tunnel 重建，临时隧道完全不适合长期使用 ## 状态概览 - 各 Agent 处于待命状态 - 7 月基建方向（Agent自进化 + Loop Engineering）已在 Daryl 与 Bryson 讨论中推进 - OPC 看板 v1.5 运行中 - M2 全部模块验收完毕",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.3517094016075134,
-      "maxScore": 0.3517094016075134,
+      "totalScore": 0.756888610124588,
+      "maxScore": 0.40517920851707456,
       "firstRecalledAt": "2026-08-07T09:22:23.404Z",
-      "lastRecalledAt": "2026-08-07T09:22:23.404Z",
+      "lastRecalledAt": "2026-08-13T02:27:14.717Z",
       "queryHashes": [
-        "0151b4f90a54"
+        "0151b4f90a54",
+        "2cf693662f3a"
       ],
       "recallDays": [
-        "2026-08-07"
+        "2026-08-07",
+        "2026-08-13"
       ],
       "conceptTags": [
         "gateway",
@@ -3141,6 +3147,37 @@
         "api/costs/projects",
         "api/artifacts",
         "api/agents/projects"
+      ]
+    },
+    "memory:memory/archive/2026-07-07.md:60:78": {
+      "key": "memory:memory/archive/2026-07-07.md:60:78",
+      "path": "memory/archive/2026-07-07.md",
+      "startLine": 60,
+      "endLine": 78,
+      "source": "memory",
+      "snippet": "## 全天 · 隔壁隧道稳定性问题（heartbeat 会话处理） - 今天 tunnel 多次挂掉（~10+ 次），OPC Dashboard 服务进程也多次异常退出 - **根因发现**: 重启时旧 cloudflared 进程未清干净 → 多个 cloudflared 竞争同一端口 → tunnel 返回 000/502 - **修复**: 重启前必须 `pkill -9 -f cloudflared` 彻底清理，再启单一进程 → 稳定性显著提升（3.5h+ 连续运行） - **待办**: 建议为 OPC Dashboard + tunnel 配 LaunchAgent 自动重启，根治临时隧道不稳定（需 Daryl 确认方向） ## 21:50 · Crontab 手动安装（Daryl 指令）✅ - Daryl 将「Crontab 手动安装」移至 In Progress（无描述） - 结合全天隧道痛点 → 判断需求为装看门狗自动恢复 OPC Dashboard + tunnel - **产物**: `opc-dashboard/scripts/watchdog.sh` - 检本地服务（localhost:8765）异常 → manage.sh restart - 检隧道异常 → pkill -9 彻底清理 + 重建单一 cloudflared + 自动写回新 URL - 日志滚动保留 500 行 - **crontab 条目**: `*/5 * * * *` 每 5 分钟执行 - 旧 crontab 已备份到 /tmp/crontab_backup_*.tx",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.35293180942535396,
+      "maxScore": 0.35293180942535396,
+      "firstRecalledAt": "2026-08-13T02:27:14.717Z",
+      "lastRecalledAt": "2026-08-13T02:27:14.717Z",
+      "queryHashes": [
+        "2cf693662f3a"
+      ],
+      "recallDays": [
+        "2026-08-13"
+      ],
+      "conceptTags": [
+        "backup",
+        "备份",
+        "000/502",
+        "3.5h",
+        "manage.sh",
+        "tmp/crontab-backup",
+        "全天",
+        "隔壁"
       ]
     }
   }
