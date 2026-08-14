@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-13T02:27:18.847Z",
+  "updatedAt": "2026-08-14T04:51:49.039Z",
   "entries": {
     "memory:memory/2026-06-08.md:19:38": {
       "key": "memory:memory/2026-06-08.md:19:38",
@@ -2968,20 +2968,22 @@
       "endLine": 32,
       "source": "memory",
       "snippet": "- 17:00 OPC Dashboard 服务挂掉（进程异常退出）→ 重启 - 17:05 tunnel 过期 → 重建（charm-functioning-donna-time.trycloudflare.com） - 22:37 tunnel 再次挂+服务进程异常退出 → 全栈重启 - 23:00 Gateway 重启（Sentinel 插件加载）→ OPC Dashboard 被带下线 → 再次全栈重启 - ⚠️ 今天累计 8 次 tunnel 重建，临时隧道完全不适合长期使用 ## 状态概览 - 各 Agent 处于待命状态 - 7 月基建方向（Agent自进化 + Loop Engineering）已在 Daryl 与 Bryson 讨论中推进 - OPC 看板 v1.5 运行中 - M2 全部模块验收完毕",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.756888610124588,
+      "totalScore": 1.159947547316551,
       "maxScore": 0.40517920851707456,
       "firstRecalledAt": "2026-08-07T09:22:23.404Z",
-      "lastRecalledAt": "2026-08-13T02:27:14.717Z",
+      "lastRecalledAt": "2026-08-14T04:51:49.039Z",
       "queryHashes": [
         "0151b4f90a54",
-        "2cf693662f3a"
+        "2cf693662f3a",
+        "d3f91d98a23a"
       ],
       "recallDays": [
         "2026-08-07",
-        "2026-08-13"
+        "2026-08-13",
+        "2026-08-14"
       ],
       "conceptTags": [
         "gateway",
@@ -3156,18 +3158,21 @@
       "endLine": 78,
       "source": "memory",
       "snippet": "## 全天 · 隔壁隧道稳定性问题（heartbeat 会话处理） - 今天 tunnel 多次挂掉（~10+ 次），OPC Dashboard 服务进程也多次异常退出 - **根因发现**: 重启时旧 cloudflared 进程未清干净 → 多个 cloudflared 竞争同一端口 → tunnel 返回 000/502 - **修复**: 重启前必须 `pkill -9 -f cloudflared` 彻底清理，再启单一进程 → 稳定性显著提升（3.5h+ 连续运行） - **待办**: 建议为 OPC Dashboard + tunnel 配 LaunchAgent 自动重启，根治临时隧道不稳定（需 Daryl 确认方向） ## 21:50 · Crontab 手动安装（Daryl 指令）✅ - Daryl 将「Crontab 手动安装」移至 In Progress（无描述） - 结合全天隧道痛点 → 判断需求为装看门狗自动恢复 OPC Dashboard + tunnel - **产物**: `opc-dashboard/scripts/watchdog.sh` - 检本地服务（localhost:8765）异常 → manage.sh restart - 检隧道异常 → pkill -9 彻底清理 + 重建单一 cloudflared + 自动写回新 URL - 日志滚动保留 500 行 - **crontab 条目**: `*/5 * * * *` 每 5 分钟执行 - 旧 crontab 已备份到 /tmp/crontab_backup_*.tx",
-      "recallCount": 1,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.35293180942535396,
-      "maxScore": 0.35293180942535396,
+      "totalScore": 1.0823510408401489,
+      "maxScore": 0.3694107204675674,
       "firstRecalledAt": "2026-08-13T02:27:14.717Z",
-      "lastRecalledAt": "2026-08-13T02:27:14.717Z",
+      "lastRecalledAt": "2026-08-14T04:51:49.039Z",
       "queryHashes": [
-        "2cf693662f3a"
+        "2cf693662f3a",
+        "f3168b292e47",
+        "d3f91d98a23a"
       ],
       "recallDays": [
-        "2026-08-13"
+        "2026-08-13",
+        "2026-08-14"
       ],
       "conceptTags": [
         "backup",
@@ -3178,6 +3183,69 @@
         "tmp/crontab-backup",
         "全天",
         "隔壁"
+      ]
+    },
+    "memory:memory/2026-08-13.md:1:23": {
+      "key": "memory:memory/2026-08-13.md:1:23",
+      "path": "memory/2026-08-13.md",
+      "startLine": 1,
+      "endLine": 23,
+      "source": "memory",
+      "snippet": "# 2026-08-13 日记 ## 09:33 · OPC 看板公网隧道状态（Daryl 验收 Self 成果） - Daryl 要最新公网隧道地址验收 Self 成果 - **serveo 固定域名仍 502**（8/12 服务端故障未恢复），watchdog 每 5 分钟重试回切 - 当前可用入口 = cloudflared 临时隧道 - ⚠️ **隧道地址两次变更**：09:25 `phil-highly-threshold-extend.trycloudflare.com` → 09:30 连接终止（导致 Daryl 访问报 Error 1033）→ 09:30 重启后新地址 `arcade-interpreted-nevertheless-radios.trycloudflare.com`（实测 200） ## ⚠️ 教训 · serveo 域名纠正（Daryl 第二次纠正） - **错误**：我在聊天里说 serveo 固定域名是 `opc-darylchiu.serveo.net` - **正确**：`https://opc-darylchiu.serveousercontent.com`（serveo.net 是 SSH 主机名，公网 URL 是 serveousercontent.com 域名） - **Daryl 已纠正两次**，必须记住：serveo 公网 URL 一律用 `*.serveousercontent.com`，脚本 watchdog.sh 里 TUNNEL_URL 本来就是对的，是我口头说错 - 教训：报 URL 前先查脚本/文档中",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7539873838424682,
+      "maxScore": 0.3803050577640533,
+      "firstRecalledAt": "2026-08-14T04:51:48.818Z",
+      "lastRecalledAt": "2026-08-14T04:51:49.039Z",
+      "queryHashes": [
+        "f3168b292e47",
+        "d3f91d98a23a"
+      ],
+      "recallDays": [
+        "2026-08-14"
+      ],
+      "conceptTags": [
+        "8/12",
+        "opc-darylchiu.serveo.net",
+        "serveo.net",
+        "serveousercontent.com",
+        "watchdog.sh",
+        "tunnel-url",
+        "前先查脚本/文档中",
+        "日记"
+      ]
+    },
+    "memory:memory/2026-08-05.md:54:67": {
+      "key": "memory:memory/2026-08-05.md:54:67",
+      "path": "memory/2026-08-05.md",
+      "startLine": 54,
+      "endLine": 67,
+      "source": "memory",
+      "snippet": "- kill: serveo autossh(78660)+ssh(78662)、cloudflared 孤儿进程(18941, PPID=1, 8/4凌晨遗留) - 安全核查: 无 launchd 托管、无脚本引用、tunnel_url.txt 仅剩过期 serveousercontent URL - 保留: localhost.run(87000)→8765 + launchd ngrok(8768) - 验证: https://acfa255fc9e8bc.lhr.life HTTP 200（2.2s） ## ⚠️ 隧道清理更正（09:10，Bryson 更正） - **更正**: serveo 隧道并非无效! serveo.net 域名重定向到主页，但实际内容在 ***.serveousercontent.com**（https://opc-darylchiu.serveousercontent.com/ → 200）。之前按 Bryson 建议 kill 了 autossh(78660/78662) 是误判，他已手动恢复（87989/87991）并确认 watchdog.sh 每5分钟守护 + @reboot autossh 自愈。 - **最终保留清单**: serveo（看板官方地址，Daryl确认）+ ngrok launchd(8768)；localhost.run 已按 Daryl 要求取消（进程已无，URL 503）；cloudflared 孤儿进程清理正确无误。 - **教训(重要)**: 杀进程前必须查 crontab（watchdog/*@rebo",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.36303177773952483,
+      "maxScore": 0.36303177773952483,
+      "firstRecalledAt": "2026-08-14T04:51:48.818Z",
+      "lastRecalledAt": "2026-08-14T04:51:48.818Z",
+      "queryHashes": [
+        "f3168b292e47"
+      ],
+      "recallDays": [
+        "2026-08-14"
+      ],
+      "conceptTags": [
+        "8/4凌晨遗留",
+        "tunnel-url.txt",
+        "localhost.run",
+        "acfa255fc9e8bc.lhr.life",
+        "2.2s",
+        "serveo.net",
+        "serveousercontent.com",
+        "78660/78662"
       ]
     }
   }
