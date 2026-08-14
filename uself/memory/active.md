@@ -1,20 +1,38 @@
 # 当前活跃任务
 
-> 最后更新: 2026-08-12 00:15 GMT+7
+> 最后更新: 2026-08-14 00:10 GMT+7
 
 ## 🟢 进行中
+
+### 心理学知识树（问诊式组织，8/14 Daryl 拍板）
+- 组织模式：按「你给我看病」= 临床问诊流程（主诉→追问→评估→处置参考→随访）
+- 结构：A-通用知识层 + B-个人问诊层🔒（仅本地）+ C-评估工具；诊断永远留给专业人士
+- 下一步：等 Daryl 确认是否以本次睡眠问题为首条主诉试跑
 
 ### ACCA 知识网络维护（知识库）
 - 维护 Daryl Obsidian Vault（ACCA-Knowledge-Network），IAS/IFRS 知识网络持续更新
 - 含 OPC看板方法论卡片集成（进行中）
 - 8/9 已验证 syncthing 同步链路：Mac 侧 663 文件全同步 / relay 中继正常；平板端需上线补同步（落后 ~120 更新）
 
-### 待办：清理旧 gateway cron 1799ac76（连续 4 天，已升级处理）
-- 8/8、8/9、8/10、8/11 四次审计均确认该 cron 仍启用，与 main consolidated 23:59 双通道并存
-- 已多次提醒 Kitty 删除，尚未处理；8/11 仍触发，已按 8/10 预案升级处理（记录于 project_Self.md）
+### 待办：清理旧 gateway cron 1799ac76（连续 6 天，已升级处理）
+- 8/8–8/13 六次审计均确认该 cron 仍启用，与 main consolidated 23:59 双通道并存
+- 已多次提醒 Kitty 删除，尚未处理；8/13 仍触发，已按 8/10 预案升级处理（记录于 project_Self.md）
 
 
 ## ✅ 今日完成
+
+### 方法论卡片《Ni/Te 决策风格协作指南》确认入库（2026-08-13 ✅）
+- Daryl 确认入库，库存第 3 张；已更新 canonical frontmatter + 工作流库存表 + 同步副本 + git commit
+- OPC 看板「产物与预览」POST /api/artifacts/refresh 后可见
+- 正式分发已投递 Kitty(main)/Bryson(xiaofeng)/Balance
+
+### Daryl 分析深度新规全员落地（2026-08-13 ✅）
+- 分析类任务要挖两层（现象→结构→模式→含义），定义口径、找模式、给可执行含义、不确定标注不迎合
+- 已通知 Bryson + Balance 并各自写入 lessons.md；Self 已捕获到共享教训库
+
+### Kitty=main 纠错落地（2026-08-13 ✅）
+- main 就是 Kitty（首席Agent）；xiaofeng=Bryson 映射正确
+- MEMORY.md 已固化 Agent 会话映射表，capture_correction.sh 已捕获
 
 ### Huatex 团建邀请卡（2026-08-06 ✅ 已完成归档）
 - Daryl 指示制作周日(8/9)团建邀请卡：Huatex 财务部 · Buffet Poseidon 海鲜自助
@@ -144,6 +162,7 @@
 ### ⏸️ 等待 Daryl 反馈
 - [ ] 确认 OPC看板方法论卡片集成 → 找 Kitty 开第6模块
 - [ ] 审核 2 张待审核卡片（胭脂扣/VAS-FDI）
+- [ ] 心理学知识树整合 P1 变更（新建 05-Psychology/依恋理论+人格心理学+案例库）待确认（8/12 报告已 SAGE PASS）
 - [ ] 继续验收 Vault（Fitness → Psychology 已修复）
 - [ ] 确认心理学域的子分类（认知/行为/组织？）
 - [ ] 发送第一批手写笔记 + 录音
