@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-12T06:39:31.823Z",
+  "updatedAt": "2026-08-14T04:50:40.787Z",
   "entries": {
     "memory:memory/2026-06-10.md:1:29": {
       "key": "memory:memory/2026-06-10.md:1:29",
@@ -4164,6 +4164,68 @@
         "104.58",
         "44.98",
         "2.90"
+      ]
+    },
+    "memory:memory/2026-08-12.md:24:33": {
+      "key": "memory:memory/2026-08-12.md:24:33",
+      "path": "memory/2026-08-12.md",
+      "startLine": 24,
+      "endLine": 33,
+      "source": "memory",
+      "snippet": "- **交付**: `reports/仓储突击检查-仓储部配合清单-v1.0-中越双语-20260812.docx`（5项：人员陪同/现场设备支持/现场操作配合/差异确认签字/整改闭环；表头蓝底；textutil验证通过） ## 总结报告修订 + 项目收尾决策（Daryl 四点反馈） - ①M7成本平衡点：领导「一刀切」按20个料号执行，平衡点转 OPC 层面讨论，Huatex 不再调整（反形式主义初衷） - ②体系归属：纯存货内控板块；**内控体系应建立在已建好的核算体系之上、服务于核算体系**——OPC 后续建设顺序先核算后内控 - ③联动勾稽：删全部弱勾稽项，细化留待 OPC 体系建设时专项澄清（本次不拓展） - ④抽样插件**终止**；今后减少对 Huatex 适用的工具类项目开发（同事接受度低、费用报销MVP已有敌意）——**「我们不拯救任何人」** - 报告已修订至 `reports/仓储专项检查-总结报告-20260812.md`，待 Daryl 确认后归档 - **8/12 看板推送**: 报告已推送 OPC看板产物模块（Balance #1，score=41；机制：工作区根目录=_root 优先项目+新鲜文档加成；reports/ 下会被前15名挤压）；预览接口验证 HTTP 200；隧道实测 https://cia-job-strap-agricultural.trycloudflare.com（MEMORY.md 已更新）",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.39921430647373196,
+      "maxScore": 0.39921430647373196,
+      "firstRecalledAt": "2026-08-14T04:50:40.787Z",
+      "lastRecalledAt": "2026-08-14T04:50:40.787Z",
+      "queryHashes": [
+        "bcf0e3c5a82c"
+      ],
+      "recallDays": [
+        "2026-08-14"
+      ],
+      "conceptTags": [
+        "人员陪同/现场设备支持/现场操作配合/差异确认签字/整改闭环",
+        "reports/仓储专项检查-总结报告-20260812.md",
+        "8/12",
+        "memory.md",
+        "交付",
+        "reports",
+        "突击",
+        "检查"
+      ]
+    },
+    "memory:memory/2026-08-12.md:32:43": {
+      "key": "memory:memory/2026-08-12.md:32:43",
+      "path": "memory/2026-08-12.md",
+      "startLine": 32,
+      "endLine": 43,
+      "source": "memory",
+      "snippet": "- **8/12 看板推送**: 报告已推送 OPC看板产物模块（Balance #1，score=41；机制：工作区根目录=_root 优先项目+新鲜文档加成；reports/ 下会被前15名挤压）；预览接口验证 HTTP 200；隧道实测 https://cia-job-strap-agricultural.trycloudflare.com（MEMORY.md 已更新） ## ✅ 仓储专项检查项目归档完成（8/12） - Daryl 确认归档；warehouse-inspection-sop → 📦 archived 100%（project_Balance.md 已更新，M5 done） - active.md 仓储段移入归档状态；交付物全部留存 reports/ - 项目遗产：突击检查SOP（执行中）+ 配合清单 + 方法论7条（lessons.md）+ 看板产物 #1 ## 🚀 费用报销MVP 8771 验收准备（8/12 下午） - **8771 演示实例已启动**: PID 36998（PORT=8771 python3 server.py），HTTP 200；新进程自动带上 8/10 CQT 修复 - **隧道**: https://mice-lone-ghz-favorites.trycloudflare.com （HTTP 200 验证；首次域名遇 NXDOMAIN 负缓存，重启换域名解决；无 sudo 无法清 DNS 缓存，后续遇同类问题直接重启 cloudflared） - **8765 看板隧道**: watchdog 13:40 重建为 p",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3762545228004455,
+      "maxScore": 0.3762545228004455,
+      "firstRecalledAt": "2026-08-14T04:50:40.787Z",
+      "lastRecalledAt": "2026-08-14T04:50:40.787Z",
+      "queryHashes": [
+        "bcf0e3c5a82c"
+      ],
+      "recallDays": [
+        "2026-08-14"
+      ],
+      "conceptTags": [
+        "8/12",
+        "memory.md",
+        "warehouse-inspection-sop",
+        "project-balance.md",
+        "active.md",
+        "lessons.md",
+        "server.py",
+        "8/10"
       ]
     }
   }
