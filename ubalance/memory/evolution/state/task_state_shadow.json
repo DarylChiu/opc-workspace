@@ -1,64 +1,14 @@
 {
   "sessions": {
-    "huaxing-tax-plan-v12-en": {
-      "task_id": "task-20260811144819",
-      "subject": "华星税务检查计划docx翻译成英文并润色，用于发邮件给A&C审计所确认审计计划",
+    "dorm-waste-export": {
+      "task_id": "task-20260815152639",
+      "subject": "越南不良品(200吨账外,已BOM损耗出表)报关销售回中国/香港:可行性+税负成本+资金流转,流氓会",
       "type": "调研",
       "injected_patterns": [],
-      "started_at": "2026-08-11T14:48:19",
+      "started_at": "2026-08-15T15:26:39",
       "msg_count": 1,
-      "subject_hash": "89b8e658652a",
-      "project": "华星税务检查"
-    },
-    "translation-sop-20260812": {
-      "task_id": "task-20260812081256",
-      "subject": "翻译Daryl发来的仓储突击检查SOP文档",
-      "type": "调研",
-      "injected_patterns": [],
-      "started_at": "2026-08-12T08:12:56",
-      "msg_count": 1,
-      "subject_hash": "1d107cd0327a",
-      "project": "SOP翻译"
-    },
-    "summary-warehouse-inspection": {
-      "task_id": "task-20260812102226",
-      "subject": "仓储专项检查项目总结报告:方法论提取+OPC财务内控体系归属+联动勾稽,websearch深度调研",
-      "type": "调研",
-      "injected_patterns": [],
-      "started_at": "2026-08-12T10:22:26",
-      "msg_count": 1,
-      "subject_hash": "4c1d90a421f1",
-      "project": "warehouse-inspection-sop"
-    },
-    "expense-mvp-verify-20260812": {
-      "task_id": "task-20260812133930",
-      "subject": "检查8771费用报销MVP运行状态+拉trycloudflare隧道供下午验收+准备分析报告架构模板",
-      "type": "调研",
-      "injected_patterns": [],
-      "started_at": "2026-08-12T13:39:30",
-      "msg_count": 1,
-      "subject_hash": "b40a0487305f",
-      "project": "expense_reimbursement_mvp"
-    },
-    "ap-sop-phase2-20260812": {
-      "task_id": "task-20260812161241",
-      "subject": "完善应付采购SOP(Phase2优化),小专题分析报告改明日",
-      "type": "分析",
-      "injected_patterns": [],
-      "started_at": "2026-08-12T16:12:41",
-      "msg_count": 1,
-      "subject_hash": "44dfc078c102",
-      "project": "vn-fin-sop-ap-procurement"
-    },
-    "2026-08-13-dorm": {
-      "task_id": "task-20260813131433",
-      "subject": "外租宿舍价格合理性分析-退租转租决策辅助：整理租赁合同，统计外租宿舍数量与房间数，列表格列示综合租赁",
-      "type": "分析",
-      "injected_patterns": [],
-      "started_at": "2026-08-13T13:14:33",
-      "msg_count": 1,
-      "subject_hash": "b59400b42269",
-      "project": "外租宿舍分析"
+      "subject_hash": "ff2bb12c0855",
+      "project": "waste-disposal-research"
     }
   }
 }
