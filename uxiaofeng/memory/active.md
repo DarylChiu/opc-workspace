@@ -85,9 +85,11 @@
 | 管线2 Qwen Omni 对接 | ❌ 冻结 | 30% |
 
 ## 🔵 待办
-### IELTS陪练助手 — v1.3.0 待 Daryl 验收（⏸️ 挂起中，服务 8767 ACTIVE）
-- v1.3.0 开发完毕，7/25 两 Bug 已修复；等 Daryl 晚间验收（已等 13 天）
-- 服务 LaunchAgent 持久化：localhost:8767 ACTIVE
+### IELTS陪练助手 — v1.4.1 题库改造 + v1.5.0 用户系统P1（🟢 开发完成，待 Daryl 验收）
+- 服务 LaunchAgent 持久化：localhost:8767 ACTIVE（v1.5.0）
+- **8/15**: ① 成本模型费率更新 ② Free Talk 持久记忆 v1.4.0 ③ 题库改造 A+B v1.4.1（120题+变体）④ 用户系统 P1 v1.5.0（登录页 /login，AUTH_REQUIRED=0 guest 模式，详见 2026-08-15.md）
+- ⏸️ 待 Daryl 验收：v1.3.0 IELTS 1/2/3（对定式题型麻木，优先级让位）+ 今晚四个成果；Daryl 商业化方向：每月免费额度+按量收费
+- 下一步：P2 数据隔离（全表挂 user_id + 强制登录开关）
 
 
 ### ~/opc-workspace 本地仓库卡死 rebase（7/16发现）
