@@ -1,8 +1,8 @@
 # Project Dashboard — main（忧郁小猫）
 
-> 最后编译: 2026-08-14 19:00 +07:00
+> 最后编译: 2026-08-15 19:00 +07:00
 > 负责人: Kitty | Agent ID: main
-> 下轮更新: 2026-08-15 07:00
+> 下轮更新: 2026-08-16 07:00
 
 ---
 
@@ -21,8 +21,8 @@
 | 阶段进度 | 战略 ✅ v1.1 + 服务目录 ✅ v1 + 可用性实测 ✅（4 项目代码/端口核验）；获客渠道 ⏳ 待 Daryl 选定 |
 | 启动日期 | 2026-08-12 |
 | 预计交付 | 第一阶段月入 $200；API 预算 ≤ $85/月 |
-| 本周进展 | 8/12 四轮深谈：①长期方案 v1.0（双引擎+三阶段；4 轮 websearch：AI 陪练 $20/月、代剪 500-2000 元/条、企业矩阵年费 2500-16800 元、微 SaaS 中位 MRR $4200）→ ②Daryl 质疑「东西能用吗」→ 可用性实测 4 项目（雅思🟡 服务活但 transcripts 不落库 / 视频分析❌ 死代码 / 剪辑🟡 引擎可导入但 v4.0 前端 0 行代码 / 费用报销🟡 代码完测试绿但生产跑 8/9 旧代码+隧道死）→ ③产品无法变现（对标 Speak/CapCut 免费竞品无竞争力）→ 框架切换「先卖后建、卖结果不卖软件」，产出 docs/opc_longterm_plan_20260812.md (v1.1) + docs/opc_service_catalog_v1.md（财务/内容/知识/开发/调研五条服务线 + $200 最速路径：财务 2 单 or 内容包 1-2 单）→ ④半年定性：能力建设非沉没成本，v1.1 修订完成；中午 Daryl 转向「变现≠目标，机制才是」（OPC 的病是回路断裂：交付→汇报→断线；机制包=使用回执/5分钟验收/看板指标切换（完成度%→被使用记录）/周度反馈简报）；会话模型实锤曾跑 deepseek-v4-flash，已切回 v4-pro；8/13 无直接进展（上午 Daryl 聚焦隧道恢复与 Self 成果验收）；8/14 无直接进展（Daryl 批准 xiaofeng 休假休整，约定回归后「开第一枪：选题、渠道、前 3 条内容」——内容账号方向酝酿中，渠道仍未正式选定），获客渠道仍待 Daryl 选定 |
-| 下周计划 | 待 Daryl 选定第一个获客渠道（华特网络/搞钱群/内容账号；xiaofeng 8/14 起休假，内容账号渠道待其回归开第一枪）→ 对应 Agent 出价目表+样例 → 接单制运行；接单后 Agent 生产，Daryl 验收（链接+5分钟亲手操作） |
+| 本周进展 | 8/12 四轮深谈：①长期方案 v1.0（双引擎+三阶段；4 轮 websearch：AI 陪练 $20/月、代剪 500-2000 元/条、企业矩阵年费 2500-16800 元、微 SaaS 中位 MRR $4200）→ ②Daryl 质疑「东西能用吗」→ 可用性实测 4 项目（雅思🟡 服务活但 transcripts 不落库 / 视频分析❌ 死代码 / 剪辑🟡 引擎可导入但 v4.0 前端 0 行代码 / 费用报销🟡 代码完测试绿但生产跑 8/9 旧代码+隧道死）→ ③产品无法变现（对标 Speak/CapCut 免费竞品无竞争力）→ 框架切换「先卖后建、卖结果不卖软件」，产出 docs/opc_longterm_plan_20260812.md (v1.1) + docs/opc_service_catalog_v1.md（财务/内容/知识/开发/调研五条服务线 + $200 最速路径：财务 2 单 or 内容包 1-2 单）→ ④半年定性：能力建设非沉没成本，v1.1 修订完成；中午 Daryl 转向「变现≠目标，机制才是」（OPC 的病是回路断裂：交付→汇报→断线；机制包=使用回执/5分钟验收/看板指标切换（完成度%→被使用记录）/周度反馈简报）；会话模型实锤曾跑 deepseek-v4-flash，已切回 v4-pro；8/13 无直接进展（上午 Daryl 聚焦隧道恢复与 Self 成果验收）；8/14 无直接进展（Daryl 批准 xiaofeng 休假休整，约定回归后「开第一枪：选题、渠道、前 3 条内容」——内容账号方向酝酿中，渠道仍未正式选定）；8/15 xiaofeng 已回归并交付雅思陪练产品批次（Free Talk 持久记忆 v1.4.0 / 题库改造 A+B v1.4.1 120题+变体去重轮换 / 用户系统 P1 v1.5.0 登录+鉴权 guest 模式 / 成本模型费率更新 8/16 16:00 UTC 切峰谷价，commit d4ca27d，$0 成本，待 Daryl 验收，下一步 P2 数据隔离）→ 雅思服务线可用性显著提升（transcripts 落库痛点获 Free Talk 记忆修复），但内容账号渠道「第一枪」尚未开出，获客渠道仍待 Daryl 选定 |
+| 下周计划 | 待 Daryl 选定第一个获客渠道（华特网络/搞钱群/内容账号；xiaofeng 8/15 已回归并交付雅思批次，内容账号渠道第一枪临近）→ 对应 Agent 出价目表+样例 → 接单制运行；接单后 Agent 生产，Daryl 验收（链接+5分钟亲手操作） |
 | 阻塞项 | 获客渠道待 Daryl 选定 |
 
 #### 里程碑
@@ -56,7 +56,7 @@
 | 阶段进度 | M0 100% / M1 100% / M2 进度修正（8/12 实测：v4.0 前端 0 行代码，原 60% 虚报，实际停在线框冻结；完成度% 口径已废除，改「链接+5分钟亲手操作」验收） |
 | 启动日期 | 2026-08-05 |
 | 预计交付 | M0→M3 共 40-80h；M2 原预计 8/8-8/9 → 顺延（Daryl 需求下发中，预计 8/10+ 视节奏） |
-| 本周进展 | 8/5 Daryl 立项、指定 Kitty 负责人（Bryson 移交）；M0 机制冻结（需求分级模板/提问质量门禁/教训病理Schema#4/错误预算规则#5 + AGENTS.md M0条款 + jianji-mvp workflow 方向确认前置节点 + 模式库3条种子病理，patterns 4→7）；M1 决策自主层工具 5/5（decide.py 三分类零LLM 13/13 + decision_ledger 账本 + error_budget 周度预算 P0拦截/降档/磨合期 + daily_exception_report + review_batch 周度批量审批），22 用例全绿，commits 069aa1df/ec22d4cb；四Agent 颠覆性思路征集整合（用户定方向、细节全归AI、控制→定价审计、经验可遗忘）；8/6 Daryl 拍板启动 M2：试点框架 docs/m2_jianji_pilot.md + 账本种子 dec_20260806_001 落盘，线框 wf01-wf05 冻结（2必改已核验），Bryson 交互方案定稿、完成 30%；8/7 核验 Bryson 前端 v4.0 达 60% 节点（8/6 开工后无新进展，xiaofeng 看板确认）；8/9 隧道基建修复（ngrok 固定域名回 8768 视频剪辑前端，雅思陪练改走 cloudflared）；8/9 Daryl 开始下发剩余 3 模块（ASR/情感/MATCHER）交互需求，第 1 条「素材联动+自动识别+补充识别」Bryson 已回复理解待确认；8/10 无新进展（需求下发节奏待续）；8/11 无新进展；8/12 可用性实测（Daryl 三连纠偏第一轮）：剪辑 MVP 引擎 5 模块可导入+历史渲染产物，但 v4.0 前端 0 行代码（Bryson 承认 60% 虚报，实际只到线框冻结）→ 完成度% 从汇报废除，验收改为「链接+5分钟亲手操作」（详见 OPC 变现战略项目）；8/13 无新进展（Daryl 上午处理隧道与验收）；8/14 无新进展（Daryl 处理隧道换址、批准 xiaofeng 休假，无需求下发） |
+| 本周进展 | 8/5 Daryl 立项、指定 Kitty 负责人（Bryson 移交）；M0 机制冻结（需求分级模板/提问质量门禁/教训病理Schema#4/错误预算规则#5 + AGENTS.md M0条款 + jianji-mvp workflow 方向确认前置节点 + 模式库3条种子病理，patterns 4→7）；M1 决策自主层工具 5/5（decide.py 三分类零LLM 13/13 + decision_ledger 账本 + error_budget 周度预算 P0拦截/降档/磨合期 + daily_exception_report + review_batch 周度批量审批），22 用例全绿，commits 069aa1df/ec22d4cb；四Agent 颠覆性思路征集整合（用户定方向、细节全归AI、控制→定价审计、经验可遗忘）；8/6 Daryl 拍板启动 M2：试点框架 docs/m2_jianji_pilot.md + 账本种子 dec_20260806_001 落盘，线框 wf01-wf05 冻结（2必改已核验），Bryson 交互方案定稿、完成 30%；8/7 核验 Bryson 前端 v4.0 达 60% 节点（8/6 开工后无新进展，xiaofeng 看板确认）；8/9 隧道基建修复（ngrok 固定域名回 8768 视频剪辑前端，雅思陪练改走 cloudflared）；8/9 Daryl 开始下发剩余 3 模块（ASR/情感/MATCHER）交互需求，第 1 条「素材联动+自动识别+补充识别」Bryson 已回复理解待确认；8/10 无新进展（需求下发节奏待续）；8/11 无新进展；8/12 可用性实测（Daryl 三连纠偏第一轮）：剪辑 MVP 引擎 5 模块可导入+历史渲染产物，但 v4.0 前端 0 行代码（Bryson 承认 60% 虚报，实际只到线框冻结）→ 完成度% 从汇报废除，验收改为「链接+5分钟亲手操作」（详见 OPC 变现战略项目）；8/13 无新进展（Daryl 上午处理隧道与验收）；8/14 无新进展（Daryl 处理隧道换址、批准 xiaofeng 休假，无需求下发）；8/15 无新进展（Daryl 聚焦 serveo 恢复排查与 xiaofeng 雅思批次验收，无需求下发） |
 | 下周计划 | ①跟踪 Daryl 需求下发节奏 + Bryson M2 汇报节点（按新验收标准：链接+5分钟亲手操作）②M2 完成后试点报告（决策次数对比/预算/例外）③Bryson 工具链清单搭设（mechanism_toolchain_requirements.md，~6h）④随变现战略推进，M2 交付优先级并入服务线接单能力 |
 | 阻塞项 | wf01 A/A 与 ASR 交互需求待 Daryl 回复；M2 前端实际 0 行代码，需 Bryson 重新排期（原 60% 虚报，8/12 实测） |
 
@@ -91,12 +91,12 @@
 | 项目ID | evolution-l1 |
 | 状态 | 🟢 active |
 | 优先级 | P0 |
-| 当前阶段 | M0+M1+M2 已交付；Balance Phase0 影子测试窗口已结束（8/5-8/7），监控中，8/9 决策日已过仍未收到决策（截至 8/14 19:00，8/14 当日 Daryl 处理隧道换址与 xiaofeng 休假安排） |
-| 阶段进度 | M0 100% / M1 100% / M2 100% / Balance Phase0 评估中（8/9 Daryl 一次性决策已过，挂起第 5 天） |
+| 当前阶段 | M0+M1+M2 已交付；Balance Phase0 影子测试窗口已结束（8/5-8/7），监控中，8/9 决策日已过仍未收到决策（截至 8/15 19:00，8/14-8/15 Daryl 处理隧道与 xiaofeng 批次验收，未涉及） |
+| 阶段进度 | M0 100% / M1 100% / M2 100% / Balance Phase0 评估中（8/9 Daryl 一次性决策已过，挂起第 6 天） |
 | 启动日期 | 2026-08-04 |
-| 预计交付 | 待 Daryl 决策（8/9 决策日已过，截至 8/14 19:00 未获回应，继续挂起） |
-| 本周进展 | 8/4 Daryl批准启动，M0+M1+M2全部交付（回归11/11，commits 7bf03311/dfccca86/6175b1ed）；8/5 Daryl批准Balance为第二试点，部署Phase0影子模式（shadow_inject只记录不注入+shadow_report周五评估+种子库7条+classify_task财务域关键词+AGENTS.md条款）；8/5-8/7 影子测试窗口运行完毕无异常；8/7 Daryl 指令：Phase0 评估不专门汇报，这几天监控即可，周日(8/9) 一次性做「是否全面应用」决策；8/8 记忆 Cron consolidated 修复上线（audit-all-report.sh 四 workspace 审计+汇总+群汇报）；8/9 周日决策日，截至 19:00 尚未收到 Daryl 一次性决策，Phase0 评估结果已备好待呈报，监控持续；8/10 截至 19:00 仍未收到决策（周一群报到未涉及），继续监控 + 计划主动跟进提醒；8/11 截至 19:00 仍未收到决策，Phase0 评估结果持续待呈报，监控中；8/12 无相关交互（Daryl 当日聚焦 OPC 变现战略深谈与 serveo 隧道排查），Phase0 决策持续挂起；8/13 无相关交互（Daryl 上午处理隧道与 Self 成果验收）；8/14 无相关交互（Daryl 处理隧道换址与 xiaofeng 休假安排），Phase0 决策持续挂起 |
-| 下周计划 | 视 Daryl 决策结果推进：Phase1 放行 or 推广 or 回退；8/9 决策日已过 → 持续挂起待 Daryl 一次性决策，评估结果随时可呈报（截至 8/14 19:00 决策继续挂起） |
+| 预计交付 | 待 Daryl 决策（8/9 决策日已过，截至 8/15 19:00 未获回应，继续挂起） |
+| 本周进展 | 8/4 Daryl批准启动，M0+M1+M2全部交付（回归11/11，commits 7bf03311/dfccca86/6175b1ed）；8/5 Daryl批准Balance为第二试点，部署Phase0影子模式（shadow_inject只记录不注入+shadow_report周五评估+种子库7条+classify_task财务域关键词+AGENTS.md条款）；8/5-8/7 影子测试窗口运行完毕无异常；8/7 Daryl 指令：Phase0 评估不专门汇报，这几天监控即可，周日(8/9) 一次性做「是否全面应用」决策；8/8 记忆 Cron consolidated 修复上线（audit-all-report.sh 四 workspace 审计+汇总+群汇报）；8/9 周日决策日，截至 19:00 尚未收到 Daryl 一次性决策，Phase0 评估结果已备好待呈报，监控持续；8/10 截至 19:00 仍未收到决策（周一群报到未涉及），继续监控 + 计划主动跟进提醒；8/11 截至 19:00 仍未收到决策，Phase0 评估结果持续待呈报，监控中；8/12 无相关交互（Daryl 当日聚焦 OPC 变现战略深谈与 serveo 隧道排查），Phase0 决策持续挂起；8/13 无相关交互（Daryl 上午处理隧道与 Self 成果验收）；8/14 无相关交互（Daryl 处理隧道换址与 xiaofeng 休假安排），Phase0 决策持续挂起；8/15 无相关交互（Daryl 处理 serveo 恢复排查与 xiaofeng 雅思批次验收），Phase0 决策持续挂起第 6 天 |
+| 下周计划 | 视 Daryl 决策结果推进：Phase1 放行 or 推广 or 回退；8/9 决策日已过 → 持续挂起待 Daryl 一次性决策，评估结果随时可呈报（截至 8/15 19:00 决策继续挂起） |
 | 阻塞项 | 无 |
 
 #### 里程碑
@@ -106,7 +106,7 @@
 | M0 · 信号捕获（纠错/失败/审计/复盘→inbox→周度蒸馏） | 🟢 done | 100% | 8/4 ✅ |
 | M1 · 失败模式库（JSON+规则表+embedding+三层检索） | 🟢 done | 100% | 8/4 ✅ |
 | M2 · 任务级注入（任务边界触发检索→注入上下文） | 🟢 done | 100% | 8/4 ✅ |
-| Balance试点 Phase0（影子模式8/5-8/7，只记录不注入） | 🟡 评估中 | — | 待 Daryl 决策（8/9 已过，挂起第 5 天） |
+| Balance试点 Phase0（影子模式8/5-8/7，只记录不注入） | 🟡 评估中 | — | 待 Daryl 决策（8/9 已过，挂起第 6 天） |
 
 #### 关键决策
 
@@ -135,9 +135,9 @@
 | 总进度 | 100%（M4 收官） |
 | 启动日期 | 2026-06-08 |
 | 预计交付 | 2026-08-10 |
-| 本周进展 | 8/2-8/5 运行平稳；8/5 成本端点核查+preview修复（ea47ba2）+产物模块 v1.7.0（fbcd813）；8/7 M4 收官：③约定版本变更自动DM通知（M4c，commit 09e38ea），至此 M4 三项全完成（①override过期清理✅ ②系统消息过滤✅ ③约定版本变更通知✅）；Daryl 拍板 v1.7 整合「Sidebar项目总线 → 平移到 Agent状态和任务的 project milestone 模块」；8/7 21:40 全 Agent 看板初始化（Daryl 指令）：通知 xiaofeng/Balance/Self 清过时任务+成本自查，Self 已回复（清理5个过时项目+发现 8/6 团建卡生图 ~$1.0-1.3 未进台账），待 xiaofeng/Balance 回复；8/8 记忆 Cron consolidated 修复上线（audit-all-report.sh 四 workspace 审计+汇总+群汇报，00:16 手动跑通）；8/9 ~08:10 serveo.net 服务端宕机（DNS 可达但 22/443 超时，非映射问题）→ 固定域名 opc-darylchiu.serveousercontent.com 失联；应急上线 cloudflared 备用隧道 searched-chip-belly-consolidation.trycloudflare.com → 8765（公网 HTTP 200 / 0.87s），autossh 持续重连待 serveo 恢复；Balance 顺手修复 .current_tunnel_url 文件 grep 误写；8/10 复核：localhost:8765 正常（HTTP 200），cloudflared 进程存活但旧随机域名已失效（000），serveo 恢复状态待确认；13:08 Daryl 周一报到，4 Agent 全员在线；8/10 23:25 Balance cron 成本扫描（今日 $0.24/本月 $20.24/全量 $146.03 写入 cost_daily.json），main 核实 /api/costs 端点数字全对齐（monthly kitty 6.04+xiaofeng 2.45+balance 6.98+self 4.77=20.24），确认 v1.6.1 已实现 .jsonl 全量扫描+balance-ledger 权威源、无需代码改动，并确认 opc-workspace 下 cost_daily.json 为指向 WorkBuddy 的符号链接（8/4 建立）；8/11 全天无新进展（仅心跳，Balance 13:00 侧完成自身看板刷新）；8/12 serveo 固定域名 502 排查（Daryl 报障）：本地 8765 正常、serveo.net 首页 200、SSH 22 通，新建随机子域名 opc-test-111446 也 502 → 定性 serveo 服务端「HTTP代理→SSH隧道」内部路由整体故障（8/9 宕机家族复发），非我方问题；彻底重建 autossh 仍 502，等 serveo 恢复（watchdog 每 5 分钟自动检测回切）；cloudflared 备用隧道 sweet-letter-dame-sensitive.trycloudflare.com 实测 200（11:15 刚换过 URL）；顺手修复 .current_tunnel_url 被 grep 报错文本污染（存 "Binary file ... matches" 非 URL，已改写为可用地址）；Daryl 用临时隧道验收 Balance 费用报销报告 ✅（第一个完整正反馈案例）；8/13 上午 Daryl 要最新公网隧道地址验收 Self 成果：serveo 固定域名仍 502（8/12 服务端故障未恢复）；隧道地址两次变更（09:25 phil-highly-threshold-extend → 09:30 连接终止致 Daryl 访问 Error 1033 → 09:30 重启 arcade-interpreted-nevertheless-radios → 09:35 singer-mechanisms-rolled-geographical 实测 200）；09:35 修复 watchdog.sh L69 grep 读 cf.log 报 Binary file matches（加 -a）；09:40 Error 1033 根因复盘：localhost:8765 从未掉过（PID 3587 自 8/7 20:34 连续运行 6 天），真实根因 = watchdog 自杀式换 URL（serveo 502 → pkill 健康 CF 隧道 → 重建新随机 URL，Daryl 拿到的 URL 5 分钟内被杀）→ 修复 = CF 回退分支「已有健康 CF 隧道则保留不重建」（exit 0）；serveo 公网 URL 域名纠正（Daryl 第二次）：一律 *.serveousercontent.com，serveo.net 是 SSH 主机名，报 URL 前查 watchdog.sh 权威值；8/13 23:45 Balance 成本扫描：今日 $0.75 / 本月 $22.70 / 全量 $148.49，/api/costs 与台账对齐（无需改造）；8/14 ~12:00 隧道再换：旧 cloudflared（ports-evening）11:55 进程挂 → watchdog 12:00 检测 → 12:05 重建新隧道 overall-supplier-season-stick.trycloudflare.com（实测 200，PID 3869；watchdog 行为正确——旧隧道确实死亡，该重建）；serveo 固定域名仍 502（服务端故障第 3 天）；当日第 4 次换 URL（临时隧道进程死即换域名，Daryl 追不上地址）；main 再次建议 Cloudflare Named Tunnel 固定域名方案（免费：命名隧道+固定域名，进程重启地址不变），待 Daryl 确认（8/12 曾决定不投入） |
-| 下周计划 | v1.7 整合开发（Sidebar 项目总线平移到 project milestone 模块，8/7 拍板待启动）；汇总三 Agent 看板初始化结果给 Daryl；Brave 接回主搜索路由待 Daryl 确认；8/8 起逐项清理四 workspace 审计遗留问题；serveo 恢复后验证固定域名回归（8/14 第 3 天仍 502；cloudflared 临时隧道 8/14 第 4 次换 URL——进程死亡触发重建，watchdog 行为正确，自杀式换 URL 已修复）；Named Tunnel 固定域名方案 8/14 再次提议，待 Daryl 确认（8/12 曾决定不投入） |
-| 阻塞项 | Daryl决策阻塞：Self阻塞(OPC看板/卡片审核/ACCA Vault等) + Balance SOP审阅（音乐文件/车辆费用/JGL 8/5已取消）；Brave接回主搜索路由待确认（C15基准8/5归档：SearXNG 39.9坍塌/Brave 65.9持平；8/10 08:00 周度抽检 SearXNG 37.0，坍塌持续）；xiaofeng/Balance 看板初始化回复待收；Self 旧 gateway cron 1799ac76 仍启用（8/10 归档确认连续第3天双通道并存，非禁用态），待清理；serveo 固定域名 502 待恢复（8/12 服务端内部路由故障，8/14 第 3 天仍 502；cloudflared 临时隧道 overall-supplier-season-stick 200 可用）；Named Tunnel 固定域名方案 8/14 再次提议，待 Daryl 确认 |
+| 本周进展 | 8/2-8/5 运行平稳；8/5 成本端点核查+preview修复（ea47ba2）+产物模块 v1.7.0（fbcd813）；8/7 M4 收官：③约定版本变更自动DM通知（M4c，commit 09e38ea），至此 M4 三项全完成（①override过期清理✅ ②系统消息过滤✅ ③约定版本变更通知✅）；Daryl 拍板 v1.7 整合「Sidebar项目总线 → 平移到 Agent状态和任务的 project milestone 模块」；8/7 21:40 全 Agent 看板初始化（Daryl 指令）：通知 xiaofeng/Balance/Self 清过时任务+成本自查，Self 已回复（清理5个过时项目+发现 8/6 团建卡生图 ~$1.0-1.3 未进台账），待 xiaofeng/Balance 回复；8/8 记忆 Cron consolidated 修复上线（audit-all-report.sh 四 workspace 审计+汇总+群汇报，00:16 手动跑通）；8/9 ~08:10 serveo.net 服务端宕机（DNS 可达但 22/443 超时，非映射问题）→ 固定域名 opc-darylchiu.serveousercontent.com 失联；应急上线 cloudflared 备用隧道 searched-chip-belly-consolidation.trycloudflare.com → 8765（公网 HTTP 200 / 0.87s），autossh 持续重连待 serveo 恢复；Balance 顺手修复 .current_tunnel_url 文件 grep 误写；8/10 复核：localhost:8765 正常（HTTP 200），cloudflared 进程存活但旧随机域名已失效（000），serveo 恢复状态待确认；13:08 Daryl 周一报到，4 Agent 全员在线；8/10 23:25 Balance cron 成本扫描（今日 $0.24/本月 $20.24/全量 $146.03 写入 cost_daily.json），main 核实 /api/costs 端点数字全对齐（monthly kitty 6.04+xiaofeng 2.45+balance 6.98+self 4.77=20.24），确认 v1.6.1 已实现 .jsonl 全量扫描+balance-ledger 权威源、无需代码改动，并确认 opc-workspace 下 cost_daily.json 为指向 WorkBuddy 的符号链接（8/4 建立）；8/11 全天无新进展（仅心跳，Balance 13:00 侧完成自身看板刷新）；8/12 serveo 固定域名 502 排查（Daryl 报障）：本地 8765 正常、serveo.net 首页 200、SSH 22 通，新建随机子域名 opc-test-111446 也 502 → 定性 serveo 服务端「HTTP代理→SSH隧道」内部路由整体故障（8/9 宕机家族复发），非我方问题；彻底重建 autossh 仍 502，等 serveo 恢复（watchdog 每 5 分钟自动检测回切）；cloudflared 备用隧道 sweet-letter-dame-sensitive.trycloudflare.com 实测 200（11:15 刚换过 URL）；顺手修复 .current_tunnel_url 被 grep 报错文本污染（存 "Binary file ... matches" 非 URL，已改写为可用地址）；Daryl 用临时隧道验收 Balance 费用报销报告 ✅（第一个完整正反馈案例）；8/13 上午 Daryl 要最新公网隧道地址验收 Self 成果：serveo 固定域名仍 502（8/12 服务端故障未恢复）；隧道地址两次变更（09:25 phil-highly-threshold-extend → 09:30 连接终止致 Daryl 访问 Error 1033 → 09:30 重启 arcade-interpreted-nevertheless-radios → 09:35 singer-mechanisms-rolled-geographical 实测 200）；09:35 修复 watchdog.sh L69 grep 读 cf.log 报 Binary file matches（加 -a）；09:40 Error 1033 根因复盘：localhost:8765 从未掉过（PID 3587 自 8/7 20:34 连续运行 6 天），真实根因 = watchdog 自杀式换 URL（serveo 502 → pkill 健康 CF 隧道 → 重建新随机 URL，Daryl 拿到的 URL 5 分钟内被杀）→ 修复 = CF 回退分支「已有健康 CF 隧道则保留不重建」（exit 0）；serveo 公网 URL 域名纠正（Daryl 第二次）：一律 *.serveousercontent.com，serveo.net 是 SSH 主机名，报 URL 前查 watchdog.sh 权威值；8/13 23:45 Balance 成本扫描：今日 $0.75 / 本月 $22.70 / 全量 $148.49，/api/costs 与台账对齐（无需改造）；8/14 ~12:00 隧道再换：旧 cloudflared（ports-evening）11:55 进程挂 → watchdog 12:00 检测 → 12:05 重建新隧道 overall-supplier-season-stick.trycloudflare.com（实测 200，PID 3869；watchdog 行为正确——旧隧道确实死亡，该重建）；serveo 固定域名仍 502（服务端故障第 3 天）；当日第 4 次换 URL（临时隧道进程死即换域名，Daryl 追不上地址）；main 再次建议 Cloudflare Named Tunnel 固定域名方案（免费：命名隧道+固定域名，进程重启地址不变），待 Daryl 确认（8/12 曾决定不投入）；8/15 ~14:00 serveo 恢复排查（Daryl 报「产物与预览看不到」）：①serveo 服务端已恢复（8/12 故障解除，固定域名 opc-darylchiu.serveousercontent.com 200，autossh PID 38214 正常）②但免费版对浏览器访问强制插入「Serveo Browser Warning」确认页（防钓鱼），点 Continue 种 cookie serveo-skip-browser-warning=true → 带此 cookie 的所有 /api/* 请求全 502（curl 无 cookie 直连 200）③根因=serveo 服务端行为非我方问题：Agent 卡片是静态 HTML 所以能显示，产物列表靠 /api/artifacts 所以永远 Loading ④cloudflared 备用隧道 endorsed-calgary-revolution-vip.trycloudflare.com 浏览器实测 37 产物全正常零错误（playwright 验证）⑤watchdog 风险提示：其用 curl 无 cookie 检测 serveo 200 会判健康，但 serveo 对浏览器实际不可用；当前 .current_tunnel_url 指向 CF 隧道为权威入口；长期方案 A serveo 付费去警告页（~$5/月）/ B Named Tunnel 固定域名（免费，推荐），待 Daryl 确认 |
+| 下周计划 | v1.7 整合开发（Sidebar 项目总线平移到 project milestone 模块，8/7 拍板待启动）；汇总三 Agent 看板初始化结果给 Daryl；Brave 接回主搜索路由待 Daryl 确认；8/8 起逐项清理四 workspace 审计遗留问题；serveo 已恢复但免费版浏览器 Warning 页致 API 502（8/15 排查定案，非我方问题）→ 公网入口以 cloudflared 临时隧道 endorsed-calgary-revolution-vip 为准；Named Tunnel 固定域名方案 8/15 第三次提议（或 serveo 付费 ~$5/月），待 Daryl 确认 |
+| 阻塞项 | Daryl决策阻塞：Self阻塞(OPC看板/卡片审核/ACCA Vault等) + Balance SOP审阅（音乐文件/车辆费用/JGL 8/5已取消）；Brave接回主搜索路由待确认（C15基准8/5归档：SearXNG 39.9坍塌/Brave 65.9持平；8/10 08:00 周度抽检 SearXNG 37.0，坍塌持续）；xiaofeng/Balance 看板初始化回复待收；Self 旧 gateway cron 1799ac76 仍启用（8/10 归档确认连续第3天双通道并存，非禁用态），待清理；serveo 服务端已恢复（8/15）但免费版浏览器 Warning 页致 API 502（固定域名对浏览器不可用），公网入口以 cloudflared 临时隧道 endorsed-calgary-revolution-vip 为准（实测 200）；Named Tunnel 固定域名方案 8/15 第三次提议（或 serveo 付费 ~$5/月），待 Daryl 确认 |
 
 #### 里程碑
 
@@ -155,8 +155,8 @@
 |------|------|------|------|
 | 2026-06 | — | ~$28 | — |
 | 2026-07 | $55 | $66.01 | -$11.01 🔴 |
-| 2026-08 | ≤$85（变现战略 API 预算约束） | $22.70 | 8/13 止（Balance 台账 8/13 23:45 扫描：全量 $148.49 / 本月 $22.70 / 今日 $0.75） |
-| 累计 | — | ~$148.49 | 🔴 7月超支20.0% |
+| 2026-08 | ≤$85（变现战略 API 预算约束） | $23.28 | 8/15 07:00 归集（Self 侧刷新：全量 $149.07 / 本月 $23.28 / 今日 $0.55；Balance 台账 8/13 23:45：$22.70） |
+| 累计 | — | ~$149.07 | 🔴 7月超支20.0% |
 
 #### 关键决策
 
@@ -182,6 +182,7 @@
 | 8/13 | Error 1033 根因：watchdog 自杀式换 URL（serveo 502→pkill 健康 CF 隧道→重建新随机 URL）；修复=CF 回退分支已有健康隧道则保留不重建 + grep -a 修 Binary file 误报 | P2 | ✅ 已修复 |
 | 8/13 | serveo 公网 URL 域名纠正（Daryl 第二次）：一律 *.serveousercontent.com（serveo.net 是 SSH 主机名）；报 URL 前查 watchdog.sh L14 权威值 | P2 | ✅ 已记录 |
 | 8/14 | cloudflared 临时隧道当日第 4 次换 URL（ports-evening 11:55 挂 → watchdog 12:05 重建 overall-supplier-season-stick，实测 200，行为正确）；serveo 502 第 3 天；再次提议 Named Tunnel 固定域名方案（免费）待 Daryl 确认 | P2 | ✅ 已处理，方案待确认 |
+| 8/15 | serveo 服务端恢复（8/12 故障解除）但免费版新增浏览器 Warning 确认页 + cookie 致 /api/* 全 502（产物列表永远 Loading）；根因为 serveo 服务端行为非我方问题；立即可用入口=cloudflared endorsed-calgary-revolution-vip（浏览器实测 37 产物正常）；长期方案 A serveo 付费 ~$5/月 / B Named Tunnel 固定域名（免费，推荐）待 Daryl 确认 | P2 | ✅ 已排查定案，方案待确认 |
 
 #### 风险/问题
 
@@ -196,6 +197,7 @@
 | 8/12 | serveo 固定域名 502 复发（8/12 上午，服务端「HTTP代理→SSH隧道」内部路由整体故障，随机子域名也 502） | 看板公网域名失联，验收依赖临时隧道 | ✅ 定性非我方问题；cloudflared 临时隧道 sweet-letter-dame-sensitive 200（重启即换 URL）；.current_tunnel_url 污染已修复；watchdog 5 分钟检测回切；等 serveo 恢复 |
 | 8/13 | 隧道地址两次变更致 Daryl 验收报 Error 1033（09:25 phil → 09:30 被杀换 arcade → 09:35 换 singer） | 公网访问中断，验收受阻 | ✅ 根因定位：watchdog 自杀式换 URL（serveo 502 → pkill 健康 CF 隧道），localhost:8765 从未掉过（PID 3587 运行 6 天）；修复=已有健康 CF 隧道则保留不重建 + grep -a；当前 singer-mechanisms-rolled-geographical 200 |
 | 8/14 | cloudflared 临时隧道进程死亡 → URL 再次失效（ports-evening 11:55 挂，12:05 重建 overall-supplier-season-stick；当日第 4 次换 URL） | 公网地址频繁变化，Daryl 追不上地址 | ✅ watchdog 行为正确（旧隧道确实死亡，该重建）；已再次建议 Named Tunnel 固定域名方案（免费）待 Daryl 确认；serveo 仍 502（第 3 天） |
+| 8/15 | serveo 服务端恢复但免费版浏览器 Warning 确认页 + cookie（serveo-skip-browser-warning=true）致 /api/* 全 502 | 固定域名对浏览器实际不可用（产物/预览永远 Loading），watchdog 无 cookie 检测会误判 serveo 健康 | ✅ 排查定案（serveo 服务端行为，非我方）；权威入口切至 cloudflared endorsed-calgary-revolution-vip（实测 37 产物正常）；方案 A 付费 $5/月 / B Named Tunnel 免费待 Daryl 确认 |
 
 ---
 
