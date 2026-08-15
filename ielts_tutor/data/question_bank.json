@@ -1,0 +1,1628 @@
+{
+ "version": "1.0.0",
+ "updated": "2026-08-15",
+ "note": "结构化真题种子库: Part1 30话题/Part2 60卡/Part3 30主题. LLM变体层负责扩新, 本库保真.",
+ "part1": {
+  "topics": [
+   {
+    "id": "p1_work",
+    "topic": "work/study",
+    "questions": [
+     "Do you work or are you a student?",
+     "What do you like most about your work or studies?",
+     "Would you change anything about your job or course?",
+     "Do you prefer working alone or with other people?",
+     "What are your plans for the future?"
+    ]
+   },
+   {
+    "id": "p1_hometown",
+    "topic": "hometown",
+    "questions": [
+     "Where is your hometown?",
+     "What is your hometown famous for?",
+     "Do you still live there?",
+     "What do you like most about your hometown?",
+     "Has your hometown changed much since you were young?"
+    ]
+   },
+   {
+    "id": "p1_home",
+    "topic": "home/accommodation",
+    "questions": [
+     "Do you live in a house or an apartment?",
+     "What is your favorite room in your home?",
+     "How long have you lived there?",
+     "What would you change about your home?",
+     "Do you prefer living in a quiet or busy area?"
+    ]
+   },
+   {
+    "id": "p1_hobbies",
+    "topic": "hobbies",
+    "questions": [
+     "Do you have any hobbies?",
+     "How long have you had this hobby?",
+     "Why do you enjoy it?",
+     "Did you have different hobbies as a child?",
+     "Would you like to try a new hobby?"
+    ]
+   },
+   {
+    "id": "p1_reading",
+    "topic": "reading",
+    "questions": [
+     "Do you like reading?",
+     "What kind of books do you enjoy?",
+     "How often do you read?",
+     "Do you prefer paper books or e-books?",
+     "Did you read much when you were a child?"
+    ]
+   },
+   {
+    "id": "p1_music",
+    "topic": "music",
+    "questions": [
+     "What kind of music do you like?",
+     "When do you usually listen to music?",
+     "Do you play any instruments?",
+     "Has your taste in music changed over the years?",
+     "Do you prefer live music or recorded music?"
+    ]
+   },
+   {
+    "id": "p1_movies",
+    "topic": "movies",
+    "questions": [
+     "Do you enjoy watching movies?",
+     "What genre of movies do you prefer?",
+     "How often do you go to the cinema?",
+     "Do you prefer watching at home or in a theater?",
+     "What was the last movie you watched?"
+    ]
+   },
+   {
+    "id": "p1_travel",
+    "topic": "travel",
+    "questions": [
+     "Do you like traveling?",
+     "Where have you traveled recently?",
+     "What is the best trip you have ever taken?",
+     "Do you prefer traveling alone or with others?",
+     "Where would you like to travel next?"
+    ]
+   },
+   {
+    "id": "p1_food",
+    "topic": "food/cooking",
+    "questions": [
+     "What is your favorite food?",
+     "Can you cook?",
+     "Do you prefer eating at home or eating out?",
+     "What did you eat for breakfast today?",
+     "Is there any food you dislike?"
+    ]
+   },
+   {
+    "id": "p1_weather",
+    "topic": "weather",
+    "questions": [
+     "What is the weather like in your country?",
+     "What is your favorite season?",
+     "Does the weather affect your mood?",
+     "What do you do when it rains?",
+     "Has the weather changed much over the years?"
+    ]
+   },
+   {
+    "id": "p1_sports",
+    "topic": "sports",
+    "questions": [
+     "Do you play any sports?",
+     "What sports do you enjoy watching?",
+     "Did you play sports at school?",
+     "Do you prefer team sports or individual sports?",
+     "What sport would you like to try?"
+    ]
+   },
+   {
+    "id": "p1_friends",
+    "topic": "friends",
+    "questions": [
+     "Do you have many friends?",
+     "How often do you see your friends?",
+     "What do you usually do together?",
+     "Are you still friends with people from school?",
+     "What makes a good friend?"
+    ]
+   },
+   {
+    "id": "p1_family",
+    "topic": "family",
+    "questions": [
+     "Do you have a big family?",
+     "Who are you closest to in your family?",
+     "How often do you see your family?",
+     "What do you do together?",
+     "Is family important in your country?"
+    ]
+   },
+   {
+    "id": "p1_pets",
+    "topic": "pets/animals",
+    "questions": [
+     "Do you have any pets?",
+     "Did you have pets as a child?",
+     "What animals do people keep in your country?",
+     "Why do people keep pets?",
+     "Would you like to have a pet in the future?"
+    ]
+   },
+   {
+    "id": "p1_transport",
+    "topic": "public transport",
+    "questions": [
+     "How do you usually get around?",
+     "Do you often use public transport?",
+     "What is public transport like in your city?",
+     "Would you like to own a car?",
+     "How could public transport be improved?"
+    ]
+   },
+   {
+    "id": "p1_shopping",
+    "topic": "shopping",
+    "questions": [
+     "Do you enjoy shopping?",
+     "How often do you go shopping?",
+     "Do you prefer online or in-store shopping?",
+     "What did you buy recently?",
+     "Do you think people shop too much these days?"
+    ]
+   },
+   {
+    "id": "p1_technology",
+    "topic": "technology",
+    "questions": [
+     "How much time do you spend on your phone?",
+     "What apps do you use most?",
+     "Could you live without your phone?",
+     "Has technology made life easier?",
+     "What new technology do you find exciting?"
+    ]
+   },
+   {
+    "id": "p1_internet",
+    "topic": "internet",
+    "questions": [
+     "How often do you use the internet?",
+     "What do you usually do online?",
+     "Did you use the internet as a child?",
+     "What are the downsides of the internet?",
+     "Could you go a week without it?"
+    ]
+   },
+   {
+    "id": "p1_photography",
+    "topic": "photography",
+    "questions": [
+     "Do you like taking photos?",
+     "What do you take photos of?",
+     "Do you prefer phone or camera photos?",
+     "Do you print photos or keep them digital?",
+     "What was the last photo you took?"
+    ]
+   },
+   {
+    "id": "p1_weekends",
+    "topic": "weekends",
+    "questions": [
+     "What do you usually do on weekends?",
+     "Do you prefer busy or relaxed weekends?",
+     "What did you do last weekend?",
+     "How are weekends different from weekdays for you?",
+     "Do you think weekends are long enough?"
+    ]
+   },
+   {
+    "id": "p1_mornings",
+    "topic": "mornings",
+    "questions": [
+     "What time do you usually wake up?",
+     "What do you do first thing in the morning?",
+     "Do you feel alert in the mornings?",
+     "Do you eat breakfast every day?",
+     "Are you a morning person or a night owl?"
+    ]
+   },
+   {
+    "id": "p1_sleep",
+    "topic": "sleep",
+    "questions": [
+     "How many hours do you sleep at night?",
+     "Do you have trouble sleeping?",
+     "Do you take naps during the day?",
+     "Does your sleep quality affect your day?",
+     "What helps you sleep well?"
+    ]
+   },
+   {
+    "id": "p1_health",
+    "topic": "health/exercise",
+    "questions": [
+     "Do you exercise regularly?",
+     "What do you do to stay healthy?",
+     "Have you changed your health habits recently?",
+     "Is health important in your culture?",
+     "What advice would you give someone about health?"
+    ]
+   },
+   {
+    "id": "p1_gardens",
+    "topic": "gardens/parks",
+    "questions": [
+     "Do you spend time in parks or gardens?",
+     "Is there a park near your home?",
+     "What do people do in parks in your country?",
+     "Do you prefer gardens with flowers or grass?",
+     "Why are green spaces important?"
+    ]
+   },
+   {
+    "id": "p1_clothes",
+    "topic": "clothes/fashion",
+    "questions": [
+     "What kind of clothes do you usually wear?",
+     "Do you care about fashion?",
+     "Where do you buy clothes?",
+     "Did you wear a uniform at school?",
+     "Do you think clothes reflect personality?"
+    ]
+   },
+   {
+    "id": "p1_birthdays",
+    "topic": "birthdays",
+    "questions": [
+     "Do you celebrate your birthday?",
+     "How did you celebrate your last birthday?",
+     "Do people celebrate birthdays differently in your country?",
+     "What is the best birthday gift you have received?",
+     "Are birthdays more important for children or adults?"
+    ]
+   },
+   {
+    "id": "p1_gifts",
+    "topic": "gifts",
+    "questions": [
+     "Do you like giving gifts?",
+     "What gift did you give someone recently?",
+     "Is it better to give money or a chosen gift?",
+     "Do you prefer giving or receiving gifts?",
+     "What makes a good gift?"
+    ]
+   },
+   {
+    "id": "p1_tea_coffee",
+    "topic": "tea/coffee",
+    "questions": [
+     "Do you prefer tea or coffee?",
+     "How often do you drink it?",
+     "Do you drink it at home or outside?",
+     "Is tea/coffee culture important in your country?",
+     "What do you add to it?"
+    ]
+   },
+   {
+    "id": "p1_walking",
+    "topic": "walking",
+    "questions": [
+     "Do you like walking?",
+     "How often do you walk?",
+     "Where do you usually walk?",
+     "Do you walk for transport or exercise?",
+     "Do you prefer walking alone or with someone?"
+    ]
+   },
+   {
+    "id": "p1_neighbors",
+    "topic": "neighbors",
+    "questions": [
+     "Do you know your neighbors?",
+     "How often do you talk to them?",
+     "Is it important to have good neighbors?",
+     "What do neighbors help each other with?",
+     "Are neighbors friendlier in the countryside?"
+    ]
+   }
+  ]
+ },
+ "part2": {
+  "themes": {
+   "people": [
+    {
+     "id": "p2_people_01",
+     "title": "Describe {x} you admire",
+     "prompts": [
+      "who this person is",
+      "how you know them",
+      "what they are like",
+      "and explain why you admire them"
+     ],
+     "follow_ups": [
+      "Do you think it is important to have role models?",
+      "How has this person influenced the way you live?"
+     ],
+     "slots": {
+      "x": [
+       "a colleague",
+       "an older relative",
+       "a public figure",
+       "a classmate"
+      ]
+     }
+    },
+    {
+     "id": "p2_people_02",
+     "title": "Describe {x} you spend a lot of time with",
+     "prompts": [
+      "who this friend is",
+      "how you met",
+      "what you usually do together",
+      "and explain why you get along so well"
+     ],
+     "follow_ups": [
+      "Do you think friendships change as people grow older?",
+      "What makes a friendship last?"
+     ],
+     "slots": {
+      "x": [
+       "a friend from university",
+       "a childhood friend",
+       "a friend from work",
+       "a friend you met online"
+      ]
+     }
+    },
+    {
+     "id": "p2_people_03",
+     "title": "Describe a family member you are close to",
+     "prompts": [
+      "who this person is",
+      "what they look like and what they are like",
+      "what you do together",
+      "and explain why you are close to them"
+     ],
+     "follow_ups": [
+      "Is family more important than friends? Why?",
+      "How has your relationship with this person changed over time?"
+     ]
+    },
+    {
+     "id": "p2_people_04",
+     "title": "Describe a person who has influenced you",
+     "prompts": [
+      "who this person is",
+      "how you know them",
+      "what they did or said",
+      "and explain how they influenced you"
+     ],
+     "follow_ups": [
+      "Do people influence others more by words or by actions?",
+      "Can a stranger influence your life?"
+     ]
+    },
+    {
+     "id": "p2_people_05",
+     "title": "Describe a teacher who made a difference in your life",
+     "prompts": [
+      "who the teacher was",
+      "what subject they taught",
+      "what made them special",
+      "and explain how they affected you"
+     ],
+     "follow_ups": [
+      "What qualities make a good teacher?",
+      "Do teachers matter more than the curriculum?"
+     ]
+    },
+    {
+     "id": "p2_people_06",
+     "title": "Describe a neighbor you know well",
+     "prompts": [
+      "who they are",
+      "how long you have known them",
+      "how often you see each other",
+      "and explain what your relationship is like"
+     ],
+     "follow_ups": [
+      "Are neighbors more important in cities or villages?",
+      "How can people get along better with neighbors?"
+     ]
+    },
+    {
+     "id": "p2_people_07",
+     "title": "Describe a person you met recently",
+     "prompts": [
+      "who this person is",
+      "where you met them",
+      "what you talked about",
+      "and explain what impression they made on you"
+     ],
+     "follow_ups": [
+      "Is it easy to make new friends as an adult?",
+      "What do first impressions really tell us?"
+     ]
+    },
+    {
+     "id": "p2_people_08",
+     "title": "Describe an old person you respect",
+     "prompts": [
+      "who they are",
+      "how you know them",
+      "what they are like",
+      "and explain why you respect them"
+     ],
+     "follow_ups": [
+      "How should society treat elderly people?",
+      "What can young people learn from the elderly?"
+     ]
+    },
+    {
+     "id": "p2_people_09",
+     "title": "Describe a colleague or classmate you work or study with",
+     "prompts": [
+      "who this person is",
+      "what you do together",
+      "what they are like",
+      "and explain why you enjoy working with them"
+     ],
+     "follow_ups": [
+      "What makes a good teammate?",
+      "Is cooperation more important than competition?"
+     ]
+    },
+    {
+     "id": "p2_people_10",
+     "title": "Describe a famous person you would like to meet",
+     "prompts": [
+      "who this person is",
+      "what they do",
+      "why you find them interesting",
+      "and explain what you would ask them"
+     ],
+     "slots": {
+      "field": [
+       "a famous scientist",
+       "a famous athlete",
+       "a famous artist",
+       "a famous business leader",
+       "a famous musician"
+      ]
+     },
+     "follow_ups": [
+      "Why are some people famous only for being famous?",
+      "Does fame change people?"
+     ]
+    }
+   ],
+   "places": [
+    {
+     "id": "p2_places_01",
+     "title": "Describe a place you like to visit",
+     "prompts": [
+      "where it is",
+      "when you usually go there",
+      "what you do there",
+      "and explain why you like it"
+     ],
+     "follow_ups": [
+      "Why do people get attached to certain places?",
+      "Do you prefer familiar places or new ones?"
+     ]
+    },
+    {
+     "id": "p2_places_02",
+     "title": "Describe your favorite room in your home",
+     "prompts": [
+      "which room it is",
+      "what is in it",
+      "what you do there",
+      "and explain why it is your favorite"
+     ],
+     "follow_ups": [
+      "Does the design of a room affect your mood?",
+      "What does a home mean to people?"
+     ]
+    },
+    {
+     "id": "p2_places_03",
+     "title": "Describe a place near water you enjoy",
+     "prompts": [
+      "where it is",
+      "how often you go there",
+      "what you do there",
+      "and explain why you enjoy it"
+     ],
+     "slots": {
+      "water": [
+       "a beach",
+       "a lake",
+       "a river",
+       "a swimming pool",
+       "a waterfall"
+      ]
+     },
+     "follow_ups": [
+      "Why do people find water relaxing?",
+      "Should cities build more water spaces?"
+     ]
+    },
+    {
+     "id": "p2_places_04",
+     "title": "Describe a place where you studied or worked",
+     "prompts": [
+      "where it was",
+      "when you were there",
+      "what you did there",
+      "and explain how you felt about it"
+     ],
+     "follow_ups": [
+      "Does the environment affect productivity?",
+      "What makes a good workplace?"
+     ]
+    },
+    {
+     "id": "p2_places_05",
+     "title": "Describe {x} you have visited",
+     "prompts": [
+      "which city it was",
+      "when you visited",
+      "what you saw and did",
+      "and explain what impressed you most"
+     ],
+     "follow_ups": [
+      "What makes a city attractive to live in?",
+      "Are big cities better than small towns?"
+     ],
+     "slots": {
+      "x": [
+       "a coastal city",
+       "a capital city",
+       "an ancient city",
+       "a small historic town"
+      ]
+     }
+    },
+    {
+     "id": "p2_places_06",
+     "title": "Describe a quiet place you like",
+     "prompts": [
+      "where it is",
+      "when you go there",
+      "what you do there",
+      "and explain why you like quiet places"
+     ],
+     "follow_ups": [
+      "Do people need silence in modern life?",
+      "Is it hard to find quiet places in cities?"
+     ]
+    },
+    {
+     "id": "p2_places_07",
+     "title": "Describe a historical place you have visited",
+     "prompts": [
+      "where it is",
+      "what it is",
+      "what you learned there",
+      "and explain why it was interesting"
+     ],
+     "follow_ups": [
+      "Why do people visit historical sites?",
+      "How should we protect historical places?"
+     ]
+    },
+    {
+     "id": "p2_places_08",
+     "title": "Describe a park or garden you like",
+     "prompts": [
+      "where it is",
+      "what it looks like",
+      "when you go there",
+      "and explain why you like it"
+     ],
+     "follow_ups": [
+      "Why are green spaces important in cities?",
+      "What do people do in parks?"
+     ]
+    },
+    {
+     "id": "p2_places_09",
+     "title": "Describe a market you have visited",
+     "prompts": [
+      "where it was",
+      "what was sold there",
+      "what you did there",
+      "and explain why it was memorable"
+     ],
+     "follow_ups": [
+      "Are traditional markets disappearing?",
+      "Why do people still love markets?"
+     ]
+    },
+    {
+     "id": "p2_places_10",
+     "title": "Describe a building you like",
+     "prompts": [
+      "where it is",
+      "what it looks like",
+      "what happens there",
+      "and explain why you like it"
+     ],
+     "follow_ups": [
+      "Should new buildings match old styles?",
+      "What makes architecture memorable?"
+     ]
+    }
+   ],
+   "objects": [
+    {
+     "id": "p2_objects_01",
+     "title": "Describe something you own that is important to you",
+     "prompts": [
+      "what it is",
+      "how long you have had it",
+      "how you got it",
+      "and explain why it is important"
+     ],
+     "follow_ups": [
+      "Why do people attach value to objects?",
+      "Is it better to own few things or many?"
+     ]
+    },
+    {
+     "id": "p2_objects_02",
+     "title": "Describe a gift you received",
+     "prompts": [
+      "what the gift was",
+      "who gave it to you",
+      "on what occasion",
+      "and explain why it was memorable"
+     ],
+     "follow_ups": [
+      "Is giving gifts an important tradition?",
+      "What makes a gift meaningful?"
+     ]
+    },
+    {
+     "id": "p2_objects_03",
+     "title": "Describe a piece of technology you use regularly",
+     "prompts": [
+      "what it is",
+      "how often you use it",
+      "what you use it for",
+      "and explain why it is useful"
+     ],
+     "follow_ups": [
+      "Has technology made life too fast?",
+      "What technology could you not live without?"
+     ]
+    },
+    {
+     "id": "p2_objects_04",
+     "title": "Describe {x} you read recently",
+     "prompts": [
+      "what the book was",
+      "when you read it",
+      "what it was about",
+      "and explain how you felt about it"
+     ],
+     "follow_ups": [
+      "Do people read less than before? Why?",
+      "Should schools choose what students read?"
+     ],
+     "slots": {
+      "x": [
+       "a novel",
+       "a non-fiction book",
+       "a biography",
+       "a science book",
+       "a thriller"
+      ]
+     }
+    },
+    {
+     "id": "p2_objects_05",
+     "title": "Describe a photo that means a lot to you",
+     "prompts": [
+      "what is in the photo",
+      "when it was taken",
+      "who took it",
+      "and explain why it is important to you"
+     ],
+     "follow_ups": [
+      "Why do people take so many photos now?",
+      "Do photos preserve memories better than our minds?"
+     ]
+    },
+    {
+     "id": "p2_objects_06",
+     "title": "Describe a piece of clothing you like",
+     "prompts": [
+      "what it is",
+      "when you wear it",
+      "how you got it",
+      "and explain why you like it"
+     ],
+     "follow_ups": [
+      "Does fashion matter to young people?",
+      "Should schools have uniforms?"
+     ]
+    },
+    {
+     "id": "p2_objects_07",
+     "title": "Describe a meal you cooked",
+     "prompts": [
+      "what you cooked",
+      "when you cooked it",
+      "who you cooked it for",
+      "and explain how it went"
+     ],
+     "follow_ups": [
+      "Is cooking an important life skill?",
+      "Why are home-cooked meals special?"
+     ]
+    },
+    {
+     "id": "p2_objects_08",
+     "title": "Describe {x} you bought recently",
+     "prompts": [
+      "what you bought",
+      "where you bought it",
+      "why you bought it",
+      "and explain how you feel about it"
+     ],
+     "follow_ups": [
+      "Do people buy too many unnecessary things?",
+      "Online or in-store — which is better?"
+     ],
+     "slots": {
+      "x": [
+       "a piece of clothing",
+       "an electronic device",
+       "a gift for someone",
+       "something for your home"
+      ]
+     }
+    },
+    {
+     "id": "p2_objects_09",
+     "title": "Describe an item you use every day",
+     "prompts": [
+      "what it is",
+      "what you use it for",
+      "how often you use it",
+      "and explain why it is important to you"
+     ],
+     "follow_ups": [
+      "What everyday items will disappear in the future?",
+      "Why do we depend on certain objects?"
+     ]
+    },
+    {
+     "id": "p2_objects_10",
+     "title": "Describe a souvenir you have",
+     "prompts": [
+      "what it is",
+      "where you got it",
+      "when you got it",
+      "and explain what it means to you"
+     ],
+     "follow_ups": [
+      "Why do people buy souvenirs?",
+      "Do souvenirs really represent a place?"
+     ]
+    }
+   ],
+   "events": [
+    {
+     "id": "p2_events_01",
+     "title": "Describe a celebration you enjoyed",
+     "prompts": [
+      "what the celebration was",
+      "when it happened",
+      "who was there",
+      "and explain why you enjoyed it"
+     ],
+     "follow_ups": [
+      "Are celebrations becoming more commercial?",
+      "Which celebration matters most in your country?"
+     ]
+    },
+    {
+     "id": "p2_events_02",
+     "title": "Describe a time you helped someone",
+     "prompts": [
+      "who you helped",
+      "what the situation was",
+      "what you did",
+      "and explain how you felt afterwards"
+     ],
+     "follow_ups": [
+      "Do people help strangers less than before?",
+      "Is helping always a good thing?"
+     ]
+    },
+    {
+     "id": "p2_events_03",
+     "title": "Describe {x} you remember well",
+     "prompts": [
+      "where you went",
+      "how you traveled",
+      "what happened on the way",
+      "and explain why it was memorable"
+     ],
+     "follow_ups": [
+      "Is the journey more important than the destination?",
+      "How has travel changed in recent years?"
+     ],
+     "slots": {
+      "x": [
+       "a journey by train",
+       "a journey by car",
+       "a journey abroad",
+       "a short trip that surprised you"
+      ]
+     }
+    },
+    {
+     "id": "p2_events_04",
+     "title": "Describe a sports event you watched",
+     "prompts": [
+      "what the event was",
+      "when you watched it",
+      "who you watched it with",
+      "and explain how you felt about it"
+     ],
+     "follow_ups": [
+      "Why are sports so popular worldwide?",
+      "Do sports bring people together?"
+     ]
+    },
+    {
+     "id": "p2_events_05",
+     "title": "Describe {x} that is important in your country",
+     "prompts": [
+      "what the festival is",
+      "when it happens",
+      "how people celebrate it",
+      "and explain why it is important"
+     ],
+     "follow_ups": [
+      "Are traditional festivals losing meaning?",
+      "How do festivals affect the economy?"
+     ],
+     "slots": {
+      "x": [
+       "a harvest festival",
+       "a music festival",
+       "a religious festival",
+       "a family festival"
+      ]
+     }
+    },
+    {
+     "id": "p2_events_06",
+     "title": "Describe a time you were late",
+     "prompts": [
+      "when it happened",
+      "why you were late",
+      "what happened because of it",
+      "and explain how you felt"
+     ],
+     "follow_ups": [
+      "Is punctuality important in your culture?",
+      "Why are some people always late?"
+     ]
+    },
+    {
+     "id": "p2_events_07",
+     "title": "Describe something difficult you did successfully",
+     "prompts": [
+      "what it was",
+      "why it was difficult",
+      "how you did it",
+      "and explain how you felt when you finished"
+     ],
+     "follow_ups": [
+      "Do challenges make people stronger?",
+      "Should people be pushed out of their comfort zone?"
+     ]
+    },
+    {
+     "id": "p2_events_08",
+     "title": "Describe a happy event in your life",
+     "prompts": [
+      "what the event was",
+      "when it happened",
+      "who was with you",
+      "and explain why it made you happy"
+     ],
+     "follow_ups": [
+      "What makes people truly happy?",
+      "Do small joys matter more than big ones?"
+     ]
+    },
+    {
+     "id": "p2_events_09",
+     "title": "Describe a time you got lost",
+     "prompts": [
+      "where you were",
+      "how you got lost",
+      "what you did",
+      "and explain how you found your way"
+     ],
+     "follow_ups": [
+      "Do people rely too much on GPS?",
+      "Is getting lost always a bad thing?"
+     ]
+    },
+    {
+     "id": "p2_events_10",
+     "title": "Describe a wedding you attended",
+     "prompts": [
+      "whose wedding it was",
+      "where it was held",
+      "what happened",
+      "and explain how you felt about it"
+     ],
+     "follow_ups": [
+      "Are weddings too expensive these days?",
+      "Should marriage traditions change?"
+     ]
+    }
+   ],
+   "experiences": [
+    {
+     "id": "p2_exp_01",
+     "title": "Describe an interesting conversation you had",
+     "prompts": [
+      "who you talked to",
+      "where it happened",
+      "what you talked about",
+      "and explain why it was interesting"
+     ],
+     "follow_ups": [
+      "Why do some conversations stay in our minds?",
+      "Are people worse at talking now because of phones?"
+     ]
+    },
+    {
+     "id": "p2_exp_02",
+     "title": "Describe a time you learned something new",
+     "prompts": [
+      "what you learned",
+      "how you learned it",
+      "why you wanted to learn it",
+      "and explain how useful it has been"
+     ],
+     "follow_ups": [
+      "Is lifelong learning necessary today?",
+      "What is the best way to learn a new skill?"
+     ]
+    },
+    {
+     "id": "p2_exp_03",
+     "title": "Describe an outdoor activity you enjoyed",
+     "prompts": [
+      "what the activity was",
+      "when and where you did it",
+      "who you did it with",
+      "and explain why you enjoyed it"
+     ],
+     "follow_ups": [
+      "Why do people enjoy outdoor activities?",
+      "Are people spending less time outdoors?"
+     ]
+    },
+    {
+     "id": "p2_exp_04",
+     "title": "Describe a skill you would like to learn",
+     "prompts": [
+      "what the skill is",
+      "why you want to learn it",
+      "how you would learn it",
+      "and explain what might stop you"
+     ],
+     "follow_ups": [
+      "Which skills will matter most in the future?",
+      "Is talent more important than practice?"
+     ]
+    },
+    {
+     "id": "p2_exp_05",
+     "title": "Describe a time you tried {x}",
+     "prompts": [
+      "what you tried",
+      "when you tried it",
+      "who you were with",
+      "and explain how you felt"
+     ],
+     "follow_ups": [
+      "Why is it good to try new things?",
+      "Are people less adventurous as they age?"
+     ],
+     "slots": {
+      "x": [
+       "a new food",
+       "a new sport",
+       "a new technology",
+       "a new way of traveling"
+      ]
+     }
+    },
+    {
+     "id": "p2_exp_06",
+     "title": "Describe a childhood memory you remember well",
+     "prompts": [
+      "what happened",
+      "how old you were",
+      "who was involved",
+      "and explain why you remember it"
+     ],
+     "follow_ups": [
+      "Why do childhood memories stay so vivid?",
+      "Is childhood the happiest time of life?"
+     ]
+    },
+    {
+     "id": "p2_exp_07",
+     "title": "Describe a time you felt proud of yourself",
+     "prompts": [
+      "what you did",
+      "when it happened",
+      "why it mattered",
+      "and explain why you felt proud"
+     ],
+     "follow_ups": [
+      "Is pride a good or bad emotion?",
+      "Should parents praise children more?"
+     ]
+    },
+    {
+     "id": "p2_exp_08",
+     "title": "Describe a trip that changed your perspective",
+     "prompts": [
+      "where you went",
+      "when you went",
+      "what happened there",
+      "and explain how it changed you"
+     ],
+     "follow_ups": [
+      "Can travel really change a person?",
+      "Is travel a form of education?"
+     ]
+    },
+    {
+     "id": "p2_exp_09",
+     "title": "Describe a volunteer experience you had",
+     "prompts": [
+      "what you did",
+      "where and when",
+      "why you did it",
+      "and explain how it affected you"
+     ],
+     "follow_ups": [
+      "Should volunteering be compulsory?",
+      "Why do people volunteer?"
+     ]
+    },
+    {
+     "id": "p2_exp_10",
+     "title": "Describe a time you taught someone something",
+     "prompts": [
+      "who you taught",
+      "what you taught them",
+      "how you did it",
+      "and explain how it went"
+     ],
+     "follow_ups": [
+      "Does teaching help the teacher learn too?",
+      "Are good teachers born or made?"
+     ]
+    }
+   ],
+   "activities": [
+    {
+     "id": "p2_act_01",
+     "title": "Describe {x} you enjoy",
+     "prompts": [
+      "what the hobby is",
+      "how long you have had it",
+      "how often you do it",
+      "and explain why you enjoy it"
+     ],
+     "follow_ups": [
+      "Why do hobbies matter for adults?",
+      "Are hobbies becoming more expensive?"
+     ],
+     "slots": {
+      "x": [
+       "a creative hobby",
+       "an outdoor hobby",
+       "a collecting hobby",
+       "a fitness hobby"
+      ]
+     }
+    },
+    {
+     "id": "p2_act_02",
+     "title": "Describe a game you like to play",
+     "prompts": [
+      "what the game is",
+      "who you play it with",
+      "how it is played",
+      "and explain why you like it"
+     ],
+     "follow_ups": [
+      "Are video games a waste of time?",
+      "Do games teach useful skills?"
+     ]
+    },
+    {
+     "id": "p2_act_03",
+     "title": "Describe something you do to relax",
+     "prompts": [
+      "what you do",
+      "when you do it",
+      "where you do it",
+      "and explain why it helps you relax"
+     ],
+     "follow_ups": [
+      "Are people more stressed than before?",
+      "Is relaxation undervalued?"
+     ]
+    },
+    {
+     "id": "p2_act_04",
+     "title": "Describe {x} you like",
+     "prompts": [
+      "what the show is",
+      "when you watch it",
+      "what it is about",
+      "and explain why you like it"
+     ],
+     "follow_ups": [
+      "Are people watching too much TV?",
+      "Why are streaming series so popular?"
+     ],
+     "slots": {
+      "x": [
+       "a drama series",
+       "a documentary series",
+       "a comedy series",
+       "a reality show"
+      ]
+     }
+    },
+    {
+     "id": "p2_act_05",
+     "title": "Describe an activity you do near water",
+     "prompts": [
+      "what the activity is",
+      "where you do it",
+      "how often",
+      "and explain why you enjoy it"
+     ],
+     "follow_ups": [
+      "Why do people love water activities?",
+      "Should water sports be safer?"
+     ]
+    },
+    {
+     "id": "p2_act_06",
+     "title": "Describe a sport you enjoy watching",
+     "prompts": [
+      "what sport it is",
+      "who you watch it with",
+      "when you watch it",
+      "and explain why you enjoy it"
+     ],
+     "follow_ups": [
+      "Why do people watch sports they never play?",
+      "Do sports stars earn too much?"
+     ]
+    },
+    {
+     "id": "p2_act_07",
+     "title": "Describe something you do every morning",
+     "prompts": [
+      "what you do",
+      "when you started doing it",
+      "how long it takes",
+      "and explain why you do it"
+     ],
+     "follow_ups": [
+      "Do morning routines make people productive?",
+      "Why do routines matter?"
+     ]
+    },
+    {
+     "id": "p2_act_08",
+     "title": "Describe a leisure activity you do with friends",
+     "prompts": [
+      "what you do",
+      "how often",
+      "who joins",
+      "and explain why it is fun"
+     ],
+     "follow_ups": [
+      "Is it hard to keep friends busy together as adults?",
+      "Do shared activities strengthen friendship?"
+     ]
+    },
+    {
+     "id": "p2_act_09",
+     "title": "Describe a project you worked on",
+     "prompts": [
+      "what the project was",
+      "who you worked with",
+      "what you did",
+      "and explain how it turned out"
+     ],
+     "follow_ups": [
+      "Do people work better alone or in teams?",
+      "What makes a project successful?"
+     ]
+    },
+    {
+     "id": "p2_act_10",
+     "title": "Describe something you do to stay healthy",
+     "prompts": [
+      "what you do",
+      "how often",
+      "when you started",
+      "and explain how it helps"
+     ],
+     "follow_ups": [
+      "Why is preventive health so important?",
+      "Do people in your country exercise enough?"
+     ]
+    }
+   ]
+  }
+ },
+ "part3": {
+  "themes": [
+   {
+    "id": "p3_reading",
+    "theme": "reading",
+    "questions": [
+     "Why do people read less now than in the past?",
+     "Do you think e-books will completely replace paper books?",
+     "What can governments do to encourage reading?",
+     "Is reading for pleasure different from reading for study?",
+     "Will reading remain important in a video-first world?"
+    ]
+   },
+   {
+    "id": "p3_technology",
+    "theme": "technology",
+    "questions": [
+     "Has technology made our lives better or worse overall?",
+     "Do people depend too much on their devices?",
+     "How is technology changing the way we communicate?",
+     "Will AI replace many human jobs?",
+     "Should children be allowed to use screens freely?"
+    ]
+   },
+   {
+    "id": "p3_education",
+    "theme": "education",
+    "questions": [
+     "Is the current education system preparing students for the future?",
+     "Should universities be free for everyone?",
+     "Is online learning as good as classroom learning?",
+     "What skills should schools teach that they don't?",
+     "Do exams measure real ability?"
+    ]
+   },
+   {
+    "id": "p3_work",
+    "theme": "work",
+    "questions": [
+     "Is job satisfaction more important than salary?",
+     "Will remote work become the new normal?",
+     "How is the workplace changing for young people?",
+     "Should people change jobs frequently?",
+     "What makes a good boss?"
+    ]
+   },
+   {
+    "id": "p3_cities",
+    "theme": "cities",
+    "questions": [
+     "What problems do big cities face today?",
+     "Are cities becoming too crowded?",
+     "How can cities become more livable?",
+     "Do young people prefer cities over the countryside?",
+     "What will cities look like in fifty years?"
+    ]
+   },
+   {
+    "id": "p3_environment",
+    "theme": "environment",
+    "questions": [
+     "What is the biggest environmental problem today?",
+     "Can individual actions really help the environment?",
+     "Should governments force companies to go green?",
+     "Is climate change the greatest challenge of our time?",
+     "How can we encourage people to live sustainably?"
+    ]
+   },
+   {
+    "id": "p3_health",
+    "theme": "health",
+    "questions": [
+     "Is prevention better than cure in healthcare?",
+     "Why are mental health problems increasing?",
+     "Should junk food be taxed?",
+     "How can people be encouraged to exercise more?",
+     "Is healthcare a right or a privilege?"
+    ]
+   },
+   {
+    "id": "p3_food",
+    "theme": "food",
+    "questions": [
+     "How have eating habits changed in recent decades?",
+     "Is fast food a serious problem in modern society?",
+     "Should people eat more local food?",
+     "Will lab-grown food become mainstream?",
+     "Why is food so central to culture?"
+    ]
+   },
+   {
+    "id": "p3_family",
+    "theme": "family",
+    "questions": [
+     "How is the structure of families changing?",
+     "Do parents spend enough time with their children?",
+     "Is it better to live with or apart from your parents as an adult?",
+     "How has the role of grandparents changed?",
+     "What challenges do modern families face?"
+    ]
+   },
+   {
+    "id": "p3_friends",
+    "theme": "friends",
+    "questions": [
+     "Are online friendships as real as offline ones?",
+     "Why is it harder to make friends as an adult?",
+     "Do social media make people lonelier?",
+     "What is the value of having friends from different backgrounds?",
+     "Can friendship survive disagreement?"
+    ]
+   },
+   {
+    "id": "p3_media",
+    "theme": "media",
+    "questions": [
+     "Is the news reliable these days?",
+     "Do social media spread misinformation?",
+     "Should there be limits on what people can post online?",
+     "How has media changed the way we see the world?",
+     "Is traditional media dying?"
+    ]
+   },
+   {
+    "id": "p3_culture",
+    "theme": "culture",
+    "questions": [
+     "Is globalization destroying local cultures?",
+     "Should governments protect traditional culture?",
+     "Why do people love experiencing other cultures?",
+     "How is culture passed to young people today?",
+     "Is cultural exchange more important than cultural preservation?"
+    ]
+   },
+   {
+    "id": "p3_travel",
+    "theme": "travel",
+    "questions": [
+     "Has travel become too commercialized?",
+     "Does tourism help or hurt local communities?",
+     "Why do people feel the need to travel?",
+     "Will virtual travel replace real travel?",
+     "How can tourism become more sustainable?"
+    ]
+   },
+   {
+    "id": "p3_money",
+    "theme": "money",
+    "questions": [
+     "Does money buy happiness?",
+     "Should children be taught about money in school?",
+     "Why do people feel richer but not happier?",
+     "Is saving more important than spending?",
+     "How has cashless payment changed society?"
+    ]
+   },
+   {
+    "id": "p3_society",
+    "theme": "society",
+    "questions": [
+     "Is society becoming more unequal?",
+     "What makes a good society?",
+     "Do people care less about each other now?",
+     "How should society treat its most vulnerable members?",
+     "Is individualism a threat to community?"
+    ]
+   },
+   {
+    "id": "p3_change",
+    "theme": "change",
+    "questions": [
+     "Why do people resist change?",
+     "Is change always for the better?",
+     "How quickly is the world changing today?",
+     "Should young people embrace change more than the old?",
+     "What change in your lifetime has mattered most?"
+    ]
+   },
+   {
+    "id": "p3_communication",
+    "theme": "communication",
+    "questions": [
+     "Has technology improved communication?",
+     "Why do misunderstandings happen so often?",
+     "Is face-to-face communication still necessary?",
+     "Do emojis weaken language?",
+     "What makes someone a good communicator?"
+    ]
+   },
+   {
+    "id": "p3_art",
+    "theme": "art",
+    "questions": [
+     "Why is art important to society?",
+     "Should governments fund the arts?",
+     "Is digital art as valuable as traditional art?",
+     "Can anyone be an artist?",
+     "How has art changed with technology?"
+    ]
+   },
+   {
+    "id": "p3_sports",
+    "theme": "sports",
+    "questions": [
+     "Why are sports so important to people?",
+     "Do professional athletes deserve their high salaries?",
+     "Should school sports be compulsory?",
+     "Are sports becoming too commercial?",
+     "What does sport teach us about life?"
+    ]
+   },
+   {
+    "id": "p3_aging",
+    "theme": "aging",
+    "questions": [
+     "How is society dealing with an aging population?",
+     "Should retirement age be raised?",
+     "Do we respect the elderly enough?",
+     "How can older people stay active and happy?",
+     "Will robots care for the elderly in the future?"
+    ]
+   },
+   {
+    "id": "p3_happiness",
+    "theme": "happiness",
+    "questions": [
+     "What makes people truly happy?",
+     "Is happiness a choice or a circumstance?",
+     "Are people in rich countries happier?",
+     "How can society increase well-being?",
+     "Does social media affect happiness?"
+    ]
+   },
+   {
+    "id": "p3_success",
+    "theme": "success",
+    "questions": [
+     "How do you define success?",
+     "Is success mostly luck or hard work?",
+     "Do people put too much pressure on success?",
+     "Should success be measured by wealth?",
+     "What advice would you give to someone chasing success?"
+    ]
+   },
+   {
+    "id": "p3_privacy",
+    "theme": "privacy",
+    "questions": [
+     "Is privacy dying in the digital age?",
+     "Should companies be allowed to collect personal data?",
+     "How much privacy should governments have access to?",
+     "Do young people care about privacy?",
+     "Can we ever get privacy back?"
+    ]
+   },
+   {
+    "id": "p3_globalization",
+    "theme": "globalization",
+    "questions": [
+     "Has globalization helped or hurt developing countries?",
+     "Is the world becoming too similar?",
+     "How has globalization affected jobs?",
+     "Should countries protect local industries?",
+     "Is globalization reversible?"
+    ]
+   },
+   {
+    "id": "p3_tradition",
+    "theme": "tradition",
+    "questions": [
+     "Why do traditions matter?",
+     "Should traditions change with the times?",
+     "Are young people losing their traditions?",
+     "Can traditions survive globalization?",
+     "Which traditions are worth keeping?"
+    ]
+   },
+   {
+    "id": "p3_young",
+    "theme": "young people",
+    "questions": [
+     "Do young people today face more pressure than previous generations?",
+     "Are young people too dependent on technology?",
+     "How should society support young people?",
+     "Do young people respect their elders enough?",
+     "What will the next generation be better at?"
+    ]
+   },
+   {
+    "id": "p3_learning",
+    "theme": "learning",
+    "questions": [
+     "Is lifelong learning becoming necessary?",
+     "What is the best way to learn a language?",
+     "Should learning be fun or disciplined?",
+     "How will education change with AI?",
+     "Why do some people love learning and others hate it?"
+    ]
+   },
+   {
+    "id": "p3_leadership",
+    "theme": "leadership",
+    "questions": [
+     "What makes a great leader?",
+     "Are leaders born or made?",
+     "Do countries need strong leaders or strong institutions?",
+     "How has leadership changed in the digital age?",
+     "Can anyone become a leader?"
+    ]
+   },
+   {
+    "id": "p3_shopping",
+    "theme": "shopping",
+    "questions": [
+     "Has online shopping changed society?",
+     "Do people buy too much?",
+     "Should we return to smaller local shops?",
+     "How does consumerism affect happiness?",
+     "Will physical shops disappear?"
+    ]
+   },
+   {
+    "id": "p3_time",
+    "theme": "time",
+    "questions": [
+     "Why do people always feel short of time?",
+     "Is multitasking a myth?",
+     "How has technology changed our sense of time?",
+     "Should people plan their time more?",
+     "Is 'time is money' a dangerous idea?"
+    ]
+   }
+  ]
+ }
+}
