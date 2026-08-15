@@ -20,6 +20,7 @@ else:
 
 from config import GOOGLE_STT_KEY, GOOGLE_TTS_KEY, DEEPSEEK_KEY, DEEPSEEK_BASE
 import question_bank
+import auth
 from session_manager import PersistentSessionManager
 from report_generator import generate_report
 from stt_streaming import StreamingTranscriber
@@ -45,6 +46,7 @@ def _prewarm_models():
     t.start()
 sessions = PersistentSessionManager()
 question_bank.init_db()  # v1.4.1 题库去重表
+auth.init_db()  # v1.5.0 P1 用户系统
 FRONTEND = os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend", "index.html")
 VOCAB_PAGE = os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend", "vocab.html")
 
@@ -1325,6 +1327,54 @@ if debug_manager:
     @app.websocket("/debug/ws/{sid}")
     async def debug_ws(ws: WebSocket, sid: str):
         await handle_debug_ws(ws, sid)
+
+@app.get("/login")
+async def login_page():
+    return HTMLResponse(open(os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend", "login.html"), encoding="utf-8").read())
+
+
+# ── Auth API (v1.5.0 P1: 增量式, AUTH_REQUIRED=0 默认 guest, 不影响现有路由) ──
+def _bearer(req: Request):
+    h = req.headers.get("Authorization", "")
+    return h[7:] if h.lower().startswith("bearer ") else ""
+
+
+def _client_ip(req: Request):
+    return req.client.host if req.client else "local"
+
+
+@app.post("/api/auth/register")
+async def auth_register(req: Request):
+    body = await req.json()
+    ok, res = auth.register(body.get("email", ""), body.get("password", ""),
+                            body.get("display_name", ""), _client_ip(req))
+    if ok:
+        return {"ok": True, "user": res["user"], "token": res["token"]}
+    return {"ok": False, "error": res}
+
+
+@app.post("/api/auth/login")
+async def auth_login(req: Request):
+    body = await req.json()
+    ok, res = auth.login(body.get("email", ""), body.get("password", ""), _client_ip(req))
+    if ok:
+        return {"ok": True, "user": res["user"], "token": res["token"]}
+    return {"ok": False, "error": res}
+
+
+@app.post("/api/auth/logout")
+async def auth_logout(req: Request):
+    auth.logout(_bearer(req))
+    return {"ok": True}
+
+
+@app.get("/api/auth/me")
+async def auth_me(req: Request):
+    u = auth.get_user_by_token(_bearer(req))
+    if not u:
+        return {"ok": False, "error": "未登录或登录已过期"}
+    return {"ok": True, "user": u}
+
 
 # ── Cost Endpoint ──
 # DeepSeek 费率参数（2026-08-15 更新，官方公告 2026-08-13）

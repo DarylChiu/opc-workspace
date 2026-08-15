@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+<title>🔐 IELTS Tutor · 登录</title>
+<style>
+:root {
+    --bg:#0f0f1a; --card:#1a1a2e; --border:#2a2a4a;
+    --accent:#6c63ff; --accent2:#00d4aa; --text:#e0e0f0;
+    --muted:#888; --danger:#ff6b6b;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+    font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background:var(--bg); color:var(--text);
+    min-height:100vh; display:flex; align-items:center; justify-content:center;
+    padding:16px;
+}
+.card {
+    background:var(--card); border:1px solid var(--border); border-radius:16px;
+    padding:32px; width:100%; max-width:380px;
+}
+.logo { text-align:center; font-size:22px; margin-bottom:4px; }
+.title { text-align:center; color:var(--muted); font-size:13px; margin-bottom:24px; }
+.tabs { display:flex; gap:8px; margin-bottom:20px; }
+.tab {
+    flex:1; text-align:center; padding:8px 0; border-radius:8px;
+    border:1px solid var(--border); cursor:pointer; font-size:14px; color:var(--muted);
+    background:transparent; transition:all .15s;
+}
+.tab.active { background:var(--accent); color:#fff; border-color:var(--accent); }
+.field { margin-bottom:14px; }
+label { display:block; font-size:12px; color:var(--muted); margin-bottom:6px; }
+input {
+    width:100%; padding:10px 12px; border-radius:8px;
+    border:1px solid var(--border); background:var(--bg); color:var(--text);
+    font-size:14px; outline:none;
+}
+input:focus { border-color:var(--accent); }
+.hidden { display:none; }
+.btn {
+    width:100%; padding:11px 0; border-radius:8px; border:none; cursor:pointer;
+    background:var(--accent); color:#fff; font-size:15px; font-weight:600; margin-top:6px;
+}
+.btn:hover { opacity:.9; }
+.msg { min-height:18px; font-size:13px; margin-top:10px; text-align:center; }
+.msg.ok { color:var(--accent2); }
+.msg.err { color:var(--danger); }
+.user-box {
+    border:1px solid var(--border); border-radius:10px; padding:14px; margin-top:10px;
+    background:var(--bg); font-size:13px; line-height:1.7;
+}
+.user-box b { color:var(--accent2); }
+.link { text-align:center; margin-top:16px; font-size:13px; }
+.link a { color:var(--accent); text-decoration:none; }
+.note {
+    margin-top:18px; padding:10px 12px; border-radius:8px;
+    background:var(--bg); border:1px dashed var(--border);
+    font-size:11px; color:var(--muted); line-height:1.6;
+}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="logo">🎤 IELTS Tutor</div>
+  <div class="title">用户系统 · P1 试点（登录不影响现有功能）</div>
+
+  <div class="tabs">
+    <div class="tab active" id="tabLogin" onclick="switchTab('login')">登录</div>
+    <div class="tab" id="tabRegister" onclick="switchTab('register')">注册</div>
+  </div>
+
+  <form id="loginForm" onsubmit="submitAuth(event,'login')">
+    <div class="field"><label>邮箱</label><input type="email" id="loginEmail" placeholder="you@example.com" required></div>
+    <div class="field"><label>密码</label><input type="password" id="loginPw" placeholder="至少 6 位" required></div>
+    <button class="btn" type="submit">登 录</button>
+  </form>
+
+  <form id="registerForm" class="hidden" onsubmit="submitAuth(event,'register')">
+    <div class="field"><label>昵称（可选）</label><input type="text" id="regName" placeholder="怎么称呼你"></div>
+    <div class="field"><label>邮箱</label><input type="email" id="regEmail" placeholder="you@example.com" required></div>
+    <div class="field"><label>密码</label><input type="password" id="regPw" placeholder="至少 6 位" required></div>
+    <button class="btn" type="submit">注 册</button>
+  </form>
+
+  <div class="msg" id="msg"></div>
+  <div id="userBox" class="user-box hidden"></div>
+
+  <div class="link"><a href="/" id="goHome">← 返回口语训练主页</a></div>
+  <div class="note">💡 试点模式：AUTH_REQUIRED 未开启，训练页无需登录即可使用；登录后你的身份将用于后续的数据隔离与用量统计。</div>
+</div>
+
+<script>
+const TOKEN_KEY = 'ielts_token';
+const msg = document.getElementById('msg');
+
+function switchTab(t) {
+  document.getElementById('tabLogin').classList.toggle('active', t==='login');
+  document.getElementById('tabRegister').classList.toggle('active', t==='register');
+  document.getElementById('loginForm').classList.toggle('hidden', t!=='login');
+  document.getElementById('registerForm').classList.toggle('hidden', t!=='register');
+  msg.textContent=''; msg.className='msg';
+}
+
+function show(text, ok) {
+  msg.textContent = text;
+  msg.className = 'msg ' + (ok ? 'ok' : 'err');
+}
+
+async function submitAuth(e, kind) {
+  e.preventDefault();
+  const email = document.getElementById(kind==='login'?'loginEmail':'regEmail').value.trim();
+  const pw = document.getElementById(kind==='login'?'loginPw':'regPw').value;
+  const name = kind==='register' ? document.getElementById('regName').value.trim() : '';
+  const body = kind==='login' ? {email, password:pw} : {email, password:pw, display_name:name};
+  try {
+    const r = await fetch('/api/auth/'+kind, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body)});
+    const d = await r.json();
+    if (!d.ok) { show(d.error || '请求失败', false); return; }
+    localStorage.setItem(TOKEN_KEY, d.token);
+    show('✅ '+(kind==='login'?'登录':'注册')+'成功', true);
+    renderUser(d.user);
+  } catch(err) { show('网络错误：'+err.message, false); }
+}
+
+function renderUser(u) {
+  const box = document.getElementById('userBox');
+  box.classList.remove('hidden');
+  box.innerHTML = '<b>'+ (u.display_name || u.email) +'</b> 已登录<br>'
+    + '📧 '+u.email+'<br>'
+    + '📋 套餐: '+u.plan+' · 月配额: '+(u.monthly_quota_tokens/1000|0)+'K tokens<br>'
+    + '<button class="btn" style="margin-top:10px;background:var(--danger)" onclick="doLogout()">登 出</button>';
+  document.querySelectorAll('form').forEach(f=>f.classList.add('hidden'));
+  document.querySelector('.tabs').classList.add('hidden');
+}
+
+async function doLogout() {
+  const token = localStorage.getItem(TOKEN_KEY);
+  if (token) await fetch('/api/auth/logout', {method:'POST', headers:{'Authorization':'Bearer '+token}});
+  localStorage.removeItem(TOKEN_KEY);
+  location.reload();
+}
+
+async function init() {
+  const token = localStorage.getItem(TOKEN_KEY);
+  if (!token) return;
+  try {
+    const r = await fetch('/api/auth/me', {headers:{'Authorization':'Bearer '+token}});
+    const d = await r.json();
+    if (d.ok) renderUser(d.user);
+    else localStorage.removeItem(TOKEN_KEY);
+  } catch(e) {}
+}
+init();
+</script>
+</body>
+</html>
