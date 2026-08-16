@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-15T01:27:09.062Z",
+  "updatedAt": "2026-08-15T17:00:36.233Z",
   "entries": {
     "memory:memory/2026-06-10.md:1:29": {
       "key": "memory:memory/2026-06-10.md:1:29",
@@ -3925,18 +3925,20 @@
       "endLine": 33,
       "source": "memory",
       "snippet": "- 📌 最终交付物已归档在 `reports/`：管理办法 v1.0.5、明细表 v0.5.5（无保护版）、征集意见整理 - 📌 待 Daryl 新任务（OA 表单如需要 Excel 逻辑说明可随时提供） - 📌 越南差旅费管理办法征集意见整理：已融入 v1.0.5，无遗留 ## ⚠️ 待观察 - 自进化基建 L1 Phase 0 影子模式测试期（8/5→8/7）：今日起进入第 2 天，8/7 由 Kitty 评估 shadow_log 精度决定 Phase 1 放行或回退 - 8/5 单日成本 $7.60 偏高归因（Balance $3.08 + Self $2.90，疑与全量重扫有关）——8/6 数据已回落，继续观察 ## 📌 Session 活动摘要（近24h，跨 8/5 → 8/6 凌晨） - 8/5 主要活动均已在昨日日记完整记录（误餐补贴 v0.5.x 系列修复、管理办法 v1.0.x 交付、教训 3 条已写入 lessons.md） - 8/6 凌晨：本次 cron 审计执行（无其他 session 活动） ## 🕛 00:10 OPC 群聊汇报发送（Cron 2fe401f9 收尾） - 发送成功：messageId om_x100b6802afdda8a4df9a925b0da46a8 → chatId oc_7d71d54d87cbd265d9c3811bc59840b2 - **修正认知**: 历史日记记录的 `om_x100b6ae474f85ca0c02e04ea387e92e` 是消息 ID 而非群聊 ID；正确 OPC 群聊 ID",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.3818778991699219,
+      "totalScore": 0.7407150715589523,
       "maxScore": 0.3818778991699219,
       "firstRecalledAt": "2026-08-08T16:59:41.801Z",
-      "lastRecalledAt": "2026-08-08T16:59:41.801Z",
+      "lastRecalledAt": "2026-08-15T17:00:36.233Z",
       "queryHashes": [
-        "d7cf321bbcd7"
+        "d7cf321bbcd7",
+        "764616e192f5"
       ],
       "recallDays": [
-        "2026-08-08"
+        "2026-08-08",
+        "2026-08-16"
       ],
       "conceptTags": [
         "v1.0.5",
