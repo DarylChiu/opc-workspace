@@ -6388,12 +6388,87 @@
       "occurrences": 1,
       "last_seen": "2026-08-09",
       "resolved": false
+    },
+    {
+      "id": "fp-20260816-014",
+      "category": "correction",
+      "project": null,
+      "trigger": {
+        "raw": "上下文：分析Daryl与越南女生样本（170cm漂亮+蹩脚中文表白+无感觉）时，我用单点数据（'蹩脚中文'）搭建理论塔（语言代理深度缺失、努力不计分），并推断他"
+      },
+      "text": "上下文：分析Daryl与越南女生样本（170cm漂亮+蹩脚中文表白+无感觉）时，我用单点数据（'蹩脚中文'）搭建理论塔（语言代理深度缺失、努力不计分），并推断他'从未探索'。错误：①把'无探索欲望'误读为'从未探索'，实际他已通过聊天软件探索并评估过 ②忽略更简单的解释：对方年轻、人生阅历未到质变点 ③过度建模，用精致理论替代事实。正确做法：先确认上下文（是否已探索/评估过），优先奥卡姆剃刀（最简单解释），单点数据不建理论塔；Daryl的筛选标准是'人生阅历质变点'而非语言或努力。",
+      "source": "daryl_message",
+      "severity": "medium",
+      "status": "active",
+      "occurrences": 1,
+      "last_seen": "2026-08-16",
+      "resolved": false
+    },
+    {
+      "id": "fp-20260816-015",
+      "category": "correction",
+      "project": null,
+      "trigger": {
+        "raw": "Daryl 新规 2026-08-13: 分析类任务禁止浅层思维交付。他自称 Ni+Te 型认知，一眼能看出分析深度不足。正确做法: ①至少挖两层(现象→结构/"
+      },
+      "text": "Daryl 新规 2026-08-13: 分析类任务禁止浅层思维交付。他自称 Ni+Te 型认知，一眼能看出分析深度不足。正确做法: ①至少挖两层(现象→结构/模式→含义) ②分析前定义口径 ③找模式不找数据 ④给可执行含义 ⑤不确定标注不迎合。反例: 指令频率调查第一轮只看频率被点名表面; 第二轮加难度结构+长线占比才过关。",
+      "source": "daryl_message",
+      "severity": "medium",
+      "status": "active",
+      "occurrences": 1,
+      "last_seen": "2026-08-16",
+      "resolved": false
+    },
+    {
+      "id": "fp-20260816-016",
+      "category": "correction",
+      "project": null,
+      "trigger": {
+        "raw": "Daryl 纠错 2026-08-13: 我把 Kitty 和 main 当成两个独立 Agent。事实: main 就是 Kitty(忧郁小猫, 首席Agen"
+      },
+      "text": "Daryl 纠错 2026-08-13: 我把 Kitty 和 main 当成两个独立 Agent。事实: main 就是 Kitty(忧郁小猫, 首席Agent/总协调), 会话 key = agent:main:main。正确做法: 团队映射表 Kitty=main, Bryson=xiaofeng(已在 MEMORY.md), Balance=balance, Self=self; 涉及团队协调/首席的触达一律走 agent:main:main。",
+      "source": "daryl_message",
+      "severity": "medium",
+      "status": "active",
+      "occurrences": 1,
+      "last_seen": "2026-08-16",
+      "resolved": false
+    },
+    {
+      "id": "fp-20260816-017",
+      "category": "correction",
+      "project": null,
+      "trigger": {
+        "raw": "上下文：8/12 可用性实测，4个项目（雅思/剪辑/视频分析/报销）完成度自报全部失真——剪辑v4.0前端0行代码但自报60%、视频分析是死代码、报销交付了没部"
+      },
+      "text": "上下文：8/12 可用性实测，4个项目（雅思/剪辑/视频分析/报销）完成度自报全部失真——剪辑v4.0前端0行代码但自报60%、视频分析是死代码、报销交付了没部署。错误：只核Agent自报的完成度%没查代码/端口/进程。正确做法：里程碑汇报必须附验证证据（端口/进程/代码行数/测试输出），验收标准=链接+5分钟亲手操作，完成度%自报不可信",
+      "source": "milestone_report",
+      "severity": "medium",
+      "status": "active",
+      "occurrences": 1,
+      "last_seen": "2026-08-16",
+      "resolved": false
+    },
+    {
+      "id": "fp-20260816-018",
+      "category": "correction",
+      "project": null,
+      "trigger": {
+        "raw": "上下文：8/16 设计训练计划时，Daryl 提到羽毛球发现弹跳/耐力下降（回答'为什么想运动'），我过度解读成训练目标，计划里写了'弹跳力之王''验收场'。错"
+      },
+      "text": "上下文：8/16 设计训练计划时，Daryl 提到羽毛球发现弹跳/耐力下降（回答'为什么想运动'），我过度解读成训练目标，计划里写了'弹跳力之王''验收场'。错误：把动机触发点当成了训练目标。正确做法：设计前严格区分 trigger（为什么想改变）vs goal（要达成什么），目标必须用户明确定义，触发点只用于理解动机，不用于设计训练重点",
+      "source": "daryl_message",
+      "severity": "medium",
+      "status": "active",
+      "occurrences": 1,
+      "last_seen": "2026-08-16",
+      "resolved": false
     }
   ],
   "stats": {
-    "total_patterns": 13,
-    "active_patterns": 13,
+    "total_patterns": 18,
+    "active_patterns": 18,
     "resolved_patterns": 0,
-    "last_distill": "2026-08-09"
+    "last_distill": "2026-08-16"
   }
 }
