@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-18T03:53:40.805Z",
+  "updatedAt": "2026-08-19T07:08:41.363Z",
   "entries": {
     "memory:memory/2026-06-10.md:1:29": {
       "key": "memory:memory/2026-06-10.md:1:29",
@@ -4620,6 +4620,223 @@
         "v0.1三方案",
         "v0.2方案4/5/6",
         "8/15定调"
+      ]
+    },
+    "memory:memory/archive/2026-06-29.md:1:19": {
+      "key": "memory:memory/archive/2026-06-29.md:1:19",
+      "path": "memory/archive/2026-06-29.md",
+      "startLine": 1,
+      "endLine": 19,
+      "source": "memory",
+      "snippet": "# 2026-06-29 日记 ## 00:03 记忆系统每日审计（第2轮） - **触发**: Cron 定时任务 (audit.sh --report) - **审计结果**: 2浅层+1深层告警 - 浅层：「日记过短+骨架检测」→ 午夜边界误报（00:03执行，9个session均属6/28晚间OPC群周汇报等活动，6/28日记已有完整47行内容） - 浅层：Git pull 标记失败 → 实际成功（Already up to date），审计脚本 exit code 偏严 - 深层：Session-Diary 交叉验证9个活动 session vs 12行日记 → 同上午夜边界 - **处置**: - Git pull 验证通过（Already up to date） - 更新日记标注边界情况 - Git commit 提交修改文件+新日记 - OPC 群聊发送通知 - **前序审计**: 6/29 00:01 同任务已执行过一轮（balance上轮 cron），本轮为第二批次 agent（balance 再次触发） ## 概述 - 周日夜→周一凌晨，无用户交互 - 6/28 OPC 群周汇报为本周最后一次用户交互",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.45927133858203883,
+      "maxScore": 0.45927133858203883,
+      "firstRecalledAt": "2026-08-18T17:00:41.112Z",
+      "lastRecalledAt": "2026-08-18T17:00:41.112Z",
+      "queryHashes": [
+        "3e816774dbcb"
+      ],
+      "recallDays": [
+        "2026-08-19"
+      ],
+      "conceptTags": [
+        "audit.sh",
+        "9个session均属6/28晚间opc群周汇报等活动",
+        "6/28日记已有完整47行内容",
+        "session-diary",
+        "6/29",
+        "6/28",
+        "日记",
+        "记忆"
+      ]
+    },
+    "memory:memory/archive/2026-07-07.md:1:34": {
+      "key": "memory:memory/archive/2026-07-07.md:1:34",
+      "path": "memory/archive/2026-07-07.md",
+      "startLine": 1,
+      "endLine": 34,
+      "source": "memory",
+      "snippet": "# 2026-07-07 日记 ## 🕛 00:02 每日记忆归档审计 - **触发**: Cron 兜底审计 - **审计脚本**: `bash scripts/compliance/audit.sh --report` - **结果**: - ✅ 日记骨架已创建 - ✅ 昨天日记 (2026-07-06) 存在 (23行) - ✅ active.md 新鲜 (23h) - ✅ lessons.md 无需更新 - ✅ 无需归档 - ✅ MEMORY.md 符合规范 - ⚠️ Git push 失败（重试后正常） - ℹ️ 14个session横跨午夜为正常现象 ## 🖥️ Self — OPC Dashboard 设计系统调研 - **触发**: Kitty 委派 Self 调研 OPC Dashboard 设计规范 - **范围**: Linear · Stripe · Vercel · GitHub Primer · Notion · Raycast 六大平台 - **产出**: `~/WorkBuddy/Claw/opc-dashboard/DESIGN.md`（13KB） - 暗色色彩系统（4层elevation透明层叠） - Inter字体 + JetBrains Mono等宽 - 4px基网格系统 - 组件速查代码（CSS :root变量块复制即用） - 10项迁移检查清单 - **Accent色**: Indigo #6366f1（暗色下蓝紫系） - **置信度**: ⚠️ 部分平台色板用既有知识补全",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4155362337827682,
+      "maxScore": 0.4155362337827682,
+      "firstRecalledAt": "2026-08-18T17:00:41.112Z",
+      "lastRecalledAt": "2026-08-18T17:00:41.112Z",
+      "queryHashes": [
+        "3e816774dbcb"
+      ],
+      "recallDays": [
+        "2026-08-19"
+      ],
+      "conceptTags": [
+        "scripts/compliance/audit.sh",
+        "active.md",
+        "lessons.md",
+        "memory.md",
+        "日记",
+        "每日",
+        "记忆",
+        "归档"
+      ]
+    },
+    "memory:memory/archive/2026-07-09.md:1:23": {
+      "key": "memory:memory/archive/2026-07-09.md:1:23",
+      "path": "memory/archive/2026-07-09.md",
+      "startLine": 1,
+      "endLine": 23,
+      "source": "memory",
+      "snippet": "# 2026-07-09 日记 ## 🕛 00:01 每日记忆归档审计 - **触发**: Cron 兜底审计 `bash scripts/compliance/audit.sh --report` - **审计结果**: - ❌ 7/9日记缺失 → 🔧 已自动创建骨架 - ✅ active.md 新鲜 (23h) - ❌ 7/9日记骨架（Cron刚创建，午夜正常现象） - ❌ 日记过短但有2个活跃session → 实为跨午夜cron session误报 - ❌ Git pull失败（opc-workspace-cache未staged changes）→ 🔧 已rebase并修复冲突 - ❌ Git push失败 → GitHub branch protection拒绝（非本端问题，需Daryl处置） - ⚠️ 6/8日记 → 🔧 已归档到archive/ - **修复项**: 2项（日记骨架创建 + 过期日记归档）+ Git冲突手动修复 - **备注**: 午夜0点当日无实质活动，日记为骨架属正常。2个活跃session均为cron审计session（Balance+小枫） ## 🕘 09:05 OPC看板成本统计 — .jsonl全量解析上线 - **Daryl指令**: 让看板改用.jsonl全量解析，输出正确的成本统计表 - **执行**: 创建 `scripts/full_cost_scan.py`，更新 `opc_dashboard/server.py`，生成 `cost_live.json` - **结果**: 全量$",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3997909218072891,
+      "maxScore": 0.3997909218072891,
+      "firstRecalledAt": "2026-08-18T17:00:41.112Z",
+      "lastRecalledAt": "2026-08-18T17:00:41.112Z",
+      "queryHashes": [
+        "3e816774dbcb"
+      ],
+      "recallDays": [
+        "2026-08-19"
+      ],
+      "conceptTags": [
+        "scripts/compliance/audit.sh",
+        "7/9日记缺失",
+        "active.md",
+        "7/9日记骨架",
+        "opc-workspace-cache未staged",
+        "6/8日记",
+        "让看板改用.jsonl全量解析",
+        "scripts/full-cost-scan.py"
+      ]
+    },
+    "memory:memory/archive/2026-07-03.md:1:31": {
+      "key": "memory:memory/archive/2026-07-03.md:1:31",
+      "path": "memory/archive/2026-07-03.md",
+      "startLine": 1,
+      "endLine": 31,
+      "source": "memory",
+      "snippet": "# 2026-07-03 日记 ## 🕛 Cron 审计 (00:02 7/3) - **审计结果**: 0 自动修复 + 2 浅层 + 1 深层 ### 审计发现与归因 - ⚠️ 日记过短（10行）+ 9 个活跃 session → 深层问题 - 📌 **归因: 午夜边界误报**。5 个 session 为各 Agent 的 cron 审计任务，1 个为 pre-midnight webchat，均为 7/2 延续。Cross-validation 在 00:00 天然有此问题（与 7/2 00:00 审计相同） - ⚠️ Git pull 失败 → 📌 **归因: exit code 敏感度误报**，实测 `Already up to date`，实际成功 ### 午夜边界说明 - 审计脚本 session-diary 交叉验证依赖「今天」的活动 session 计数 - 00:00-00:30 时段所有 cron 审计任务同时触发 → 计数虚高 - 实际无 7/3 新事件，diary 正常 ### Git 状态 - ✅ pull: Already up to date - ✅ 无本地变更需 push ## 昨日回顾 (7/2) - 日记 59 行，内容充实 - FutureTextile 第三轮攻击（攻击7-12），攻击7&8 被 Daryl 确认已死 - 记忆系统重大故障诊断与修复（三脚本骨架检测增强） ## 主要事件 ### 🟡 OPC看板通知系统 Bug 排查 (13:12-13:30) - Daryl 问有没有收到 dashboard 发",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.39920644164085384,
+      "maxScore": 0.39920644164085384,
+      "firstRecalledAt": "2026-08-18T17:00:41.112Z",
+      "lastRecalledAt": "2026-08-18T17:00:41.112Z",
+      "queryHashes": [
+        "3e816774dbcb"
+      ],
+      "recallDays": [
+        "2026-08-19"
+      ],
+      "conceptTags": [
+        "7/3",
+        "pre-midnight",
+        "7/2",
+        "cross-validation",
+        "session-diary",
+        "00-00",
+        "攻击7-12",
+        "12-13"
+      ]
+    },
+    "memory:memory/archive/2026-06-27.md:1:16": {
+      "key": "memory:memory/archive/2026-06-27.md:1:16",
+      "path": "memory/archive/2026-06-27.md",
+      "startLine": 1,
+      "endLine": 16,
+      "source": "memory",
+      "snippet": "# 2026-06-27 日记 ## 概述 - 星期六，新的一天开始，暂无用户交互 - 00:00 Cron 触发每日记忆归档审计 ## 00:00 记忆系统审计 - **触发**: Cron 每日归档任务 (audit.sh --report) - **审计结果**: - 1 项自动修复: 本日记骨架创建 - 2 浅层问题 + 2 深层问题告警 - 深层告警均为午夜边界误报（0时执行，当日无活动，但24h session窗口捕获前一天活跃session） - **修复**: 骨架改写为实际内容 - **前日回顾**: 2026-06-26 完成大量贷款材料整理工作（v2迭代 + 6,887,555.02usd批次实战），日记已完整记录 - **通知**: 已发送 OPC 群聊审计完成消息",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.39719957411289214,
+      "maxScore": 0.39719957411289214,
+      "firstRecalledAt": "2026-08-18T17:00:41.112Z",
+      "lastRecalledAt": "2026-08-18T17:00:41.112Z",
+      "queryHashes": [
+        "3e816774dbcb"
+      ],
+      "recallDays": [
+        "2026-08-19"
+      ],
+      "conceptTags": [
+        "audit.sh",
+        "555.02usd批次实战",
+        "日记",
+        "概述",
+        "星期六",
+        "新的",
+        "一天",
+        "开始"
+      ]
+    },
+    "memory:memory/2026-08-17.md:1:18": {
+      "key": "memory:memory/2026-08-17.md:1:18",
+      "path": "memory/2026-08-17.md",
+      "startLine": 1,
+      "endLine": 18,
+      "source": "memory",
+      "snippet": "# 2026-08-17 日记 ## 00:01 每日记忆归档审计执行（跨午夜，系统定时任务 2fe401f9） - 8/16 23:59 Cron 触发，审计 00:01 跨午夜运行，将 8/17 视为「今日」自动创建本文件 - 8/16 实际事件已补全至 `memory/2026-08-16.md`（13:00 看板更新 + 23:46 成本扫描 + 23:59 审计记录） ## 00:03 审计问题修复 - **active.md 35h 未更新** → 时间戳已刷新至 2026-08-17 00:05 GMT+7 - **8/16 日记过短（5行）** → 已补全 13:00 看板更新事件 + 23:59 审计记录（23行） - **OPC API 瞬时不可达** → 审计时 curl 超时，手动复测 3 次均 200 正常（数据完整，timestamp 17:06Z），判定为瞬时故障；cost-check-status.txt 已修正为 fresh_api_ok ## 00:08 系统资源异常处置（根因：2401 个孤儿进程） - **发现**: 系统进程数 2851 超 ulimit 2666 → fork 持续失败（`Resource temporarily unavailable`），审计脚本 curl 无法启动误报 API 不可达 - **根因**: 2401 个 `tail -f /dev/null` 孤儿进程（ppid=1，无父进程，存在 3~15 天不等），纯占资源泄漏 - **处置**: `pkill -f \"tail -f /dev/null\"",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.396029070019722,
+      "maxScore": 0.396029070019722,
+      "firstRecalledAt": "2026-08-18T17:00:41.112Z",
+      "lastRecalledAt": "2026-08-18T17:00:41.112Z",
+      "queryHashes": [
+        "3e816774dbcb"
+      ],
+      "recallDays": [
+        "2026-08-19"
+      ],
+      "conceptTags": [
+        "8/16",
+        "8/17",
+        "memory/2026-08-16.md",
+        "active.md",
+        "cost-check-status.txt",
+        "fresh-api-ok",
+        "dev/null",
+        "日记"
+      ]
+    },
+    "memory:memory/2026-08-09.md:17:23": {
+      "key": "memory:memory/2026-08-09.md:17:23",
+      "path": "memory/2026-08-09.md",
+      "startLine": 17,
+      "endLine": 23,
+      "source": "memory",
+      "snippet": "- **②财务审核**（新增）：问题费用必须处理完毕（补传缺失单据/修改金额/修改费用类型）→ 才可勾选点击「生成凭证」→ 传输到③ - **③账务处理**（现凭证模块）：接收②数据，勾选分组+生成凭证（VAT分离/智能分组保留） - **关键约束**: 三节点顺序解锁，②问题费用不清零不能生成凭证 - **Daryl 要求**: 先深度理解+总结需求回放，确认理解无误后再动工（本次不写代码） - **产出**: 需求回放已发，Daryl 确认三步流程理解无误 + 答复 3 决策点（10:00） - **3 决策点已确认**: ①报销组=同次差旅自动分组+手动拖拽（可拖到其他报销组/待报销池；水单=佐证发票真实性的单据）②生成凭证勾选粒度=费用明细行，可跨报销单勾选（同一出差事项合一张凭证）③单据级预审批状态（一费用多单据各标红/黄/绿）；问题费用处理=补传重审 或 手动确认无误转绿；问题清零后置信度≥90%/＜90%均可勾选生成凭证（90%是人工介入触发线非凭证门槛） - **数据模型 v2**: documents 表（费用→单据一对多）+ reimbursement_orders/order_items + 待报销池标记 + review_attachments/decisions",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.38286244273185727,
+      "maxScore": 0.38286244273185727,
+      "firstRecalledAt": "2026-08-19T07:08:41.363Z",
+      "lastRecalledAt": "2026-08-19T07:08:41.363Z",
+      "queryHashes": [
+        "22fe643e3198"
+      ],
+      "recallDays": [
+        "2026-08-19"
+      ],
+      "conceptTags": [
+        "补传缺失单据/修改金额/修改费用类型",
+        "vat分离/智能分组保留",
+        "可拖到其他报销组/待报销池",
+        "一费用多单据各标红/黄/绿",
+        "reimbursement-orders/order-items",
+        "review-attachments/decisions",
+        "财务",
+        "审核"
       ]
     }
   }

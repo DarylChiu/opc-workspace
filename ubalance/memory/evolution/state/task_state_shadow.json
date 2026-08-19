@@ -1,24 +1,12 @@
 {
   "sessions": {
-    "dorm-waste-export": {
-      "task_id": "task-20260815152639",
-      "subject": "越南不良品(200吨账外,已BOM损耗出表)报关销售回中国/香港:可行性+税负成本+资金流转,流氓会",
-      "type": "调研",
+    "default": {
+      "task_id": null,
+      "subject": null,
+      "type": null,
       "injected_patterns": [],
-      "started_at": "2026-08-15T15:26:39",
-      "msg_count": 1,
-      "subject_hash": "ff2bb12c0855",
-      "project": "waste-disposal-research"
-    },
-    "300usd-vnd-20260817": {
-      "task_id": "task-20260817104308",
-      "subject": "外汇交易研究员：300万美元到账VCB，USD/VND汇率变化复杂，上周一Selling Price",
-      "type": "调研",
-      "injected_patterns": [],
-      "started_at": "2026-08-17T10:43:08",
-      "msg_count": 1,
-      "subject_hash": "722f97814410",
-      "project": "waste-disposal"
+      "started_at": null,
+      "msg_count": 1
     }
   }
 }
