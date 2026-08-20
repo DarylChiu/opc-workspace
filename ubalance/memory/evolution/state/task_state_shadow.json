@@ -7,6 +7,14 @@
       "injected_patterns": [],
       "started_at": null,
       "msg_count": 1
+    },
+    "loan-renewal-huatex": {
+      "task_id": null,
+      "subject": null,
+      "type": null,
+      "injected_patterns": [],
+      "started_at": null,
+      "msg_count": 1
     }
   }
 }
