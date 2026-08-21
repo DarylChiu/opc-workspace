@@ -335,3 +335,10 @@
   "🔴 今日日记缺失 — 必须创建"
 ]}
 {"timestamp":"2026-08-20T23:59:30+0700","check":"L4-audit-v2","agent":"balance","fixes":2,"shallow_issues":1,"deep_issues":0,"diary_lines":36,"diary_sections":3,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-08-20T23:59:45+0700","check":"L4-audit-v2","agent":"balance","fixes":1,"shallow_issues":0,"deep_issues":0,"diary_lines":36,"diary_sections":3,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-08-21T08:45:52+0700","check":"post-op","task":"集团内部借款台账编制（资金流转关系图+合同台账）","score":1,"total":5,"warnings":[
+  "🔴 今日日记缺失 — 必须创建"
+]}
+{"timestamp":"2026-08-21T15:50:07+0700","check":"post-op","task":"编制越南海关/税务笔试卷（4题：FCT/VAT+CIT/保税工厂/PIT，含法规检索+计算答案）","score":3,"total":5,"warnings":[
+  ""
+]}
