@@ -15,17 +15,25 @@ RESOLVED = re.compile(r'✅|已修复|已恢复|已从|已重启|已写入|已�
 
 
 def parse_date(s: str):
-    """Parse '7/24', '2026-07-24', '7-24' → date or None"""
+    """Parse '7/24', '2026-07-24', '7-24' → date or None.
+
+    Returns None (instead of raising) on invalid month/day, so stray
+    fragments like '2025-04' (year-month, no day), '15/15' (ratio), or
+    '52/53' (progress) don't crash the whole file scan.
+    """
     s = s.strip()
     if not s:
         return None
-    for pat in [r'(\d{4})[/\-](\d{1,2})[/\-](\d{1,2})', r'(\d{1,2})[/\-](\d{1,2})']:
+    for pat in [r'(\d{4})[/\-](\d{1,2})[/\-](\d{1,2})', r'(?<!\d)(\d{1,2})[/\-](\d{1,2})(?!\d)']:
         m = re.search(pat, s)
         if m:
             g = m.groups()
-            if len(g) == 3:
-                return date(int(g[0]), int(g[1]), int(g[2]))
-            return date(TODAY.year, int(g[0]), int(g[1]))
+            try:
+                if len(g) == 3:
+                    return date(int(g[0]), int(g[1]), int(g[2]))
+                return date(TODAY.year, int(g[0]), int(g[1]))
+            except ValueError:
+                return None
     return None
 
 
