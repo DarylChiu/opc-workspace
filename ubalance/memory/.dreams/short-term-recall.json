@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-21T08:46:08.978Z",
+  "updatedAt": "2026-08-22T01:05:44.172Z",
   "entries": {
     "memory:memory/2026-06-10.md:1:29": {
       "key": "memory:memory/2026-06-10.md:1:29",
@@ -4475,18 +4475,20 @@
       "endLine": 111,
       "source": "memory",
       "snippet": "- **今日成本**: $10.94 | **本月**: $23.69 | **全量**: $83.29 - **按Agent**: Bryson $7.37 / Kitty $2.21 / Balance $0.99 / Self $0.38 - **按模型**: deepseek-r1 $51.06 / deepseek-v4-pro $31.44 / claude-sonnet-4.5 $0.64 / claude-3.7-sonnet $0.15 - **兜底文件**: ✅ 已写入 `~/opc-workspace/Kitty/opc-dashboard/data/cost_daily.json` - **Kitty推送**: ⚠️ 已降级写文件，Kitty未确认（sessions_send 30s超时） - **API验证**: ✅ `localhost:8765/api/costs` 正常响应，数据一致性OK - **状态**: ⚠️ 降级模式 | 文件已就位，Kitty后续可自行更新看板 ## 📝 待关注 - 贷款材料 v2.7.0 定版，等Daryl抽查反馈 - Future Textile × Wellname 攻击9-12 待Daryl防御 - OPC成本仪表盘 append-only台账已上线",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.35690296590328213,
-      "maxScore": 0.35690296590328213,
+      "totalScore": 0.728498002886772,
+      "maxScore": 0.37159503698348995,
       "firstRecalledAt": "2026-08-17T09:16:15.426Z",
-      "lastRecalledAt": "2026-08-17T09:16:15.426Z",
+      "lastRecalledAt": "2026-08-21T17:00:51.942Z",
       "queryHashes": [
-        "910ea6afbbce"
+        "910ea6afbbce",
+        "447befd6c1c4"
       ],
       "recallDays": [
-        "2026-08-17"
+        "2026-08-17",
+        "2026-08-22"
       ],
       "conceptTags": [
         "10.94",
@@ -4506,18 +4508,20 @@
       "endLine": 65,
       "source": "memory",
       "snippet": "- 成本仪表盘：fresh_api_ok，今日 $1.04 / 本月 $17.35 / 全量 $143.14（14 分钟前新鲜数据） - 自进化基建对账：checker-log/reflexion_journal 仍缺失（Kitty 侧基建，WARN 不阻塞） - OPC 群聊汇报已发送：messageId om_x100b6854bebbfca0dfabd7c25836588 → chatId oc_7d71d54d87cbd265d9c3811bc59840b2 - 汇报含 4 项：审计结果（修复1/问题0）+ 成本状态 + Kitty 同步（降级文件已就位，看板自动采纳）+ 完成标记 - 模型: deepseek-v4-flash",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.35431293249130247,
-      "maxScore": 0.35431293249130247,
+      "totalScore": 0.7848110824823379,
+      "maxScore": 0.4304981499910354,
       "firstRecalledAt": "2026-08-17T09:16:15.426Z",
-      "lastRecalledAt": "2026-08-17T09:16:15.426Z",
+      "lastRecalledAt": "2026-08-21T17:00:51.942Z",
       "queryHashes": [
-        "910ea6afbbce"
+        "910ea6afbbce",
+        "447befd6c1c4"
       ],
       "recallDays": [
-        "2026-08-17"
+        "2026-08-17",
+        "2026-08-22"
       ],
       "conceptTags": [
         "fresh-api-ok",
@@ -4901,6 +4905,192 @@
         "单间含税3.784m",
         "违约金/押金含税基数5.68亿/1.89亿",
         "合计7.57亿"
+      ]
+    },
+    "memory:memory/archive/2026-07-13.md:59:63": {
+      "key": "memory:memory/archive/2026-07-13.md:59:63",
+      "path": "memory/archive/2026-07-13.md",
+      "startLine": 59,
+      "endLine": 63,
+      "source": "memory",
+      "snippet": "- **按模型**: deepseek-r1 $51.06, deepseek-v4-pro $15.80, claude-sonnet-4.5 $0.64, claude-3.7-sonnet $0.15 - **⚠️ 已降级写文件**: Kitty session_send 30s超时未确认，cost_daily.json 已写入 `~/opc-workspace/Kitty/opc-dashboard/data/cost_daily.json` - **API状态**: ✅ localhost:8765/api/costs 正常响应（_stale:true 正在刷新中） - **备注**: API已采用.jsonl全量扫描（_source:jsonl-full-scan），但返回_stale表明可能有竞争条件",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3946169465780258,
+      "maxScore": 0.3946169465780258,
+      "firstRecalledAt": "2026-08-21T17:00:51.942Z",
+      "lastRecalledAt": "2026-08-21T17:00:51.942Z",
+      "queryHashes": [
+        "447befd6c1c4"
+      ],
+      "recallDays": [
+        "2026-08-22"
+      ],
+      "conceptTags": [
+        "deepseek-r1",
+        "51.06",
+        "deepseek-v4-pro",
+        "15.80",
+        "claude-sonnet-4.5",
+        "0.64",
+        "claude-3.7-sonnet",
+        "0.15"
+      ]
+    },
+    "memory:memory/2026-08-07.md:49:62": {
+      "key": "memory:memory/2026-08-07.md:49:62",
+      "path": "memory/2026-08-07.md",
+      "startLine": 49,
+      "endLine": 62,
+      "source": "memory",
+      "snippet": "- 成本仪表盘：fresh_api_ok，今日 $0.93 / 本月 $16.23 / 全量 $142.01（与 00:00 轮一致） - 自进化基建对账：checker-log/reflexion_journal 仍缺失（Kitty 侧基建，WARN 不阻塞，连续 3 日记录） - OPC 群聊汇报已发送：审计修复 1 项/问题 0 项 + 成本状态 + Kitty 同步（已确认）+ 完成标记 - 模型: deepseek-v4-flash - 23:45 每日成本扫描（cron 超时保护模式）：今日 $1.0355 / 本月 $17.3530 / 全量 $143.1396（台账 23,248 调用，新增 478），兜底文件已写 ~/WorkBuddy/Claw/opc-dashboard/data/cost_daily.json - ⚠️已降级写文件，Kitty未确认（session_send 30s 超时） - 看板 API 验证：http://localhost:8765/api/costs 正常，已读到 balance-ledger 新台账（ageMs 39s，authoritative=true，全量 $143.14）—— 降级文件已被看板自动采纳 - 模型: deepseek-v4-flash ## 🕛 23:59 每日记忆归档审计（Cron: 2fe401f9 当日末轮） - L4 审计 v2 执行：10 项检查全过，修复 1 项（Git 备份 commit+push），浅层/深层问题均 0 - 成本仪表盘：fresh_api_ok，今日 $1.04 / 本",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.384356427192688,
+      "maxScore": 0.384356427192688,
+      "firstRecalledAt": "2026-08-21T17:00:51.942Z",
+      "lastRecalledAt": "2026-08-21T17:00:51.942Z",
+      "queryHashes": [
+        "447befd6c1c4"
+      ],
+      "recallDays": [
+        "2026-08-22"
+      ],
+      "conceptTags": [
+        "备份",
+        "fresh-api-ok",
+        "0.93",
+        "16.23",
+        "142.01",
+        "checker-log/reflexion-journal",
+        "项/问题",
+        "deepseek-v4-flash"
+      ]
+    },
+    "memory:memory/2026-08-04.md:46:60": {
+      "key": "memory:memory/2026-08-04.md:46:60",
+      "path": "memory/2026-08-04.md",
+      "startLine": 46,
+      "endLine": 60,
+      "source": "memory",
+      "snippet": "- API验证 http://localhost:8765/api/costs ✅ 正常（source=balance-ledger，ageMs≈39s） - 今日成本异常高（$7.60，近7日均值~2.5），主要由 Balance $3.08 / Self $2.90 贡献，可能与全量重扫有关，待观察 ## 23:47 · OPC看板代码路径核实结果 ✅（Kitty/Main回复） - **背景**: 此前发现 `~/opc-workspace/Kitty/opc-dashboard/server.js`（347行）只有sessions.json读取逻辑，疑似看板未用balance-ledger台账，发起核实 - **核实结论**: 当前运行代码无需改动 - 实际运行: `~/WorkBuddy/Claw/opc-dashboard/server.js`（2521行，PID 95813） - `/api/costs` 返回 `_source: balance-ledger` ✅ 优先使用我的 cost_daily.json 台账 - `refreshCostFromJsonl()` 已解析 `usage.cost.total`（1882-1883行），全量扫描 `~/.openclaw/agents/*/sessions/*.jsonl`（排除trajectory）✅ - `/api/costs/projects` 返回 `_source: jsonl-full-scan`，含项目成本拆分 ✅ - 实测: 今日$7.60 / 本月$11.64 与我的台账",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.37512899637222286,
+      "maxScore": 0.37512899637222286,
+      "firstRecalledAt": "2026-08-21T17:00:51.942Z",
+      "lastRecalledAt": "2026-08-21T17:00:51.942Z",
+      "queryHashes": [
+        "447befd6c1c4"
+      ],
+      "recallDays": [
+        "2026-08-22"
+      ],
+      "conceptTags": [
+        "8765/api/costs",
+        "balance-ledger",
+        "7.60",
+        "2.5",
+        "3.08",
+        "2.90",
+        "kitty/main回复",
+        "只有sessions.json读取逻辑"
+      ]
+    },
+    "memory:memory/2026-08-21.md:24:28": {
+      "key": "memory:memory/2026-08-21.md:24:28",
+      "path": "memory/2026-08-21.md",
+      "startLine": 24,
+      "endLine": 28,
+      "source": "memory",
+      "snippet": "- **4题**: ①FCT缴纳时点+计算(DAP进口设备+安装费) ②综合题VAT+CIT(非生产性费用应税义务) ③保税工厂EPE两场景+不良品处置(海关平衡手册) ④PIT外籍住宿福利(15%上限+本地/外籍判断陷阱) - **法规检索**: 5轮websearch(PwC/EY/Crowe/越南税务局口径)，钉牢关键数：FCT安装3%VAT+2%CIT/货物1%+1%；VAT标准10%临时8%(至2026底)；CIT 20%；新PIT法109/2025五档5/10/20/30/35%+扣除15.5M/6.2M；住宿福利15%上限(TT111) - **产出**: `reports/越南海关税务笔试卷-4题-20260821.md`（4题各含场景/计算答案/评分要点/法规依据 + 速览表） - **🔴 Daryl 纠错（保税仓≠EPE）**: 第3题我错把「保税仓（kho ngoại quan，仓储设施）」等同于「EPE（企业 chế xuất，企业身份/非关税区）」。Daryl追问后已重写第3题：普通企业（非EPE）用保税仓/非保税仓，\"即视进出口\"→\"出仓内销清关补税\"，\"海关平衡手册\"→\"保税仓货物出入台账\"。教训入 lessons.md - **Daryl 二轮调整**: ①第1题 Incoterm DAP→DDP（设备也成越南来源收入，设备1%+1%+安装3%+2%，FCT合计USD 26,000） ②题目卷/答案卷分离，答案卷置文末 → 已产出 Word 版 `越南海关税务笔试卷-4题-20260821.docx`（pandoc转docx+分页+中文字体）",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4101304441690445,
+      "maxScore": 0.4101304441690445,
+      "firstRecalledAt": "2026-08-22T01:05:44.172Z",
+      "lastRecalledAt": "2026-08-22T01:05:44.172Z",
+      "queryHashes": [
+        "4f8572516463"
+      ],
+      "recallDays": [
+        "2026-08-22"
+      ],
+      "conceptTags": [
+        "本地/外籍判断陷阱",
+        "pwc/ey/crowe/越南税务局口径",
+        "cit/货物1",
+        "新pit法109/2025五档5/10/20/30/35",
+        "扣除15.5m/6.2m",
+        "reports/越南海关税务笔试卷-4题-20260821.md",
+        "4题各含场景/计算答案/评分要点/法规依据",
+        "企业身份/非关税区"
+      ]
+    },
+    "memory:memory/2026-08-21.md:18:25": {
+      "key": "memory:memory/2026-08-21.md:18:25",
+      "path": "memory/2026-08-21.md",
+      "startLine": 18,
+      "endLine": 25,
+      "source": "memory",
+      "snippet": "- **账户追加**: Daryl 指令在 Lender(华峰)段新增 CTBC BANK 台湾账户（USD 108141001242 / SWIFT CTCBTWTPXXX）+ Legal Address，未动原格式 → `reports/华特×华丰股东借款合同-英越双语-定稿版-20260821.docx`（脚本 `work/loan-ledger/add_ctbc_account.py`） - **发现两处一致性疑点**（已提示Daryl）: ①合同借方地址仍用 Long Tho Commune（隆寿社），但章程v2.0已更正为 Phước An（福安社，与最新ERC/IRC一致）②华峰香港成立证书号合同写 68898950 vs 章程写 2648928（待核实是否CR/BR两个号） - 模型: deepseek/deepseek-v4-pro ## 上午：越南海关/税务笔试卷（4题） - **触发**: Daryl「把我们越南目前碰到的海关/税务问题，设4个题目准备给国内做笔试卷」 - **4题**: ①FCT缴纳时点+计算(DAP进口设备+安装费) ②综合题VAT+CIT(非生产性费用应税义务) ③保税工厂EPE两场景+不良品处置(海关平衡手册) ④PIT外籍住宿福利(15%上限+本地/外籍判断陷阱) - **法规检索**: 5轮websearch(PwC/EY/Crowe/越南税务局口径)，钉牢关键数：FCT安装3%VAT+2%CIT/货物1%+1%；VAT标准10%临时8%(至2026底)；CIT 20%；新PIT法109/2025五档5/10/20/30/35",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.36437197029590607,
+      "maxScore": 0.36437197029590607,
+      "firstRecalledAt": "2026-08-22T01:05:44.172Z",
+      "lastRecalledAt": "2026-08-22T01:05:44.172Z",
+      "queryHashes": [
+        "4f8572516463"
+      ],
+      "recallDays": [
+        "2026-08-22"
+      ],
+      "conceptTags": [
+        "reports/华特",
+        "华丰股东借款合同-英越双语-定稿版-20260821.docx",
+        "但章程v2.0已更正为",
+        "与最新erc/irc一致",
+        "待核实是否cr/br两个号",
+        "deepseek/deepseek-v4-pro",
+        "越南海关/税务笔试卷",
+        "把我们越南目前碰到的海关/税务问题"
+      ]
+    },
+    "memory:memory/2026-08-18.md:12:21": {
+      "key": "memory:memory/2026-08-18.md:12:21",
+      "path": "memory/2026-08-18.md",
+      "startLine": 12,
+      "endLine": 21,
+      "source": "memory",
+      "snippet": "1. 🔴 来源总开关没绕开：出口仍要「发票+账务+实物」三流一致，账外货没发票，且搬到海关面前比内销更易被翻出（跨境+海关+税务+外汇四线追） 2. 🟠 换公司再进口=全新进口，不是「再进口免税」：tái nhập 免税要原出口商+同货同单+期限内，换公司套不上 → 进口关税(MFN 8-20%)+VAT10% 3. 🔴 出口收汇+进口付汇闭环=假出口/中转逃税画像：越南389指导委员会2025-04-10公告点名打击「被用作向第三国出口虚假货物以逃税的中转站」；TT 130/2016「进口再出口未实际办理出口手续不得退税」；胡志明/海防/岘港已上自动原产地+估价比对 - 关键一问：最终目的（A洗货变现/B套外汇/C造进货来源）决定转圈是否划算；判断若是A（变现）大概率不值得（转圈成本贵过补账完税） - 模型: deepseek/deepseek-v4-pro ## 上午 Daryl 定调：挂起，等领导采纳方向 - Daryl 已向老板汇报，这票是账外的，不做太多；**等领导真采纳「方向」再深挖三方案实际实施细节** - 项目状态：⏸️ 挂起；定性框架+完整版+Excel 已交付；定量欠账（金额测算+文书清单）暂不交 - 已更新 active.md 项目卡 + project_Balance.md 里程碑",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.36271687150001525,
+      "maxScore": 0.36271687150001525,
+      "firstRecalledAt": "2026-08-22T01:05:44.172Z",
+      "lastRecalledAt": "2026-08-22T01:05:44.172Z",
+      "queryHashes": [
+        "4f8572516463"
+      ],
+      "recallDays": [
+        "2026-08-22"
+      ],
+      "conceptTags": [
+        "8-20",
+        "假出口/中转逃税画像",
+        "越南389指导委员会2025-04-10公告点名打击",
+        "130/2016",
+        "胡志明/海防/岘港已上自动原产地",
+        "a洗货变现/b套外汇/c造进货来源",
+        "deepseek/deepseek-v4-pro",
+        "active.md"
       ]
     }
   }
