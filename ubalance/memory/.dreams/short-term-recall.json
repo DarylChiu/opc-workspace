@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-22T01:05:44.172Z",
+  "updatedAt": "2026-08-23T02:52:05.061Z",
   "entries": {
     "memory:memory/2026-06-10.md:1:29": {
       "key": "memory:memory/2026-06-10.md:1:29",
@@ -3464,18 +3464,20 @@
       "endLine": 38,
       "source": "memory",
       "snippet": "## 📊 成本仪表盘状态 - **API端点**: ✅ 正常 (localhost:8765, fresh_api_ok) - **今日**: $7.60（异常偏高，近7日均值~$2.5）| **本月**: $11.64 | **全量**: $137.42 - **高成本归因**: Balance $3.08 + Self $2.90 贡献，疑与全量重扫有关，待观察 ## 📋 昨日结转（8/4 → 8/5） - **费用报销MVP v0.2.0** — 已交付，等待Daryl验收反馈 - **越南财务体系SOP v5.0** — 已交付越南同事，等待反馈（对方理解不足，Daryl补案例库后启动Phase 2） - **仓储专项检查SOP** — 待拟（盘点报告已发，整改Deadline由仓储部自提） - **差旅费误餐补贴明细表 v0.5** — 8/4 交付，6/6 真实引擎验证通过 - **Kimi ¥36.6 账单调查** — 已收口锁定 Bryson 方向，待 Daryl 在 Moonshot 后台核实 7 月 websearch 计费 - **TOSHIBA 硬盘** — DEAD 状态，等待物理重插；10分钟自动检测看护已部署（Xiaofeng） - **其余项目**: 全部暂停/等待Daryl（贷款材料、JGL并购、二级市场框架等） ## 📌 Session 活动摘要（近24h，跨 8/4 午后 ~ 8/5 00:05） - **Balance**: - 差旅费误餐补贴明细表 v0.5 交付（8/4 ~17:55）：去掉国际特判，国际/国内/市内统一",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.658147161308674,
+      "totalScore": 1.0282611480392496,
       "maxScore": 0.658147161308674,
       "firstRecalledAt": "2026-08-05T00:01:20.588Z",
-      "lastRecalledAt": "2026-08-05T00:01:20.588Z",
+      "lastRecalledAt": "2026-08-23T02:52:05.061Z",
       "queryHashes": [
-        "0c8bbbde1354"
+        "0c8bbbde1354",
+        "0455f68347fd"
       ],
       "recallDays": [
-        "2026-08-05"
+        "2026-08-05",
+        "2026-08-23"
       ],
       "conceptTags": [
         "fresh-api-ok",
@@ -3784,18 +3786,20 @@
       "endLine": 178,
       "source": "memory",
       "snippet": "- `reports/越南差旅费管理办法-征集意见整理-20260805.md`（8条意见整理） - **遗留**: OA 表单开发由 IT 部负责；如 IT 需要 Excel 逻辑说明可随时提供 - **状态**: 等待 Daryl 新任务 ## 23:45 每日成本扫描（cron 521a3db3） - 扫描: 3395个.jsonl, 台账22,256次调用, 去重真值 $141.0266 - 今日: $3.52 | 本月: $15.24 | 全量: $141.03 | Token: 1.46B - 兜底文件: ~/opc-workspace/Kitty/opc-dashboard/data/cost_daily.json ✅ 已写入 - Kitty确认: ⚠️已降级写文件，Kitty未确认（sessions_send 30s超时） - 端点验证: /api/costs 返回正常，_source=balance-ledger（全量扫描已生效，Kitty看板侧已消费新数据源）",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.5512325472057645,
+      "totalScore": 0.9175276256025617,
       "maxScore": 0.5512325472057645,
       "firstRecalledAt": "2026-08-06T04:26:47.624Z",
-      "lastRecalledAt": "2026-08-06T04:26:47.624Z",
+      "lastRecalledAt": "2026-08-23T02:52:05.061Z",
       "queryHashes": [
-        "e4f606bb2007"
+        "e4f606bb2007",
+        "0455f68347fd"
       ],
       "recallDays": [
-        "2026-08-06"
+        "2026-08-06",
+        "2026-08-23"
       ],
       "conceptTags": [
         "3395个.jsonl",
@@ -4635,18 +4639,20 @@
       "endLine": 19,
       "source": "memory",
       "snippet": "# 2026-06-29 日记 ## 00:03 记忆系统每日审计（第2轮） - **触发**: Cron 定时任务 (audit.sh --report) - **审计结果**: 2浅层+1深层告警 - 浅层：「日记过短+骨架检测」→ 午夜边界误报（00:03执行，9个session均属6/28晚间OPC群周汇报等活动，6/28日记已有完整47行内容） - 浅层：Git pull 标记失败 → 实际成功（Already up to date），审计脚本 exit code 偏严 - 深层：Session-Diary 交叉验证9个活动 session vs 12行日记 → 同上午夜边界 - **处置**: - Git pull 验证通过（Already up to date） - 更新日记标注边界情况 - Git commit 提交修改文件+新日记 - OPC 群聊发送通知 - **前序审计**: 6/29 00:01 同任务已执行过一轮（balance上轮 cron），本轮为第二批次 agent（balance 再次触发） ## 概述 - 周日夜→周一凌晨，无用户交互 - 6/28 OPC 群周汇报为本周最后一次用户交互",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.45927133858203883,
+      "totalScore": 0.8282898813486099,
       "maxScore": 0.45927133858203883,
       "firstRecalledAt": "2026-08-18T17:00:41.112Z",
-      "lastRecalledAt": "2026-08-18T17:00:41.112Z",
+      "lastRecalledAt": "2026-08-22T17:01:16.924Z",
       "queryHashes": [
-        "3e816774dbcb"
+        "3e816774dbcb",
+        "cccfeda2fa9d"
       ],
       "recallDays": [
-        "2026-08-19"
+        "2026-08-19",
+        "2026-08-23"
       ],
       "conceptTags": [
         "audit.sh",
@@ -5091,6 +5097,99 @@
         "a洗货变现/b套外汇/c造进货来源",
         "deepseek/deepseek-v4-pro",
         "active.md"
+      ]
+    },
+    "memory:memory/2026-08-06.md:47:58": {
+      "key": "memory:memory/2026-08-06.md:47:58",
+      "path": "memory/2026-08-06.md",
+      "startLine": 47,
+      "endLine": 58,
+      "source": "memory",
+      "snippet": "- **改动2 · 误餐补贴场景说明表**: 文档内嵌入Excel正下方新增4场景中越双语表（公司出发→门禁刷脸；返程太晚直接回家→总监签字+派车单/网约车行程单证结束时间；家/宿舍出发→同上证出发时间；频繁出差→按周集中申请），不加新编号 - **编号重排**: 原附件3（误餐补贴申请明细表）→ **附件2**；4.4.2引用同步 - **交付**: `reports/越南差旅费管理办法-v1.0.6-20260806.docx`（81KB，68段+8表） - **压力测试全过**: python-docx解析 ✓ / XML合法 ✓ / pandoc+textutil解析 ✓ / **Word真实打开无崩溃** ✓ / 嵌入Excel openpyxl可开（公式+下拉+命名区域保留）✓ / OLE rId12→embeddings ProgID=Excel.Sheet.12 ✓ - **技术要点**: python-docx打开→保存不破坏OLE嵌入对象；openpyxl改嵌入Excel需先解压替换再重打包 - 模型: deepseek-v4-flash ## 23:45 每日成本扫描（cron 521a3db3） - **扫描结果**: 今日 $0.93 | 本月 $16.23 | 全量 $142.01（3460个.jsonl，台账22,770次调用） - **兜底文件**: 已写入 ~/WorkBuddy/Claw/opc-dashboard/data/cost_daily.json ✅ - **Kitty 通知**: ⚠️ 已降级写文件，Kitty未确认（sessi",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3834693908691406,
+      "maxScore": 0.3834693908691406,
+      "firstRecalledAt": "2026-08-23T02:52:05.061Z",
+      "lastRecalledAt": "2026-08-23T02:52:05.061Z",
+      "queryHashes": [
+        "0455f68347fd"
+      ],
+      "recallDays": [
+        "2026-08-23"
+      ],
+      "conceptTags": [
+        "embedding",
+        "embeddings",
+        "派车单/网约车行程单证结束时间",
+        "家/宿舍出发",
+        "4.4.2引用同步",
+        "python-docx解析",
+        "excel.sheet.12",
+        "python-docx打开"
+      ]
+    },
+    "memory:memory/2026-08-13.md:44:59": {
+      "key": "memory:memory/2026-08-13.md:44:59",
+      "path": "memory/2026-08-13.md",
+      "startLine": 44,
+      "endLine": 59,
+      "source": "memory",
+      "snippet": "- 台账还发现：A8-514、A9-517是员工报销租房（非公司对公），供应商NGUYEN TRAN QUOC DUNG/BABA CHIN CHIN - Daryl补充：DTA=DETACO（Đệ Tam）；财务只提问题方向，方案由行政部落地；DTA多栋可整租+可退散客置换（筹码：企业整租/稳定现金流/统一管理） ## 外租宿舍分析-P2市场基准（websearch完成，Brave引擎） - 搜索范围：Nhơn Trạch 5km内，越南语关键词，多源（batdongsan/alonhadat/muaban/phongtro123/nhatot/homedy/guland） - 关键发现：①DTA Happy Home散客挂牌2-2.5M/月(33-52m²空房)，90%谈判价1.8-2.25M——我们的对公价2.4-2.91M并不便宜，续约有压价空间 ②富禄寿3.5-4M带家具对标市场3-5M档中上 ③市场最低档1.2-1.5M(基础房) - 输出：Excel Sheet9-市场可比租金（7类房源基准） ## ⚖️ 成本扫描（23:45 cron） - 今日: $0.7545 | 本月: $22.7022 | 全量: $148.4888 | tokens 1.74B | calls 25,622 - 看板 /api/costs totalCost 148.49 ≈ 台账 148.4888 ✅ 数字已对齐，无需接口改造 - Kitty 确认状态：⚠️已降级写文件（sessions_send 30s 超时未确认），数据已写入 cost_daily.json ## 🕛 2",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.38212206363677975,
+      "maxScore": 0.38212206363677975,
+      "firstRecalledAt": "2026-08-23T02:52:05.061Z",
+      "lastRecalledAt": "2026-08-23T02:52:05.061Z",
+      "queryHashes": [
+        "0455f68347fd"
+      ],
+      "recallDays": [
+        "2026-08-23"
+      ],
+      "conceptTags": [
+        "a8-514",
+        "a9-517是员工报销租房",
+        "dung/baba",
+        "企业整租/稳定现金流/统一管理",
+        "外租宿舍分析-p2市场基准",
+        "home散客挂牌2-2.5m/月",
+        "33-52m2空房",
+        "谈判价1.8-2.25m"
+      ]
+    },
+    "memory:memory/2026-08-08.md:18:35": {
+      "key": "memory:memory/2026-08-08.md:18:35",
+      "path": "memory/2026-08-08.md",
+      "startLine": 18,
+      "endLine": 35,
+      "source": "memory",
+      "snippet": "8. 科目体系越南化: 6601/6602(中国) → 641/642(Thông tư 200) 9. 卡片科目显示策略: 低置信度显示「待指定科目」 - **P1**: 16字段全量落库(8新列) / 前端卡片加发票号+置信度 / OCR原文默认隐藏(debug开关) / api()响应类型检查 - **P2**: 15项自动化测试(pytest) / launchd托管+日志 / README / v1弃用标注 / 清理脚本 - **测试**: 15/15通过 | 7张发票回归全对 | 凭证生成借贷平衡26,057,944 VND - **服务**: http://localhost:8770 v3.0.0 (launchd: com.balance.expense-mvp) - **备份**: expense_mvp/backup-v0.2.0/ - **模型**: deepseek/deepseek-v4-flash ## 🌙 23:45 每日成本扫描（cron超时保护模式） - **扫描**: 3573个.jsonl全量去重 | 台账23,647调用 | 今日$0.4261 | 本月$17.8554 | 全量$143.6421 - **兜底文件**: 已写入 ~/WorkBuddy/Claw/opc-dashboard/data/cost_daily.json ✅ - **Kitty同步**: ⚠️已降级写文件，Kitty未确认（sessions_send 30s超时） - **看板API验证**: http://localhost:8765/api/c",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.36051044166088103,
+      "maxScore": 0.36051044166088103,
+      "firstRecalledAt": "2026-08-23T02:52:05.061Z",
+      "lastRecalledAt": "2026-08-23T02:52:05.061Z",
+      "queryHashes": [
+        "0455f68347fd"
+      ],
+      "recallDays": [
+        "2026-08-23"
+      ],
+      "conceptTags": [
+        "backup",
+        "备份",
+        "6601/6602",
+        "641/642",
+        "15/15通过",
+        "v3.0.0",
+        "com.balance.expense-mvp",
+        "expense-mvp/backup-v0.2.0"
       ]
     }
   }
