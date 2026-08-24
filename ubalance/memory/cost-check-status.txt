@@ -1,1 +1,1 @@
-stale_api_down|数据过期（1454分钟前）
+stale_api_down|数据过期（2894分钟前）
