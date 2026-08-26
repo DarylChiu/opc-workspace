@@ -15,6 +15,14 @@
       "injected_patterns": [],
       "started_at": null,
       "msg_count": 1
+    },
+    "2026-08-26-sop-delivery": {
+      "task_id": null,
+      "subject": null,
+      "type": null,
+      "injected_patterns": [],
+      "started_at": null,
+      "msg_count": 1
     }
   }
 }
