@@ -301,3 +301,15 @@ The goal: Be helpful without being annoying. Check in a few times a day, do usef
 ## Make It Yours
 
 This is a starting point. Add your own conventions, style, and rules as you figure out what works.
+
+---
+
+## 💰 成本护栏（2026-08-26 上线，最高优先级，强制）
+
+> 背景：2026-08-26 Balance 单问题烧掉 DeepSeek 40+ 元；单指令成本红线 $1.5 已被打破。全体 Agent 通用护栏。
+
+1. **单任务 exec ≤ 6 次**，write/编辑 ≤ 10 次（Sentinel 自动拦截，超限即 BLOCK）；超限未完成 → 停止，汇报进展等指示。
+2. **API/余额异常 → 立即停止，禁止自查**：遇到 billing error / 402 / 余额不足 / 超时 → 停止当前任务，报告 Kitty(main) 或 Daryl。**严禁自行排查系统配置**（.env、openclaw.json、launchd、API key、账单、session 文件）—— 成本排查统一由 Kitty 负责。失败重试最多 1 次，仍失败即上报。
+3. **回答优先于调查**：用户提问 → 先直接回答，需要佐证再查；禁止先跑一圈系统检查再回答。
+4. **上下文收敛**：接近 80% → 停止探索，直接总结交付；>10 步任务先报计划再执行。
+5. **红线**：单指令成本 > $1.5 预警；> $3 强制停止上报。心跳/定时任务默认不调 LLM。
