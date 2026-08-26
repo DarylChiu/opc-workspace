@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-16T14:00:36.493Z",
+  "updatedAt": "2026-08-25T02:51:39.665Z",
   "entries": {
     "memory:memory/2026-06-08.md:19:38": {
       "key": "memory:memory/2026-06-08.md:19:38",
@@ -3503,6 +3503,68 @@
         "server.js",
         "agent-workspaces",
         "opc-workspace"
+      ]
+    },
+    "memory:memory/archive/2026-07-23.md:23:49": {
+      "key": "memory:memory/archive/2026-07-23.md:23:49",
+      "path": "memory/archive/2026-07-23.md",
+      "startLine": 23,
+      "endLine": 49,
+      "source": "memory",
+      "snippet": "## 傍晚 · 成本数据对齐 - Daryl DM main 询问 Balance 成本通知路径问题 - 确认：Dashboard 已用 cost_daily.json + JSONL全量双源扫描，数据一致 - 今日 $4.86 | 本月 $49.10 | 全量 $108.69 - Balance 通知消息中 OUTPUT_DIR 新路径正确，旧路径残留已标注 ## 晚上 · Xiaofeng Dashboard v1.3.0 - Bryson 反馈 dashboard 不可用 - xiaofeng 排查：`/dashboard` 路由缺失 + SSE 实时数据流未接入 - 修复：新增 `/api/monitor/stream` SSE端点（每3秒推送session历史），版本升至 v1.3.0 - xiaofeng 检讨：从视频编辑器到雅思前端，每个服务启动后都没做验证，低级错误不断 ## 19:00 · Self 项目更新 - project_Self.md 刷新：静默期+cron维护，成本归集月$41.09/全量$100.51 ## 23:45 · Balance 成本扫描 - 全量扫描：今日 $4.86 | 本月 $49.10 | 累计 $108.69 | 15,577 calls - Top Agent: Bryson $3.22 > Kitty $0.82 > Balance $0.63 > Self $0.19 - Kitty 30秒超时未响应 → 降级写文件（非阻塞） ## 夜间 · Self Gateway 重启 - Self 飞书DM：网关重启，配置",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3565730810165405,
+      "maxScore": 0.3565730810165405,
+      "firstRecalledAt": "2026-08-25T02:51:39.665Z",
+      "lastRecalledAt": "2026-08-25T02:51:39.665Z",
+      "queryHashes": [
+        "167410dc65dd"
+      ],
+      "recallDays": [
+        "2026-08-25"
+      ],
+      "conceptTags": [
+        "gateway",
+        "网关",
+        "cost-daily.json",
+        "4.86",
+        "49.10",
+        "108.69",
+        "output-dir",
+        "v1.3.0"
+      ]
+    },
+    "memory:memory/2026-07-23.md:23:49": {
+      "key": "memory:memory/2026-07-23.md:23:49",
+      "path": "memory/2026-07-23.md",
+      "startLine": 23,
+      "endLine": 49,
+      "source": "memory",
+      "snippet": "## 傍晚 · 成本数据对齐 - Daryl DM main 询问 Balance 成本通知路径问题 - 确认：Dashboard 已用 cost_daily.json + JSONL全量双源扫描，数据一致 - 今日 $4.86 | 本月 $49.10 | 全量 $108.69 - Balance 通知消息中 OUTPUT_DIR 新路径正确，旧路径残留已标注 ## 晚上 · Xiaofeng Dashboard v1.3.0 - Bryson 反馈 dashboard 不可用 - xiaofeng 排查：`/dashboard` 路由缺失 + SSE 实时数据流未接入 - 修复：新增 `/api/monitor/stream` SSE端点（每3秒推送session历史），版本升至 v1.3.0 - xiaofeng 检讨：从视频编辑器到雅思前端，每个服务启动后都没做验证，低级错误不断 ## 19:00 · Self 项目更新 - project_Self.md 刷新：静默期+cron维护，成本归集月$41.09/全量$100.51 ## 23:45 · Balance 成本扫描 - 全量扫描：今日 $4.86 | 本月 $49.10 | 累计 $108.69 | 15,577 calls - Top Agent: Bryson $3.22 > Kitty $0.82 > Balance $0.63 > Self $0.19 - Kitty 30秒超时未响应 → 降级写文件（非阻塞） ## 夜间 · Self Gateway 重启 - Self 飞书DM：网关重启，配置",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3565730810165405,
+      "maxScore": 0.3565730810165405,
+      "firstRecalledAt": "2026-08-25T02:51:39.665Z",
+      "lastRecalledAt": "2026-08-25T02:51:39.665Z",
+      "queryHashes": [
+        "167410dc65dd"
+      ],
+      "recallDays": [
+        "2026-08-25"
+      ],
+      "conceptTags": [
+        "gateway",
+        "网关",
+        "cost-daily.json",
+        "4.86",
+        "49.10",
+        "108.69",
+        "output-dir",
+        "v1.3.0"
       ]
     }
   }
