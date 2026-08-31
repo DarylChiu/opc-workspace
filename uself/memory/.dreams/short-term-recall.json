@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-19T17:02:56.522Z",
+  "updatedAt": "2026-08-31T07:32:19.128Z",
   "entries": {
     "memory:memory/2026-06-22.md:22:34": {
       "key": "memory:memory/2026-06-22.md:22:34",
@@ -1970,6 +1970,99 @@
         "v1.3",
         "1.0-1.3",
         "gemini-3.1-flash-image-preview"
+      ]
+    },
+    "memory:memory/archive/2026-06-14.md:1:28": {
+      "key": "memory:memory/archive/2026-06-14.md:1:28",
+      "path": "memory/archive/2026-06-14.md",
+      "startLine": 1,
+      "endLine": 28,
+      "source": "memory",
+      "snippet": "# 2026-06-14 日记 ## 重大进展 ### ACCA F1 知识网络建设启动 - Daryl 决策：ACCA 从 F1 起步（放弃原建议的 F3） - 要求：读完 BPP/Kaplan 最新版教材，画出完整知识网络 - 要求：提供 Obsidian 可视化 Demo 验收 ### Obsidian Vault Demo 搭建 - 完整目录结构：5 域 4 层架构 - 总览层：首页 Home + 仪表盘 Dashboard + 跨域地图 Knowledge-Map - F1 层：F1-Home（带考试结构、理论索引、课程衔接图） - 模块层：A/B/C/D/E 五个模块首页，各有完整 Mermaid 思维导图 - 深度页：B1 战略管理（含战略层次、SWOT、Porter、Ansoff、BCG 等全部可视化） - 模板：概念模板/理论模板/跨域关联模板 - 图谱配置：按模块着色（A蓝/B绿/C橙/D青/E红） ### 材料问题 - BPP/Kaplan F1 教材为商业版权材料，网上无合法免费版 - 已告知 Daryl 需要他提供：①教材（扫描/拍照/PDF）②手写笔记 + 录音 - 可用的公开资源：ACCA 官方 Syllabus（已下载）、ACCA 官网学习资源、OpenTuition 等免费平台 ## 待解决 - Daryl 是否已有 BPP/Kaplan 教材？能否拍照/扫描发给我？ - 或者接受使用公开免费资源（OpenTuition + ACCA 官网 + aCOWtancy）作为替代？ ## ⚠️ 重大修复",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4066380202770233,
+      "maxScore": 0.4066380202770233,
+      "firstRecalledAt": "2026-08-31T07:32:18.651Z",
+      "lastRecalledAt": "2026-08-31T07:32:18.651Z",
+      "queryHashes": [
+        "cf93e2ad9d9e"
+      ],
+      "recallDays": [
+        "2026-08-31"
+      ],
+      "conceptTags": [
+        "网络",
+        "bpp/kaplan",
+        "knowledge-map",
+        "f1-home",
+        "a/b/c/d/e",
+        "概念模板/理论模板/跨域关联模板",
+        "a蓝/b绿/c橙/d青/e红",
+        "扫描/拍照/pdf"
+      ]
+    },
+    "memory:memory/archive/2026-07-15.md:11:25": {
+      "key": "memory:memory/archive/2026-07-15.md:11:25",
+      "path": "memory/archive/2026-07-15.md",
+      "startLine": 11,
+      "endLine": 25,
+      "source": "memory",
+      "snippet": "- 22:15 Kitty 独立核实完毕：①无下游读取 compliance-audit.jsonl（Dashboard 数据源是自己的 data/*.json，M5合规面板不存在），bugfix 安全保留 ②117条错位历史先不迁，等 Daryl 拍板 ③Balance/小枫已由 Kitty 通知 ## 凌晨记忆审计 (00:08) - Cron 触发每日记忆审计，发现问题： 1. active.md 39h 未更新 → 已刷新时间戳至 00:08 2. 7/14 日记过短（11行）vs 20个活跃 session → 已从 session 历史充实为完整日记（TTS方案B/成本对账/项目看板刷新/项目状态修正） 3. 7/15 日记本文件为骨架 → 已升级为真实内容 4. 归档 2026-06-14.md → archive/ - Git 本地备份完成（7 files changed, 144 insertions, 78 deletions） - 成本仪表盘正常：今日 $2.11 | 本月 $8.70 | 全量 $68.30 | API 正常 ## 待办 - 无新任务指派 - 进行中任务（关联方与股东借款知识树、ACCA F1、VAS知识树、OPC方法论卡片）待 Daryl 反馈后推进",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.36688045561313626,
+      "maxScore": 0.36688045561313626,
+      "firstRecalledAt": "2026-08-31T07:32:19.128Z",
+      "lastRecalledAt": "2026-08-31T07:32:19.128Z",
+      "queryHashes": [
+        "76c5a271663c"
+      ],
+      "recallDays": [
+        "2026-08-31"
+      ],
+      "conceptTags": [
+        "备份",
+        "compliance-audit.jsonl",
+        "3balance/小枫已由",
+        "active.md",
+        "7/14",
+        "tts方案b/成本对账/项目看板刷新/项目状态修正",
+        "7/15",
+        "2.11"
+      ]
+    },
+    "memory:memory/archive/2026-07-16.md:16:31": {
+      "key": "memory:memory/archive/2026-07-16.md:16:31",
+      "path": "memory/archive/2026-07-16.md",
+      "startLine": 16,
+      "endLine": 31,
+      "source": "memory",
+      "snippet": "- **Balance-Kitty 成本对账深度讨论**：Balance 核实了成本台账与 Kitty live 看板的口径差异——差异源是 append-only 台账 vs 现存文件扫描（已删除文件的 $1.26 历史记录），非零成本调用所致。建议累计读数用台账、今日/本月用 live 自扫。Balance 同时纠正了 7/14 的污染值（$281.53→$70.39）。 - **Kitty 处理 Balance 请求**：发现 Balance 对着 6/30 就已废弃的旧副本发请求，通知其认准正确路径 `~/WorkBuddy/Claw/opc-dashboard`。 - **小枫 IELTS 项目推进**：VAD 敏感度 1.3→1.6（降低误触发）、STT 模型 base.en→small.en（找回口音识别），部署完成待 Daryl 验收。 ### 项目看板刷新 (19:00) - Self/Balance/小枫 各自刷新 project 文档（时间戳、进展、成本同步），均为例行更新，无新里程碑。 ### 审计基建升级（7/15 21:45） - audit.sh 新增 9.5 段「自进化基建对账」：checker 执行率 + reflexion 检讨条目对账 - 修复合规审计 JSONL 写入路径 bug（cd 缓存仓库后未切回） - 共享目录非 git 仓库，以日记留痕 ## 待办 - 无新任务指派 - 进行中任务（关联方与股东借款知识树、ACCA F1、VAS知识树、OPC方法论卡片）待 Daryl 反馈后推进",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.35918345451354977,
+      "maxScore": 0.35918345451354977,
+      "firstRecalledAt": "2026-08-31T07:32:19.128Z",
+      "lastRecalledAt": "2026-08-31T07:32:19.128Z",
+      "queryHashes": [
+        "76c5a271663c"
+      ],
+      "recallDays": [
+        "2026-08-31"
+      ],
+      "conceptTags": [
+        "balance-kitty",
+        "append-only",
+        "1.26",
+        "今日/本月用",
+        "7/14",
+        "281.53",
+        "70.39",
+        "6/30"
       ]
     }
   }

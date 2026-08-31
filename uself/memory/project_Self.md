@@ -13,9 +13,9 @@
 - 已完成 3 张卡片（8/13《Ni/Te 决策风格协作指南》入库并分发全员）
 - 阻塞：等 Daryl 确认方向后开第 6 模块
 
-### 模型路由对齐（8/21 发现，P1 待报 Daryl）
-- runtime 实挂 deepseek-v4-pro（全队最贵），但 AGENTS.md 路由写 sonnet-4.5/flash → 配置与规则不符
-- 改法（与 Balance 一致）：轻量→flash / 深度→sonnet / v4-pro 仅跨域推导；整理方案后报 Daryl 再动
+### 模型路由（8/31 Daryl 拍板：降级为 deepseek-v4-flash ✅）
+- 8/21 发现 runtime 实挂 v4-pro（全队最贵）→ P1 待报 Daryl
+- 8/31 Daryl 指示降级，当前 session 已确认挂 deepseek/deepseek-v4-flash，default_model 同为 flash → 已生效，待办关闭
 
 ### ⚠️ 待办：清理旧 gateway cron 1799ac76（连续 15 天）
 - 与 main consolidated 23:59 双通道并存，多次提醒 Kitty 未处理，8/11 起升级处理

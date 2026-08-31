@@ -4,7 +4,7 @@
 >
 > ℹ️ 8/21 非平静日：OPC 群聊「模型成本/路由」大讨论（Daryl 发起，各 Agent 反思），Self 发现自身模型路由配置与规则不符并承诺对齐（P1 待报 Daryl）。8/22 截至 00:01 仅 Cron 审计，无实质交付。结转观察：旧 gateway cron 1799ac76 双通道并存已连续 13 天，待 Kitty 清理。
 >
-> 🆕 P1 待报 Daryl：模型路由对齐方案（runtime 现挂 v4-pro，AGENTS.md 写 sonnet-4.5/flash，需对齐「轻量→flash / 深度→sonnet / 跨域→v4-pro」）
+> ✅ 8/31 Daryl 拍板：模型降级为 deepseek-v4-flash，已确认生效（session + default 均为 flash），P1 待办关闭
 
 ## 🟢 进行中
 
