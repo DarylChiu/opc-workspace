@@ -23,6 +23,16 @@
       "injected_patterns": [],
       "started_at": null,
       "msg_count": 1
+    },
+    "2026-09-05-strategy": {
+      "task_id": "task-20260905162425",
+      "subject": "Daryl战略定调：借款合同续签/工程验收SOP/集团借款台账已由Daryl自行完成不再汇报；不良品",
+      "type": "文档",
+      "injected_patterns": [],
+      "started_at": "2026-09-05T16:24:25",
+      "msg_count": 1,
+      "subject_hash": "a3558bea3fac",
+      "project": "core-plugin-projects"
     }
   }
 }
