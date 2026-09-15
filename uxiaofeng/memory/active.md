@@ -3,6 +3,12 @@
 > 最后更新: 2026-08-15 17:30（8/15 四个交付：费率更新/FT记忆/题库/用户系统 P1）
 
 ## 🟢 进行中
+
+> 2026-09-15 09:30 服务拉起（Daryl 指令）：IELTS 8767 ✅ + ngrok ielts-tutor ✅
+> - LaunchAgent 已恢复：`ai.openclaw.ielts`（v1.5.0, DEBUG_MODE=1, KeepAlive）
+> - 新增 LaunchAgent：`ai.openclaw.ngrok.ielts` → `ngrok start ielts-tutor`（8767）
+> - localhost:8767 200 ✅ / api/health 200 ✅ / 公网 https://unwhispering-imani-digitately.ngrok-free.dev 200 ✅
+> - ⚠️ 该静态域名此前指向 video-editor(8768)，现已切回 IELTS(8767)；video-editor 隧道未启动
 ### M2 剪辑MVP 试点（8/6 开工 · Kitty 下发）🟢
 - **8/6**: Daryl 拍板 M2 试点 = 剪辑MVP（决策自主环），wf01-wf05 冻结为 v4.0 基线（2 必改已核验落实）
 - 30% 节点完成：交互方案定稿 + 账本记录；进行中：前端 v4.0 交互版开发（60% 节点预估 8-12h 后）
