@@ -1,0 +1,10 @@
+{"ts":"2026-09-16T09:02:15+07:00","step":"init","detail":"创建 subagent_runs/cost_pipeline_20260916 目录"}
+{"ts":"2026-09-16T09:02:20+07:00","step":"recon_pipeline","detail":"确认管线三件套 mtime：full_cost_scan.py=07-14 15:37, generate_cost_daily.py=07-19 23:52, cost_daily.json=08-22 23:45；Kitty 副本为符号链接；xiaofeng 副本=07-22 快照"}
+{"ts":"2026-09-16T09:03:00+07:00","step":"recon_scheduling","detail":"无 launchd/cron 调度成本管线。crontab 仅 watchdog.sh(5min)/ops_center.sh(08:00)/audit-cron.sh(23:59)。watchdog.sh 只做服务+隧道健康，不跑成本扫描 → 确认为 cost_daily.json 停更根因"}
+{"ts":"2026-09-16T09:03:00+07:00","step":"recon_ledger","detail":"cost_ledger.jsonl 27854 行，日期分布止于 08-26(99条)，08-27~09-04 与 09-06~09-14 为 0 → 机器 9 月近乎闲置，仅 09-05/09-15/09-16 有活动"}
+{"ts":"2026-09-16T09:03:31+07:00","step":"backup_config","detail":"备份 openclaw.json → openclaw.json.bak_20260916-090331，JSON 校验通过"}
+{"ts":"2026-09-16T09:03:40+07:00","step":"patch_price","detail":"flash cost 修改：input 0.44→0.30, output 1.32→1.20, cacheRead 0.014→0.006；pro 未动；JSON 校验通过"}
+{"ts":"2026-09-16T09:03:50+07:00","step":"check_workspaces","detail":"check_workspaces.py 结果 0 FAIL (❌0)，仅 2 条既有 WARN(空壳候选工作区，与本次无关)"}
+{"ts":"2026-09-16T09:03:49+07:00","step":"run_scan","detail":"full_cost_scan.py 完成：扫 4250 个 jsonl，台账 27988 调用(新增134)，累计$177.0179，本月$0.5317，今日$0.1787"}
+{"ts":"2026-09-16T09:04:06+07:00","step":"run_generate","detail":"generate_cost_daily.py 完成，cost_daily.json 刷新至 timestamp 2026-09-16T09:04:06"}
+{"ts":"2026-09-16T09:04:43+07:00","step":"verify_dashboard","detail":"/api/costs 返回 HTTP 200；server.js 的 loadBalanceCostDaily()(L1990) 读 cost_daily.json 为权威源，另有 refreshCostFromJsonl 每30min 独立活扫"}
