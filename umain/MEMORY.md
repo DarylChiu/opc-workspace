@@ -33,4 +33,8 @@
 - 自主决策记理由 · 里程碑汇报一并提交
 - 系统级操作前群内@all通知 → 等全部确认再执行
 
-## 模型: `deepseek/deepseek-v4-pro` · 全部任务统一 · 已弃用OpenRouter
+## 模型路由（2026-09-17 Daryl 拍板：私聊/群聊分档）
+- **私聊 DM（Daryl 直连）**: main(Kitty) / xiaofeng(Bryson) = `deepseek/deepseek-v4-pro` · balance / self = `deepseek/deepseek-v4-flash`
+- **群聊（OPC of DarylChiu）**: 四家统一 `deepseek/deepseek-v4-flash`
+- **默认兜底** `agents.defaults.model` = `deepseek/deepseek-v4-flash`
+- 已弃用 OpenRouter · pro 单价约 flash 3×（输入 $1.32/输出 $3.96 vs $0.44/$1.32）

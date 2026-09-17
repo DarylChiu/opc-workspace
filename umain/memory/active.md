@@ -1,16 +1,27 @@
 # 当前活跃任务
 
-> 最后更新: 2026-09-15 09:05 GMT+7
+> 最后更新: 2026-09-17 10:40 GMT+7
 
 ## 🟢 进行中
 
-### 🔑 DeepSeek key 轮换 + 成本泄漏观察（9/15）
-- **背景**: 凌晨 01:00-06:00 被扣 ¥15.6，其中 v4-pro ¥14.1（单请求上下文 40-53 万 tokens，与 7/5 僵尸 session 同构）；**本机 OpenClaw 零调用**（全 agent sessions 无夜间更新）
-- **已完成**: 本机 7 个文件 12 处 key 切换 → `sk-9638…35cf`；Gateway 两次热重启；旧 key 由 Daryl 控制台删除，复测 401/401；新 key 200；日志 0 鉴权错误；备份 `.bak_20260915-084341`
-- **基线余额**: ¥30.78（09:02:51）
-- **观察期**: Daryl 决定观察半天；**Sentinel 与余额告警均不开（Daryl 9/15 明确决定，不再提议）**
-- **判定口径**: 无对话时段余额明显下降（尤其夜间）→ 泄漏未止；余额持平 → 已封闭；外部旧 key 持有方应开始报 401
-- **存档**: memory/incident_2026-09-15_overnight_api_spend.md
+### ⚠️ 待办：MEMORY.md 模型口径已过时（9/17 发现）
+- 现值：私聊 main/xiaofeng = pro · 群聊四家 = flash · balance/self = flash
+- MEMORY.md 仍写「模型: deepseek-v4-pro · 全部任务统一」→ 锁定文件，需 Daryl 批准修改
+
+### 🟢 进行中：团队恢复 + 进度收口（9/17 Daryl 指令）
+- **① 通知 3 Agent 恢复开发** ✅ 已发（xiaofeng/balance/self）→ 要求各自飞书 DM Daryl 在手项目进度
+- **② 成本管线恢复** ✅ cron `521a3db3`（每日 23:45 成本全量扫描）已 enable；`cost_daily.json` 已手工刷新至 9/17；Balance 已被要求恢复每日监控
+- **③ 全部 cron 恢复** ✅（9/17 10:50 Daryl 拍板）：4 个 23:59 每日记忆归档 + self methodology Git 备份已 enable；**去重**：main/balance 各自的重复归档 job（ab1010cf / 434a8462）已 rm；今晚 23:59 起 OPC 群恢复每日完成汇报
+- **待确认**: 3 个旧项目检查 job（daily-project-check/report/weekly-project-review）+ 过期一次性 job daryl-morning-reminder 未动\xa0
+- **跟进**: 收集 3 Agent 的进度汇报，汇总给 Daryl；处理 Self 报的 cron 双通道（已随去重解决）
+
+### ✅ 已关闭：DeepSeek key 轮换 + 成本泄漏（9/15 → 9/17 定案）
+- **结论（9/17 Daryl 确认）**: 根因 = **旧 key 泄漏**；换新 key（`sk-9638…35cf`）后全天监控无成本失控 → **Agent 团队开发回归正轨**
+- **证据**: 余额曲线平缓 ¥30.78(9/15) → ¥27.57(9/16) → ¥23.01(9/17)，无凌晨跳变；旧 key 复测 401；新 key 200
+- **已完成**: 本机 7 文件 12 处 key 切换（备份 `.bak_20260915-084341`）+ Gateway 热重启 + 旧 key 控制台删除
+- **不做（Daryl 明确决定，不再提议）**: Sentinel 启用 / 余额告警
+- **存档**: memory/incident_2026-09-15_overnight_api_spend.md（已定案关闭）、memory/2026-09-17.md
+- **次要遗留**: `cost_daily.json` 管线停更（8/22 起）→ 成本看板不可见，待 Daryl 决定是否修复
 
 ### 🆕 OPC 变现战略 v1.1 — 先卖后建，接单制（8/12 Daryl 三连纠偏后）
 - **约束**: 月入 $200（第一阶段）| API 预算 ≤ $85/月
