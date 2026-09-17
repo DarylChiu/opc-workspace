@@ -24,15 +24,15 @@
       "started_at": null,
       "msg_count": 1
     },
-    "2026-09-05-strategy": {
-      "task_id": "task-20260905162425",
-      "subject": "Daryl战略定调：借款合同续签/工程验收SOP/集团借款台账已由Daryl自行完成不再汇报；不良品",
-      "type": "文档",
+    "vn-fin-sop-ap-procurement": {
+      "task_id": "task-20260917102232",
+      "subject": "执行模式改革两步走：调研既有执行模式成因+开发报关单vs ERP入库数量自动比对插件",
+      "type": "开发",
       "injected_patterns": [],
-      "started_at": "2026-09-05T16:24:25",
+      "started_at": "2026-09-17T10:22:32",
       "msg_count": 1,
-      "subject_hash": "a3558bea3fac",
-      "project": "core-plugin-projects"
+      "subject_hash": "6f7e11afba2e",
+      "project": "应付采购单据清单"
     }
   }
 }

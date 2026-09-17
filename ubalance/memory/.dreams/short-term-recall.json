@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-05T09:31:15.216Z",
+  "updatedAt": "2026-09-17T01:13:50.154Z",
   "entries": {
     "memory:memory/2026-06-10.md:1:29": {
       "key": "memory:memory/2026-06-10.md:1:29",
@@ -5087,18 +5087,20 @@
       "endLine": 21,
       "source": "memory",
       "snippet": "1. 🔴 来源总开关没绕开：出口仍要「发票+账务+实物」三流一致，账外货没发票，且搬到海关面前比内销更易被翻出（跨境+海关+税务+外汇四线追） 2. 🟠 换公司再进口=全新进口，不是「再进口免税」：tái nhập 免税要原出口商+同货同单+期限内，换公司套不上 → 进口关税(MFN 8-20%)+VAT10% 3. 🔴 出口收汇+进口付汇闭环=假出口/中转逃税画像：越南389指导委员会2025-04-10公告点名打击「被用作向第三国出口虚假货物以逃税的中转站」；TT 130/2016「进口再出口未实际办理出口手续不得退税」；胡志明/海防/岘港已上自动原产地+估价比对 - 关键一问：最终目的（A洗货变现/B套外汇/C造进货来源）决定转圈是否划算；判断若是A（变现）大概率不值得（转圈成本贵过补账完税） - 模型: deepseek/deepseek-v4-pro ## 上午 Daryl 定调：挂起，等领导采纳方向 - Daryl 已向老板汇报，这票是账外的，不做太多；**等领导真采纳「方向」再深挖三方案实际实施细节** - 项目状态：⏸️ 挂起；定性框架+完整版+Excel 已交付；定量欠账（金额测算+文书清单）暂不交 - 已更新 active.md 项目卡 + project_Balance.md 里程碑",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.36271687150001525,
+      "totalScore": 0.7173668235540389,
       "maxScore": 0.36271687150001525,
       "firstRecalledAt": "2026-08-22T01:05:44.172Z",
-      "lastRecalledAt": "2026-08-22T01:05:44.172Z",
+      "lastRecalledAt": "2026-09-17T01:13:50.154Z",
       "queryHashes": [
-        "4f8572516463"
+        "4f8572516463",
+        "391797ead165"
       ],
       "recallDays": [
-        "2026-08-22"
+        "2026-08-22",
+        "2026-09-17"
       ],
       "conceptTags": [
         "8-20",
@@ -5329,6 +5331,99 @@
         "pdf的invoice/sc/packing",
         "00-17",
         "v2.1"
+      ]
+    },
+    "memory:memory/2026-08-12.md:47:53": {
+      "key": "memory:memory/2026-08-12.md:47:53",
+      "path": "memory/2026-08-12.md",
+      "startLine": 47,
+      "endLine": 53,
+      "source": "memory",
+      "snippet": "- Daryl 发来《应付采购单据清单-Daryl0810.docx》：3.3单据完整性清单*（分级标准🔴强制/🟠条件/🟢参考）+ 6类采购单据表（本地/进口/委外/化学品/生物质/固资）+ 附录单据流转时序（10节点+责任部门） - **已翻译**: `reports/应付采购单据清单-中越双语-20260812.docx`（192处0缺失；结构逐项一致；无TOC；textutil通过；脚本 `scripts/translate_doclist.py`） - 备注：v5.1 化学品表有 MSDS/批次/环保税、固资表有固资卡片——Daryl 0810 版没有，整合 v5.2 时需确认去留 - **8/12 流程图升级**: 单据流转时序纯文本 → 中越双语泳道图（方案A: HTML/CSS+Playwright headless截图，7部门泳道+10节点+进口/本地双分支）；`reports/单据流转时序流程图-中越双语-20260812.png` + 已嵌入 `reports/应付采购单据清单-中越双语-v1.1-流程图版-20260812.docx`（替换纯文本段落+删除遗留「部门」标签；表格结构/无TOC/textutil验证通过）；生成源 `scripts/flow_chart.html` - 工具链沉淀：playwright-core 全局可用(/.npm-global) + chromium headless 缓存(ms-playwright)；图片分析模型不可用（gemini key 失效，改用 PIL 颜色抽样验证） - **小专题分析报告**: 改明日",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4180693358182907,
+      "maxScore": 0.4180693358182907,
+      "firstRecalledAt": "2026-09-17T01:13:49.975Z",
+      "lastRecalledAt": "2026-09-17T01:13:49.975Z",
+      "queryHashes": [
+        "09a5658fe31a"
+      ],
+      "recallDays": [
+        "2026-09-17"
+      ],
+      "conceptTags": [
+        "应付采购单据清单-daryl0810.docx",
+        "3.3单据完整性清单",
+        "本地/进口/委外/化学品/生物质/固资",
+        "scripts/translate-doclist.py",
+        "v5.1",
+        "msds/批次/环保税",
+        "v5.2",
+        "8/12"
+      ]
+    },
+    "memory:memory/2026-08-12.md:41:48": {
+      "key": "memory:memory/2026-08-12.md:41:48",
+      "path": "memory/2026-08-12.md",
+      "startLine": 41,
+      "endLine": 48,
+      "source": "memory",
+      "snippet": "- **隧道**: https://mice-lone-ghz-favorites.trycloudflare.com （HTTP 200 验证；首次域名遇 NXDOMAIN 负缓存，重启换域名解决；无 sudo 无法清 DNS 缓存，后续遇同类问题直接重启 cloudflared） - **8765 看板隧道**: watchdog 13:40 重建为 purple-thumbzilla-investigation-cooperative.trycloudflare.com（MEMORY.md 已更新） - **8770 生产**: 运行中但进程仍是旧代码（CQT 修复需重启 launchd 生效），验收时建议一并重启（已提醒 Daryl） - **新任务预告**: Daryl 下午验收时会发一个简单分析报告任务（以「车辆费用分析报告」为参考），目标：通过两个分析报告固定分析架构+模板，后续小专题报告全部交 Balance（车辆费用专项分析 7/11 挂起待数据，作为模板参考） ## 📄 应付采购单据清单 → 中越双语（Daryl 0810 版）✅ - Daryl 发来《应付采购单据清单-Daryl0810.docx》：3.3单据完整性清单*（分级标准🔴强制/🟠条件/🟢参考）+ 6类采购单据表（本地/进口/委外/化学品/生物质/固资）+ 附录单据流转时序（10节点+责任部门） - **已翻译**: `reports/应付采购单据清单-中越双语-20260812.docx`（192处0缺失；结构逐项一致；无TOC；textutil通过；脚本 `scripts/tran",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.40441462993621824,
+      "maxScore": 0.40441462993621824,
+      "firstRecalledAt": "2026-09-17T01:13:49.975Z",
+      "lastRecalledAt": "2026-09-17T01:13:49.975Z",
+      "queryHashes": [
+        "09a5658fe31a"
+      ],
+      "recallDays": [
+        "2026-09-17"
+      ],
+      "conceptTags": [
+        "memory.md",
+        "7/11",
+        "应付采购单据清单-daryl0810.docx",
+        "3.3单据完整性清单",
+        "本地/进口/委外/化学品/生物质/固资",
+        "scripts/tran",
+        "隧道",
+        "https"
+      ]
+    },
+    "memory:memory/2026-08-22.md:1:8": {
+      "key": "memory:memory/2026-08-22.md:1:8",
+      "path": "memory/2026-08-22.md",
+      "startLine": 1,
+      "endLine": 8,
+      "source": "memory",
+      "snippet": "# 2026-08-22 日记 ## 上午：越南海关/税务笔试卷·领导反馈整改（3 点） - **触发**: Daryl 转发领导对 8/21 笔试卷（4题）的 3 点反馈，需整改 - **反馈与整改**（`reports/越南海关税务笔试卷-4题-20260821.md/.docx` 已更新并重生成 docx）： 1. **第2题 VAT 隐蔽点**: 原答案 ①②④⑤ 全是\"无发票\"→进项未入账，太浅。领导要\"不能抵扣部分设隐蔽点、分析计算扣减一部分\"。→ 改为 ② 业务招待费(300M)、④ 员工福利(500M) **已取得合规发票、进项已入账**，但按非生产经营用途**不可抵扣**，须**进项转出 64,000,000**（24M+40M）。应纳 VAT 由 2,000,000,000 → **2,064,000,000**。隐蔽点 = \"有票 ≠ 可抵\"（Circular 219/2013 Điều 14） 2. **第3题 场景b 出口分析修改**: 原\"0（退税）\"过于简略 → 改为\"出口 0% 销项 + 进项 814,814,815 VND 全额抵扣/留抵退税，新增税负 0 但形成 VAT 留抵/应退税（先垫付后退税，资金占用）+ 0% 的合规前提\" 3. **第3题 场景a 增加数量 + 海关手册平衡**: 加数量 200,000 kg（USD 5/kg）+ 不良品 4,000 kg（2%，残值 USD 20,000）；题目要求 + 答案均改为**数量口径**勾稽：入仓 = 出仓内销 + 出仓复出口 + 损耗/销毁（方案1: 200,000=19",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.36291203200817107,
+      "maxScore": 0.36291203200817107,
+      "firstRecalledAt": "2026-09-17T01:13:50.154Z",
+      "lastRecalledAt": "2026-09-17T01:13:50.154Z",
+      "queryHashes": [
+        "391797ead165"
+      ],
+      "recallDays": [
+        "2026-09-17"
+      ],
+      "conceptTags": [
+        "越南海关/税务笔试卷",
+        "8/21",
+        "reports/越南海关税务笔试卷-4题-20260821.md",
+        "219/2013",
+        "全额抵扣/留抵退税",
+        "留抵/应退税",
+        "5/kg",
+        "损耗/销毁"
       ]
     }
   }
