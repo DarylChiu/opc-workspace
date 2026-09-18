@@ -1,8 +1,10 @@
 # 当前活跃任务 (中期记忆 — 每次session加载)
 
-> 最后更新: 2026-08-15 17:30（8/15 四个交付：费率更新/FT记忆/题库/用户系统 P1）
+> 最后更新: 2026-09-17 23:59（9/17 进度汇报任务 + 发现 xiaofeng 缺 message 工具 + Balance 成本 $5.29 异常预警）
 
 ## 🟢 进行中
+
+> ⚠️ **9/17 工具口径问题**：xiaofeng tool profile 为 `coding`，不含 `message` 工具（group:messaging 未挂载），无法主动 DM Daryl。已报 Kitty：需补 message 工具或由 Kitty 转达。
 
 > 2026-09-15 09:30 服务拉起（Daryl 指令）：IELTS 8767 ✅ + ngrok ielts-tutor ✅
 > - LaunchAgent 已恢复：`ai.openclaw.ielts`（v1.5.0, DEBUG_MODE=1, KeepAlive）
