@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-18T16:59:55.473Z",
+  "updatedAt": "2026-09-20T17:00:20.148Z",
   "entries": {
     "memory:memory/archive/2026-03-24.md:138:171": {
       "key": "memory:memory/archive/2026-03-24.md:138:171",
@@ -3657,6 +3657,68 @@
       ],
       "recallDays": [
         "2026-09-18"
+      ],
+      "conceptTags": [
+        "opc看板v1.6",
+        "v1.6.1",
+        "workbuddy/claw/opc-dashboard",
+        "api/workflows",
+        "agent-id",
+        "wf-ielts-tutor-v130",
+        "v1.3.0",
+        "双管线设计/训练入口/管线1链式流式/管线2"
+      ]
+    },
+    "memory:memory/archive/2026-06-29.md:83:93": {
+      "key": "memory:memory/archive/2026-06-29.md:83:93",
+      "path": "memory/archive/2026-06-29.md",
+      "startLine": 83,
+      "endLine": 93,
+      "source": "memory",
+      "snippet": "- **OPC看板访问地址**：localhost:8765 API，不是 8766 - **inbox检查**：GET localhost:8765/api/inbox/xiaofeng - **消息标记**：PATCH localhost:8765/api/inbox/<msgId> - **主动轮询**：每次session启动应检查inbox有无待处理消息 ## 15:50 · 雅思陪练 v2.0 产物推送 - Kitty (OPC看板) 要求推送 v2.0 产物到 opc-workspace/xiaofeng/ - 使用 `rsync` 推送核心文件（backend/server.py, pipeline_qwen_omni.py, session_manager.py, report_generator.py, frontend/index.html, WORKFLOW.md, VERSION） - Git commit: `4525624` on `detached HEAD` - 同时推送了 voice-mvp (v1.0) 作为对比参考",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4062540620565414,
+      "maxScore": 0.4062540620565414,
+      "firstRecalledAt": "2026-09-20T17:00:20.148Z",
+      "lastRecalledAt": "2026-09-20T17:00:20.148Z",
+      "queryHashes": [
+        "4fafe3b2184e"
+      ],
+      "recallDays": [
+        "2026-09-21"
+      ],
+      "conceptTags": [
+        "8765/api/inbox/xiaofeng",
+        "8765/api/inbox",
+        "v2.0",
+        "opc-workspace/xiaofeng",
+        "backend/server.py",
+        "pipeline-qwen-omni.py",
+        "session-manager.py",
+        "report-generator.py"
+      ]
+    },
+    "memory:memory/archive/2026-08-05.md:24:31": {
+      "key": "memory:memory/archive/2026-08-05.md:24:31",
+      "path": "memory/archive/2026-08-05.md",
+      "startLine": 24,
+      "endLine": 31,
+      "source": "memory",
+      "snippet": "- **Daryl 要求**: 把最新雅思陪练助手工作流放入 OPC看板v1.6；检查三个项目 workflow 是否正确并同步；下午向潜在投资人展示（对方感兴趣的是我做的几个项目） - **版本确认**: 看板 v1.6.1（运行中 server @ WorkBuddy/Claw/opc-dashboard，git tip 8fdf08f，端口8765）— 直接核实了运行实例，无需问 Kitty - **更新内容**（POST /api/workflows，agent_id=xiaofeng，commit 77c8aab）： 1. 新增 wf_ielts_tutor_v130「雅思陪练助手 v1.3.0 · 双管线实时陪练」11节点（双管线设计/训练入口/管线1链式流式/管线2 Qwen-Omni/统一评估/训练库/跟读/仪表盘/Vocab/调试面板/部署） 2. wf_video_analyzer 补3节点（内核卡提取/洗稿重构/溯源验证），v1.1.2 → done 3. wf_video_editor_phase0 状态同步（scan/ASR描述含今日修复，preview标注前端v3.0可视化上线） - **隧道修复 ⚠️**: serveo 自定义域名已失效（免费版重定向到 serveo.net）→ 换 localhost.run: https://acfa255fc9e8bc.lhr.life → 8765（已验证200）；ngrok 双隧道同域名不可行（free 1 session 限制），已恢复原单隧道（视频编辑器 unwhispering-iman",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3586325407028198,
+      "maxScore": 0.3586325407028198,
+      "firstRecalledAt": "2026-09-20T17:00:20.148Z",
+      "lastRecalledAt": "2026-09-20T17:00:20.148Z",
+      "queryHashes": [
+        "4fafe3b2184e"
+      ],
+      "recallDays": [
+        "2026-09-21"
       ],
       "conceptTags": [
         "opc看板v1.6",
