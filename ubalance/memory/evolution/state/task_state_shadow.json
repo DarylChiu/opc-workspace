@@ -24,15 +24,15 @@
       "started_at": null,
       "msg_count": 1
     },
-    "vn-fin-sop-ap-procurement": {
-      "task_id": "task-20260917102232",
-      "subject": "执行模式改革两步走：调研既有执行模式成因+开发报关单vs ERP入库数量自动比对插件",
-      "type": "开发",
+    "expense-approval-support": {
+      "task_id": "task-20260922164516",
+      "subject": "Daryl 接手同事的费用审批工作，希望用 Balance 辅助完成零碎的高频小判断审批任务，待其列",
+      "type": "文档",
       "injected_patterns": [],
-      "started_at": "2026-09-17T10:22:32",
+      "started_at": "2026-09-22T16:45:16",
       "msg_count": 1,
-      "subject_hash": "6f7e11afba2e",
-      "project": "应付采购单据清单"
+      "subject_hash": "2c01ce833d3e",
+      "project": "费用审批"
     }
   }
 }
