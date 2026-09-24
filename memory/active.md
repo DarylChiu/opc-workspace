@@ -1,8 +1,16 @@
 # 当前活跃任务 (中期记忆 — 每次session加载)
 
-> 最后更新: 2026-08-06 23:59（每日审计 · 工作区指针事故修复+M2试点开工）
+> 最后更新: 2026-09-24 23:59（9/24 记忆归档刷新；安静日无新任务，各进行中/挂起项均保持原状态，成本今日 $0.05/本月 $9.01 正常）
 
 ## 🟢 进行中
+
+> ⚠️ **9/17 工具口径问题**：xiaofeng tool profile 为 `coding`，不含 `message` 工具（group:messaging 未挂载），无法主动 DM Daryl。已报 Kitty：需补 message 工具或由 Kitty 转达。
+
+> 2026-09-15 09:30 服务拉起（Daryl 指令）：IELTS 8767 ✅ + ngrok ielts-tutor ✅
+> - LaunchAgent 已恢复：`ai.openclaw.ielts`（v1.5.0, DEBUG_MODE=1, KeepAlive）
+> - 新增 LaunchAgent：`ai.openclaw.ngrok.ielts` → `ngrok start ielts-tutor`（8767）
+> - localhost:8767 200 ✅ / api/health 200 ✅ / 公网 https://unwhispering-imani-digitately.ngrok-free.dev 200 ✅
+> - ⚠️ 该静态域名此前指向 video-editor(8768)，现已切回 IELTS(8767)；video-editor 隧道未启动
 ### M2 剪辑MVP 试点（8/6 开工 · Kitty 下发）🟢
 - **8/6**: Daryl 拍板 M2 试点 = 剪辑MVP（决策自主环），wf01-wf05 冻结为 v4.0 基线（2 必改已核验落实）
 - 30% 节点完成：交互方案定稿 + 账本记录；进行中：前端 v4.0 交互版开发（60% 节点预估 8-12h 后）
@@ -22,6 +30,8 @@
   - ✅ **BGM节点v2 完成** (7/30): 歌曲卡片/音频播放器/乐句播放+和弦弹窗/ffmpeg乐句连接
   - ⏳ 待验证: Gemini 场景检测 + Emotion 三层漏斗 + ffmpeg 渲染（需素材+API Key）
   - ⏳ Daryl 7/30指令：先不动，等他把剩余模块需求全部写出再一次性迭代
+  - ✅ **8/9**: ngrok 隧道已切回 8768（launchd plist 修复，KeepAlive 常驻），公网 https://unwhispering-imani-digitately.ngrok-free.dev 可达
+  - ⏳ 剩余3模块（ASR/情感/匹配）交互需求 Daryl 即将澄清（8/5 线框 wf02/wf03/wf04 为基线）
   - 🆕 **7/31**: Daryl 飞书发送 01-素材扫描 模块改造需求（4项），小风已回复可行性评估（~3.5h，全部可行），等待Daryl确认2个前置问题
   - 🆕 **8/4**: Daryl 度假回来要求恢复开发；服务已持久化（LaunchAgent: videoeditor/ielts/ngrok，Gateway重启不掉）；隧道 `https://unwhispering-imani-digitately.ngrok-free.dev` ✅
   - ⚠️ **8/4 阻塞**: TOSHIBA EXT 1TB 硬盘文件系统层卡死（ls 卡 EINTR），需 Daryl 物理重插；watchdog LaunchAgent 每10分钟探测，恢复后自动挂载+前端可用
@@ -83,9 +93,12 @@
 | 管线2 Qwen Omni 对接 | ❌ 冻结 | 30% |
 
 ## 🔵 待办
-### IELTS陪练助手 — v1.3.0 待 Daryl 验收（⏸️ 挂起中，服务 8767 ACTIVE）
-- v1.3.0 开发完毕，7/25 两 Bug 已修复；等 Daryl 晚间验收（已等 13 天）
-- 服务 LaunchAgent 持久化：localhost:8767 ACTIVE
+### IELTS陪练助手 — v1.4.1 题库改造 + v1.5.0 用户系统P1（🟢 开发完成，待 Daryl 验收）
+- 服务 LaunchAgent 持久化：localhost:8767 ACTIVE（v1.5.0）
+- OPC 看板 workflow：`wf_ielts_tutor_v130`「雅思陪练助手 v1.3.0 · 双管线实时陪练」11 节点已同步（8/5 建，随版本迭代需更新）
+- **8/15**: ① 成本模型费率更新 ② Free Talk 持久记忆 v1.4.0 ③ 题库改造 A+B v1.4.1（120题+变体）④ 用户系统 P1 v1.5.0（登录页 /login，AUTH_REQUIRED=0 guest 模式，详见 2026-08-15.md）
+- ⏸️ 待 Daryl 验收：v1.3.0 IELTS 1/2/3（对定式题型麻木，优先级让位）+ 今晚四个成果；Daryl 商业化方向：每月免费额度+按量收费
+- 下一步：P2 数据隔离（全表挂 user_id + 强制登录开关）
 
 
 ### ~/opc-workspace 本地仓库卡死 rebase（7/16发现）
