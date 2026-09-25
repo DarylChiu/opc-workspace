@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-23T17:01:28.669Z",
+  "updatedAt": "2026-09-25T03:09:04.411Z",
   "entries": {
     "memory:memory/2026-06-10.md:1:29": {
       "key": "memory:memory/2026-06-10.md:1:29",
@@ -5719,6 +5719,130 @@
         "api/costs",
         "8/22",
         "checker-log"
+      ]
+    },
+    "memory:memory/archive/2026-08-21.md:18:25": {
+      "key": "memory:memory/archive/2026-08-21.md:18:25",
+      "path": "memory/archive/2026-08-21.md",
+      "startLine": 18,
+      "endLine": 25,
+      "source": "memory",
+      "snippet": "- **账户追加**: Daryl 指令在 Lender(华峰)段新增 CTBC BANK 台湾账户（USD 108141001242 / SWIFT CTCBTWTPXXX）+ Legal Address，未动原格式 → `reports/华特×华丰股东借款合同-英越双语-定稿版-20260821.docx`（脚本 `work/loan-ledger/add_ctbc_account.py`） - **发现两处一致性疑点**（已提示Daryl）: ①合同借方地址仍用 Long Tho Commune（隆寿社），但章程v2.0已更正为 Phước An（福安社，与最新ERC/IRC一致）②华峰香港成立证书号合同写 68898950 vs 章程写 2648928（待核实是否CR/BR两个号） - 模型: deepseek/deepseek-v4-pro ## 上午：越南海关/税务笔试卷（4题） - **触发**: Daryl「把我们越南目前碰到的海关/税务问题，设4个题目准备给国内做笔试卷」 - **4题**: ①FCT缴纳时点+计算(DAP进口设备+安装费) ②综合题VAT+CIT(非生产性费用应税义务) ③保税工厂EPE两场景+不良品处置(海关平衡手册) ④PIT外籍住宿福利(15%上限+本地/外籍判断陷阱) - **法规检索**: 5轮websearch(PwC/EY/Crowe/越南税务局口径)，钉牢关键数：FCT安装3%VAT+2%CIT/货物1%+1%；VAT标准10%临时8%(至2026底)；CIT 20%；新PIT法109/2025五档5/10/20/30/35",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.35067852437496183,
+      "maxScore": 0.35067852437496183,
+      "firstRecalledAt": "2026-09-25T01:23:54.608Z",
+      "lastRecalledAt": "2026-09-25T01:23:54.608Z",
+      "queryHashes": [
+        "d734c793cf0c"
+      ],
+      "recallDays": [
+        "2026-09-25"
+      ],
+      "conceptTags": [
+        "reports/华特",
+        "华丰股东借款合同-英越双语-定稿版-20260821.docx",
+        "但章程v2.0已更正为",
+        "与最新erc/irc一致",
+        "待核实是否cr/br两个号",
+        "deepseek/deepseek-v4-pro",
+        "越南海关/税务笔试卷",
+        "把我们越南目前碰到的海关/税务问题"
+      ]
+    },
+    "memory:memory/archive/2026-07-01.md:41:60": {
+      "key": "memory:memory/archive/2026-07-01.md:41:60",
+      "path": "memory/archive/2026-07-01.md",
+      "startLine": 41,
+      "endLine": 60,
+      "source": "memory",
+      "snippet": "- 攻击8（豁免=应税事件 CIT 20%）→ 可转换工具下「利息从未产生」，不是豁免 - 攻击9（银行汇款附言独立证据）→ Daryl确认附言可控 ### 方案转折：从「豁免」到「可转换工具」 - Daryl提出三方案对比（A:豁免/B:无息/C:可转换） - 选择**方案C：可转换借款工具 + 附条件利息条款** - 核心逻辑：不是「豁免」利息，而是让利息**从未产生过** - 365日内完成债转股ERC登记 → 利息条款自始不生效 ### 落地实操确认 - **关键时点**：ERC变更日（vs IRC变更日 vs 协议签署日）→ ERC是注册资本变更的外部证据 - **完整证据链**：15份文件（行政审批+商业+跨境，中越双语） - **补充协议框架**：五条+附件（可转换条款/利息条款/转换确认/Wellname确认/提款明细） - **Wellname侧处理**：利息全额冲回，participation exemption下税负中性 ### 关键教训 - 法律概念选择决定税务结果：「豁免」→ 承认债务=应税事件 vs 「条件」→ 债务从未产生=零事件 - FCT直接法是收付实现制，不是权责发生制（再确认） - 越南税务：「消灭红旗=消灭审计」 - 行政时点法律效力：ERC变更日 > IRC变更日 > 协议签署日",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.39227806627750395,
+      "maxScore": 0.39227806627750395,
+      "firstRecalledAt": "2026-09-25T03:09:04.411Z",
+      "lastRecalledAt": "2026-09-25T03:09:04.411Z",
+      "queryHashes": [
+        "47e41e9771a5"
+      ],
+      "recallDays": [
+        "2026-09-25"
+      ],
+      "conceptTags": [
+        "豁免/b",
+        "无息/c",
+        "可转换条款/利息条款/转换确认/wellname确认/提款明细",
+        "攻击",
+        "豁免",
+        "事件",
+        "cit",
+        "转换"
+      ]
+    },
+    "memory:memory/archive/2026-07-14.md:41:48": {
+      "key": "memory:memory/archive/2026-07-14.md:41:48",
+      "path": "memory/archive/2026-07-14.md",
+      "startLine": 41,
+      "endLine": 48,
+      "source": "memory",
+      "snippet": "## 09:50 · Future Textile 债转股生效日争议 + 案例卡片归档（Daryl） - **Topic1**：A&C事务所就债转股生效日回复——主张 **IRC修订日**=生效日/会计确认日（国家批准外资出资变更之点，ERC为后续步骤，决议/协议仅内部意图）。 - **Balance初判**：排除协议日（认同A&C）；A&C把“IRC=可以变”当成“ERC=已经变”，偷20一步；严格论确认点应为使增资对世生效的最后一道登记（ERC）。 - **Daryl两次纠正**（已接受）： 1. 我误加“取IRC/ERC较晚者”→FDI增资顺序固定先IRC后ERC，ERC恒在后，对冲话术多余，删。 2. Daryl框架：**ERC修订日=确认时点**，债转股协议日=计量补充。 - **风险取向**：Daryl认为A&C直接用IRC不够“符合法理”，但越南法未完善，跟随审计师实务建议或较安全。 - **Balance精确化“安全”**：跟A&C口径一致→安全的是审计意见签发（风险管理选择，非法理让步）；是否免费取决于 **IRC与ERC是否同一会计期间**（同期→零摩擦，直接用IRC；跨期末/USD波动→ERC口径更稳健，值得pushback）。➕提醒：“多数已转”=追溯，必须确认已入账各笔当初按哪个日期，不能混口径。",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.37342833578586576,
+      "maxScore": 0.37342833578586576,
+      "firstRecalledAt": "2026-09-25T03:09:04.411Z",
+      "lastRecalledAt": "2026-09-25T03:09:04.411Z",
+      "queryHashes": [
+        "47e41e9771a5"
+      ],
+      "recallDays": [
+        "2026-09-25"
+      ],
+      "conceptTags": [
+        "生效日/会计确认日",
+        "决议/协议仅内部意图",
+        "取irc/erc较晚者",
+        "跨期末/usd波动",
+        "future",
+        "textile",
+        "生效",
+        "争议"
+      ]
+    },
+    "memory:memory/archive/2026-08-22.md:26:41": {
+      "key": "memory:memory/archive/2026-08-22.md:26:41",
+      "path": "memory/archive/2026-08-22.md",
+      "startLine": 26,
+      "endLine": 41,
+      "source": "memory",
+      "snippet": "- 影响：安装 CIT 4,000→800（2%×20%），原卷合计 26,000 错 - ⏸️ Daryl 会后有\"大幅改动\"，先 Mark 不输出新题目；记录在 `work/loan-ledger/笔试卷-Q1-FCT-待改.md` ## 🔴 Q2 综合题按 Daryl 口径改定（方案B） - ②业务招待费: 进项可抵扣(24M) + CIT可全额扣(无15%上限) = 干扰项 - ④员工福利: 描述改\"与生产经营不直接关联\"；进项不可抵扣(40M计入费用) = 隐蔽点；法律依据 Circular 219/2013 Điều 14 - ③广告费: 15%上限保留（旧法口径/例题假设，Daryl 拍方案B），超额800M调增 - b 确认: 广告费超额不能结转下年 - 新结果: 应纳VAT 2,040,000,000；应纳税所得额 11,900,000,000；CIT 2,380,000,000 - docx 已重出；Q1 FCT 仍 Mark 住（核定利润率2% + net合同，等 Daryl 最终方向） ## 🔴 Q3 保税仓/非保税仓 + 不良品 按会议改定（docx 红线已合并） - 场景a: 200,000kg 拆 100,000kg(CO证0%) + 100,000kg(无CO证12%)；进保税仓=免缴增值税（非\"暂缓缴纳\"），出仓内销才用8% - 场景b: 辅料11B未付款(进项暂不可抵扣) + 电力30M已付款(可抵扣2,222,222)；出口已收款50% - 不良品: 术语微调(题目要求\"进口=出口+内销+损耗\"；账实相符\"数量口径\") - 新数字:",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.36482005715370175,
+      "maxScore": 0.36482005715370175,
+      "firstRecalledAt": "2026-09-25T03:09:04.411Z",
+      "lastRecalledAt": "2026-09-25T03:09:04.411Z",
+      "queryHashes": [
+        "47e41e9771a5"
+      ],
+      "recallDays": [
+        "2026-09-25"
+      ],
+      "conceptTags": [
+        "219/2013",
+        "旧法口径/例题假设",
+        "保税仓/非保税仓",
+        "影响",
+        "安装",
+        "cit",
+        "4,000",
+        "合计"
       ]
     }
   }

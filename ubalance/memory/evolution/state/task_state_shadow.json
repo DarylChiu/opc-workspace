@@ -1,12 +1,14 @@
 {
   "sessions": {
     "default": {
-      "task_id": null,
-      "subject": null,
-      "type": null,
+      "task_id": "task-20260925164907",
+      "subject": "越南中秋节月饼采购后赠送客户：是否需要开具赠送发票、开具依据与凭证要求",
+      "type": "财务",
       "injected_patterns": [],
-      "started_at": null,
-      "msg_count": 1
+      "started_at": "2026-09-25T16:49:07",
+      "msg_count": 1,
+      "subject_hash": "a68d0e7d2ec8",
+      "project": "huatex"
     },
     "loan-renewal-huatex": {
       "task_id": null,
@@ -23,16 +25,6 @@
       "injected_patterns": [],
       "started_at": null,
       "msg_count": 1
-    },
-    "expense-approval-support": {
-      "task_id": "task-20260922164516",
-      "subject": "Daryl 接手同事的费用审批工作，希望用 Balance 辅助完成零碎的高频小判断审批任务，待其列",
-      "type": "文档",
-      "injected_patterns": [],
-      "started_at": "2026-09-22T16:45:16",
-      "msg_count": 1,
-      "subject_hash": "2c01ce833d3e",
-      "project": "费用审批"
     }
   }
 }
