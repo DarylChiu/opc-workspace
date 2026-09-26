@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-25T03:09:04.411Z",
+  "updatedAt": "2026-09-26T06:28:38.642Z",
   "entries": {
     "memory:memory/2026-06-10.md:1:29": {
       "key": "memory:memory/2026-06-10.md:1:29",
@@ -5843,6 +5843,130 @@
         "cit",
         "4,000",
         "合计"
+      ]
+    },
+    "memory:memory/archive/2026-08-09.md:17:23": {
+      "key": "memory:memory/archive/2026-08-09.md:17:23",
+      "path": "memory/archive/2026-08-09.md",
+      "startLine": 17,
+      "endLine": 23,
+      "source": "memory",
+      "snippet": "- **②财务审核**（新增）：问题费用必须处理完毕（补传缺失单据/修改金额/修改费用类型）→ 才可勾选点击「生成凭证」→ 传输到③ - **③账务处理**（现凭证模块）：接收②数据，勾选分组+生成凭证（VAT分离/智能分组保留） - **关键约束**: 三节点顺序解锁，②问题费用不清零不能生成凭证 - **Daryl 要求**: 先深度理解+总结需求回放，确认理解无误后再动工（本次不写代码） - **产出**: 需求回放已发，Daryl 确认三步流程理解无误 + 答复 3 决策点（10:00） - **3 决策点已确认**: ①报销组=同次差旅自动分组+手动拖拽（可拖到其他报销组/待报销池；水单=佐证发票真实性的单据）②生成凭证勾选粒度=费用明细行，可跨报销单勾选（同一出差事项合一张凭证）③单据级预审批状态（一费用多单据各标红/黄/绿）；问题费用处理=补传重审 或 手动确认无误转绿；问题清零后置信度≥90%/＜90%均可勾选生成凭证（90%是人工介入触发线非凭证门槛） - **数据模型 v2**: documents 表（费用→单据一对多）+ reimbursement_orders/order_items + 待报销池标记 + review_attachments/decisions",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3690671920776367,
+      "maxScore": 0.3690671920776367,
+      "firstRecalledAt": "2026-09-26T06:28:38.642Z",
+      "lastRecalledAt": "2026-09-26T06:28:38.642Z",
+      "queryHashes": [
+        "1cb48f9758a9"
+      ],
+      "recallDays": [
+        "2026-09-26"
+      ],
+      "conceptTags": [
+        "补传缺失单据/修改金额/修改费用类型",
+        "vat分离/智能分组保留",
+        "可拖到其他报销组/待报销池",
+        "一费用多单据各标红/黄/绿",
+        "reimbursement-orders/order-items",
+        "review-attachments/decisions",
+        "财务",
+        "审核"
+      ]
+    },
+    "memory:memory/2026-09-25.md:72:76": {
+      "key": "memory:memory/2026-09-25.md:72:76",
+      "path": "memory/2026-09-25.md",
+      "startLine": 72,
+      "endLine": 76,
+      "source": "memory",
+      "snippet": "- **合规流程**: ①`shadow_inject.py` → 🔒 SHADOW-LOGGED（判定=new_task，本应注入3条，实际注入0）②`pre-op.sh` → **P2 PASS**（可自主执行）③`post-op.sh` 已跑（3/5，查询类无需更新 active.md） - **检索**: **5 轮 websearch（Brave 越语）+ 2 篇全文抓取 + 1 政府门户（baochinhphu.vn）**——满足 AGENTS.md「外部交叉验证 ≥2 轮」 - **产出**: `reports/越南-客户礼品月饼-赠送发票与税务处理-20260925.md` - **核心结论**: ①**必须开票**（NĐ 254/2026/NĐ-CP Khoản 1 Điều 4，2026/07/01 生效，含 cho/biếu/tặng）②开票时点=**所有权转移时**（Đ9.1）③计税价格=**同时点同类/同等货物 VAT 计税价**（NĐ 181/2025 Đ6.1）④**进项可抵**（NĐ 181/2025 **Khoản 7 Điều 23**）⑤可按申报期**汇总开票+附明细清单**（NĐ 254/2026 附录 điểm a3 mục 5；口径源起 NĐ 70/2025）⑥税率按货物现行税率（月饼食品类**现行多为 8%**，待当期文本复核） - **依据清单（Daryl 问的核心）**: 内部=赠送审批决定／客户名单+礼品明细／出库单；外部=采购进项发票／非现金付款凭证；发票备注「hàng biếu tặng, không thu tiền」",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3677599191665649,
+      "maxScore": 0.3677599191665649,
+      "firstRecalledAt": "2026-09-26T06:28:38.642Z",
+      "lastRecalledAt": "2026-09-26T06:28:38.642Z",
+      "queryHashes": [
+        "1cb48f9758a9"
+      ],
+      "recallDays": [
+        "2026-09-26"
+      ],
+      "conceptTags": [
+        "shadow-inject.py",
+        "shadow-logged",
+        "new-task",
+        "pre-op.sh",
+        "post-op.sh",
+        "3/5",
+        "active.md",
+        "baochinhphu.vn"
+      ]
+    },
+    "memory:memory/2026-09-25.md:77:83": {
+      "key": "memory:memory/2026-09-25.md:77:83",
+      "path": "memory/2026-09-25.md",
+      "startLine": 77,
+      "endLine": 83,
+      "source": "memory",
+      "snippet": "- **风险 4 条**: 🔴非现金支付门槛新旧口径混用（境外/进口 **5 triệu**（NĐ181 Đ26） vs 境内历来 **20 triệu**）→ 须核现行条文；🔴未开票后果（追税+滞纳金+CIT 不得扣+罚款 [NĐ125/2020 体系下 4–8 triệu，2026 新体系待核]）；🟡客户礼品**无比例上限**（印证 8/22 结论）；🟡受赠方无付款凭证不得抵扣 - **⚠️ 待 Daryl 确认**: 采购主体是 **Huatex（非 EPE）还是 Future Textile（EPE）** → If EPE 需分叉出专版（参考 9/19 电费案 NĐ181 Đ17 + TT219 Đ16.2） - **关键发现（需入长期记忆）**: **越南开票法规已换代** —— NĐ 123/2020 →（NĐ 70/2025 自 2025/06/01 修订，首次引入「汇总开票+明细清单」）→ **NĐ 254/2026/NĐ-CP 自 2026/07/01 生效**；后续引用开票依据不得再引 NĐ 123/2020 为现行法 - **本轮成本**: exec 2（合规脚本）/ websearch 5 / web_fetch 2 / write 1 / edit 1 ## 🕙 10:5x 【新交付】华特 · 中秋客户礼品「开票依据」三件套模版（Excel，一张 A4） - **Daryl 指令**: 「采购主体是 Huatex 的，你用 Excel 帮我拟一个『开票依据』的三内的模版吧，尽量一张 A4 纸覆盖审批决定，客户及礼品名单，出库（采购进来就由使",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3538935512304306,
+      "maxScore": 0.3538935512304306,
+      "firstRecalledAt": "2026-09-26T06:28:38.642Z",
+      "lastRecalledAt": "2026-09-26T06:28:38.642Z",
+      "queryHashes": [
+        "1cb48f9758a9"
+      ],
+      "recallDays": [
+        "2026-09-26"
+      ],
+      "conceptTags": [
+        "境外/进口",
+        "nđ125/2020",
+        "8/22",
+        "9/19",
+        "đ16.2",
+        "123/2020",
+        "70/2025",
+        "2025/06/01"
+      ]
+    },
+    "memory:memory/2026-09-23.md:35:43": {
+      "key": "memory:memory/2026-09-23.md:35:43",
+      "path": "memory/2026-09-23.md",
+      "startLine": 35,
+      "endLine": 43,
+      "source": "memory",
+      "snippet": "- **两层拆分**: A 数据层（表内一致性，导出表可跑，今天能上）/ B 凭证层（附件内容，审批实质） - **B 层三路径**: 附件投递式半自动（先做）/ 单笔兜底 / 接口直连（企微审批接口、流程系统接口、BIP只读；附件可达性待实测） - **B 层可查 8 项**（发票要素比对/三值勾稽/附件齐全性/抬头税号/类别vs品名/水单收款方/审批链路/电子发票查验）→ 全部映射到 SOP 的 C7/C9/E4/P3/G4/C4/C5/C1/G2/T2 - **向 Daryl 提的 3 个决策项**: ①附件如何到我手上（批量导出？人工投递？IT 接口？）②先做 A 还是 B ③给 50–100 笔历史单回测一致率 - **成本**: 本任务 exec 1 次 / write-edit 3 次 / websearch 2 轮（Brave：企微审批接口、越南电子发票查验） ## 🔎 边界现象（第 8 次复现） - 00:00 触发的审计**必然**报出「日记过短 + 疑似骨架日记」两类深层问题——午夜边界导致当日日记天然为空。 - 处置原则（沿用）：①不伪造内容 ②核验是否为真漏记（近 24h 活动 session 是否全为 cron 自动化）③只记录真实事件 + 对前一日状态的指向。",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.35374635159969325,
+      "maxScore": 0.35374635159969325,
+      "firstRecalledAt": "2026-09-26T06:28:38.642Z",
+      "lastRecalledAt": "2026-09-26T06:28:38.642Z",
+      "queryHashes": [
+        "1cb48f9758a9"
+      ],
+      "recallDays": [
+        "2026-09-26"
+      ],
+      "conceptTags": [
+        "c7/c9/e4/p3/g4/c4/c5/c1/g2/t2",
+        "write-edit",
+        "数据",
+        "一致性",
+        "导出",
+        "今天",
+        "凭证",
+        "附件"
       ]
     }
   }
