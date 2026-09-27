@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-26T06:28:38.642Z",
+  "updatedAt": "2026-09-27T05:46:35.101Z",
   "entries": {
     "memory:memory/2026-06-10.md:1:29": {
       "key": "memory:memory/2026-06-10.md:1:29",
@@ -2729,20 +2729,22 @@
       "endLine": 13,
       "source": "memory",
       "snippet": "# 2026-06-16 记忆 ## 关键事件 ### 每日记忆归档审计 - 00:06 Cron触发每日审计 - 修复：创建今日日记（审计前缺失） - 状态：✅ 审计通过 ## 状态 - 合规系统: ✅ 运行中 - Cron审计: ✅ 已执行",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.7350133180618286,
-      "maxScore": 0.3678278237581253,
+      "totalScore": 1.1495448559522627,
+      "maxScore": 0.41453153789043423,
       "firstRecalledAt": "2026-07-28T17:01:47.007Z",
-      "lastRecalledAt": "2026-07-30T17:01:14.661Z",
+      "lastRecalledAt": "2026-09-27T05:46:08.384Z",
       "queryHashes": [
         "428d10408272",
-        "00ccaefb2624"
+        "00ccaefb2624",
+        "ae52c2b1c5fe"
       ],
       "recallDays": [
         "2026-07-29",
-        "2026-07-31"
+        "2026-07-31",
+        "2026-09-27"
       ],
       "conceptTags": [
         "记忆",
@@ -2979,18 +2981,20 @@
       "endLine": 13,
       "source": "memory",
       "snippet": "# 2026-06-15 记忆 ## 关键事件 ### 每日记忆归档审计 - 00:00 Cron触发每日审计 - 修复：创建今日日记（审计前缺失） - 状态：✅ 审计通过 ## 状态 - 合规系统: ✅ 运行中 - Cron审计: ✅ 已执行",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.361355859041214,
-      "maxScore": 0.361355859041214,
+      "totalScore": 0.7733594685792923,
+      "maxScore": 0.4120036095380783,
       "firstRecalledAt": "2026-07-30T17:01:14.661Z",
-      "lastRecalledAt": "2026-07-30T17:01:14.661Z",
+      "lastRecalledAt": "2026-09-27T05:46:08.384Z",
       "queryHashes": [
-        "00ccaefb2624"
+        "00ccaefb2624",
+        "ae52c2b1c5fe"
       ],
       "recallDays": [
-        "2026-07-31"
+        "2026-07-31",
+        "2026-09-27"
       ],
       "conceptTags": [
         "记忆",
@@ -5967,6 +5971,161 @@
         "今天",
         "凭证",
         "附件"
+      ]
+    },
+    "memory:memory/archive/2026-06-17.md:1:13": {
+      "key": "memory:memory/archive/2026-06-17.md:1:13",
+      "path": "memory/archive/2026-06-17.md",
+      "startLine": 1,
+      "endLine": 13,
+      "source": "memory",
+      "snippet": "# 2026-06-17 记忆 ## 关键事件 ### 每日记忆归档审计 - 00:01 Cron触发每日审计 - 修复：创建今日日记（审计前缺失） - 状态：✅ 审计通过 ## 状态 - 合规系统: ✅ 运行中 - Cron审计: ✅ 已执行",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4145396530628204,
+      "maxScore": 0.4145396530628204,
+      "firstRecalledAt": "2026-09-27T05:46:08.384Z",
+      "lastRecalledAt": "2026-09-27T05:46:08.384Z",
+      "queryHashes": [
+        "ae52c2b1c5fe"
+      ],
+      "recallDays": [
+        "2026-09-27"
+      ],
+      "conceptTags": [
+        "记忆",
+        "关键",
+        "事件",
+        "每日",
+        "归档",
+        "审计",
+        "cron",
+        "触发"
+      ]
+    },
+    "memory:memory/2026-09-18.md:1:16": {
+      "key": "memory:memory/2026-09-18.md:1:16",
+      "path": "memory/2026-09-18.md",
+      "startLine": 1,
+      "endLine": 16,
+      "source": "memory",
+      "snippet": "# 2026-09-18 日记 ## 📋 概述 - 本日 00:00 起由 23:59 Cron「每日记忆归档」审计开启 → 本篇随审计实况记录 - 承接 9/17 收尾：海关报关 vs 环思入库 票级勾稽项目（Daryl 主导，9/17 23:46 最后一轮 session 活动） ## 🕛 00:00 每日记忆归档审计（Cron: 2fe401f9） - **执行**: `bash scripts/compliance/audit.sh --report`（L4 审计 v2，10 项检查） - **自动修复**: 3 项（含归档 2026-08-18.md → memory/archive/、Git 备份 commit + push 成功） - **报告读数**（第一轮）: 浅层 4 / 深层 3 - **深层问题与处置**: 1. `2026-09-18.md` 疑似 Cron 骨架日记（5 行 / 1 段落 / 真实章节 0）→ **已补**：写入本篇实况 2. `2026-09-16.md` 疑似 Cron 骨架日记 → **已补**：经 session mtime 核验确认 9/16 为**真空日**（无活动，非漏记），补记核验过程为正文 3. Session-Diary 交叉验证：6 个 session 有活动 vs 日记过短 → 属**午夜边界效应**（00:00 执行，session 活动实为 9/17 晚间，已在 9/17 日记 508 行完整记录） - **保留 WARN（不阻塞）**: `checker-log.jsonl` / `r",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.385639625787735,
+      "maxScore": 0.385639625787735,
+      "firstRecalledAt": "2026-09-27T05:46:08.384Z",
+      "lastRecalledAt": "2026-09-27T05:46:08.384Z",
+      "queryHashes": [
+        "ae52c2b1c5fe"
+      ],
+      "recallDays": [
+        "2026-09-27"
+      ],
+      "conceptTags": [
+        "备份",
+        "9/17",
+        "scripts/compliance/audit.sh",
+        "memory/archive",
+        "9/16",
+        "session-diary",
+        "checker-log.jsonl",
+        "日记"
+      ]
+    },
+    "memory:memory/archive/2026-08-17.md:1:18": {
+      "key": "memory:memory/archive/2026-08-17.md:1:18",
+      "path": "memory/archive/2026-08-17.md",
+      "startLine": 1,
+      "endLine": 18,
+      "source": "memory",
+      "snippet": "# 2026-08-17 日记 ## 00:01 每日记忆归档审计执行（跨午夜，系统定时任务 2fe401f9） - 8/16 23:59 Cron 触发，审计 00:01 跨午夜运行，将 8/17 视为「今日」自动创建本文件 - 8/16 实际事件已补全至 `memory/2026-08-16.md`（13:00 看板更新 + 23:46 成本扫描 + 23:59 审计记录） ## 00:03 审计问题修复 - **active.md 35h 未更新** → 时间戳已刷新至 2026-08-17 00:05 GMT+7 - **8/16 日记过短（5行）** → 已补全 13:00 看板更新事件 + 23:59 审计记录（23行） - **OPC API 瞬时不可达** → 审计时 curl 超时，手动复测 3 次均 200 正常（数据完整，timestamp 17:06Z），判定为瞬时故障；cost-check-status.txt 已修正为 fresh_api_ok ## 00:08 系统资源异常处置（根因：2401 个孤儿进程） - **发现**: 系统进程数 2851 超 ulimit 2666 → fork 持续失败（`Resource temporarily unavailable`），审计脚本 curl 无法启动误报 API 不可达 - **根因**: 2401 个 `tail -f /dev/null` 孤儿进程（ppid=1，无父进程，存在 3~15 天不等），纯占资源泄漏 - **处置**: `pkill -f \"tail -f /dev/null\"",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3851951062679291,
+      "maxScore": 0.3851951062679291,
+      "firstRecalledAt": "2026-09-27T05:46:08.384Z",
+      "lastRecalledAt": "2026-09-27T05:46:08.384Z",
+      "queryHashes": [
+        "ae52c2b1c5fe"
+      ],
+      "recallDays": [
+        "2026-09-27"
+      ],
+      "conceptTags": [
+        "8/16",
+        "8/17",
+        "memory/2026-08-16.md",
+        "active.md",
+        "cost-check-status.txt",
+        "fresh-api-ok",
+        "dev/null",
+        "日记"
+      ]
+    },
+    "memory:memory/2026-09-24.md:10:22": {
+      "key": "memory:memory/2026-09-24.md:10:22",
+      "path": "memory/2026-09-24.md",
+      "startLine": 10,
+      "endLine": 22,
+      "source": "memory",
+      "snippet": "- **自动修复项**: ①当日日记建档 `2026-09-24.md` ②归档 `2026-08-24.md` → `memory/archive/` ③Git 备份 commit `c880989` + push 成功 - **逐项检查结果**: - ✅ 日记存在（初始为 Cron 骨架，本文件已替换为实况正文） - ✅ 昨天日记 `2026-09-23.md` 存在且完整（55 行，含 Daryl 上午 4 条口径拍板 + 附件方案 v0.1） - ✅ `active.md` 新鲜（15h） - ✅ `lessons.md` 无需更新 - ✅ 归档检查通过（无待归档） - ✅ `MEMORY.md` 39 行，符合 <30 行规范（含索引+规则） - ✅ 项目清单与 session 一致 - ✅ 成本数据新鲜（15 分钟前）| OPC API 端点正常（localhost:8765） - ⚠️ `checker-log.jsonl` / `reflexion_journal.md` 不存在 → 自进化基建 L1 Phase 1 部署范围（Kitty 侧），非本工作区缺陷，保留 WARN 不阻塞 - **两项深层问题归因（第 9 次复现）**: ①「日记过短（5行）但有 11 个活动 session」②「疑似 Cron 骨架日记」—— 均为**午夜边界效应**：00:00 触发时当日尚无真实事件，活动 session 全部属于 9/23。处置原则不变：**不伪造内容**，只记录当日真实发生的事 + 对前一日状态的明确指向。 - **成本仪",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.38306269347667693,
+      "maxScore": 0.38306269347667693,
+      "firstRecalledAt": "2026-09-27T05:46:08.384Z",
+      "lastRecalledAt": "2026-09-27T05:46:08.384Z",
+      "queryHashes": [
+        "ae52c2b1c5fe"
+      ],
+      "recallDays": [
+        "2026-09-27"
+      ],
+      "conceptTags": [
+        "备份",
+        "memory/archive",
+        "v0.1",
+        "active.md",
+        "lessons.md",
+        "memory.md",
+        "checker-log.jsonl",
+        "reflexion-journal.md"
+      ]
+    },
+    "memory:memory/2026-09-26.md:9:21": {
+      "key": "memory:memory/2026-09-26.md:9:21",
+      "path": "memory/2026-09-26.md",
+      "startLine": 9,
+      "endLine": 21,
+      "source": "memory",
+      "snippet": "- **执行**: `bash scripts/compliance/audit.sh --report`（L4 审计 v2，8 大类 + 成本仪表盘验证 + 自进化基建对账 + Git 备份） - **首轮读数**: 修复 3 / 浅层 3 / 深层 2；**复跑核对**: 修复 1 / 浅层 2 / 深层 2（幂等，无新增实质变更） - **自动修复项**: ①当日日记建档 `2026-09-26.md`（初始为 Cron 骨架 → 本文件已替换为实况正文）②归档 `2026-08-26.md` → `memory/archive/`（>30 天）③Git 备份 commit `f42c0a7` + push 成功；复跑补记审计日志 1 行并再次 push - **逐项检查结果**: - ✅ 日记存在（初始 5 行骨架 → 已实况补写） - ✅ 昨天日记 `2026-09-25.md` 存在且完整（99+ 行：税务咨询函退出 + 月饼发票任务 + 三件套模版 + 23:45 成本全量扫描） - ✅ `active.md` 新鲜（mtime 2026-09-25 08:37，约 15.4h） - ✅ `lessons.md` 无需今日更新 - ✅ 归档检查通过（本次归档 2026-08-26.md，其余无待归档） - ✅ `MEMORY.md` 39 行，符合规范（索引+规则） - ✅ 项目清单与 session 一致 - ✅ 成本数据新鲜（15 分钟前）| OPC API 端点正常（localhost:8765） - ⚠️ `checke",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3548792004585266,
+      "maxScore": 0.3548792004585266,
+      "firstRecalledAt": "2026-09-27T05:46:35.101Z",
+      "lastRecalledAt": "2026-09-27T05:46:35.101Z",
+      "queryHashes": [
+        "3ec975f8674a"
+      ],
+      "recallDays": [
+        "2026-09-27"
+      ],
+      "conceptTags": [
+        "备份",
+        "scripts/compliance/audit.sh",
+        "memory/archive",
+        "active.md",
+        "15.4h",
+        "lessons.md",
+        "memory.md",
+        "执行"
       ]
     }
   }
