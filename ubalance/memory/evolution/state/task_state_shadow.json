@@ -1,15 +1,5 @@
 {
   "sessions": {
-    "default": {
-      "task_id": "task-20260925164907",
-      "subject": "越南中秋节月饼采购后赠送客户：是否需要开具赠送发票、开具依据与凭证要求",
-      "type": "财务",
-      "injected_patterns": [],
-      "started_at": "2026-09-25T16:49:07",
-      "msg_count": 1,
-      "subject_hash": "a68d0e7d2ec8",
-      "project": "huatex"
-    },
     "loan-renewal-huatex": {
       "task_id": null,
       "subject": null,

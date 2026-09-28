@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-27T05:46:35.101Z",
+  "updatedAt": "2026-09-28T04:59:09.554Z",
   "entries": {
     "memory:memory/2026-06-10.md:1:29": {
       "key": "memory:memory/2026-06-10.md:1:29",
@@ -6126,6 +6126,37 @@
         "lessons.md",
         "memory.md",
         "执行"
+      ]
+    },
+    "memory:memory/archive/2026-07-21.md:45:69": {
+      "key": "memory:memory/archive/2026-07-21.md:45:69",
+      "path": "memory/archive/2026-07-21.md",
+      "startLine": 45,
+      "endLine": 69,
+      "source": "memory",
+      "snippet": "## 🔧 20:31 Daryl指令：所有Agent备份记忆，准备重启Mac mini - **执行**: Balance记忆文件全部验证完好 - memory/identity.md ✅ - memory/active.md ✅ - memory/projects.md ✅ - memory/lessons.md ✅ - memory/search_methodology.md ✅ - memory/2026-07-21.md ✅ (本日记) - memory/2026-07-20.md ✅ (昨日日记) - memory/archive/ (历史归档) ✅ - **数据文件**: data/cost_ledger.jsonl (成本台账, append-only) 在磁盘上随workspace持久化 - **状态**: 所有记忆文件均为本地磁盘文件，重启不影响数据完整性 - **备注**: exec spawn 返回 EAGAIN（可能是系统准备重启的资源状态），文件读写正常 ## 📊 23:45 成本全量扫描（Cron） - **状态**: ⚠️ 已降级写文件，Kitty未确认 - **扫描结果**: 2232个.jsonl文件 | 台账总调用13,573（新增1045） - **今日**: $4.59 | **本月**: $37.82 | **全量**: $97.42 - **Token**: 737,509,150 | API调用: 13,573 - **按Agent**: Bryson $75.09(日$3.53) / Bal",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3540691018104553,
+      "maxScore": 0.3540691018104553,
+      "firstRecalledAt": "2026-09-28T04:59:09.554Z",
+      "lastRecalledAt": "2026-09-28T04:59:09.554Z",
+      "queryHashes": [
+        "c7b13f85911d"
+      ],
+      "recallDays": [
+        "2026-09-28"
+      ],
+      "conceptTags": [
+        "备份",
+        "memory/identity.md",
+        "memory/active.md",
+        "memory/projects.md",
+        "memory/lessons.md",
+        "memory/search-methodology.md",
+        "memory/2026-07-21.md",
+        "memory/2026-07-20.md"
       ]
     }
   }
