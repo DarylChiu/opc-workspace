@@ -15,6 +15,16 @@
       "injected_patterns": [],
       "started_at": null,
       "msg_count": 1
+    },
+    "balance-feishu-group": {
+      "task_id": "task-20260929080052",
+      "subject": "Daryl追问：记忆归档Cron为什么又失败（checker-log.jsonl 写入失败）",
+      "type": null,
+      "injected_patterns": [],
+      "started_at": "2026-09-29T08:00:52",
+      "msg_count": 1,
+      "subject_hash": "cbd2c60860bc",
+      "project": "self-evolution"
     }
   }
 }
