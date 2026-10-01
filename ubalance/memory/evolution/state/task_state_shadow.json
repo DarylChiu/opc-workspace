@@ -16,15 +16,15 @@
       "started_at": null,
       "msg_count": 1
     },
-    "balance-feishu-group": {
-      "task_id": "task-20260929080052",
-      "subject": "Daryl追问：记忆归档Cron为什么又失败（checker-log.jsonl 写入失败）",
-      "type": null,
+    "balance-feishu": {
+      "task_id": "task-20261001093216",
+      "subject": "越南税法问题：9月购买月饼分发给员工，是否属福利费、是否需缴PIT、是否需开赠送发票、其他入账方式及",
+      "type": "财务",
       "injected_patterns": [],
-      "started_at": "2026-09-29T08:00:52",
+      "started_at": "2026-10-01T09:32:16",
       "msg_count": 1,
-      "subject_hash": "cbd2c60860bc",
-      "project": "self-evolution"
+      "subject_hash": "81b06381799d",
+      "project": "越南税务"
     }
   }
 }
