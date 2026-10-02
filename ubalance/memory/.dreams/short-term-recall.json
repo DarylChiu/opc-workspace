@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-28T04:59:09.554Z",
+  "updatedAt": "2026-10-02T01:22:24.080Z",
   "entries": {
     "memory:memory/2026-06-10.md:1:29": {
       "key": "memory:memory/2026-06-10.md:1:29",
@@ -5476,24 +5476,26 @@
       "endLine": 33,
       "source": "memory",
       "snippet": "- 📌 最终交付物已归档在 `reports/`：管理办法 v1.0.5、明细表 v0.5.5（无保护版）、征集意见整理 - 📌 待 Daryl 新任务（OA 表单如需要 Excel 逻辑说明可随时提供） - 📌 越南差旅费管理办法征集意见整理：已融入 v1.0.5，无遗留 ## ⚠️ 待观察 - 自进化基建 L1 Phase 0 影子模式测试期（8/5→8/7）：今日起进入第 2 天，8/7 由 Kitty 评估 shadow_log 精度决定 Phase 1 放行或回退 - 8/5 单日成本 $7.60 偏高归因（Balance $3.08 + Self $2.90，疑与全量重扫有关）——8/6 数据已回落，继续观察 ## 📌 Session 活动摘要（近24h，跨 8/5 → 8/6 凌晨） - 8/5 主要活动均已在昨日日记完整记录（误餐补贴 v0.5.x 系列修复、管理办法 v1.0.x 交付、教训 3 条已写入 lessons.md） - 8/6 凌晨：本次 cron 审计执行（无其他 session 活动） ## 🕛 00:10 OPC 群聊汇报发送（Cron 2fe401f9 收尾） - 发送成功：messageId om_x100b6802afdda8a4df9a925b0da46a8 → chatId oc_7d71d54d87cbd265d9c3811bc59840b2 - **修正认知**: 历史日记记录的 `om_x100b6ae474f85ca0c02e04ea387e92e` 是消息 ID 而非群聊 ID；正确 OPC 群聊 ID",
-      "recallCount": 4,
+      "recallCount": 5,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.5145579874515533,
+      "totalScore": 1.8685184836387634,
       "maxScore": 0.3943400293588638,
       "firstRecalledAt": "2026-09-17T17:01:34.887Z",
-      "lastRecalledAt": "2026-09-23T17:01:28.669Z",
+      "lastRecalledAt": "2026-10-01T17:01:41.615Z",
       "queryHashes": [
         "f883fe147c7c",
         "96340f7cb7b0",
         "c5dad0c58b13",
-        "e175fee64a3a"
+        "e175fee64a3a",
+        "344bd1afd11e"
       ],
       "recallDays": [
         "2026-09-18",
         "2026-09-19",
         "2026-09-20",
-        "2026-09-24"
+        "2026-09-24",
+        "2026-10-02"
       ],
       "conceptTags": [
         "v1.0.5",
@@ -6157,6 +6159,37 @@
         "memory/search-methodology.md",
         "memory/2026-07-21.md",
         "memory/2026-07-20.md"
+      ]
+    },
+    "memory:memory/2026-10-01.md:28:42": {
+      "key": "memory:memory/2026-10-01.md:28:42",
+      "path": "memory/2026-10-01.md",
+      "startLine": 28,
+      "endLine": 42,
+      "source": "memory",
+      "snippet": "- [ ] **第 13 次复现的结构性误报**：建议 `audit.sh` 步骤 6「日记过短」检查增加 `hour < 1` 豁免（D0 期间本就不可能产出长日记，与步骤 7 已做的 D0 豁免同一逻辑）。**本周期未自行改动**（避免自行放宽审计口径），提请 Kitty/Daryl 确认后再改 - [ ] L0 启动校验刷新 `memory/compliance-status.json` - [ ] 日内自进化基建（shadow/checker/reflexion）运行后复查步骤 9.5 是否归零 ## 备注 - 本次任务 exec 调用 4 次（达护栏上限），此后改用只读工具，未超限 - 模型：deepseek/deepseek-v4-flash（如实标注） ## 越南税法咨询：中秋月饼发放（Daryl 09:31 提问） - 输出：月饼福利定性、PIT 判定（集体享用 vs 指名发放）、发票要求（ND 254/2026 汇总发票+清单）、替代入账方式与凭证清单 - 关键法源：Luật TNCN 109/2025/QH15（Đ3.2，2026税年适用）、TT 111/2013（细则参照）、CV 260/CTHNA-HKDCN 12/02/2025、ND 254/2026/NĐ-CP（Đ4.1+Phụ lục 5 a3）、ND 181/2025/NĐ-CP（Đ6）、Luật TNDN 67/2025/QH15 + ND 320/2025 + TT 20/2026 - 待确认：Luật 109 配套细则文件、CIT 福利费条款具体条号（已提示 Daryl 按当地审计师口",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3587577104568481,
+      "maxScore": 0.3587577104568481,
+      "firstRecalledAt": "2026-10-02T01:22:24.080Z",
+      "lastRecalledAt": "2026-10-02T01:22:24.080Z",
+      "queryHashes": [
+        "481f9cea2e51"
+      ],
+      "recallDays": [
+        "2026-10-02"
+      ],
+      "conceptTags": [
+        "audit.sh",
+        "kitty/daryl",
+        "memory/compliance-status.json",
+        "shadow/checker/reflexion",
+        "9.5",
+        "deepseek/deepseek-v4-flash",
+        "254/2026",
+        "109/2025/qh15"
       ]
     }
   }
