@@ -9,6 +9,7 @@ process_v2_6.py — v2.7.0 贷款材料整理(2023 HUATEX批次)
 import os, sys, re, glob
 sys.path.insert(0, os.path.dirname(__file__))
 from tokhai_extract import extract_tokhai, is_tokhai_filename, _norm
+import doc_fields as DF   # v2.8: L1 缺 日期/供应商 时，从材料补全
 from doc_classify import classify_keep_ex, attribute_file, pdf_text as _pdf_text
 import openpyxl
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
@@ -258,6 +259,33 @@ for rec in l1_rows:
         hs_cls = classify_by_hs(hs)
         inv_cls, inv_prod, _ = classify_by_invoice(dp, files)
         cls, src, cf = cross_validate(inv_cls, inv_prod, hs_cls, hs)
+
+    # v2.8: L1 无 发票日期/供应商/金额 时（如 L1 只是一张票号图）→ 从材料本身补全
+    try:
+        tk_best = picked[0] if picked else {}
+    except NameError:
+        tk_best = {}
+    if (not rec['l1_date']) or (not rec['supplier']) or (rec['amount'] is None):
+        try:
+            _txt = ''
+            for _f in files:
+                if _f.lower().endswith('.pdf') and any(k in _f for k in
+                        ['清关', '中英文明细', 'INVOICE', '合同', '明细', 'SC ']):
+                    try:
+                        _txt += _pdf_text(os.path.join(dp, _f)) + '\n'
+                    except Exception:
+                        pass
+            _F = DF.fill_fields(l1={'date': rec['l1_date'], 'supplier': rec['supplier'],
+                                    'amount': rec['amount']},
+                                tk=tk_best, inv_text=_txt)
+            rec['l1_date'] = rec['l1_date'] or _F['date']
+            rec['supplier'] = rec['supplier'] or _F['supplier']
+            if rec['amount'] is None:
+                rec['amount'] = _F['amount']
+            if _F['notes']:
+                note = (note + '；' if note else '') + '；'.join(_F['notes'])
+        except Exception as _e:
+            note = (note + '；' if note else '') + f'⚠️字段补全失败:{_e}'
 
     out_rows.append({'stt': rec['stt'], 'inv': inv, 'so': so, 'date': date,
                      'amount': rec['amount'], 'l1_date': rec['l1_date'], 'supplier': rec['supplier'],

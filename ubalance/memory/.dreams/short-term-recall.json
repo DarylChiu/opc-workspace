@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-02T01:22:24.080Z",
+  "updatedAt": "2026-10-03T07:47:22.962Z",
   "entries": {
     "memory:memory/2026-06-10.md:1:29": {
       "key": "memory:memory/2026-06-10.md:1:29",
@@ -2339,13 +2339,13 @@
       "endLine": 32,
       "source": "memory",
       "snippet": "- 已session_send问Kitty，Kitty回复：当前Workflow只是可视化编辑器，无执行引擎 - 需小枫开发Workflow执行引擎，工时约30-42h - 短期替代：Daryl写「任务模板」说明文件，Balance按模板静默执行全部步骤后一次性回复 ### 🔴 贷款材料整理项目启动（17:24-17:31）⚠️ 此前遗漏，6/25从session恢复 - 17:24 Daryl发送 `贷款材料整理-任务模版.xlsx`，解析为5阶段工作流： ① 从L1-Raw Materials提取发票号/合同号 → ② 关键字在RM-Database中OCR匹配PDF发票+报关单+提单 → ③ 输出关键字段到汇总Excel → ④ 循环全部发票号 → ⑤ 错误标记 - 17:27 发送 `L1-Raw Materials-10,125usd.xlsx`，成功读取：10条发票记录，供应商HUA FENG GROUP，总金额$10,125.75 - 17:31 开始发送RM-Database拆分包（RM-Database-1of 10.zip已接收），后续9个未传完 - ⚠️ post-op.sh关键词太窄→此段未写入日记→6/22暂停时也未同步到active.md - ⏸️ 6/22 Daryl指令暂缓",
-      "recallCount": 10,
+      "recallCount": 11,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 3.824101585149765,
+      "totalScore": 4.219670426845551,
       "maxScore": 0.40819894969463344,
       "firstRecalledAt": "2026-07-21T02:21:42.626Z",
-      "lastRecalledAt": "2026-09-05T09:22:50.559Z",
+      "lastRecalledAt": "2026-10-03T07:47:22.962Z",
       "queryHashes": [
         "f89cc9b709ed",
         "f298ccadf4de",
@@ -2354,13 +2354,15 @@
         "ea9487caee9b",
         "b75b01650727",
         "07c1b5cf7033",
-        "96f04be8e04c"
+        "96f04be8e04c",
+        "35ae0bb7abea"
       ],
       "recallDays": [
         "2026-07-21",
         "2026-07-22",
         "2026-08-17",
-        "2026-09-05"
+        "2026-09-05",
+        "2026-10-03"
       ],
       "conceptTags": [
         "已session-send问kitty",
@@ -2799,21 +2801,23 @@
       "endLine": 92,
       "source": "memory",
       "snippet": "- **输入**: `6,887,555.02usd 贷款材料/` (L1 103条 STT242-410 + RM-Database 12月/771子目录) - **执行v2.1工作流**: 7步全自动 (输入验证→数据提取→目录匹配→材料收集→OCR验证→质检→输出) - **产出到桌面**: `Balance贷款材料自动化处理-6,887,555.02usd/` ### 处理过程关键发现 1. **-1后缀匹配问题**: 13条-1发票UNMATCHED → 发现RM目录名不含-1, 修复为base目录搜索 2. **设备Invoice模式不同**: HMM/HMK设备类不含\"中英文明细\" → 放宽为\"清关资料\"即匹配 3. **报关单命名多样**: 非ToKhaiHQ格式, 用 `发票号_海关号.xls` → 增加数字模式识别 4. **嵌套子目录**: HMAEFZ240104文件在子目录 → 改为递归扫描 5. **NBSP编码干扰**: Toshiba→Desktop复制时遇到权限错误, 改为扫描现有文件 ### 最终结果 - **100/103 OK (97.1%)**, 0 INCOMPLETE, 3 UNMATCHED - UNMATCHED: RE-VN240904 + RE-2024-054 (RE退款单, 非进口发票) + HMVFZ240072-1(目录缺失) - Outcome1 Excel (103行+公式), Outcome2 100个子目录, process_results.json, 处理报告 ### 工作流模式确定 - Daryl选",
-      "recallCount": 3,
+      "recallCount": 4,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.2088910698890687,
-      "maxScore": 0.48008354306221007,
+      "totalScore": 1.7207448869943618,
+      "maxScore": 0.5118538171052932,
       "firstRecalledAt": "2026-07-29T08:26:34.847Z",
-      "lastRecalledAt": "2026-09-05T09:31:15.216Z",
+      "lastRecalledAt": "2026-10-03T07:47:22.962Z",
       "queryHashes": [
         "96b4acb02fbb",
         "96f04be8e04c",
-        "7abf980fe7a4"
+        "7abf980fe7a4",
+        "35ae0bb7abea"
       ],
       "recallDays": [
         "2026-07-29",
-        "2026-09-05"
+        "2026-09-05",
+        "2026-10-03"
       ],
       "conceptTags": [
         "555.02usd",
@@ -4051,18 +4055,20 @@
       "endLine": 54,
       "source": "memory",
       "snippet": "- **Daryl安排同事验收昨晚完成的贷款材料整理项目** - **收到5项验收反馈**，记录后一次性修正： ### 问题1 · 干扰文件 - Seq1目录混入HMKFZ240756（无-1后缀）的Invoice/Sales Confirmation/Packing List - 要求：只保留目标发票号精确匹配的材料 - **修复**：全量排查10个seq，发现8个有干扰文件，全部移除 ### 问题2 · B/L文档类型分类错误 - Seq2的MV9450L根本就不是B/L/Seaway Bill/Arrival Note - Daryl纠正：不是\"不匹配发票\"，是这个PDF本身就不属于B/L类材料 - **修复**：移除MV9450L，B/L待Daryl确认正确文件 ### 问题3 · Seq7重大遗漏 ⚠️ - Invoice/Sales Confirmation/Packing List完全漏收（RM-Database/57.中明确存在） - mv3750l不是B/L类材料 - 正确B/L：AN XMNA005234 + HAWB_731-7835（空运到越南证明） - Daryl定性为\"重大失误\" - **修复**：补收Invoice PDF+XLSM，替换B/L为AN+HAWB ### 问题4 · Seq9补充 - Invoice漏收（RM-Database/75.中存在），仅空运快递单元B/L - **修复**：补收Invoice，备注无B/L ### 问题5 · Outcome1 Excel格式 - ①日期写入Ngày Tháng Năm 2026处",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.3560749888420105,
-      "maxScore": 0.3560749888420105,
+      "totalScore": 0.7656567722558976,
+      "maxScore": 0.409581783413887,
       "firstRecalledAt": "2026-08-09T02:30:05.772Z",
-      "lastRecalledAt": "2026-08-09T02:30:05.772Z",
+      "lastRecalledAt": "2026-10-03T07:47:22.962Z",
       "queryHashes": [
-        "eeda30f9bbe1"
+        "eeda30f9bbe1",
+        "35ae0bb7abea"
       ],
       "recallDays": [
-        "2026-08-09"
+        "2026-08-09",
+        "2026-10-03"
       ],
       "conceptTags": [
         "无-1后缀",
@@ -4113,21 +4119,23 @@
       "endLine": 76,
       "source": "memory",
       "snippet": "### 问题5 · Outcome1 Excel格式 - ①日期写入Ngày Tháng Năm 2026处 - ②日期格式YYYY/MM/DD - ③产品列留空 - ④删除表内子汇总 - 补充a：供应商≠HUA FENG时按实际更新B/C/D列 - 补充b：超17行自动插行 - **修复**：4项格式修正+TỔNG CỘNG公式修正，全部完成 ### 技术问题 - NBSP(\\xa0)编码导致文件匹配失败，需模糊匹配 - 干扰检测逻辑初版有bug（日期\"12-19\"含\"-1\"子串），已修正 ### 待确认项 - Seq2 B/L：RM-Database/26.中有I228475630*/MV5150LHT，需Daryl指定 - Seq4 mv9650l.pdf是否为B/L（RM-Database有BL2305342010.PDF） - Seq10 AM2502SSG310(2).pdf类型 ### 产出 - `fix_v2.py` + `fix_v2_1.py` 修复脚本 - `process_results.json` 已更新（含fix_v2记录） - Outcome1 Excel v2 已保存 - Outcome2 10个子目录已清理/补充 ## 23:10 贷款材料整理 — 6,887,555.02usd 批次实战处理 - **Daryl要求**: 跳过验收，直接按v2.1工作流实战，输入在Toshiba硬盘 - **输入**: `6,887,555.02usd 贷款材料/` (L1 103条 STT242-410 + RM-Database 12月/771子目",
-      "recallCount": 3,
+      "recallCount": 4,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.149696707725525,
-      "maxScore": 0.4388461798429489,
+      "totalScore": 1.597624307870865,
+      "maxScore": 0.44792760014533994,
       "firstRecalledAt": "2026-08-09T02:30:10.113Z",
-      "lastRecalledAt": "2026-09-05T09:31:15.216Z",
+      "lastRecalledAt": "2026-10-03T07:47:22.962Z",
       "queryHashes": [
         "89b3b107fe48",
         "96f04be8e04c",
-        "7abf980fe7a4"
+        "7abf980fe7a4",
+        "35ae0bb7abea"
       ],
       "recallDays": [
         "2026-08-09",
-        "2026-09-05"
+        "2026-09-05",
+        "2026-10-03"
       ],
       "conceptTags": [
         "2日期格式yyyy/mm/dd",
@@ -4882,18 +4890,20 @@
       "endLine": 72,
       "source": "memory",
       "snippet": "- 产出: Outcome1-v2.6-ALL-20260715_1445.xlsx + Outcome2-v2.6-ALL-20260715_1447/ - 模型：deepseek/deepseek-v4-pro ## 16:xx · 越南PIT速查更新（Law 109/2025/QH15 + Res.110/2025）Daryl指令 - 触发: Daryl发Nghị định 253/2025(合作社基金,已速览)后指令\"越南PIT最新规定,总结推理,更新PIT速查\" - 联网核查(Crowe/Rödl/Forvis Mazars/PwC/MoF): 新PIT法109/2025/QH15(2025-12-10通过,替代04/2007),总体2026-07-01生效,工资条款追溯2026全年; 家庭扣除Res.110/2025(2026-01-01起) - 关键更新: ①5档累进(砍15%/25%,2-3档降10%/20%) ②家庭扣除15.5M/6.2M(+41%) ③个体户免税门槛升500M+中型户15%利润选项 ④黄金转让0.1%(7/1) ⑤新增免税:加班夜班溢价/未休年假 - 🔴 资本侧收紧(对M&A最相关): 非上市/非公众公司股份转让 从0.1%证券税 收拢为20%利得(成本不可确定则2%毛额); 0.1%仅剩真·上市证券。正对应之前Daryl纠正的0.1%vs20%点 - 推理: 20%利得vs2%毛额临界点=利得率10%×转让价; \"先分红5%再转让\"策略更重要 - ⚠️ 资本/不动产/医疗教育扣除细节在**起草中细则(draft)**,已在文件标🟡,",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.38320791125297543,
-      "maxScore": 0.38320791125297543,
+      "totalScore": 0.7700953751802444,
+      "maxScore": 0.38688746392726897,
       "firstRecalledAt": "2026-08-21T08:46:08.978Z",
-      "lastRecalledAt": "2026-08-21T08:46:08.978Z",
+      "lastRecalledAt": "2026-10-03T07:11:45.956Z",
       "queryHashes": [
-        "1cee27bc9f9d"
+        "1cee27bc9f9d",
+        "83a3ccac4bfb"
       ],
       "recallDays": [
-        "2026-08-21"
+        "2026-08-21",
+        "2026-10-03"
       ],
       "conceptTags": [
         "outcome2-v2.6-all-20260715-1447",
@@ -5290,18 +5300,20 @@
       "endLine": 23,
       "source": "memory",
       "snippet": "# 2026-06-25 日记 ## 贷款材料整理 — 项目恢复并完成 - **22:00** Daryl询问贷款材料整理项目进度 - **发现**: 记忆系统完全丢失了此项目（active.md/日记均无记录），从session transcript恢复 - **22:05** 定位文件: `/Users/zhaoyuzhao/Desktop/Balance贷款材料自动化处理/` - **22:07** 完成10条发票的5阶段循环处理： - 全部10条发票号→RM-Database目录映射成功 - Outcome1明细表生成完毕（$10,125.75） - Outcome2文件夹10个子目录，每目录含Invoice/报关单/B/L - **处置**: 记忆系统漏洞已修复，active.md已更新 ## ⚠️ 记忆系统问题 - 贷款材料整理项目（6月20日启动）在记忆文件中完全缺失 - 根因: 6月20日处理时未写入active.md/日记 - 修复: 已从session transcript恢复并补写 ## 待办 - ⏳ 等待Daryl反馈贷款材料处理结果 - ⏳ 等待Daryl的AI Workflow详细计划 - ⏳ 等待越南会计差错具体清单 - ⏳ RM-Database共103条目录，后续可能需批量处理",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.4109953045845032,
+      "totalScore": 0.8205628186464309,
       "maxScore": 0.4109953045845032,
       "firstRecalledAt": "2026-09-05T09:22:50.559Z",
-      "lastRecalledAt": "2026-09-05T09:22:50.559Z",
+      "lastRecalledAt": "2026-10-03T07:47:22.962Z",
       "queryHashes": [
-        "96f04be8e04c"
+        "96f04be8e04c",
+        "35ae0bb7abea"
       ],
       "recallDays": [
-        "2026-09-05"
+        "2026-09-05",
+        "2026-10-03"
       ],
       "conceptTags": [
         "active.md/日记均无记录",
@@ -5321,18 +5333,20 @@
       "endLine": 27,
       "source": "memory",
       "snippet": "# 2026-06-28 日记 ## 概述 - Daryl交互日，贷款材料自动化整理 v2.0→v2.3 全流程开发+验收 ## 00:02 记忆系统审计 - **触发**: Cron 每日归档任务 (audit.sh --report) - **审计结果**: 1项自动修复(日记骨架)，3浅层+2深层告警（午夜边界误报） - **前日回顾**: 2026-06-27（周六）无用户交互 ## 10:33 Daryl要求清理Outcome2干扰文件 - 删除15个 `1_*` 运费VAT Invoice、163个 `清关资料中英文明细` xlsm/xlsx、1个 `~$`临时文件，合计179文件 - **⚠️ 失误**: 初版误删清关资料PDF，Daryl立即指出→AppleScript恢复→Python精确还原 - **教训**: Daryl说\"Excel文件\"=仅xlsm/xlsx，PDF的invoice/SC/packing list必须保留 ## 16:00-17:20 贷款材料整理工作流 v2.0→v2.3 全流程 ### 版本演进 | 版本 | 完成率 | 数据源 | 核心改进 | |------|:---:|------|------| | v2.1 | 50.5% | RM-Database原始 | 基准线（pdfplumber+openpyxl） | | v2.2 | 84.0% | 预收集Outcome2-材料包 | B/L内容识别（海运关键词+船公司列表） | | **v2.3** | **96.1%** | RM-Database原始 | OCR",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.35369818210601806,
-      "maxScore": 0.35369818210601806,
+      "totalScore": 0.7675054877996444,
+      "maxScore": 0.4138073056936264,
       "firstRecalledAt": "2026-09-05T09:31:15.216Z",
-      "lastRecalledAt": "2026-09-05T09:31:15.216Z",
+      "lastRecalledAt": "2026-10-03T07:47:22.962Z",
       "queryHashes": [
-        "7abf980fe7a4"
+        "7abf980fe7a4",
+        "35ae0bb7abea"
       ],
       "recallDays": [
-        "2026-09-05"
+        "2026-09-05",
+        "2026-10-03"
       ],
       "conceptTags": [
         "v2.0",
@@ -5858,18 +5872,20 @@
       "endLine": 23,
       "source": "memory",
       "snippet": "- **②财务审核**（新增）：问题费用必须处理完毕（补传缺失单据/修改金额/修改费用类型）→ 才可勾选点击「生成凭证」→ 传输到③ - **③账务处理**（现凭证模块）：接收②数据，勾选分组+生成凭证（VAT分离/智能分组保留） - **关键约束**: 三节点顺序解锁，②问题费用不清零不能生成凭证 - **Daryl 要求**: 先深度理解+总结需求回放，确认理解无误后再动工（本次不写代码） - **产出**: 需求回放已发，Daryl 确认三步流程理解无误 + 答复 3 决策点（10:00） - **3 决策点已确认**: ①报销组=同次差旅自动分组+手动拖拽（可拖到其他报销组/待报销池；水单=佐证发票真实性的单据）②生成凭证勾选粒度=费用明细行，可跨报销单勾选（同一出差事项合一张凭证）③单据级预审批状态（一费用多单据各标红/黄/绿）；问题费用处理=补传重审 或 手动确认无误转绿；问题清零后置信度≥90%/＜90%均可勾选生成凭证（90%是人工介入触发线非凭证门槛） - **数据模型 v2**: documents 表（费用→单据一对多）+ reimbursement_orders/order_items + 待报销池标记 + review_attachments/decisions",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.3690671920776367,
-      "maxScore": 0.3690671920776367,
+      "totalScore": 0.765663781762123,
+      "maxScore": 0.39659658968448636,
       "firstRecalledAt": "2026-09-26T06:28:38.642Z",
-      "lastRecalledAt": "2026-09-26T06:28:38.642Z",
+      "lastRecalledAt": "2026-10-03T07:47:22.962Z",
       "queryHashes": [
-        "1cb48f9758a9"
+        "1cb48f9758a9",
+        "35ae0bb7abea"
       ],
       "recallDays": [
-        "2026-09-26"
+        "2026-09-26",
+        "2026-10-03"
       ],
       "conceptTags": [
         "补传缺失单据/修改金额/修改费用类型",
@@ -6190,6 +6206,192 @@
         "deepseek/deepseek-v4-flash",
         "254/2026",
         "109/2025/qh15"
+      ]
+    },
+    "memory:memory/archive/2026-08-12.md:24:33": {
+      "key": "memory:memory/archive/2026-08-12.md:24:33",
+      "path": "memory/archive/2026-08-12.md",
+      "startLine": 24,
+      "endLine": 33,
+      "source": "memory",
+      "snippet": "- **交付**: `reports/仓储突击检查-仓储部配合清单-v1.0-中越双语-20260812.docx`（5项：人员陪同/现场设备支持/现场操作配合/差异确认签字/整改闭环；表头蓝底；textutil验证通过） ## 总结报告修订 + 项目收尾决策（Daryl 四点反馈） - ①M7成本平衡点：领导「一刀切」按20个料号执行，平衡点转 OPC 层面讨论，Huatex 不再调整（反形式主义初衷） - ②体系归属：纯存货内控板块；**内控体系应建立在已建好的核算体系之上、服务于核算体系**——OPC 后续建设顺序先核算后内控 - ③联动勾稽：删全部弱勾稽项，细化留待 OPC 体系建设时专项澄清（本次不拓展） - ④抽样插件**终止**；今后减少对 Huatex 适用的工具类项目开发（同事接受度低、费用报销MVP已有敌意）——**「我们不拯救任何人」** - 报告已修订至 `reports/仓储专项检查-总结报告-20260812.md`，待 Daryl 确认后归档 - **8/12 看板推送**: 报告已推送 OPC看板产物模块（Balance #1，score=41；机制：工作区根目录=_root 优先项目+新鲜文档加成；reports/ 下会被前15名挤压）；预览接口验证 HTTP 200；隧道实测 https://cia-job-strap-agricultural.trycloudflare.com（MEMORY.md 已更新）",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.43640457689762113,
+      "maxScore": 0.43640457689762113,
+      "firstRecalledAt": "2026-10-03T07:25:03.936Z",
+      "lastRecalledAt": "2026-10-03T07:25:03.936Z",
+      "queryHashes": [
+        "ef2f43f0b208"
+      ],
+      "recallDays": [
+        "2026-10-03"
+      ],
+      "conceptTags": [
+        "人员陪同/现场设备支持/现场操作配合/差异确认签字/整改闭环",
+        "reports/仓储专项检查-总结报告-20260812.md",
+        "8/12",
+        "memory.md",
+        "交付",
+        "reports",
+        "突击",
+        "检查"
+      ]
+    },
+    "memory:memory/archive/2026-08-12.md:32:43": {
+      "key": "memory:memory/archive/2026-08-12.md:32:43",
+      "path": "memory/archive/2026-08-12.md",
+      "startLine": 32,
+      "endLine": 43,
+      "source": "memory",
+      "snippet": "- **8/12 看板推送**: 报告已推送 OPC看板产物模块（Balance #1，score=41；机制：工作区根目录=_root 优先项目+新鲜文档加成；reports/ 下会被前15名挤压）；预览接口验证 HTTP 200；隧道实测 https://cia-job-strap-agricultural.trycloudflare.com（MEMORY.md 已更新） ## ✅ 仓储专项检查项目归档完成（8/12） - Daryl 确认归档；warehouse-inspection-sop → 📦 archived 100%（project_Balance.md 已更新，M5 done） - active.md 仓储段移入归档状态；交付物全部留存 reports/ - 项目遗产：突击检查SOP（执行中）+ 配合清单 + 方法论7条（lessons.md）+ 看板产物 #1 ## 🚀 费用报销MVP 8771 验收准备（8/12 下午） - **8771 演示实例已启动**: PID 36998（PORT=8771 python3 server.py），HTTP 200；新进程自动带上 8/10 CQT 修复 - **隧道**: https://mice-lone-ghz-favorites.trycloudflare.com （HTTP 200 验证；首次域名遇 NXDOMAIN 负缓存，重启换域名解决；无 sudo 无法清 DNS 缓存，后续遇同类问题直接重启 cloudflared） - **8765 看板隧道**: watchdog 13:40 重建为 p",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.41872991919517516,
+      "maxScore": 0.41872991919517516,
+      "firstRecalledAt": "2026-10-03T07:25:03.936Z",
+      "lastRecalledAt": "2026-10-03T07:25:03.936Z",
+      "queryHashes": [
+        "ef2f43f0b208"
+      ],
+      "recallDays": [
+        "2026-10-03"
+      ],
+      "conceptTags": [
+        "8/12",
+        "memory.md",
+        "warehouse-inspection-sop",
+        "project-balance.md",
+        "active.md",
+        "lessons.md",
+        "server.py",
+        "8/10"
+      ]
+    },
+    "memory:memory/archive/2026-08-15.md:61:72": {
+      "key": "memory:memory/archive/2026-08-15.md:61:72",
+      "path": "memory/archive/2026-08-15.md",
+      "startLine": 61,
+      "endLine": 72,
+      "source": "memory",
+      "snippet": "- POST /api/report 两次：①projects（差旅费保留+外租宿舍新增，M1-M4 done/M5 active 90%，artifactLink=终版v2含税口径xlsx）②tasks（7条：OA交接in_progress+职级源文件/65vs63/服务费含税/班车口径/空调归属/gen_excel对齐 pending） - 验证：200 ok ×2，agent_reports.json落盘确认2项目，agent_tasks.json 7条；预览链接HTTP 200 - 接口规范：POST /api/report {agent, type: projects|costs|tasks, data}；projects/tasks为整体覆盖，推时必须带上全部存量 - 模型: deepseek/deepseek-v4-flash ## 12:40 模式定稿（Daryl：报告已交→剩余问题P2；定模板+接任务模式，1天SLA） - Daryl 教学：报告已交 = 结论被接受，剩余问题（职级源文件/65vs63/服务费含税/班车口径/空调归属）全部降级P2非阻塞，不再追问 - 产出：①`reports/小专题报告模板-v1.0-20260815.md`（5 Sheet结构：报告=决策信息/1-明细/2-测算/3-基准/4-口径与假设；强制检查清单7项）②`reports/小专题报告模板-空白-v1.0-20260815.xlsx` ③`reports/接任务-提供资料-替代分析-模式-v1.0-20260815.md`（P0/P1/P2分级+替代三件套+8h流程+1天",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3964652240276336,
+      "maxScore": 0.3964652240276336,
+      "firstRecalledAt": "2026-10-03T07:25:03.936Z",
+      "lastRecalledAt": "2026-10-03T07:25:03.936Z",
+      "queryHashes": [
+        "ef2f43f0b208"
+      ],
+      "recallDays": [
+        "2026-10-03"
+      ],
+      "conceptTags": [
+        "api/report",
+        "m1-m4",
+        "done/m5",
+        "oa交接in-progress",
+        "agent-reports.json落盘确认2项目",
+        "agent-tasks.json",
+        "projects/tasks为整体覆盖",
+        "deepseek/deepseek-v4-flash"
+      ]
+    },
+    "memory:memory/archive/2026-08-15.md:76:87": {
+      "key": "memory:memory/archive/2026-08-15.md:76:87",
+      "path": "memory/archive/2026-08-15.md",
+      "startLine": 76,
+      "endLine": 87,
+      "source": "memory",
+      "snippet": "- 模板v1.1模块化设计：核心固定层（报告+4-口径与假设）+ 模块选装层（5a对比合理性/5b预实差异/5c趋势/5d结构/5e对标/5f效益ROI/5g风险合规/5h敏感性）+ 专题→模块映射表（5类专题） - 产出：reports/小专题报告模板-v1.1-模块化拓展-20260815.md（方法论+设计），等Daryl核对 - 模型: deepseek/deepseek-v4-flash + Brave websearch×2轮 ## 13:30 看板产物模块问题修复（Daryl：产物与预览看不到模板v1.1） - 根因：reports/ 有104个文件，看板「每项目最多5个」规则 → 新md被同项目高分旧文件挤掉（reports不在balance priorityProjects，_root才是） - 修复：4个关键交付物复制到工作区根目录（_root=优先项目+新鲜加成，看板设计意图）→ 刷新后 score 41-43 霸榜产物模块前4 - 项目卡片 artifactLink 同步指向根目录副本；刷新接口 POST /api/artifacts/refresh（urllib 有编码问题，用 curl） - 经验：balance 交付物要上产物模块 → 放根目录（_root），放 reports/ 会被同项目5个上限挤压 - 模型: deepseek/deepseek-v4-flash ## 14:20 新项目：越南不良品（200吨账外）出口方案与风险调研（Daryl布置，流氓会计师角色）",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3929579049348831,
+      "maxScore": 0.3929579049348831,
+      "firstRecalledAt": "2026-10-03T07:25:03.936Z",
+      "lastRecalledAt": "2026-10-03T07:25:03.936Z",
+      "queryHashes": [
+        "ef2f43f0b208"
+      ],
+      "recallDays": [
+        "2026-10-03"
+      ],
+      "conceptTags": [
+        "模板v1.1模块化设计",
+        "4-口径与假设",
+        "deepseek/deepseek-v4-flash",
+        "产物与预览看不到模板v1.1",
+        "41-43",
+        "api/artifacts/refresh",
+        "模板",
+        "v1.1"
+      ]
+    },
+    "memory:memory/archive/2026-08-15.md:68:79": {
+      "key": "memory:memory/archive/2026-08-15.md:68:79",
+      "path": "memory/archive/2026-08-15.md",
+      "startLine": 68,
+      "endLine": 79,
+      "source": "memory",
+      "snippet": "- 产出：①`reports/小专题报告模板-v1.0-20260815.md`（5 Sheet结构：报告=决策信息/1-明细/2-测算/3-基准/4-口径与假设；强制检查清单7项）②`reports/小专题报告模板-空白-v1.0-20260815.xlsx` ③`reports/接任务-提供资料-替代分析-模式-v1.0-20260815.md`（P0/P1/P2分级+替代三件套+8h流程+1天SLA） - active.md 外租宿舍段已更新为「报告已交」状态 - 教训入 lessons.md（报告已交后剩余问题降级） - 模型: deepseek/deepseek-v4-flash ## 13:10 模板拓展性（Daryl：模式+模板推看板，考虑可拓展性，websearch财务BP方法论） - 看板推送：模式v1.0 + 模板v1.0 + 模板v1.1（4项目，预览全HTTP 200） - websearch两轮（中英）：财务BP费用分析三要素（主体/维度/方法）+ FP&A八大分析类型（预实差异/趋势/对标/结构/效益/敏感性/合规/供应商比价）+ \"术vs道\"原则（深入业务给建议） - 模板v1.1模块化设计：核心固定层（报告+4-口径与假设）+ 模块选装层（5a对比合理性/5b预实差异/5c趋势/5d结构/5e对标/5f效益ROI/5g风险合规/5h敏感性）+ 专题→模块映射表（5类专题） - 产出：reports/小专题报告模板-v1.1-模块化拓展-20260815.md（方法论+设计），等Daryl核对 - 模型: deepseek/deepseek-v4",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3790879279375076,
+      "maxScore": 0.3790879279375076,
+      "firstRecalledAt": "2026-10-03T07:25:03.936Z",
+      "lastRecalledAt": "2026-10-03T07:25:03.936Z",
+      "queryHashes": [
+        "ef2f43f0b208"
+      ],
+      "recallDays": [
+        "2026-10-03"
+      ],
+      "conceptTags": [
+        "reports/小专题报告模板-v1.0-20260815.md",
+        "决策信息/1-明细/2-测算/3-基准/4-口径与假设",
+        "p0/p1/p2分级",
+        "active.md",
+        "lessons.md",
+        "deepseek/deepseek-v4-flash",
+        "模式v1.0",
+        "模板v1.0"
+      ]
+    },
+    "memory:memory/archive/2026-07-15.md:1:13": {
+      "key": "memory:memory/archive/2026-07-15.md:1:13",
+      "path": "memory/archive/2026-07-15.md",
+      "startLine": 1,
+      "endLine": 13,
+      "source": "memory",
+      "snippet": "# 2026-07-15 日记 ## 09:23 · 贷款材料 v2.6.2 — Daryl 飞书新规则（贷款材料包=五类全保留） - **Daryl 两轮反馈（承接 7/14 v2.6 THÁNG1-6 输出）**: 第一轮我错误理解为“SC该剔除”；第二轮明确纠正： 1. **贷款材料包=五类文件全保留**：Invoice（货物/设备，物流发票除外）+ Sales Contract/Confirmation + Packing List + B/L或Sea Waybill + ToKhai（已通关Excel版） 2. “不管是2个、5个还是10个文件”——全部收进包；销售合同分几份扫描PDF也全放进去 3. 序号2/3 (NSLMYR221078/221081) 的 Invoice 合订在 B/L或Sea Waybill 文件内 → 需**标记出来**，不能误报\"缺B/L\" - **重写分类器（v2.6.2）**: - `doc_classify.py`: 重构为多标签 `classify_keep`（一份PDF可同时含多类）；保留=Invoice/SALES_CONTRACT/PACKING_LIST/BL/SWB/AWB/TOKHAI_QDTQ；排除=FREIGHT/ARRIVAL_NOTICE/CO_CERT/DONG THUE/Excel副本 - ⭐纠正前一版：把独立SC剔除是错的，SC是五类之一必须保留（但SC标题页不单独充当Invoice）；运费发票不计Invoice - 合订标记：同文件含Invoice页+提单页 → 同时满足两项",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.39605781733989714,
+      "maxScore": 0.39605781733989714,
+      "firstRecalledAt": "2026-10-03T07:47:22.962Z",
+      "lastRecalledAt": "2026-10-03T07:47:22.962Z",
+      "queryHashes": [
+        "35ae0bb7abea"
+      ],
+      "recallDays": [
+        "2026-10-03"
+      ],
+      "conceptTags": [
+        "v2.6.2",
+        "7/14",
+        "v2.6",
+        "tháng1-6",
+        "货物/设备",
+        "contract/confirmation",
+        "b/l或sea",
+        "序号2/3"
       ]
     }
   }
