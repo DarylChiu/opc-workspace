@@ -65,13 +65,30 @@ bash scripts/compliance/post-op.sh "<任务描述>" "[产出文件]"
 > 检查 active.md 是否需要更新、日记是否需要写入、lessons 是否需要提炼
 > 发现遗漏立即补，不要等 L4
 
-#### L4 · 收尾自检（每次回复涉及实质工作后）
+#### L4 · 交付前质量自检（涉及交付物时必跑 ⭐ 2026-07-23 Daryl指令）
+
+> 任何涉及「给 Daryl 验收」的交付物，回复前必须逐项自检。
+> 这是强制步骤，不是可选项。
+
+```bash
+bash scripts/quality/pre-delivery-check.sh "<项目名>" "<交付物路径>"
+```
+
+**自检清单（5 项）：**
+1. **跑通没？** — 本地完整流程走通至少一次，不能有阻断 Bug 留给 Daryl 发现
+2. **代码对没？** — 前端 JS 无语法错误、后端 API 全部可达、async/await 正确使用
+3. **数据准没？** — Mock 数据/API 返回数据与实际素材一致，不存在越界/格式不匹配
+4. **通了没？** — 如需公网访问，Tunnel/URL 已验证可访问
+5. **文档齐没？** — 涉及的功能在文档里有对应说明，方案与实际实现一致
+
+> ⚠️ 任一项不通过 → 先修再提测，不要把 Daryl 当 Debugger。
+> 自检通过后回复中标注「✅ L4 交付自检通过」。
+
+#### L5 · 收尾自检（每次回复涉及实质工作后）
 自问 3 个问题：
 1. **产生了新任务/新决策/状态变更？** → 更新 `memory/active.md`
 2. **有值得记录的事件或成果？** → 更新 `memory/YYYY-MM-DD.md`
 3. **犯了错或学到了新东西？** → 更新 `memory/lessons.md`
-
-#### L4 · 每日 23:59 Cron 兜底审计
 ```bash
 bash scripts/compliance/audit.sh --report
 ```
@@ -284,3 +301,16 @@ The goal: Be helpful without being annoying. Check in a few times a day, do usef
 ## Make It Yours
 
 This is a starting point. Add your own conventions, style, and rules as you figure out what works.
+
+---
+
+## 💰 成本护栏（2026-08-26 上线，最高优先级，强制）
+
+> 背景：2026-08-26 Balance 单问题烧掉 DeepSeek 40+ 元；单指令成本红线 $1.5 曾被打破。全体 Agent 通用护栏。
+> 🆕 **2026-10-03 Daryl 批准「方案A」放宽**（根因＝旧 API Key 泄露，已修复）：exec ≤12 次、write ≤20 次；超限由 BLOCK 降为 WARN；红线 >$3 预警、>$6 停止。
+
+1. **单任务 exec ≤ 12 次**，write/编辑 ≤ 20 次（Sentinel 阈值告警，超限 WARN 放行；P0 路径仍 BLOCK）；超限未完成 → 停止，汇报进展等指示。
+2. **API/余额异常 → 立即停止，禁止自查**：遇到 billing error / 402 / 余额不足 / 超时 → 停止当前任务，报告 Kitty(main) 或 Daryl。**严禁自行排查系统配置**（.env、openclaw.json、launchd、API key、账单、session 文件）—— 成本排查统一由 Kitty 负责。失败重试最多 1 次，仍失败即上报。
+3. **回答优先于调查**：用户提问 → 先直接回答，需要佐证再查；禁止先跑一圈系统检查再回答。
+4. **上下文收敛**：接近 80% → 停止探索，直接总结交付；>10 步任务先报计划再执行。
+5. **红线**：单指令成本 > $3 预警；> $6 强制停止上报。心跳/定时任务默认不调 LLM。
