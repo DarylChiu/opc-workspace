@@ -1,10 +1,16 @@
 # 当前活跃任务
 
-> 最后更新: 2026-10-01 00:04 GMT+7
+> 最后更新: 2026-10-03 00:04 GMT+7
 
-> 📌 9/22-9/29 说明：9/17 全部 cron 恢复后，每日 23:59 记忆归档 + 成本扫描持续正常运行；9/22 起无项目级状态变更，下方各项目状态维持不变。9/26 Balance 交付「开票依据三件套模版」（华特中秋客户礼品），已 DM Daryl；同日上报 gemini-3-flash-preview API key not valid 环境异常（待 Kitty/Daryl 处理，未自查）。
+> 📌 9/22-10/3 说明：9/17 全部 cron 恢复后，每日 23:59 记忆归档 + 成本扫描持续正常运行；9/22 起无项目级状态变更，下方各项目状态维持不变。9/26 Balance 交付「开票依据三件套模版」（华特中秋客户礼品），已 DM Daryl；同日上报 gemini-3-flash-preview API key not valid 环境异常（待 Kitty/Daryl 处理，未自查）。10/1 Balance 交付「月饼签收扫描件 OCR 识别」（匹配 1,264/1,631 人，94.8% 有签收墨迹，反直觉结论「发放量接近满额」），待 Daryl 定路；同日 Self 方法论卡拆卡提案二轮审查 FAIL（P0 需重做 §1 事实核查）。
 
 ## 🟢 进行中
+
+### ✅ 已落地：成本护栏「方案A」放宽（10/03 Daryl 批准）
+- **背景**: 10/2 Daryl 要求列出成本红线规则拟解除部分；根因＝旧 API Key 泄露（换 Key 后已验证修复）
+- **方案A（已执行）**: exec 6→12 次 · write 10→20 次 · 超限 BLOCK→WARN · 红线 $1.5→$3 预警 / $3→$6 停止
+- **落地**: AGENTS.md 共 8 份已同步（4 家实目录 + xiaofeng_workspace 4 个镜像）· sentinel.config execThreshold=12 / writeThreshold=20（enabled 仍 false）· check_workspaces.py **0 FAIL** · openclaw.json 已备份 .bak_guardrailA_20261003
+- **待 Daryl**: ① MEMORY.md 成本口径（锁定文件，仍写 $1.5/$2）是否同步改 ② Balance 专属冻结 exec ≤4/write ≤6 是否一并放宽 ③ 是否发 OPC 群公告
 
 ### ⚠️ 待办：MEMORY.md 模型口径已过时（9/17 发现）
 - 现值：私聊 main/xiaofeng = pro · 群聊四家 = flash · balance/self = flash

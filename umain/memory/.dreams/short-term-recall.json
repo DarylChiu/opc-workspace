@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-22T04:01:45.354Z",
+  "updatedAt": "2026-10-03T07:01:40.290Z",
   "entries": {
     "memory:memory/2026-06-08.md:19:38": {
       "key": "memory:memory/2026-06-08.md:19:38",
@@ -2939,18 +2939,20 @@
       "endLine": 66,
       "source": "memory",
       "snippet": "## 18:50 · OPC看板 v1.4 完成 ✅ - Daryl 将「OPC看板v1.4」移至 In Progress → 完成三项需求 - **主次优先级视觉分层**：P0-P3 四级，左侧色条+徽章+创建时可选 - **Bryson 雅思陪练补全**：ielts_tutor 加入扫描优先级，产物 3→7 - **symlink 清理**：移除 opc-workspace 中旧 ielts_tutor_v2.0 副本 - Commit v1.4 + tag ## 状态概览 - 🔴 M2 全模块验收完毕 ✅ → v1.5 生产模式 - OPC 看板 v1.4 并入 v1.5 - 验收报告已生成 `decision_reports/m2_acceptance_report_2026-07-05.md` - 7 月基建方向（Agent自进化 + Loop Engineering）待 Daryl 启动确认 - ✅ M2 全部模块验收完毕 + v1.4 完成 - 待办: Agent版本变更通知 - 雅思陪练 v2.0 收尾中 - 7 月基建方向（Agent自进化 + Loop Engineering）待 Daryl 启动确认",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.39254726469516754,
+      "totalScore": 0.745447427034378,
       "maxScore": 0.39254726469516754,
       "firstRecalledAt": "2026-08-07T09:22:23.404Z",
-      "lastRecalledAt": "2026-08-07T09:22:23.404Z",
+      "lastRecalledAt": "2026-10-03T07:01:40.290Z",
       "queryHashes": [
-        "0151b4f90a54"
+        "0151b4f90a54",
+        "1a1516b1ba0d"
       ],
       "recallDays": [
-        "2026-08-07"
+        "2026-08-07",
+        "2026-10-03"
       ],
       "conceptTags": [
         "v1.4",

@@ -506,13 +506,14 @@ This is a starting point. Add your own conventions, style, and rules as you figu
 
 ## 💰 成本护栏（2026-08-26 上线，最高优先级，强制）
 
-> 背景：2026-08-26 Balance 单问题烧掉 DeepSeek 40+ 元；单指令/项目成本红线 $1.5 已被打破。此为全体 Agent 通用护栏。
+> 背景：2026-08-26 Balance 单问题烧掉 DeepSeek 40+ 元；单指令/项目成本红线 $1.5 曾被打破。此为全体 Agent 通用护栏。
+> 🆕 **2026-10-03 Daryl 批准「方案A」放宽**（成本泄露根因＝旧 API Key 泄露，换 Key 后已连续验证无异常）：exec 6→12、write 10→20，超限由 BLOCK 降为 WARN；红线 $1.5→$3 预警、$3→$6 停止。
 
 ### 1. 单任务工具调用上限
 
-- **单任务 exec 调用 ≤ 6 次**（Sentinel 自动拦截，超限即 BLOCK）
-- **单任务 write/编辑 ≤ 10 次**
-- 达到上限仍未完成 → 立即停止，汇报 Daryl 当前进展 + 剩余步骤，等指示
+- **单任务 exec 调用 ≤ 12 次**（Sentinel 阈值告警，超限 WARN 放行不阻断；P0 路径仍 BLOCK）
+- **单任务 write/编辑 ≤ 20 次**
+- 达到上限仍未完成 → 停止，汇报 Daryl 当前进展 + 剩余步骤，等指示
 
 ### 2. API/余额异常 → 立即停止，禁止自查
 
@@ -528,9 +529,9 @@ This is a starting point. Add your own conventions, style, and rules as you figu
 ### 4. 回答优先于调查
 
 - 用户提问 → **先直接回答**，需要佐证时再查；禁止先跑一圈系统检查再回答
-- 回答问题所需的工具调用计入上限（exec ≤ 6）
+- 回答问题所需的工具调用计入上限（exec ≤ 12）
 
 ### 5. 红线
 
-- 单指令成本 > $1.5 → 超预算预警；> $3 → 强制停止上报（Sentinel + 本条双保险）
+- 单指令成本 > $3 → 超预算预警；> $6 → 强制停止上报（Sentinel + 本条双保险）
 - 心跳、定时任务默认不调 LLM；确需调用的必须经 Daryl 批准
