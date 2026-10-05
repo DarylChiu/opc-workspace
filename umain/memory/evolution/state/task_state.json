@@ -1,3 +1,16 @@
 {
-  "sessions": {}
+  "sessions": {
+    "self-feishu": {
+      "task_id": "task-20261005161041",
+      "subject": "我要对越南处理FOC做一个不同业务场景的详细调研，先把FOC的越南法规（VAS入账+税法处理方式）统",
+      "type": "调研",
+      "injected_patterns": [
+        "fp-20260816-014"
+      ],
+      "started_at": "2026-10-05T16:10:41",
+      "msg_count": 1,
+      "subject_hash": "7ec07d0ab761",
+      "project": "vn-foc"
+    }
+  }
 }
