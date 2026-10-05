@@ -1,19 +1,29 @@
 ---
-title: SOP场景-贷款材料自动化整理（Outcome1/Outcome2）
+title: SOP场景-进出口材料自动化处理（Outcome1/Outcome2）
 type: card
 domain: finance-ops
 jurisdiction: VN
 owner: Balance
-version: v2.8.0
-updated: 2026-10-03
-spec: reports/贷款材料自动化整理-v2.7.0-操作手册.md
-scripts: scripts/process_v2_6.py, scripts/gen_outcome2_v2_6.py, scripts/doc_classify.py
+version: v2.8d
+updated: 2026-10-05
+spec: reports/进出口材料自动化处理-工作流与操作手册.md   # v2.8d 定版（2026-10-05 Daryl 验收；旧名有兼容软链）
+scripts: scripts/loan_input.py, scripts/run_loan_2026_0810.py, scripts/gen_outcome2_v2_6.py, scripts/process_v2_6.py, scripts/doc_classify.py, scripts/doc_fields.py, scripts/tokhai_extract.py
 tags: [loan-materials, huatex, workflow, ocr]
 ---
 
-# SOP · 贷款材料自动化整理（速查卡）
+# SOP · 进出口材料自动化处理（速查卡）
 
 > **运行前必读本卡 + 手册**。本卡只记「口径与铁律」，实现细节看手册。
+
+## 零、版本与输入（Daryl 2026-10-05 定）
+
+1. **本项目一律用 v2.8d 口径** —— 凡 Daryl 说执行「进出口材料自动化处理」（旧称「贷款材料自动化整理/处理」），即按 **v2.8d** 跑；更早版本（v2.1→v2.8.0、v2.3 工作流文档）功能重复或落后的**已全部覆盖 / 标记留痕**，不得再作基准。2023 旧运行器不管（不改、也不作基准）。
+2. **输入三形式皆合法**：L1 Excel ／ 发票号 txt（可多个）／ 截图。
+   - 截图 → 本机 **tesseract**（云多模态不可用）；小图**前缀不可靠** → 用 RM-Database **目录名反向校正**
+   - 归一化：`python3 scripts/loan_input.py --in <xlsx|txt|图片> [--rm <RM-Database/2026>]`
+3. **不反向索取 L1、不产出 L1**：输入到手即开工；**Outcome1 即取数基准**（三列自行补全，缺则「待补」）。
+4. **产出用途**：Outcome 交 **采购部发起请款流程**（项目也因此更名）。
+5. 项目名：**进出口材料自动化处理**（旧称「贷款材料自动化整理/处理」，沿用至 2026-10-05）。
 
 ## 一、两条铁律
 
@@ -25,11 +35,18 @@ tags: [loan-materials, huatex, workflow, ocr]
 - **Outcome1** = 13 列 Excel（含关单号 / 报关日期 / 金额 / 五类完整性 / ToKhai 勾稽），按 STT 升序
 - **Outcome2** = 每票号一个文件夹，**扁平**存放（**不建 1/2/3 分类子目录**）
 
+> **★ v2.8d（2026-10-05 Daryl 定 · 终版交付形态）**
+> 1. **Outcome2 文件夹名 = Outcome1 序号前缀 + 发票号**（如 `1-HMXCFZGYAT260042`、`10-HMXCFZK260005`；序号 = Outcome1 的 STT）
+> 2. **不再生成 `材料清单.txt`**（票号文件夹里只放材料本身）
+> 3. 去重留痕不丢：被丢弃件改写入 **`处理报告`** 的「去重丢弃清单」节（铁则「不静默丢件」仍有效）
+> 4. 无材料票号仍建**空文件夹**（如 `3-OP26092401332`）→ Outcome2 文件夹数 = Outcome1 行数
+> 5. 交付 zip **必须带 UTF-8 标志**（macOS `zip` 不带 → Windows 中文乱码/丢件；改用 Python `zipfile`）
+
 ### ★ v2.8.0 两条硬规则（2026-10-03 Daryl 定，曾犯过）
 
 | # | 规则 | 反面教训 |
 |---|---|---|
-| **1** | **合订本只存一份**：清关资料 PDF 常是「SC+Invoice+PL 合订本」，**不得**按多标签复制成 3 份塞进 1/2/3 子目录；「覆盖了哪几类」写进同目录的 **`材料清单.txt`** | 2026-10-03 我按多标签拷贝 → 同一 PDF 在 3 个子目录重复出现 |
+| **1** | **合订本只存一份**：清关资料 PDF 常是「SC+Invoice+PL 合订本」，**不得**按多标签复制成 3 份塞进 1/2/3 子目录（v2.8d 起连 `材料清单.txt` 也不再生成，覆盖类别看 `处理报告`） | 2026-10-03 我按多标签拷贝 → 同一 PDF 在 3 个子目录重复出现 |
 | **2** | **必须去重**：①内容 md5 一致只留一份 ②**归一化文件名**同文档多版本（去 `--已盖章`/`(1)`/尾部空格/`__N`）优先保留带「盖章」者；被丢弃者在 `材料清单.txt` 列明，**不静默丢件** | 提单 `X.pdf` / `X--已盖章.pdf` / `X(1).pdf` 重复堆叠 |
 
 - **递归扫描**：2026 起票号目录下按「胚布/纱线/机织/成品」子目录分装 → 脚本必须递归
@@ -71,8 +88,8 @@ tags: [loan-materials, huatex, workflow, ocr]
 ## 六、自检清单（交付前逐项打勾）
 
 - [ ] 每个票号文件夹**扁平**、无 1/2/3 子目录
-- [ ] 同一 PDF 未重复出现（md5 去重生效）
-- [ ] 提单无同文档多版本堆叠
-- [ ] 每票号有 `材料清单.txt`（含覆盖类别 + 去重留痕）
+- [ ] 文件夹名 = **`<序号>-<发票号>`**（序号与 Outcome1 STT 一致）
+- [ ] **无 `材料清单.txt`**（v2.8d 起取消）
+- [ ] 同一 PDF 未重复出现（md5 去重生效）；提单无同文档多版本堆叠
 - [ ] 五类齐全（缺项显式标 ⚠️）
-- [ ] Outcome1 行数 = L1 行数
+- [ ] Outcome1 行数 = L1 行数 = Outcome2 文件夹数（含无材料空文件夹）

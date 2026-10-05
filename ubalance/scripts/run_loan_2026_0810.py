@@ -31,6 +31,7 @@ FIVE = ['SalesConfirmation', 'Invoice', 'PackingList', 'BL_or_AWB', 'ToKhai']
 TICKET = re.compile(r'[A-Z]{2,}[A-Z0-9]{2,}\d{3,}(?:-\d+)?')
 
 log = []
+dedup_drops = []   # v2.8d: 去重丢弃留痕（不再写材料清单.txt，改写入处理报告）
 def P(s):
     print(s, flush=True); log.append(s)
 
@@ -144,8 +145,10 @@ for fp in dirpath2cands:
             continue
         excluded.append({'src': f, 'kind': 'NO_MATCH', 'dir': os.path.basename(fp)})
 
+# v2.8d（Daryl 2026-10-05 定）: Outcome2 文件夹名 = Outcome1 序号前缀 + 发票号（如 1-HMXCFZGYAT260042）
+TICKET_DIR = {t: f'{i}-{t}' for i, t in enumerate(L1, 1)}
 for t in L1:
-    os.makedirs(os.path.join(OUT2, t), exist_ok=True)
+    os.makedirs(os.path.join(OUT2, TICKET_DIR[t]), exist_ok=True)
 
 import hashlib
 def md5f(p):
@@ -173,10 +176,12 @@ for t in L1:
 
     # ② 同文档多版本去重（归一化文件名：去 --已盖章 / (1) / 末尾空格）
     def norm(nm):
-        s = os.path.splitext(nm)[0]
-        s = re.sub(r'[-_\s]*(已盖章|盖章|摘录|\(\d+\)|__\d+)\s*$', '', s)
+        # v2.8b 修正：保留扩展名。旧版 splitext 丢弃扩展名 → X.pdf 与 X.xlsx 会被当作
+        # 「同文档多版本」而误删其一（潜在丢件）。扩展名必须进入去重键。
+        b, e = os.path.splitext(nm)
+        s = re.sub(r'[-_\s]*(已盖章|盖章|摘录|\(\d+\)|__\d+)\s*$', '', b)
         s = re.sub(r'[^0-9A-Za-z\u4e00-\u9fff]+', '', s)
-        return s.upper()
+        return s.upper() + e.lower()
     groups = {}
     for r in cands:
         groups.setdefault(norm(r['name']), []).append(r)
@@ -201,23 +206,17 @@ for t in L1:
             nm = f'{b}__{i}{e}'
         used_names.add(nm)
         try:
-            shutil.copy2(r['src'], os.path.join(OUT2, t, nm))
+            shutil.copy2(r['src'], os.path.join(OUT2, TICKET_DIR[t], nm))
             copied += 1
         except Exception as ex:
             P(f'  [COPY-ERR] {nm}: {ex}')
         lines.append((nm, sorted(r['tags']), r['attr']))
 
-    with open(os.path.join(OUT2, t, '材料清单.txt'), 'w', encoding='utf-8') as fh:
-        fh.write(f'票号：{t}\n文件数：{len(lines)}\n')
-        if t == 'OP26092401332':
-            fh.write('\n在2026年8-10月未匹配（RM-Database 无该号目录）\n')
-        fh.write('\n' + '-' * 64 + '\n')
-        for nm, tg, at in lines:
-            fh.write(f'\n{nm}\n    覆盖类别：{" / ".join(tg)}\n    归属判定：{at}\n')
-        if dropped:
-            fh.write('\n' + '-' * 64 + '\n已去重未收（同内容/同文档多版本）：\n')
-            for nm, why in dropped:
-                fh.write(f'    - {nm}  ← {why}\n')
+    # v2.8d（Daryl 2026-10-05 定）: 不再生成「材料清单.txt」。
+    # 但去重留痕不得丢失（铁则：不静默丢件）→ 改打 [DEDUP-DROP] 并写入「处理报告」
+    for nm, why in dropped:
+        dedup_drops.append((t, nm, why))
+        P(f'  [DEDUP-DROP] {t} | {nm} ← {why}')
 P(f'复制文件数（已去重）: {copied}')
 
 import openpyxl
@@ -288,6 +287,9 @@ with open(rep, 'w', encoding='utf-8') as fh:
     fh.write('\n\n===== 剔除清单 =====\n')
     for e in excluded:
         fh.write(f"    {e['kind']} | [{e['dir'][:30]}] {os.path.basename(e['src'])}\n")
+    fh.write('\n\n===== 去重丢弃清单（md5 相同 / 同文档多版本；不静默丢件）=====\n')
+    for t, nm, why in dedup_drops:
+        fh.write(f'    {t} | {nm}  ← {why}\n')
 P(f'报告: {rep}')
 print('\n===SUMMARY===')
 for t in L1:

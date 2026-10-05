@@ -264,6 +264,13 @@ def classify_keep(fp):
                 elif ('提单' in fname or '电放' in fname) and len(full.strip()) >= 80:
                     tags.add('BL')
 
+        # 注（2026-10-05）: Daryl 追问过 AT260091 的 `BL2336285560.PDF` 为何不算 B/L。
+        # 已核证其为交货单 D/O（正文标题 DELIVERY ORDER / DO ISSUE DATE: Sep 25 2026，
+        # 字段 BILL OF LADING NO.: OOLU2336285560 = 包内那份 Sea Waybill 的提单号）。
+        # Daryl 明确「只是问原因，不一定要用」→ 此处**维持 7/14 口径：D/O 不算 B/L**，不擅自放宽。
+        # 若将来决定收 D/O，可加附加规则：文件名 ^BL\d + 正文含 'BILL OF LADING NO' → 收进且
+        # 同时保留 DELIVERY_ORDER 标签（口径变更需 Daryl 明确后再生效）。
+
         # 命中保留类 → 保留
         if tags & KEEP_TAGS:
             return (True, tags, None)

@@ -16,15 +16,15 @@
       "started_at": null,
       "msg_count": 1
     },
-    "balance-feishu": {
-      "task_id": "task-20261001093216",
-      "subject": "越南税法问题：9月购买月饼分发给员工，是否属福利费、是否需缴PIT、是否需开赠送发票、其他入账方式及",
-      "type": "财务",
+    "loan-materials-2026-0810": {
+      "task_id": "task-20261005080623",
+      "subject": "重挂Toshiba后重跑2026年8-10月贷款材料批次（v2.8扁平+去重+Outcome1三列补",
+      "type": null,
       "injected_patterns": [],
-      "started_at": "2026-10-01T09:32:16",
+      "started_at": "2026-10-05T08:06:23",
       "msg_count": 1,
-      "subject_hash": "81b06381799d",
-      "project": "越南税务"
+      "subject_hash": "540f85aca32f",
+      "project": "loan-materials"
     }
   }
 }
