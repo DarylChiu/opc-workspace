@@ -1,8 +1,19 @@
 # 当前活跃任务 (中期记忆 — 每次session加载)
 
-> 最后更新: 2026-10-03 23:59（10/3 记忆归档刷新；安静日无新任务，IELTS/video-editor/洗稿MVP 均保持原状态，成本今日 $2.34/本月 $5.03 正常）
+> 最后更新: 2026-10-05 23:59（10/5 记忆归档刷新；新战略项目「Token级全自动AI财务与审计」启动，Bryson 已溯源 8/7方法论→9/5战略→10/5 v0.1 三份文档；IELTS+视频剪辑待完结；成本今日 $8.09/本月 $13.78）
 
 ## 🟢 进行中
+
+### Token级全自动AI财务与审计项目（10/5 启动 · Daryl 战略新方向）🟢
+- **定位**：财务核算+审计取证中可标准化的部分做成 Source-to-Report 自动化主干，人只保留判断/例外/签字
+- **脉络**：8/7《OPC-AI财务与内审方法论v0.2》（Token级控制+五层幻觉防控+四大边界+三层架构）→ 9/5 战略定调（财务体系化→变现基础）→ 10/5 Balance v0.1 工程化落地
+- **变现**：A 按项目收费（已在跑）→ A+B 口径库产品化 → C 托管订阅（需持牌）；红线不做税务申报代理/审计签字
+- **⏳ 待 Daryl 拍板三件事**：① Token级读法（A成本口径/B动作粒度）② 认不认 L3 上限 ③ 变现从 A 起步
+- 主要文档：`workspace-balance/reports/`（Balance 侧）、`workspace-balance/memory/project_Balance.md`
+
+### IELTS陪练助手 + 视频剪辑MVP — 待完结（10/5 Daryl 指令）⏳
+- Daryl 指令：完结这两个项目后再正式投入新项目
+- Bryson 已问完结方式（归档收尾 / 出完结 checklist），**等 Daryl 明确**
 
 > ⚠️ **9/17 工具口径问题**：xiaofeng tool profile 为 `coding`，不含 `message` 工具（group:messaging 未挂载），无法主动 DM Daryl。已报 Kitty：需补 message 工具或由 Kitty 转达。
 
