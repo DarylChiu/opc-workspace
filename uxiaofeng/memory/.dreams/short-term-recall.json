@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-26T17:00:19.765Z",
+  "updatedAt": "2026-10-05T03:20:37.870Z",
   "entries": {
     "memory:memory/archive/2026-03-24.md:138:171": {
       "key": "memory:memory/archive/2026-03-24.md:138:171",
@@ -3830,6 +3830,318 @@
         "nb-frames/avg-frame-rate",
         "opt/homebrew/bin",
         "bootout/bootstrap"
+      ]
+    },
+    "memory:memory/2026-09-23.md:1:22": {
+      "key": "memory:memory/2026-09-23.md:1:22",
+      "path": "memory/2026-09-23.md",
+      "startLine": 1,
+      "endLine": 22,
+      "source": "memory",
+      "snippet": "# 2026-09-23 日记（周三） ## Balance · 费用审批辅助方案 v0.1（今日实质工作） - Balance 在飞书 DM 交付 `work/expense-approval/辅助审批实现方案-v0.1-20260923.md`（commit 80a7db9） - 核心：费用审批拆两层 - A 数据层：币种/勾稽公式/金额修正方向/账期/部门分摊/类别编码/合同/无票标记 → 4 张表导出，今天即可上 - B 凭证层：发票/合同/水单/审批记录本身（OA 附件）→ 卡在附件获取 - 附件三条路径，推荐① 附件投递式半自动（批量下载 → OCR → 勾稽 → 输出 🟢🟠🔴 审批建议表） - 待 Daryl 定：先做 A（导出表预筛）还是 B（附件审）+ 确认 OA 附件能否批量导出 ## Balance · 成本全量扫描（Cron） - 扫描 4,240 个 .jsonl，总调用 28,788（新增 82） - 今日 $0.0970 | 本月 $8.8455 | 全量 $185.3317 - 看板 `/api/costs` 与台账对齐（差异 $0.30 < $1 阈值），按规则仅发确认、未做接口改造请求 ## 记忆归档（各 Agent Cron 正常） - main / self / balance 各自 23:59 归档 Cron 均正常执行，Git 备份 commit + push 成功 - 归档 `2026-08-23.md` → `archive/` - 成本护栏：各任务 exec 均在 ≤6 预算内，无系统配置自主排查 ## 审",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.46024574339389795,
+      "maxScore": 0.46024574339389795,
+      "firstRecalledAt": "2026-10-05T01:50:54.799Z",
+      "lastRecalledAt": "2026-10-05T01:50:54.799Z",
+      "queryHashes": [
+        "480af976634d"
+      ],
+      "recallDays": [
+        "2026-10-05"
+      ],
+      "conceptTags": [
+        "备份",
+        "v0.1",
+        "发票/合同/水单/审批记录本身",
+        "0.0970",
+        "8.8455",
+        "185.3317",
+        "api/costs",
+        "0.30"
+      ]
+    },
+    "memory:memory/2026-09-28.md:1:21": {
+      "key": "memory:memory/2026-09-28.md:1:21",
+      "path": "memory/2026-09-28.md",
+      "startLine": 1,
+      "endLine": 21,
+      "source": "memory",
+      "snippet": "# 2026-09-28 日记 ## 记忆归档审计（23:59 · xiaofeng cron） - 运行 `bash scripts/compliance/audit.sh --report`：退出码 6 - 自动修复 2 项：创建今日日记骨架、git 备份 commit + push - 遗留浅层 4 / 深层 2，均已判定为结构性误报（见下） - 成本仪表盘 `fresh_api_ok`：今日 $0.08 | 本月 $10.61 | 全量 $187.10（OPC API 端点正常） ## 成本全量扫描（23:45 · Balance cron） - Balance 完成每日成本扫描并推送 Kitty：今日 $0.0802 / 本月 $10.6093 / 全量 $187.0955 - 分 Agent 今日：Balance $0.0753 / Kitty $0.0049 / Bryson $0.0000 / Self $0.0000 - 看板 `/api/costs` 与台账差异 < $1，已对齐 ## 跨 Agent 动态：Balance ↔ Daryl node host 部署方案（约 13:40） - Balance 与 Daryl 深入讨论「Dell Windows 机器作为 node host 接入 Mac mini 网关」方案 - 核心结论：性能靠「任务分级 + 优先级限制」可压住；Dell 侧零入站规则是最大优势 - 传输建议走 wss + 证书指纹（更严）而非私有网 ws:// opt-in - 待 Daryl 拍 3 件事：① 传输档位 ② 目录路径（",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.8334168553352355,
+      "maxScore": 0.452717450261116,
+      "firstRecalledAt": "2026-10-05T01:50:54.799Z",
+      "lastRecalledAt": "2026-10-05T03:20:37.870Z",
+      "queryHashes": [
+        "480af976634d",
+        "3ee8b87422ec"
+      ],
+      "recallDays": [
+        "2026-10-05"
+      ],
+      "conceptTags": [
+        "备份",
+        "网关",
+        "scripts/compliance/audit.sh",
+        "fresh-api-ok",
+        "0.08",
+        "10.61",
+        "187.10",
+        "0.0802"
+      ]
+    },
+    "memory:memory/2026-09-20.md:1:23": {
+      "key": "memory:memory/2026-09-20.md:1:23",
+      "path": "memory/2026-09-20.md",
+      "startLine": 1,
+      "endLine": 23,
+      "source": "memory",
+      "snippet": "# 2026-09-20 日记 ## 今日概览 - 无实质用户交付，主要活动为 Balance 每日成本扫描 + Main 例行健康提醒 - 本日成本 $0.0003 | 本月 $8.01 | 全量 $184.49 ## Balance · 成本全量扫描（23:45） - 扫描 4,245 个 .jsonl，台账总调用 28,563（本次新增 68） - 全量累计 $184.4931 ｜ 本月 $8.0069 ｜ 今日 $0.0003 - Agent 分布：Bryson $94.4515 · Balance $51.4201 · Kitty $22.6828 · Self $15.9386 - 看板核对：/api/costs totalCost $184.49 ≈ 台账 $184.4931（差异 <$1）→ 数字对齐，按规则跳过接口改造请求 - ⚠️ Kitty 同步降级：sessions_send 30s 超时返回 NO_REPLY，已降级写文件路径 `~/opc-workspace/Kitty/opc-dashboard/data/cost_daily.json`，Kitty 未确认 ## Main · 例行健康提醒（全天） - 花青素服用提醒、早晚涂软膏、睡前整理床铺、确认就寝提醒 - 接收 Balance 成本扫描 inter-session 消息（NO_REPLY），无实质交付 ## 其他 - 00:00-00:04 多 agent（main/self/balance）各自执行前一日 23:59 记忆归档 cron，属午夜边界，实质内容已记录于 9/19 日记",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.8328348785638808,
+      "maxScore": 0.4488703995943069,
+      "firstRecalledAt": "2026-10-05T01:50:54.799Z",
+      "lastRecalledAt": "2026-10-05T03:20:37.870Z",
+      "queryHashes": [
+        "480af976634d",
+        "3ee8b87422ec"
+      ],
+      "recallDays": [
+        "2026-10-05"
+      ],
+      "conceptTags": [
+        "0.0003",
+        "8.01",
+        "184.49",
+        "184.4931",
+        "8.0069",
+        "94.4515",
+        "51.4201",
+        "22.6828"
+      ]
+    },
+    "memory:memory/2026-09-22.md:1:15": {
+      "key": "memory:memory/2026-09-22.md:1:15",
+      "path": "memory/2026-09-22.md",
+      "startLine": 1,
+      "endLine": 15,
+      "source": "memory",
+      "snippet": "# 2026-09-22 日记 ## 记忆审计（23:59 Cron） - 执行 `audit.sh --report`，自动修复 3 项：创建今日日记、归档 `2026-08-22.md` → `memory/archive/`、Git 备份 commit + push 成功 - 深层问题核验：日记过短（当日无实质项目工作）、active.md 47h 未更新（已补刷新） ## 跨 Agent 动态（sessions_list 观察） - **balance**：23:45 成本全量扫描 → 今日 $0.14 / 本月 $8.55 / 全量 $185.03，已推 Kitty - **balance**：费用审批工作 — 读完 316 行费用类别表（BX001–BX099），发现 4 处口径冲突 + 5 处数据质量问题，按成本护栏停下等 Daryl 拍板 - **self**：methodology-cards 每日 Git 备份，工作区干净无变更 ## 今日小结 - xiaofeng 无实质项目交付，仅日常 cron（记忆归档） - 无新任务、无新决策",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.44616546034812926,
+      "maxScore": 0.44616546034812926,
+      "firstRecalledAt": "2026-10-05T01:50:54.799Z",
+      "lastRecalledAt": "2026-10-05T01:50:54.799Z",
+      "queryHashes": [
+        "480af976634d"
+      ],
+      "recallDays": [
+        "2026-10-05"
+      ],
+      "conceptTags": [
+        "备份",
+        "audit.sh",
+        "memory/archive",
+        "active.md",
+        "sessions-list",
+        "0.14",
+        "8.55",
+        "185.03"
+      ]
+    },
+    "memory:memory/2026-09-29.md:1:17": {
+      "key": "memory:memory/2026-09-29.md:1:17",
+      "path": "memory/2026-09-29.md",
+      "startLine": 1,
+      "endLine": 17,
+      "source": "memory",
+      "snippet": "# 2026-09-29 日记 ## 记忆归档审计（23:59 · xiaofeng cron） - 运行 `bash scripts/compliance/audit.sh --report`：退出码 4，自动修复 1 项（git 备份 commit + push） - 遗留浅层 2 / 深层 2，深层均为「日记骨架」类误报，本轮已补全真实记录（见下） - 成本仪表盘 `fresh_api_ok`：今日 $0.01 | 本月 $10.76 | 全量 $187.24（OPC API 端点 normal） ## 成本全量扫描（23:5x · Balance cron） - Balance 完成每日成本扫描并推送 Kitty：今日 $0.0132 | 本月 $10.7580 | 全量 $187.2442 | Token 1,991,977,158 - 扫描文件 4,265 个 .jsonl，台账总调用 29,270 次（本次新增 67） - 看板 `/api/costs` totalCost $187.24 与台账差异 $0.0042 < $1 → 已对齐，无需改接口 - Kitty 通知返回 `NO_REPLY`，按降级处理记录，cost_daily.json 已就位 ## 跨 Agent 动态：Balance 排查 checker-log 死循环根因（约 23:0x · feishu OPC 群） - Balance 查明 `memory/evolution/checker-log.jsonl` 缺失 → Cron 补建占位文件反复报错形成死循环 - 根因：write 工",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4377636909484863,
+      "maxScore": 0.4377636909484863,
+      "firstRecalledAt": "2026-10-05T01:50:54.799Z",
+      "lastRecalledAt": "2026-10-05T01:50:54.799Z",
+      "queryHashes": [
+        "480af976634d"
+      ],
+      "recallDays": [
+        "2026-10-05"
+      ],
+      "conceptTags": [
+        "备份",
+        "scripts/compliance/audit.sh",
+        "fresh-api-ok",
+        "0.01",
+        "10.76",
+        "187.24",
+        "0.0132",
+        "10.7580"
+      ]
+    },
+    "memory:memory/archive/2026-08-10.md:1:10": {
+      "key": "memory:memory/archive/2026-08-10.md:1:10",
+      "path": "memory/archive/2026-08-10.md",
+      "startLine": 1,
+      "endLine": 10,
+      "source": "memory",
+      "snippet": "# 2026-08-10 日记 ## ⚠️ Cron 审计自动创建（内容待补充） - 本日记由 23:59 Cron 自动创建，当日内容未记录 - 需从 session 历史补充实际事件 ## 补充（8/11 心跳维护补录） - Balance 项目 v0.4.0 修复批完成并 git 提交，8/12 为验收节点（详见 project_Balance.md，8/11 13:00 已刷新编译时间戳+成本归集） - 8/10 无其他重大事件；服务层（videoeditor/ielts/ngrok）全天正常",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4365370690822601,
+      "maxScore": 0.4365370690822601,
+      "firstRecalledAt": "2026-10-05T01:50:54.799Z",
+      "lastRecalledAt": "2026-10-05T01:50:54.799Z",
+      "queryHashes": [
+        "480af976634d"
+      ],
+      "recallDays": [
+        "2026-10-05"
+      ],
+      "conceptTags": [
+        "8/11",
+        "v0.4.0",
+        "8/12",
+        "project-balance.md",
+        "8/10",
+        "videoeditor/ielts/ngrok",
+        "日记",
+        "cron"
+      ]
+    },
+    "memory:memory/2026-10-02.md:1:20": {
+      "key": "memory:memory/2026-10-02.md:1:20",
+      "path": "memory/2026-10-02.md",
+      "startLine": 1,
+      "endLine": 20,
+      "source": "memory",
+      "snippet": "# 2026-10-02 日记 ## 团队实质交付（跨 Agent 同步） ### Balance · 越南月饼签收表 OCR 终版 - 产出 `2026-10-02_部门领用记录_签收表数行_终版.xlsx`：45 个部门、1,365 行、合计 90,958,140 VND（财务部 17 人 / 1,132,812 VND） - 换引擎：tesseract → macOS 原生 Vision OCR（vi-VN，本地跑），三种方法交叉验证（Vision 1365 / 墨迹投影 1391 / 工号去重 1394） - 两个必须上报的发现：① 签收表比名单少 229 人（针织面料部染色课等 5 处占 146）；② 4 张空白页（46/50/54/58）仅有手写盒数标注 - 待 Daryl 拍板分摊基数：A=按签收表 1,365 行 vs B=按名单 1,631 盒（Balance 建议 B 作基数、签收表作证据） ### Self · 知识网络核查 - 结论：10-01 未向 Vault 写入任何新树叶（仍 219 md，git HEAD 停在 8-05） - 昨日实际产出为 Huatex 月饼案落盘方案 v4（SAGE PASS 9/9/8，Maker-Checker 二轮 FAIL 留档），卡在审批 D1+D3 + 口径矛盾（PIT 征/不征） ### 成本扫描（Balance Cron） - 今日 $0.59 | 本月 $2.56 | 全量 $190.07，调用 29,685；`/api/costs` 与台账差异 < $0.01 已对齐 ## 本 Agent（吹点",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4182978332042694,
+      "maxScore": 0.4182978332042694,
+      "firstRecalledAt": "2026-10-05T03:20:37.870Z",
+      "lastRecalledAt": "2026-10-05T03:20:37.870Z",
+      "queryHashes": [
+        "3ee8b87422ec"
+      ],
+      "recallDays": [
+        "2026-10-05"
+      ],
+      "conceptTags": [
+        "网络",
+        "2026-10-02-部门领用记录-签收表数行-终版.xlsx",
+        "vi-vn",
+        "46/50/54/58",
+        "10-01",
+        "8-05",
+        "9/9/8",
+        "maker-checker"
+      ]
+    },
+    "memory:memory/2026-09-25.md:16:25": {
+      "key": "memory:memory/2026-09-25.md:16:25",
+      "path": "memory/2026-09-25.md",
+      "startLine": 16,
+      "endLine": 25,
+      "source": "memory",
+      "snippet": "- 23:59 Balance「成本全量扫描推Kitty」：今日 $0.4336 / 本月 $9.7454 / 全量 $186.2315；台账 28,980 调用（+126）｜看板 totalCost $186.23 与台账差异 <$0.01 已对齐；Kitty session_send 确认送达 - self「methodology-cards 每日 Git 备份」：working tree clean，无变更 - 多 Agent（main/self/balance/xiaofeng）「每日记忆归档审计」：各自跑通，均为午夜边界效应误报（日记过短/骨架判定/checker 零运行），无实质遗漏 ## 进行中任务状态（结转自 active.md） - 无变化：IELTS 陪练助手 v1.4.1/v1.5.0 待 Daryl 验收、剪辑MVP、洗稿MVP standby 等均保持原状态 ## 成本 - 今日 $0.43 | 本月 $9.75 | 全量 $186.23（仪表盘 fresh_api_ok）",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4082192063331604,
+      "maxScore": 0.4082192063331604,
+      "firstRecalledAt": "2026-10-05T03:20:37.870Z",
+      "lastRecalledAt": "2026-10-05T03:20:37.870Z",
+      "queryHashes": [
+        "3ee8b87422ec"
+      ],
+      "recallDays": [
+        "2026-10-05"
+      ],
+      "conceptTags": [
+        "备份",
+        "0.4336",
+        "9.7454",
+        "186.2315",
+        "186.23",
+        "0.01",
+        "session-send",
+        "methodology-cards"
+      ]
+    },
+    "memory:memory/2026-09-27.md:15:28": {
+      "key": "memory:memory/2026-09-27.md:15:28",
+      "path": "memory/2026-09-27.md",
+      "startLine": 15,
+      "endLine": 28,
+      "source": "memory",
+      "snippet": "- **Git 备份「静默假成功」**：Balance 于今日中午排查发现，9/24 之后多轮归档的 commit 实际未生成（`audit.sh` 用 2>/dev/null 吞掉 git add/commit 报错，再拿 push 返回码判成功，无提交时 push 为 no-op 仍返回 0）。根因候选：① `git add \"$AGENT_CAP/\"` 变量展开无效；② cron 环境 git 身份为空。 - 影响：记忆资产异地备份链断档数日，本地文件未丢（T0 铁律未破）。 - 待办：修复 audit.sh（去静默、改用 commit 返回码判定）+ 补跑真实提交，把 9/25–9/27 记忆资产补进版本库。 ## 🕚 23:45 成本全量扫描（Balance Cron） - 今日 $0.0251 | 本月 $10.4220 | 累计全量 $186.9082（29,134 次调用 / 19.88 亿 tokens） - 看板 vs 台账差异 $0.002 → 完全对齐，未触发接口改造 ## 备注 - active.md 状态：各进行中/挂起项保持原状态（IELTS 陪练助手 v1.5.0 待 Daryl 验收、视频剪辑 MVP、洗稿 MVP standby 等） - 无 Daryl 新指令",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.39976544976234435,
+      "maxScore": 0.39976544976234435,
+      "firstRecalledAt": "2026-10-05T03:20:37.870Z",
+      "lastRecalledAt": "2026-10-05T03:20:37.870Z",
+      "queryHashes": [
+        "3ee8b87422ec"
+      ],
+      "recallDays": [
+        "2026-10-05"
+      ],
+      "conceptTags": [
+        "备份",
+        "9/24",
+        "audit.sh",
+        "dev/null",
+        "add/commit",
+        "no-op",
+        "agent-cap",
+        "9/25"
+      ]
+    },
+    "memory:memory/2026-09-25.md:1:17": {
+      "key": "memory:memory/2026-09-25.md:1:17",
+      "path": "memory/2026-09-25.md",
+      "startLine": 1,
+      "endLine": 17,
+      "source": "memory",
+      "snippet": "# 2026-09-25 日记 ## 概述 - 非安静日：Balance agent 完成一项实质交付（华特中秋礼品开票三件套模版），其余为自动化 cron ## 实质工作 ### Balance · 华特中秋客户礼品开票依据三件套模版（✅ 已交付） - 产出文件：`reports/华特-中秋客户礼品-开票依据三件套模版-v1.0-20260925.xlsx`（中越双语，单页 A4，可直接打印） - 结构：PHẦN I 赠送审批决定（四级签批）｜PHẦN II 客户及礼品名单（预留10行）｜PHẦN III 形式出库单（预置法律免责表述，主动写明\"形式出库\"而非假装出入库） - 页脚：法律依据（NĐ 254/2026 Đ4.1/Đ9.1、NĐ 181/2025 Đ6.1/Đ23.7）+ 三项注意事项 - 版面实测：宽 554pt/A4 可印 552pt → 100.3%（Excel 自动缩到 ~99.7%）；高 690/791pt → 87.2%，确定 1 页 A4 - 生成脚本留痕：`work/gift-invoice-basis/build_gift_docs.py` - ⚠️ 环境异常上报：调图像模型做视觉复核时返回 `google/gemini-3-flash-preview` — API key not valid，已按护栏仅上报未自行排查，待 Kitty/Daryl 处理 ## 自动化任务（cron） - 23:59 Balance「成本全量扫描推Kitty」：今日 $0.4336 / 本月 $9.7454 / 全量 $186.2315；台账 28,980 调",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.38528414368629454,
+      "maxScore": 0.38528414368629454,
+      "firstRecalledAt": "2026-10-05T03:20:37.870Z",
+      "lastRecalledAt": "2026-10-05T03:20:37.870Z",
+      "queryHashes": [
+        "3ee8b87422ec"
+      ],
+      "recallDays": [
+        "2026-10-05"
+      ],
+      "conceptTags": [
+        "254/2026",
+        "đ4.1/đ9.1",
+        "181/2025",
+        "đ6.1/đ23.7",
+        "554pt/a4",
+        "100.3",
+        "99.7",
+        "690/791pt"
       ]
     }
   }
