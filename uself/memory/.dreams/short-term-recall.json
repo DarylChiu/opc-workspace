@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-05T17:05:01.924Z",
+  "updatedAt": "2026-10-07T01:27:33.972Z",
   "entries": {
     "memory:memory/2026-06-22.md:22:34": {
       "key": "memory:memory/2026-06-22.md:22:34",
@@ -2145,6 +2145,100 @@
         "get/patch",
         "api/methodology-cards",
         "日记"
+      ]
+    },
+    "memory:memory/2026-10-05.md:38:46": {
+      "key": "memory:memory/2026-10-05.md:38:46",
+      "path": "memory/2026-10-05.md",
+      "startLine": 38,
+      "endLine": 46,
+      "source": "memory",
+      "snippet": "- **待 Daryl**：确认 FOC 业务场景范围（7 类中 D 客供料件、E 保修换件**尚未覆盖**）；确认后补缺口 → 出终稿 → **终稿走 Maker-Checker 对抗审查** - **教训（已入 reflexion）**：拿到条款标题就写结论 → 未核项只能待在缺口清单，不得进结论矩阵 ## 【Daryl 纠错 → 重做】越南 FOC 深度报告框架 v2（16:29–16:4x） - **纠错原话**：「业务场景中我最需要的就是保修/索赔免费换件和免费样品，你就没覆盖」→ 已捕获到共享教训库（corrections_inbox） - **根因**：v1 按「检索难易」而非「用户业务重要性」排场景优先级，把真需求放进\"未覆盖\" - **产出**：`memory/2026-10-05-vn-FOC-深度报告框架-v2.md` - **内容**：五层框架（场景→法规→处理→单据→风险）+ 保修 5 子场景（A1 免费维修/A2 换零部件/A3 整机换新/A4 索赔补货/A5 跨境）+ 样品 4 子场景（B1 境内/B2 进口/B3 出口/B4 接受） - **核到官方口径**：TT 219/2013 Điều 7 khoản 5 **逐字原文**（财政部答复页）+ Công văn 9671/7333/10281 (CT-TTHT)、4738/TCT-CS(2016-10-13,Panasonic)、5485/TCHQ-TXNK、12166/BTC-TCHQ **文号存在性已核**",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7922512143850327,
+      "maxScore": 0.39930960237979884,
+      "firstRecalledAt": "2026-10-07T01:27:15.314Z",
+      "lastRecalledAt": "2026-10-07T01:27:33.972Z",
+      "queryHashes": [
+        "60bd04cb8373",
+        "232f0710a115"
+      ],
+      "recallDays": [
+        "2026-10-07"
+      ],
+      "conceptTags": [
+        "maker-checker",
+        "业务场景中我最需要的就是保修/索赔免费换件和免费样品",
+        "corrections-inbox",
+        "免费维修/a2",
+        "换零部件/a3",
+        "整机换新/a4",
+        "索赔补货/a5",
+        "境内/b2"
+      ]
+    },
+    "memory:memory/2026-10-05.md:27:35": {
+      "key": "memory:memory/2026-10-05.md:27:35",
+      "path": "memory/2026-10-05.md",
+      "startLine": 27,
+      "endLine": 35,
+      "source": "memory",
+      "snippet": "- 结转项（见 active.md）无变更：①季度主线 + 待办默认动作机制 + 周度节奏 → 等 Daryl 拍板；②心理学知识树首条主诉试跑 → 等 Daryl 确认；③ACCA 知识网络平板端补同步 + OPC 看板方法论卡片集成 → 推进中；④旧 gateway cron `1799ac76` 双通道并存（连续 31 天）→ 待 Kitty 清理 ## 【新任务】越南 FOC 法规地图 v1.1（Daryl 交办，16:10–16:2x GMT+7） - **任务**：越南处理 FOC 的不同业务场景详细调研 · 第一步＝统计 FOC 相关越南法规（VAS 入账 + 税法处理方式）；后续 Daryl 再把公司案例往法条上映射 - **前提**：Daryl 明确「不用读 Balance 工作区」→ 一手资料全靠公开检索（已知短板，见 7/15 检讨） - **产出**：`memory/2026-10-05-vn-FOC-法规地图-v1.md`（8.3KB） - **检索**：Brave ×12（VI/EN/ZH）+ 官方门户核验｜模型 deepseek-v4-flash - **已核验**：Luật GTGT 48/2024/QH15（2025-07-01 生效）、NĐ 181/2025/NĐ-CP Điều 6（标题）、Luật TNDN 67/2025/QH15（2025-10-01 生效）、NĐ 320/2025/NĐ-CP（2025-12-15）、NĐ 254/2026/NĐ-CP（2026-07-01，替代 NĐ 123/2020）、NĐ 253/2026/N",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.35500864684581757,
+      "maxScore": 0.35500864684581757,
+      "firstRecalledAt": "2026-10-07T01:27:15.314Z",
+      "lastRecalledAt": "2026-10-07T01:27:15.314Z",
+      "queryHashes": [
+        "60bd04cb8373"
+      ],
+      "recallDays": [
+        "2026-10-07"
+      ],
+      "conceptTags": [
+        "gateway",
+        "网络",
+        "active.md",
+        "v1.1",
+        "7/15",
+        "8.3kb",
+        "vi/en/zh",
+        "deepseek-v4-flash"
+      ]
+    },
+    "memory:memory/2026-10-05.md:34:41": {
+      "key": "memory:memory/2026-10-05.md:34:41",
+      "path": "memory/2026-10-05.md",
+      "startLine": 34,
+      "endLine": 41,
+      "source": "memory",
+      "snippet": "- **已核验**：Luật GTGT 48/2024/QH15（2025-07-01 生效）、NĐ 181/2025/NĐ-CP Điều 6（标题）、Luật TNDN 67/2025/QH15（2025-10-01 生效）、NĐ 320/2025/NĐ-CP（2025-12-15）、NĐ 254/2026/NĐ-CP（2026-07-01，替代 NĐ 123/2020）、NĐ 253/2026/NĐ-CP（PIT）、TT 99/2025/TT-BTC（2026-01-01 替代 TT 200/2014） - **内容**：3 种情形 VAS 分录（送客户 / 送员工福利基金 / 接受方）+ 场景×税种矩阵 + 6 条实操风险 + 10 项缺口清单 - **质量门**：SAGE Checker **两轮 FAIL**（首轮 trace/rigor 未达；次轮 traceability 7 / structure 8 / **rigor 6**）→ 按协议写检讨 + 标注 4 项保留项后交付 - **保留项**：①VAT 促销「计税价=0」款项原文未核 ②PIT 2000 万门槛单一来源+两套口径冲突 ③CIT 可扣除是否受 NĐ 320/2025 修订未确认 ④V5 置信度下调为中 - **待 Daryl**：确认 FOC 业务场景范围（7 类中 D 客供料件、E 保修换件**尚未覆盖**）；确认后补缺口 → 出终稿 → **终稿走 Maker-Checker 对抗审查** - **教训（已入 reflexion）**：拿到条款标题就写结论 → 未核项只能待在缺口清单，不得",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.35327106118202206,
+      "maxScore": 0.35327106118202206,
+      "firstRecalledAt": "2026-10-07T01:27:33.972Z",
+      "lastRecalledAt": "2026-10-07T01:27:33.972Z",
+      "queryHashes": [
+        "232f0710a115"
+      ],
+      "recallDays": [
+        "2026-10-07"
+      ],
+      "conceptTags": [
+        "48/2024/qh15",
+        "181/2025/nđ-cp",
+        "67/2025/qh15",
+        "320/2025/nđ-cp",
+        "254/2026/nđ-cp",
+        "123/2020",
+        "253/2026/nđ-cp",
+        "99/2025/tt-btc"
       ]
     }
   }

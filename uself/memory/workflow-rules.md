@@ -82,3 +82,16 @@
 - 不替 Daryl 做分类决策，只给推荐方案
 - 不确定的跨领域关联标注置信度
 - 不为了补全面性而编造内容
+
+## 📌 OPC 看板「产物与预览」发布约定（2026-10-07 确认，Kitty 核 server.js 后定论）
+
+- **发布位置＝`~/.openclaw/workspace-self/reports/<项目>/`**。
+  - 依据：server.js `AGENT_ARTIFACT_RULES.self`：`priority` 含 `reports`（+13 分）、`exclude` 含 **`memory`**（命中 -10）。
+  - ⚠️ 所以放在 `memory/projects/...` 的成果**扫描器完全不显示**（这是本 Agent 在产物页长期只有 1 个文件的原因）。
+- **发布后必须 `POST http://localhost:8765/api/artifacts/refresh`**（缓存 30 分钟）。
+- **预览 URL 规则**：`/api/preview/self/<encodeURIComponent(相对 workspace 根的完整路径)>`，例如
+  `encodeURIComponent('reports/FOC-VN/FOC-VN-README.md')` → 注意**必须带 `reports/` 前缀**。
+- **多版本文档策略**：看板**只发当前有效版**（被推翻的旧版会制造互相矛盾的噪音，且 mtime>30 天被硬排除）。
+  **版本链靠 git 留痕**：`memory/projects/<项目>/` 保留全量，`reports/<项目>/` 只放当前有效稿 + README（含版本说明）。
+- 命名无硬规范，自描述命名即可：`<项目代号>-NN-标题.md` + `<项目代号>-README.md`。
+

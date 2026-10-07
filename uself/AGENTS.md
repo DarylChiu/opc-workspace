@@ -89,21 +89,21 @@ python3 /Users/zhaoyuzhao/.openclaw/workspace/scripts/evolution/classify_task.py
 - 现有 L3（SAGE Checker + reflexion_journal）继续保留；本条款负责**跨Agent统一信号捕获与共享教训库**
 - reflect.sh 写入的教训同时用 capture_correction.sh 补一份到共享库（双写，各取所长）
 
-## 🧬 L3 自进化协议 (2026-07-15 上线, 强制执行)
+## 🧬 L3 自进化协议 (2026-07-15 上线)
 
+> ⛔ **2026-10-07 Daryl 指令：SAGE Checker（交付前审查）已关闭。** 实质交付不再强制跑 checker.py。检讨（reflect.sh）机制保留。
 > 详细协议见 `EVOLUTION.md`。核心三条:
 
-1. **交付前审查**: 实质性交付(研究/分析/结论性回复)前必须跑 SAGE Checker:
-   `python3 scripts/evolution/checker.py --file /tmp/self_draft.md --task "任务"`
-   FAIL → 按 issues 修改重跑(最多2轮)；仍FAIL → 写检讨+标注保留项后交付
-2. **失败写检讨**: 被纠正 / Checker两轮FAIL / 重复犯错 → 立即:
+1. ~~**交付前审查**: 实质性交付前必须跑 SAGE Checker~~ ⛔已关闭(2026-10-07)
+2. **失败写检讨**: 被纠正 / 重复犯错 → 立即:
    `bash scripts/evolution/reflect.sh add "任务" "哪错了" "根因" "下次规则"`
 3. **动手先读检讨**: session启动读最近5条；同类任务先 memory_search 检索 `reflexion_journal.md`
 
-## 🔍 Maker-Checker 审查协议 (2026-07-21 上线, 强制执行)
+## 🔍 Maker-Checker 审查协议 (2026-07-21 上线) ⛔已关闭(2026-10-07 Daryl 指令)
 
 > 来自 Loop Engineering 核心理念：写代码的和审代码的必须分开。
 > Self 试点，仅本 Agent 执行。
+> ⛔ **2026-10-07 Daryl 指令：对抗审查已关闭。** 实质交付不再强制走 Maker-Checker 审查子Agent。
 
 ### 触发条件
 **实质性交付前**（研究报告、跨域分析、知识库方案、结论性回复给 Daryl/其他 Agent）必须走 Maker-Checker 流程。
@@ -228,6 +228,17 @@ bash scripts/compliance/audit.sh --report
 
 
 
+
+## ⏱️ 子代理分流规则（长任务强制走子代理）
+
+**原则**：飞书通道有 ~310s 超时限制。**预估单 turn > 2 分钟的任务，必须 spawn 子代理执行，主 session 不阻塞。**
+
+- 预估单 turn < 2 分钟 → 直接执行
+- 预估单 turn > 2 分钟 → spawn 子代理执行，主 session 秒回「收到，执行中」
+- Daryl 发修正指令 → kill 旧子代理 + respawn 新版本
+- 子代理完成 → `sessions_send` 通知主 Agent → 主 Agent 转发结果给 Daryl
+
+**⚠️ 教训（2026-10-07 Balance 发票解析事故）**：把 >2min 的任务在自己主 session 里 nohup+poll 跑，陷入「改→跑→改」死循环，全程失联。根因＝没走子代理。**长任务在主 session 跑 = 阻塞消息 = 失联。**
 
 ## 🚀 子代理 Trace 协议（2026-07-18 上线）
 
