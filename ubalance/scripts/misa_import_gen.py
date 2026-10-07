@@ -89,7 +89,34 @@ def main():
     ap.add_argument('--src', required=True)
     ap.add_argument('--invoices', default='attachments/凭证')
     ap.add_argument('--out', required=True)
+    ap.add_argument('--date', default=None, help='批次日期 YYYYMMDD → 决定凭证字号前缀 UNC<MMDD> 与页首批次标签')
+    ap.add_argument('--currency', default=None, help="Loại tiền (VND/USD)；不传则从定稿表 H 列表头推断，推论不出默认 VND")
     a = ap.parse_args()
+
+    # 批次日期 → 凭证字号前缀 + 页首标签（payprep.py 会传入；不传则沿用 CFG 默认）
+    batch_disp = '04/09/2026'
+    if a.date:
+        d = re.sub(r'\D', '', str(a.date))
+        if len(d) != 8:
+            raise SystemExit(f'❌ --date 需为 YYYYMMDD，收到: {a.date}')
+        CFG['so_ct_fmt'] = 'UNC' + d[4:] + '-{n}'
+        batch_disp = f'{d[6:]}/{d[4:6]}/{d[0:4]}'
+
+    # 币别（写入 Loại tiền 列）：显式参数 > 定稿表 H 列表头 > 默认 VND
+    loai_tien = (a.currency or '').upper().strip()
+    if loai_tien not in ('VND', 'USD'):
+        loai_tien = 'VND'
+        try:
+            import openpyxl as _oxl
+            _ws = _oxl.load_workbook(a.src).active
+            for _c in range(1, _ws.max_column + 1):
+                _v = _ws.cell(2, _c).value
+                _m = re.match(r'^Số tiền trên hóa đơn/\s*Hợp đồng\s*\((VND|USD)\)', str(_v or ''), re.I)
+                if _m:
+                    loai_tien = _m.group(1).upper()
+                    break
+        except Exception:
+            pass
 
     # 1) 读定稿表
     wb = openpyxl.load_workbook(a.src); ws = wb.active
@@ -123,7 +150,7 @@ def main():
 
     # 3) 生成 MISA 导入文件
     out = openpyxl.Workbook(); o = out.active; o.title = 'Phieu chi tien gui'
-    o['A1'] = 'FILE NHẬP KHẨU PHIẾU CHI TIỀN GỬI (MISA AMIS) — HUATEX · lô 04/09/2026'
+    o['A1'] = f'FILE NHẬP KHẨU PHIẾU CHI TIỀN GỬI (MISA AMIS) — HUATEX · lô {batch_disp}'
     o['A1'].font = Font(bold=True, size=13)
     o['A2'] = 'Hướng dẫn: điền dữ liệu vào các cột tương ứng; cột có (*) là bắt buộc.'
     o['A3'] = '⚠️ Các ô đánh dấu [XÁC NHẬN] là giá trị tạm — chờ xác nhận chính sách kế toán / danh mục của công ty trước khi nhập chính thức.'
@@ -152,7 +179,7 @@ def main():
         vals = {
             1: CFG['phuong_thuc_tt'], 2: pd_s, 3: pd_s, 4: CFG['so_ct_fmt'].format(n=row['stt']),
             5: CFG['ly_do_chi'], 6: '', 7: row['memo'], 8: row['acct_loan'], 9: CFG['bank_name'],
-            10: '', 11: row['vendor_vi'], 12: row['acct_recv'], 13: bank_en, 14: 'VND', 15: '',
+            10: '', 11: row['vendor_vi'], 12: row['acct_recv'], 13: bank_en, 14: loai_tien, 15: '',
             16: row['memo'], 17: CFG['tk_no'], 18: CFG['tk_co'], 19: row['gross'], 20: '',
             21: row['vendor_vi'], 22: row['acct_recv'], 23: bank_en, 24: branch, 25: '',
             26: 'Không',                        # Hạch toán gộp nhiều hóa đơn
@@ -181,6 +208,25 @@ def main():
     o.row_dimensions[1].height = 20
 
     os.makedirs(os.path.dirname(os.path.abspath(a.out)), exist_ok=True)
+
+    # ── 输出格式规范（Daryl 2026-10-07 定，已写入 workflow）:
+    #    ① 字体全部 Times New Roman  ② 全部加框线  ③ 取消 wrap text
+    from copy import copy as _copy
+    _thin = Side(style='thin', color='000000')
+    _bd = Border(left=_thin, right=_thin, top=_thin, bottom=_thin)
+    for _r in range(1, o.max_row + 1):
+        for _c in range(1, o.max_column + 1):
+            _cell = o.cell(_r, _c)
+            _f = _copy(_cell.font)
+            _f.name = 'Times New Roman'
+            _f.size = _f.size or 11
+            _cell.font = _f
+            _cell.border = _bd
+            _al = _cell.alignment
+            _cell.alignment = Alignment(horizontal=_al.horizontal,
+                                        vertical=_al.vertical or 'center', wrap_text=False)
+    print('🎨 格式规范: Times New Roman + 全框线 + 取消 wrap text（%d行×%d列）' % (o.max_row, o.max_column))
+
     out.save(a.out)
     s = sum(int(x['gross']) for x in rows)
     print(f"\n✅ 已生成 {len(rows)} 行 → {a.out}")

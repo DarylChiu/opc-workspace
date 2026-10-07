@@ -1,0 +1,248 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""payprep.py — Payment 批次产出统一入口（命名方案 A · 单脚本双子命令）
+
+Daryl 2026-10-07 定：
+  · 脚本命名 = 方案 A → `payprep.py to-bank | to-misa`
+  · 输出文件名一律英文，日期为**批次日期** <YYYYMMDD>：
+      (a) to-bank →  Payment request to Bank-<YYYYMMDD>.xlsx
+      (b) to-misa →  Payment record for MISA-<YYYYMMDD>.xlsx
+  （旧名 `Payment核销测试0904-*.xlsx` / `MISA导入-*.xlsx` 作废，不再产出）
+
+定位（零账套绑定）：本脚本**只产出文件**，不登录 MISA、不碰任何账套。
+  导入（Nhập khẩu chứng từ）与核销（Đối trừ chứng từ）由知道账套的会计在 MISA 内执行。
+
+输出格式规范（Daryl 2026-10-07 定，写入 workflow，两份产物都适用）：
+  ① 字体全部 **Times New Roman**  ② **全部加框线**（细实线）  ③ **取消 wrap text**（不自动换行）
+  → 由 `payment_recon_finalize.py` / `misa_import_gen.py` 末尾统一套用；如需跳过用 `--no-style`（仅 finalize 支持）
+
+薄适配层：逻辑仍留在原脚本，本脚本只做调度 + 命名，便于单点维护：
+  gen_payment_recon_v2.py    明细表 + 附件包 + OCR → 送银行底稿
+  fill_bank_receipt.py       （可选）银行回单 → 放款账号 / payment date
+  fill_payment_paid.py       （可选）电汇凭单 → 已付金额
+  payment_recon_finalize.py  凭证摘要静态化 + 整列删除
+  misa_import_gen.py         定稿表 + 发票 PDF → MISA 40 列导入文件
+
+用法：
+  # (a) 送银行
+  python3 scripts/payprep.py to-bank \
+      --template <模板.xlsx> --detail <明细.xlsx> --attach <附件包根目录> \
+      --outdir work/Mai岗位效率优化专案/out [--date 20260904] [--drop 款项类别] \
+      [--receipt <回单.pdf>] [--wire <电汇凭单.pdf>] [--map-folder-by amount|order]
+
+  # (b) MISA 入账（src 通常 = 上一步 (a) 的产物）
+  python3 scripts/payprep.py to-misa \
+      --src <定稿表.xlsx> --invoices <发票目录> --outdir work/Mai岗位效率优化专案/out [--date 20260904]
+
+  --date 省略时从文件名推断（20260904 / 0904 / 9-4 均可），推断不到则报错要求显式给。
+"""
+import argparse
+import datetime as _dt
+import importlib
+import os
+import re
+import sys
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+if HERE not in sys.path:
+    sys.path.insert(0, HERE)
+
+NAME_BANK = 'Payment request to Bank-{d}.xlsx'
+NAME_MISA = 'Payment record for MISA-{d}.xlsx'
+
+
+# ───────────────────────────── 工具 ─────────────────────────────
+def _year():
+    return _dt.date.today().year
+
+
+def resolve_date(explicit, *hints):
+    """返回 8 位批次日期 YYYYMMDD。explicit 优先；否则从文件名推断。"""
+    if explicit:
+        d = re.sub(r'\D', '', str(explicit))
+        if len(d) == 8:
+            return d
+        if len(d) == 4:                       # MMDD
+            return f'{_year()}{d}'
+        raise SystemExit(f'❌ --date 需为 YYYYMMDD 或 MMDD，收到: {explicit}')
+
+    for h in hints:
+        if not h:
+            continue
+        b = os.path.basename(str(h))
+        m = re.search(r'(20\d{2})[-_.]?(\d{2})(\d{2})', b)      # 20260904
+        if m:
+            return m.group(1) + m.group(2) + m.group(3)
+        m = re.search(r'(?<!\d)(\d{1,2})[-_.](\d{1,2})(?!\d)', b)  # 9-4
+        if m:
+            mm, dd = int(m.group(1)), int(m.group(2))
+            if 1 <= mm <= 12 and 1 <= dd <= 31:
+                return f'{_year()}{mm:02d}{dd:02d}'
+        m = re.search(r'(?<!\d)(\d{2})(\d{2})(?!\d)', b)        # 0904
+        if m:
+            mm, dd = int(m.group(1)), int(m.group(2))
+            if 1 <= mm <= 12 and 1 <= dd <= 31:
+                return f'{_year()}{mm:02d}{dd:02d}'
+    raise SystemExit('❌ 无法从文件名推断批次日期 → 请显式传 --date YYYYMMDD')
+
+
+def call(mod_name, argv):
+    """以 sys.argv 调起既有脚本的 main()（保留原逻辑，零重写）。"""
+    mod = importlib.import_module(mod_name)
+    old = sys.argv
+    sys.argv = [mod_name] + [str(x) for x in argv]
+    try:
+        mod.main()
+    finally:
+        sys.argv = old
+
+
+def _drop(path):
+    try:
+        os.remove(path)
+    except OSError:
+        pass
+
+
+def detail_currency(path):
+    """明细表「原币币种」多数决 → VND / USD（混合批次取多数；单行原币以明细表为准）"""
+    try:
+        g = importlib.import_module('gen_payment_recon_v2')
+        rows = g.load_detail(path)
+    except Exception:
+        return None
+    votes = {}
+    for r in rows:
+        cur = str(r.get('cur') or '')
+        u = cur.upper()
+        if 'USD' in u or '美元' in cur or 'DOLLAR' in u:
+            k = 'USD'
+        elif 'VND' in u or '越南盾' in cur or cur.endswith('盾'):
+            k = 'VND'
+        else:
+            k = None
+        if k:
+            votes[k] = votes.get(k, 0) + 1
+    return max(votes, key=votes.get) if votes else None
+
+
+# ───────────────────────── (a) 送银行 ─────────────────────────
+def cmd_to_bank(a):
+    outdir = os.path.abspath(a.outdir)
+    os.makedirs(outdir, exist_ok=True)
+    date = resolve_date(a.date, a.detail, a.template)
+    final = os.path.join(outdir, NAME_BANK.format(d=date))
+    print(f'=== payprep to-bank | 批次 {date} | 输出 {os.path.basename(final)} ===')
+    ccy = (a.currency or detail_currency(a.detail) or '').upper() or None
+    print(f'  币别（H 列表头）: {ccy or "(自动推断)"}')
+
+    tmp = os.path.join(outdir, '._payprep_1.xlsx')
+    call('gen_payment_recon_v2', [
+        '--template', a.template, '--detail', a.detail, '--attach', a.attach,
+        '--out', tmp, '--map-folder-by', a.map_folder_by,
+    ])
+    cur, temps = tmp, [tmp]
+
+    if a.receipt:
+        nxt = os.path.join(outdir, '._payprep_2.xlsx')
+        argv = ['--xlsx', cur, '--receipt', a.receipt, '--out', nxt]
+        if a.set_bank:
+            argv += ['--set-bank', a.set_bank]
+        if a.set_method:
+            argv += ['--set-method', a.set_method]
+        argv += ['--summary-lang', a.summary_lang]
+        print('\n=== 回单回填 ===')
+        call('fill_bank_receipt', argv)
+        cur = nxt
+        temps.append(nxt)
+
+    if a.wire:
+        nxt = os.path.join(outdir, '._payprep_3.xlsx')
+        argv = ['--xlsx', cur, '--wire', a.wire, '--out', nxt, '--fill-i', '--fill-j']
+        print('\n=== 电汇凭单回填 ===')
+        call('fill_payment_paid', argv)
+        cur = nxt
+        temps.append(nxt)
+
+    argv = ['--xlsx', cur, '--out', final, '--summary-lang', a.summary_lang]
+    if ccy:
+        argv += ['--currency', ccy]
+    for col in a.drop:
+        argv += ['--drop', col]
+    print('\n=== 收尾（摘要静态化 + 删列） ===')
+    call('payment_recon_finalize', argv)
+
+    for t in temps:
+        if os.path.exists(t + '.recon.txt'):
+            try:
+                os.replace(t + '.recon.txt', final + '.recon.txt')
+            except OSError:
+                pass
+        _drop(t)
+    print(f'\n✅ (a) {final}')
+    return final
+
+
+# ───────────────────────── (b) MISA ─────────────────────────
+def cmd_to_misa(a):
+    outdir = os.path.abspath(a.outdir)
+    os.makedirs(outdir, exist_ok=True)
+    date = resolve_date(a.date, a.src)
+    final = os.path.join(outdir, NAME_MISA.format(d=date))
+    print(f'=== payprep to-misa | 批次 {date} | 输出 {os.path.basename(final)} ===')
+
+    # 列映射自检：misa_import_gen 按固定列号取值（发票号 F=6 / 价税合计 H=8 /
+    # 请款单号=17 / 凭证摘要=18 / 税号=19）→ 与 to-bank 产物（含删列后）对齐
+    try:
+        import openpyxl
+        ws = openpyxl.load_workbook(a.src).active
+        hdr = {c: ws.cell(2, c).value for c in (6, 8, 17, 18, 19)}
+        print('  列映射自检:', hdr)
+        if not ws.cell(2, 6).value or not ws.cell(2, 8).value:
+            raise SystemExit('❌ 定稿表列 6/8 为空 → 不是期望的 Payment 定稿表结构')
+    except ImportError:
+        pass
+
+    call('misa_import_gen', [
+        '--src', a.src, '--invoices', a.invoices, '--out', final,
+        '--date', date,
+    ] + (['--currency', a.currency] if a.currency else []))
+    print(f'\n✅ (b) {final}')
+    return final
+
+
+# ───────────────────────────── main ─────────────────────────────
+def main():
+    ap = argparse.ArgumentParser(description='Payment 批次产出统一入口（命名方案 A）')
+    sub = ap.add_subparsers(dest='cmd', required=True)
+
+    b = sub.add_parser('to-bank', help='生成送银行文件')
+    b.add_argument('--template', required=True)
+    b.add_argument('--detail', required=True)
+    b.add_argument('--attach', required=True, help='附件包根目录（含 1/2/3 子文件夹）')
+    b.add_argument('--outdir', required=True)
+    b.add_argument('--date', default=None, help='批次日期 YYYYMMDD（省略则从文件名推断）')
+    b.add_argument('--drop', action='append', default=[], help='收尾时整列删除（表头名或列字母），可重复')
+    b.add_argument('--receipt', default=None, help='银行放款回单 PDF（可选）')
+    b.add_argument('--wire', default=None, help='电汇凭单 PDF（可选）')
+    b.add_argument('--set-bank', default=None)
+    b.add_argument('--set-method', default=None)
+    b.add_argument('--map-folder-by', choices=['amount', 'order'], default='amount')
+    b.add_argument('--summary-lang', choices=['vi', 'zh'], default='vi', help='凭证摘要语言；默认 vi')
+    b.add_argument('--currency', choices=['VND', 'USD'], default=None, help='H 列表头/金额币别；默认从明细表推断')
+    b.set_defaults(func=cmd_to_bank)
+
+    m = sub.add_parser('to-misa', help='生成 MISA 导入文件')
+    m.add_argument('--src', required=True, help='定稿表（通常 = to-bank 的产物）')
+    m.add_argument('--invoices', required=True, help='发票 PDF 目录')
+    m.add_argument('--outdir', required=True)
+    m.add_argument('--date', default=None)
+    m.add_argument('--currency', choices=['VND', 'USD'], default=None, help='Loại tiền；默认从定稿表 H 列表头推断')
+    m.set_defaults(func=cmd_to_misa)
+
+    a = ap.parse_args()
+    a.func(a)
+
+
+if __name__ == '__main__':
+    main()

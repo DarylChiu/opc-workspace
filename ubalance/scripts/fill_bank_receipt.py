@@ -81,6 +81,10 @@ def parse_receipt(pdf):
             if k in nm:
                 out['bank'] = v
                 break
+    # 贷款放款回单（GIẤY BÁO NỢ / Debit Advice）→ payment method = Loan
+    # （Daryl 2026-10-07 明确：GNN/UNC/回单信息本就可判定放款性质，不必等人填）
+    if re.search(r'GI[ẤA]Y B[ÁA]O N[ỢO]|Debit\s*Advice', t, re.I):
+        out['method'] = 'Loan'
     # 交易号
     m = re.search(r'S[ốo] giao d[ịi]ch\s*[:：]?\s*([0-9A-Za-z\-/]+)', t, re.I)
     if m:
@@ -94,18 +98,25 @@ def fmt_amount(v, cur):
 
 
 def main():
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    try:
+        import summary_text
+    except ImportError:
+        summary_text = None
     ap = argparse.ArgumentParser()
     ap.add_argument('--xlsx', required=True)
     ap.add_argument('--receipt', required=True)
     ap.add_argument('--out', required=True)
     ap.add_argument('--set-method', default=None, help='写 payment method（如 Loan）；默认不动')
     ap.add_argument('--set-bank', default=None, help='写 Bank（如 VTB）；默认按回单银行识别')
+    ap.add_argument('--summary-lang', choices=['vi', 'zh'], default='vi',
+                    help='凭证摘要语言；默认 vi（Daryl 2026-10-07 定）')
     ap.add_argument('--dry-run', action='store_true')
     a = ap.parse_args()
 
     info = parse_receipt(a.receipt)
     print('=== 回单解析 ===')
-    for k in ('account', 'date', 'amount', 'currency', 'bank', 'bank_raw', 'txn'):
+    for k in ('account', 'date', 'amount', 'currency', 'bank', 'bank_raw', 'txn', 'method'):
         if info.get(k) is not None:
             print('  %-9s %s' % (k, info[k]))
     if not info.get('account') or not info.get('date'):
@@ -136,7 +147,9 @@ def main():
         v = ws.cell(hdr, c).value
         if v:
             col[str(v).strip()] = c
-    rows = [r for r in range(hdr + 1, ws.max_row + 1) if ws.cell(r, col.get('Chứng từ giải ngân', 6)).value]
+    rows = [r for r in range(hdr + 1, ws.max_row + 1)
+            if ws.cell(r, col.get('Chứng từ giải ngân', 6)).value
+            or ws.cell(r, col.get('请款单号', 18)).value]
     date_txt = '%d月%d日' % (info['date'].month, info['date'].day)
     n = 0
     for r in rows:
@@ -144,27 +157,35 @@ def main():
             ws.cell(r, col['File Name'], label)
         ws.cell(r, col.get('BÚT TOÁN', 11), info['account'])
         ws.cell(r, col.get('payment date', 12), info['date'])
-        if a.set_method and 'payment method' in col:
-            ws.cell(r, col['payment method'], a.set_method)
+        method = a.set_method or info.get('method')
+        if method and 'payment method' in col:
+            ws.cell(r, col['payment method'], method)
         if 'Bank' in col:
             ws.cell(r, col['Bank'], a.set_bank or info.get('bank') or '')
         # ★ 凭证摘要：改写成**静态文本**（公式在飞书预览/Numbers 等不重算会显空）
         if '凭证摘要' in col:
             oa = ws.cell(r, col.get('请款单号', 18)).value or ''
             vn = ws.cell(r, col.get('Tiếng việt', 15)).value or ''
-            inv = ws.cell(r, col.get('Chứng từ giải ngân', 6)).value or ''
-            c_h = col.get('Số tiền trên hóa đơn/ Hợp đồng (USD)', 8)
-            amt = ws.cell(r, c_h).value or ''
+            inv = ws.cell(r, col.get('Chứng từ giải ngân', 6)).value or 'Thiếu hóa đơn'
+            c_h = None
+            for k, cc in col.items():
+                if re.match(r'^Số tiền trên hóa đơn/\s*Hợp đồng', k or ''):
+                    c_h = cc
+                    break
+            amt = ws.cell(r, c_h).value if c_h else ''
             if isinstance(amt, float):
                 amt = int(amt)
-            ws.cell(r, col['凭证摘要'],
-                    f"在{info['account']}账号于{date_txt}放款OA流程号{oa}的{vn}发票号{inv}金额{amt}vnd")
+            if summary_text:
+                txt = summary_text.build(a.summary_lang, info['account'], info['date'], oa, vn, inv, amt)
+            else:
+                txt = f"在{info['account']}账号于{date_txt}放款OA流程号{oa}的{vn}发票号{inv}金额{amt}vnd"
+            ws.cell(r, col['凭证摘要'], txt)
         n += 1
     os.makedirs(os.path.dirname(os.path.abspath(a.out)), exist_ok=True)
     wb.save(a.out)
     print('\n✅ 已回填 %d 行 → %s' % (n, a.out))
     print('   A=%s | K=%s | L=%s | M=%s | N=%s' % (label, info['account'], info['date'],
-          a.set_method or '(未动)', a.set_bank or info.get('bank') or '(未动)'))
+          a.set_method or info.get('method') or '(未动)', a.set_bank or info.get('bank') or '(未动)'))
 
 
 if __name__ == '__main__':

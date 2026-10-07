@@ -1,0 +1,38 @@
+{
+  "_note": "发票解析回归期望值（C8）。样本只读复制自 work/Mai岗位效率优化专案/attachments/凭证-20261008（未改原包）。期望值已与请款明细表金额/事由交叉验证。",
+  "_fields": {
+    "no": "发票号（票面正文真值，含前导 0）",
+    "alt_no": "允许的兜底值（正文确实读不出时：文件名兜底值，且必须带 _need_check_no 备注）",
+    "date": "发票日期 YYYY-MM-DD",
+    "amount": "价税合计（负数 = 调整票/贷项）",
+    "tax": "卖方税号",
+    "serial": "序列号（Ký hiệu）",
+    "num_src": "号码来源：body / ocr-header / filename"
+  },
+  "samples": [
+    {"file": "short_4.pdf",          "no": "4",        "date": "2026-06-15", "amount": 525268800,  "tax": "0318815727", "serial": "1C26TAA", "num_src": "body"},
+    {"file": "short_40.pdf",         "no": "40",       "date": "2026-08-22", "amount": 322593214,  "tax": "3603917899", "serial": "1C26TDN", "num_src": "body"},
+    {"file": "wm_short_57.pdf",      "no": "57",       "date": "2026-08-28", "amount": 2433358400, "tax": "0318919500", "serial": "1C26TAA", "num_src": "body"},
+    {"file": "adjust_neg_70.pdf",    "no": "70",       "date": "2026-09-21", "amount": -14077280,  "tax": "0318919500", "serial": "1C26TAA", "num_src": "body"},
+    {"file": "wm_short_65.pdf",      "no": "65",       "date": "2026-06-02", "amount": 18360000,   "tax": "0314574460", "serial": "1C26TLP", "num_src": "body"},
+    {"file": "short_77.pdf",         "no": "77",       "date": "2026-07-04", "amount": 156600000,  "tax": "0314574460", "serial": "1C26TLP", "num_src": "body"},
+    {"file": "short_78.pdf",         "no": "78",       "date": "2026-07-04", "amount": 182129472,  "tax": "0314574460", "serial": "1C26TLP", "num_src": "body"},
+    {"file": "hdr_222.pdf",          "no": "222",      "date": "2026-07-08", "amount": 149299200,  "tax": "0315649694", "serial": "1C26TYH", "num_src": "body"},
+    {"file": "lead0_333.pdf",        "no": "00000333", "date": "2026-08-21", "amount": 11880000,   "tax": "3702954884", "serial": "1C26TYY", "num_src": "body"},
+    {"file": "mixedcase_8307.pdf",   "no": "8307",     "date": "2026-08-07", "amount": 6350400,    "tax": "0304876381", "serial": "1C26TBL", "num_src": "body"},
+    {"file": "wm_long_720.pdf",      "no": "00000720", "date": "2026-08-13", "amount": 59911488,   "tax": "3901280358", "serial": "1C26TTL", "num_src": "body"},
+    {"file": "multi_3_211.pdf",      "no": "00000211", "date": "2026-08-04", "amount": 3780000,    "tax": "3603695597", "serial": "1C26TAA", "num_src": "body"},
+    {"file": "multi_2_521.pdf",      "no": "521",      "date": "2026-07-20", "amount": 5335000,    "tax": "3603289884", "serial": "1C26TBT", "num_src": "body"},
+    {"file": "scan_hdr_0235.pdf",    "no": "00000235", "alt_no": "0235",     "date": "2025-12-31", "amount": 5832000},
+    {"file": "scan_0223.pdf",        "no": "00000223", "alt_no": "0223",     "date": "2025-12-04", "amount": 2916000}
+  ],
+  "cases": [
+    {
+      "name": "folder16_multi",
+      "desc": "多文件同卷（3 张发票）：逐文件解析后合计 = 13,500,000",
+      "dir": "cases/folder16_multi",
+      "invoices": {"00000209": 4860000, "00000210": 4860000, "00000211": 3780000},
+      "sum": 13500000
+    }
+  ]
+}

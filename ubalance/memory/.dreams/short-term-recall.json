@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-05T01:50:52.590Z",
+  "updatedAt": "2026-10-07T01:09:18.618Z",
   "entries": {
     "memory:memory/2026-06-10.md:1:29": {
       "key": "memory:memory/2026-06-10.md:1:29",
@@ -6549,6 +6549,285 @@
         "内容",
         "补充",
         "当日"
+      ]
+    },
+    "memory:memory/2026-10-05.md:263:269": {
+      "key": "memory:memory/2026-10-05.md:263:269",
+      "path": "memory/2026-10-05.md",
+      "startLine": 263,
+      "endLine": 269,
+      "source": "memory",
+      "snippet": "- **现状澄清**: 我**从未落地** `run_payment_recon.py`（只是提案）→ 改名/定名成本 = 0 ## 🕐 17:4x 🔬 MISA「Excel 导入凭证 + 发票级核销」调研（Daryl 质疑：同事说批量导入不能按发票核销） - **检索**: brave 6 轮 + 4 次抓取官方页（helpact/helpsme/helpasp.misa.vn、developer.misa.vn） - **结论 1（✅ 官方确认）**: MISA 支持从 Excel 导入凭证；**但 Tiền mặt / Tiền gửi 分系统一次只能导入一类**（Thu tiền / Chi tiền / Chuyển tiền nội bộ 各一份文件，不能混）；导入后凭证 = **chưa ghi sổ**，需再 ghi sổ - **结论 2（✅ 官方确认）**: **发票级核销确实存在，但是 MISA 内的独立功能，不在导入链路上** —— Mua hàng ▸ `Đối trừ chứng từ`（逐供应商，把 chứng từ công nợ ↔ chứng từ thanh toán 勾对，可改 số tiền đối trừ，外币差异自动生成汇率差异凭证）、`Đối trừ chứng từ nhiều đối tượng`（**批量**多供应商）、`Bỏ đối trừ`（反核销） - **结论 3（✅ 决定性规则）**: AMIS 官方 FAQ —— 付款凭证**若不是「Ủy nhiệm chi / Phiếu chi trả tiền nhà",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4169623553752899,
+      "maxScore": 0.4169623553752899,
+      "firstRecalledAt": "2026-10-07T01:09:18.618Z",
+      "lastRecalledAt": "2026-10-07T01:09:18.618Z",
+      "queryHashes": [
+        "ba15faacec52"
+      ],
+      "recallDays": [
+        "2026-10-07"
+      ],
+      "conceptTags": [
+        "run-payment-recon.py",
+        "改名/定名成本",
+        "helpact/helpsme/helpasp.misa.vn",
+        "developer.misa.vn",
+        "现状",
+        "澄清",
+        "从未",
+        "落地"
+      ]
+    },
+    "memory:memory/2026-10-05.md:260:266": {
+      "key": "memory:memory/2026-10-05.md:260:266",
+      "path": "memory/2026-10-05.md",
+      "startLine": 260,
+      "endLine": 266,
+      "source": "memory",
+      "snippet": "- **我的命名建议**: 弃用 `recon/核销/stage`（核销是银行会计在 MISA 的动作，我们做的是**资料整理 + 入账辅助**，不是核销本身）→ 方案 A `payprep.py to-bank|to-misa`；**方案 B（我推荐）两个独立命令** `pay_to_bank.py`(A) / `pay_to_misa.py`(B)，输出改名 `Payment送银行-<批次>.xlsx` / `Payment入账辅助-<批次>.xlsx` - **🔍 关键发现（websearch 2 轮，brave/site:misa.vn）**: **MISA 支持从 Excel 导入凭证**（SME2022 / AMIS Kế toán / ASP / MIMOSA 均有「Nhập khẩu chứng từ từ file excel」，有官方 tệp mẫu 下载，必填列带 *；导入后凭证=**chưa ghi sổ**，需再 ghi sổ）；AMIS 还支持**导入银行对账单自动生成收/支凭证**、以及「**一张采购凭证带多张发票**」导入 - ⇒ **通往\"自动化入账\"的现实路径 = 输出 MISA 可直接导入的凭证 Excel**（而不是\"辅助表\"）；**前提：需要拿到他们 MISA 里的官方导入模板文件**（tệp mẫu nhập khẩu chứng từ）← 待向 Daryl/Mai 索取 - **现状澄清**: 我**从未落地** `run_payment_recon.py`（只是提案）→ 改名/定名成本 = 0 ## 🕐 17:4x 🔬",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4104042738676071,
+      "maxScore": 0.4104042738676071,
+      "firstRecalledAt": "2026-10-07T01:09:18.618Z",
+      "lastRecalledAt": "2026-10-07T01:09:18.618Z",
+      "queryHashes": [
+        "ba15faacec52"
+      ],
+      "recallDays": [
+        "2026-10-07"
+      ],
+      "conceptTags": [
+        "recon/核销/stage",
+        "payprep.py",
+        "to-bank",
+        "to-misa",
+        "pay-to-bank.py",
+        "pay-to-misa.py",
+        "brave/site",
+        "misa.vn"
+      ]
+    },
+    "memory:memory/2026-10-05.md:281:290": {
+      "key": "memory:memory/2026-10-05.md:281:290",
+      "path": "memory/2026-10-05.md",
+      "startLine": 281,
+      "endLine": 290,
+      "source": "memory",
+      "snippet": "- **卡点（需 Daryl/Mai 给）**: ①**Mã đối tượng / Mã NCC 必须与其 MISA 主数据一致**（最容易卡） ②科目规则（TK Nợ/TK Có）、凭证字号规则（Số chứng từ）、`Lý do chi`/`Nhóm HHDV mua vào` 字典取值 ③是否允许试导入 1 笔 - **我能补的**: 从发票 PDF 补抽「未税金额 / %税率 / 税额 / TK thuế GTGT」→ 填满模板税块（现有 -5 表只有价税合计） ## 🕐 18:0x 🛑 Daryl：MISA Open API 路线作废（即将结束与 MISA 的合作） - **Daryl 原话**: 「MISA的官方Open API就不用想了，Balance，我们很快跟MISA不合作了，所以大概率是拿不到这个API的授权的」 - **影响**: \"自动化入账\"的天花板从「API 直连」降为「**Excel 批量导入 + 批量核销**」；API 调研成果作废（保留备查，不再投入） - **我给的调整方案（分层，待 Daryl 定投入深度）**: - **资产层（与系统无关，值钱）**: 发票级结构化数据（供应商/税号/发票号/日期/未税/税额/总额/OA号/放款与实付）+ 三重勾稽校验 + 核销台账 ⇒ **迁移后仍然复用** - **适配层（与系统绑定，很薄）**: MISA 40 列导入文件生成器；MISA 停用即弃/换新系统适配器 - 原则: **不把业务逻辑绑死在 MISA 模板上**",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4047387361526489,
+      "maxScore": 0.4047387361526489,
+      "firstRecalledAt": "2026-10-07T01:09:18.618Z",
+      "lastRecalledAt": "2026-10-07T01:09:18.618Z",
+      "queryHashes": [
+        "ba15faacec52"
+      ],
+      "recallDays": [
+        "2026-10-07"
+      ],
+      "conceptTags": [
+        "daryl/mai",
+        "nợ/tk",
+        "供应商/税号/发票号/日期/未税/税额/总额/oa号/放款与实付",
+        "停用即弃/换新系统适配器",
+        "daryl",
+        "mai",
+        "đối",
+        "tượng"
+      ]
+    },
+    "memory:memory/2026-10-05.md:304:311": {
+      "key": "memory:memory/2026-10-05.md:304:311",
+      "path": "memory/2026-10-05.md",
+      "startLine": 304,
+      "endLine": 311,
+      "source": "memory",
+      "snippet": "- **踩坑（重要）**: ①MISA 版发票**无「Tổng cộng tiền thanh toán」行** → 合计用未税+税额兜底 ②水印碎数字会污染金额（`[\\d.\\s]+` 贪婪 → 抽出 1.4 万亿）→ 必须用**严格千分位** `\\d{1,3}(?:\\.\\d{3})+` ③水印字符在**康熙部首区 U+2E80–U+2FFF**（⽟⽒，不在 CJK 统一表意区）→ 清理要覆盖该区 ④水印数字会夹在\"月\"和\"năm\"之间 → 日期正则要留 `\\D{0,5}` 余量 ⑤MST 取前 10 位（避免水印尾号） - **待确认暂定值**: Số chứng từ 规则（现 `UNC0904-n`）、Lý do chi（现 \"Chi mua ngoài có hóa đơn\"）、TK Nợ 331 / TK Có 1121 / TK thuế 1331、Nhóm HHDV mua vào = 1、放款银行全称；**空缺**: Mã đối tượng / Mã NCC（需 MISA 主数据） - **下一步**: Daryl 将提供 MISA 登录 → 我先只读主数据（NCC编码/科目/凭证字号/字典）→ 用真值重生成 → 批量导入 7 张 → 核实是否**发票级核销** ## 🕐 23:45 📊 每日成本扫描（cron · 超时保护模式） - **全量扫描**: 4320 个 .jsonl，台账 30,577 次调用（本次新增 555） - **今日 $8.0940 | 本月 $13.7808 | 全量 $201.2963 | Token 2,158,534,6",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4025102138519287,
+      "maxScore": 0.4025102138519287,
+      "firstRecalledAt": "2026-10-07T01:09:18.618Z",
+      "lastRecalledAt": "2026-10-07T01:09:18.618Z",
+      "queryHashes": [
+        "ba15faacec52"
+      ],
+      "recallDays": [
+        "2026-10-07"
+      ],
+      "conceptTags": [
+        "1.4",
+        "unc0904-n",
+        "ncc编码/科目/凭证字号/字典",
+        "8.0940",
+        "13.7808",
+        "201.2963",
+        "重要",
+        "misa"
+      ]
+    },
+    "memory:memory/2026-10-05.md:269:274": {
+      "key": "memory:memory/2026-10-05.md:269:274",
+      "path": "memory/2026-10-05.md",
+      "startLine": 269,
+      "endLine": 274,
+      "source": "memory",
+      "snippet": "- **结论 3（✅ 决定性规则）**: AMIS 官方 FAQ —— 付款凭证**若不是「Ủy nhiệm chi / Phiếu chi trả tiền nhà cung cấp」类型，就不会自动挂核销** ⇒ **这就是同事\"只能核销供应商余额\"的机制原因**（凭证类型不对 → 无自动 đối trừ） - **结论 4（✅）**: **MISA 有官方 Open API**（developer.misa.vn + actdocs.misa.vn ACTOpenAPIHelp；AMIS Kế toán「Kết nối ứng dụng ▸ API」可推送数据建凭证，支持 Tiền mặt/Tiền gửi/Mua hàng/Bán hàng，可批量「Lập CT kế toán」）→ 真正\"全自动入账\"的技术路径，但需 MISA 侧开通授权 + 确认 API 能否带核销明细（**未知，需查开发者文档**） - **待测（关键未知）**: 用「Ủy nhiệm chi」类型**导入**时，能否带 đối tượng+331 明细并**自动挂发票级核销** → 只能实测验，文档未覆盖 - **给 Daryl 的方案**: 今晚现实目标 = 把 (b) 升级为「**生成 MISA 可导入文件 + 批量核销对照表**」→ 会计从\"逐笔录入+逐笔核销\"变为\"**导入 + 批量 đối trừ**\"两个动作（严格意义的\"API 全自动\"属下一步） - **需 Daryl/Mai 提供 3 样**: ①官方导入模板文件（Tiền gửi ▸ Ủy nhiệm chi/Chi tiền",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.389910626411438,
+      "maxScore": 0.389910626411438,
+      "firstRecalledAt": "2026-10-07T01:09:18.618Z",
+      "lastRecalledAt": "2026-10-07T01:09:18.618Z",
+      "queryHashes": [
+        "ba15faacec52"
+      ],
+      "recallDays": [
+        "2026-10-07"
+      ],
+      "conceptTags": [
+        "developer.misa.vn",
+        "actdocs.misa.vn",
+        "mặt/tiền",
+        "gửi/mua",
+        "hàng/bán",
+        "daryl/mai",
+        "chi/chi",
+        "结论"
+      ]
+    },
+    "memory:memory/2026-10-05.md:288:298": {
+      "key": "memory:memory/2026-10-05.md:288:298",
+      "path": "memory/2026-10-05.md",
+      "startLine": 288,
+      "endLine": 298,
+      "source": "memory",
+      "snippet": "- **资产层（与系统无关，值钱）**: 发票级结构化数据（供应商/税号/发票号/日期/未税/税额/总额/OA号/放款与实付）+ 三重勾稽校验 + 核销台账 ⇒ **迁移后仍然复用** - **适配层（与系统绑定，很薄）**: MISA 40 列导入文件生成器；MISA 停用即弃/换新系统适配器 - 原则: **不把业务逻辑绑死在 MISA 模板上** - **待 Daryl 定**: ①先做 A（MISA 薄适配 + 1 笔试导入，验证\"能否自动挂核销\"）还是 B（只做资产层，MISA 继续人工录）→ 我推荐 A ②换到哪个系统 / 时间线（决定投入深度） ## 🕐 18:1x ✅ 生成 MISA 导入文件（7 行全量，Daryl 指令「全部都试，不要只试一笔」） - **新脚本**: `scripts/misa_import_gen.py`（可复用）：读定稿表 + 发票 PDF → 抽 未税/税率/税额/MST/日期 → 生成 40 列 MISA 导入文件；顶部 `CFG` 集中放**暂定值**（科目/字号/字典），确认后改一处重跑 - **产出**: `work/Mai岗位效率优化专案/out/MISA导入-Phiếu chi tiền gửi-0904-20261005.xlsx`（+ .xls 版，若 xlwt 可用） - **7 行校验全过**（未税+税额=价税合计=定稿金额；MST 与定稿表一致）： - 00021618 IDICO 179,663,201 + 14,373,056 = 194,036,257 (8%) - 00021687",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3818306893110275,
+      "maxScore": 0.3818306893110275,
+      "firstRecalledAt": "2026-10-07T01:09:18.618Z",
+      "lastRecalledAt": "2026-10-07T01:09:18.618Z",
+      "queryHashes": [
+        "ba15faacec52"
+      ],
+      "recallDays": [
+        "2026-10-07"
+      ],
+      "conceptTags": [
+        "供应商/税号/发票号/日期/未税/税额/总额/oa号/放款与实付",
+        "停用即弃/换新系统适配器",
+        "scripts/misa-import-gen.py",
+        "未税/税率/税额/mst/日期",
+        "科目/字号/字典",
+        "gửi-0904-20261005.xlsx",
+        "资产",
+        "系统"
+      ]
+    },
+    "memory:memory/2026-10-05.md:279:284": {
+      "key": "memory:memory/2026-10-05.md:279:284",
+      "path": "memory/2026-10-05.md",
+      "startLine": 279,
+      "endLine": 284,
+      "source": "memory",
+      "snippet": "- **🎯 重大发现**: 模板**本身就带发票级字段**（Số hóa đơn / Ngày hóa đơn / Mã NCC / Tên NCC / MST NCC / Có hóa đơn / Giá trị chưa thuế / Thuế GTGT / TK thuế GTGT / Hạch toán gộp nhiều hóa đơn），且示例里 `Phương thức thanh toán = Ủy nhiệm chi`（＝官方说\"会自动挂核销\"的那种类型）⇒ **同事反馈的\"批量导入不能按发票核销\"，更可能是\"发票字段没填 / 凭证类型不对\"，而不是功能不存在**；但是否**自动挂 `Đối trừ`** 仍需 1 笔实测 - **示例行解读**: r8 = USD 例（Loại tiền USD / Tỷ giá 23500 / 原币 100 / quy đổi 2,350,000 / TK Nợ 6427 / TK Có 1122 / Có hóa đơn / Số HĐ 0002211 / MST NCC）；r9+r10 = **同一 Số chứng từ UNC0002 用两行明细**（费用行 + VAT 行 TK 1331）⇒ **多明细行合成一张凭证** + **一张凭证可合多张发票**（Hạch toán gộp nhiều hóa đơn） - **卡点（需 Daryl/Mai 给）**: ①**Mã đối tượng / Mã NCC 必须与其 MISA 主数据一致**（最容易卡） ②科目规则（TK Nợ/TK Có）、凭证字号规则（S",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.36769435107707976,
+      "maxScore": 0.36769435107707976,
+      "firstRecalledAt": "2026-10-07T01:09:18.618Z",
+      "lastRecalledAt": "2026-10-07T01:09:18.618Z",
+      "queryHashes": [
+        "ba15faacec52"
+      ],
+      "recallDays": [
+        "2026-10-07"
+      ],
+      "conceptTags": [
+        "daryl/mai",
+        "nợ/tk",
+        "重大",
+        "发现",
+        "模板",
+        "本身",
+        "发票",
+        "hóa"
+      ]
+    },
+    "memory:memory/2026-10-05.md:295:304": {
+      "key": "memory:memory/2026-10-05.md:295:304",
+      "path": "memory/2026-10-05.md",
+      "startLine": 295,
+      "endLine": 304,
+      "source": "memory",
+      "snippet": "- **产出**: `work/Mai岗位效率优化专案/out/MISA导入-Phiếu chi tiền gửi-0904-20261005.xlsx`（+ .xls 版，若 xlwt 可用） - **7 行校验全过**（未税+税额=价税合计=定稿金额；MST 与定稿表一致）： - 00021618 IDICO 179,663,201 + 14,373,056 = 194,036,257 (8%) - 00021687 IDICO 292,755,528 + 23,420,442 = 316,175,970 (8%) - 00003348 ĐIỆN TÍN PHÁT 489,070,179 + 39,125,614 = 528,195,793 (8%) - 00003349 ĐIỆN TÍN PHÁT 1,735,286,211 + 138,822,897 = 1,874,109,108 (8%) - 00000017 NEWTECH 1,162,008,892 + 116,200,888 = 1,278,209,780 (10%) - 00000018 NEWTECH 1,165,318,408 + 116,531,840 = 1,281,850,248 (10%) - 00000019 NEWTECH 1,319,683,690 + 131,968,368 = 1,451,652,058 (10%)；**合计 6,924,229,214 VND** - **踩坑（重要）**: ①MISA 版发票**无「Tổng cộng tiền thanh",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.36418982744216916,
+      "maxScore": 0.36418982744216916,
+      "firstRecalledAt": "2026-10-07T01:09:18.618Z",
+      "lastRecalledAt": "2026-10-07T01:09:18.618Z",
+      "queryHashes": [
+        "ba15faacec52"
+      ],
+      "recallDays": [
+        "2026-10-07"
+      ],
+      "conceptTags": [
+        "gửi-0904-20261005.xlsx",
+        "mai",
+        "岗位",
+        "效率",
+        "专案",
+        "out",
+        "misa",
+        "导入"
+      ]
+    },
+    "memory:memory/2026-10-06.md:12:23": {
+      "key": "memory:memory/2026-10-06.md:12:23",
+      "path": "memory/2026-10-06.md",
+      "startLine": 12,
+      "endLine": 23,
+      "source": "memory",
+      "snippet": "- ⚠️ 成本红线：昨日（10-05）全站 $8.09 **已超 $6 停止线**；Balance 10-05 $5.49、本月 $9.76 / 预算 $20（49%）→ 本轮从严自律 ## 修复动作 1. 将 Cron 自动生成的日记骨架替换为实况正文（本文件） 2. `active.md` 追加 10-06 00:00 状态快照（保持新鲜度 + 承接未闭环事项） 3. `lessons.md` 新增一条操作教训（审计日志缓冲截断 → 首轮即重定向到文件，避免浪费重跑） 4. 明确判定「日记过短」为午夜边界误报 → 不改脚本，仅提请 Kitty 评估 D0 豁免 ## 承接 10-05 未闭环事项 - **MISA 路线**：Open API 作废（Daryl 明确：很快结束与 MISA 合作）→ 天花板＝**Excel 批量导入 + 批量 đối trừ**；**待 Daryl 定投入深度**（我推荐 A：薄适配 + 7 笔试导入，验证「Ủy nhiệm chi 类型能否自动挂发票级核销」） - **待 Daryl/Mai 提供**：MISA 主数据（Mã đối tượng / Mã NCC）、科目与凭证字号规则、是否允许试导入 → 已备 `work/Mai岗位效率优化专案/out/MISA导入-Phiếu chi tiền gửi-0904-20261005.xlsx`（7 行全量，合计 6,924,229,214 VND，校验全过） - **命名与定位**：`payment_recon.py` 改名待 Daryl 选定（我推荐拆为 `pay_to_bank.py`",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.35129932463169095,
+      "maxScore": 0.35129932463169095,
+      "firstRecalledAt": "2026-10-07T01:09:18.618Z",
+      "lastRecalledAt": "2026-10-07T01:09:18.618Z",
+      "queryHashes": [
+        "ba15faacec52"
+      ],
+      "recallDays": [
+        "2026-10-07"
+      ],
+      "conceptTags": [
+        "10-05",
+        "8.09",
+        "5.49",
+        "9.76",
+        "active.md",
+        "10-06",
+        "lessons.md",
+        "daryl/mai"
       ]
     }
   }

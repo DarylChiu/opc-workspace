@@ -45,7 +45,7 @@ def _num(s):
 def parse_wire(pdf):
     pages = []
     for i, t in enumerate(_pages_text(pdf), 1):
-        rec = {'page': i}
+        rec = {'page': i, 'text': t}
         # 金额：优先 "Số tiền:"，其次 Phiếu hạch toán 的 CR 行
         m = re.search(r'S[ốo] ti[ềe]n\s*[:：]\s*([0-9][0-9.,]*)', t, re.I)
         if not m:
@@ -62,7 +62,7 @@ def parse_wire(pdf):
             for d in re.findall(r'\d{5,}', mm.group(1)):
                 invs.append(d)
         if not invs and rec.get('remark'):
-            invs = [d for d in re.findall(r'(?<!\d)(\d{6,})(?!\d)', rec['remark'])]
+            invs = [d for d in re.findall(r'(?<!\d)(\d{5,})(?!\d)', rec['remark'])]
         rec['invoices'] = invs
         # 收款方
         m = re.search(r'[ĐD][ơo]n v[ịi] nh[ậa]n ti[ềe]n\s*[:：]?\s*(.+)', t, re.I) or \
@@ -114,49 +114,82 @@ def main():
         if v:
             col[str(v).strip()] = c
     cF = col.get('Chứng từ giải ngân', 6)
-    cH = col.get('Số tiền trên hóa đơn/ Hợp đồng (USD)', 8)
+    cH = None
+    for _k, _c in col.items():
+        if re.match(r'^Số tiền trên hóa đơn/\s*Hợp đồng', _k or ''):
+            cH = _c
+            break
+    cH = cH or 8
     cR = col.get('请款单号', 18)
     cI = col.get('Số tiền đã thanh toán', 9)
     cJ = col.get('Số tiền nhận nợ lần này (VND)', 10)
 
     rows = [r for r in range(hdr + 1, ws.max_row + 1) if ws.cell(r, cF).value]
     paid = {}
-    print('\n=== 逐行匹配 ===')
-    for r in rows:
-        inv = str(ws.cell(r, cF).value).strip()
-        amt = int(ws.cell(r, cH).value or 0)
-        got = direct.get(inv.lstrip('0'))
-        if got is None:
-            # 打包付款：找同 OA 组的 lump 金额是否等于该组发票合计
-            oa = ws.cell(r, cR).value
-            group_total = sum(int(ws.cell(x, cH).value or 0) for x in rows if ws.cell(x, cR).value == oa)
-            hit = [p for p in lumps if p.get('amount') == group_total]
-            if hit:
-                got = amt   # 组内按发票金额逐张核销
-                src = '打包付款按发票金额核销'
-            else:
-                src = '❌ 未匹配'
-        else:
-            src = '按发票号直配'
-        if got is not None:
-            paid[r] = got
-        print('  行%-2d %-10s 发票金额=%-15s 已付=%-15s %s' % (
-            r, inv, format(amt, ','), format(got, ',') if got is not None else '-', src))
+    amt_of = {r: int(ws.cell(r, cH).value or 0) for r in rows}
+    # 每页“数字串”（去分隔符）→ 金额/发票号都可能出现在其中；OCR 把金额字段读得不准时
+    # 仍可“金额是否出现在本页”做判定（金额位数多，误配概率低）
+    pdigits = {}
+    for p in pages:
+        pdigits[p['page']] = re.sub(r'\D', '', p.get('text') or '')
+    used = set()
 
-    # 组级校验
-    print('\n=== 组级校验（电汇合计 vs 发票合计）===')
+    def _inv(r):
+        return str(ws.cell(r, cF).value).strip()
+
+    print('\n=== 逐行匹配 ===')
+    # ① 组级核销：本组发票合计出现在某页（含贷项通知单净额）→ 组内逐张按发票金额核销
     for oa in sorted({ws.cell(r, cR).value for r in rows}):
         grp = [r for r in rows if ws.cell(r, cR).value == oa]
-        inv_tot = sum(int(ws.cell(r, cH).value or 0) for r in grp)
-        grp_inv = {str(ws.cell(r, cF).value).strip().lstrip('0') for r in grp}
-        wire_tot = 0
+        tot = sum(amt_of[r] for r in grp)
+        if tot <= 0 or len(grp) < 1:
+            continue
+        hit = [p for p in pages if p['page'] not in used and str(tot) in pdigits[p['page']]]
+        if hit and (len(grp) > 1 or not any(str(abs(amt_of[r])) in pdigits[p['page']]
+                                              for r in grp for p in pages)):
+            used.add(hit[0]['page'])
+            for r in grp:
+                paid[r] = amt_of[r]
+                print('  行%-2d %-16s 发票金额=%-15s 已付=%-15s ①组级核销（OA=%s，凭单 p%d）'
+                      % (r, _inv(r), format(amt_of[r], ','), format(amt_of[r], ','), oa, hit[0]['page']))
+    # ② 按发票号直配（凭单附言带发票号，如 TT HD 00001046）
+    for r in rows:
+        if r in paid:
+            continue
         for p in pages:
-            p_inv = {str(i).lstrip('0') for i in (p.get('invoices') or [])}
-            if p_inv & grp_inv:                      # 该页电汇直接引用本组发票号
-                wire_tot += p.get('amount') or 0
-            elif not p_inv and (p.get('amount') or 0) == inv_tot:   # 打包付款页
-                wire_tot += p.get('amount') or 0
-        print('  %-22s 发票合计=%-15s 电汇合计=%-15s %s' % (oa, format(inv_tot, ','), format(wire_tot, ','),
+            if p['page'] in used:
+                continue
+            if _inv(r).lstrip('0') and _inv(r).lstrip('0') in [str(x).lstrip('0') for x in (p.get('invoices') or [])]:
+                used.add(p['page'])
+                paid[r] = amt_of[r]
+                print('  行%-2d %-16s 发票金额=%-15s 已付=%-15s ②按发票号直配（凭单 p%d）'
+                      % (r, _inv(r), format(amt_of[r], ','), format(amt_of[r], ','), p['page']))
+                break
+    # ③ 按金额出现在凭单页判定（凭单金额 = 该发票金额）
+    for r in rows:
+        if r in paid or not amt_of[r]:
+            continue
+        for p in pages:
+            if p['page'] in used:
+                continue
+            if str(abs(amt_of[r])) in pdigits[p['page']]:
+                used.add(p['page'])
+                paid[r] = amt_of[r]
+                print('  行%-2d %-16s 发票金额=%-15s 已付=%-15s ③按金额直配（凭单 p%d）'
+                      % (r, _inv(r), format(amt_of[r], ','), format(amt_of[r], ','), p['page']))
+                break
+    for r in rows:
+        if r not in paid:
+            print('  行%-2d %-16s 发票金额=%-15s 已付=%-15s ❌无对应电汇凭单（未付款，需人工核）'
+                  % (r, _inv(r), format(amt_of[r], ','), '-'))
+
+    # 组级校验
+    print('\n=== 组级校验（已匹配电汇合计 vs 发票合计）===')
+    for oa in sorted({ws.cell(r, cR).value for r in rows}):
+        grp = [r for r in rows if ws.cell(r, cR).value == oa]
+        inv_tot = sum(amt_of[r] for r in grp)
+        wire_tot = sum(paid.get(r, 0) for r in grp)
+        print('  %-22s 发票合计=%-15s 已匹配电汇=%-15s %s' % (oa, format(inv_tot, ','), format(wire_tot, ','),
               '✅一致' if inv_tot == wire_tot else '⚠️不一致'))
     if a.dry_run:
         print('\n[dry-run] 不写文件')

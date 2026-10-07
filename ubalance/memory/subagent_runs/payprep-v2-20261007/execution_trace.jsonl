@@ -1,0 +1,19 @@
+{"ts": "2026-10-07T15:54:12", "step": "1", "action": "read_spec", "result": "读完改造规格v2-20261007.md：9条口径/改动清单/验收标准"}
+{"ts": "2026-10-07T16:05:21", "step": "2", "action": "analyze_attachments", "result": "遍历附件包 53 卷 + 明细 56 行，导出每卷发票解析结果 → _analyze_folders.json/log"}
+{"ts": "2026-10-07T16:05:21", "step": "3", "action": "baseline_run", "result": "用现版 gen_payment_recon_v2 跑 1005 批次 → out/preview-v2/_base.xlsx（68 行，参考基线，未覆盖已交付件）"}
+{"ts": "2026-10-07T16:05:21", "step": "4", "action": "edit_vn_invoice_parse", "result": "实现 Q3 号码来源(body/ocr-header/filename)+数字归一+页眉定向 OCR(上25%,350dpi,0/180旋转,二值化)+Q8 is_official_einvoice"}
+{"ts": "2026-10-07T16:05:21", "step": "5", "action": "edit_gen_recon", "result": "重写组级金额呈现 plan_group/note_group（Q1 部分付款、Q2 净额单行、Q4 OCR 不准、Q5 币别分流、Q6 占位）+ 碎行保护 + .recon.json 台账 sidecar"}
+{"ts": "2026-10-07T16:14:08", "step": "6", "action": "edit_finalize", "result": "payment_recon_finalize: 新增 --submit 提交版净化（K/L 空→摘要留空、清残留占位符）+ --hdr-currency 表头币别指定"}
+{"ts": "2026-10-07T16:14:08", "step": "7", "action": "edit_payprep", "result": "payprep: unique_out(-rN 自动递增/--rev)、非 VND 表产出(build_nonvnd)、默认 --submit、行缓冲日志 Tee + pdfminer 屏蔽 + 异常退出码非 0"}
+{"ts": "2026-10-07T16:14:08", "step": "8", "action": "new_recon_ledger", "result": "新增 scripts/recon_ledger.py：发票级台账 xlsx（台账 sheet + 差异清单 sheet），读 .recon.json sidecar"}
+{"ts": "2026-10-07T16:14:08", "step": "9", "action": "new_regress", "result": "新增 scripts/regress_invoices.sh + regress_invoices.py + 15 张票据样本 + folder16 多文件用例 + expected.json；首跑 16/16 全绿"}
+{"ts": "2026-10-07T16:14:08", "step": "10", "action": "doc_v2", "result": "新增 work/Mai岗位效率优化专案/Payment核销流程-银行受托支付-v2-20261007.md（列口径表/9条口径+3修正/金额呈现优先序/附件包规范/验收）；v1 加 v2 指针"}
+{"ts": "2026-10-07T16:21:40", "step": "11", "action": "preview_run_r2", "result": "payprep to-bank 1005 批次 → out/preview-v2（-r2）：VND 表 H 合计 9,799,973,728；摘要 0 占位符；目录 8/37 部分付款备注；目录 56 单行净额 2,419,281,120；缺票占位 26/30/54；非 VND 表 + 台账 xlsx 产出"}
+{"ts": "2026-10-07T16:21:40", "step": "12", "action": "fix_official_scope", "result": "_mark_official 限定「仅无文本层(OCR)发票」做 Q8 判定；文本层未命中税务机关代码 → None（不加备注），噪音备注从 20+ 行降到 3 行（扫描件）"}
+{"ts": "2026-10-07T16:21:40", "step": "13", "action": "preview_run_r3", "result": "按最终代码重跑 1005 批次 → -r3（不覆盖 r2/已交付件）；同时重跑回归（18/18 全绿，含合成多票文件用例）"}
+{"ts": "2026-10-07T16:28:00", "step": "14", "action": "verify_r3_acceptance", "result": "逐项核对 -r3：VND 合计 9,799,973,728；0 占位符；8/37 部分付款；56 净额单行；26/30/54 占位；4=00000223/10=00000235；nonVND 3 笔；台账 64 行"}
+{"ts": "2026-10-07T16:28:00", "step": "15", "action": "verify_delivered_untouched", "result": "确认 out/Payment request to Bank-20261005.xlsx 未被修改（mtime 仍 15:42，size 17753）"}
+{"ts": "2026-10-07T16:28:00", "step": "16", "action": "report_patch", "result": "recon.txt 标题由中间临时名改为交付件名（与代码同逻辑手工同步 -r3 稿）；v2 文档追加 §8 验收记录"}
+{"ts": "2026-10-07T16:35:22", "step": "17", "action": "regress_final", "result": "bash scripts/regress_invoices.sh → 回归全绿 34/34（含结构断言：无补零入口；扫描件页眉定向 OCR 00000223/00000235）日志 preview-v2/regress_invoices-20261007.log"}
+{"ts": "2026-10-07T16:35:22", "step": "18", "action": "artifact_consolidation", "result": "preview-v2 定稿件：Payment request to Bank-20261005.xlsx（VND 合计 9,799,973,728 / 64 行 / 0 占位符）+ -nonVND.xlsx（3 行）+ Payment recon ledger-20261005.xlsx（台账 64 行/差异 43 行）；中间稿 r2/r3 移入 _superseded/ 保留"}
+{"ts": "2026-10-07T16:35:22", "step": "19", "action": "note_concurrency", "result": "期间工作区被并行会话同步修改（payprep/finalize/gen/regress 多处增强：内联台账、pdfunite 合成多票样本、recon.txt 标题=交付件名）；已对最终态重新验收，结论一致"}

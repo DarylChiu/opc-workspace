@@ -123,6 +123,17 @@ bash scripts/compliance/audit.sh --report
 
 
 
+## ⏱️ 子代理分流规则（长任务强制走子代理）
+
+**原则**：飞书通道有 ~310s 超时限制。**预估单 turn > 2 分钟的任务，必须 spawn 子代理执行，主 session 不阻塞。**
+
+- 预估单 turn < 2 分钟 → 直接执行
+- 预估单 turn > 2 分钟 → spawn 子代理执行，主 session 秒回「收到，执行中」
+- Daryl 发修正指令 → kill 旧子代理 + respawn 新版本
+- 子代理完成 → `sessions_send` 通知主 Agent → 主 Agent 转发结果给 Daryl
+
+**⚠️ 教训（2026-10-07 Balance 发票解析事故）**：把 >2min 的 payprep 任务在自己主 session 里 nohup+poll 跑了 5 小时，陷入「改→跑→改」死循环，全程失联收不到 Daryl 消息。根因＝没走子代理。**长任务在主 session 跑 = 阻塞消息 = 失联，绝不能再犯。**
+
 ## 🚀 子代理 Trace 协议（2026-07-18 上线）
 
 > **协议规范**: `~/.openclaw/workspace/memory/subagent_runs/README.md`  
