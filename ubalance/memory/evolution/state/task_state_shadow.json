@@ -16,15 +16,15 @@
       "started_at": null,
       "msg_count": 1
     },
-    "loan-materials-2026-0810": {
-      "task_id": "task-20261005080623",
-      "subject": "重挂Toshiba后重跑2026年8-10月贷款材料批次（v2.8扁平+去重+Outcome1三列补",
+    "foc-20261008": {
+      "task_id": "task-20261008164826",
+      "subject": "合同未写保修条款→免费换货是否被定性为bồi thường(以货赔偿)；需否开FOC票/计税价/税率",
       "type": null,
       "injected_patterns": [],
-      "started_at": "2026-10-05T08:06:23",
+      "started_at": "2026-10-08T16:48:26",
       "msg_count": 1,
-      "subject_hash": "540f85aca32f",
-      "project": "loan-materials"
+      "subject_hash": "4b197f5756e3",
+      "project": "FOC业务场景"
     }
   }
 }

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-07T01:09:18.618Z",
+  "updatedAt": "2026-10-08T01:19:02.516Z",
   "entries": {
     "memory:memory/2026-06-10.md:1:29": {
       "key": "memory:memory/2026-06-10.md:1:29",
@@ -6828,6 +6828,37 @@
         "10-06",
         "lessons.md",
         "daryl/mai"
+      ]
+    },
+    "memory:memory/2026-10-05.md:59:72": {
+      "key": "memory:memory/2026-10-05.md:59:72",
+      "path": "memory/2026-10-05.md",
+      "startLine": 59,
+      "endLine": 72,
+      "source": "memory",
+      "snippet": "- 原排除依据 = Daryl 7/14「D/O 不算 B/L」；**Daryl 指示优先** → `doc_classify.py` 新增规则收进该 D/O 并保留 DELIVERY_ORDER 标签 - 全批重跑 v2.8c（32 文件）；AT260091/-1 两票现同时含 D/O + SW；已回写 Toshiba + 上传看板 - 交付: `HUATEX-LoanMaterials-2026-08to10-v2.8c-20261005_0903.zip`（44 条目 / 6.95MB / UTF-8；隧道 200） - ⚠️ 其后 Daryl 纠正「只是问原因」→ 已回滚口径，看板改回 v2.8b ## 09:12 Daryl 两条明确指令 → v2.8d 交付 - 指令: ①去掉每票号文件夹里的 `材料清单.txt` ②Outcome2 文件夹名按 Outcome1 序号加前缀 - 脚本: 取消清单生成（去重留痕移入处理报告）；`TICKET_DIR = <序号>-<发票号>` - 结果: 10 个文件夹（`1-…` 到 `10-`）、清单残留 0、`3-OP26092401332` 空文件夹、复制 30 文件 - 交付: `HUATEX-LoanMaterials-2026-08to10-v2.8d-20261005_0912.zip`（43 条目 / 6.78MB / UTF-8；隧道 200 / 7,114,458 字节）；Toshiba 回写 `v2.8d` - 文案同步: SOP 卡 + 手册新增 v2.8d 节 ## 09:24 工作流文档升为 v2.",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4070265263319015,
+      "maxScore": 0.4070265263319015,
+      "firstRecalledAt": "2026-10-08T01:19:02.516Z",
+      "lastRecalledAt": "2026-10-08T01:19:02.516Z",
+      "queryHashes": [
+        "dfe0d06dbd90"
+      ],
+      "recallDays": [
+        "2026-10-08"
+      ],
+      "conceptTags": [
+        "7/14",
+        "d/o",
+        "b/l",
+        "doc-classify.py",
+        "delivery-order",
+        "v2.8c",
+        "6.95mb",
+        "utf-8"
       ]
     }
   }
