@@ -29,7 +29,9 @@ import difflib
 INV_PREFIX = ('HMA', 'HMF', 'HMH', 'HMX', 'HMHT', 'YN', 'YR', 'YL', 'IV', 'BV', 'EC', 'OP')
 
 # 票号 token：字母前缀(2+) + 数字(3+)，可带 -N 兄弟票后缀
-TOKEN_RE = re.compile(r'(?<![0-9A-Za-z])([A-Z]{2,}[A-Z0-9]*\d{3,}(?:-\d+)?)(?![0-9A-Za-z])')
+# v2.8d-patch (2026-10-09): 后缀放宽到最多两段 (-N 及 -N-1)，否则 YNHT20261386-3-1
+# 会被截断成 YNHT20261386-3 → 静默丢 L1 行（违反铁律1）。
+TOKEN_RE = re.compile(r'(?<![0-9A-Za-z])([A-Z]{2,}[A-Z0-9]*\d{3,}(?:-\d+){0,2})(?![0-9A-Za-z])')
 
 # 各种连字符/减号（U+2010/2011/2012/2013/2014/2015/2212/FF0D）统一成 ASCII '-'
 _DASHES = dict.fromkeys(map(ord, '\u2010\u2011\u2012\u2013\u2014\u2015\u2212\uff0d\u00ad'), '-')
@@ -113,13 +115,13 @@ def ocr_fix(token, names):
     并取相似度最高者；否则返回 None（**不改写**，宁可报未命中，不得把好票号改坏）。
     典型修正：HIXCFZGYAT260042 → HMXCFZGYAT260042（小图 OCR 前缀错读）
     """
-    m = re.match(r'^([A-Z][A-Z0-9]*?)(\d{3,})(-\d+)?$', norm_dash(token))
+    m = re.match(r'^([A-Z][A-Z0-9]*?)(\d{3,})((?:-\d+){0,2})$', norm_dash(token))
     if not m:
         return None
     alpha, digits, suffix = m.group(1), m.group(2), (m.group(3) or '')
     best, best_score = None, 0.0
     for n in names:
-        for mm in re.finditer(r'([A-Z]{2,}[A-Z0-9]*?)(\d{3,})(-\d+)?', norm_dash(n).upper()):
+        for mm in re.finditer(r'([A-Z]{2,}[A-Z0-9]*?)(\d{3,})((?:-\d+){0,2})', norm_dash(n).upper()):
             if mm.group(2) != digits:
                 continue
             if (mm.group(3) or '') != suffix:

@@ -1,0 +1,8 @@
+{"ts":"2026-10-09T12:27:00+07:00","step":"0","action":"init","result":"子代理启动；读取手册 v2.8d + SOP + 上一版(1029)产出与报告；准备重跑批次 20261009-r2"}
+{"ts":"2026-10-09T12:30:00+07:00","step":"1","action":"precheck","result":"Toshiba 已挂载；RM/2026 三月份子目录存在；5 张待补票目录已含 ToKhaiHQ7N_*.xlsx（人工抽验 5/5 命中）；L1 保持 11 票不变"}
+{"ts":"2026-10-09T12:30:30+07:00","step":"2","action":"run_workflow","result":"python3 scripts/run_loan_2026_0810.py 后台跑完(exit 0)；新输出目录 Outcome-v2.7-2026_08to10-20261009_1227（未覆盖 1027/1028/1029）"}
+{"ts":"2026-10-09T12:31:00+07:00","step":"3","action":"read_output","result":"Outcome1 11 行全部补齐：关单号/报关日期/金额/勾稽 11/11 ✅金额已核对、五类 11/11 ✅完整；金额合计 685219.63 USD；报关日期区间 2026/09/24~2026/10/06"}
+{"ts":"2026-10-09T12:32:00+07:00","step":"4","action":"verify_tokhai","result":"独立抽验 5 票 ToKhai 内容：YNHT20261386-3→108694493940(272087.87,HS5407,已通关) 另 108694493350(同号同额,HS6004) 同被判有效；YNHT20261386-3-1→108694494420(3812.34)；HMXCFZAT260094→108691576010(129821.39)；HMXCFZAT260096→108694151310(124945.12)；HMXCK260106→108691585810(36088.31)"}
+{"ts":"2026-10-09T12:33:00+07:00","step":"5","action":"package_zip","result":"Python zipfile 打包 HUATEX-LoanMaterials-2026-08to10-v2.8d-20261009_1227-r2.zip：47 条目(11 目录+36 文件)/8685049 字节；非ASCII 23 条目全部带 UTF-8 标志 0x800；md5=74593ed6946306cc6b41a2ff67ee30bc"}
+{"ts":"2026-10-09T12:34:00+07:00","step":"6","action":"writeback_toshiba","result":"写回 HUATEX贷款材料/：Outcome1-v2.8d-20261009_1227.xlsx + Outcome2-v2.8d-20261009_1227/(36 文件) + 处理报告 + zip；sync 后 md5 读回一致(xlsx 6763d9c3…/zip 74593ed6…)"}
+{"ts":"2026-10-09T12:35:00+07:00","step":"7","action":"dashboard_copy","result":"复制 zip + Outcome1 到 ~/WorkBuddy/Claw/opc-dashboard/ 供直链；md5 与本地一致(74593ed6…)"}

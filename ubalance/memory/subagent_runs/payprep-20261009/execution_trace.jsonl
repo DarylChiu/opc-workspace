@@ -1,0 +1,8 @@
+{"ts":"2026-10-09T02:09:04Z","step":"0.1","action":"init","result":"trace dir created; task payprep-20261009 start"}
+{"ts":"2026-10-09T02:09:24Z","step":"1.1","action":"assert-columns","result":"detail xlsx 结算单 sheet: 26 rows,140 headers,header row2; required cols OK: 对方名称(H/O dup,consistent),本方银行账户(D),对方银行账号(DA),对方开户行名(DB),请款单号(F/DR dup,consistent),本币付款金额(E),原币金额(P),原币币种(S),本币汇率(CW); no missing col"}
+{"ts":"2026-10-09T02:09:24Z","step":"1.2","action":"input-inventory","result":"template Payment核销测试1005-1-MINH.xlsx header row2 OK; attachments dirs 1-26 with 57 PDFs; dir1=0 files,dir18=0 files (expect placeholder rows Q6); 1 USD row (row1) + 25 VND"}
+{"ts":"2026-10-09T02:16:05Z","step":"2.1","action":"run-pipeline","result":"payprep.py to-bank --date 20261009 completed rc=0; produced VND table(46r), nonVND table(3r), ledger(44 invoice rows/38 diff rows), recon.txt/json, log"}
+{"ts":"2026-10-09T02:18:55Z","step":"3.1","action":"verify-outputs","result":"VND table H sum=8,521,969,438 == VND detail sum (44 rows); nonVND 1 row USD241.9->6,286,981; 5 placeholder rows; S col empty & no placeholders; ledger 44 rows + 38 diff rows"}
+{"ts":"2026-10-09T02:18:55Z","step":"3.2","action":"gen-manual-review","result":"generated Payment 待人工核清单-20261009.xlsx: 52 items — A金额差异8 / B缺票卷6 / C部分付款2 / D字段缺失20 / E OCR来源15 / F非VND精度1; plus 口径核对(Q1-Q9) sheet"}
+{"ts":"2026-10-09T02:18:55Z","step":"3.3","action":"flag-conflict","result":"口径冲突(P1): Q4(task A=不改写) vs v2(_scale_to 改写) 影响8卷; Q1(task A=发票全额) vs v2(H=本次付款) 影响2卷; Q3(task B=序列号+号) vs v2(纯号); nonVND orig 241.9 truncated to 241"}
+{"ts":"2026-10-09T02:18:55Z","step":"3.4","action":"report","result":"wrote Payment核销批次报告-20261009.md + subagent summary.md; no delivered files touched"}

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-08T01:19:02.516Z",
+  "updatedAt": "2026-10-09T04:02:25.674Z",
   "entries": {
     "memory:memory/2026-06-10.md:1:29": {
       "key": "memory:memory/2026-06-10.md:1:29",
@@ -6859,6 +6859,161 @@
         "v2.8c",
         "6.95mb",
         "utf-8"
+      ]
+    },
+    "memory:memory/2026-10-09.md:15:23": {
+      "key": "memory:memory/2026-10-09.md:15:23",
+      "path": "memory/2026-10-09.md",
+      "startLine": 15,
+      "endLine": 23,
+      "source": "memory",
+      "snippet": "- 所谓「今天有活动的 2 个 session」＝ **本审计 cron 自身 + 23:45 成本扫描 cron**，两者 `updatedAt` 均落在 00:00:1x（刚跨日），并非当日新增工作 - 00:00 时点当日尚无实质交付，日记自然只有骨架行数 - **处置**：以本实况正文替代 Cron 骨架日记 + 在 `active.md` 追加 10-09 状态快照保持新鲜度 - **🟡 长期机制项（第 7 次提请，不重复催办）**：建议 `audit.sh` 步骤 6「日记过短」检查加 `hour < 1` 豁免（与步骤 7 的 D0 豁免同逻辑）。按系统侧配置冻结，**不自行改脚本**，等 Kitty/Daryl 拍。 ## 📋 承接的等待项（无新增 Daryl 决策） - **FOC 业务场景**：v2.0（保守口径）已交付，等 Daryl 拍——①加权售价 ②上游合同 HFHT-2025/01（B↔HUATEX，定性缺它做不完）③出口侧是否发 công văn ④破保口径 ⑤MISA 子科目（6411/6412/6413）⑥ERP 1–9 月 FOC 导出；另待一句「旧版（`免费质量补货执行口径-v1.0` + `FOC处理方案-v1.1`）是否加作废横幅」 - **LITCHI → Tân Thuận 进口估价争议**：本项已关案（Daryl 16:xx 收口，不改原合同/发票单价 0.8）；遗留：其余 4 票敞口、**AD10 措施 2026-10-15 到期**是否续期、未来申报基准",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.39385946094989777,
+      "maxScore": 0.39385946094989777,
+      "firstRecalledAt": "2026-10-09T04:02:25.674Z",
+      "lastRecalledAt": "2026-10-09T04:02:25.674Z",
+      "queryHashes": [
+        "72b82f0de495"
+      ],
+      "recallDays": [
+        "2026-10-09"
+      ],
+      "conceptTags": [
+        "active.md",
+        "10-09",
+        "audit.sh",
+        "kitty/daryl",
+        "v2.0",
+        "hfht-2025/01",
+        "6411/6412/6413",
+        "免费质量补货执行口径-v1.0"
+      ]
+    },
+    "memory:memory/2026-10-09.md:22:30": {
+      "key": "memory:memory/2026-10-09.md:22:30",
+      "path": "memory/2026-10-09.md",
+      "startLine": 22,
+      "endLine": 30,
+      "source": "memory",
+      "snippet": "- **FOC 业务场景**：v2.0（保守口径）已交付，等 Daryl 拍——①加权售价 ②上游合同 HFHT-2025/01（B↔HUATEX，定性缺它做不完）③出口侧是否发 công văn ④破保口径 ⑤MISA 子科目（6411/6412/6413）⑥ERP 1–9 月 FOC 导出；另待一句「旧版（`免费质量补货执行口径-v1.0` + `FOC处理方案-v1.1`）是否加作废横幅」 - **LITCHI → Tân Thuận 进口估价争议**：本项已关案（Daryl 16:xx 收口，不改原合同/发票单价 0.8）；遗留：其余 4 票敞口、**AD10 措施 2026-10-15 到期**是否续期、未来申报基准 - **Mai 岗位效率优化专案**：A/B 投入深度未拍 + MISA 主数据（Mã đối tượng / Mã NCC）+ 试导入授权待 Daryl/Mai；10-05 r2 正式交付版仍是首件待办 - ⚠️ **环境（仅上报，未自主排查）**：`image` 工具 API key 失效（延续 9/25）→ OCR 走本机 tesseract；看板 CF 隧道自 10-06 13:50 停摆，本地 8765 正常 → 请 Kitty 重起 watchdog - ⚠️ **Kitty 同步**：10-08 23:45 成本扫描推送超时未确认 → 已降级写 `cost_daily.json`（看板 23:46 已由 Kitty 实测对齐 $223.63），按「严禁失败重试风暴」不重试 ## 护栏自查（本轮） - exec **3 次**（≤12 ✅，",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3855373412370682,
+      "maxScore": 0.3855373412370682,
+      "firstRecalledAt": "2026-10-09T04:02:25.674Z",
+      "lastRecalledAt": "2026-10-09T04:02:25.674Z",
+      "queryHashes": [
+        "72b82f0de495"
+      ],
+      "recallDays": [
+        "2026-10-09"
+      ],
+      "conceptTags": [
+        "v2.0",
+        "hfht-2025/01",
+        "6411/6412/6413",
+        "免费质量补货执行口径-v1.0",
+        "foc处理方案-v1.1",
+        "不改原合同/发票单价",
+        "0.8",
+        "a/b"
+      ]
+    },
+    "memory:memory/archive/2026-07-13.md:21:45": {
+      "key": "memory:memory/archive/2026-07-13.md:21:45",
+      "path": "memory/archive/2026-07-13.md",
+      "startLine": 21,
+      "endLine": 45,
+      "source": "memory",
+      "snippet": "- 按Agent: Bryson $57.23, Kitty $49.57, Balance $3.33, Self $2.83 - ⚠️ 降级写文件 — Kitty session_send超时，cost_daily.json已就位 ## 🕘 09:20 Daryl回归，JGL并购项目暂告段落 - **Daryl反馈**: v1.0框架的PIT 0.1%税率有误，正确是20%（非上市公司股权转让，成本可确定） - **Balance纠错**: 承认错误——把「成本无法确定时的0.1%兜底税率」当成了通用税率 - **Daryl方案**: 发送了完整Word方案（两方案对比），方案2（先分红再转让）可节省75%税负（$99k→$2.5k） - **关键教训**: Daryl提醒——做的是战略层面，不需要把细枝末节拓展开。以后分析要注意分寸，不代替部门执行判断 - **归档**: `reports/并购KHOA_DUNG-方案-20260713-Daryl原稿.docx` - **项目状态**: ⏸️ 暂告段落，正式推进时再启动 ## 📋 昨日续接事项（7/12 → 7/13） 以下任务仍等待Daryl反馈/数据： ### 🔴 JGL收购KHOA DUNG并购框架 - **状态**: v1.0框架已交付，等待8项关键信息确认 - **产出**: `reports/JGL-KHOA_DUNG-并购框架-v1.0-20260710.md` ### 🔴 车辆费用专项分析 - **状态**: ⏳ 待Daryl发送详细数据 ### 🟡 Future Textile ×",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3733224213123321,
+      "maxScore": 0.3733224213123321,
+      "firstRecalledAt": "2026-10-09T04:02:25.674Z",
+      "lastRecalledAt": "2026-10-09T04:02:25.674Z",
+      "queryHashes": [
+        "72b82f0de495"
+      ],
+      "recallDays": [
+        "2026-10-09"
+      ],
+      "conceptTags": [
+        "57.23",
+        "49.57",
+        "3.33",
+        "2.83",
+        "session-send超时",
+        "cost-daily.json已就位",
+        "v1.0框架的pit",
+        "0.1"
+      ]
+    },
+    "memory:memory/2026-10-08.md:84:95": {
+      "key": "memory:memory/2026-10-08.md:84:95",
+      "path": "memory/2026-10-08.md",
+      "startLine": 84,
+      "endLine": 95,
+      "source": "memory",
+      "snippet": "- 预期：`Payment request to Bank-20261005-r2.xlsx` + 非 VND 表 + 发票级台账 + `.recon.txt`｜VND 合计 **9,799,973,728**｜**不覆盖 15:42 已交付版** - 交付后提请 Daryl 确认：卷 44（合同类文件已按口径③排除 → 现为缺发票占位 137,440,000）是否需小朋友补传发票 - [ ] 交接后转 **FOC 业务场景处理方案**（v1 已出，等 Daryl 答 6 项待定） ## 承接待办（自 10-06/10-07 延续，无新增 Daryl 决策） - [ ] **Mai 岗位效率优化专案**：MISA 主数据（Mã đối tượng / Mã NCC）、科目与凭证字号规则、试导入授权 → 待 Daryl/Mai 提供；导入文件已备（7 行，合计 6,924,229,214 VND） - [ ] MISA 合作收口后的**下一步定位**（Open API 路线已作废）；投入深度 A/B（资产层 vs 薄适配层）→ 待 Daryl 拍 - [ ] **Kitty 对 10-05 / 10-06 / 10-07 成本扫描降级文件的确认回执**：10-07 23:45 推送 30s 未确认 → 已降级写 `~/WorkBuddy/Claw/opc-dashboard/data/cost_daily.json`（写入后看板已刷新对齐）；按「严禁失败重试风暴」不重试 - [ ] **看板 CF 隧道**自 2026-10-06 13:50 `Tunnel serve",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.36910920739173886,
+      "maxScore": 0.36910920739173886,
+      "firstRecalledAt": "2026-10-09T04:02:25.674Z",
+      "lastRecalledAt": "2026-10-09T04:02:25.674Z",
+      "queryHashes": [
+        "72b82f0de495"
+      ],
+      "recallDays": [
+        "2026-10-09"
+      ],
+      "conceptTags": [
+        "bank-20261005-r2.xlsx",
+        "recon.txt",
+        "10-06/10-07",
+        "daryl/mai",
+        "a/b",
+        "10-05",
+        "10-06",
+        "10-07"
+      ]
+    },
+    "memory:memory/2026-10-08.md:53:61": {
+      "key": "memory:memory/2026-10-08.md:53:61",
+      "path": "memory/2026-10-08.md",
+      "startLine": 53,
+      "endLine": 61,
+      "source": "memory",
+      "snippet": "① **履约补货（giao bù）不重复开票**（本合同 Đ7-2「giao đủ số lượng」明文；最省税，需报关配合） ② **退货票+新票**（净 VAT 0，**完全兼容实物补货**，只是多两张票） ③ 只走成本不开票（风险最高）→ **推荐 ①为主、②兜底；减价/抵销只作最后手段** - **核准依据（2 轮 websearch）**: ①**ND 320/2025/NĐ-CP Điều 9.2.i** = 毁销库存损失/费用的 CIT 扣除依据（需 销毁决定或委员会 + 盘点纪要 + 销毁纪要）②无收汇的出口**不能适用 0%**（缺非现金收款凭证）→ 免费补货不能单独主张 0%，应为「含在原订单价款内」③生产损耗型销毁可扣性**存争议**（需留档） - **配套动作**: 不收回不良品 → **必建销毁档案**；进项 VAT 照抵；建议对「转厂出口补货 + 不良品销毁」发 công văn 取书面口径 - **模型**: deepseek/deepseek-v4-flash（如实标注） ## ⏸️ 12:4x Daryl：FOC 方案挂起（本日主线暂告一段落） - **Daryl 判断**: 方案仍有问题；**目前做不到换货**——不会让客户把不良品退回来，**跟客户没有议价权**",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3684620380401611,
+      "maxScore": 0.3684620380401611,
+      "firstRecalledAt": "2026-10-09T04:02:25.674Z",
+      "lastRecalledAt": "2026-10-09T04:02:25.674Z",
+      "queryHashes": [
+        "72b82f0de495"
+      ],
+      "recallDays": [
+        "2026-10-09"
+      ],
+      "conceptTags": [
+        "đ7-2",
+        "减价/抵销只作最后手段",
+        "320/2025/nđ-cp",
+        "9.2.i",
+        "毁销库存损失/费用的",
+        "deepseek/deepseek-v4-flash",
+        "履约",
+        "补货"
       ]
     }
   }

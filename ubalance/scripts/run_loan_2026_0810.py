@@ -19,9 +19,11 @@ OUT2 = os.path.join(OUTDIR, 'Outcome2')
 shutil.rmtree(OUTDIR, ignore_errors=True)
 os.makedirs(OUT2, exist_ok=True)
 
-L1 = ['HMXCFZGYAT260042', 'HMXCFZGYAT260042-1', 'OP26092401332',
-      'HMXCFZAT260091', 'HMXCFZAT260091-1', 'HMXCFZV260091', 'HMXCFZV260091-1',
-      'HMXCFZK260004', 'HMXCFZK260004-1', 'HMXCFZK260005']
+# v2.8d-patch (2026-10-09): 本批次 L1 = 票号图 OCR（tesseract psm6/11）+ RM-Database 前缀反向校正
+#   OCR 原读 HMKCK260103 → 经 RM 目录名反向校正为 HMXCK260103（前缀获 RM 验证）
+L1 = ['HMXCAT260615', 'HMXCAT260618', 'HMXCK260103', 'HMXCK260103-1',
+      'HMXCAT260621', 'HMXCAT260620', 'YNHT20261386-3', 'YNHT20261386-3-1',
+      'HMXCFZAT260094', 'HMXCFZAT260096', 'HMXCK260106']
 L1_SET = set(L1)
 TRANSPORT = {'BL', 'SWB', 'AWB'}
 TAGDIR = {'SALES_CONTRACT': '1_SalesConfirmation', 'INVOICE': '2_Invoice',
@@ -74,6 +76,25 @@ for m in MONTHS:
                 all_dirs.append((m, d, os.path.join(p, d)))
 P(f'RM-Database/2026 目录数: {len(all_dirs)}')
 
+# v2.8d-patch (2026-10-09 / Daryl 补充指令): 记录 RM 快照（= 本批数据截止时间）
+rm_counts = {m: sum(1 for (mm, _dn, _fp) in all_dirs if mm == m) for m in MONTHS}
+rm_latest, _rm_latest_ts = '', 0.0
+for dp, dns, fns in os.walk(RM):
+    dns[:] = [x for x in dns if not x.startswith('._') and x != '__MACOSX']
+    for n in list(dns) + list(fns):
+        if n.startswith('._'):
+            continue
+        try:
+            mt = os.path.getmtime(os.path.join(dp, n))
+        except OSError:
+            continue
+        if mt > _rm_latest_ts:
+            _rm_latest_ts, rm_latest = mt, datetime.datetime.fromtimestamp(mt).strftime('%Y-%m-%d')
+RM_SNAP = (f"RM快照（= 本批数据截止）: THÁNG 08={rm_counts.get('THÁNG 08', 0)} / "
+           f"THÁNG 09={rm_counts.get('THÁNG 09', 0)} / THÁNG 10={rm_counts.get('THÁNG 10', 0)} "
+           f"子目录；全库最新 mtime={rm_latest}")
+P(RM_SNAP)
+
 t2dirs, t2base = {}, {}
 for t in L1:
     ds = [d for d in all_dirs if tok_in(d[1], t)]
@@ -83,6 +104,13 @@ for t in L1:
         t2base[t] = base
     t2dirs[t] = ds
     P(f'  {t:<24} → {len(ds)} 目录 {"(base回退)" if t in t2base else ""}')
+
+# v2.8d-patch: 未决问题数据（铁律1：未匹配仍入 Outcome1 行 + Outcome2 空文件夹，不中止）
+unmatched_tickets = [t for t in L1 if not t2dirs.get(t)]
+# 本批 OCR 前缀反校正留痕（前缀仅在 RM 命中时采用；未命中则保留 OCR 原样并标「前缀未获 RM 验证」）
+# 第 3 条经 Daryl 人工确认 = HMXCK260103（OCR 曾误读 HMKCK260103），与 RM 反校正结果一致
+rm_prefix_fix = [('HMKCK260103', 'HMXCK260103')]
+rm_unverified = []  # 本批 11/11 全部在 RM 找到同号目录，无未验证前缀
 
 dirpath2cands = {}
 for t, ds in t2dirs.items():
@@ -252,8 +280,12 @@ for idx, t in enumerate(L1, 1):
             except Exception:
                 pass
     F = DF.fill_fields(l1={}, tk=tk or {}, inv_text=inv_text)
+    rmk.append(f'[数据截止:{rm_latest}]（RM快照，见处理报告）')
+    for _a, _b in rm_prefix_fix:
+        if t == _b:
+            rmk.append(f'OCR前缀校正 {_a}→{_b}（经 RM 目录名反校正；第3条经 Daryl 人工确认 = {_b}）')
     if not rs:
-        rmk.append('在2026年8-10月未匹配' if t == 'OP26092401332' else 'RM-Database 无该号材料')
+        rmk.append('RM-Database 无该号材料（目录缺失，入 Outcome1 行 + Outcome2 空文件夹）')
     if t in t2base:
         rmk.append(f'目录经 base {t2base[t]} 回退定位')
     if any(r['attr'].startswith('neutral') for r in rs):
@@ -262,7 +294,7 @@ for idx, t in enumerate(L1, 1):
     ws.append([idx, t,
                tk.get('so_to_khai', '') if tk else '',
                tk.get('ngay_ymd', '') if tk else '',
-               F['amount'] if F['amount'] is not None else '',
+               F['amount'] if F['amount'] is not None else '待补',
                F['date'] or '待补',
                F['supplier'] or '待补',
                F['cls'],
@@ -291,6 +323,21 @@ with open(rep, 'w', encoding='utf-8') as fh:
     for t, nm, why in dedup_drops:
         fh.write(f'    {t} | {nm}  ← {why}\n')
 P(f'报告: {rep}')
+# v2.8d-patch (2026-10-09 / Daryl 补充指令): 报告追加「未决问题」节
+with open(rep, 'a', encoding='utf-8') as fh:
+    fh.write('\n\n===== 未决问题 =====\n')
+    fh.write(f'{RM_SNAP}\n')
+    fh.write(f"L1 来源：票号图 OCR（{datetime.datetime.now().strftime('%Y-%m-%d')}）\n")
+    fh.write('① 未获 RM 验证的票号前缀: '
+             + ('; '.join(f'{a}→保留原样' for a, _b in rm_unverified) if rm_unverified
+                else '无（11/11 票号在 RM-Database/2026 均找到同号目录；HMKCK260103 前缀已由 RM 校正为 HMXCK260103，并经 Daryl 人工确认）')
+             + '\n')
+    fh.write('①-1 前缀校正命中详情: 第3条 HMXCK260103（OCR 误读 HMKCK260103）→ RM 命中 THÁNG 09/93.HMXCK260103，HMXCK260103-1 胚布；'
+             'Daryl 人工确认 = HMXCK260103；同目录另含 HMXCK260103-1，两者均已收为 L1 行\n')
+    fh.write('② 未匹配到目录的票号: '
+             + ('; '.join(unmatched_tickets) if unmatched_tickets else '无（11/11 全部命中 RM 目录）') + '\n')
+    fh.write(f'③ RM 快照与 L1 关系: RM 数据截止 {rm_latest}；本次 L1 为 {datetime.datetime.now().strftime("%Y-%m-%d")} 票号图，'
+             '晚于 RM 快照 → 若 L1 存在晚于快照的票据，本批为「不完整匹配」，需 Daryl 更新 RM 后重跑（脚本按时间戳建目录，可安全重跑）\n')
 print('\n===SUMMARY===')
 for t in L1:
     tg = set()

@@ -1,0 +1,14 @@
+{"ts":"2026-10-09T03:24:30Z","step":"0","action":"init","result":"读毕手册v2.8d与SOP速查卡; 建立trace目录"}
+{"ts": "2026-10-09T10:27:30", "step": "1", "action": "input-normalize", "result": "loan_input.py --in <png> --rm RM2026：OCR psm6/11 token=20，去重得 9；2 个因 OCR 行内空格被截断（HMXCK260 103-1 / YNHT2026 1386-3）"}
+{"ts": "2026-10-09T10:27:30", "step": "2", "action": "bugfix", "result": "patch loan_input.py TOKEN_RE：兄弟票后缀 (-\\d+)? → (-\\d+){0,2}，修复 YNHT20261386-3-1 被截断丢行"}
+{"ts": "2026-10-09T10:27:30", "step": "3", "action": "bugfix", "result": "发现前缀白名单在 RM 校正前过滤，HMKCK260103（误读前缀）被静默丢弃 → 改用 --loose 让 RM 反校正生效"}
+{"ts": "2026-10-09T10:27:30", "step": "4", "action": "rm-reverse-correct", "result": "HMKCK260103 → HMXCK260103（RM THÁNG 09/93.HMXCK260103，HMXCK260103-1）；11/11 票号全部 RM 命中，0 未匹配"}
+{"ts": "2026-10-09T10:27:30", "step": "5", "action": "rm-snapshot", "result": "RM 快照：08=109 / 09=104 / 10=21 子目录；全库最新 mtime=2026-10-03（Daryl 实测 110/105/21，差±1，已记入未决问题）"}
+{"ts": "2026-10-09T10:27:30", "step": "6", "action": "l1-final", "result": "最终 L1=11 票号（图片顺序）：HMXCAT260615,18 / HMXCK260103,-1 / HMXCAT260621,620 / YNHT20261386-3,-3-1 / HMXCFZAT260094,96 / HMXCK260106"}
+{"ts": "2026-10-09T10:27:30", "step": "7", "action": "patch-runner", "result": "run_loan_2026_0810.py：替换 L1 为本批 11 票号；新增 RM 快照记录 + Outcome1 备注[数据截止] + 报告「未决问题」节"}
+{"ts": "2026-10-09T10:30:26", "step": "8", "action": "daryl-confirm", "result": "Daryl 人工确认第3条=HMXCK260103（OCR 曾误读 HMKCK260103）；与 RM 反校正一致，已写入备注与未决问题①-1"}
+{"ts": "2026-10-09T10:30:26", "step": "9", "action": "run", "result": "run_loan_2026_0810.py 完成：11 票号全部命中 RM(11/11)；复制文件 30；无空文件夹"}
+{"ts": "2026-10-09T10:30:26", "step": "10", "action": "outcome1", "result": "Outcome1 11行；日期/供应商/类别三列无空白；金额缺5行写「待补」；1-6 ✅完整(含ToKhai)；7-11 ⚠️缺ToKhai(该RM目录内确无 ToKhaiHQ7N_*.xlsx，仅清关资料xlsx)"}
+{"ts": "2026-10-09T10:30:26", "step": "11", "action": "self-check", "result": "Outcome2 文件夹=11=Outcome1行数；扁平；无材料清单.txt；md5去重生效(丢弃1件 BIL HUATEX24(1).pdf，已留痕)"}
+{"ts": "2026-10-09T10:30:26", "step": "12", "action": "package", "result": "Python zipfile 打包 41 条目/21 非ASCII 全带 UTF-8 标志(0x800)/7.63MB"}
+{"ts": "2026-10-09T10:30:26", "step": "13", "action": "writeback", "result": "写回 Toshiba + sync：Outcome1/Outcome2/zip md5 读回一致=True"}
