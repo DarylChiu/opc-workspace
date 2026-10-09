@@ -1135,3 +1135,12 @@
 - **护栏**：本轮 exec 6（≤12）、write/edit 2（≤20）；未触碰 .env/API key/cost_ledger/网关日志。
 - **🟡 长期机制项（第 5 次提请，不重复催办）**：`audit.sh` 步骤 6 建议加 `hour < 1` 豁免（与步骤 7 D0 豁免同逻辑）；未自行改脚本，等 Kitty/Daryl 拍。
 - ⚠️ **环境异常（仅上报，未自主排查）**：`image` 工具 `google/gemini-3-flash-preview` API key 失效（延续 9/25 起）→ OCR 一律走本机 tesseract。
+
+---
+
+## 🗓️ 状态快照 2026-10-10 00:0x（Cron 2fe401f9 每日记忆归档后）
+- 记忆系统：L4 审计完成，修复 2 项；唯一遗留＝步骤6「午夜边界」误报（深层+浅层同源，第 20 次复现，已核验非漏记）
+- 成本：`fresh_api_ok`｜今日 $4.50｜本月 $40.80｜全量 $228.32
+- Git 备份：commit `afcf322` push 成功；OPC API `localhost:8765` 正常
+- 待办主线不变：FOC v2.0 等 Daryl 拍 6 项 + 旧版作废横幅；LITCHI 争议关案后遗留 4 票敞口/AD10 续期待定；Mai 专案待授权
+- 环境：`image` key 失效→OCR 走 tesseract；看板 CF 隧道停摆→请 Kitty 重起 watchdog
