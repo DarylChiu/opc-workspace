@@ -118,6 +118,10 @@
 | 管线2 Qwen Omni 对接 | ❌ 冻结 | 30% |
 
 ## 🔵 待办
+### 💬 调研方法论资产化（10/10 Daryl DM 提议，待 Daryl 响应）
+- Daryl 问能否让 agent 学会调研能力；小风结论：不建第 5 个 agent，把「术/器」沉淀成共享调研 Playbook/Skill，判断力（道）留在 Daryl
+- 下一步待 Daryl 口述调研框架 → 小风沉淀 Playbook（未开工，等 Daryl）
+
 ### IELTS陪练助手 — v1.4.1 题库改造 + v1.5.0 用户系统P1（🟢 开发完成，待 Daryl 验收）
 - 服务 LaunchAgent 持久化：localhost:8767 ACTIVE（v1.5.0）
 - OPC 看板 workflow：`wf_ielts_tutor_v130`「雅思陪练助手 v1.3.0 · 双管线实时陪练」11 节点已同步（8/5 建，随版本迭代需更新）
