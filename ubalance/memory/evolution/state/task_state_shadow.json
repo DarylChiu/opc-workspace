@@ -25,6 +25,14 @@
       "msg_count": 1,
       "subject_hash": "4b197f5756e3",
       "project": "FOC业务场景"
+    },
+    "balance": {
+      "task_id": null,
+      "subject": null,
+      "type": null,
+      "injected_patterns": [],
+      "started_at": null,
+      "msg_count": 1
     }
   }
 }

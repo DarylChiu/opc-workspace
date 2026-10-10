@@ -1,0 +1,13 @@
+{"ts": "2026-10-10T11:30:54+07:00", "step": "1", "action": "read_sop", "result": "已读 memory/sops/loan-materials-workflow.md（v2.8d 速查卡）+ reports/进出口材料自动化处理-工作流与操作手册.md；口径以此为准，未改动"}
+{"ts": "2026-10-10T11:31:54+07:00", "step": "2", "action": "ocr_l1_input", "result": "tesseract --psm 6 + --psm 11（170x85 小图）两路一致读出 4 票号：HMHTAV260075-1 / HMHTAV260075-2 / SLMYPJ260525 / HMHTAV260077；与 Daryl 截图一致"}
+{"ts": "2026-10-10T11:32:54+07:00", "step": "3", "action": "read_modules", "result": "研读 run_loan_2026_0810.py / doc_classify.py / doc_fields.py / tokhai_extract.py，确认五类/去重/勾稽/字段补全口径"}
+{"ts": "2026-10-10T11:33:54+07:00", "step": "4", "action": "check_disk", "result": "确认 /Volumes/TOSHIBA EXT 已挂载；RM-Database/2026 计 250 子目录（08=109/09=104/10=37）"}
+{"ts": "2026-10-10T11:34:54+07:00", "step": "5", "action": "rm_match", "result": "按目录名模糊匹配（递归）：SLMYPJ260525→THÁNG09/97；HMHTAV260077→THÁNG10/6；HMHTAV260075-1/-2 无独立目录→base HMHTAV260075 回退→THÁNG09/85（共享目录，含子目录 85.HMHTAV260075-1, HMHTAV260075-2 纱线）"}
+{"ts": "2026-10-10T11:35:54+07:00", "step": "6", "action": "build_runner", "result": "复制 run_loan_2026_0810.py → scripts/run_loan_20261010.py（参数化 L1/输出名/未决问题节），口径逻辑零改动"}
+{"ts": "2026-10-10T11:36:54+07:00", "step": "7", "action": "run_workflow", "result": "执行 run_loan_20261010.py：4 票全部命中 RM；逐票内容级分类+票号归属+md5/多版本双重去重；复制去重后 20 文件；输出 Outcome-v2.8d-20261010_1135/"}
+{"ts": "2026-10-10T11:37:54+07:00", "step": "8", "action": "gen_outcome1", "result": "生成 Outcome1 13 列 xlsx（4 行，按 STT 升序），三列（发票日期/供应商/采购类别）全部有值"}
+{"ts": "2026-10-10T11:38:54+07:00", "step": "9", "action": "gen_outcome2", "result": "Outcome2 生成 4 个扁平文件夹（1-/2-/3-/4-），无 1/2/3 子目录、无 材料清单.txt；文件夹数=Outcome1 行数=4"}
+{"ts": "2026-10-10T11:39:54+07:00", "step": "10", "action": "gen_report", "result": "生成处理报告（含 逐票明细 / 剔除清单 / 去重丢弃清单 / 未决问题 / 本批偏差说明），未静默丢件"}
+{"ts": "2026-10-10T11:40:54+07:00", "step": "11", "action": "co_deviation_check", "result": "抽查发现产地证(C/O)/Form-E 扫描件因 doc_classify 弱兜底被判 BL 而入包（与历史 0912 批次一致），已写入处理报告 [A]/[B] 偏差节，未擅自改口径"}
+{"ts": "2026-10-10T11:41:54+07:00", "step": "12", "action": "package_zip", "result": "Python zipfile 打包 HUATEX-Materials-20261010-*.zip：22 条目，非ASCII 12 条全带 UTF-8 标志(0x800)；解压回归验证 22 文件正常"}
+{"ts": "2026-10-10T11:42:54+07:00", "step": "13", "action": "verify", "result": "md5 计算 + 解压回归 + 自检清单（扁平/命名/无材料清单/去重/五类/三列无空）逐项通过"}

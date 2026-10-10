@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-09T04:02:25.674Z",
+  "updatedAt": "2026-10-10T06:17:06.774Z",
   "entries": {
     "memory:memory/2026-06-10.md:1:29": {
       "key": "memory:memory/2026-06-10.md:1:29",
@@ -2801,23 +2801,25 @@
       "endLine": 92,
       "source": "memory",
       "snippet": "- **输入**: `6,887,555.02usd 贷款材料/` (L1 103条 STT242-410 + RM-Database 12月/771子目录) - **执行v2.1工作流**: 7步全自动 (输入验证→数据提取→目录匹配→材料收集→OCR验证→质检→输出) - **产出到桌面**: `Balance贷款材料自动化处理-6,887,555.02usd/` ### 处理过程关键发现 1. **-1后缀匹配问题**: 13条-1发票UNMATCHED → 发现RM目录名不含-1, 修复为base目录搜索 2. **设备Invoice模式不同**: HMM/HMK设备类不含\"中英文明细\" → 放宽为\"清关资料\"即匹配 3. **报关单命名多样**: 非ToKhaiHQ格式, 用 `发票号_海关号.xls` → 增加数字模式识别 4. **嵌套子目录**: HMAEFZ240104文件在子目录 → 改为递归扫描 5. **NBSP编码干扰**: Toshiba→Desktop复制时遇到权限错误, 改为扫描现有文件 ### 最终结果 - **100/103 OK (97.1%)**, 0 INCOMPLETE, 3 UNMATCHED - UNMATCHED: RE-VN240904 + RE-2024-054 (RE退款单, 非进口发票) + HMVFZ240072-1(目录缺失) - Outcome1 Excel (103行+公式), Outcome2 100个子目录, process_results.json, 处理报告 ### 工作流模式确定 - Daryl选",
-      "recallCount": 4,
+      "recallCount": 5,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.7207448869943618,
+      "totalScore": 2.129095250368118,
       "maxScore": 0.5118538171052932,
       "firstRecalledAt": "2026-07-29T08:26:34.847Z",
-      "lastRecalledAt": "2026-10-03T07:47:22.962Z",
+      "lastRecalledAt": "2026-10-10T04:33:08.958Z",
       "queryHashes": [
         "96b4acb02fbb",
         "96f04be8e04c",
         "7abf980fe7a4",
-        "35ae0bb7abea"
+        "35ae0bb7abea",
+        "ac14665a68ea"
       ],
       "recallDays": [
         "2026-07-29",
         "2026-09-05",
-        "2026-10-03"
+        "2026-10-03",
+        "2026-10-10"
       ],
       "conceptTags": [
         "555.02usd",
@@ -4119,23 +4121,25 @@
       "endLine": 76,
       "source": "memory",
       "snippet": "### 问题5 · Outcome1 Excel格式 - ①日期写入Ngày Tháng Năm 2026处 - ②日期格式YYYY/MM/DD - ③产品列留空 - ④删除表内子汇总 - 补充a：供应商≠HUA FENG时按实际更新B/C/D列 - 补充b：超17行自动插行 - **修复**：4项格式修正+TỔNG CỘNG公式修正，全部完成 ### 技术问题 - NBSP(\\xa0)编码导致文件匹配失败，需模糊匹配 - 干扰检测逻辑初版有bug（日期\"12-19\"含\"-1\"子串），已修正 ### 待确认项 - Seq2 B/L：RM-Database/26.中有I228475630*/MV5150LHT，需Daryl指定 - Seq4 mv9650l.pdf是否为B/L（RM-Database有BL2305342010.PDF） - Seq10 AM2502SSG310(2).pdf类型 ### 产出 - `fix_v2.py` + `fix_v2_1.py` 修复脚本 - `process_results.json` 已更新（含fix_v2记录） - Outcome1 Excel v2 已保存 - Outcome2 10个子目录已清理/补充 ## 23:10 贷款材料整理 — 6,887,555.02usd 批次实战处理 - **Daryl要求**: 跳过验收，直接按v2.1工作流实战，输入在Toshiba硬盘 - **输入**: `6,887,555.02usd 贷款材料/` (L1 103条 STT242-410 + RM-Database 12月/771子目",
-      "recallCount": 4,
+      "recallCount": 5,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.597624307870865,
+      "totalScore": 2.027412328124046,
       "maxScore": 0.44792760014533994,
       "firstRecalledAt": "2026-08-09T02:30:10.113Z",
-      "lastRecalledAt": "2026-10-03T07:47:22.962Z",
+      "lastRecalledAt": "2026-10-10T04:33:08.958Z",
       "queryHashes": [
         "89b3b107fe48",
         "96f04be8e04c",
         "7abf980fe7a4",
-        "35ae0bb7abea"
+        "35ae0bb7abea",
+        "ac14665a68ea"
       ],
       "recallDays": [
         "2026-08-09",
         "2026-09-05",
-        "2026-10-03"
+        "2026-10-03",
+        "2026-10-10"
       ],
       "conceptTags": [
         "2日期格式yyyy/mm/dd",
@@ -4663,24 +4667,26 @@
       "endLine": 19,
       "source": "memory",
       "snippet": "# 2026-06-29 日记 ## 00:03 记忆系统每日审计（第2轮） - **触发**: Cron 定时任务 (audit.sh --report) - **审计结果**: 2浅层+1深层告警 - 浅层：「日记过短+骨架检测」→ 午夜边界误报（00:03执行，9个session均属6/28晚间OPC群周汇报等活动，6/28日记已有完整47行内容） - 浅层：Git pull 标记失败 → 实际成功（Already up to date），审计脚本 exit code 偏严 - 深层：Session-Diary 交叉验证9个活动 session vs 12行日记 → 同上午夜边界 - **处置**: - Git pull 验证通过（Already up to date） - 更新日记标注边界情况 - Git commit 提交修改文件+新日记 - OPC 群聊发送通知 - **前序审计**: 6/29 00:01 同任务已执行过一轮（balance上轮 cron），本轮为第二批次 agent（balance 再次触发） ## 概述 - 周日夜→周一凌晨，无用户交互 - 6/28 OPC 群周汇报为本周最后一次用户交互",
-      "recallCount": 4,
+      "recallCount": 5,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.6207258254289627,
+      "totalScore": 2.0515634983778,
       "maxScore": 0.45927133858203883,
       "firstRecalledAt": "2026-08-18T17:00:41.112Z",
-      "lastRecalledAt": "2026-09-23T17:01:28.669Z",
+      "lastRecalledAt": "2026-10-09T17:02:29.695Z",
       "queryHashes": [
         "3e816774dbcb",
         "cccfeda2fa9d",
         "f883fe147c7c",
-        "e175fee64a3a"
+        "e175fee64a3a",
+        "6527226eb3c8"
       ],
       "recallDays": [
         "2026-08-19",
         "2026-08-23",
         "2026-09-18",
-        "2026-09-24"
+        "2026-09-24",
+        "2026-10-10"
       ],
       "conceptTags": [
         "audit.sh",
@@ -4764,20 +4770,22 @@
       "endLine": 31,
       "source": "memory",
       "snippet": "# 2026-07-03 日记 ## 🕛 Cron 审计 (00:02 7/3) - **审计结果**: 0 自动修复 + 2 浅层 + 1 深层 ### 审计发现与归因 - ⚠️ 日记过短（10行）+ 9 个活跃 session → 深层问题 - 📌 **归因: 午夜边界误报**。5 个 session 为各 Agent 的 cron 审计任务，1 个为 pre-midnight webchat，均为 7/2 延续。Cross-validation 在 00:00 天然有此问题（与 7/2 00:00 审计相同） - ⚠️ Git pull 失败 → 📌 **归因: exit code 敏感度误报**，实测 `Already up to date`，实际成功 ### 午夜边界说明 - 审计脚本 session-diary 交叉验证依赖「今天」的活动 session 计数 - 00:00-00:30 时段所有 cron 审计任务同时触发 → 计数虚高 - 实际无 7/3 新事件，diary 正常 ### Git 状态 - ✅ pull: Already up to date - ✅ 无本地变更需 push ## 昨日回顾 (7/2) - 日记 59 行，内容充实 - FutureTextile 第三轮攻击（攻击7-12），攻击7&8 被 Daryl 确认已死 - 记忆系统重大故障诊断与修复（三脚本骨架检测增强） ## 主要事件 ### 🟡 OPC看板通知系统 Bug 排查 (13:12-13:30) - Daryl 问有没有收到 dashboard 发",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.7795033216476439,
+      "totalScore": 1.1742928564548492,
       "maxScore": 0.39920644164085384,
       "firstRecalledAt": "2026-08-18T17:00:41.112Z",
-      "lastRecalledAt": "2026-09-23T17:01:28.669Z",
+      "lastRecalledAt": "2026-10-09T17:02:29.695Z",
       "queryHashes": [
         "3e816774dbcb",
-        "e175fee64a3a"
+        "e175fee64a3a",
+        "6527226eb3c8"
       ],
       "recallDays": [
         "2026-08-19",
-        "2026-09-24"
+        "2026-09-24",
+        "2026-10-10"
       ],
       "conceptTags": [
         "7/3",
@@ -5490,26 +5498,28 @@
       "endLine": 33,
       "source": "memory",
       "snippet": "- 📌 最终交付物已归档在 `reports/`：管理办法 v1.0.5、明细表 v0.5.5（无保护版）、征集意见整理 - 📌 待 Daryl 新任务（OA 表单如需要 Excel 逻辑说明可随时提供） - 📌 越南差旅费管理办法征集意见整理：已融入 v1.0.5，无遗留 ## ⚠️ 待观察 - 自进化基建 L1 Phase 0 影子模式测试期（8/5→8/7）：今日起进入第 2 天，8/7 由 Kitty 评估 shadow_log 精度决定 Phase 1 放行或回退 - 8/5 单日成本 $7.60 偏高归因（Balance $3.08 + Self $2.90，疑与全量重扫有关）——8/6 数据已回落，继续观察 ## 📌 Session 活动摘要（近24h，跨 8/5 → 8/6 凌晨） - 8/5 主要活动均已在昨日日记完整记录（误餐补贴 v0.5.x 系列修复、管理办法 v1.0.x 交付、教训 3 条已写入 lessons.md） - 8/6 凌晨：本次 cron 审计执行（无其他 session 活动） ## 🕛 00:10 OPC 群聊汇报发送（Cron 2fe401f9 收尾） - 发送成功：messageId om_x100b6802afdda8a4df9a925b0da46a8 → chatId oc_7d71d54d87cbd265d9c3811bc59840b2 - **修正认知**: 历史日记记录的 `om_x100b6ae474f85ca0c02e04ea387e92e` 是消息 ID 而非群聊 ID；正确 OPC 群聊 ID",
-      "recallCount": 5,
+      "recallCount": 6,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.8685184836387634,
-      "maxScore": 0.3943400293588638,
+      "totalScore": 2.270759457349777,
+      "maxScore": 0.40224097371101375,
       "firstRecalledAt": "2026-09-17T17:01:34.887Z",
-      "lastRecalledAt": "2026-10-01T17:01:41.615Z",
+      "lastRecalledAt": "2026-10-09T17:02:29.695Z",
       "queryHashes": [
         "f883fe147c7c",
         "96340f7cb7b0",
         "c5dad0c58b13",
         "e175fee64a3a",
-        "344bd1afd11e"
+        "344bd1afd11e",
+        "6527226eb3c8"
       ],
       "recallDays": [
         "2026-09-18",
         "2026-09-19",
         "2026-09-20",
         "2026-09-24",
-        "2026-10-02"
+        "2026-10-02",
+        "2026-10-10"
       ],
       "conceptTags": [
         "v1.0.5",
@@ -5622,20 +5632,22 @@
       "endLine": 44,
       "source": "memory",
       "snippet": "- 合规: P2 PASS；post-op 触发今日日记创建（本条） - 模型: deepseek/deepseek-v4-pro ## 晚间：每日成本扫描（cron 成本全量扫描推Kitty） - 状态: ⚠️已降级写文件，Kitty未确认（sessions_send 30s超时） - 全量台账扫描: 4178个.jsonl → 总调用 27,216（新增186） - 数据: 今日 $1.9478 | 本月 $34.4681 | 全量 $160.2547 | Token 1,842,555,850 - 看板 /api/costs 读数 totalCost $160.25，与台账 $160.2547 差异 <$1 → 已对齐，无需改接口 - 兜底文件: ~/WorkBuddy/Claw/opc-dashboard/data/cost_daily.json（已写入） - 按Agent: Bryson $93.22 | Balance $32.39 | Kitty $19.78 | Self $14.85 - 模型: deepseek/deepseek-v4-pro ## 🕛 23:59 OPC 群聊汇报发送（Cron 2fe401f9 每日记忆归档收尾） - 审计: 修复2项（归档 2026-07-20.md + Git 备份 commit/push），深层问题0，浅层1（共享repo pull 瞬时报错，已自愈） - 成本: 今日 $1.95 | 本月 $34.47 | 全量 $160.25 | API 正常（fresh_api_ok） - Kitty 同步: 降级文件已",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.7211457192897797,
-      "maxScore": 0.3659648597240448,
+      "totalScore": 1.1211204946041107,
+      "maxScore": 0.399974775314331,
       "firstRecalledAt": "2026-09-19T17:01:46.176Z",
-      "lastRecalledAt": "2026-09-23T17:01:28.669Z",
+      "lastRecalledAt": "2026-10-09T17:02:29.695Z",
       "queryHashes": [
         "c5dad0c58b13",
-        "e175fee64a3a"
+        "e175fee64a3a",
+        "6527226eb3c8"
       ],
       "recallDays": [
         "2026-09-20",
-        "2026-09-24"
+        "2026-09-24",
+        "2026-10-10"
       ],
       "conceptTags": [
         "备份",
@@ -5686,18 +5698,20 @@
       "endLine": 47,
       "source": "memory",
       "snippet": "- 兜底文件: ~/WorkBuddy/Claw/opc-dashboard/data/cost_daily.json 已就位 - sessions_send 超时(32s)，数据已写入，无需接口改动 ## 🕛 23:59 每日记忆归档审计（Cron: 2fe401f9 当日末轮） - L4 审计 v2 执行：10 项检查，修复 2 项（归档 2026-07-21.md / 2026-07-22.md），浅层问题 1 项 / 深层问题 0 - 浅层问题：审计时 OPC API 端点（localhost:8765/api/costs）不可达 → 复核时已恢复（curl 实测 ok:true，数据新鲜） - 自进化基建对账：checker-log / reflexion_journal 仍缺失（Kitty 侧基建，WARN 不阻塞） - 成本仪表盘：今日 $4.12 | 本月 $38.98 | 全量 $164.77 - Git 备份：commit + push 成功 - OPC 群聊汇报已发送：chatId oc_7d71d54d87cbd265d9c3811bc59840b2 - 模型: deepseek/deepseek-v4-pro",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.3711756765842438,
-      "maxScore": 0.3711756765842438,
+      "totalScore": 0.7702658563852309,
+      "maxScore": 0.3990901798009872,
       "firstRecalledAt": "2026-09-23T17:01:28.669Z",
-      "lastRecalledAt": "2026-09-23T17:01:28.669Z",
+      "lastRecalledAt": "2026-10-09T17:02:29.695Z",
       "queryHashes": [
-        "e175fee64a3a"
+        "e175fee64a3a",
+        "6527226eb3c8"
       ],
       "recallDays": [
-        "2026-09-24"
+        "2026-09-24",
+        "2026-10-10"
       ],
       "conceptTags": [
         "备份",
@@ -5717,20 +5731,22 @@
       "endLine": 21,
       "source": "memory",
       "snippet": "# 2026-08-23 日记 ## 00:00 记忆系统每日审计（L4 Cron 兜底） - **触发**: Cron 定时任务（audit.sh --report） - **审计结果**: 5 浅层 + 2 深层告警 - 深层①「日记过短但有 20 个活动 session」→ **午夜边界误报**：审计脚本时钟已滚动到 08-23 00:00:01，但 20 个活动 session 全部属于 08-22 晚间活动，08-22 日记已有完整 77 行内容，无遗漏 - 深层②「疑似 Cron 骨架日记」→ 同上午夜边界，本日为 08-23 新一日开头，尚无真实事件 - 浅层「active.md 39h 未更新」→ 已刷新触达时间戳（内容本身已含 8/21 最新任务） - 浅层「OPC API 端点不可达」→ 成本看板 /api/costs 服务未运行（8/22 已降级写文件，延续至今），数据文件本身新鲜（14 分钟前） - 浅层「checker-log / reflexion-journal 不存在」→ 自进化基建刚上线，非阻塞 - **处置**: - 归档过期日记 2026-07-23.md → memory/archive/ - 刷新 active.md 触达时间戳 - 本日记标注午夜边界（08-22 已完整记录） - Git commit + push 成功 - OPC 群聊发送通知 ## 概述 - 周六深夜 → 周日凌晨，无用户交互 - 08-22 白天的海关/税务笔试卷整改 + 4 题定稿为最近一次实质工作（详见 memor",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.8366874366998672,
+      "totalScore": 1.220134860277176,
       "maxScore": 0.4795608550310135,
       "firstRecalledAt": "2026-09-23T17:01:28.669Z",
-      "lastRecalledAt": "2026-10-05T01:50:52.590Z",
+      "lastRecalledAt": "2026-10-09T17:02:29.695Z",
       "queryHashes": [
         "e175fee64a3a",
-        "a36e75860e23"
+        "a36e75860e23",
+        "6527226eb3c8"
       ],
       "recallDays": [
         "2026-09-24",
-        "2026-10-05"
+        "2026-10-05",
+        "2026-10-10"
       ],
       "conceptTags": [
         "audit.sh",
@@ -7014,6 +7030,223 @@
         "deepseek/deepseek-v4-flash",
         "履约",
         "补货"
+      ]
+    },
+    "memory:memory/2026-10-06.md:1:8": {
+      "key": "memory:memory/2026-10-06.md:1:8",
+      "path": "memory/2026-10-06.md",
+      "startLine": 1,
+      "endLine": 8,
+      "source": "memory",
+      "snippet": "# 2026-10-06 日记 ## 00:00 每日记忆系统归档审计（Cron 2fe401f9） - 执行 `scripts/compliance/audit.sh --report`，结果：**修复 3 / 浅层 2 / 深层 1**（Cron 轮次，exit=2） - 因首轮输出被进程日志缓冲截断，为取全量报告手工重跑 1 次（**审计日志 compliance-audit.jsonl 未删改**，两条记录按原样保留以保证审计链完整） - 9 项检查结果：日记（Cron 自动建骨架 → 已替换为实况正文）✅ / active.md 新鲜（7h）✅ / lessons 自查后已更新 ✅ / 归档无需处理 ✅ / MEMORY.md 39 行合规 ✅ / 日记骨架检测（D-1~D-3）✅ / 项目清单与 session 一致 ✅ - ❌ 唯一实项：**日记过短（骨架 5 行）但有 2 个当日活动 session** → 判定为**午夜边界效应**（与 10-02 / 10-03 / 10-04 同日形态一致）：00:0x 被计入「当日活动」的是归档类 Cron 会话，非 Daryl 新任务；脚本已给 D0 骨架检测豁免，但第 6 步「日记过短」尚未豁免 → **建议 Kitty 追加同款 D0 豁免**（本项「深层问题」亦为该同一事件的重复计数，日志已注明） - OPC 群聊汇报已发送：messageId `om_x100b6309cae738a0c3ab671cd28e9e3` → chatId `oc_7d71d54d87cbd265d9c3811bc59840b2`",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4109663277864456,
+      "maxScore": 0.4109663277864456,
+      "firstRecalledAt": "2026-10-09T17:02:29.695Z",
+      "lastRecalledAt": "2026-10-09T17:02:29.695Z",
+      "queryHashes": [
+        "6527226eb3c8"
+      ],
+      "recallDays": [
+        "2026-10-10"
+      ],
+      "conceptTags": [
+        "scripts/compliance/audit.sh",
+        "compliance-audit.jsonl",
+        "active.md",
+        "memory.md",
+        "d-1",
+        "d-3",
+        "10-02",
+        "10-03"
+      ]
+    },
+    "memory:memory/2026-09-27.md:17:22": {
+      "key": "memory:memory/2026-09-27.md:17:22",
+      "path": "memory/2026-09-27.md",
+      "startLine": 17,
+      "endLine": 22,
+      "source": "memory",
+      "snippet": "- ✅ `MEMORY.md` 39 行，符合规范（索引+规则） - ✅ 成本数据新鲜 | OPC API 端点正常（localhost:8765） - ⚠️ `checker-log.jsonl` / `reflexion_journal.md` 不存在 → 自进化基建 L1 Phase 1 部署范围（Kitty 侧），非本工作区缺陷，保留 WARN 不阻塞 - **两项深层问题归因（第 12 次复现）**: ①「日记过短（5 行）」「疑似 Cron 骨架日记」—— 均为**午夜边界效应**：00:00 触发时当日尚无真实事件，正文只能是对前一日状态的指向。处置原则不变：**不伪造内容**，只记录当日真实发生的事（本文件已按此补写）。建议 Kitty 侧上一次提出的方案仍未落地 → 评估将 Cron 改至 00:30，或把「当日活动 session 计数」窗口改为「前一日」，可一次性消除该项误报。 - **成本仪表盘**: ✅ fresh_api_ok | 今日 $0.09 | 本月 $10.11 | 全量 $186.59（看板与台账已对齐） - **Kitty 同步**: 已 sessions_send 上报审计结果（sessionKey `agent:main:feishu:default:direct:ou_3bf0...`，runId 50e86944，**45s 内未返回 = 已投递/announce pending，非失败**）+ 本条同步至 OPC 群；无降级文件",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3764347046613693,
+      "maxScore": 0.3764347046613693,
+      "firstRecalledAt": "2026-10-09T17:02:29.695Z",
+      "lastRecalledAt": "2026-10-09T17:02:29.695Z",
+      "queryHashes": [
+        "6527226eb3c8"
+      ],
+      "recallDays": [
+        "2026-10-10"
+      ],
+      "conceptTags": [
+        "memory.md",
+        "checker-log.jsonl",
+        "reflexion-journal.md",
+        "fresh-api-ok",
+        "0.09",
+        "10.11",
+        "186.59",
+        "sessions-send"
+      ]
+    },
+    "memory:memory/2026-10-08.md:91:101": {
+      "key": "memory:memory/2026-10-08.md:91:101",
+      "path": "memory/2026-10-08.md",
+      "startLine": 91,
+      "endLine": 101,
+      "source": "memory",
+      "snippet": "- [ ] **Kitty 对 10-05 / 10-06 / 10-07 成本扫描降级文件的确认回执**：10-07 23:45 推送 30s 未确认 → 已降级写 `~/WorkBuddy/Claw/opc-dashboard/data/cost_daily.json`（写入后看板已刷新对齐）；按「严禁失败重试风暴」不重试 - [ ] **看板 CF 隧道**自 2026-10-06 13:50 `Tunnel server stopped`，本地 `localhost:8765` 正常 → **请 Kitty 重起 watchdog**（近期交付走飞书附件） ## 护栏自查（本轮） - exec **7 次**（≤12 ✅，含 2 次审计复跑与输出提取）｜write/edit **2 次**（≤20 ✅） - 未触碰 `.env` / `openclaw.json` / API key / `cost_ledger` / 网关日志 ✅（未做任何自主系统排查） - 未删改 `memory/compliance-audit.jsonl` ✅ - 模型：`deepseek/deepseek-v4-flash`（如实标注） ## FOC 方案 v2.0（保守口径）· 法条纠错（17:3x–17:4x） - Daryl 连追两轮质检 → 推翻 v1.x 两大支点：①「免费保修换件不开票」= **调研深度不足导致的错误归池**（只查到\"实务口径\"就收手、漏引 TT219 Đ5.1、且把 CV9671 的\"换零配件不开票\"外推成\"换货不开票\" → 错误地把整池归入\"可不开 FOC",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3544573366641998,
+      "maxScore": 0.3544573366641998,
+      "firstRecalledAt": "2026-10-10T04:09:09.833Z",
+      "lastRecalledAt": "2026-10-10T04:09:09.833Z",
+      "queryHashes": [
+        "be5f7a18e6c5"
+      ],
+      "recallDays": [
+        "2026-10-10"
+      ],
+      "conceptTags": [
+        "网关",
+        "10-05",
+        "10-06",
+        "10-07",
+        "write/edit",
+        "openclaw.json",
+        "cost-ledger",
+        "memory/compliance-audit.jsonl"
+      ]
+    },
+    "memory:memory/2026-10-05.md:110:125": {
+      "key": "memory:memory/2026-10-05.md:110:125",
+      "path": "memory/2026-10-05.md",
+      "startLine": 110,
+      "endLine": 125,
+      "source": "memory",
+      "snippet": "# ⚡ 2026-10-05 白天全记录（flush 归档，13:00–15:00） ## A. 项目：进出口材料自动化处理 v2.8d（已验收，暂时收工） **背景**：Daryl 重挂 Toshiba → 重跑 2026 年 8-10 月批次；输出需经飞书发给他（传输问题）。 **v2.8d 定版口径（Daryl 验收）** 1. Outcome2 文件夹名 = **Outcome1 序号前缀 + 发票号**（`1-HMXCFZGYAT260042` … `10-HMXCFZK260005`） 2. **取消 `材料清单.txt`**（去重留痕改写入「处理报告-去重丢弃清单」节） 3. 无材料票号保留**空文件夹**（`3-OP26092401332`）→ 文件夹数 = Outcome1 行数 4. **交付 zip 必须带 UTF-8 标志**（macOS `zip` 不写 → Windows 乱码/丢件；改用 Python `zipfile`） 5. 去重键**必须含扩展名**（旧版 `norm()` 丢扩展名 → `X.pdf`/`X.xlsx` 误判同一文档） 6. Outcome1 三列（发票日期/供应商/采购类别）**不得留空**，缺则写「待补」 7. `-N` 兄弟票回退 base 目录；D/O（交货单）**不算 B/L**（BL2336285560.PDF 核证为 D/O，正文 `BILL OF LODING NO.: OOLU2336285560`；Daryl 明确\"只是问原因，不一定要用\"）→ 维持 7/14 口径，规则以注释形式留在 `doc_c",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.42688512504100795,
+      "maxScore": 0.42688512504100795,
+      "firstRecalledAt": "2026-10-10T04:33:08.958Z",
+      "lastRecalledAt": "2026-10-10T04:33:08.958Z",
+      "queryHashes": [
+        "ac14665a68ea"
+      ],
+      "recallDays": [
+        "2026-10-10"
+      ],
+      "conceptTags": [
+        "v2.8d",
+        "8-10",
+        "1-hmxcfzgyat260042",
+        "10-hmxcfzk260005",
+        "材料清单.txt",
+        "处理报告-去重丢弃清单",
+        "3-op26092401332",
+        "utf-8"
+      ]
+    },
+    "memory:memory/2026-09-17.md:276:297": {
+      "key": "memory:memory/2026-09-17.md:276:297",
+      "path": "memory/2026-09-17.md",
+      "startLine": 276,
+      "endLine": 297,
+      "source": "memory",
+      "snippet": "3. 纱线对比需用非胚布行（环思纱线导出含该发票下全部行）；胚布对比用采购单号，纱线用备注 ## 🧾 Daryl 重发《应付采购单据清单》两张表 → 报告补附录 C.9（制度印证） - **判读结果**: 清单本身已经规定了数量口径，无需外求 - **第5项 入库单→来源=仓库**（BIP 已关联则无需纸质）；**第6项 过磅单→仓库**（以重量结算者须 LE 过磅单系统单）；**第4项 送货单→供应商+仓库**（仓库在送货单上注明入库单号）；**第11项 对账单→供应商**：**“对账以我司入库单号及时间为准，同一入库单不得拆单请款”** - 月结纸质顺序：…2.采购请款明细 **3.入库单** 4.过磅单 5.送货单…；**清单内无报关单/税单**（属关务体系） - **三条推论**: ①数量口径=仓库入库单，**是公司现行制度已定**→不需为“用真实入库单”改制度；反而是“按报关数量入账”需**绕过第11项** ②冲突点可定位在“对账以入库单号为准”③BIP 内入库单唯一编号可追溯→“形式入库单”只能存在于系统外，系统化环境下更易暴露",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.486095842719078,
+      "maxScore": 0.486095842719078,
+      "firstRecalledAt": "2026-10-10T06:17:06.693Z",
+      "lastRecalledAt": "2026-10-10T06:17:06.693Z",
+      "queryHashes": [
+        "5c8cc4f2a53f"
+      ],
+      "recallDays": [
+        "2026-10-10"
+      ],
+      "conceptTags": [
+        "c.9",
+        "2.采购请款明细",
+        "3.入库单",
+        "4.过磅单",
+        "5.送货单",
+        "清单内无报关单/税单",
+        "纱线",
+        "对比"
+      ]
+    },
+    "memory:memory/archive/2026-08-12.md:47:53": {
+      "key": "memory:memory/archive/2026-08-12.md:47:53",
+      "path": "memory/archive/2026-08-12.md",
+      "startLine": 47,
+      "endLine": 53,
+      "source": "memory",
+      "snippet": "- Daryl 发来《应付采购单据清单-Daryl0810.docx》：3.3单据完整性清单*（分级标准🔴强制/🟠条件/🟢参考）+ 6类采购单据表（本地/进口/委外/化学品/生物质/固资）+ 附录单据流转时序（10节点+责任部门） - **已翻译**: `reports/应付采购单据清单-中越双语-20260812.docx`（192处0缺失；结构逐项一致；无TOC；textutil通过；脚本 `scripts/translate_doclist.py`） - 备注：v5.1 化学品表有 MSDS/批次/环保税、固资表有固资卡片——Daryl 0810 版没有，整合 v5.2 时需确认去留 - **8/12 流程图升级**: 单据流转时序纯文本 → 中越双语泳道图（方案A: HTML/CSS+Playwright headless截图，7部门泳道+10节点+进口/本地双分支）；`reports/单据流转时序流程图-中越双语-20260812.png` + 已嵌入 `reports/应付采购单据清单-中越双语-v1.1-流程图版-20260812.docx`（替换纯文本段落+删除遗留「部门」标签；表格结构/无TOC/textutil验证通过）；生成源 `scripts/flow_chart.html` - 工具链沉淀：playwright-core 全局可用(/.npm-global) + chromium headless 缓存(ms-playwright)；图片分析模型不可用（gemini key 失效，改用 PIL 颜色抽样验证） - **小专题分析报告**: 改明日",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.43425918817520137,
+      "maxScore": 0.43425918817520137,
+      "firstRecalledAt": "2026-10-10T06:17:06.693Z",
+      "lastRecalledAt": "2026-10-10T06:17:06.693Z",
+      "queryHashes": [
+        "5c8cc4f2a53f"
+      ],
+      "recallDays": [
+        "2026-10-10"
+      ],
+      "conceptTags": [
+        "应付采购单据清单-daryl0810.docx",
+        "3.3单据完整性清单",
+        "本地/进口/委外/化学品/生物质/固资",
+        "scripts/translate-doclist.py",
+        "v5.1",
+        "msds/批次/环保税",
+        "v5.2",
+        "8/12"
+      ]
+    },
+    "memory:memory/2026-10-03.md:91:99": {
+      "key": "memory:memory/2026-10-03.md:91:99",
+      "path": "memory/2026-10-03.md",
+      "startLine": 91,
+      "endLine": 99,
+      "source": "memory",
+      "snippet": "- **✅ 答: 能，而且应该计入集体福利** —— 不记名、集体取用、已消耗 → phúc lợi tập thể 成立；R3 存货疑问解除 - **✅ 附带红利**: 不记名集体性食品赠送 → 越南口径**不计入个人 PIT 应税收入**（TT 111/2013 应税礼品类型不含食品）→ 放食堂恰好落在免税侧 - **⚠️ VAT 收口（R2 最终形态）**: 「福利」定性 vs 「抵进项 340,584 未计销项」相冲。NĐ 181/2025（2025/7/1 起）：员工福利类进项不得抵扣 → A 转出 / **B 开票计销项（净税负 0，倾向 B）** - **🆕 TNDN 提醒**: TT 96/2015 Đ4 —— 福利费扣除**不超 1 个月实际平均工资**，年度汇算需并测 - **产出**: 补遗 §7；`memory/lessons.md` 已有 4 条规则（无新增） - **护栏自查**: 本轮 exec 1 次、edit 3 次；websearch **3 轮**（法规时效类，符合强制条款）；未触碰系统配置/凭证/台账 ## 15:0x Q&A：员工侧 PIT（Daryl 问 Part A 开赠送发票后是否需申报个税） - **✅ 结论**: **不需要申报；与是否开赠送发票无关**（发票=VAT 侧视同销售，PIT 走独立规则，不得混）",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.39340480268001554,
+      "maxScore": 0.39340480268001554,
+      "firstRecalledAt": "2026-10-10T06:17:06.774Z",
+      "lastRecalledAt": "2026-10-10T06:17:06.774Z",
+      "queryHashes": [
+        "0017aa58b159"
+      ],
+      "recallDays": [
+        "2026-10-10"
+      ],
+      "conceptTags": [
+        "111/2013",
+        "181/2025",
+        "2025/7/1",
+        "96/2015",
+        "memory/lessons.md",
+        "未触碰系统配置/凭证/台账",
+        "而且",
+        "应该"
       ]
     }
   }
