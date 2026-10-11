@@ -1,6 +1,8 @@
 # 当前活跃任务
 
-> 最后更新: 2026-10-11 00:1x GMT+7
+> 最后更新: 2026-10-12 00:0x GMT+7
+>
+> ℹ️ 10/12 00:0x 状态刷新（本次归档审计触发后回填）：10/11 深夜–10/12 凌晨仍为记忆归档/审计 cron 会话，Self 侧**无实质交付、无项目状态变更**。10/12 审计**连续第 5 日**报「日记过短（浅层+深层同源双计）」——与前 4 日**同一已知误报**。本次同样以 `find ~/.openclaw/agents/self/sessions -name "*.jsonl" -newermt "2026-10-12 00:00"` 实测取证：只命中 `eca7e6aa-….jsonl` 与其派生 `eca7e6aa-….trajectory.jsonl`，证实「2 个活动 session」＝本审计会话自身双文件，全天无第三方 session 活动。已按 lessons 2026-10-10 条目压缩定性三步执行（回填 `memory/2026-10-12.md` → 刷新本文件 → 重跑验证），**未改动共享脚本**（属 P1，待 Daryl 拍板）。⚠️ 误报自 10/8 起已连续 5 日、每日耗一轮人工定性，根治三选一（①步骤 6 豁免本次审计会话自身含 trajectory 派生文件；②调度移至 00:30 后；③00:0x 时段改审 D-1）**建议尽快决断**。（`~/.openclaw/compliance/scripts/audit.sh` 为全 Agent 共享。）成本：今日 $0.18 | 本月 $44.82。结转项不变：FOC-VN H2 规则卡 v1.3（等 Huatex F1/F2/F3）；待 Daryl 五问；VAT 0%/按内销 P1；ACCA 平板端同步 + OPC 方法论卡片集成；旧 gateway cron `1799ac76` 待 Kitty 清理。
 >
 > ℹ️ 10/11 00:0x 状态刷新（本次归档审计触发后回填）：10/10 深夜–10/11 凌晨仍为记忆归档/审计 cron 会话，Self 侧**无实质交付、无项目状态变更**。10/11 审计**连续第 4 日**报「日记过短（浅层+深层同源双计）」——与前 3 日**同一误报**。本次同样以 `find ~/.openclaw/agents/self/sessions -name "*.jsonl" -newermt "2026-10-11 00:00"` 实测取证：只命中 `0d201342-….jsonl` 与其派生 `0d201342-….trajectory.jsonl`，证实「2 个活动 session」＝本审计会话自身双文件，全天无第三方 session 活动。已回填 `memory/2026-10-11.md` 为真实事件记录并刷新本文件解除。⚠️ **误报已由「偶发」升级为「稳定缺陷」（连续 4 日，每日耗一轮人工定性）**，根治三选一（P1 待 Daryl 拍板，`~/.openclaw/compliance/scripts/audit.sh` 为全 Agent 共享，不单方面改）：①步骤 6 豁免本次审计会话自身（含 trajectory 派生文件）；②调度移至 00:30 后；③00:0x 时段改审 D-1。成本：今日 $3.40 | 本月 $44.48。结转项不变：FOC-VN H2 规则卡 v1.3（等 Huatex F1/F2/F3）；待 Daryl 五问；VAT 0%/按内销 P1；ACCA 平板端同步 + OPC 方法论卡片集成；旧 gateway cron `1799ac76` 待 Kitty 清理。
 >
