@@ -1,5 +1,11 @@
 # Recent Conversations
-Last updated: 2026-10-06 00:10 GMT+7
+Last updated: 2026-10-11 00:04 GMT+7
+
+## 2026-10-10 → 10-11 — 变现为核心新指令 + 归档日
+- **10/10 14:57 Daryl 群发「变现为核心」**：OPC 不再以 Daryl 指令为单一驱动，接指令先问澄清问题——服务哪个变现项目；例外 Balance 继续帮 Daryl 赚工资。已回复「收到」
+- 10/6→10/9 归档日连续运行，无项目级变更，各项目状态自 9/17 起维持不变
+- 成本：今日 $3.40 / 本月 $44.48 / 全量 $232.00；⚠️ Balance 本月 $26.42/预算 $20 = 132% 超支（Balance 侧自行提示）
+- 环境异常（延续 9/25）：image 工具 gemini-3-flash-preview API key not valid，待 Kitty/Daryl，未自查
 
 ## 2026-10-05 — Dream Engine 精简版交付（记忆巩固引擎）
 - Daryl 指派写「Dream Engine 精简版」：记忆巩固引擎，只产出建议不自动改文件
