@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-09T01:22:14.762Z",
+  "updatedAt": "2026-10-12T03:53:05.804Z",
   "entries": {
     "memory:memory/2026-06-08.md:19:38": {
       "key": "memory:memory/2026-06-08.md:19:38",
@@ -2943,22 +2943,24 @@
       "endLine": 66,
       "source": "memory",
       "snippet": "## 18:50 · OPC看板 v1.4 完成 ✅ - Daryl 将「OPC看板v1.4」移至 In Progress → 完成三项需求 - **主次优先级视觉分层**：P0-P3 四级，左侧色条+徽章+创建时可选 - **Bryson 雅思陪练补全**：ielts_tutor 加入扫描优先级，产物 3→7 - **symlink 清理**：移除 opc-workspace 中旧 ielts_tutor_v2.0 副本 - Commit v1.4 + tag ## 状态概览 - 🔴 M2 全模块验收完毕 ✅ → v1.5 生产模式 - OPC 看板 v1.4 并入 v1.5 - 验收报告已生成 `decision_reports/m2_acceptance_report_2026-07-05.md` - 7 月基建方向（Agent自进化 + Loop Engineering）待 Daryl 启动确认 - ✅ M2 全部模块验收完毕 + v1.4 完成 - 待办: Agent版本变更通知 - 雅思陪练 v2.0 收尾中 - 7 月基建方向（Agent自进化 + Loop Engineering）待 Daryl 启动确认",
-      "recallCount": 3,
+      "recallCount": 4,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.1468069761991502,
+      "totalScore": 1.5166882097721102,
       "maxScore": 0.401359549164772,
       "firstRecalledAt": "2026-08-07T09:22:23.404Z",
-      "lastRecalledAt": "2026-10-07T03:39:02.403Z",
+      "lastRecalledAt": "2026-10-12T01:48:34.887Z",
       "queryHashes": [
         "0151b4f90a54",
         "1a1516b1ba0d",
-        "3b82f0d8ec0a"
+        "3b82f0d8ec0a",
+        "1c6aa48ffc78"
       ],
       "recallDays": [
         "2026-08-07",
         "2026-10-03",
-        "2026-10-07"
+        "2026-10-07",
+        "2026-10-12"
       ],
       "conceptTags": [
         "v1.4",
@@ -3801,19 +3803,21 @@
       "endLine": 20,
       "source": "memory",
       "snippet": "- **待 Daryl 拍板**：Phase0 全面应用/维持试点、M2 正式关闭、serveo A/B（A=付费/B=CF命名隧道推荐） ## 中午 · Daryl 训练计划（个人服务） - Daryl 需求：增肌+体能健康，居家哑铃/弹力带，4练/周，不喜慢跑喜骑行，睡眠差（23:45-06:30偶失眠），高度近视，58kg/BMI 18.7 偏瘦 - **交付** `docs/daryl_training_plan_20260816.md` v1.0：8周周期 4分化（下肢/上肢推/下肢+体能/上肢拉）+ 渐进超负荷节奏 + 30min压缩版 + 骑行2次/周 + 饮食 2500kcal/120g蛋白（食堂+宿舍鸡蛋牛肉策略）+ 补剂优先级（肌酸⭐⭐⭐必买/蛋白粉镁可选/维D花青素继续/BCAA智商税）+ 睡眠6条 + 高度近视安全清单（禁极限憋气/跳跃低冲击替代/眼底检查） - 迭代：2周反馈（8/30），8周复评（10/11） - **v1.1 全身版修正（21:30）**：Daryl 纠正——羽毛球体感下降是触发点非目标（已捕获进信号池）；改全身训练 4 次/周（一三五七，A/B轮换）+ 骑行 3 次/周（二四六，共75-90min） ## 成本（Balance cron 例行） - 今日 $0.21 | 本月 $24.51 | 全量 $150.30，看板一致",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.7348148196935653,
+      "totalScore": 1.092177304625511,
       "maxScore": 0.3809468865394592,
       "firstRecalledAt": "2026-09-18T01:10:18.468Z",
-      "lastRecalledAt": "2026-09-18T01:10:27.336Z",
+      "lastRecalledAt": "2026-10-12T03:53:05.771Z",
       "queryHashes": [
         "7d8a168474c9",
-        "1c976fe98726"
+        "1c976fe98726",
+        "2f44356cb8ad"
       ],
       "recallDays": [
-        "2026-09-18"
+        "2026-09-18",
+        "2026-10-12"
       ],
       "conceptTags": [
         "全面应用/维持试点",
@@ -4447,6 +4451,68 @@
         "09-15",
         "32.96",
         "5.39"
+      ]
+    },
+    "memory:memory/archive/2026-07-21.md:27:41": {
+      "key": "memory:memory/archive/2026-07-21.md:27:41",
+      "path": "memory/archive/2026-07-21.md",
+      "startLine": 27,
+      "endLine": 41,
+      "source": "memory",
+      "snippet": "- **OPC 群消息**: main 推送决策清单（三模型混合方案/自进化方向/7月预算告警），xiaofeng 推送阻塞项清单（洗稿MVP/IELTS v2.0/Loop Engineering/AI模型切换） ### 运行状态 - **active.md**: 最后更新 7/21 20:31，重启前备份 - **OPC Dashboard v1.6**: 正常运行 (localhost:8765)，成本数据路径已修复 - **各 Agent 心跳**: 全部正常，HEARTBEAT_OK - **4 Agent 审计 cron**: 全部触发完成（main/xiaofeng/balance/self），均已 OPC 群汇报 - **SearXNG/ngrok**: 正常运行 - **成本数据**: API 正常 (localhost:8765/api/costs) ### ⚠️ 待关注 - **7月预算**: 当前 $32.84 / 预算 $15，超支 119%，待 Daryl 确认预算调整 - **crontab 周度搜索抽检**: 待 Daryl 手动安装（macOS 非交互式权限阻塞） - **重启后 git commit/push**: 待补做",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3667706191539764,
+      "maxScore": 0.3667706191539764,
+      "firstRecalledAt": "2026-10-12T01:48:34.887Z",
+      "lastRecalledAt": "2026-10-12T01:48:34.887Z",
+      "queryHashes": [
+        "1c6aa48ffc78"
+      ],
+      "recallDays": [
+        "2026-10-12"
+      ],
+      "conceptTags": [
+        "备份",
+        "三模型混合方案/自进化方向/7月预算告警",
+        "洗稿mvp/ielts",
+        "v2.0/loop",
+        "engineering/ai模型切换",
+        "active.md",
+        "7/21",
+        "v1.6"
+      ]
+    },
+    "memory:memory/2026-10-12.md:12:23": {
+      "key": "memory:memory/2026-10-12.md:12:23",
+      "path": "memory/2026-10-12.md",
+      "startLine": 12,
+      "endLine": 23,
+      "source": "memory",
+      "snippet": "- ⚠️ 连续多日复现的「步骤 6 误报自身」根治方案（audit.sh 步骤 6 豁免本次审计会话 / 调度移后 00:30 / 00:0x 改审 D-1 三选一）仍待 Daryl 拍板；未单方面改动共享脚本 ## 10/11 遗留（跨日待办） - Daryl 10/10 14:57 群发「变现为核心」新指令：OPC 接指令先问一句澄清问题——服务哪个变现项目。已回复「收到」，待具体变现任务落地 ## 🧭 Daryl 重大个人/战略信息（10/12 私聊，需长期记住） - 第三季度「堕怠」根因自述：① OPC 方向动摇 ② 情绪问题 ③ 晚上没给 Agent 做自己项目 - 真正原因：**准备离职**，认为现公司「土壤」不利于发展，计划离职空窗期找回进步节奏 - 自述无抽烟/酗酒/熬夜恶习；唯一点名适用的是「少刷短视频」 - 关键窗口：待其空窗后重做 OPC 战略（对齐其「一个月内重做战略」指令） - 我方回应基调：换土壤 > 硬扛意志力（书的立场「意志力像肌肉是错的」+ 孙宇晨「先自由后财富」）",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3767878919839859,
+      "maxScore": 0.3767878919839859,
+      "firstRecalledAt": "2026-10-12T03:53:05.804Z",
+      "lastRecalledAt": "2026-10-12T03:53:05.804Z",
+      "queryHashes": [
+        "dd223d2112ae"
+      ],
+      "recallDays": [
+        "2026-10-12"
+      ],
+      "conceptTags": [
+        "audit.sh",
+        "d-1",
+        "10/11",
+        "10/10",
+        "重大个人/战略信息",
+        "10/12",
+        "自述无抽烟/酗酒/熬夜恶习",
+        "连续"
       ]
     }
   }
