@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 """
-tokhai_extract.py — v2.6 ToKhai 内容级抽取模块
+tokhai_extract.py — v2.9 ToKhai 内容级抽取模块
 职责：从单个 ToKhai .xls/.xlsx 文件读内容，判定是否「已通关」，
-      抽取 关单号 / 报关日期 / 发票号 / 发票金额（供方案B金额勾稽用）。
+      抽取 关单号 / 报关日期(申报日) / 放行日 / 发票号 / 发票金额（供方案B金额勾稽用）。
+v2.9（2026-10-13 Daryl 定）：新增【放行日】= ToKhai『Ngày cấp phép』（海关批准/放行日）。
+      说明：Tờ khai 上无『Ngày thông quan』字段；全库 943 份 HQ7N 导出中，放行语义只有一个字段 =
+      『Ngày cấp phép』；未通关件（文件名无 QDTQ）该字段为空 → 本模块照实留空，不臆造。
 判定完全基于文件内容，不依赖文件名（文件名带不带QDTQ只作辅助线索）。
 """
 import re
@@ -89,8 +92,10 @@ def extract_tokhai(filepath):
       status         : 'THONG_QUAN' | 'PHAN_LUONG' | 'DRAFT' | 'OTHER'
       is_cleared     : 是否已通关 (status == THONG_QUAN)
       so_to_khai     : 关单号
-      ngay_dang_ky   : 报关日期(原始 DD/MM/YYYY)
-      ngay_ymd       : 报关日期(YYYY/MM/DD)
+      ngay_dang_ky   : 报关日期=申报日(原始 DD/MM/YYYY)
+      ngay_ymd       : 报关日期=申报日(YYYY/MM/DD)
+      ngay_cap_phep  : 放行日(原始 DD/MM/YYYY)，取『Ngày cấp phép』
+      ngay_cap_phep_ymd : 放行日(YYYY/MM/DD)，无则空
       so_hoa_don     : 发票号(报关单内记载)
       amount         : 发票金额(Tổng trị giá hóa đơn)
       error          : 读取错误信息
@@ -99,7 +104,8 @@ def extract_tokhai(filepath):
         'file': os.path.basename(filepath),
         'is_customs_doc': False, 'status_text': '', 'status': 'OTHER',
         'is_cleared': False, 'so_to_khai': '', 'ngay_dang_ky': '',
-        'ngay_ymd': '', 'so_hoa_don': '', 'amount': None, 'hs_code': '', 'error': '',
+        'ngay_ymd': '', 'ngay_cap_phep': '', 'ngay_cap_phep_ymd': '',
+        'so_hoa_don': '', 'amount': None, 'hs_code': '', 'error': '',
     }
     try:
         rows = _load_rows(filepath)
@@ -139,6 +145,23 @@ def extract_tokhai(filepath):
                 res['ngay_dang_ky'] = m.group(1)
                 d, mo, y = m.group(1).split('/')
                 res['ngay_ymd'] = f'{y}/{mo}/{d}'
+
+        # v2.9 放行日 Ngày cấp phép（行内形如：[Ngày cấp phép, '28/09/2026  12:35:21']；
+        # 未通关件为 '/  /' → 留空）。只认标签值对，避免误抓同行其它日期。
+        if 'ngay cap phep' in n and not res['ngay_cap_phep']:
+            li = None
+            for i, c in enumerate(cells):
+                if 'cap phep' in _norm(c):
+                    li = i
+                    break
+            seg = cells[li + 1:] if li is not None else []
+            for c in seg:
+                m = re.search(r'(\d{2}/\d{2}/\d{4})', c)
+                if m:
+                    res['ngay_cap_phep'] = m.group(1)
+                    d, mo, y = m.group(1).split('/')
+                    res['ngay_cap_phep_ymd'] = f'{y}/{mo}/{d}'
+                    break
 
         # 发票号 Số hóa đơn
         if n.startswith('so hoa don') and not res['so_hoa_don']:

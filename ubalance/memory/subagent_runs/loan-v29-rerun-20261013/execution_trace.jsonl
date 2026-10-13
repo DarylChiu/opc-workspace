@@ -1,0 +1,13 @@
+{"ts": "2026-10-13T11:47:53+07:00", "step": "1", "action": "check_dependency", "result": "外置盘 /Volumes/TOSHIBA EXT/.../RM-Database/2026 已挂载（DRIVE_OK）"}
+{"ts": "2026-10-13T11:47:53+07:00", "step": "2", "action": "read_script", "result": "确认 scripts/run_loan_v29_20261013.py 输出名已改为 Outcome1-v2.9-… / 处理报告-v2.9-…（OUTDIR=Outcome-v2.9-…）"}
+{"ts": "2026-10-13T11:47:53+07:00", "step": "3", "action": "rerun", "result": "python3 scripts/run_loan_v29_20261013.py，exit=0；新目录 work/loan-materials-2026/Outcome-v2.9-2026_08to10-20261013_1147/；11 单号全见 SUMMARY"}
+{"ts": "2026-10-13T11:47:53+07:00", "step": "4", "action": "detect_new_file", "result": "新产出 Outcome1-v2.9-2026_08to10-20261013_1147.xlsx（6679 bytes）"}
+{"ts": "2026-10-13T11:47:53+07:00", "step": "5", "action": "compare_rows_cols", "result": "新旧 Outcome1 逐行逐列比对：表头 14 列一致且等于期望顺序，TOTAL_CELL_ROWS_DIFF=0"}
+{"ts": "2026-10-13T11:47:53+07:00", "step": "6", "action": "check_header", "result": "表头=序号|发票号|关单号|报关日期|放行日|金额(USD)|日期|供应商|贷款用途分类|分类依据|置信度|五类材料完整性|ToKhai勾稽|备注（14 列，匹配）"}
+{"ts": "2026-10-13T11:47:53+07:00", "step": "7", "action": "check_rows", "result": "数据行 11 行（含表头共 12 行）"}
+{"ts": "2026-10-13T11:47:53+07:00", "step": "8", "action": "check_release_date_nonempty", "result": "放行日非空 11/11"}
+{"ts": "2026-10-13T11:47:53+07:00", "step": "9", "action": "check_release_ge_declare", "result": "放行日<报关日期 异常数=0"}
+{"ts": "2026-10-13T11:47:53+07:00", "step": "10", "action": "write_superseded", "result": "在 Outcome-v2.9-2026_08to10-20261013_1142/ 写入 SUPERSEDED.md（保留目录，不删除）"}
+{"ts": "2026-10-13T11:47:53+07:00", "step": "11", "action": "dashboard_copy", "result": "复制新 Outcome1-v2.9-…1147.xlsx 到 ~/WorkBuddy/Claw/opc-dashboard/"}
+{"ts": "2026-10-13T11:47:53+07:00", "step": "12", "action": "dashboard_remove_misnamed", "result": "trash 误名文件 Outcome1-v2.9-2026_08to10-20261013_1142.xlsx（trash_exit=0）"}
+{"ts": "2026-10-13T11:47:53+07:00", "step": "13", "action": "dashboard_http_check", "result": "curl -I http://localhost:8765/Outcome1-v2.9-2026_08to10-20261013_1147.xlsx -> HTTP/1.1 200 OK (Content-Length 6679)"}

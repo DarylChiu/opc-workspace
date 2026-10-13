@@ -1,0 +1,9 @@
+{"ts": "2026-10-13T09:45:06+07:00", "step": "0", "action": "建目录 work/payprep-20261013/{attachments-20261013,out,logs,template} + 复制模板", "result": "OK"}
+{"ts": "2026-10-13T09:45:06+07:00", "step": "0", "action": "解压3个zip到 attachments-20261013 (Python zipfile, cp437->gbk 还原中文名)", "result": "51 子目录 1..51 / 79 PDF"}
+{"ts": "2026-10-13T09:45:06+07:00", "step": "1", "action": "列名断言(必需列 D/E/F/DA/DB/DR/H/O/P/S/CW)", "result": "全部存在; F/DR 与 H/O 数据逐行一致; 明细51行; 币种全部=越南盾(VND)"}
+{"ts": "2026-10-13T09:46:44+07:00", "step": "2", "action": "跑主流程 v2: python3 scripts/payprep.py to-bank (template/detail/attach/outdir/date=20261013), 日志重定向 logs/payprep-run.log", "result": "EXIT=0; 产出 Payment request to Bank-20261013.xlsx(68发票行) + recon ledger + recon.json/txt + payprep-log"}
+{"ts": "2026-10-13T09:46:44+07:00", "step": "3", "action": "生成逐卷待人工核清单 (复制改写 20261009 的 _gen_manual_review.py → 本批 out/)", "result": "Payment 待人工核清单-20261013.xlsx: 26 条 (A3/B7/D7/E9); 口径核对表 9 行"}
+{"ts": "2026-10-13T09:46:44+07:00", "step": "4", "action": "勾稽校验: VND 表 H 合计 vs 明细 VND 行合计; Q7 摘要净化; Q3 前导0", "result": "H=12,949,026,506 == 明细=12,949,026,506 (逐位一致); 摘要列全空/无{}占位符; 前导0保留未补零; 无非VND明细"}
+{"ts": "2026-10-13T09:47:07+07:00", "step": "5", "action": "写批次报告 out/Payment核销批次报告-20261013.md", "result": "含输入读数/逐卷结果表(51)/差异清单/口径冲突/产出清单/护栏自查"}
+{"ts": "2026-10-13T09:47:07+07:00", "step": "6", "action": "写 trace + summary.md", "result": "execution_trace.jsonl (7 条); summary.md"}
+{"ts": "2026-10-13T09:47:07+07:00", "step": "7", "action": "复制4个交付物到 OPC 看板静态根 ~/WorkBuddy/Claw/opc-dashboard/ 并 curl localhost:8765 实测", "result": "4 个文件全部 200 且 size_download=本地字节(15730/14414/9898/7932)"}

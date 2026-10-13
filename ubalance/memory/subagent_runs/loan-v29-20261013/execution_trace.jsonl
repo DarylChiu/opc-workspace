@@ -1,0 +1,6 @@
+{"ts":"2026-10-13T04:42:45Z","step":"1","action":"preflight","result":"外置盘已挂载 THÁNG 08/09/10 可读; 脚本 tokhai_extract.py(v2.9)+run_loan_v29_20261013.py 存在; 基线 Outcome1-v2.7-...20261009_1227.xlsx 存在"}
+{"ts":"2026-10-13T04:44:54Z","step":"2","action":"run_workflow","result":"python3 scripts/run_loan_v29_20261013.py 完成(约45s); OUTDIR=work/loan-materials-2026/Outcome-v2.9-2026_08to10-20261013_1142; 复制文件36; 11票全部命中RM目录"}
+{"ts":"2026-10-13T04:44:54Z","step":"3","action":"verify_structure","result":"Outcome1表头14列顺序=PASS(放行日位于报关日期后); 数据行=11=PASS"}
+{"ts":"2026-10-13T04:44:54Z","step":"4","action":"verify_ngay_cap_phep","result":"11/11非空, 空=0; 全部 放行日==申报日(同日,非异常); 逐票源ToKhai status=THONG_QUAN/文件名含QDTQ; 原始单元格 Ngày cấp phép 已抽查(1票)=24/09/2026 10:09:28 与申报同刻"}
+{"ts":"2026-10-13T04:44:54Z","step":"5","action":"regression_vs_baseline","result":"vs Outcome-v2.7-...20261009_1227: 13列按列名逐一比对143格, DIFF=0; 列顺序一致; 日期列仍为 YYYY/MM/DD 字符串(未回退为Excel序列值)"}
+{"ts":"2026-10-13T04:44:54Z","step":"6","action":"publish_dashboard","result":"复制 Outcome1 至 ~/WorkBuddy/Claw/opc-dashboard/Outcome1-v2.9-2026_08to10-20261013_1142.xlsx; md5一致; curl -I http://localhost:8765/... = HTTP 200"}
