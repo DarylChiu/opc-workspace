@@ -1,0 +1,13 @@
+{"ts":"2026-10-14T15:55:00+07:00","step":"01","action":"read_sop","result":"读速查卡 loan-materials-workflow.md + 操作手册 v2.8d（13列/扁平/序号-票号/无材料清单/zip UTF-8）"}
+{"ts":"2026-10-14T15:56:00+07:00","step":"02","action":"read_l1","result":"work/loan-materials-2025-12-batch7/split/L1-p3.xlsx（Sheet1，52 行，全局STT 107-158，列=全局STT/形式发票号/供应商）"}
+{"ts":"2026-10-14T15:57:00+07:00","step":"03","action":"rm_index","result":"RM-Database 四年全搜(2023/2024/2025/2026)=共索引目录；全库最新 mtime=2026-10-13"}
+{"ts":"2026-10-14T15:57:30+07:00","step":"04","action":"match","result":"exact 命中 49/52；无目录 3：HMFZAW260005 / HMFZAW260011 / HMFZAK260243（base/-N 回退均未触发）"}
+{"ts":"2026-10-14T16:00:00+07:00","step":"05","action":"classify_ocr","result":"逐文件内容级分类（pdfplumber + 扫描件 Tesseract OCR 回退）；判定 ToKhai 已通关(金额勾稽)；剔除 EDO/D.O./到货通知/运费/海关监管清单/他票单据"}
+{"ts":"2026-10-14T16:24:00+07:00","step":"06","action":"dedup_copy","result":"md5 去重 + 同文档多版本去重；复制文件 240 个；去重丢弃 6 件（写入处理报告，不静默丢件）"}
+{"ts":"2026-10-14T16:25:00+07:00","step":"07","action":"outcome1","result":"13列 × 52 行；STT 直接取全局STT(107-158 连续)；三列(发票日期/供应商/采购用途)无空白；金额合计 1,573,409.48 USD；报关日期 2026/04/03~2026/05/28"}
+{"ts":"2026-10-14T16:25:10+07:00","step":"08","action":"outcome2","result":"52 个扁平文件夹(名=<全局STT>-<发票号>)；无 1/2/3 子目录、无 材料清单.txt；3 个空文件夹(117/118/129)"}
+{"ts":"2026-10-14T16:25:20+07:00","step":"09","action":"report","result":"处理报告含 逐票明细/剔除清单/去重丢弃清单/未决问题/五类完整性汇总"}
+{"ts":"2026-10-14T16:26:00+07:00","step":"10","action":"zip","result":"Python zipfile：292 条目(52目录+240文件)；非ASCII 91 全带 UTF-8 标志；60,588,070 B"}
+{"ts":"2026-10-14T16:26:30+07:00","step":"11","action":"writeback_toshiba","result":"写回 /Volumes/TOSHIBA EXT/HUATEX进出口材料/Outcome1-p3-v2.8d-20261014_1557.xlsx + Outcome2-p3-v2.8d-20261014_1557/；xlsx md5 读回一致；目录文件 240/240"}
+{"ts":"2026-10-14T16:27:00+07:00","step":"12","action":"dashboard_tunnel","result":"复制到 opc-dashboard；隧道 https://always-changed-reviews-material.trycloudflare.com 实测 200 且字节一致(xlsx 10225 / zip 60588070)"}
+{"ts":"2026-10-14T16:27:30+07:00","step":"13","action":"spotcheck","result":"独立抽检：Outcome2 文件夹数 52 = Outcome1 行数；空文件夹恰为 3 未命中票；122-HMXCAC260357 观察 2 处引擎边缘（EDO/CO 经弱兜底被收）已在 summary 标注"}

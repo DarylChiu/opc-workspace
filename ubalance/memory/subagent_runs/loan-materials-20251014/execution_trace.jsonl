@@ -1,0 +1,14 @@
+{"ts": "2026-10-14T15:19:08+07:00", "step": "0.1", "action": "读 SOP 速查卡 + 操作手册", "result": "已读 loan-materials-workflow.md(v2.8d) / 操作手册(v2.8d)，确认 13 列口径/扁平 Outcome2/无材料清单/zip UTF-8 标志"}
+{"ts": "2026-10-14T15:19:08+07:00", "step": "0.2", "action": "环境核对", "result": "Toshiba 已挂载；新源根 /Volumes/TOSHIBA EXT/HUATEX进出口材料；RM-Database 含 2023/2024/2025/2026；2025/THÁNG 12=138 目录、2026/THÁNG 01=138 目录"}
+{"ts": "2026-10-14T15:19:08+07:00", "step": "0.3", "action": "读 L1 输入", "result": "work/loan-materials-2025-12/in/L1-成品采购入库补单测试20条.xlsx Sheet1：20 行，列=形式发票号/供应商(HUA FENG GROUP INC.)"}
+{"ts": "2026-10-14T15:19:08+07:00", "step": "0.4", "action": "RM 独立复核命中", "result": "18/20 命中；未命中 2 条=HMXCAM250001、HMFZR250008；HMFZR250002 存在自有 base 目录 #70（非仅 -1 兄弟）"}
+{"ts": "2026-10-14T15:26:57+07:00", "step": "1.1", "action": "写运行器 run_loan_2025_12_v28d.py", "result": "基于 run_loan_v29 引擎；改 DISK→HUATEX进出口材料；RM 跨 2025/THÁNG 12 + 2026/THÁNG 01；L1 读 Excel 20 行；base↔-N 双向回退；Outcome1=13 列(v2.8d)"}
+{"ts": "2026-10-14T15:26:57+07:00", "step": "1.2", "action": "第 1 次运行", "result": "18/20 命中；Outcome2=20 文件夹；但「日期」列出现非法值 2025/17/12、2025/26/12、2025/09/12、2025/10/12"}
+{"ts": "2026-10-14T15:26:57+07:00", "step": "1.3", "action": "定位缺陷", "result": "doc_fields.extract_invoice_date 无中文日期模式「2025年12月10日」→ 标签命中后回退全文首个 D/M/Y（实为 M/D/Y）→ 月位非法。属实现缺陷，非口径变更"}
+{"ts": "2026-10-14T15:26:57+07:00", "step": "1.4", "action": "修正 doc_fields.DATE_PAT", "result": "新增最高优先中文日期模式 r'(\\d{4})年(\\d{1,2})月(\\d{1,2})日'；口径不变（发票日期仍取 Invoice Date）"}
+{"ts": "2026-10-14T15:32:27+07:00", "step": "2.1", "action": "第 2 次运行（修正日期解析后）", "result": "18/20 命中；Outcome1=13列×20行；非法日期全部修正；金额合计 518,500.10 USD"}
+{"ts": "2026-10-14T15:32:27+07:00", "step": "2.2", "action": "Outcome2 结构自检", "result": "20 文件夹(=Outcome1 行数)，扁平无 1/2/3 子目录，无「材料清单.txt」，70 文件，2 空文件夹(10/19)"}
+{"ts": "2026-10-14T15:32:27+07:00", "step": "3.1", "action": "打包 zip（Python zipfile）", "result": "HUATEX-Outcome2-v2.8d-2025_12-20261014_1526.zip；90 条目(70 文件+20 目录)；非ASCII 32=带UTF-8标志 32；19,188,099 B"}
+{"ts": "2026-10-14T15:32:27+07:00", "step": "3.2", "action": "写回 Toshiba 新路径 + md5 读回校验", "result": "Outcome1 xlsx / Outcome2 目录 / 处理报告 / zip 均落 HUATEX进出口材料；md5 一致；目录 20、文件 70 一致"}
+{"ts": "2026-10-14T15:32:27+07:00", "step": "3.3", "action": "看板发布 + 隧道实测", "result": "复制 xlsx+zip 至 ~/WorkBuddy/Claw/opc-dashboard；本地与隧道均 HTTP 200，字节数与文件一致"}
+{"ts": "2026-10-14T15:32:27+07:00", "step": "3.4", "action": "写 summary.md", "result": "结果 + 关键偏差（HMFZR250002 复核、中文日期实现修正、跨年票、首跑作废留痕）"}

@@ -1,0 +1,10 @@
+{"ts": "2026-10-14T15:58:56", "step": "P4-001", "action": "读 L1", "result": "52 行, STT 159-210, 来源 L1-p4.xlsx"}
+{"ts": "2026-10-14T15:58:57", "step": "P4-002", "action": "RM 目录索引", "result": "2342 目录 / 32 月目录 / 年 ['2023', '2024', '2025', '2026']"}
+{"ts": "2026-10-14T15:59:19", "step": "P4-003", "action": "RM 快照", "result": "RM快照（= 本批数据截止）: 全库最新 mtime=2026-10-13"}
+{"ts": "2026-10-14T15:59:19", "step": "P4-004", "action": "目录匹配", "result": "命中 49/52；无目录 3"}
+{"ts": "2026-10-14T16:26:00", "step": "P4-005", "action": "Outcome2 复制", "result": "233 文件, 52 文件夹（去重丢弃 3）"}
+{"ts": "2026-10-14T16:26:00", "step": "P4-006", "action": "Outcome1 生成", "result": "52 行 → Outcome1-p4-v2.8d-20261014_1558.xlsx"}
+{"ts": "2026-10-14T16:26:00", "step": "P4-007", "action": "完成 stage", "result": "Outcome1 52 行 / Outcome2 52 文件夹 / 复制 233 文件"}
+{"ts": "2026-10-14T16:26:42", "step": "P4-DEL", "action": "zip 打包", "result": "Outcome2-p4-v2.8d-20261014_1558.zip 285条目/非ASCII115/UTF8115/size53424040"}
+{"ts": "2026-10-14T16:26:58", "step": "P4-DEL", "action": "写回 Toshiba", "result": "Outcome1-p4-v2.8d-20261014_1558.xlsx md5=c0d19521c06a61d2d828dcf64f55779b; Outcome2-p4-v2.8d-20261014_1558 52 文件夹"}
+{"ts": "2026-10-14T16:26:58", "step": "P4-DEL", "action": "看板副本", "result": "Outcome1-p4-v2.8d-20261014_1558.xlsx md5=c0d19521c06a61d2d828dcf64f55779b; Outcome2-p4-v2.8d-20261014_1558.zip size=53424040"}

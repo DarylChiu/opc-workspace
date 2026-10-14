@@ -1,0 +1,11 @@
+{"ts": "2026-10-14T15:59:27", "step": "01", "action": "read_L1", "result": "52 rows, STT 211-262"}
+{"ts": "2026-10-14T15:59:27", "step": "02", "action": "build_index", "result": "2342 dirs"}
+{"ts": "2026-10-14T15:59:33", "step": "03", "action": "match_dirs", "result": "hit=49 miss=3: ['HMXCM260011', 'HMFZAX260043', 'HMXCM260009']"}
+{"ts": "2026-10-14T16:24:01", "step": "04", "action": "attribute", "result": "assigned files total=245 excluded=400"}
+{"ts": "2026-10-14T16:24:06", "step": "05", "action": "outcome2", "result": "folders=52 copied=245 dedup_drops=0"}
+{"ts": "2026-10-14T16:24:06", "step": "06", "action": "outcome1", "result": "52 rows -> /Users/zhaoyuzhao/.openclaw/workspace-balance/work/loan-materials-2025-12-batch7/p5/out/Outcome1-p5-v2.8d-20261014_1559.xlsx"}
+{"ts": "2026-10-14T16:24:06", "step": "07", "action": "report", "result": "/Users/zhaoyuzhao/.openclaw/workspace-balance/work/loan-materials-2025-12-batch7/p5/out/处理报告-p5-v2.8d-20261014_1559.txt"}
+{"ts": "2026-10-14T16:24:08", "step": "08", "action": "zip", "result": "248 entries, 49509505 bytes -> /Users/zhaoyuzhao/.openclaw/workspace-balance/work/loan-materials-2025-12-batch7/p5/out/Outcome2-p5-v2.8d-20261014_1559.zip"}
+{"ts": "2026-10-14T16:24:30", "step": "09", "action": "write_back", "result": "/Volumes/TOSHIBA EXT/HUATEX进出口材料/Outcome1-p5-v2.8d-20261014_1559.xlsx md5_match=True; /Volumes/TOSHIBA EXT/HUATEX进出口材料/Outcome2-p5-v2.8d-20261014_1559"}
+{"ts": "2026-10-14T16:24:30", "step": "10", "action": "dashboard_copy", "result": "/Users/zhaoyuzhao/WorkBuddy/Claw/opc-dashboard/Outcome1-p5-v2.8d-20261014_1559.xlsx ; /Users/zhaoyuzhao/WorkBuddy/Claw/opc-dashboard/Outcome2-p5-v2.8d-20261014_1559.zip"}
+{"ts": "2026-10-14T16:24:30", "step": "DONE", "action": "pipeline_complete", "result": "xlsx=/Users/zhaoyuzhao/.openclaw/workspace-balance/work/loan-materials-2025-12-batch7/p5/out/Outcome1-p5-v2.8d-20261014_1559.xlsx; dir=/Volumes/TOSHIBA EXT/HUATEX进出口材料/Outcome2-p5-v2.8d-20261014_1559; zip=/Users/zhaoyuzhao/.openclaw/workspace-balance/work/loan-materials-2025-12-batch7/p5/out/Outcome2-p5-v2.8d-20261014_1559.zip; ts=20261014_1559"}

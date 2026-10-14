@@ -1,0 +1,13 @@
+{"ts": "2026-10-14T15:57:39", "step": "1", "action": "read_sop", "result": "已读 SOP 速查卡 v2.8d + 操作手册 + 参考运行器 run_loan_2025_12_v28d.py"}
+{"ts": "2026-10-14T15:57:39", "step": "2", "action": "read_input", "result": "L1-p2.xlsx 53 行，全局STT 54-106，票号起点 HMFZR260039"}
+{"ts": "2026-10-14T15:57:39", "step": "3", "action": "build_runner", "result": "新增 work/.../p2/scripts/run_p2_v28d.py（不改 scripts/ 既有文件）"}
+{"ts": "2026-10-14T16:27:09", "step": "4", "action": "build_index", "result": "RM-Database 2023-2026 全库目录索引 2342 目录 → p2/scripts/rm_index.json（缓存复用）"}
+{"ts": "2026-10-14T16:27:09", "step": "5", "action": "run_workflow", "result": "python3 run_p2_v28d.py：51/53 票 exact 命中；2 票无目录（HMFZK260099 / HMFZAK260174）"}
+{"ts": "2026-10-14T16:27:09", "step": "6", "action": "output_outcome1", "result": "Outcome1-p2-v2.8d-20261014_1558.xlsx：53 行，序号=全局STT 54-106，13 列，三列(日期/供应商/类别)无空白"}
+{"ts": "2026-10-14T16:27:09", "step": "7", "action": "output_outcome2", "result": "Outcome2/ 53 个文件夹（=L1 行数），命名 <全局STT>-<发票号>，扁平；空文件夹 2 个(78/82)；无材料清单.txt；无 1/2/3 子目录"}
+{"ts": "2026-10-14T16:27:09", "step": "8", "action": "dedup", "result": "md5 去重丢弃 8 件，全部逐条写入处理报告「去重丢弃清单」；复制 232 件"}
+{"ts": "2026-10-14T16:27:09", "step": "9", "action": "zip", "result": "Python zipfile 打包 Outcome2-p2-v2.8d-20261014_1558.zip：234 条目(dirs=2) / 66,553,080 B；非ASCII条目 90 全部带 UTF-8 标志(ok)"}
+{"ts": "2026-10-14T16:27:09", "step": "10", "action": "writeback_toshiba", "result": "写回 /Volumes/TOSHIBA EXT/HUATEX进出口材料/ Outcome1+Outcome2-p2-v2.8d-20261014_1558；xlsx md5 读回一致；232 文件/53 文件夹"}
+{"ts": "2026-10-14T16:27:09", "step": "11", "action": "deliver_dashboard", "result": "复制 Outcome1 xlsx + Outcome2 zip 到 ~/WorkBuddy/Claw/opc-dashboard/"}
+{"ts": "2026-10-14T16:27:09", "step": "12", "action": "tunnel_verify", "result": "公网直链实测 200：xlsx 10106 B 一致；zip 66553080 B 一致（tunnel always-changed-reviews-material.trycloudflare.com）"}
+{"ts": "2026-10-14T16:27:09", "step": "13", "action": "cleanup", "result": "清理误建空 STAGE v2.8d-p2-20261014_1557（trash）"}

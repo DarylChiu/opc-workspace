@@ -1,0 +1,12 @@
+{"ts": "2026-10-14T16:16:27", "step": "00", "action": "读SOP+手册", "result": "v2.8d 口径确认；硬约束=不改 scripts/ 下既有文件"}
+{"ts": "2026-10-14T16:16:27", "step": "01", "action": "读L1", "result": "split/L1-p1.xlsx 53 行，全局STT 1-53，供应商列已含 HUA FENG GROUP INC."}
+{"ts": "2026-10-14T16:16:27", "step": "02", "action": "建RM目录索引", "result": "四年全搜 2023/2024/2025/2026 → 2342 目录，落 p1/scripts/rm_dir_index.json"}
+{"ts": "2026-10-14T16:16:27", "step": "03", "action": "试匹配", "result": "52/53 命中（唯一目录），STT49 HMXCFZA260011 无目录"}
+{"ts": "2026-10-14T16:16:27", "step": "04", "action": "迁移pdftext缓存", "result": "旧路径 HUATEX贷款材料→HUATEX进出口材料 键改写，抽样200/200 mtime+size 一致"}
+{"ts": "2026-10-14T16:16:27", "step": "05", "action": "写本批运行器", "result": "p1/scripts/run_p1.py（基线 run_loan_2025_12_v28d.py，STT 取全局STT）"}
+{"ts": "2026-10-14T16:16:27", "step": "06", "action": "启动运行器", "result": "run_p1.py 后台执行；文件分类/OCR 中"}
+{"ts": "2026-10-14T16:32:13", "step": "07", "action": "运行器完成", "result": "52/53 命中；复制文件(去重后) 236；Outcome1 53 行；Outcome2 53 文件夹"}
+{"ts": "2026-10-14T16:32:13", "step": "08", "action": "自检", "result": "Outcome2 文件夹=53，无子目录，无材料清单.txt，空文件夹=49-HMXCFZA260011；Outcome1 13列×53行，三列(6/7/8)无空白"}
+{"ts": "2026-10-14T16:32:13", "step": "09", "action": "Toshiba 回写", "result": "Outcome1-p1-v2.8d-20261014_1558.xlsx + Outcome2-p1-v2.8d-20261014_1558/ + 处理报告；md5 读回一致"}
+{"ts": "2026-10-14T16:32:13", "step": "10", "action": "zip 打包(Python zipfile)", "result": "63,325,542 字节；237 条目(236 文件 + 1 空目录)；非ASCII 106 条，缺 UTF-8 标志 0"}
+{"ts": "2026-10-14T16:32:13", "step": "11", "action": "看板直链实测", "result": "Outcome1 http=200 10283B；Outcome2.zip http=200 63325542B；均与本地字节一致"}
