@@ -1,0 +1,25 @@
+{"ts":"2026-10-15T11:29:17+07:00","step":"01","action":"setup","result":"创建 S3 目录与 evidence/；开始"}
+{"ts":"2026-10-15T11:32:25+07:00","step":"02","action":"env-check","result":"flask/waitress 缺失（禁止装包）→ 改用 Python 标准库 http.server；python3.14.5；yaml/openpyxl 可用"}
+{"ts":"2026-10-15T11:32:25+07:00","step":"03","action":"write-code","result":"portable/app/{server.py,jobs.py,index.html} + workflows/payprep/manual_review.py + templates/ + start/stop(Mac/Win)"}
+{"ts":"2026-10-15T11:35:31+07:00","step":"04","action":"bugfix","result":"首次 Web 端到端 Payment 失败：payment_recon_finalize 缺 summary_text 模块（S2 只复制了 8 个 payprep 脚本，漏 summary_text.py）。已从 scripts/ 1:1 复制到 portable/workflows/payprep/（md5 全等）；scripts/ 未改"}
+{"ts":"2026-10-15T11:42:35+07:00","step":"05","action":"root-cause","result":"Payment 对拍差异根因：portable 版 gen_payment_recon_v2 的 MVP=WS/expense_mvp 在便携根下不存在（S2 未覆盖），导致 ocr_engine 不可用（'No module named ocr_engine'）→ 读值/品名/分类全变。修复：把 expense_mvp 的最小三模块（ocr_engine/preprocess/classifier，无硬编码路径）1:1 复制进 portable/expense_mvp/，不改任何代码"}
+{"ts":"2026-10-15T11:46:14+07:00","step":"06","action":"payment-verify","result":"Payment 经 Web 端到端 PASS：三份交付件逐单元格差异 0（送银行 70×22 / 台账 69×15+27×10 / 待人工核 27×12+10×6）；H合计 12,949,026,506、发票行 68、groups 51；recon.txt md5 全等；recon.json 仅 attach 路径字段不同（job 隔离所致）"}
+{"ts":"2026-10-15T11:46:20+07:00","step":"07","action":"repo-check","result":"修复后重跑 Web Payment（job 20261015_114428_payment）：3 份交付件逐单元格差异 0、待人工核 26 条与基线一致；确认根因=OCR 引擎路径"}
+{"ts":"2026-10-15T11:46:40+07:00","step":"08","action":"code-read","result":"核对 portable vs scripts 的 payprep 各脚本 md5：ok=gen_payment_recon_v2/payment_recon_finalize/recon_ledger/misa_import_gen/summary_text；diff=payprep/vn_invoice_parse/fill_bank_receipt/fill_payment_paid（差异全部是 S2 的 tesseract 路径+OCR 语言配置化，判定逻辑无改动）"}
+{"ts":"2026-10-15T11:47:00+07:00","step":"09","action":"loan-run","result":"首次经 Web 跑进出口材料（job 20261015_114617_loan，override=config.regression-2025_12.yaml）：done 66.6s；Outcome1 21×13、Outcome2 20 目录/70 文件"}
+{"ts":"2026-10-15T11:48:10+07:00","step":"10","action":"loan-verify","result":"Outcome1 逐单元格差异 0；Outcome2 磁盘 20 目录/70 文件；处理报告仅 7 行元信息差异（时间戳/路径/[CFG]）"}
+{"ts":"2026-10-15T11:48:40+07:00","step":"11","action":"bugfix","result":"产物清单竞态修复：worker 先收产物清单再翻 status（原来先翻 done → 前端可能读到空清单）"}
+{"ts":"2026-10-15T11:48:55+07:00","step":"12","action":"bug-defect","result":"下载 Outcome2.zip 首测 404：终态任务用了过期的内存/job.json 产物清单 → 改为终态任务一律以磁盘扫描为准（/api/job 与 /api/download）"}
+{"ts":"2026-10-15T11:49:20+07:00","step":"13","action":"bugfix","result":"Outcome2.zip 丢空目录（20→18）：_zip_dir 只写文件；补写空目录条目（10-HMXCAM250001 / 19-HMFZR250008）"}
+{"ts":"2026-10-15T11:49:25+07:00","step":"14","action":"bugfix","result":"产物清单重复列出目录 zip：扫描时把刚生成的 <dir>.zip 当孤儿文件；改为先算本层待打包目录并跳过同名 zip"}
+{"ts":"2026-10-15T11:50:20+07:00","step":"15","action":"loan-run2","result":"最终 Web 跑 Loan（job 20261015_114947_loan）：done；产物清单干净=Outcome1 xlsx / Outcome2.zip / 处理报告"}
+{"ts":"2026-10-15T11:50:40+07:00","step":"16","action":"loan-download-verify","result":"经 HTTP 下载 Outcome2.zip：20 目录/70 文件，与基线逐文件 md5 全等 70/70，空目录保留；Outcome1 差异 0"}
+{"ts":"2026-10-15T11:51:10+07:00","step":"17","action":"redline-check","result":"scripts/ 45 个 py 汇总 md5 ab2921d2…（S3 前后一致）；md2docx.py 未改；Toshiba 顶层最新=10-14；work/ 今日新增 0；仅 127.0.0.1:8000 监听；portable/app 无 Mac 硬编码、无 POSIX-only"}
+{"ts":"2026-10-15T11:51:20+07:00","step":"18","action":"external-link-scan","result":"index.html（HTTP 实取 14323 B）：http(s):// 0 处、协议相对 // 0 处、script src/link href/@import/url( 0 处；唯一 href 为相对 /api/download"}
+{"ts":"2026-10-15T11:51:35+07:00","step":"19","action":"stop-server","result":"停服：kill pid=56657 → lsof 8000 空、ps 无 server.py 常驻；无遗留进程"}
+{"ts":"2026-10-15T11:51:45+07:00","step":"20","action":"start-stop-smoke","result":"start.command / stop.command 冒烟通过：双击脚本起服务→GET / 200→stop 停止；start.bat/stop.bat 转 CRLF+chcp 65001（Mac 上无法实测 bat，已在文档标注）"}
+{"ts":"2026-10-15T11:52:30+07:00","step":"21","action":"config-isolation-verify","result":"页面 ⓪ 保存数据路径：非法路径被拒、合法路径写回 config.yaml 定点一行、还原后与原文件 diff 为空（逐字节一致）"}
+{"ts":"2026-10-15T11:53:20+07:00","step":"22","action":"deliverable","result":"产出 deliverables/HUATEX本地部署-S3-Web原型说明-v1-20261015.md + .docx（scripts/md2docx.py 生成，79 段/9 表）"}
+{"ts":"2026-10-15T11:54:00+07:00","step":"23","action":"evidence","result":"证据落盘 evidence/：web_drive.py(HTTP 驱动) / payment_diff3.txt / loan_verify.txt / redlines.txt / index_external_link_scan.txt / api_jobs_history.txt / server_startup.log / start_stop_smoke.txt / Outcome2_zip_md5.txt"}
+{"ts":"2026-10-15T11:53:57+07:00","step":"24","action":"redline-final","result":"最终复核：scripts/ md5 前后一致；md2docx 未改；work/ 今日新增 0；Toshiba 顶层最新=10-14；8000 端口 0 监听；config.yaml 与 S3 前备份逐字节一致；config.regression-2025_12.yaml 未改（md5 b4ca9475…）"}
+{"ts":"2026-10-15T11:53:57+07:00","step":"25","action":"cleanup","result":"清理 app/__pycache__ 与 runs/_uploads（上传暂存；每个 job 的 in/ 已留输入副本）；留痕 jobs 9 个（含 1 失败）保留"}

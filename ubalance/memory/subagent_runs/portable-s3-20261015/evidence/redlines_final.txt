@@ -1,0 +1,54 @@
+### 最终红线复核（2026-10-15T11:53:51+07:00）
+1) scripts/ 汇总 md5: ab2921d264c04bc1cddfc5b150d52f40  (基线 ab2921d264c04bc1cddfc5b150d52f40)
+2) md2docx.py md5: ce75c32f7922509c54737e1aa7e97f6f  (基线 ce75c32f7922509c54737e1aa7e97f6f)
+3) work/ 今日新增:        0
+4) Toshiba 顶层最新: Outcome1-v2.8d-ALL262-20261014.xlsx
+5) 8000 端口: 0 个进程监听
+6) config.yaml 与 S3 前备份 diff:
+   ✅ 逐字节一致
+7) config.regression-2025_12.yaml 未被改动: b4ca9475895fc85a6f4e80699c4bd268
+8) 交付物:
+-rw-------  1 zhaoyuzhao  staff  28734 Oct 15 11:52 deliverables/HUATEX本地部署-S3-Web原型说明-v1-20261015.docx
+-rw-------  1 zhaoyuzhao  staff  17182 Oct 15 11:52 deliverables/HUATEX本地部署-S3-Web原型说明-v1-20261015.md
+9) portable/app:
+portable/app:
+total 112
+drwx------   7 zhaoyuzhao  staff    224 Oct 15 11:32 .
+drwx------  18 zhaoyuzhao  staff    576 Oct 15 11:42 ..
+-rw-------   1 zhaoyuzhao  staff   2057 Oct 15 11:52 README.md
+drwx------   4 zhaoyuzhao  staff    128 Oct 15 11:49 __pycache__
+-rw-------   1 zhaoyuzhao  staff  14323 Oct 15 11:31 index.html
+-rw-------   1 zhaoyuzhao  staff  20133 Oct 15 11:49 jobs.py
+-rw-------   1 zhaoyuzhao  staff  13482 Oct 15 11:48 server.py
+
+portable/expense_mvp:
+total 144
+drwx------   5 zhaoyuzhao  staff    160 Oct 15 11:42 .
+drwx------  18 zhaoyuzhao  staff    576 Oct 15 11:42 ..
+-rw-------   1 zhaoyuzhao  staff  48364 Oct 15 11:42 classifier.py
+-rw-------   1 zhaoyuzhao  staff  13256 Oct 15 11:42 ocr_engine.py
+-rw-------   1 zhaoyuzhao  staff   4576 Oct 15 11:42 preprocess.py
+
+portable/templates:
+total 32
+drwx------   3 zhaoyuzhao  staff     96 Oct 15 11:32 .
+drwx------  18 zhaoyuzhao  staff    576 Oct 15 11:42 ..
+-rw-------   1 zhaoyuzhao  staff  12325 Oct 15 11:32 Payment核销-模板.xlsx
+
+portable/tools:
+total 32
+drwx------   4 zhaoyuzhao  staff    128 Oct 15 11:40 .
+drwx------  18 zhaoyuzhao  staff    576 Oct 15 11:42 ..
+-rw-------   1 zhaoyuzhao  staff   2583 Oct 15 11:40 compare_xlsx.py
+-rw-------   1 zhaoyuzhao  staff  10720 Oct 15 10:38 regress_compare.py
+10) runs 目录（留痕）:
+20261015_1044
+20261015_1100
+20261015_113418_payment
+20261015_113538_payment
+20261015_113841_payment
+20261015_114238_payment
+20261015_114428_payment
+20261015_114617_loan
+20261015_114947_loan
+_uploads

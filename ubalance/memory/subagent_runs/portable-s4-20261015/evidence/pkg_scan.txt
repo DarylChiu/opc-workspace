@@ -1,0 +1,8 @@
+包内文件数 = 45
+扩展名统计 = {'.md': 6, '.py': 30, '.yaml': 1, '.txt': 3, '.bat': 3, '.html': 1, '.xlsx': 1}
+客户数据类扩展名命中 = 无 ✅
+runs 留痕命中 = ['HUATEX-Tools/runs/说明.txt']
+回归配置命中 = 无 ✅
+包内表格文件（应仅模板 1 个）= ['HUATEX-Tools/templates/Payment核销-模板.xlsx']
+包内 md 文档 = ['HUATEX-Tools/README-先读我.md', 'HUATEX-Tools/README.md', 'HUATEX-Tools/安装清单-Windows.md', 'HUATEX-Tools/手册-徒弟操作.md', 'HUATEX-Tools/自查表-常见报错.md', 'HUATEX-Tools/app/README.md']
+包内 bat = ['HUATEX-Tools/selftest.bat', 'HUATEX-Tools/start.bat', 'HUATEX-Tools/stop.bat']

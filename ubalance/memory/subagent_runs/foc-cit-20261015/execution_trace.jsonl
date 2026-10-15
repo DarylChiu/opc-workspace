@@ -1,0 +1,14 @@
+{"ts":"2026-10-15T04:34:28Z","step":"1","action":"setup","result":"创建工作目录 memory/subagent_runs/foc-cit-20261015；读取任务底稿 FOC批注9条草稿v1 + active.md；确认 md2docx.py/pandoc 可用"}
+{"ts":"2026-10-15T04:35:50Z","step":"2","action":"websearch/fetch","result":"检索3个悬点第1轮：①Luật 67/2025/QH15 Điều 8 收入定义(luatvietnam) ②NĐ 320/2025 Điều 9/10(非扣除项) ③NĐ 181/2025 Điều 6(VAT计税价)"}
+{"ts":"2026-10-15T04:35:50Z","step":"3","action":"关键发现","result":"NĐ 320/2025 Điều 10 khoản 12：赠品无偿销项VAT【不在】不可扣除之列→可列费用（与旧 TT 96/2015 口径相反）"}
+{"ts":"2026-10-15T04:37:53Z","step":"4","action":"websearch/fetch","result":"悬点定案检索：NĐ 320 Điều 10 khoản 12 原文（thuvienphapluat 转载）确认赠品销项VAT不在不可扣除之列；TT 20/2026 全文（luatnguyen）确认无15%广告限额；检索处罚令"}
+{"ts":"2026-10-15T04:37:53Z","step":"5","action":"定案","result":"①CIT 无赠品视同销售收入规定（Luật 67/2025 Đ8 + 2026多源）②NĐ 320 未恢复15%限额 ③销项VAT条号=NĐ 320/2025 Đ10.12；处罚=ND 125/2020 经 ND 310/2025 修订；滞纳=Luật QLT 108/2025/QH15"}
+{"ts":"2026-10-15T04:39:51Z","step":"6","action":"websearch","result":"VAT 链：NĐ 181/2025 Điều 6.1 赠品按同类市场价；Điều 6.2 khuyến mại=0；Điều 23.7 进项可抵。NĐ 254/2026 Đ4.1 赠品必须开票"}
+{"ts":"2026-10-15T04:39:51Z","step":"7","action":"websearch","result":"征管/处罚：Luật QLT 108/2025/QH15(2026-07-01生效,取代38/2019)；处罚 NĐ 125/2020 经 NĐ 310/2025 修订(2026-01-16生效)"}
+{"ts":"2026-10-15T04:39:51Z","step":"8","action":"websearch","result":"CIT 申报表：03/TNDN (Phụ lục I TT 89/2026)；指标 B4=chi phí không được trừ；VAT 01/GTGT(TT 89/2026) 新增 [32a][32b][34a]"}
+{"ts":"2026-10-15T04:39:51Z","step":"9","action":"fetch","result":"NĐ 320 草案全文(xaydungchinhsach.chinhphu.vn)：Điều 3 khoản 2 điểm l/l.1 确认 quà biếu tặng 仅作受赠方 thu nhập khác"}
+{"ts":"2026-10-15T04:39:51Z","step":"10","action":"fetch","result":"MỌF Hỏi đáp CSTC 143206 + CV 5519/TCT-DNL：biếu tặng 必计 VAT 销项但『không hạch toán doanh thu TNDN』"}
+{"ts":"2026-10-15T04:39:51Z","step":"11","action":"docx","result":"md2docx.py 生成主文档 + 回填文档 .docx（主文档 130 段/11 表；回填 19 段/2 表）"}
+{"ts":"2026-10-15T04:39:51Z","step":"12","action":"输出","result":"deliverables/FOC-632与64183售价入账-CIT影响分析-v1-20261015.{md,docx}；deliverables/FOC批注9条-③⑦结论回填-v1-20261015.{md,docx}"}
+{"ts":"2026-10-15T04:39:51Z","step":"13","action":"偏差","result":"NĐ 320 Điều 8 逐字原文未取得（来源PDF为图片型,pdftotext 0 行）；CV720 PDF 亦为图片型。已在文中标 ❓"}
+{"ts":"2026-10-15T04:39:51Z","step":"14","action":"收尾","result":"写 summary.md；scripts/ 零改动；未写 Toshiba；产出仅落 deliverables/ + memory/subagent_runs/foc-cit-20261015/"}

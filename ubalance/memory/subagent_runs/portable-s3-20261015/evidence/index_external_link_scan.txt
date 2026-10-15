@@ -1,0 +1,10 @@
+### index 外链扫描（served over HTTP,    14323 bytes）
+--- http(s):// 命中 ---
+  ✅ 0 处
+--- 协议相对 // 命中 ---
+  ✅ 0 处
+--- <script src= / <link href= / @import / url( ---
+  ✅ 0 处
+--- 全部 href/src 取值 ---
+href="'+url+'"
+href="/api/download?id='+encodeURIComponent(j.id)+'&name='+encodeURIComponent(a.name)+'"

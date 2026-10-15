@@ -1,0 +1,18 @@
+base sheets = ['Outcome1']
+new  sheets = ['Outcome1']
+  [Outcome1] base 21×13 | new 21×13 | 尺寸一致
+
+差异总数 = 0
+### 处理报告 diff ###
+1,2c1,2
+< 进出口材料自动化处理 v2.8d · 批次 2025_12 · 2026-10-14 15:28
+< L1: /Users/zhaoyuzhao/.openclaw/workspace-balance/work/loan-materials-2025-12/in/L1-成品采购入库补单测试20条.xlsx（20 行）
+---
+> 进出口材料自动化处理 v2.8d · 批次 2025_12 · 2026-10-15 11:47
+> L1: /Users/zhaoyuzhao/.openclaw/workspace-balance/portable/runs/20261015_114617_loan/in/L1-成品采购入库补单测试20条.xlsx（20 行）
+5a6
+> [CFG] source_root=/Volumes/TOSHIBA EXT/HUATEX进出口材料 | rm_db=/Volumes/TOSHIBA EXT/HUATEX进出口材料/RM-Database | runs_dir=/Users/zhaoyuzhao/.openclaw/workspace-balance/portable/runs/20261015_114617_loan/out | tag=2025_12 | months=[('2025', 'THÁNG 12'), ('2026', 'THÁNG 01')] | dry_run=False
+33c34
+< Outcome1: /Users/zhaoyuzhao/.openclaw/workspace-balance/work/loan-materials-2025-12/out/v2.8d-2025_12-20261014_1526/Outcome1-v2.8d-2025_12-20261014_1526.xlsx
+---
+> Outcome1: /Users/zhaoyuzhao/.openclaw/workspace-balance/portable/runs/20261015_114617_loan/out/20261015_1146/Outcome1-v2.8d-2025_12-20261015_1146.xlsx

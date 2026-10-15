@@ -1,0 +1,5 @@
+base sheets = ['Outcome1']
+new  sheets = ['Outcome1']
+  [Outcome1] base 21×13 | new 21×13 | 尺寸一致
+
+差异总数 = 0

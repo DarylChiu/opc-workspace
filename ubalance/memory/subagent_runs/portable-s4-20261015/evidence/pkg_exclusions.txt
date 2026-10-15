@@ -1,0 +1,13 @@
+本次实际被排除的条目（10 条）：
+  - __pycache__/                                                __pycache__ 字节码缓存
+  - runs/                                                       运行留痕/输入输出/证据目录（含客户数据）：runs/
+  - start.command                                               Mac 专用启停脚本
+  - stop.command                                                Mac 专用启停脚本
+  - config.regression-2025_12.yaml                              匹配排除模式 config.regression-*.yaml
+  - tools/build_package.py                                      mac 垃圾/缓存文件：build_package.py
+  - app/__pycache__/                                            __pycache__ 字节码缓存
+  - workflows/loan_materials/__pycache__/                       __pycache__ 字节码缓存
+  - workflows/loan_materials/.pdftext_cache.json                mac 垃圾/缓存文件：.pdftext_cache.json
+  - workflows/payprep/__pycache__/                              __pycache__ 字节码缓存
+
+校验方法：

@@ -1,0 +1,12 @@
+{"ts":"2026-10-15T10:09:45Z","step":"1","action":"setup","result":"创建 work/khoa-dung-2025/ 与 memory/subagent_runs/khoa-dung-recon-wp/；确认 openpyxl 3.1.5 可用，soffice 不可用（不做公式引擎求值，仅结构校验）"}
+{"ts":"2026-10-15T10:10:10Z","step":"2","action":"读取既有底稿","result":"读 reports/KHOA_DUNG-案例分析总结-20260711.md + JGL-KHOA_DUNG-并购框架-v1.0-20260710.md；确认事实：税号3703366116、成立2025-08-18、章程初始50亿VND、ERC第2次变更(2026-03-09)降至2亿VND、一人有限责任公司、NGUYỄN THỊ TƯ 100%；LPMB档位 注册资本≤100亿→200万/年"}
+{"ts":"2026-10-15T10:11:02Z","step":"3","action":"设计底稿结构","result":"确定 9 sheet：0口径与说明/1登记资本日历/2银行流水分类/3重分类调整/4与已申报差异/5重建资产负债表/6重建损益表/7无凭证待核清单/8税额影响测算；数据区 3-302 行(300笔)；科目下拉 35 项 VAS 常用科目"}
+{"ts":"2026-10-15T10:11:48Z","step":"4","action":"write","result":"写入 build_recon_wp.py (生成器，约 33KB)：样式体系(TITLE/HDR/SEC/BOX)、merge、列宽、freeze panes、6 组 DataValidation、公式化 TOT 行与校验区"}
+{"ts":"2026-10-15T10:12:20Z","step":"5","action":"首轮执行","result":"报错 ValueError: not enough values to unpack (rows8 SEC 行 6 元素 vs 7) → 改为先取 kind 再按类型解包"}
+{"ts":"2026-10-15T10:12:44Z","step":"6","action":"生成产出","result":"首次成功生成 重建工作底稿-v1.xlsx；9 sheet 全部创建（公式 380 个 / 下拉 13 组）"}
+{"ts":"2026-10-15T10:13:05Z","step":"7","action":"回读校验-1","result":"verify_readback.py 首轮 FAIL：①row312 自检公式自引用(C312 引用 C312) ②sheet8 行号引用错位(应=C4+C5-C6-C7 而非 C6..C9) ③verify 脚本自身坐标偏移。定位后修正生成器与校验脚本"}
+{"ts":"2026-10-15T10:13:22Z","step":"8","action":"修复公式","result":"修正 sheet8 全部行号引用(应纳税所得=C4+C5-C6-C7 / CIT=C8*20% / 滞纳金=C8*0.0003*C12 / 罚款 D8*20%,E8*100% / 最坏=E8+E17+E13)；修正 sheet2 C312 自检公式为 ABS((C306-C307)-C308)<1"}
+{"ts":"2026-10-15T10:13:40Z","step":"9","action":"回读校验-2","result":"第二次回读 PASS：20 项关键校验全绿（银行勾稽 6 项、资产负债表平衡 C31/D31、损益表 4 层公式、税额测算 3 项、跨表引用 2 项）"}
+{"ts":"2026-10-15T10:13:52Z","step":"10","action":"合规校验","result":"确认 13 组 DataValidation 的 formula1 长度均 <255（最长 161 字符，符合 Excel 列表限制）；确认无真实金额编造——仅登记资本 50亿/2亿（既定事实）与现金缴税 1,660,000（Daryl 提供事实），其余金额一律 0/占位"}
+{"ts":"2026-10-15T10:14:10Z","step":"11","action":"write","result":"写入 说明-重建方法与判定规则.md（8 章）：逐笔分类规则+科目映射表、三大常见误判、4111 四要件判定流程、勾稽闭环法、1,660,000 现金缴税疑点(LPMB 100万 vs 166万不符)、风险红线 7 条、待补输入清单 9 项、未决口径 6 项"}
+{"ts":"2026-10-15T10:14:30Z","step":"12","action":"归档","result":"落盘 summary.md 与 execution_trace.jsonl；产出文件 4 个：重建工作底稿-v1.xlsx / 说明-重建方法与判定规则.md / build_recon_wp.py / verify_readback.py"}

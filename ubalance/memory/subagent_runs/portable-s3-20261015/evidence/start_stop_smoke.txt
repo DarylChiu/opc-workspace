@@ -1,0 +1,11 @@
+### start.command / stop.command 冒烟测试（2026-10-15T11:51:40+07:00）
+--- start.command 输出 ---
+使用解释器：python3
+[http] 127.0.0.1 "GET / HTTP/1.1" 200 -
+--- 端口 ---
+Python    56853 zhaoyuzhao    3u  IPv4 0x3c636c864e00aa19      0t0  TCP 127.0.0.1:8000 (LISTEN)
+--- HTTP 探活 ---
+GET / → 200
+--- stop.command ---
+已停止服务（pid=56853 port=8000）
+✅ 已停止

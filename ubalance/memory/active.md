@@ -1,6 +1,102 @@
 # 当前活跃任务
 
-> 最后更新: 2026-10-14 10:5x
+> 最后更新: 2026-10-15 10:0x
+
+## 🚧 2026-10-15 17:4x KHOA DUNG 重建 → **底稿已填流水 v1.1**（等 4 项补充材料）
+- **交付**：`work/khoa-dung-2025/重建工作底稿-v1.1-已填流水.xlsx`（+ v1 模板 + `说明-重建方法与判定规则.md`）
+- **结论**：2025-12-31 实收资本 = **200,000,000 VND**（2025-12-16 股东本人转入）；银行存款 = **200,009,863 VND** → 数据填空完成
+- **验收**：子代理 trace PASS；公式 380 / 下拉 13 完整；**手工复算三项全对**（流水勾稽闭环、资产负债表平衡、损益表↔4212 勾稽）
+- **⏳ 待 Daryl**：①明确区间流水 23/10–31/12 ②1,660,000 缴款单 ③手搓报表 + 03/TNDN ④出资决议/章程/ERC 各版本
+- **⚠️ 已提示**：出资逾期 30 天；减资登记逾期约 3 个月；不得以基准日后减资倒推
+
+## 🔴 2026-10-15 16:5x 【新任务·高优先】KHOA DUNG 重建 2025-12-31 财务报表（实收资本有误）
+- **Daryl 原话**：KHOA DUNG 并购已准备提交管委会变更投资执照/营业执照；**2025 年未建账套** → 2026-03 末所得税汇算清缴时按「营业执照+银行流水」**手搓了一份财务报表**；现发现**实收资本有误** → 要**重新查银行流水，重编截止 2025-12-31 的财务报表**
+- **FOC v2.3 已被 Daryl 挂起**（本轮不推进）
+- **我的记忆核对（reports/ 底稿）**：CÔNG TY TNHH XÂY DỰNG KHOA DUNG VIỆT NAM｜税号 3703366116｜一人有限公司｜**成立 2025-08-18**｜同奈 Long Thành｜股东 NGUYỄN THỊ TƯ｜章程初始注册资本 **50亿** → ERC 第2次变更 **2亿**（2026-03-09）｜2026-06-30：总资产 453亿/负债 320亿/NAV 123亿/未分配 121亿｜JGL 拟 100% FDI 收购，首选 A3（先分利再转股）
+- **⏳ 已请 Daryl 提供**：5 项（实收资本错法/应然数、2025-12-31 登记资本、手搓报表+03/TNDN 申报表、全账户流水 2025-08-18~今、出资凭证与股东转账记录）
+- **我预备的产出**：重建工作底稿（出资日历 / 流水逐笔分类 / 重分类分录 / 与已申报差异 / 重建资产负债表+损益表 / 无凭证待核清单）
+- **⚠️ 红线提示已给**：未建账套属会计违规 → 重建须**如实标注「经证据重建」**，**不得倒填伪造账簿**；重建后若影响税额 → 走**补充申报**+滞纳金；提交给管委会的材料须与重建后数据一致
+
+## 🔴 2026-10-15 14:1x FOC 改版 · 台账金额口径已用数据实证（进行中）
+- **Daryl 问**：台账里计入 64183/1551 的金额是 FOC **发票金额**吗？→ **不是，是成本（giá vốn）**
+- **证据**：359/379 行发票侧金额全 0；样本 00006665 成本 25,060,437 VND(=893.40 USD) ≠ 票面 840.20 USD；三科目单位成本 118~143k VND/kg 呈成本特征
+- **★ 自证**：v2.1 的 4,784,432,918 VND = 台账 gia_von 合计（三项相加完全吻合）→ 方案定量本就是成本口径
+- **⚠️ 两个新发现须处理**：①**台账缺发票票面金额** → 做票-账-税对平须**另接 hóa đơn 数据源** ②**20 行「有价无成本」异常（COGIA 组）** 待查
+- **下一步**：待 Daryl 定台账模板范围（三张 / 整套 Excel），再出 v2.3 + 台账模板
+
+## 🔧 2026-10-15 17:5x Huatex Tools · **S4.2 全离线一键包 v1.2 已发布（v1/v1.1 下架）**
+- **链接**：`https://phase-partial-renew-juan.trycloudflare.com/HUATEX-Tools-Windows-v1.2-20261015.zip`（145MB，sha256 `a61792c0…`，公网实测 200/67s）
+- **内置**：Tesseract 安装器 + Poppler + 4 语言包 + wheels×28 → 用户只需 **双击 `一键安装.bat` → 双击 `start.bat`**
+- **验收 PASS**：素材逐字节一致｜UTF-8 标志 9/9｜testzip OK｜**解压到 /tmp 跑 Payment 逐单元格 0 差异**｜0 客户数据｜旧包已下架｜临时目录已清
+- **⏳ 等 Daryl**：真机跑 `一键安装.bat` → `selftest.bat` → 回报；下载完通知我下架链接
+- **待真机确认 R1–R12**（静默安装/非管理员/Expand-Archive/探测命中/环境变量生效/离线 wheel/扫描件 OCR/中文名/杀毒/真机 Payment 对拍）
+
+## 🔧 2026-10-15 17:5x Huatex Tools · **Windows 实测 S4.1：selftest 4 项已出离线修复包**
+- **交付**：`deliverables/HUATEX-Tools-Windows-v1.1-20261015.zip`（+`wheels/` 15 个离线 wheel + 包内《修复指引-自检4项.md》）｜sha256 `a43142ee…`
+- **待他做**：①pip 离线装依赖（包内 wheels）②装 Tesseract（勾 vie/chi_sim/eng）③Poppler 解压进包 tools\poppler ④跑 loan 前填 ⓪ 数据文件夹；**装完依赖再跑一次 selftest**（届时才真正解析 YAML）
+- **已预告**：下载完我下架公网链接
+- **⏳ 等他二次自检结果**
+
+## ⏸️ 2026-10-15 14:0x Huatex 本地部署 —— **Daryl 明确「先挂起」**（等他 Windows 实测反馈）
+- 交付包公网链接已给：`https://phase-partial-renew-juan.trycloudflare.com/HUATEX-Tools-Windows-v1-20261015.zip`（sha256 `ba15d96e…ec277d`）
+- **⏳ 待办**：Daryl 说「等我实测完给你反馈」；他下载完要我**下架该公网链接**（已预告，「下载完说一声我就下架」）
+- **不要主动推进 S5**，等反馈
+
+## ✅ 2026-10-15 13:2x 本地部署 **S4 完成 + 验收 PASS → 交付包已发 Daryl（Windows 实测）**
+- **包**：`deliverables/HUATEX-Tools-Windows-v1-20261015.zip`｜sha256 `ba15d96e…ec277d`｜196 KB｜45 文件｜MANIFEST 齐
+- **独立验收 PASS**：trace 18 行 PASS｜zip sha256 逐位一致 + 打包幂等｜包内 0 客户数据（0 PDF/图片/客户表；仅白名单模板）｜**7 个非 ASCII 文件名全带 UTF-8 标志**｜`scripts/` md5 全等｜**我自己解压到 /tmp、脱离 dev 树、纯 HTTP 跑 Payment 52.2s → 3 个 xlsx 逐单元格 0 差异**；测后停服、临时目录已删
+- **子代理又抓 2 个 S3 漏掉的真缺陷**：①便携根启发式依赖目录名 `portable`（包内 runs/work 掉到包外）②**包内 OCR 静默降级**（S3「通过」实为候选路径落到开发树 → 自包含漏洞）
+- **包内文档**：README-先读我／手册-徒弟操作／自查表-常见报错（22 条）／安装清单-Windows／requirements.txt；`selftest.bat`（10 项自检）
+- **⚠️ Windows 待实测 13 项**清单已交 Daryl
+- **未决（S5）**：无鉴权｜runs/ 清理策略｜模板上传入口｜`run.months` 推断值｜scripts/↔portable/ 同步纪律
+
+## ✅ 2026-10-15 11:5x 本地部署 **S3 完成 + 验收 PASS**（子代理 portable-s3-20261015）
+- **产出**：`portable/app/{server.py,jobs.py,index.html}` + `start|stop.{command,bat}` + `expense_mvp/` + `deliverables/HUATEX本地部署-S3-Web原型说明-v1-20261015.{md,docx}`
+- **独立验收 PASS**：Payment 经**纯 HTTP** 端到端 3 个 Excel **逐单元格 0 差异** + 复算 H=12,949,026,506/68 行一致｜loan 同通道 21×13 差异 0、Outcome2 70 文件 md5 全等｜scripts/ 零改动｜Toshiba/work 零写入｜仅 127.0.0.1｜零外链｜服务已停
+- **⚠️ 记账**：trace 第 25 行（cleanup）时间戳 3 秒倒退 → verify_trace FAIL；内容完整，我判为可接受瑕疵、不令重跑
+- **关键技术决策**：本机无 flask/waitress 且禁止装包 → 改用标准库 `http.server`（Windows 断网更稳）
+- **子代理修 5 个真缺陷**，最关键是「**OCR 引擎在便携包内静默失效**」（旧绝对路径 → 退化解析，靠对拍抓到）
+- **未决**：无鉴权｜runs/ 无清理策略（470MB）｜无模板上传入口｜`run.months` 推断值｜scripts/ 与 portable/ 分叉待定同步纪律
+- **下一步 S4**：start.bat 打磨 + 徒弟手册 + Windows 安装清单 + Windows 实测（本机 macOS 无法实测）
+
+## 🔴 2026-10-15 11:4x FOC 9 问 · 财务部可核实项（Daryl 交办，进行中）
+- **重点**：按售价计入 **632 / 64183** 是否导致虚增成本/费用 → **CIT 申报错**
+- **我已给的结论（6 轮检索）**：两处按售价入账均=虚增（差额=毛利）→ CIT 少缴风险；**64183 含 33311 销项部分明确不可扣**（Luật 32/2013 Đ1.5.l + TT 96/2015 Đ4.2.37 → 税局口径已核原文）；VAT 侧赠品必须视同销售按同类市场价（TT 219/2013 Đ7.10 → Luật 48/2024 + NĐ 181/2025）
+- **2026 换法**：Luật 67/2025/QH15 + NĐ 320/2025 + TT 20/2026/TT-BTC → 旧 TT 78/2014+96/2015 条号不可照搬
+- **子代理**：`foc-632-64183-cit-20261015` 查 ①CIT 有无视同销售收入规定 ②NĐ 320/2025 是否恢复 15% 限额；产出分析文档 + ③⑦结论回填 + 财务部核实清单
+- **并行**：S3 子代理 `portable-s3-20261015`（本地 Web 骨架 + Payment 端到端对拍）
+
+## ✅ 2026-10-15 11:0x 本地部署 **S2.1 完成 + 验收 PASS**（子代理 portable-s2p1-20261015）
+- **Daryl 拍板已落**：`run.tag` 默认 → **`2026_10`**（连带 `run.months` 2026/THÁNG 10+11、`paths.batch_dir` loan-materials-2026-10、`paths.l1_file` 留空）；配置键名保持 4 个；`.gitignore` → **一条 `portable/`**；10-14 清单不下架
+- **新增**：`portable/config.regression-2025_12.yaml`；`deliverables/HUATEX本地部署-S2配置化落实表-v1.1-20261015.{md,docx}`
+- **独立验收 PASS**：trace 12 行 PASS｜`scripts/` 37 .py md5 全等｜Toshiba/work 零写入｜Outcome1 逐单元格 0 差异｜Outcome2 70 文件 md5 全等｜`l1_file` 留空明确报错且零写盘
+- **⚠️ 待 Daryl 确认 2 项**：①2026_10 跨月范围（推断 THÁNG 10+11）②`config.py DEFAULTS` 同步改 2026_10 口径
+- **下一步 S3**：Web 骨架最小原型（先跑通 Payment，再加 进出口材料）——待 Daryl 放行
+
+## ✅ 2026-10-15 10:5x 本地部署 **S2 完成 + 验收 PASS**（子代理 portable-s2-20261015，6m6s）
+- **产出**：`portable/`（config.yaml 唯一入口 + config.py + workflows/{loan_materials,payprep} + app 占位 + runs/）；`deliverables/HUATEX本地部署-S2配置化落实表-v1-20261015.{md,docx}`；`deliverables/HUATEX本地部署-配置化改造清单-v1.2-20261015.{md,docx}`（§6.1 同步机制作废 + §3 ⓪ 前端路径填写位）
+- **主代理独立验收 PASS**：trace 18 行 verify_trace PASS｜Mac `scripts/` 37 个 .py md5 与冻结快照**全等**｜Toshiba 零写入（最新 mtime 仍 10-14）｜Outcome1 21×13 **逐单元格 0 差异**｜Outcome2 70 文件**逐个 md5 全等**｜zip 90 条目/20 目录
+- **收尾整改**：删 `portable/**.pdftext_cache.json`（客户数据缓存）+ `.gitignore` 加 `portable/runs/` 等三条
+- **偏差**：`paths.output_root` 默认 = `workspace/work`（S1 写「=源根」）→ 有意安全偏离（回归不写回 Toshiba）
+- **遗留待拍 3 项（需 Daryl 一句话）**：① `run.tag` 默认 `2025_12`（=现值）是否认可 ② 新增 4 键命名（`paths.runs_dir`/`batch_dir`/`l1_file`/`source_root_hint`）③ `portable/` 是否入 .gitignore（我已排除 runs/ 与缓存；代码与 config 建议入库）
+- **下一步 = S3**：Web 骨架最小原型，先跑通 Payment 再加 进出口材料
+- **⚠️ 仍待拍**：看板根目录 10-14 的 `HUATEX本地部署-配置化改造清单-v1.1-20261014.{docx,md}` 是否下架
+
+## 🚧 2026-10-15 10:5x 本地部署 S2 已开工（子代理 portable-s2-20261015）
+- **Daryl 放行**：「本地部署可以下一步的」→ 执行 S2 = 建 `portable/` 副本仓库 + 12 项硬编码抽离到 config.yaml（默认值=现值）+ 2025_12 批次回归对拍
+- **验收口径**：Outcome1 逐单元格 0 差异；Outcome2 20 文件夹/70 文件逐个 md5；命中 18/20；处理报告结构一致
+- **红线**：Mac `scripts/` 零改动｜**不写回 Toshiba**｜不改判定逻辑
+- **📌 Daryl 拍板（10:5x）**：**RM-Database 不做同步机制**（同事自行从公司共享盘拷到本机）→ **前端留一个「本地文件夹地址」填写位**即可；S1 文档 §6.1 与 §7 作废，待出 v1.2
+- **⚠️ 仍待拍**：看板根目录 `HUATEX本地部署-配置化改造清单-v1.1-20261014.{docx,md}` 是否下架
+
+## ✅ 2026-10-15 10:0x 删除昨日「进出口材料自动化整理」全部公网链接（Daryl 指令，需求人已下载）
+- **执行**：看板静态根目录（`~/WorkBuddy/Claw/opc-dashboard/`）13 个 10-14 产出副本全部 `trash`
+  - 15:26（20 条）：`Outcome1-v2.8d-2025_12-20261014_1526.xlsx` / `HUATEX-Outcome2-v2.8d-2025_12-20261014_1526.zip`
+  - 16:3x（262 条）：`Outcome1-v2.8d-ALL262-20261014.xlsx` + `Outcome1-p1~p5-*.xlsx` + `Outcome2-p1~p5-*.zip`
+- **验证**：本地 8765 + 公网隧道抽检均 **404**；根目录列表已无 20261014 产出
+- **T0**：底稿完整保留（`work/loan-materials-2025-12/out/…1526/`、`work/loan-materials-2025-12-batch7/{p1..p5}/out/…`、`batch7/out/Outcome1-v2.8d-ALL262-20261014.xlsx`），仅下架公网副本
+- **⚠️ 待 Daryl**：看板根目录仍有 `HUATEX本地部署-配置化改造清单-v1.1-20261014.{docx,md}`（非本 workflow 产物）→ 是否一并下架
+- pre-op P2 PASS｜post-op 已跑
 
 ## 🔴 2026-10-14 10:4x 进出口材料自动化处理 · 首批20条（成品采购入库补单）→ ⛔ 源缺失，已上报请 Daryl 指路
 - **Daryl 指令**: 用「进出口材料自动化整理」workflow（= v2.8d），总量 ~300 条，第一批 20 条；输出 Outcome1/Outcome2 **公网链接**

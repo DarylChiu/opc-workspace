@@ -1,0 +1,52 @@
+{
+  "id": "20261015_174120_loan",
+  "workflow": "loan",
+  "workflow_label": "进出口材料自动化处理",
+  "params": {
+    "override": "/tmp/huatex-v12-test/config.regression-2025_12.yaml",
+    "tag": "2025_12",
+    "months": [
+      [
+        "2025",
+        "THÁNG 12"
+      ],
+      [
+        "2026",
+        "THÁNG 01"
+      ]
+    ],
+    "batch_dir": "loan-materials-2025-12",
+    "source_root": "/Volumes/TOSHIBA EXT/HUATEX进出口材料"
+  },
+  "inputs": [
+    "L1-成品采购入库补单测试20条.xlsx"
+  ],
+  "status": "done",
+  "created_at": "2026-10-15T17:41:20",
+  "started_at": "2026-10-15T17:41:20",
+  "finished_at": "2026-10-15T17:44:40",
+  "elapsed_sec": 199.5,
+  "exit_code": 0,
+  "error": null,
+  "artifacts": [
+    {
+      "name": "Outcome1-v2.8d-2025_12-20261015_1741.xlsx",
+      "path": "/private/tmp/huatex-v12-test/HUATEX-Tools/runs/20261015_174120_loan/out/20261015_1741/Outcome1-v2.8d-2025_12-20261015_1741.xlsx",
+      "size": 7498,
+      "kind": "file"
+    },
+    {
+      "name": "Outcome2.zip",
+      "path": "/private/tmp/huatex-v12-test/HUATEX-Tools/runs/20261015_174120_loan/out/20261015_1741/Outcome2.zip",
+      "size": 19186175,
+      "kind": "dir-zip"
+    },
+    {
+      "name": "处理报告-v2.8d-2025_12-20261015_1741.txt",
+      "path": "/private/tmp/huatex-v12-test/HUATEX-Tools/runs/20261015_174120_loan/out/20261015_1741/处理报告-v2.8d-2025_12-20261015_1741.txt",
+      "size": 26750,
+      "kind": "file"
+    }
+  ],
+  "job_dir": "/private/tmp/huatex-v12-test/HUATEX-Tools/runs/20261015_174120_loan"
+}

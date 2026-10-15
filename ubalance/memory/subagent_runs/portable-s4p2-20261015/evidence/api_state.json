@@ -1,0 +1,16 @@
+{
+  "source_root": "",
+  "source_root_hint": "请填写本机资料文件夹（含 RM-Database 的那一层），例如 D:/HUATEX（用正斜杠）",
+  "server_port": 8000,
+  "bind": "127.0.0.1",
+  "delivery_mode": "local",
+  "timezone": "Asia/Saigon",
+  "run_tag": "2026_10",
+  "workflows": {
+    "payment": "Payment Request（付款核销）",
+    "loan": "进出口材料自动化处理"
+  },
+  "runs_dir": "/private/tmp/huatex-v12-test/HUATEX-Tools/runs",
+  "python": "3.14.5",
+  "deps": "python-stdlib-only (flask/waitress 未使用)"
+}

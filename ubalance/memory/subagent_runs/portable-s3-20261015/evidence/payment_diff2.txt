@@ -1,0 +1,175 @@
+################ Payment request to Bank-20261013.xlsx
+base sheets = ['Sheet1', 'Sheet2', 'Sheet3']
+new  sheets = ['Sheet1', 'Sheet2', 'Sheet3']
+  [Sheet1] base 70×22 | new 70×22 | 尺寸一致
+  [Sheet2] base 1×1 | new 1×1 | 尺寸一致
+  [Sheet3] base 1×1 | new 1×1 | 尺寸一致
+
+差异总数 = 93
+  ✗ Sheet1!R3C16: base='服务费' new='其他（待指定）'
+  ✗ Sheet1!R4C16: base='服务费' new='其他（待指定）'
+  ✗ Sheet1!R5C16: base='能源费' new='其他（待指定）'
+  ✗ Sheet1!R6C16: base='能源费' new='其他（待指定）'
+  ✗ Sheet1!R7C7: base=None new=datetime.datetime(2026, 4, 16, 0, 0)
+  ✗ Sheet1!R7C15: base='CONG TY CO PHAN CONG NGHIEP PINNACLE（VIET NAM）' new='CÔNG TY CỔ PHẦN CÔNG NGHIỆP PINNACLE (VIỆT NAM)'
+  ✗ Sheet1!R7C22: base='Thiếu hóa đơn (缺发票)' new='Thiếu số hóa đơn (需人工补) | 发票 OCR 金额不准，按请款明细金额对齐 (Số tiền hóa đơn OCR chưa chính xác - theo bảng kê giải ngân)'
+  ✗ Sheet1!R8C16: base='服务费' new='其他（待指定）'
+  ✗ Sheet1!R9C16: base='服务费' new='其他（待指定）'
+  ✗ Sheet1!R9C22: base='số hóa đơn cần kiểm tra (không đọc được từ hóa đơn)' new='số hóa đơn cần kiểm tra (không đọc được từ hóa đơn) | 发票 OCR 金额不准，按请款明细金额对齐 (Số tiền hóa đơn OCR chưa chính xác - theo bảng kê giải ngân)'
+  ✗ Sheet1!R10C16: base='服务费' new='其他（待指定）'
+  ✗ Sheet1!R11C7: base=None new=datetime.datetime(2026, 5, 13, 0, 0)
+  ✗ Sheet1!R11C15: base='CONG TY CO PHAN CONG NGHIEP PINNACLE（VIET NAM）' new='CÔNG TY CỔ PHẦN CÔNG NGHIỆP PINNACLE (VIỆT NAM)'
+  ✗ Sheet1!R11C22: base='Thiếu hóa đơn (缺发票)' new='Thiếu số hóa đơn (需人工补) | 发票 OCR 金额不准，按请款明细金额对齐 (Số tiền hóa đơn OCR chưa chính xác - theo bảng kê giải ngân)'
+  ✗ Sheet1!R12C16: base='能源费' new='其他（待指定）'
+  ✗ Sheet1!R13C16: base='服务费' new='其他（待指定）'
+  ✗ Sheet1!R14C16: base='能源费' new='其他（待指定）'
+  ✗ Sheet1!R15C16: base='能源费' new='其他（待指定）'
+  ✗ Sheet1!R16C16: base='能源费' new='其他（待指定）'
+  ✗ Sheet1!R17C16: base='服务费' new='其他（待指定）'
+  ✗ Sheet1!R17C22: base='số hóa đơn cần kiểm tra (không đọc được từ hóa đơn)' new='số hóa đơn cần kiểm tra (không đọc được từ hóa đơn) | 发票 OCR 金额不准，按请款明细金额对齐 (Số tiền hóa đơn OCR chưa chính xác - theo bảng kê giải ngân)'
+  ✗ Sheet1!R18C16: base='服务费' new='其他（待指定）'
+  ✗ Sheet1!R18C22: base='số hóa đơn cần kiểm tra (không đọc được từ hóa đơn)' new='số hóa đơn cần kiểm tra (không đọc được từ hóa đơn) | 发票 OCR 金额不准，按请款明细金额对齐 (Số tiền hóa đơn OCR chưa chính xác - theo bảng kê giải ngân)'
+  ✗ Sheet1!R19C16: base='能源费' new='其他（待指定）'
+  ✗ Sheet1!R20C16: base='能源费' new='其他（待指定）'
+  ✗ Sheet1!R21C16: base='能源费' new='其他（待指定）'
+  ✗ Sheet1!R22C7: base=None new=datetime.datetime(2026, 4, 17, 0, 0)
+  ✗ Sheet1!R22C15: base='CONG TY CO PHAN CONG NGHIEP PINNACLE（VIET NAM）' new='CÔNG TY CỔ PHẦN CÔNG NGHIỆP PINNACLE (VIỆT NAM)'
+  ✗ Sheet1!R22C22: base='Thiếu hóa đơn (缺发票)' new='Thiếu số hóa đơn (需人工补) | 发票 OCR 金额不准，按请款明细金额对齐 (Số tiền hóa đơn OCR chưa chính xác - theo bảng kê giải ngân)'
+  ✗ Sheet1!R23C16: base='能源费' new='其他（待指定）'
+  ✗ Sheet1!R24C16: base='服务费' new='其他（待指定）'
+  ✗ Sheet1!R25C7: base=None new=datetime.datetime(2026, 7, 24, 0, 0)
+  ✗ Sheet1!R25C15: base='CONG TY CO PHAN CONG NGHIEP PINNACLE（VIET NAM）' new='CÔNG TY CỔ PHẦN CÔNG NGHIỆP PINNACLE (VIỆT NAM)'
+  ✗ Sheet1!R25C21: base=None new='3603695597'
+  ✗ Sheet1!R25C22: base='Thiếu hóa đơn (缺发票)' new='Thiếu số hóa đơn (需人工补) | 发票 OCR 金额不准，按请款明细金额对齐 (Số tiền hóa đơn OCR chưa chính xác - theo bảng kê giải ngân)'
+  ✗ Sheet1!R26C16: base='能源费' new='其他（待指定）'
+  ✗ Sheet1!R27C16: base='能源费' new='其他（待指定）'
+  ✗ Sheet1!R28C16: base='能源费' new='其他（待指定）'
+  ✗ Sheet1!R29C7: base=None new=datetime.datetime(2026, 4, 21, 0, 0)
+  ✗ Sheet1!R29C15: base='CONG TY CO PHAN CONG NGHIEP PINNACLE（VIET NAM）' new='CÔNG TY CỔ PHẦN CÔNG NGHIỆP PINNACLE (VIỆT NAM)'
+  ✗ Sheet1!R29C22: base='Thiếu hóa đơn (缺发票)' new='Thiếu số hóa đơn (需人工补) | 发票 OCR 金额不准，按请款明细金额对齐 (Số tiền hóa đơn OCR chưa chính xác - theo bảng kê giải ngân)'
+  ✗ Sheet1!R30C7: base=None new=datetime.datetime(2026, 5, 14, 0, 0)
+  ✗ Sheet1!R30C15: base='CONG TY CO PHAN CONG NGHIEP PINNACLE（VIET NAM）' new='CÔNG TY CỔ PHẦN CÔNG NGHIỆP PINNACLE (VIỆT NAM)'
+  ✗ Sheet1!R30C22: base='Thiếu hóa đơn (缺发票)' new='Thiếu số hóa đơn (需人工补) | 发票 OCR 金额不准，按请款明细金额对齐 (Số tiền hóa đơn OCR chưa chính xác - theo bảng kê giải ngân)'
+  ✗ Sheet1!R31C16: base='服务费' new='其他（待指定）'
+  ✗ Sheet1!R31C22: base='số hóa đơn cần kiểm tra (không đọc được từ hóa đơn)' new='số hóa đơn cần kiểm tra (không đọc được từ hóa đơn) | 发票 OCR 金额不准，按请款明细金额对齐 (Số tiền hóa đơn OCR chưa chính xác - theo bảng kê giải ngân)'
+  ✗ Sheet1!R32C7: base=None new=datetime.datetime(2026, 4, 20, 0, 0)
+  ✗ Sheet1!R32C15: base='CONG TY CO PHAN CONG NGHIEP PINNACLE（VIET NAM）' new='CÔNG TY CỔ PHẦN CÔNG NGHIỆP PINNACLE (VIỆT NAM)'
+  ✗ Sheet1!R32C22: base='Thiếu hóa đơn (缺发票)' new='Thiếu số hóa đơn (需人工补) | 发票 OCR 金额不准，按请款明细金额对齐 (Số tiền hóa đơn OCR chưa chính xác - theo bảng kê giải ngân)'
+  ✗ Sheet1!R33C16: base='服务费' new='其他（待指定）'
+  … 其余 43 条省略
+################ Payment recon ledger-20261013.xlsx
+base sheets = ['台账', '差异清单']
+new  sheets = ['台账', '差异清单']
+  [台账] base 69×15 | new 69×15 | 尺寸一致
+  [差异清单] base 27×10 | new 34×10 | ⚠ 尺寸不同
+
+差异总数 = 332
+  ✗ 台账!R6C4: base=None new='2026-04-16'
+  ✗ 台账!R6C6: base=0 new=9720000
+  ✗ 台账!R6C8: base='Thiếu hóa đơn (缺发票)' new='Thiếu số hóa đơn (需人工补)'
+  ✗ 台账!R6C9: base=None new='generic'
+  ✗ 台账!R6C10: base=None new='filename'
+  ✗ 台账!R6C11: base=None new='Y'
+  ✗ 台账!R6C14: base='CONG TY CO PHAN CONG NGHIEP PINNACLE（VIET NAM）' new='CÔNG TY CỔ PHẦN CÔNG NGHIỆP PINNACLE (VIỆT NAM)'
+  ✗ 台账!R6C15: base=None new='20260416571.pdf'
+  ✗ 台账!R8C3: base='1C26TYH' new=None
+  ✗ 台账!R8C9: base='engine' new='generic'
+  ✗ 台账!R10C4: base=None new='2026-05-13'
+  ✗ 台账!R10C6: base=0 new=36504000
+  ✗ 台账!R10C8: base='Thiếu hóa đơn (缺发票)' new='Thiếu số hóa đơn (需人工补)'
+  ✗ 台账!R10C9: base=None new='generic'
+  ✗ 台账!R10C10: base=None new='filename'
+  ✗ 台账!R10C11: base=None new='Y'
+  ✗ 台账!R10C14: base='CONG TY CO PHAN CONG NGHIEP PINNACLE（VIET NAM）' new='CÔNG TY CỔ PHẦN CÔNG NGHIỆP PINNACLE (VIỆT NAM)'
+  ✗ 台账!R10C15: base=None new='20260513734 (1).pdf'
+  ✗ 台账!R16C3: base='1C26TPN' new=None
+  ✗ 台账!R16C9: base='engine' new='generic'
+  ✗ 台账!R17C3: base='1C26TPN' new=None
+  ✗ 台账!R17C9: base='engine' new='generic'
+  ✗ 台账!R21C4: base=None new='2026-04-17'
+  ✗ 台账!R21C6: base=0 new=52920000
+  ✗ 台账!R21C8: base='Thiếu hóa đơn (缺发票)' new='Thiếu số hóa đơn (需人工补)'
+  ✗ 台账!R21C9: base=None new='generic'
+  ✗ 台账!R21C10: base=None new='filename'
+  ✗ 台账!R21C11: base=None new='Y'
+  ✗ 台账!R21C14: base='CONG TY CO PHAN CONG NGHIEP PINNACLE（VIET NAM）' new='CÔNG TY CỔ PHẦN CÔNG NGHIỆP PINNACLE (VIỆT NAM)'
+  ✗ 台账!R21C15: base=None new='20260417580.pdf'
+  ✗ 台账!R24C4: base=None new='2026-07-24'
+  ✗ 台账!R24C5: base=None new='3603695597'
+  ✗ 台账!R24C6: base=0 new=67824000
+  ✗ 台账!R24C8: base='Thiếu hóa đơn (缺发票)' new='Thiếu số hóa đơn (需人工补)'
+  ✗ 台账!R24C9: base=None new='generic'
+  ✗ 台账!R24C10: base=None new='filename'
+  ✗ 台账!R24C11: base=None new='Y'
+  ✗ 台账!R24C14: base='CONG TY CO PHAN CONG NGHIEP PINNACLE（VIET NAM）' new='CÔNG TY CỔ PHẦN CÔNG NGHIỆP PINNACLE (VIỆT NAM)'
+  ✗ 台账!R24C15: base=None new='202607241166.pdf'
+  ✗ 台账!R28C4: base=None new='2026-04-21'
+  ✗ 台账!R28C6: base=0 new=80438400
+  ✗ 台账!R28C8: base='Thiếu hóa đơn (缺发票)' new='Thiếu số hóa đơn (需人工补)'
+  ✗ 台账!R28C9: base=None new='generic'
+  ✗ 台账!R28C10: base=None new='filename'
+  ✗ 台账!R28C11: base=None new='Y'
+  ✗ 台账!R28C14: base='CONG TY CO PHAN CONG NGHIEP PINNACLE（VIET NAM）' new='CÔNG TY CỔ PHẦN CÔNG NGHIỆP PINNACLE (VIỆT NAM)'
+  ✗ 台账!R28C15: base=None new='20260421592.pdf'
+  ✗ 台账!R29C4: base=None new='2026-05-14'
+  ✗ 台账!R29C6: base=0 new=84780000
+  ✗ 台账!R29C8: base='Thiếu hóa đơn (缺发票)' new='Thiếu số hóa đơn (需人工补)'
+  … 其余 282 条省略
+################ Payment 待人工核清单-20261013.xlsx
+base sheets = ['待人工核清单', '口径核对(Q1-Q9)']
+new  sheets = ['待人工核清单', '口径核对(Q1-Q9)']
+  [待人工核清单] base 27×12 | new 44×12 | ⚠ 尺寸不同
+  [口径核对(Q1-Q9)] base 10×6 | new 10×6 | 尺寸一致
+
+差异总数 = 440
+  ✗ 待人工核清单!R2C3: base='14' new='4'
+  ✗ 待人工核清单!R2C4: base=14 new=4
+  ✗ 待人工核清单!R2C5: base='CGQK2606030123' new='CGQK2608170061'
+  ✗ 待人工核清单!R2C6: base='CONG TY TNHH VUONG HONG' new='CONG TY CO PHAN CONG NGHIEP PINNACLE（VIET NAM）'
+  ✗ 待人工核清单!R2C7: base=51246000 new=9720000
+  ✗ 待人工核清单!R2C8: base=48924000 new=39012265908
+  ✗ 待人工核清单!R2C9: base=-2322000 new=39002545908
+  ✗ 待人工核清单!R2C10: base=51246000 new=9720000
+  ✗ 待人工核清单!R3C3: base='35' new='6'
+  ✗ 待人工核清单!R3C4: base=35 new=6
+  ✗ 待人工核清单!R3C5: base='CGQK2607150089' new='CGQK2609070092'
+  ✗ 待人工核清单!R3C6: base='CONG TY CO PHAN CONG NGHIEP PINNACLE（VIET NAM）' new='CONG TY TNHH Y HUNG'
+  ✗ 待人工核清单!R3C7: base=153748800 new=15225000
+  ✗ 待人工核清单!R3C8: base=19685752 new=3603695597
+  ✗ 待人工核清单!R3C9: base=-134063048 new=3588470597
+  ✗ 待人工核清单!R3C10: base=153748800 new=15225000
+  ✗ 待人工核清单!R4C3: base='37' new='8'
+  ✗ 待人工核清单!R4C4: base=37 new=8
+  ✗ 待人工核清单!R4C5: base='CGQK2608060050' new='CGQK2608170049'
+  ✗ 待人工核清单!R4C6: base='CONG TY TNHH VUONG HONG' new='CONG TY CO PHAN CONG NGHIEP PINNACLE（VIET NAM）'
+  ✗ 待人工核清单!R4C7: base=171687300 new=36504000
+  ✗ 待人工核清单!R4C8: base=162615600 new=39012265908
+  ✗ 待人工核清单!R4C9: base=-9071700 new=38975761908
+  ✗ 待人工核清单!R4C10: base=171687300 new=36504000
+  ✗ 待人工核清单!R5C2: base='B. 缺发票卷(占位行)' new='A. 金额差异(OCR不准)'
+  ✗ 待人工核清单!R5C3: base='4' new='12'
+  ✗ 待人工核清单!R5C4: base=4 new=12
+  ✗ 待人工核清单!R5C5: base='CGQK2608170061' new='CGQK2608250195'
+  ✗ 待人工核清单!R5C7: base=9720000 new=50868000
+  ✗ 待人工核清单!R5C8: base=0 new=39012265908
+  ✗ 待人工核清单!R5C9: base=-9720000 new=38961397908
+  ✗ 待人工核清单!R5C10: base=9720000 new=50868000
+  ✗ 待人工核清单!R5C11: base='卷内无有效发票（仅合同/订单/通知等非发票文档，或无材料）' new='发票扫描/OCR 读值与请款明细不一致；v2 脚本已按明细金额改写 H（=Q4『改写』口径）'
+  ✗ 待人工核清单!R5C12: base='补齐发票后重跑；或按 Q6 占位行放行（备注 Thiếu hóa đơn）' new='按 Q4=A 口径：不得改写发票金额 → 需人工核对发票真实金额；若确认为明细额，放行'
+  ✗ 待人工核清单!R6C2: base='B. 缺发票卷(占位行)' new='A. 金额差异(OCR不准)'
+  ✗ 待人工核清单!R6C3: base='8' new='13'
+  ✗ 待人工核清单!R6C4: base=8 new=13
+  ✗ 待人工核清单!R6C5: base='CGQK2608170049' new='CGQK2609040033'
+  ✗ 待人工核清单!R6C7: base=36504000 new=50868000
+  ✗ 待人工核清单!R6C8: base=0 new=39012265908
+  ✗ 待人工核清单!R6C9: base=-36504000 new=38961397908
+  ✗ 待人工核清单!R6C10: base=36504000 new=50868000
+  ✗ 待人工核清单!R6C11: base='卷内无有效发票（仅合同/订单/通知等非发票文档，或无材料）' new='发票扫描/OCR 读值与请款明细不一致；v2 脚本已按明细金额改写 H（=Q4『改写』口径）'
+  ✗ 待人工核清单!R6C12: base='补齐发票后重跑；或按 Q6 占位行放行（备注 Thiếu hóa đơn）' new='按 Q4=A 口径：不得改写发票金额 → 需人工核对发票真实金额；若确认为明细额，放行'
+  ✗ 待人工核清单!R7C2: base='B. 缺发票卷(占位行)' new='A. 金额差异(OCR不准)'
+  ✗ 待人工核清单!R7C3: base='15' new='14'
+  ✗ 待人工核清单!R7C4: base=15 new=14
+  ✗ 待人工核清单!R7C5: base='CGQK2608150135' new='CGQK2606030123'
+  ✗ 待人工核清单!R7C6: base='CONG TY CO PHAN CONG NGHIEP PINNACLE（VIET NAM）' new='CONG TY TNHH VUONG HONG'
+  ✗ 待人工核清单!R7C7: base=52920000 new=51246000
+  … 其余 390 条省略

@@ -1,0 +1,50 @@
+Archive:  deliverables/HUATEX-Tools-Windows-v1-20261015.zip
+  Length      Date    Time    Name
+---------  ---------- -----   ----
+     4170  01-01-1980 00:00   HUATEX-Tools/README-?????????.md
+     4671  01-01-1980 00:00   HUATEX-Tools/README.md
+     7511  01-01-1980 00:00   HUATEX-Tools/config.py
+     5275  01-01-1980 00:00   HUATEX-Tools/config.yaml
+      349  01-01-1980 00:00   HUATEX-Tools/requirements.txt
+     1129  01-01-1980 00:00   HUATEX-Tools/selftest.bat
+     2196  01-01-1980 00:00   HUATEX-Tools/start.bat
+     1040  01-01-1980 00:00   HUATEX-Tools/stop.bat
+     6156  01-01-1980 00:00   HUATEX-Tools/????????????-Windows.md
+     7748  01-01-1980 00:00   HUATEX-Tools/??????-????????????.md
+     5904  01-01-1980 00:00   HUATEX-Tools/?????????-????????????.md
+     2057  01-01-1980 00:00   HUATEX-Tools/app/README.md
+    14323  01-01-1980 00:00   HUATEX-Tools/app/index.html
+    20133  01-01-1980 00:00   HUATEX-Tools/app/jobs.py
+    13482  01-01-1980 00:00   HUATEX-Tools/app/server.py
+    48364  01-01-1980 00:00   HUATEX-Tools/expense_mvp/classifier.py
+    13256  01-01-1980 00:00   HUATEX-Tools/expense_mvp/ocr_engine.py
+     4576  01-01-1980 00:00   HUATEX-Tools/expense_mvp/preprocess.py
+      549  01-01-1980 00:00   HUATEX-Tools/runs/??????.txt
+    12325  01-01-1980 00:00   HUATEX-Tools/templates/Payment??????-??????.xlsx
+     2583  01-01-1980 00:00   HUATEX-Tools/tools/compare_xlsx.py
+    20360  01-01-1980 00:00   HUATEX-Tools/tools/preflight.py
+    10720  01-01-1980 00:00   HUATEX-Tools/tools/regress_compare.py
+      374  01-01-1980 00:00   HUATEX-Tools/work/??????.txt
+        0  01-01-1980 00:00   HUATEX-Tools/workflows/__init__.py
+    48364  01-01-1980 00:00   HUATEX-Tools/workflows/expense_mvp/classifier.py
+    13256  01-01-1980 00:00   HUATEX-Tools/workflows/expense_mvp/ocr_engine.py
+     4576  01-01-1980 00:00   HUATEX-Tools/workflows/expense_mvp/preprocess.py
+        0  01-01-1980 00:00   HUATEX-Tools/workflows/loan_materials/__init__.py
+    16593  01-01-1980 00:00   HUATEX-Tools/workflows/loan_materials/doc_classify.py
+     8812  01-01-1980 00:00   HUATEX-Tools/workflows/loan_materials/doc_fields.py
+     8567  01-01-1980 00:00   HUATEX-Tools/workflows/loan_materials/loan_input.py
+    21773  01-01-1980 00:00   HUATEX-Tools/workflows/loan_materials/run_loan_2025_12_v28d.py
+     7829  01-01-1980 00:00   HUATEX-Tools/workflows/loan_materials/tokhai_extract.py
+        0  01-01-1980 00:00   HUATEX-Tools/workflows/payprep/__init__.py
+     8782  01-01-1980 00:00   HUATEX-Tools/workflows/payprep/fill_bank_receipt.py
+     9726  01-01-1980 00:00   HUATEX-Tools/workflows/payprep/fill_payment_paid.py
+    42472  01-01-1980 00:00   HUATEX-Tools/workflows/payprep/gen_payment_recon_v2.py
+    10555  01-01-1980 00:00   HUATEX-Tools/workflows/payprep/manual_review.py
+    13211  01-01-1980 00:00   HUATEX-Tools/workflows/payprep/misa_import_gen.py
+    10238  01-01-1980 00:00   HUATEX-Tools/workflows/payprep/payment_recon_finalize.py
+    19670  01-01-1980 00:00   HUATEX-Tools/workflows/payprep/payprep.py
+     4698  01-01-1980 00:00   HUATEX-Tools/workflows/payprep/recon_ledger.py
+     2526  01-01-1980 00:00   HUATEX-Tools/workflows/payprep/summary_text.py
+    36848  01-01-1980 00:00   HUATEX-Tools/workflows/payprep/vn_invoice_parse.py
+---------                     -------
+   497747                     45 files

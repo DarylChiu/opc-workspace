@@ -1,0 +1,25 @@
+### 1) scripts/ 零改动
+ab2921d264c04bc1cddfc5b150d52f40
+  (S3 前基线: ab2921d264c04bc1cddfc5b150d52f40)
+
+### 2) md2docx.py
+ce75c32f7922509c54737e1aa7e97f6f
+### 3) 端口监听（应为 127.0.0.1:8000）
+Python    56657 zhaoyuzhao    3u  IPv4 0x247bde964b219ec4      0t0  TCP 127.0.0.1:8000 (LISTEN)
+
+### 4) 硬编码扫描 portable/app + portable/workflows/payprep/manual_review.py
+  ✅ 无 Mac 专有硬编码
+
+### 5) POSIX-only 扫描（os.fork / signal / chmod / pwd / fcntl）
+  ✅ 无 POSIX-only 调用
+
+### 6) Toshiba 写检查（顶层最新 5 个文件）
+total 38144
+-rwx------  1 zhaoyuzhao  staff     27508 Oct 14 16:33 Outcome1-v2.8d-ALL262-20261014.xlsx
+-rwx------  1 zhaoyuzhao  staff     77976 Oct 14 16:27 处理报告-p1-v2.8d-20261014_1558.txt
+-rwx------  1 zhaoyuzhao  staff     10283 Oct 14 16:27 Outcome1-p1-v2.8d-20261014_1558.xlsx
+drwx------  1 zhaoyuzhao  staff      8192 Oct 14 16:27 Outcome2-p1-v2.8d-20261014_1558
+-rwx------  1 zhaoyuzhao  staff     10094 Oct 14 16:26 Outcome1-p4-v2.8d-20261014_1558.xlsx
+
+### 7) work/ 今日新增
+  计数:        0

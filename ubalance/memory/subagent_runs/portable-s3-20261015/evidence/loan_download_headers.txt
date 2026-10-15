@@ -1,0 +1,7 @@
+HTTP/1.1 200 OK
+Server: HUATEX-Local/1.0 Python/3.14.5
+Date: Thu, 15 Oct 2026 04:49:08 GMT
+Content-Type: application/octet-stream
+Content-Length: 19185961
+Content-Disposition: attachment; filename*=UTF-8''Outcome2.zip
+

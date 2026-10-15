@@ -1,0 +1,22 @@
+################ Payment request to Bank-20261013.xlsx
+base sheets = ['Sheet1', 'Sheet2', 'Sheet3']
+new  sheets = ['Sheet1', 'Sheet2', 'Sheet3']
+  [Sheet1] base 70×22 | new 70×22 | 尺寸一致
+  [Sheet2] base 1×1 | new 1×1 | 尺寸一致
+  [Sheet3] base 1×1 | new 1×1 | 尺寸一致
+
+差异总数 = 0
+################ Payment recon ledger-20261013.xlsx
+base sheets = ['台账', '差异清单']
+new  sheets = ['台账', '差异清单']
+  [台账] base 69×15 | new 69×15 | 尺寸一致
+  [差异清单] base 27×10 | new 27×10 | 尺寸一致
+
+差异总数 = 0
+################ Payment 待人工核清单-20261013.xlsx
+base sheets = ['待人工核清单', '口径核对(Q1-Q9)']
+new  sheets = ['待人工核清单', '口径核对(Q1-Q9)']
+  [待人工核清单] base 27×12 | new 27×12 | 尺寸一致
+  [口径核对(Q1-Q9)] base 10×6 | new 10×6 | 尺寸一致
+
+差异总数 = 0

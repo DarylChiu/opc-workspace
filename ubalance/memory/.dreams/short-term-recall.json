@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-14T03:43:56.693Z",
+  "updatedAt": "2026-10-15T09:58:52.147Z",
   "entries": {
     "memory:memory/2026-06-10.md:1:29": {
       "key": "memory:memory/2026-06-10.md:1:29",
@@ -7536,6 +7536,68 @@
         "cfb/biff",
         "2.0.2",
         "sheet2/3"
+      ]
+    },
+    "memory:memory/2026-10-14.md:1:18": {
+      "key": "memory:memory/2026-10-14.md:1:18",
+      "path": "memory/2026-10-14.md",
+      "startLine": 1,
+      "endLine": 18,
+      "source": "memory",
+      "snippet": "# 2026-10-14 ## 15:26 ✅ 进出口材料自动化处理 v2.8d · L1 首批 20 条交付（2025/THÁNG 12 批次） - Toshiba 重挂 + 目录改名 `HUATEX贷款材料`→`HUATEX进出口材料`；RM-Database 新增 2025/THÁNG 12 - 子代理 loan-materials-2025-12-batch1（17m10s）；trace 14 行 verify_trace PASS - 主代理独立抽检：Outcome1 20行×13列（518,500.10 USD）；Outcome2 20 文件夹（2空）/70 文件/0 子目录/0 材料清单.txt；zip 90 条目 UTF-8 ✅ - 命中 18/20；未命中 HMXCAM250001、HMFZR250008 → 无目录空文件夹 - 公网直链 200 实测（本地+隧道） - 成本：子代理 ≈$0.35，本批合计 ≈$0.36 - 偏差：中文日期解析 bug（已修+重跑）；HMFZR250002 base 目录我预核有误；2 处 ⚠️缺 ## 下午 Daryl 议题：离职交接 —— 把 Payment Request + 进出口材料 workflow 做成公司本地 server - 方案 A 一键脚本包 / B 本地 Web（推荐）/ C 内网多人版 / D 桌面 exe 打包 - 关键判断：两套 workflow 运行时不依赖 LLM，可做成离线、数据不出内网 - 已问 5 项澄清（徒弟技术水平/内网服务器/IT政策/人数/OS），待回 ## 16:3x ✅",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4089054077863693,
+      "maxScore": 0.4089054077863693,
+      "firstRecalledAt": "2026-10-15T03:03:58.679Z",
+      "lastRecalledAt": "2026-10-15T03:03:58.679Z",
+      "queryHashes": [
+        "9fa77b09f5df"
+      ],
+      "recallDays": [
+        "2026-10-15"
+      ],
+      "conceptTags": [
+        "v2.8d",
+        "2025/tháng",
+        "rm-database",
+        "loan-materials-2025-12-batch1",
+        "verify-trace",
+        "500.10",
+        "文件/0",
+        "子目录/0"
+      ]
+    },
+    "memory:memory/archive/2026-07-16.md:12:19": {
+      "key": "memory:memory/archive/2026-07-16.md:12:19",
+      "path": "memory/archive/2026-07-16.md",
+      "startLine": 12,
+      "endLine": 19,
+      "source": "memory",
+      "snippet": "- Daryl暂停PIT研究，要求websearch越南债转股时点认定的法律条文文号，他找原文回来再验证 - 核心结论(诚实标注): **越南现行法无任何条文直接规定债转股生效时点**——正是A&C(IRC日) vs ERC日争议存在的根源 - 给出的锚点文号: ①TT 12/2022/TT-NHNN Đ.34.2(b)(c)合法性+Đ.16-18中长期外债SBV变更登记前置 (已被TT 80/2025/TT-NHNN修订,合并版23/VBHN-NHNN-2026) ②Luật DN 59/2020/QH14 Đ.30/Đ.47/Đ.68.4(增资完成后10日内登记→登记是申报性非设权性) ③Luật Đầu tư 61/2020/QH14 Đ.41+NĐ 31/2021(IRC调整,A&C锚点) ④NĐ 168/2025/NĐ-CP(2025-07-01起替代01/2021企业登记) - 模型：deepseek/deepseek-v4-pro ## 12:0x · Đ.41投资法适用分析：IRC $15.8M cap vs ERC实缴$23.1M（Daryl发来Art.41英文原文） - Daryl场景: 2025-08-11 IRC变更(出资上限$15.8M) → 2025-12-29 ERC变更实收$23.1M(债转股款已到账), 问是否符合Đ.41 - 结论: 按此时序**不合规**。①Đ.41.2必然触发: vốn góp是IRC记载事项(Đ.40), 实缴超IRC上限$7.3M(+46.2%)须先调IRC——正确顺序=(chủ trương如适用)→IRC→ERC",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.352155527472496,
+      "maxScore": 0.352155527472496,
+      "firstRecalledAt": "2026-10-15T09:58:52.147Z",
+      "lastRecalledAt": "2026-10-15T09:58:52.147Z",
+      "queryHashes": [
+        "730921acf1b6"
+      ],
+      "recallDays": [
+        "2026-10-15"
+      ],
+      "conceptTags": [
+        "12/2022/tt-nhnn",
+        "đ.34.2",
+        "đ.16-18中长期外债sbv变更登记前置",
+        "80/2025/tt-nhnn修订",
+        "合并版23/vbhn-nhnn-2026",
+        "59/2020/qh14",
+        "đ.30/đ.47/đ.68.4",
+        "61/2020/qh14"
       ]
     }
   }

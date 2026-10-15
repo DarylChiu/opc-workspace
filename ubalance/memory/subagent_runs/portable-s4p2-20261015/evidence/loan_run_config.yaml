@@ -1,0 +1,14 @@
+run:
+  tag: '2025_12'
+  months:
+  - - '2025'
+    - THÁNG 12
+  - - '2026'
+    - THÁNG 01
+paths:
+  batch_dir: loan-materials-2025-12
+  l1_file: in/L1-成品采购入库补单测试20条.xlsx
+  output_root: /private/tmp/huatex-v12-test/HUATEX-Tools/runs/20261015_174120_loan/out
+  runs_dir: /private/tmp/huatex-v12-test/HUATEX-Tools/runs/20261015_174120_loan/out
+  workspace: /private/tmp/huatex-v12-test/HUATEX-Tools/runs/20261015_174120_loan
+  source_root: /Volumes/TOSHIBA EXT/HUATEX进出口材料
