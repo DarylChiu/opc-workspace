@@ -1,39 +1,29 @@
 # MEMORY.md - Balance Core Index
 
-## Memory Architecture
-分层记忆系统，详细信息在 `memory/` 目录：
-- L0: `memory/identity.md` (每次加载)
-- L1: `memory/active.md` (每次加载) 
-- L2: `memory/projects.md` (按需检索)
-- L3: `memory/lessons.md` (按需检索)
-- L4: `memory/YYYY-MM-DD.md` (按需加载)
+## Memory Architecture (v2 分层)
+详见 AGENTS.md「Memory Architecture」。索引：
+- L0 `memory/identity.md` | L1 `memory/active.md`（每 session 加载）
+- L2 `memory/projects.md` | L3 `memory/lessons.md` | L4 `memory/YYYY-MM-DD.md`（按需/近日）
 
 ## Budget
-- 月预算: $20
-- API Key: 待Kitty配置
-- 模型: 中型Sonnet 4.5 + 轻量Flash
+- 月预算 $20 | 模型: 中型 Sonnet 4.5 / 轻量 Gemini Flash
+- 成本仪表盘 http://localhost:8765 （隧道 URL 以 cf.log 实测为准）
 
 ## Key Rules
-- 诚实标注模型，不虚标
-- Daryl纠正过：财务理解要宽，Hedging是财资决策不是核算
-- 所有汇报附调用模型名称
+- 诚实标注模型，不虚标；所有汇报附模型名称
+- Daryl 纠正过：财务理解要宽，Hedging 是财资决策不是核算
 - 不确定就说不确定，标注置信度
 
 ## Team
-- Daryl: Owner (Feishu: ou_0d7a57b9a531823aa1edee6874dcbb34)
-- Kitty (忧郁小猫): 首席Agent/调度者 (AgentID: main)
-- 小枫: 技术开发
-- Self: 知识管理
+- Daryl: Owner (ou_0d7a57b9a531823aa1edee6874dcbb34)
+- Kitty (忧郁小猫): 首席Agent/调度 (AgentID: main)
+- 小枫: 技术开发 | Self: 知识管理
 
 ## Projects
-### OPC看板交互系统 (OPC Dashboard)
-- 负责人: Kitty (main)
-- 你有访问权限，特别是**成本仪表盘**模块
-- 地址: http://localhost:8765
-- 隧道: https://purple-thumbzilla-investigation-cooperative.trycloudflare.com (2026-08-12 13:45 实测更新；watchdog 每5分钟重建 CF 回退隧道，URL 随 cloudflared 重启变化，以 cf.log 实测为准；备用: https://opc-dashboard-daryl.loca.lt)
-- 成本数据源: 自动从 Agent sessions.json 编译
-- 上报接口: POST /api/report
-- 如果 Daryl 问成本/项目数据，这是你应该查的地方
+### OPC 看板交互系统
+- 负责人 Kitty；我关注**成本仪表盘**模块
+- 地址 http://localhost:8765，上报 POST /api/report，数据源＝Agent sessions.json
+- 隧道见 cf.log（watchdog 每5min 重建）；备用 https://opc-dashboard-daryl.loca.lt
 
 ## Silent Replies
-When you have nothing to say, respond with ONLY: NO_REPLY
+无话可说时仅回: NO_REPLY
