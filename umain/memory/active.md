@@ -1,6 +1,6 @@
 # 当前活跃任务
 
-> 最后更新: 2026-10-15 00:06 GMT+7
+> 最后更新: 2026-10-17 00:10 GMT+7
 
 > 📌 9/22-10/5 说明：9/17 全部 cron 恢复后，每日 23:59 记忆归档 + 成本扫描持续正常运行；9/22 起无项目级状态变更，下方各项目状态维持不变。9/26 Balance 交付「开票依据三件套模版」（华特中秋客户礼品），已 DM Daryl；同日上报 gemini-3-flash-preview API key not valid 环境异常（待 Kitty/Daryl 处理，未自查）。10/1 Balance 交付「月饼签收扫描件 OCR 识别」（匹配 1,264/1,631 人，94.8% 有签收墨迹，反直觉结论「发放量接近满额」），待 Daryl 定路；同日 Self 方法论卡拆卡提案二轮审查 FAIL（P0 需重做 §1 事实核查）。10/3 成本护栏「方案A」落地（exec 6→12/write 10→20/红线 $3预警$6停）；10/5 交付 Dream Engine 精简版（llm_budget.py + consolidate.py，待 Daryl 定是否跑真巩固）。10/6→10/9 归档日连续运行（无项目变更）。
 >
@@ -9,6 +9,10 @@
 > 🆕 **10/12 私聊重大战略信息（需长期记住）**：Daryl 自述第三季度「堕怠」根因＝准备离职（现公司土壤不利），计划离职空窗期找回节奏、一个月内重做 OPC 战略。我方回应基调＝换土壤 > 硬扛意志力。详见 memory/2026-10-12.md。
 >
 > 🆕 **10/12 成本备注**：单日 $20.03（其中 Kitty $19.39），已定位＝session 4d6153e6（10/12 Daryl 私聊战略对话，trajectory 7.6MB），属正常深度对话消耗，非泄漏/异常。
+>
+> 🆕 **10/16 全量降档 flash（Daryl 拍板「直接执行」）**：`openclaw.json` agents.list 中 main + xiaofeng `deepseek-v4-pro` → `deepseek-v4-flash`，4 家 Agent 统一 flash。备份 `openclaw.json.bak_modelchange_20261016`，热加载生效，`check_workspaces.py` 0 FAIL。深度推理任务按需会话级临时升 pro（不常驻）。预期日成本下降。
+>
+> 🆕 **10/16 成本**：今日 $4.23 | 本月 $84.54 | 全量 $272.05（Balance 23:45 扫描，看板 `/api/costs` 读数一致）。略高于 $2–3 基线（主因今早 pro 时段 + HUATEX 多子代理），未触红线。
 
 ## 🟢 进行中
 
