@@ -479,3 +479,30 @@ Daryl 认知类型 Ni+Te——看分析报告像看 X 光，表面数据堆砌�
 - **根因**：`-X`（strip extra fields）会连 **Unicode path extra field** 一起剥掉
 - **正确做法**：用 **Python `zipfile`** 写包（自动为非 ASCII 名设置 UTF-8 标志）；打完**必须回读校验** `i.flag_bits & 0x800`
 - **适用**：所有面向 Windows 的交付包（HUATEX Tools、材料包、模板包等）
+
+## 2026-10-16 · 交付中文 Windows 的包：两个必踩的编码坑（HUATEX v1.3.1）
+- **症状 A**：`UnicodeDecodeError: 'gbk' codec can't decode byte 0xac` ← 中文 Windows 的 pip 用 cp936 读 `requirements.txt`（含中文注释）→ 依赖全装不上。
+  对策：**requirements.txt 保持纯 ASCII**；并在安装脚本里加「直接列包名」兜底重试。
+- **症状 B**：`The filename, directory name, or volume label syntax is incorrect.` / `'...' is not recognized as an internal or external command` ← UTF-8 的 `.bat` 配 `chcp 65001` 被 cmd 误拆行。
+  对策：**`.bat` 用 GBK(cp936) 写出 + `chcp 936`**；GBK 表达不了的符号（❌⚠✅）打包时替换，仍有漏网就**中止打包**（不要静默糊过去）。
+- **元教训**：这类问题在 macOS 开发树**永远测不出来**（本机 cp 不是 936、无 cmd）→ 凡「交付给 Windows 用户」的包，必须把「编码/代码页」列入验收清单。
+
+## 2026-10-16 · ⛔ 绝不用 PowerShell 改用户的 UTF-8 文本配置文件（自己闯的祸）
+- **事故**：给 Daryl 一行 PowerShell 改 `config.yaml`，用了 `(Get-Content $c -Raw) -replace ... | Set-Content -Encoding UTF8`。
+  **漏了 `-Encoding UTF8`** → Windows PowerShell 5.1 的 `Get-Content` 默认按 **GBK(cp936)** 读 → UTF-8 中文全变乱码（`序号`→`搴忓彿`），且多字节错位**吞掉后面的引号** → YAML 解析失败，用户自检 3/12 直接 ❌。**用户的配置文件被我损坏。**
+- **正确做法**（给中文 Windows 用户改文本文件）：
+  1. 首选：**不要给 PowerShell 文本改写指令**；让用户用「记事本 + 另存为 UTF-8」或产品内 UI（页面 ⓪）改。
+  2. 必须脚本化时：用 .NET 显式编码 —— `[IO.File]::ReadAllText($p,[Text.Encoding]::UTF8)` / `[IO.File]::WriteAllText($p,$t,(New-Object Text.UTF8Encoding($false)))`，**永不依赖 `Get-Content/Set-Content` 的默认编码**。
+  3. 改之前先备份（`Copy-Item $p "$p.bak"`）。
+- **产品化对策（已落地 v1.3.2）**：包内 `config.default.yaml` 原版备份 + `恢复配置.bat`（一键恢复、损坏件另存）+ 自检 3/12 乱码诊断。
+- **元教训**：给用户的「一行命令」也是交付物——**必须先在等价环境验证**（本机没有 PowerShell 就至少逐参数核对编码/引号/转义），否则用户会替我们踩坑。
+
+## 2026-10-16 · Windows 交付包必做：「默认编码非 UTF-8」双重校验（HUATEX v1.3.3）
+- **机制**：Windows 上 `open()` 默认编码 = `locale.getpreferredencoding()` = 系统 ANSI 代码页（中文机 = **cp936**）；macOS/Linux = UTF-8。所以「不写 encoding 的 `open()`」= **Mac 必过、Windows 必挂**（或静默乱码）。
+- **实战案例**：`json.load(open(recon.json))` → `UnicodeDecodeError: 'gbk' codec can't decode byte 0x94` → workflow 子步骤 rc≠0 → 整个 job 判 failed（前端显示失败、无产物可下载，但磁盘上其实已有部分产物 → **容易被误判为「界面问题」**）。
+- **三重防线（已落地）**：
+  1. **代码**：所有文本 `open()` 显式 `encoding='utf-8'`（含缓存/json/txt）。
+  2. **运行时**：子进程环境统一设 `PYTHONUTF8=1`（+`PYTHONIOENCODING=utf-8`），从根上让默认编码=UTF-8。
+  3. **打包门禁**：`build_package.py` 用 AST 扫全部 `.py`，发现「文本 open() 不带 encoding」→ **中止打包**（AST 而非正则：避免 docstring/嵌套括号误判）。
+- **可复现的模拟方法**：`PYTHONUTF8=0 PYTHONCOERCECLOCALE=0 LC_ALL=C PYTHONIOENCODING=utf-8 python3 <脚本>` → 默认编码降为 US-ASCII，等价暴露 cp936 类问题（无需 Windows 真机）。
+- **教训延伸**：判「界面失败」前先看 workflow 子步骤 rc；日志「断在中间」通常等于「下一步挂了」。

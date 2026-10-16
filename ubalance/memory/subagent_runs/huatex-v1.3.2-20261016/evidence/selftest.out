@@ -1,0 +1,61 @@
+包版本     : HUATEX Tools Windows v1.3.2-20261016
+程序目录   : /private/tmp/huatex-heal-test/HUATEX-Tools
+检查时间   : 2026-10-16 08:57:25
+解释器     : /opt/homebrew/opt/python@3.14/bin/python3.14
+
+✅ [1/12] Python 3.14.5 · 64 位
+✅ [2/12] 程序目录可写（runs\ 与 work\ 均 OK）
+❌ [3/12] config.yaml 无法解析：while parsing a block mapping
+  in "<unicode string>", line 27, column 3:
+      source_root: "D:/HUATEX          ... 
+      ^
+expected <block end>, but found '<scalar>'
+  in "<unicode string>", line 32, column 11:
+      rm_db: "RM-Database"
+              ^
+      诊断：config.yaml 里中文已**乱码**——典型原因是用 PowerShell/记事本以“非 UTF-8”
+            方式保存过（Get-Content 默认按 GBK 读，再 Set-Content -Encoding UTF8 写回）
+      最快修复：双击包根 `恢复配置.bat`（恢复原版 + 把损坏件另存为 config.yaml.broken-时间戳）
+      等价命令：/opt/homebrew/opt/python@3.14/bin/python3.14 -u tools\preflight.py --restore-config
+      source_root = '"D:/HUATEX'
+      output_root = 'work'
+      runs_dir    = 'runs'
+      tesseract   = 'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'   ← config.yaml 里的配置值
+      port        = 8000
+      [自动探测] POPPLER_PATH    = ''
+      [自动探测] TESSDATA_PREFIX = ''
+✅ [4/12] 输出根可写：/private/tmp/huatex-heal-test/HUATEX-Tools/work
+✅ [5/12] 依赖 7/7 齐全
+      ✅ PyYAML(6.0.3) 读 config.yaml
+      ✅ openpyxl(3.1.5) 读写 Excel
+      ✅ pdfplumber(0.11.10) 解析 PDF 文本层
+      ✅ pytesseract(0.3.13) 调用 OCR
+      ✅ Pillow(12.2.0) 图像处理
+      ✅ pdf2image(?) PDF 转图片（扫描件 OCR）
+      ✅ xlrd(2.0.2) 读老式 .xls
+⚠️ [6/12] 注意：config.yaml 的 tesseract_cmd 不存在 → C:\Program Files\Tesseract-OCR\tesseract.exe
+      已**自动探测改用**：/opt/homebrew/bin/tesseract
+✅ [6/12] Tesseract = /opt/homebrew/bin/tesseract（自动探测）· vie/eng/chi_sim 齐全
+      --list-langs 实测（163 种）：afr, amh, ara, asm, aze, aze_cyrl, bel, ben, bod, bos, bre, bul, cat, ceb, ces, chi_sim, chi_sim_vert, chi_tra, chi_tra_vert, chr …
+✅ [7/12] Poppler 就位：/opt/homebrew/bin/pdftoppm（来源：PATH）
+      POPPLER_PATH 实际值 = ''
+⚠️ [8/12] TESSDATA_PREFIX 未设置（包内有 tessdata\，一键安装.bat 会自动接上）
+      ✅ tessdata\eng.traineddata  4113088 字节
+      ✅ tessdata\osd.traineddata  10562727 字节
+      ✅ tessdata\vie.traineddata  531275 字节
+      ✅ tessdata\chi_sim.traineddata  2469156 字节
+✅ [9/12] 内置素材齐全（7/7 项）· 用户无需联网下载
+  ✅ installers/Release-26.09.0-0.zip                     43709956 字节（Poppler for Windows 26.09.0）
+  ✅ installers/tesseract-ocr-w64-setup-5.4.0.20240606.exe 50175248 字节（Tesseract 5.4.0 安装器）
+  ✅ tessdata/chi_sim.traineddata                         2469156 字节（语言包 chi_sim）
+  ✅ tessdata/eng.traineddata                             4113088 字节（语言包 eng）
+  ✅ tessdata/osd.traineddata                             10562727 字节（语言包 osd）
+  ✅ tessdata/vie.traineddata                             531275 字节（语言包 vie）
+  ✅ wheels/*.whl                                         28 个（47.7 MB）
+✅ [10/12] 端口 8000 可用
+❌ [11/12] 数据文件夹不存在："D:/HUATEX
+      处理：确认盘符（换盘后盘符会变）与目录是否拷全，再在页面 ⓪ 重新填写。
+✅ [12/12] 运行留痕目录可写：runs\
+
+== 自检结论：发现致命问题（❌）→ 修好后再启动 ==
+提示：把本报告整段复制发给管理员，可以最快定位问题。

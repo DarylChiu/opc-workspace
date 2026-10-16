@@ -1,0 +1,7 @@
+== 页面 ⓪ HTTP 保存后，包内 config.yaml 的 source_root 行（证明真实 HTTP 路径也写单引号）==
+27:  source_root: '/Volumes/TOSHIBA EXT/HUATEX进出口材料'                 # ← 由页面 ⓪ 填写；例：D:/HUATEX（正斜杠）。留空时运行会明确报错，不会静默
+
+== 该行以单引号包裹？==
+行 = "  source_root: '/Volumes/TOSHIBA EXT/HUATEX进出口材料'                 # ← 由页面 ⓪ 填写；例：D:/HUATEX（正斜杠）。留空时运行会明确报错，不会静默"
+单引号 = True
+裸 yaml 解析 = '/Volumes/TOSHIBA EXT/HUATEX进出口材料'

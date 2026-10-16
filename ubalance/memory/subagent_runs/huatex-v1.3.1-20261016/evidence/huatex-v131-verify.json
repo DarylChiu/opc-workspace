@@ -1,0 +1,192 @@
+[
+ {
+  "status": "PASS",
+  "check": "zip.bytes",
+  "detail": "size=151999991"
+ },
+ {
+  "status": "PASS",
+  "check": "zip.sha256",
+  "detail": "92fcee1987caaab455a7ad2e337f1bbb609206de161dd691c4a8787b60940e0a"
+ },
+ {
+  "status": "PASS",
+  "check": "zip.entries",
+  "detail": "n=81"
+ },
+ {
+  "status": "PASS",
+  "check": "zip.testzip",
+  "detail": "None"
+ },
+ {
+  "status": "PASS",
+  "check": "zip.utf8_flag_all",
+  "detail": "missing=0 []"
+ },
+ {
+  "status": "PASS",
+  "check": "zip.utf8_flag_count",
+  "detail": "81/81"
+ },
+ {
+  "status": "PASS",
+  "check": "asset:installers/tesseract-ocr-w64-setup-5.4.0.20240606.exe",
+  "detail": "expect=50175248 got=50175248 read=50175248"
+ },
+ {
+  "status": "PASS",
+  "check": "asset:installers/Release-26.09.0-0.zip",
+  "detail": "expect=43709956 got=43709956 read=43709956"
+ },
+ {
+  "status": "PASS",
+  "check": "asset:tessdata/eng.traineddata",
+  "detail": "expect=4113088 got=4113088 read=4113088"
+ },
+ {
+  "status": "PASS",
+  "check": "asset:tessdata/osd.traineddata",
+  "detail": "expect=10562727 got=10562727 read=10562727"
+ },
+ {
+  "status": "PASS",
+  "check": "asset:tessdata/vie.traineddata",
+  "detail": "expect=531275 got=531275 read=531275"
+ },
+ {
+  "status": "PASS",
+  "check": "asset:tessdata/chi_sim.traineddata",
+  "detail": "expect=2469156 got=2469156 read=2469156"
+ },
+ {
+  "status": "PASS",
+  "check": "wheels.count",
+  "detail": "n=28"
+ },
+ {
+  "status": "PASS",
+  "check": "requirements.ascii",
+  "detail": "676 bytes, 14 lines"
+ },
+ {
+  "status": "PASS",
+  "check": "bat.count",
+  "detail": "n=4 ['selftest.bat', 'start.bat', 'stop.bat', '一键安装.bat']"
+ },
+ {
+  "status": "PASS",
+  "check": "bat.cp936:selftest.bat",
+  "detail": "1103 bytes"
+ },
+ {
+  "status": "PASS",
+  "check": "bat.chcp936:selftest.bat",
+  "detail": "chcp936=True"
+ },
+ {
+  "status": "PASS",
+  "check": "bat.nobadsym:selftest.bat",
+  "detail": "hasU274c=False hasU26a0=False"
+ },
+ {
+  "status": "PASS",
+  "check": "bat.not_pure_utf8:selftest.bat",
+  "detail": "utf8_decodable=True ascii_only=False"
+ },
+ {
+  "status": "PASS",
+  "check": "bat.cp936:start.bat",
+  "detail": "2047 bytes"
+ },
+ {
+  "status": "PASS",
+  "check": "bat.chcp936:start.bat",
+  "detail": "chcp936=True"
+ },
+ {
+  "status": "PASS",
+  "check": "bat.nobadsym:start.bat",
+  "detail": "hasU274c=False hasU26a0=False"
+ },
+ {
+  "status": "PASS",
+  "check": "bat.not_pure_utf8:start.bat",
+  "detail": "utf8_decodable=True ascii_only=False"
+ },
+ {
+  "status": "PASS",
+  "check": "bat.cp936:stop.bat",
+  "detail": "915 bytes"
+ },
+ {
+  "status": "PASS",
+  "check": "bat.chcp936:stop.bat",
+  "detail": "chcp936=True"
+ },
+ {
+  "status": "PASS",
+  "check": "bat.nobadsym:stop.bat",
+  "detail": "hasU274c=False hasU26a0=False"
+ },
+ {
+  "status": "PASS",
+  "check": "bat.not_pure_utf8:stop.bat",
+  "detail": "utf8_decodable=True ascii_only=False"
+ },
+ {
+  "status": "PASS",
+  "check": "bat.cp936:一键安装.bat",
+  "detail": "7212 bytes"
+ },
+ {
+  "status": "PASS",
+  "check": "bat.chcp936:一键安装.bat",
+  "detail": "chcp936=True"
+ },
+ {
+  "status": "PASS",
+  "check": "bat.nobadsym:一键安装.bat",
+  "detail": "hasU274c=False hasU26a0=False"
+ },
+ {
+  "status": "PASS",
+  "check": "bat.not_pure_utf8:一键安装.bat",
+  "detail": "utf8_decodable=True ascii_only=False"
+ },
+ {
+  "status": "PASS",
+  "check": "preflight.has:v1.3.1-20261016",
+  "detail": "found=True"
+ },
+ {
+  "status": "PASS",
+  "check": "preflight.has:HUATEX_TESSERACT",
+  "detail": "found=True"
+ },
+ {
+  "status": "PASS",
+  "check": "preflight.has:Tools for Huatex",
+  "detail": "found=True"
+ },
+ {
+  "status": "PASS",
+  "check": "config.has:WIN_TESS_SCAN_ROOTS",
+  "detail": "found=True"
+ },
+ {
+  "status": "PASS",
+  "check": "install.bat.has:D:\\Tools for Huatex\\tesseract.exe",
+  "detail": "found=True"
+ },
+ {
+  "status": "PASS",
+  "check": "install.bat.has:fallback_retry",
+  "detail": "fallback_marker=True"
+ },
+ {
+  "status": "PASS",
+  "check": "customer_data_scan",
+  "detail": "hits=0 []"
+ }
+]

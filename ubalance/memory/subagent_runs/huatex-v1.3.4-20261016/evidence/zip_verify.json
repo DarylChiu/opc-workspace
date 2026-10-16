@@ -1,0 +1,75 @@
+{
+ "size": 152006308,
+ "sha256": "403006b7223f3fad4f38bf2d2b7ded36acdfb8d47d9922ca7e39760ec061990b",
+ "entries": 83,
+ "testzip": null,
+ "wheels": 28,
+ "utf8_missing": [],
+ "assets": {
+  "installers/tesseract-ocr-w64-setup-5.4.0.20240606.exe": "OK",
+  "installers/Release-26.09.0-0.zip": "OK",
+  "tessdata/eng.traineddata": "OK",
+  "tessdata/osd.traineddata": "OK",
+  "tessdata/vie.traineddata": "OK",
+  "tessdata/chi_sim.traineddata": "OK"
+ },
+ "requirements_ascii": "OK",
+ "bats": {
+  "HUATEX-Tools/selftest.bat": {
+   "decode": "cp936-OK",
+   "chcp936": true,
+   "has_emoji": false
+  },
+  "HUATEX-Tools/start.bat": {
+   "decode": "cp936-OK",
+   "chcp936": true,
+   "has_emoji": false
+  },
+  "HUATEX-Tools/stop.bat": {
+   "decode": "cp936-OK",
+   "chcp936": true,
+   "has_emoji": false
+  },
+  "HUATEX-Tools/一键安装.bat": {
+   "decode": "cp936-OK",
+   "chcp936": true,
+   "has_emoji": false
+  },
+  "HUATEX-Tools/恢复配置.bat": {
+   "decode": "cp936-OK",
+   "chcp936": true,
+   "has_emoji": false
+  }
+ },
+ "bat_count": 5,
+ "config_match": true,
+ "server_py": {
+  "single_quote_write": true,
+  "v134_comment": true
+ },
+ "config_py": {
+  "load_yaml_tolerant": true,
+  "repair_yaml_quotes": true
+ },
+ "jobs_py": {
+  "load_yaml_tolerant": true
+ },
+ "preflight_py": {
+  "version": true
+ },
+ "customer_hits": [
+  "HUATEX-Tools/README-先读我.md:RM-Database",
+  "HUATEX-Tools/config.default.yaml:RM-Database",
+  "HUATEX-Tools/config.py:RM-Database",
+  "HUATEX-Tools/config.py:HUATEX进出口材料",
+  "HUATEX-Tools/config.yaml:RM-Database",
+  "HUATEX-Tools/修复指引-自检4项.md:RM-Database",
+  "HUATEX-Tools/手册-徒弟操作.md:RM-Database",
+  "HUATEX-Tools/自查表-常见报错.md:RM-Database",
+  "HUATEX-Tools/app/index.html:RM-Database",
+  "HUATEX-Tools/tools/preflight.py:RM-Database",
+  "HUATEX-Tools/workflows/loan_materials/loan_input.py:RM-Database",
+  "HUATEX-Tools/workflows/loan_materials/run_loan_2025_12_v28d.py:RM-Database",
+  "HUATEX-Tools/workflows/loan_materials/run_loan_2025_12_v28d.py:HUATEX进出口材料"
+ ]
+}

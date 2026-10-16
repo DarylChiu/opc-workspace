@@ -1,0 +1,155 @@
+HUATEX Tools · Windows 交付包 内容清单（MANIFEST）
+====================================================================================================
+包文件名   : HUATEX-Tools-Windows-v1.3.2-20261016.zip
+包 sha256  : 9cbd4a4df99ff321e358ee7dbf96e377edc553b6290aecb19e88f8629e3ddf97
+包大小     : 152004902 bytes (144.96 MB)
+条目数     : 83 个文件（解压后）
+解压后总字节: 162100675 bytes (154.59 MB)
+生成器     : portable/tools/build_package.py（S4 · 2026-10-15 · VERSION=v1.3.2-20261016）
+生成时间   : 2026-10-16T08:56:53      ← 幂等性检查时请忽略本行（其余行必须完全一致）
+
+包内 config.yaml 的 Windows 默认值（相对 dev 树 config.yaml 的差异）：
+  · source_root: ""                 # ← 由页面 ⓪ 填写；例：D:/HUATEX（正斜杠）。留空时运行会明确报错，不会静默
+  · source_root_hint: '请填写本机资料文件夹（含 RM-Database 的那一层），例如 D:/HUATEX（用正斜杠）'
+  · workspace: ""                # Windows 无工作区概念；留空时脚本自动回退到程序所在目录
+  · output_root: 'D:\HUATEX\work'   # 该盘不存在时，start.bat 会启动自检并自动回落为 程序目录/work
+  · tesseract_cmd: 'C:\Program Files\Tesseract-OCR\tesseract.exe'   # 装在别处就改这一行（单引号）
+
+S4.2 · 内置素材（随包外发；已逐文件校验字节数）
+  · installers/Release-26.09.0-0.zip                       43709956 B  sha256=7a6f256a0ddf7536182246a5733331bf4677cbcc34f4663774947ad34556c8d0  Poppler for Windows 26.09.0（解压即用）
+  · installers/tesseract-ocr-w64-setup-5.4.0.20240606.exe   50175248 B  sha256=c885fff6998e0608ba4bb8ab51436e1c6775c2bafc2559a19b423e18678b60c9  Tesseract 5.4.0 安装器（UB-Mannheim 构建，Inno Setup 可静默安装）
+  · tessdata/chi_sim.traineddata                            2469156 B  sha256=a5fcb6f0db1e1d6d8522f39db4e848f05984669172e584e8d76b6b3141e1f730  tessdata_fast 语言包 chi_sim
+  · tessdata/eng.traineddata                                4113088 B  sha256=7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2  tessdata_fast 语言包 eng
+  · tessdata/osd.traineddata                               10562727 B  sha256=9cf5d576fcc47564f11265841e5ca839001e7e6f38ff7f7aacf46d15a96b00ff  tessdata_fast 语言包 osd（方向检测）
+  · tessdata/vie.traineddata                                 531275 B  sha256=79df64caf7bcfb2a27df5042ecb6121e196eada34da774956995747636d5bfa1  tessdata_fast 语言包 vie
+  · wheels/*.whl                                           49990270 B（28 个 wheel）  离线装依赖（win_amd64 · cp310/311/312/313）
+  说明：用户双击包根《一键安装.bat》即可全部装好，**不需要联网、不需要自己搜网址**；
+        Tesseract 安装器只做静默安装（/VERYSILENT），语言包由包内 tessdata/ 经
+        TESSDATA_PREFIX 接管，因此**不依赖安装器的语言包勾选项**。
+
+包内 config.py 相对 dev 树的差异（仅 1 处，S4 实测发现）：
+  · PORTABLE_ROOT：dev = 「目录名 portable 才用自己，否则用上一级」
+                 包内 = HERE（钉死包根）——否则相对路径 runs_dir/output_root 会落到包外上一级
+
+----------------------------------------------------------------------------------------------------
+sha256                                                                 size  包内相对路径
+----------------------------------------------------------------------------------------------------
+3d4d7db0be50b6b7593491a95afc852fde5e231d4d6cb36bf6ab60090f6bc124       5615  README-先读我.md
+a8589a76c8674705fa6eadcca62e968120adf5013a7893300239b9f7e634d302       4671  README.md
+ffdf29780132b4975b4ca511c004baf128afb8641321189e83d3a4ae1c305404       2057  app/README.md
+9ed748f56566d53677415fb48d3c8b98612875c6f7a59fb5db4de710748a1aa6      14323  app/index.html
+cc61e74a2c006e964cf0ca343f65c80227c33f49e2bce66c19fba2612549d551      20564  app/jobs.py
+f828ddb3513dacfb2f5abfa1430583382bf8ffbcc6321247910e867336f27ab2      13482  app/server.py
+66e9e09e8bff5237fe84826dbe8b5f2d09c556b739fc0462f4ca6732e320c8e1       5275  config.default.yaml
+e51ddbf49cf683f8a4fcf29ff52a4e75ae41d03097d49ff3c380146e4bf5ea2f      16611  config.py
+66e9e09e8bff5237fe84826dbe8b5f2d09c556b739fc0462f4ca6732e320c8e1       5275  config.yaml
+d248375f6e5714f2db1d0c92de94c5a29ead23230fb10ff6b5e4b40824bb22ce      48364  expense_mvp/classifier.py
+20f337e845ef70b3ccbb92a040ca06c63db585d0cca59334ac049ec40b251985      13452  expense_mvp/ocr_engine.py
+ebedf0a6930adf1b1fb464a6bda80cf5d96d98086682284b733b13b8b4da5706       4576  expense_mvp/preprocess.py
+7a6f256a0ddf7536182246a5733331bf4677cbcc34f4663774947ad34556c8d0   43709956  installers/Release-26.09.0-0.zip
+c885fff6998e0608ba4bb8ab51436e1c6775c2bafc2559a19b423e18678b60c9   50175248  installers/tesseract-ocr-w64-setup-5.4.0.20240606.exe
+e4c61821850605004c4f088d1a672ff9300e634d3123b71b74293721b794f376        676  requirements.txt
+287383e936d6e1a568a70a35d83ed06e6ad5b9d002e6311a5924a189be9220db        549  runs/说明.txt
+5ab62abc847e5cba3c5247936c69d3ca5b65f51cf54554c2f161c5434b8326f0       1103  selftest.bat
+7e1e8782c1f0041fc4678df2be1a520e9a2cb4ea25e28e60f1f1e656453a3730       2047  start.bat
+1fec7f4f55317c947a08d6a8742d4e8c803221e51fd7fe81afdbf3544e818c79        915  stop.bat
+ce36c568e3ac499c5dcd246d733affdb60130670b38d43415278e314e9c60ecb      12325  templates/Payment核销-模板.xlsx
+a5fcb6f0db1e1d6d8522f39db4e848f05984669172e584e8d76b6b3141e1f730    2469156  tessdata/chi_sim.traineddata
+7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2    4113088  tessdata/eng.traineddata
+9cf5d576fcc47564f11265841e5ca839001e7e6f38ff7f7aacf46d15a96b00ff   10562727  tessdata/osd.traineddata
+79df64caf7bcfb2a27df5042ecb6121e196eada34da774956995747636d5bfa1     531275  tessdata/vie.traineddata
+7cdb4d4ae943da3e966be29c060870d369572fbceb4267ecf581ece294346d5e       2583  tools/compare_xlsx.py
+f11e10ebb498ea6a18c5d841b01b1583de418e3de584195ea428afe8d5f94007      37020  tools/preflight.py
+97094db493f7f0ae7e25c6c2dda0ff37465adc2a7ea0b91d94d7476065aa0f2b      10720  tools/regress_compare.py
+a48d62ab9d6f4f98c983223a547af44be6ca3691074c31cecced6facd3ba2dc1     185082  wheels/cffi-2.1.1-cp310-cp310-win_amd64.whl
+42f6930c31dc7f50732c9ae793c2786c7b6b044195967bbdde40bb9be81c4cc0     185096  wheels/cffi-2.1.1-cp311-cp311-win_amd64.whl
+f53e442b08449d42821fa4a4fba000095af9f62742a500f978a9f557ec44339a     185919  wheels/cffi-2.1.1-cp312-cp312-win_amd64.whl
+1aa5645c30469b09530c4ebca77ebf8f17618293c58f8549cb1a543a50236e7d     185688  wheels/cffi-2.1.1-cp313-cp313-win_amd64.whl
+1461ac396c4fdb983a675f20aa555624f0ee18ac83d832b9244ffff3d8055275     215446  wheels/charset_normalizer-3.5.2-cp310-cp310-win_amd64.whl
+87e50a3e7cb90af586b6c5faf23e302a970415ac73bd7bd90a515a04b427ef96     214932  wheels/charset_normalizer-3.5.2-cp311-cp311-win_amd64.whl
+780fbe7cab297b81dad9fb8dc5eb003c0468ffb0d9e5f65068c53a34661a96bc     207486  wheels/charset_normalizer-3.5.2-cp312-cp312-win_amd64.whl
+78456a747de8dc58360ffa581f30a002baf5aa28cb262536545e91f113ed7639     206489  wheels/charset_normalizer-3.5.2-cp313-cp313-win_amd64.whl
+7afa5a6602a9f29af1f3a2965f831bae7c9d5d597b7cbb716d41ab3b7d89879c    3824692  wheels/cryptography-50.0.2-cp311-abi3-win_amd64.whl
+4e81d95e5bafc2d6e34e4bed780e53e4d5b9a2f928573428aa4d35fbec1eb0de    3854095  wheels/cryptography-50.0.2-cp39-abi3-win_amd64.whl
+7a91720bc756843502c3b7504c77b8fe44217c85c537d85037f0f536151b2caa      18059  wheels/et_xmlfile-2.0.0-py3-none-any.whl
+5282c12b107bffeef825f4617dc029afaf41d0ea60823bbb665ef3079dc79de2     250910  wheels/openpyxl-3.1.5-py2.py3-none-any.whl
+d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c     129956  wheels/packaging-26.3-py3-none-any.whl
+ecdd58d7afb810dffe21ef2b1bbc057ef434dabbac6c33778a38a3f7744a27e2      11618  wheels/pdf2image-1.17.0-py3-none-any.whl
+366585ba97e80dffa8f00cebe303d2f381884d8637af4ce422f1df3ef38111a9    6592252  wheels/pdfminer_six-20260107-py3-none-any.whl
+7741ea81bf165b474b153e6789d10d18e06b6ddcf3ec84289c3ef2fed6802580      60047  wheels/pdfplumber-0.11.10-py3-none-any.whl
+300557495eb45ebb8aec96c2da9c4be642fbf7cd937278b4013ba894ea8eb0eb    7226887  wheels/pillow-12.3.0-cp310-cp310-win_amd64.whl
+8e95e1385e4998ae9694eeaa4730ba5457ff61185b3a55e2e7bea0880aef452a    7233653  wheels/pillow-12.3.0-cp311-cp311-win_amd64.whl
+a2b55dd6b2a4c4b7d87ffa56bdb33fdc5fdb9a462173861a7bc097f17d91cb09    7227137  wheels/pillow-12.3.0-cp312-cp312-win_amd64.whl
+1cca606cd25738df4ed873d5ad46bbdb3d83b5cbca291f6b4ff13a4df6b0bbe8    7239691  wheels/pillow-12.3.0-cp313-cp313-win_amd64.whl
+51d5a8ba2be0bbe440b99d2112604c95bbbc3c2748a64260186c541e1729cd80      51178  wheels/pycparser-3.11-py3-none-any.whl
+149fd5c6397b8df8bf7911a93506eff0be874f877afe7ac936cf5d37d21a6a06    3947280  wheels/pypdfium2-5.14.0-py3-none-win_amd64.whl
+7a99c6c2ac598360693d83a416e36e0b33a67638bb9d77fdcac094a3589d4b34      14705  wheels/pytesseract-0.3.13-py3-none-any.whl
+bdb2c67c6c1390b63c6ff89f210c8fd09d9a1217a465701eac7316313c915e4c     158561  wheels/pyyaml-6.0.3-cp310-cp310-win_amd64.whl
+9f3bfb4965eb874431221a3ff3fdcddc7e74e3b07799e0e84ca4a0f867d449bf     158763  wheels/pyyaml-6.0.3-cp311-cp311-win_amd64.whl
+5fcd34e47f6e0b794d17de1b4ff496c00986e1c83f7ab2fb8fcfe9616ff7477b     154003  wheels/pyyaml-6.0.3-cp312-cp312-win_amd64.whl
+79005a0d97d5ddabfeeea4cf676af11e647e41d81c9a7722a193022accdb6b7c     154090  wheels/pyyaml-6.0.3-cp313-cp313-win_amd64.whl
+ea762c3d29f4cca48d82df517b6d89fbce4db3107f9d78713e48cd321d5c9aa9      96555  wheels/xlrd-2.0.2-py2.py3-none-any.whl
+89ff21f7c69bd5c8245b07fa81aaf7768eb2d853d6827758beea14fe684c32ea        374  work/说明.txt
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855          0  workflows/__init__.py
+d248375f6e5714f2db1d0c92de94c5a29ead23230fb10ff6b5e4b40824bb22ce      48364  workflows/expense_mvp/classifier.py
+20f337e845ef70b3ccbb92a040ca06c63db585d0cca59334ac049ec40b251985      13452  workflows/expense_mvp/ocr_engine.py
+ebedf0a6930adf1b1fb464a6bda80cf5d96d98086682284b733b13b8b4da5706       4576  workflows/expense_mvp/preprocess.py
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855          0  workflows/loan_materials/__init__.py
+65e58fc4924ef89f45b61537958d873e61cbefab21618dc04ab33854e19e421a      16807  workflows/loan_materials/doc_classify.py
+a24f917bade677d4fcc0e112d6004727191015dbfd19d7d2b9ce4771ee9dec3f       8812  workflows/loan_materials/doc_fields.py
+2b3d90c4cd15a1f3df7b6def33fd7c1a6cbeda0a4ca76ac8a178831968c9f66b       8567  workflows/loan_materials/loan_input.py
+da3f7c99e2314630a099292b6eac65818379e72fd8d8fa4a5993a78e17e766dd      21773  workflows/loan_materials/run_loan_2025_12_v28d.py
+67eb49b9108875382feb8b9b88cc57d97bfe789445c87cd3f07b79c247c0334d       7829  workflows/loan_materials/tokhai_extract.py
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855          0  workflows/payprep/__init__.py
+efb3652f9f16e6c6da25b7d68b265ace2edaf1b515f6085ce8e1a6bacdd82a48       8947  workflows/payprep/fill_bank_receipt.py
+90808da7c53d3f3c943ffb920bbdf65041cf634a35bbb8f0cc9742685353229c       9891  workflows/payprep/fill_payment_paid.py
+b87456d4829e58d30639f6b16f9de3848aed76a039c6b9d1b856f6f34fbcae59      42472  workflows/payprep/gen_payment_recon_v2.py
+5bea3cfd2e357811a303fb970b795c683b4592aeb4fe14bee09c6bfc1c9e4f98      10555  workflows/payprep/manual_review.py
+23e159a13a84e5332aba31de1d2155d30c2c5f5a15cdac6ed1297dc44b1e1c22      13211  workflows/payprep/misa_import_gen.py
+47b665062853cbe090c871e5c3f442606eee3e4b267d2eab9390ce48084c8135      10238  workflows/payprep/payment_recon_finalize.py
+52181ce6d027e72851a56f7850cff34694464367620d99234e000544396cc8ef      19670  workflows/payprep/payprep.py
+94c199b0e37ea7bcf60fdd6801102480103201fc964931721de4a7a7816a04e0       4698  workflows/payprep/recon_ledger.py
+5cbc353dea807f8804589dedb85499b6233b94698772f369687f20de3f7d5385       2526  workflows/payprep/summary_text.py
+5363205afbc02e1e9426728bcf698d577e8036ef9d2899282045e43f1ea1c77b      37431  workflows/payprep/vn_invoice_parse.py
+edbcd2faa1c6067e728a2b7e18fe9e2b43ab03a4815f479c5f67eb3e5701b858       7212  一键安装.bat
+d7111c4dafbb03a49c4f6d1f5d716c60d6808ce0bf88887bffd130087e18d4ff       5879  修复指引-自检4项.md
+55003f5151b9a63f137239038188ddf4d74fd8b04d92a83ae2749c7b0e6d708e       7834  安装清单-Windows.md
+4e822ded7ce882e2e51cf66e25ad93c646ffa16b4b4cb3166d1e175e820a5b4c        887  恢复配置.bat
+1cc0712794e0dca5e78fa2059fec595124ebb7ecfd60d0248791d3f5e6bb8863       8328  手册-徒弟操作.md
+4307d71b6aa5dca697db7313a04956f7d3d7fbec26f386abf807ea3928bccb82       6419  自查表-常见报错.md
+----------------------------------------------------------------------------------------------------
+
+排除清单（不随包外发；规则写死在 build_package.py 的 EXCLUDE_* 常量里）
+  1) runs/**（含客户 PDF 与 470MB 级运行留痕）、runs/_uploads/**
+  2) **/__pycache__/**、*.pyc、*.pyo
+  3) **/.pdftext_cache.json、.DS_Store、*.log、*.tmp、~$*
+  4) in/**、out/**、evidence/**（输入/输出/证据目录，含客户数据）
+  5) config.regression-*.yaml（回归专用配置，不随包外发）
+  6) start.command / stop.command（Mac 专用启停脚本）
+  7) 任何 *.zip（散落的压缩包）—— 例外：installers/ 下的安装器与 Poppler 包（S4.2 内置素材）
+  8) tools/build_package.py（打包器本身 = 开发工具，不随包外发）
+  9) 例外：runs/说明.txt 与 work/说明.txt 是**占位说明**（非运行留痕、非客户数据），随包保留
+ 10) 例外：workflows/expense_mvp/ 是**OCR 引擎的包内第二份副本**（脚本按 WS/expense_mvp 解析，WS=包内 workflows/）
+      —— 为保自包含而刻意重复（3 个小文件，合计 <30KB）；dev 树脚本一行未改
+
+本次实际被排除的条目（14 条）：
+  - __pycache__/                                                __pycache__ 字节码缓存
+  - dist-assets/                                                运行留痕/输入输出/证据目录（含客户数据）：dist-assets/
+  - runs/                                                       运行留痕/输入输出/证据目录（含客户数据）：runs/
+  - start.command                                               Mac 专用启停脚本
+  - stop.command                                                Mac 专用启停脚本
+  - config.regression-2025_12.yaml                              匹配排除模式 config.regression-*.yaml
+  - tools/__pycache__/                                          __pycache__ 字节码缓存
+  - tools/preflight_win.py                                      mac 垃圾/缓存文件：preflight_win.py
+  - tools/build_package.py                                      mac 垃圾/缓存文件：build_package.py
+  - app/__pycache__/                                            __pycache__ 字节码缓存
+  - workflows/loan_materials/__pycache__/                       __pycache__ 字节码缓存
+  - workflows/loan_materials/.pdftext_cache.json                mac 垃圾/缓存文件：.pdftext_cache.json
+  - workflows/payprep/__pycache__/                              __pycache__ 字节码缓存
+  - expense_mvp/__pycache__/                                    __pycache__ 字节码缓存
+
+校验方法：
+  unzip -o HUATEX-Tools-Windows-v1.3.2-20261016.zip -d <目标目录>
+  # 逐文件核对 sha256（macOS）：
+  (cd <目标目录>/HUATEX-Tools && find . -type f | sort | xargs shasum -a 256)
+  # 幂等性：同样输入重复打包 → 本清单除「生成时间」行外逐字节一致

@@ -1,0 +1,92 @@
+{
+  "bytes": 152004902,
+  "sha256": "9cbd4a4df99ff321e358ee7dbf96e377edc553b6290aecb19e88f8629e3ddf97",
+  "entries": 83,
+  "testzip": null,
+  "utf8_flag_missing": [],
+  "assets": {
+    "HUATEX-Tools/installers/tesseract-ocr-w64-setup-5.4.0.20240606.exe": {
+      "size": 50175248,
+      "expect": 50175248,
+      "ok": true
+    },
+    "HUATEX-Tools/installers/Release-26.09.0-0.zip": {
+      "size": 43709956,
+      "expect": 43709956,
+      "ok": true
+    },
+    "HUATEX-Tools/tessdata/eng.traineddata": {
+      "size": 4113088,
+      "expect": 4113088,
+      "ok": true
+    },
+    "HUATEX-Tools/tessdata/osd.traineddata": {
+      "size": 10562727,
+      "expect": 10562727,
+      "ok": true
+    },
+    "HUATEX-Tools/tessdata/vie.traineddata": {
+      "size": 531275,
+      "expect": 531275,
+      "ok": true
+    },
+    "HUATEX-Tools/tessdata/chi_sim.traineddata": {
+      "size": 2469156,
+      "expect": 2469156,
+      "ok": true
+    }
+  },
+  "wheels_count": 28,
+  "requirements_ascii": "OK",
+  "config_default_sha256": "66e9e09e8bff5237fe84826dbe8b5f2d09c556b739fc0462f4ca6732e320c8e1",
+  "config_sha256": "66e9e09e8bff5237fe84826dbe8b5f2d09c556b739fc0462f4ca6732e320c8e1",
+  "config_default_eq_config": true,
+  "bat_files": [
+    "HUATEX-Tools/selftest.bat",
+    "HUATEX-Tools/start.bat",
+    "HUATEX-Tools/stop.bat",
+    "HUATEX-Tools/一键安装.bat",
+    "HUATEX-Tools/恢复配置.bat"
+  ],
+  "bat_count": 5,
+  "bat_detail": {
+    "HUATEX-Tools/selftest.bat": {
+      "cp936": true,
+      "chcp936": true,
+      "bad_glyph": false
+    },
+    "HUATEX-Tools/start.bat": {
+      "cp936": true,
+      "chcp936": true,
+      "bad_glyph": false
+    },
+    "HUATEX-Tools/stop.bat": {
+      "cp936": true,
+      "chcp936": true,
+      "bad_glyph": false
+    },
+    "HUATEX-Tools/一键安装.bat": {
+      "cp936": true,
+      "chcp936": true,
+      "bad_glyph": false
+    },
+    "HUATEX-Tools/恢复配置.bat": {
+      "cp936": true,
+      "chcp936": true,
+      "bad_glyph": false
+    }
+  },
+  "restore_bat_has_flag": true,
+  "preflight_strings": {
+    "v1.3.2-20261016": true,
+    "--restore-config": true,
+    "looks_mojibake": true,
+    "HUATEX_TESSERACT": true,
+    "Tools for Huatex": true
+  },
+  "config_py_WIN_TESS_SCAN_ROOTS": true,
+  "forbidden_hits": [],
+  "xlsx_files": [
+    "HUATEX-Tools/templates/Payment核销-模板.xlsx"
+  ]
+}

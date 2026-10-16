@@ -1,0 +1,54 @@
+{
+  "id": "20261016_100436_payment",
+  "workflow": "payment",
+  "workflow_label": "Payment Request（付款核销）",
+  "params": {
+    "date": "20261013"
+  },
+  "inputs": [
+    "10-12华特明细待确认.xlsx",
+    "voucher-a1013.zip",
+    "voucher-b1013.zip",
+    "voucher-c1013.zip"
+  ],
+  "status": "done",
+  "created_at": "2026-10-16T10:04:36",
+  "started_at": "2026-10-16T10:04:36",
+  "finished_at": "2026-10-16T10:05:26",
+  "elapsed_sec": 49.6,
+  "exit_code": 0,
+  "error": null,
+  "artifacts": [
+    {
+      "name": "Payment recon ledger-20261013.xlsx",
+      "path": "/private/tmp/huatex-v134-test/HUATEX-Tools/runs/20261016_100436_payment/out/Payment recon ledger-20261013.xlsx",
+      "size": 14409,
+      "kind": "file"
+    },
+    {
+      "name": "Payment request to Bank-20261013.xlsx",
+      "path": "/private/tmp/huatex-v134-test/HUATEX-Tools/runs/20261016_100436_payment/out/Payment request to Bank-20261013.xlsx",
+      "size": 15729,
+      "kind": "file"
+    },
+    {
+      "name": "Payment request to Bank-20261013.xlsx.recon.txt",
+      "path": "/private/tmp/huatex-v134-test/HUATEX-Tools/runs/20261016_100436_payment/out/Payment request to Bank-20261013.xlsx.recon.txt",
+      "size": 5413,
+      "kind": "file"
+    },
+    {
+      "name": "Payment 待人工核清单-20261013.xlsx",
+      "path": "/private/tmp/huatex-v134-test/HUATEX-Tools/runs/20261016_100436_payment/out/Payment 待人工核清单-20261013.xlsx",
+      "size": 9897,
+      "kind": "file"
+    },
+    {
+      "name": "payprep-log-20261013.txt",
+      "path": "/private/tmp/huatex-v134-test/HUATEX-Tools/runs/20261016_100436_payment/out/payprep-log-20261013.txt",
+      "size": 24194,
+      "kind": "file"
+    }
+  ],
+  "job_dir": "/private/tmp/huatex-v134-test/HUATEX-Tools/runs/20261016_100436_payment"
+}

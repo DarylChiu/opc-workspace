@@ -1,0 +1,25 @@
+HUATEX Tools · Windows 交付包 内容清单（MANIFEST）
+====================================================================================================
+包文件名   : HUATEX-Tools-Windows-v1.3-20261016.zip
+包 sha256  : 3b42e64a0ed592abf8b03ecc21bb3c4cc0cdf8d5ae7351865d5c8b552701966c
+包大小     : 151999887 bytes (144.96 MB)
+条目数     : 81 个文件（解压后）
+解压后总字节: 162091390 bytes (154.58 MB)
+生成器     : portable/tools/build_package.py（S4 · 2026-10-15 · VERSION=v1.3-20261016）
+生成时间   : 2026-10-16T08:23:39      ← 幂等性检查时请忽略本行（其余行必须完全一致）
+
+包内 config.yaml 的 Windows 默认值（相对 dev 树 config.yaml 的差异）：
+  · source_root: ""                 # ← 由页面 ⓪ 填写；例：D:/HUATEX（正斜杠）。留空时运行会明确报错，不会静默
+  · source_root_hint: '请填写本机资料文件夹（含 RM-Database 的那一层），例如 D:/HUATEX（用正斜杠）'
+  · workspace: ""                # Windows 无工作区概念；留空时脚本自动回退到程序所在目录
+  · output_root: 'D:\HUATEX\work'   # 该盘不存在时，start.bat 会启动自检并自动回落为 程序目录/work
+  · tesseract_cmd: 'C:\Program Files\Tesseract-OCR\tesseract.exe'   # 装在别处就改这一行（单引号）
+
+S4.2 · 内置素材（随包外发；已逐文件校验字节数）
+  · installers/Release-26.09.0-0.zip                       43709956 B  sha256=7a6f256a0ddf7536182246a5733331bf4677cbcc34f4663774947ad34556c8d0  Poppler for Windows 26.09.0（解压即用）
+  · installers/tesseract-ocr-w64-setup-5.4.0.20240606.exe   50175248 B  sha256=c885fff6998e0608ba4bb8ab51436e1c6775c2bafc2559a19b423e18678b60c9  Tesseract 5.4.0 安装器（UB-Mannheim 构建，Inno Setup 可静默安装）
+  · tessdata/chi_sim.traineddata                            2469156 B  sha256=a5fcb6f0db1e1d6d8522f39db4e848f05984669172e584e8d76b6b3141e1f730  tessdata_fast 语言包 chi_sim
+  · tessdata/eng.traineddata                                4113088 B  sha256=7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2  tessdata_fast 语言包 eng
+  · tessdata/osd.traineddata                               10562727 B  sha256=9cf5d576fcc47564f11265841e5ca839001e7e6f38ff7f7aacf46d15a96b00ff  tessdata_fast 语言包 osd（方向检测）
+  · tessdata/vie.traineddata                                 531275 B  sha256=79df64caf7bcfb2a27df5042ecb6121e196eada34da774956995747636d5bfa1  tessdata_fast 语言包 vie
+  · wheels/*.whl                                           49990270 B（28 个 wheel）  离线装依赖（win_amd64 · cp310/311/312/313）

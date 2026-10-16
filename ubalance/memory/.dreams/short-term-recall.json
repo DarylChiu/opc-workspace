@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-15T09:58:52.147Z",
+  "updatedAt": "2026-10-16T01:19:16.277Z",
   "entries": {
     "memory:memory/2026-06-10.md:1:29": {
       "key": "memory:memory/2026-06-10.md:1:29",
@@ -7598,6 +7598,68 @@
         "59/2020/qh14",
         "đ.30/đ.47/đ.68.4",
         "61/2020/qh14"
+      ]
+    },
+    "memory:memory/2026-10-15.md:179:188": {
+      "key": "memory:memory/2026-10-15.md:179:188",
+      "path": "memory/2026-10-15.md",
+      "startLine": 179,
+      "endLine": 188,
+      "source": "memory",
+      "snippet": "- **内置**：Tesseract 安装器 **50,175,248 B**｜Poppler **43,709,956 B**｜tessdata eng/osd/vie/chi_sim｜**wheels ×28**（cp310–313 win_amd64，49,990,270 B） - **一键安装.bat**：7,584 B，CRLF 159 行 + chcp 65001；管理员检测 → pip 离线装 → 静默装 Tesseract → Expand-Archive 解 Poppler → preflight 复检（幂等） - **应用层自动探测**（仅 Windows）：tesseract 路径（config→Program Files→x86→包内）｜POPPLER_PATH（包内 tools\\poppler 注入 + 7 处 convert_from_path 显式传参）｜TESSDATA_PREFIX（包内 tessdata\\）；**Mac 行为不变** - **主代理独立验收 PASS**： - trace 25 行 PASS｜zip sha256 与声称一致｜`testzip()` OK - **素材逐字节核对一致**（Tesseract 50,175,248 / Poppler 43,709,956 / tessdata 4 个 / wheels 28 个） - **中文名 UTF-8 标志 9/9** ✅（子代理首轮 72/81 缺失，已修） - 客户数据扫描 0；无 regression 配置；runs/ 仅占位说明 - **自包含回",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4202830672264099,
+      "maxScore": 0.4202830672264099,
+      "firstRecalledAt": "2026-10-16T01:19:16.277Z",
+      "lastRecalledAt": "2026-10-16T01:19:16.277Z",
+      "queryHashes": [
+        "a728cff30403"
+      ],
+      "recallDays": [
+        "2026-10-16"
+      ],
+      "conceptTags": [
+        "eng/osd/vie/chi-sim",
+        "win-amd64",
+        "一键安装.bat",
+        "expand-archive",
+        "poppler-path",
+        "convert-from-path",
+        "tessdata-prefix",
+        "utf-8"
+      ]
+    },
+    "memory:memory/2026-10-15.md:171:180": {
+      "key": "memory:memory/2026-10-15.md:171:180",
+      "path": "memory/2026-10-15.md",
+      "startLine": 171,
+      "endLine": 180,
+      "source": "memory",
+      "snippet": "- **我的处置**：打包 **v1.1 离线包**（+`wheels/` 15 个 win_amd64/cp313 wheel，含 pdfminer.six/pypdfium2/cryptography 传递依赖）+ 包内新增 `修复指引-自检4项.md` - 交付：`deliverables/HUATEX-Tools-Windows-v1.1-20261015.zip`｜**22,892,035 B**｜sha256 `a43142ee…b7549`｜61 条目｜**中文文件名 UTF-8 标志 8/8 ✅** - 已发布到看板静态根，公网实测 **200 / 22,892,035 B / 12.1s**，sha256 一致 - **⚠️ 教训（已入 lessons）**：首版我用 `zip -X` 打包 → **UTF-8 标志全丢**（中文名 Windows 会乱码）→ 改用 python zipfile 重打并回读校验 - **模型**：deepseek/deepseek-v4-flash（如实标注） ## 17:5x ✅ S4.2 全离线一键安装包 v1.2 完成 + 主代理验收 PASS（子代理 portable-s4p2-bundle，17m39s） - **交付**：`deliverables/HUATEX-Tools-Windows-v1.2-20261015.zip`｜**151,997,295 B (144.96 MB)**｜sha256 `a61792c0b8b92f383bfd3ea13a26cb3cdfb35374b6bea55b0043",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.40387992560863495,
+      "maxScore": 0.40387992560863495,
+      "firstRecalledAt": "2026-10-16T01:19:16.277Z",
+      "lastRecalledAt": "2026-10-16T01:19:16.277Z",
+      "queryHashes": [
+        "a728cff30403"
+      ],
+      "recallDays": [
+        "2026-10-16"
+      ],
+      "conceptTags": [
+        "v1.1",
+        "win-amd64/cp313",
+        "修复指引-自检4项.md",
+        "utf-8",
+        "8/8",
+        "12.1s",
+        "deepseek/deepseek-v4-flash",
+        "s4.2"
       ]
     }
   }

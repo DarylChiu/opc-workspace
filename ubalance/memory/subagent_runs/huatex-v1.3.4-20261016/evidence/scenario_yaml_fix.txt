@@ -1,0 +1,22 @@
+== 包根: /tmp/huatex-v134-scenario/HUATEX-Tools
+== config.yaml line 27 初始: '  source_root: ""                 # ← 由页面 ⓪ 填写；例：D:/HUATEX（正斜杠）。留空时运行会明确报错，不会静默'
+
+[1] 写入双引号路径后 line 27: '  source_root: "D:\\Tools for Huatex\\HUATEX进出口材料"'
+    ✅ 裸 yaml.safe_load → ScannerError | while scanning a double-quoted scalar |   in "<unicode string>", line 27, column 16: |       source_root: "D:\Tools for Huatex\HUATEX进出口材料" |                    ^ | found unknown escape character 'T' |   in "<unicode string>", line 27, column 20: |       source_root: "D:\Tools for Huatex\HUATEX进出口材料" |                        ^
+
+[2] 包内 config.load_yaml_tolerant('config.yaml')
+[config] config.yaml 解析失败（ScannerError）→ 已自动修正 1 处「双引号路径→单引号」（原文件已备份为 .bak）
+    ✅ 解析成功 source_root = 'D:\\Tools for Huatex\\HUATEX进出口材料'
+    ✅ 写回行 = "  source_root: 'D:\\Tools for Huatex\\HUATEX进出口材料'" → 单引号: True
+    ✅ 目录文件: ['config.yaml', 'config.yaml.bak']
+    ✅ .bak 保留原双引号行 = '  source_root: "D:\\Tools for Huatex\\HUATEX进出口材料"'
+    ✅ 修复后裸 yaml 可解析 = 'D:\\Tools for Huatex\\HUATEX进出口材料'
+
+[3] 包内 app/server.py::save_source_root（目录名含反斜杠）
+    target = '/tmp/huatex-v134-scenario/D:\\Tools for Huatex\\HUATEX进出口材料' | 存在: True | 含反斜杠: True
+    ✅ save_source_root -> True /tmp/huatex-v134-scenario/D:\Tools for Huatex\HUATEX进出口材料
+    ✅ 写回行 = "  source_root: '/tmp/huatex-v134-scenario/D:\\Tools for Huatex\\HUATEX进出口材料'"
+    ✅ 是单引号: True
+    ✅ 裸 yaml 解析 = '/tmp/huatex-v134-scenario/D:\\Tools for Huatex\\HUATEX进出口材料'
+    ✅ 往返一致: True
+    ✅ 幂等二次: True

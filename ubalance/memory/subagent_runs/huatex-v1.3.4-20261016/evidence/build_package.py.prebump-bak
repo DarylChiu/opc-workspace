@@ -1,0 +1,1985 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""build_package.py — HUATEX Tools · Windows 交付包打包器（S4 · 2026-10-15）
+
+用法：
+  python3 portable/tools/build_package.py                     # 生成 deliverables/HUATEX-Tools-Windows-v1-20261015.zip + -MANIFEST.txt
+  python3 portable/tools/build_package.py --stage /tmp/x --zip-out /tmp/y.zip --manifest-out /tmp/y-MANIFEST.txt
+
+设计（S4 任务书 §A）：
+  · 输入 = **dev 树 `portable/`** ＋ 本文件内嵌的「Windows 专属文件」（.bat / 自检脚本 / 中文文档 / requirements.txt）
+    → 全部在 **临时 stage 目录**里生成，dev 树 `portable/config.yaml` **一行不改**。
+  · 包内 `config.yaml` = 由 `portable/config.yaml` **定点替换 5 个键**生成（Windows 默认），保留其余键与注释。
+  · **排除清单写死在代码里**（见 EXCLUDE_*），并在 MANIFEST 里逐条列出。
+  · 生成 **内容清单 + 每文件 sha256 + 包 sha256/大小** → `<zip>-MANIFEST.txt`。
+  · **幂等**：所有 zip 条目时间戳固定 = 1980-01-01；相同输入 → 相同 zip 字节 → 相同清单。
+  · **自校验**：打包后扫全包，禁止出现客户数据（*.pdf / *客户*.xlsx / 图片 / runs 留痕），发现即报错退出。
+"""
+import argparse
+import ast
+import fnmatch
+import hashlib
+import os
+import re
+import shutil
+import sys
+import zipfile
+from datetime import datetime
+
+HERE = os.path.dirname(os.path.abspath(__file__))        # .../portable/tools
+PORTABLE = os.path.dirname(HERE)                         # .../portable
+REPO = os.path.dirname(PORTABLE)                         # workspace 根
+DELIV = os.path.join(REPO, 'deliverables')
+
+PKG_DIR_NAME = 'HUATEX-Tools'
+VERSION = 'v1.3.3-20261016'
+ZIP_BASENAME = 'HUATEX-Tools-Windows-%s.zip' % VERSION
+DEFAULT_STAGE = '/tmp/huatex-pkg-stage'
+ZIP_TS = (1980, 1, 1, 0, 0, 0)          # 固定时间戳 → zip 可复现（幂等）
+
+# ══════════════ 排除清单（写死在此；MANIFEST 里逐条列出） ══════════════
+EXCLUDE_TOP_DIRS = {'runs', 'in', 'out', 'evidence',     # 运行留痕 / 输入输出 / 证据目录（含客户 PDF、470MB 留痕）
+                   'dist-assets'}                        # S4.2：内置素材的「暂存目录」，按 installers/tessdata/wheels 另行落地（见 place_assets）
+EXCLUDE_ANY_DIRS = {'__pycache__'}                       # 任何层级的字节码缓存
+EXCLUDE_NAMES = {'.DS_Store', '.pdftext_cache.json',      # mac 垃圾 + pdf 文本缓存
+                 'start.command', 'stop.command',        # mac 专用启停脚本（Windows 包不带）
+                 'build_package.py',                     # 打包器本身属开发工具，不随包外发
+                 'preflight_win.py'}                     # S4.2：包内 tools/preflight.py 的「源码」，不重复外发
+EXCLUDE_PATTERNS = ['config.regression-*.yaml',          # 回归专用配置，不随包外发
+                    '*.pyc', '*.pyo', '*.log', '*.tmp', '~$*', '*.zip', '*.swp']
+
+# 允许出现的表格文件（白名单）；其余任何 xlsx/xls/xlsm 一律视为客户数据 → 报错
+ALLOWED_XLSX = {'templates/Payment核销-模板.xlsx'}
+# 允许出现的占位说明文件（覆盖层新增；非客户数据，亦不属"runs 留痕"）
+PLACEHOLDERS = {'runs/说明.txt', 'work/说明.txt'}
+
+# ══════════════ S4.2 · 内置素材（dist-assets/<名> → 包内 <名>） ══════════════
+# 素材由「下载步骤」预先落在 portable/dist-assets/ 下；打包时**逐文件校验字节数**，
+# 不符或缺文件一律**中止打包**（绝不伪造文件）。
+ASSET_SRC_DIR = os.path.join(PORTABLE, 'dist-assets')
+ASSET_DIRS = ('installers', 'tessdata', 'wheels')
+ASSET_EXPECT = {
+    'installers/tesseract-ocr-w64-setup-5.4.0.20240606.exe':
+        (50175248, 'Tesseract 5.4.0 安装器（UB-Mannheim 构建，Inno Setup 可静默安装）'),
+    'installers/Release-26.09.0-0.zip': (43709956, 'Poppler for Windows 26.09.0（解压即用）'),
+    'tessdata/eng.traineddata': (4113088, 'tessdata_fast 语言包 eng'),
+    'tessdata/osd.traineddata': (10562727, 'tessdata_fast 语言包 osd（方向检测）'),
+    'tessdata/vie.traineddata': (531275, 'tessdata_fast 语言包 vie'),
+    'tessdata/chi_sim.traineddata': (2469156, 'tessdata_fast 语言包 chi_sim'),
+}
+# 客户数据扩展名（打包后扫描用）
+FORBIDDEN_EXT = {'.pdf', '.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tif', '.tiff',
+                 '.doc', '.docx', '.rar', '.7z', '.eml', '.msg'}
+
+
+# ══════════════════════════════════════════════════════════════════
+#  一、Windows 专属文件（内嵌；全部在临时 stage 目录里生成）
+# ══════════════════════════════════════════════════════════════════
+
+START_BAT = r'''@echo off
+chcp 936 >nul
+rem ============================================================
+rem  HUATEX 本地工具台 · Windows 双击启动
+rem  双击本文件即可：自检 → 起本地服务 → 自动打开浏览器
+rem  （运行期不联网；依赖/OCR 环境由包根 一键安装.bat 一次性装好；只监听 127.0.0.1，其他人访问不到）
+rem ============================================================
+cd /d "%~dp0"
+
+set "PY="
+where py >nul 2>nul && set "PY=py"
+if not defined PY ( where python >nul 2>nul && set "PY=python" )
+if not defined PY (
+  echo.
+  echo [x] 没找到 Python。
+  echo     请先安装 Python 3.11 或更高版本，安装第一步务必勾选
+  echo     "Add python.exe to PATH" 和 "Add Python to environment variables"。
+  echo     装完关掉本窗口，重新双击 start.bat。详见《安装清单-Windows.md》。
+  echo.
+  pause
+  exit /b 1
+)
+echo 使用解释器：%PY%
+echo.
+%PY% -u tools\preflight.py
+set "RC=%ERRORLEVEL%"
+if "%RC%"=="3" goto :warn
+if %RC% GEQ 2 goto :fatal
+
+:start
+echo.
+echo 正在启动本地服务（约 2-5 秒）……
+echo   页面地址：http://127.0.0.1:8000/   （浏览器会自动打开）
+echo   停止服务：双击 stop.bat，或在本窗口按 Ctrl+C
+echo.
+%PY% -u app\server.py
+echo.
+echo 服务已退出。
+pause
+exit /b 0
+
+:warn
+echo.
+echo ============================================================
+echo  注意：自检有 ❌ 项（多为缺少依赖包、缺 Tesseract 或缺 Poppler）。
+echo        最快的修法：先双击包根 一键安装.bat（全离线，包内自带素材，可重复运行）。
+echo        此时「Payment 核销 / 进出口材料」很可能跑不出结果，
+echo        但服务仍会启动。建议先看《自查表-常见报错.md》，
+echo        或先双击 selftest.bat 看完整自检报告。
+echo.
+echo  按任意键仍要启动服务；直接关窗口 = 退出。
+echo ============================================================
+pause >nul
+goto :start
+
+:fatal
+echo.
+echo ============================================================
+echo  启动已中止：自检发现致命问题（见上方提示）。
+echo  请按提示修好后重新双击 start.bat；或先双击 selftest.bat。
+echo ============================================================
+pause
+exit /b 2
+'''
+
+STOP_BAT = r'''@echo off
+chcp 936 >nul
+rem ============================================================
+rem  HUATEX 本地工具台 · 停止服务
+rem  读取 runs\.server.pid 后结束该进程（含子进程）
+rem ============================================================
+cd /d "%~dp0"
+set "PIDFILE=runs\.server.pid"
+
+if not exist "%PIDFILE%" (
+  echo [i] 没找到 %PIDFILE% —— 服务应该已经停机了。
+  echo     如果页面还能打开，请在启动服务的那个黑窗口里按 Ctrl+C。
+  pause
+  exit /b 0
+)
+
+set "PID="
+set /p PID=<"%PIDFILE%"
+if not defined PID (
+  echo [!] %PIDFILE% 内容异常，已删除。
+  del "%PIDFILE%" >nul 2>nul
+  pause
+  exit /b 1
+)
+
+taskkill /PID %PID% /T /F >nul 2>nul
+if errorlevel 1 (
+  echo [!] 进程 %PID% 不存在或已停止（可能你已手动关闭窗口）。
+) else (
+  echo [OK] 已停止服务（pid=%PID%）。
+)
+del "%PIDFILE%" >nul 2>nul
+echo.
+echo 提示：运行留痕保留在 runs\ 目录，不会被本操作删除。
+pause
+exit /b 0
+'''
+
+SELFTEST_BAT = r'''@echo off
+chcp 936 >nul
+rem ============================================================
+rem  HUATEX 本地工具台 · 一键自检（出问题先跑这个）
+rem  输出中文报告：Python / 依赖 / Tesseract / 目录权限 / 端口 / 数据文件夹
+rem ============================================================
+cd /d "%~dp0"
+
+set "PY="
+where py >nul 2>nul && set "PY=py"
+if not defined PY ( where python >nul 2>nul && set "PY=python" )
+if not defined PY (
+  echo [x] 没找到 Python —— 请按《安装清单-Windows.md》第 1 步安装 Python 3.11+。
+  pause
+  exit /b 1
+)
+
+echo ============================================================
+echo   HUATEX 自检报告（把下面整段内容发给管理员/技术支持即可）
+echo   ※ 若下面有 ❌：先双击包根 一键安装.bat（离线装依赖 + Tesseract + Poppler），再重跑本文件
+echo ============================================================
+%PY% -u tools\preflight.py --selftest
+set "RC=%ERRORLEVEL%"
+echo.
+if %RC% GEQ 2 (
+  echo [结果] 自检发现问题，请按上面的 ❌ 修复提示处理后重跑本文件。
+) else (
+  echo [结果] 自检通过，可以双击 start.bat 开始使用。
+)
+echo.
+pause
+exit /b %RC%
+'''
+
+_PREFLIGHT_PY_S4_INLINE_UNUSED = r'''#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""preflight.py — 启动前自检 / 自动修复（Windows 交付包专用）
+
+两种用法：
+  python tools\\preflight.py              <- start.bat 调用：快速检查 + 自动修复
+  python tools\\preflight.py --selftest   <- selftest.bat 调用：完整中文自检报告
+
+退出码：
+  0 = 通过；3 = 有警告（缺依赖 / 缺 Tesseract / 数据文件夹没填）仍可启动；
+  2 = 致命（Python 版本过低 / 程序目录不可写 / config.yaml 修不好）
+
+做两件"提前发现"的事（都在本地，不联网）：
+  1) 输出根回落：config.yaml 的 paths.output_root 若指向不存在的盘（例：D:\\HUATEX\\work 而本机没有 D 盘），
+     自动改写为 'work'（= 程序目录下的 work\\），并打印中文说明。
+  2) config.yaml 引号修复：Windows 路径带反斜杠，若被写进 YAML 双引号里会导致解析失败
+     （页面上填 D:\\HUATEX 就会这样）→ 自动改成单引号并提示。
+"""
+import importlib
+import os
+import re
+import socket
+import subprocess
+import sys
+
+HERE = os.path.dirname(os.path.abspath(__file__))       # .../tools
+ROOT = os.path.dirname(HERE)                            # 交付包根目录
+CONFIG_YAML = os.path.join(ROOT, 'config.yaml')
+
+DEPS = [
+    ('yaml', 'PyYAML', '读 config.yaml'),
+    ('openpyxl', 'openpyxl', '读写 Excel'),
+    ('pdfplumber', 'pdfplumber', '解析 PDF 文本层'),
+    ('pytesseract', 'pytesseract', '调用 OCR'),
+    ('PIL', 'Pillow', '图像处理'),
+    ('pdf2image', 'pdf2image', 'PDF 转图片（扫描件 OCR）'),
+    ('xlrd', 'xlrd', '读老式 .xls'),
+]
+LANGS = ['vie', 'eng', 'chi_sim']
+
+OK = '\u2705'
+NO = '\u274c'
+WARN = '\u26a0\ufe0f'
+
+
+def p(msg=''):
+    try:
+        sys.stdout.write(str(msg) + '\n')
+    except UnicodeEncodeError:                          # 极端控制台编码兜底
+        sys.stdout.write(str(msg).encode('ascii', 'replace').decode('ascii') + '\n')
+    sys.stdout.flush()
+
+
+def read_text(path):
+    for enc in ('utf-8-sig', 'utf-8'):
+        try:
+            with open(path, encoding=enc) as fh:
+                return fh.read()
+        except Exception:
+            continue
+    return ''
+
+
+def _line_get(txt, key):
+    m = re.search(r'(?m)^[ \t]*' + re.escape(key) + r':[ \t]*(.*)$', txt or '')
+    if not m:
+        return None
+    v = m.group(1).strip()
+    if v.startswith('#'):
+        return ''
+    mc = re.search(r'\s+#', v)
+    if mc:
+        v = v[:mc.start()].strip()
+    if len(v) >= 2 and v[0] == v[-1] and v[0] in '\'"':
+        v = v[1:-1]
+    return v
+
+
+def load_cfg():
+    """优先 PyYAML；没有/解析失败则用正则兜底（保证自检本身永远跑得下去）。"""
+    txt = read_text(CONFIG_YAML)
+    try:
+        import yaml
+        d = yaml.safe_load(txt) or {}
+        g = lambda k: (d or {}).get('paths', {}).get(k)
+        ocr = (d or {}).get('ocr', {}) or {}
+        srv = (d or {}).get('server', {}) or {}
+        return {'source_root': g('source_root') or '', 'output_root': g('output_root') or '',
+                'runs_dir': g('runs_dir') or '', 'rm_db': g('rm_db') or 'RM-Database',
+                'tesseract_cmd': ocr.get('tesseract_cmd') or '',
+                'port': srv.get('port') or 8000, 'yaml_ok': True}
+    except Exception:
+        return {'source_root': _line_get(txt, 'source_root') or '',
+                'output_root': _line_get(txt, 'output_root') or '',
+                'runs_dir': _line_get(txt, 'runs_dir') or '',
+                'rm_db': _line_get(txt, 'rm_db') or 'RM-Database',
+                'tesseract_cmd': _line_get(txt, 'tesseract_cmd') or '',
+                'port': int(_line_get(txt, 'port') or 8000), 'yaml_ok': False}
+
+
+def _rewrite_line(key, value_literal):
+    txt = read_text(CONFIG_YAML)
+    pat = re.compile(r'(?m)^([ \t]*)' + re.escape(key) + r':[ \t]*.*$')
+    if len(pat.findall(txt)) != 1:
+        return False
+    new = pat.sub(lambda m: m.group(1) + key + ': ' + value_literal, txt)
+    tmp = CONFIG_YAML + '.tmp'
+    with open(tmp, 'w', encoding='utf-8') as fh:
+        fh.write(new)
+    os.replace(tmp, CONFIG_YAML)
+    return True
+
+
+def repair_quotes():
+    """双击页面填了 D:\\HUATEX 之类 → YAML 双引号里的 \\H 是非法转义 → 解析失败。
+    这里把「双引号 + 含反斜杠」的值改成单引号（YAML 单引号内反斜杠是字面量）。"""
+    txt = read_text(CONFIG_YAML)
+    pat = re.compile(r'(?m)^([ \t]*[A-Za-z_]+:[ \t]*)"([^"\n]*\\[^"\n]*)"([ \t]*#.*)?$')
+    new, n = pat.subn(lambda m: m.group(1) + "'" + m.group(2) + "'" + (m.group(3) or ''), txt)
+    if n == 0:
+        return 0
+    tmp = CONFIG_YAML + '.tmp'
+    with open(tmp, 'w', encoding='utf-8') as fh:
+        fh.write(new)
+    os.replace(tmp, CONFIG_YAML)
+    return n
+
+
+def check_config_yaml():
+    """返回 (状态, 说明)；状态 'ok' / 'repaired' / 'bad'"""
+    txt = read_text(CONFIG_YAML)
+    if not txt:
+        return 'bad', 'config.yaml 不存在或读不到'
+    try:
+        import yaml
+    except ImportError:
+        return 'ok', 'PyYAML 未安装 → 跳过 YAML 解析检查（请先装依赖）'
+    try:
+        yaml.safe_load(txt)
+        return 'ok', 'config.yaml 解析正常'
+    except Exception as e1:
+        n = repair_quotes()
+        if n:
+            try:
+                yaml.safe_load(read_text(CONFIG_YAML))
+                return 'repaired', ('config.yaml 里有 %d 处「Windows 反斜杠路径写在双引号里」，'
+                                    '已自动改成单引号并修复' % n)
+            except Exception as e2:
+                return 'bad', 'config.yaml 仍无法解析：%s' % e2
+        return 'bad', 'config.yaml 无法解析：%s' % e1
+
+
+def fix_output_root(cfg):
+    """输出根所在盘不可用 → 回落为程序目录下 work\\。返回 (是否回落, 原值, 现值)。"""
+    val = (cfg.get('output_root') or '').strip()
+    if not val:
+        return False, val, val
+    m = re.match(r'^([A-Za-z]):[\\/]', val)              # 形如 D:\... 的绝对盘符路径
+    if m:
+        drive = m.group(1).upper() + ':\\'
+        if not os.path.exists(drive):
+            if _rewrite_line('output_root', "'work'   # 由 preflight.py 自动回落（原值 %s 所在盘不可用）" % val):
+                return True, val, 'work'
+            return False, val, val
+    d = val if os.path.isabs(val) else os.path.join(ROOT, val)
+    return False, val, val
+
+
+def check_deps():
+    miss, have = [], []
+    for mod, pkg, why in DEPS:
+        try:
+            m = importlib.import_module(mod)
+            have.append('%s(%s) %s' % (pkg, getattr(m, '__version__', '?'), why))
+        except Exception:
+            miss.append(pkg)
+    return have, miss
+
+
+def find_tesseract(cfg):
+    cand = []
+    if cfg.get('tesseract_cmd'):
+        cand.append(cfg['tesseract_cmd'])
+    w = shutil_which('tesseract')
+    if w:
+        cand.append(w)
+    for c in cand:
+        if c and os.path.isfile(c):
+            return c, cand
+    return None, cand
+
+
+def shutil_which(name):
+    import shutil
+    return shutil.which(name)
+
+
+def tesseract_langs(exe):
+    try:
+        r = subprocess.run([exe, '--list-langs'], capture_output=True, timeout=30)
+        out = (r.stdout + r.stderr).decode('utf-8', 'replace')
+        langs = [ln.strip() for ln in out.splitlines()[1:] if ln.strip()]
+        return langs, None
+    except Exception as e:
+        return None, '%s: %s' % (type(e).__name__, e)
+
+
+def find_poppler():
+    if os.environ.get('POPPLER_PATH'):
+        return os.environ['POPPLER_PATH']
+    return shutil_which('pdftoppm')
+
+
+def port_free(port):
+    try:
+        s = socket.socket()
+        s.bind(('127.0.0.1', int(port)))
+        s.close()
+        return True, None
+    except Exception as e:
+        return False, '%s' % e
+
+
+def dir_writable(path):
+    try:
+        os.makedirs(path, exist_ok=True)
+        t = os.path.join(path, '.write_test_preflight')
+        with open(t, 'w') as fh:
+            fh.write('ok')
+        os.remove(t)
+        return True, None
+    except Exception as e:
+        return False, '%s' % e
+
+
+def python_bits():
+    import struct
+    return struct.calcsize('P') * 8
+
+
+def quick():
+    """start.bat 用的快速检查：只报最要紧的，附自动修复。"""
+    code = 0
+    p('── 启动前自检（HUATEX Tools %s）──' % 'v1-20261015')
+    # Python
+    if sys.version_info < (3, 9):
+        p('%s Python 版本过低：%s（需 3.9+，建议 3.11）' % (NO, sys.version.split()[0]))
+        return 2
+    p('%s Python %s · %d 位 · %s' % (OK, sys.version.split()[0], python_bits(), sys.executable))
+
+    # 程序目录可写
+    okdw, err = dir_writable(os.path.join(ROOT, 'runs'))
+    if not okdw:
+        p('%s 程序目录不可写：%s' % (NO, err))
+        p('   把整个文件夹解压到「文档」或 D 盘等普通目录，不要放在 C:\\Program Files 下。')
+        return 2
+    okw, errw = dir_writable(os.path.join(ROOT, 'work'))
+    if not okw:
+        p('%s 程序目录下 work\\ 不可写：%s' % (NO, errw))
+        code = 3
+
+    # config 解析 / 修复
+    st, msg = check_config_yaml()
+    if st == 'bad':
+        p('%s %s' % (NO, msg))
+        p('   处理：用记事本打开 config.yaml，检查是否有路径没加引号；或删掉本文件让它重建。')
+        return 2
+    p('%s %s' % (OK, msg))
+    cfg = load_cfg()
+
+    # 输出根回落
+    changed, old, new = fix_output_root(cfg)
+    if changed:
+        p('%s 输出根 %s 所在盘不可用 → 已自动回落为 程序目录\\work\\' % (WARN, old))
+        p('   如需固定输出目录：用记事本改 config.yaml 的 paths.output_root。')
+        cfg['output_root'] = new
+
+    # 依赖
+    have, miss = check_deps()
+    if miss:
+        p('%s 缺少依赖：%s' % (WARN, '、'.join(miss)))
+        p('   修复（在公司内网/离线环境）：')
+        p('     %s -m pip install -r requirements.txt' % sys.executable)
+        p('   没有网络时：把离线 wheel 目录放在本包下，然后')
+        p('     %s -m pip install --no-index --find-links=wheels -r requirements.txt' % sys.executable)
+        code = 3
+    else:
+        p('%s 依赖 7/7 已安装' % OK)
+
+    # Tesseract
+    exe, cand = find_tesseract(cfg)
+    if not exe:
+        p('%s 没找到 Tesseract（扫描件 OCR 会失败）' % WARN)
+        p('   修复：安装 Tesseract-OCR（勾选 Vietnamese + Chinese Simplified + English 语言包），')
+        p('         再把 config.yaml 的 ocr.tesseract_cmd 指向 tesseract.exe。')
+        code = 3
+    else:
+        langs, err = tesseract_langs(exe)
+        if langs is None:
+            p('%s Tesseract 无法执行：%s' % (WARN, err))
+            code = 3
+        else:
+            bad = [l for l in LANGS if l not in langs]
+            if bad:
+                p('%s Tesseract 缺语言包：%s' % (WARN, '、'.join(bad)))
+                p('   修复：重跑 Tesseract 安装包 → Additional language data → 勾 vie / chi_sim / eng。')
+                code = 3
+            else:
+                p('%s Tesseract 就绪（vie/eng/chi_sim 齐全）' % OK)
+
+    # 端口
+    okp, err = port_free(cfg.get('port') or 8000)
+    if not okp:
+        p('%s 端口 %s 被占用 → 服务会自动换到下一个可用端口（页面地址以窗口提示为准）'
+          % (WARN, cfg.get('port')))
+    else:
+        p('%s 端口 %s 可用' % (OK, cfg.get('port')))
+
+    # 数据文件夹
+    sr = cfg.get('source_root') or ''
+    if not sr or not os.path.isdir(sr):
+        p('%s 数据文件夹还没填或不可用：%s' % (WARN, sr or '(空)'))
+        p('   打开页面 http://127.0.0.1:8000/ 在「⓪ 数据文件夹地址」里填好并保存（例：D:/HUATEX）。')
+        p('   ※ 只跑「Payment 核销」不需要这个；跑「进出口材料」必须填。')
+        code = 3
+    else:
+        p('%s 数据文件夹有效：%s' % (OK, sr))
+
+    p('── 自检结束（退出码 %d：0=通过，3=有警告）──' % code)
+    return code
+
+
+def selftest():
+    p('包版本     : HUATEX Tools Windows %s' % 'v1-20261015')
+    p('程序目录   : %s' % ROOT)
+    p('检查时间   : %s' % datetime_now())
+    p('解释器     : %s' % sys.executable)
+    p('')
+    code = 0
+
+    # 1 运行环境
+    ver = sys.version.split()[0]
+    bits = python_bits()
+    if sys.version_info >= (3, 11):
+        p('%s [1/10] Python %s · %d 位' % (OK, ver, bits))
+    elif sys.version_info >= (3, 9):
+        p('%s [1/10] Python %s · %d 位（可用，但建议升到 3.11）' % (WARN, ver, bits))
+        code = 3
+    else:
+        p('%s [1/10] Python %s 版本过低（需 3.9+）→ 请装 Python 3.11+' % (NO, ver))
+        code = 2
+    if bits != 64:
+        p('      %s 32 位 Python 处理 23GB 级资料会很慢，建议换 64 位。' % WARN)
+
+    # 2 目录与权限
+    flags = []
+    norm = os.path.normcase(ROOT)
+    if 'program files' in norm or 'program files (x86)' in norm:
+        flags.append('在 Program Files 下（可能无写权限）')
+    if len(ROOT) > 180:
+        flags.append('路径偏长（Windows 上限 260 字符）')
+    okd, err = dir_writable(os.path.join(ROOT, 'runs'))
+    okw, err2 = dir_writable(os.path.join(ROOT, 'work'))
+    if okd and okw:
+        p('%s [2/10] 程序目录可写（runs\\ 与 work\\ 均 OK）' % OK)
+    else:
+        p('%s [2/10] 程序目录不可写：%s %s' % (NO, err or '', err2 or ''))
+        p('      处理：把整个文件夹移到「文档 / D 盘」等普通目录，别放 C:\\Program Files。')
+        code = 2
+    for f in flags:
+        p('      %s %s' % (WARN, f))
+
+    # 3 config.yaml
+    st, msg = check_config_yaml()
+    if st == 'ok':
+        p('%s [3/10] %s' % (OK, msg))
+    elif st == 'repaired':
+        p('%s [3/10] %s' % (WARN, msg))
+        p('      原因：页面上填了 D:\\HUATEX 这种带反斜杠的路径。建议以后填正斜杠：D:/HUATEX')
+        code = 3
+    else:
+        p('%s [3/10] %s' % (NO, msg))
+        p('      处理：用记事本打开 config.yaml，把每个路径两侧都加上单引号，例如')
+        p("            source_root: 'D:/HUATEX'   （正斜杠最稳妥）")
+        code = 2
+    cfg = load_cfg()
+    p('      source_root = %r' % (cfg.get('source_root') or ''))
+    p('      output_root = %r' % (cfg.get('output_root') or ''))
+    p('      runs_dir    = %r' % (cfg.get('runs_dir') or ''))
+    p('      tesseract   = %r' % (cfg.get('tesseract_cmd') or ''))
+    p('      port        = %s' % cfg.get('port'))
+
+    # 4 输出根回落
+    changed, old, new = fix_output_root(cfg)
+    if changed:
+        p('%s [4/10] 输出根 %s 所在盘不存在 → 已回落为 程序目录\\work\\' % (WARN, old))
+        p('      如需固定到别的目录：改 config.yaml 的 paths.output_root。')
+        code = max(code, 3) if code != 2 else code
+    else:
+        d = cfg.get('output_root') or ''
+        d = d if os.path.isabs(d) else os.path.join(ROOT, d)
+        ok, e = dir_writable(d)
+        p('%s [4/10] 输出根可写：%s' % (OK if ok else NO, d) if ok else
+          '%s [4/10] 输出根不可写：%s（%s）' % (NO, d, e))
+
+    # 5 依赖
+    have, miss = check_deps()
+    if not miss:
+        p('%s [5/10] 依赖 7/7 齐全' % OK)
+    else:
+        p('%s [5/10] 缺少依赖 %d 个：%s' % (NO, len(miss), '、'.join(miss)))
+        p('      修复命令（联网）：')
+        p('        %s -m pip install -r requirements.txt' % sys.executable)
+        p('      修复命令（离线 wheel）：')
+        p('        %s -m pip install --no-index --find-links=wheels -r requirements.txt' %
+          sys.executable)
+        code = max(code, 3) if code != 2 else code
+    for h in have:
+        p('      %s %s' % (OK, h))
+
+    # 6 Tesseract
+    exe, cand = find_tesseract(cfg)
+    if not exe:
+        p('%s [6/10] 没找到 tesseract.exe（扫描件 OCR 不可用）' % NO)
+        p('      候选路径：%s' % ('、'.join(cand) or '(无)'))
+        p('      修复：装 Tesseract-OCR（勾 vie / chi_sim / eng），再把 config.yaml 的')
+        p('            ocr.tesseract_cmd 改成实际 tesseract.exe 路径。')
+        code = max(code, 3) if code != 2 else code
+    else:
+        cfgp = (cfg.get('tesseract_cmd') or '')
+        if cfgp and os.path.normcase(cfgp) != os.path.normcase(exe):
+            p('%s [6/10] 注意：config.yaml 里配置的 tesseract_cmd 不存在 → %s' % (WARN, cfgp))
+            p('      已改用 PATH 里找到的：%s' % exe)
+            p('      建议把 config.yaml 的 ocr.tesseract_cmd 改成实际路径（单引号）。')
+        langs, err = tesseract_langs(exe)
+        if langs is None:
+            p('%s [6/10] Tesseract 在 %s，但执行失败：%s' % (NO, exe, err))
+            code = max(code, 3) if code != 2 else code
+        else:
+            bad = [l for l in LANGS if l not in langs]
+            if bad:
+                p('%s [6/10] Tesseract(%s) 缺语言包：%s（现有 %d 种）' %
+                  (NO, exe, '、'.join(bad), len(langs)))
+                p('      修复：重跑 Tesseract 安装包 → 勾 "Additional language data" → 选')
+                p('            Vietnamese、Chinese (Simplified)、English，装完重跑本自检。')
+                code = max(code, 3) if code != 2 else code
+            else:
+                p('%s [6/10] Tesseract 就绪（%s）· vie/eng/chi_sim 齐全' % (OK, exe))
+
+    # 7 Poppler（pdf2image 依赖，扫描件 OCR 必需）
+    pop = find_poppler()
+    if pop:
+        p('%s [7/10] Poppler/pdftoppm 已就位：%s' % (OK, pop))
+    else:
+        p('%s [7/10] 没找到 pdftoppm（Poppler）' % NO)
+        p('      影响：扫描件 PDF 的 OCR 会报 PDFInfoNotInstalledError。')
+        p('      修复：下载 Poppler for Windows 解压到本包（如 tools\\poppler），')
+        p('            再设置环境变量 POPPLER_PATH 指向其 bin 目录，或把 bin 加进 PATH。')
+        code = max(code, 3) if code != 2 else code
+
+    # 8 端口
+    port = cfg.get('port') or 8000
+    okp, err = port_free(port)
+    if okp:
+        p('%s [8/10] 端口 %s 可用' % (OK, port))
+    else:
+        p('%s [8/10] 端口 %s 被占用（%s）' % (WARN, port, err))
+        p('      服务会自动改用下一个可用端口，页面地址以启动窗口提示为准；')
+        p('      也可能是本工具已在运行 → 直接打开 http://127.0.0.1:%s/ 试试。' % port)
+
+    # 9 数据文件夹
+    sr = cfg.get('source_root') or ''
+    if not sr:
+        p('%s [9/10] 数据文件夹还没填（页面 ⓪ 填写）' % WARN)
+        p('      只跑「Payment 核销」不需要；跑「进出口材料」必须填。')
+        code = max(code, 3) if code != 2 else code
+    elif not os.path.isdir(sr):
+        p('%s [9/10] 数据文件夹不存在：%s' % (NO, sr))
+        p('      处理：确认盘符（换盘后盘符会变）与目录是否拷全，再在页面 ⓪ 重新填写。')
+        code = max(code, 3) if code != 2 else code
+    else:
+        rmdb = os.path.join(sr, cfg.get('rm_db') or 'RM-Database')
+        if os.path.isdir(rmdb):
+            p('%s [9/10] 数据文件夹有效，且含 %s' % (OK, cfg.get('rm_db') or 'RM-Database'))
+        else:
+            p('%s [9/10] 数据文件夹存在，但没找到 %s\\' % (WARN, cfg.get('rm_db') or 'RM-Database'))
+            p('      进出口材料流程需要它；支付核销流程不需要。')
+
+    # 10 留痕目录
+    okr, errr = dir_writable(os.path.join(ROOT, 'runs'))
+    p('%s [10/10] 运行留痕目录可写：runs\\' % (OK if okr else NO) if okr else
+      '%s [10/10] 运行留痕目录不可写（%s）' % (NO, errr))
+
+    p('')
+    if code == 0:
+        p('== 自检结论：全部通过，双击 start.bat 即可使用 ==')
+    elif code == 3:
+        p('== 自检结论：有警告项（❌/⚠️）→ 相关流程可能失败，请按上面提示修复 ==')
+    else:
+        p('== 自检结论：发现致命问题（❌）→ 修好后再启动 ==')
+    p('提示：把本报告整段复制发给管理员，可以最快定位问题。')
+    return code
+
+
+def datetime_now():
+    import datetime
+    return datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+
+def main():
+    if '--selftest' in sys.argv:
+        return selftest()
+    return quick()
+
+
+if __name__ == '__main__':
+    sys.exit(main())
+'''
+
+# ══════════════ S4.2 · 包内 tools/preflight.py 的唯一来源 ══════════════
+# 上面那份 S4 内嵌副本（_PREFLIGHT_PY_S4_INLINE_UNUSED）已**停用**，仅为 diff 可读保留；
+# 现改为从 portable/tools/preflight_win.py 读取（该文件本身不随包外发，见 EXCLUDE_NAMES）。
+PREFLIGHT_PY = open(os.path.join(HERE, 'preflight_win.py'), encoding='utf-8').read()
+
+REQUIREMENTS_TXT = '''# -*- coding: utf-8 -*-
+# HUATEX Tools - Windows dependency list (workflow layer; the web layer has zero third-party deps)
+# Quickest: double-click the one-key installer in the package root (offline, from the bundled wheels folder)
+# Online install:        python -m pip install -r requirements.txt
+# Offline wheel install: python -m pip install --no-index --find-links=wheels -r requirements.txt
+# !! KEEP THIS FILE ASCII-ONLY !! On Chinese Windows pip decodes it as GBK (cp936); any UTF-8
+#    Chinese comment here makes pip die with UnicodeDecodeError (fixed in v1.3.1).
+PyYAML>=6.0
+openpyxl>=3.1
+pdfplumber>=0.11
+pytesseract>=0.3.10
+Pillow>=10.0
+pdf2image>=1.17
+xlrd>=2.0
+'''
+
+RUNS_README_TXT = '''本目录 = 每次运行的留痕（自动生成）。
+
+结构：runs\\<日期_时间>_<payment 或 loan>\\
+  in\\    你上传的输入文件副本
+  work\\  中间产物
+  out\\   交付件（下载就是从这里取的）
+  logs\\  stdout.log / stderr.log / run_config.yaml
+  job.json  本次运行的流程、参数、状态、耗时、产物清单
+
+· 财务留痕请勿随手删除；确认不需要后再清理旧目录。
+· 磁盘占用参考：一次完整 Payment 运行约 60 MB 起（含凭证解压），进出口材料视资料量而定。
+'''
+
+WORK_README_TXT = '''本目录 = 本工具的默认输出根（程序目录下的 work\\）。
+
+· 页面跑任务时，产出实际落在 runs\\<时间戳>_<流程>\\out\\，本目录主要作为默认输出根。
+· 若 config.yaml 的 paths.output_root 指向的盘不存在（例：D 盘没插/没分区），
+  start.bat 会在启动自检时自动回落到本目录，并打印中文提示。
+'''
+
+README_FIRST = r'''# HUATEX 本地工具台 · 先读我（3 分钟上手）
+
+- **交付包**：`HUATEX-Tools-Windows-v1.3.3-20261016`（Windows 单机版）
+- **能做什么**：在本机离线跑两个财务流程 —— ① Payment Request 付款核销；② 进出口材料自动化处理（v2.8d）
+- **怎么跑**：解压 → 双击 `一键安装.bat`（一次性、全离线）→ 双击 `start.bat` → 浏览器点几下 → 下载产出。**不需要命令行**。
+- **⚠️ 支持边界（务必知悉）**：本包在 macOS 上完成打包、并在**脱离开发树**的临时目录里跑通了两条流程的端到端对拍；
+  **但尚未在 Windows 真机实测**。首次在 Windows 落地时，请先跑一次 `一键安装.bat`（离线装环境）与 `selftest.bat`（1 分钟），
+  把报告发给管理员后再正式使用。待实测清单见 `手册-徒弟操作.md` 第 6 节。
+
+---
+
+## 1. 四步用起来
+
+| 步骤 | 你要做的 |
+|---|---|
+| 第 1 步 | 把整个 `HUATEX-Tools` 文件夹解压到**普通目录**（如 `D:\HUATEX-Tools`）。**不要**放 `C:\Program Files`（没有写权限）。 |
+| 第 2 步 | 右键 `一键安装.bat` →「以管理员身份运行」（本机账号是 Administrator 就直接双击）：自动离线装好 7 个依赖 + Tesseract + Poppler。**包内自带安装素材，不用你上网找任何下载地址。** |
+| 第 3 步 | 双击 `selftest.bat` → 看报告是否「自检通过」（有 ❌ 就按提示处理，或把整段报告发给管理员）。 |
+| 第 4 步 | 双击 `start.bat` → 浏览器自动打开页面 → 按《手册-徒弟操作.md》操作。用完双击 `stop.bat`。 |
+
+## 2. 目录说明
+
+| 文件 / 目录 | 作用 | 你要动它吗 |
+|---|---|---|
+| `一键安装.bat` | **全离线一键装**：pip 依赖 + Tesseract + Poppler（只跑一次，可重复运行；建议管理员） | 第 2 步双击就用 |
+| `start.bat` | 启动服务 + 自动开浏览器 | 双击就用 |
+| `stop.bat` | 停止服务 | 双击就用 |
+| `selftest.bat` | 一键自检（出问题先跑这个） | 双击就用 |
+| `恢复配置.bat` | config.yaml 改坏了/中文乱码了 → 恢复原版（损坏件另存） | 改错配置时用 |
+| `installers/` | 内置安装素材：Tesseract 安装器 + Poppler 压缩包（**不用自己下载**） | 不删 |
+| `tessdata/` | 内置语言包 eng/osd/vie/chi_sim（不依赖安装器勾选项） | 不删 |
+| `wheels/` | 内置 pip 依赖包（离线安装用，覆盖 Python 3.10–3.13） | 不删 |
+| `修复指引-自检4项.md` | 「缺依赖 / 缺 Tesseract / 缺 Poppler / 数据文件夹未填」四条历史报错 → 已内置口径 | 排错看 |
+| `config.yaml` | **唯一配置文件**：数据文件夹地址、端口、OCR 路径 | 一般不用手改；页面 ⓪ 会自动写入数据文件夹 |
+| `README-先读我.md` | 本文件 | 看 |
+| `手册-徒弟操作.md` | 图文步骤（零命令行） | 看 |
+| `自查表-常见报错.md` | 20 条「现象 → 原因 → 处理」 | 排错看 |
+| `安装清单-Windows.md` | 第一次装环境照着做（Python / 依赖 / Tesseract / Poppler / 权限 / 杀毒） | 装机看 |
+| `requirements.txt` | 依赖清单（含离线 wheel 安装写法） | 装环境用 |
+| `app/` | 网页服务（本地 `http.server`，只监听 127.0.0.1） | 不动 |
+| `workflows/` | 两个流程的脚本（判定逻辑未改） | 不动 |
+| `expense_mvp/` | 付款核销用的 OCR 引擎最小集 | 不动 |
+| `templates/` | 付款送银行底稿模板 | 不动（页面可覆盖） |
+| `tools/` | 自检脚本 + 对拍工具 | 不动 |
+| `runs/` | **每次运行的留痕**（输入副本 / 产出 / 日志） | 别删；看完再清理旧目录 |
+| `work/` | 默认输出根（若 config 指定的盘不存在会自动回落到这里） | 不用管 |
+
+## 3. 数据从哪来
+
+本工具**不做任何同步**（无 robocopy、无增量脚本）。请**自己**从公司共享盘把资料拷到本机，
+然后在页面 **⓪ 数据文件夹地址** 里填那一层目录（含 `RM-Database` 的那层），例如 `D:/HUATEX`，点保存。
+
+- 建议用**正斜杠** `D:/HUATEX`（反斜杠在某些写法下会让配置文件解析失败，自检会自动修正并提示）。
+- 盘符会变（拔插移动硬盘后 `E:` 可能变 `F:`）→ 换盘后请重新在页面 ⓪ 填写。
+
+## 4. 产出在哪
+
+每次运行都会新建一个留痕目录：`runs\<日期_时间>_<payment|loan>\out\`。
+页面 ④ 也可以直接点「下载」拿到交付件（目录类产出会自动打包成 zip，含空目录）。
+
+## 5. 安全与数据
+
+- 服务**只绑定 127.0.0.1**，同一台电脑以外的人**访问不到**；不使用 cloudflared/内网隧道。
+- 全程**不联网**：页面 CSS/JS 全内联、无 CDN、无外链。
+- 客户财务数据**不随包外发**：本包内**不含任何客户 PDF / Excel / 图片 / 运行留痕**（打包脚本会自检并拒绝）。
+- **安装期也不需要联网**：依赖、Tesseract、Poppler、语言包**全部随包**（`wheels/`、`installers/`、`tessdata/`），
+  不会去访问任何外网下载源；内网/断网机器同样能装。
+- 运行留痕留在本机 `runs\` 下，由你自己管理。
+
+## 6. 出问题怎么办（按顺序）
+
+1. 双击 `一键安装.bat`（离线补齐 依赖 / Tesseract / Poppler；可重复运行）。
+2. 双击 `selftest.bat`，把整段中文报告发给管理员/技术支持。
+3. 查《自查表-常见报错.md》：按「现象」搜关键词。
+4. 还不行：把 `runs\<最近一次的目录>\logs\stdout.log` 与 `stderr.log` 一起发过去。
+'''
+
+MANUAL = r'''# 手册 · 徒弟操作（零命令行版）
+
+> 适用：`HUATEX-Tools-Windows-v1.3.3-20261016`
+> 前置：已跑过包根 `一键安装.bat`（全离线：依赖 + Tesseract + Poppler）与 `selftest.bat`，且「自检通过」。
+
+---
+
+## 1. 每次使用的完整流程（6 步）
+
+| 步 | 你看到什么 | 你要做什么 |
+|---|---|---|
+| 准备 | 文件夹 `HUATEX-Tools` | 确认资料已从公司共享盘拷到本机（含 `RM-Database` 的那一层） |
+| 启动 | 黑窗口闪一下然后停住，浏览器自动打开 `http://127.0.0.1:8000/` | 什么都不用做；**黑窗口不要关**，关了服务就停了 |
+| ⓪ | 页面最上方「数据文件夹地址」输入框 | 填本机资料文件夹（如 `D:/HUATEX`）→ 点「保存」。提示「已保存」才继续 |
+| ① | 「选择流程」下拉框 | 选 `Payment Request（付款核销）` 或 `进出口材料自动化处理` |
+| ② | 上传区 | Payment：上传**明细 Excel** + 一个或多个**凭证 zip** + 填批次日期（如 `20261013`）；进出口材料：上传 **L1 Excel**（或票号 txt）+ 批次 tag |
+| ③ | 「开始」按钮 → 状态 + 日志窗口 | 点「开始」，等状态变成 `done`（进度区会滚动显示日志）。并发=1：上一个没跑完，下一个会排队 |
+| ④ | 产出清单表格 | 点每行的「下载」拿交付件。文件夹类产出会自动打包成 zip |
+| 结束 | 用完 | 双击 `stop.bat` 停服务，或直接关黑窗口 |
+
+> **一次运行大概要多久**：Payment 核销（50 份左右凭证）约 1-3 分钟；进出口材料视资料量，20 条 L1 约 1-2 分钟，几百条可能 10 分钟以上。跑的时候不要关黑窗口、不要拔数据盘。
+
+---
+
+## 2. 文字版界面步骤图
+
+```
+┌──────────────────────────────────────────────────────────────┐
+│  HUATEX 本地工具台          仅 127.0.0.1 · 不联网 · 自动留痕   │
+├──────────────────────────────────────────────────────────────┤
+│  ⓪ 数据文件夹地址  [ D:/HUATEX                        ] [保存] │
+│      ↑ 填「含 RM-Database 的那一层」；提示保存成功再往下         │
+│                                                              │
+│  ① 选择流程   [ Payment Request（付款核销）        ▼ ]         │
+│                                                              │
+│  ② 上传输入                                                   │
+│     Payment： [选择文件] 明细.xlsx                            │
+│               [选择文件] voucher-a1013.zip（可多选）           │
+│               批次日期 [ 20261013 ]                           │
+│     进出口：  [选择文件] L1-成品采购入库补单.xlsx              │
+│               批次 tag [ 2026_10 ]   高级：override（回归用）   │
+│                                                              │
+│  ③ [ 开始 ]   状态：运行中…   日志：……（自动滚动）              │
+│                                                              │
+│  ④ 产出清单                                                   │
+│     文件名                          大小      操作             │
+│     Payment request to Bank-….xlsx  15 KB     [下载]           │
+│     Payment recon ledger-….xlsx     14 KB     [下载]           │
+│     Payment 待人工核清单-….xlsx      10 KB     [下载]           │
+│                                                              │
+│  运行历史（最近若干次，失败也会留痕）                          │
+└──────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 3. 两个流程分别要准备什么
+
+### 3.1 Payment Request（付款核销）
+
+| 输入 | 说明 |
+|---|---|
+| 明细 Excel | 待确认的付款明细（如 `10-12华特明细待确认.xlsx`），`in\` 里只能放**一个** `.xlsx` |
+| 凭证 zip | 银行/发票凭证压缩包，可多个（如 `voucher-a1013.zip`） |
+| 批次日期 | `YYYYMMDD`，决定产出文件名（如 `20261013`） |
+| 模板 | 默认用包内 `templates\Payment核销-模板.xlsx`，一般不用换 |
+
+产出：送银行表 `Payment request to Bank-<日期>.xlsx`、`Payment recon ledger-<日期>.xlsx`（台账 + 差异清单）、
+`Payment 待人工核清单-<日期>.xlsx`（待人工判断的行 + 口径核对）。
+
+### 3.2 进出口材料自动化处理（v2.8d）
+
+| 输入 | 说明 |
+|---|---|
+| L1 Excel | 本批 L1 清单（列名见 S2 落实表），一行一张票 |
+| 批次 tag | 如 `2026_10`（决定产出命名与 RM 搜索范围） |
+| 数据文件夹 | 页面 ⓪ 填的目录下要有 `RM-Database\<年>\THÁNG <月>\...` |
+| override | 一般不用；只有复现历史批次（如 `2025_12` 回归）才填 |
+
+产出：`Outcome1-*.xlsx`（21×13 那一张，逐票结论）、`Outcome2\`（按票号分文件夹的材料，打成 zip）、处理报告。
+
+---
+
+## 4. 每次运行的产物在哪
+
+```
+HUATEX-Tools\runs\20261015_143022_payment\
+├─ in\      你上传的文件副本（留痕，可从这儿复核输入）
+├─ work\    中间产物（如解压后的凭证）
+├─ out\     交付件 ← 页面上「下载」就是取这里
+├─ logs\    stdout.log / stderr.log / run_config.yaml（本次运行的独立配置）
+└─ job.json  流程/参数/状态/起止时间/耗时/产物清单
+```
+
+- 想复核某次运行：打开 `out\`；想查为什么失败：打开 `logs\stderr.log` 的末尾。
+- 删旧留痕：确认不需要后，删掉对应的 `runs\2026xxxx_xxxxxx_xxx\` 整个文件夹即可（**删前先确认产出已备份**）。
+
+---
+
+## 5. 出错先做什么
+
+1. 双击 `selftest.bat` —— 90% 的启动期问题（缺依赖、缺 Tesseract、语言包、权限、端口占用）它会直接指出来。
+2. 页面报错：把页面弹出的红字 + `runs\<那次>\logs\stderr.log` 末尾 20 行截图/复制发给管理员。
+3. 常见报错 → 《自查表-常见报错.md》。
+
+**绝对不要做**：不要关掉黑窗口再点「开始」（会失联）；不要把 `config.yaml` 整段删掉（会使输出根/端口回到默认）；
+不要把包放到 `C:\Program Files`；不要用记事本另存为把 `config.yaml` 存成 GBK（会乱码）。
+
+---
+
+## 6. Windows 待实测清单（首次落地请逐条确认）
+
+| # | 待确认项 | 怎么看 |
+|---|---|---|
+| 1 | `start.bat` 能起服务并自动打开浏览器 | 双击后看黑窗口与浏览器 |
+| 2 | `chcp 936` 下中文菜单/日志不乱码（.bat 为 GBK 编码） | 看黑窗口与页面文字 |
+| 3 | `py` / `python` 探测命中正确解释器 | 黑窗口第 2 行「使用解释器：…」 |
+| 4 | 7 个依赖能 import（含 pdf2image→Poppler） | `selftest.bat` 第 5、7 项 |
+| 5 | Tesseract 路径与 vie/eng/chi_sim 语言包 | `selftest.bat` 第 6 项 |
+| 6 | 端口 8000 未被占（占用时自动 +1 并提示） | `selftest.bat` 第 8 项 / 启动窗口 |
+| 7 | 数据文件夹（含越南语变音目录名）能被读到 | 页面 ⓪ 保存成功 + 跑一次小批 |
+| 8 | 输出根回落（无 D 盘时落到 `work\`） | `selftest.bat` 第 4 项 |
+| 9 | 杀毒/Defender 不拦截 `.py` 与解压过程 | 首次运行后看 `runs\` 是否正常生成 |
+| 10 | 与基线对拍：Payment 三份交付件逐单元格一致 | 交给 Balance 用 `tools\compare_xlsx.py` 复核 |
+| 11 | **`一键安装.bat` 能离线装完**（依赖 / 静默装 Tesseract / 解压 Poppler） | 双击后逐步看 `[OK]`，结尾「全部步骤完成」 |
+| 12 | **tesseract 自动探测命中**（未手改 config.yaml） | `selftest.bat` 第 6 项显示实际路径 + `--list-langs` 实测 |
+| 13 | **`POPPLER_PATH` / `TESSDATA_PREFIX` 两个实际值非空** | `selftest.bat` 第 7、8 项 |
+| 14 | **内置素材三件套齐全**（installers / tessdata / wheels） | `selftest.bat` 第 9 项（逐文件字节数） |
+'''
+
+ERRORS = r'''# 自查表 · 常见报错（现象 → 原因 → 处理）
+
+> 通用第一步：双击 `selftest.bat`，把整段中文报告发给管理员。
+> 第二步：看 `runs\<最近一次>\logs\stderr.log` 末尾。
+
+| # | 现象 | 可能原因 | 怎么处理 |
+|---|---|---|---|
+| 1 | 双击 `start.bat` 黑窗口一闪就没 / 提示「没找到 Python」 | 没装 Python，或装时没勾 Add to PATH | 装 Python 3.11+，安装第一步勾 `Add python.exe to PATH`；装完关掉所有黑窗口重试。详见《安装清单-Windows.md》§1 |
+| 2 | 启动时提示「缺少依赖：PyYAML/openpyxl/…」 | 依赖没装，或装到了另一个 Python 里；**或没先 `cd` 到 `HUATEX-Tools` 目录就跑 pip** | 先 `cd /d "D:\...\HUATEX-Tools"`，再 `"<报告里的 python.exe>" -m pip install --no-index --find-links=wheels -r requirements.txt`；也可用绝对路径：`-r "D:\...\HUATEX-Tools\requirements.txt"` | **↩ 最快：双击包根 `一键安装.bat`（离线用包内 wheels/，不用联网）** |
+| 3 | 页面「开始」后立刻失败，日志有 `ModuleNotFoundError: No module named 'yaml'` | 同上，且启动服务用的解释器与装包的不是同一个 | 看黑窗口第 2 行「使用解释器：」；用同一个解释器 `-m pip install …`；或先 `py -3 --version` / `python --version` 核对 |
+| 4 | 日志：`tesseract is not installed or it's not in your PATH` / `FileNotFoundError: ...tesseract.exe` | Tesseract 没装，或 `config.yaml` 的 `ocr.tesseract_cmd` 路径不对 | 装 Tesseract-OCR 到默认目录；若装在别处，用记事本改 `config.yaml`：`tesseract_cmd: 'C:\你的路径\tesseract.exe'`（单引号、正/反斜杠都行）**↩ 最快：双击包根 `一键安装.bat`（已内置 Tesseract 安装器，静默安装）** |
+| 5 | 日志：`Failed loading language 'vie'` / `Error opening data file ...vie.traineddata` | Tesseract 缺越南语/中文语言包 | 重跑 Tesseract 安装包 → 勾 `Additional language data` → 选 Vietnamese、Chinese (Simplified)、English；装完 `selftest.bat` 第 6 项应变成 ✅ **↩ 不用重装语言包：`一键安装.bat` 会把包内 `tessdata\` 接上（TESSDATA_PREFIX）** |
+| 6 | 日志：`PDFInfoNotInstalledError` / 找不到 `pdftoppm` | 缺 Poppler（`pdf2image` 依赖），扫描件 PDF 无法转图 | 下载 Poppler for Windows 解压到本包（如 `tools\poppler`），设环境变量 `POPPLER_PATH=<该目录>\bin`，或把 `bin` 加进 PATH；重跑自检第 7 项 **↩ 最快：双击包根 `一键安装.bat`（已内置 Poppler 压缩包，自动解压并设 POPPLER_PATH）** |
+| 7 | 页面 ⓪ 保存时报「路径不存在或不是文件夹」 | 数据文件夹填错 / 盘符变了 / 资料没拷全 | 在「此电脑」里复制真实路径（建议 `D:/HUATEX` 正斜杠）；确认那一层下能看到 `RM-Database` |
+| 8 | 日志：`❌ paths.source_root 未配置或不可用` | 页面 ⓪ 没填，或配置里的路径失效 | 回到页面 ⓪ 填好并保存；确认盘符（拔插硬盘后 `E:` 常变 `F:`） |
+| 9 | 日志：`❌ paths.l1_file 未配置（当前为空）` | 进出口材料流程没上传 L1 | 在页面 ② 上传 L1 Excel（或票号 txt）后再点开始 |
+| 10 | 日志：`❌ 未找到明细 Excel` / `❌ 未找到凭证 zip` | Payment 流程上传的文件类型不对 | Payment 必须上传 1 个明细 `.xlsx` + 至少 1 个 `voucher-*.zip`；输入目录里不要放别的 xlsx |
+| 11 | 服务起不来，提示端口被占用 / 页面地址不是 8000 | 8000 被其它程序（或上一次的服务）占用 | 本工具会自动改用下一个端口，**看黑窗口打印的地址**再打开；或先双击 `stop.bat` 停掉旧服务；也可改 `config.yaml` 的 `server.port` |
+| 12 | 提示「程序目录不可写」/ Permission denied 写 `runs\` | 包被解压在 `C:\Program Files`（或只读盘） | 把整个 `HUATEX-Tools` 文件夹移到「文档」或 `D:\` 下重新使用 |
+| 13 | 日志：`PermissionError: [Errno 13] ... ~$xxx.xlsx` 或 “正被另一个程序使用” | 相关 Excel 正被打开（Excel 会生成 `~$` 锁文件） | 关掉 Excel（含后台进程）后重跑；`in\` 里若残留 `~$` 开头的文件，删掉 |
+| 14 | 日志报「文件名或扩展名太长 / path too long」 | 目录层级太深，Windows 260 字符上限 | 把包解压到更短的路径（如 `D:\HUATEX-Tools`），并让数据文件夹路径尽量短 |
+| 15 | 越南语目录名（`THÁNG 12`）显示乱码或找不到目录 | 系统区域/编码，或资料拷盘时把变音字符改了名 | 本工具全程 UTF-8；用资源管理器复核目录名是否与源盘**完全一致**（含变音符号），必要时从共享盘重拷 |
+| 16 | 杀毒软件 / Windows Defender 报毒或把 `.py` 删了 | 未签名的脚本被启发式拦截 | 把整个文件夹加入杀毒白名单/排除项；从源码包重新解压；公司管控策略下请联系 IT 放行 |
+| 17 | OCR 很慢（一张图几十秒）或识别结果不准 | 扫描件分辨率高 / 语言包混用 / 图片质量差 | 属正常现象：本工具对每张待识别图片调用 Tesseract，首页最慢；可先跑小批验证；识别不准的行会进「待人工核清单」由人工判断 |
+| 18 | 页面一直「运行中」，很久不动 | 并发=1：前面有任务在跑；或任务确实在跑 OCR | 看日志窗口是否在滚动；不要重复点「开始」；大资料量耐心等，或先用小批试 |
+| 19 | 点「下载」没反应 / 下载的 zip 打不开 | 产出还没生成完就点了；或文件被杀毒锁定 | 等状态变 `done` 再下载；直接去 `runs\<那次>\out\` 里取文件 |
+| 20 | 结果和上一次不一致 | 输入不同（明细/凭证不同、批次日期不同）或 RM 资料有更新 | 用 `runs\<那次>\in\` 复核当次输入；确认批次日期与资料版本；差异行以「待人工核清单」为准 |
+21（补充） | 页面打不开（浏览器提示无法访问） | 服务实际没起来（黑窗口已退出/被杀毒终止） | 回到黑窗口看报错；重新双击 `start.bat`；必要时先跑 `selftest.bat` |
+22（补充） | `config.yaml` 解析报错 / 自检提示「已自动修正引号」 | 页面填数据文件夹时用了反斜杠写在双引号里（`"D:\HUATEX"`） | 自检会自动改成单引号；以后填写请用正斜杠 `D:/HUATEX`，或手工加单引号 |
+'''
+
+INSTALL = r'''# 安装清单 · Windows（第一次装环境照着做）
+
+> 全程**只需要做一次**。目标机 = 普通办公电脑（Windows 10/11 64 位）。
+> 装完请双击 `selftest.bat`，全部 ✅ 才算装好。
+
+---
+
+## 0. 先给结论：需要 4 样东西
+
+| # | 软件 | 用途 | 必需性 |
+|---|---|---|---|
+| 1 | **Python 3.11+（64 位）** | 跑所有脚本 | 必需 |
+| 2 | **7 个 pip 依赖包** | Excel / PDF / OCR 处理 | 必需 |
+| 3 | **Tesseract-OCR 5.x + 语言包 vie / eng / chi_sim** | 扫描件文字识别 | 必需（有扫描件时） |
+| 4 | **Poppler for Windows（`pdftoppm`）** | 扫描件 PDF → 图片 | 有扫描件 PDF 时必需 |
+
+> 本工具**不联网**也能跑：UI 无 CDN、无外链、不需要任何在线服务。
+
+---
+
+## 0.9 懒人版（推荐）：双击 `一键安装.bat` —— **全离线，不用自己搜网址**
+
+包内**已内置**全部需要下载的东西：
+
+| 内置目录 | 内容 |
+|---|---|
+| `installers/` | `tesseract-ocr-w64-setup-5.4.0.20240606.exe`（50,175,248 B）+ `Release-26.09.0-0.zip`（Poppler，43,709,956 B） |
+| `tessdata/` | 语言包 `eng` / `osd` / `vie` / `chi_sim`（tessdata_fast） |
+| `wheels/` | 7 个依赖 + 传递依赖的 wheel（win_amd64，覆盖 Python 3.10/3.11/3.12/3.13） |
+
+**用法**：右键 `一键安装.bat` →「以管理员身份运行」（管理员账号直接双击）。它按顺序：
+① 离线装依赖（`--no-index --find-links=wheels`）→ ② 静默装 Tesseract（`/VERYSILENT`，语言包不用勾）
+→ ③ 解压 Poppler 到 `tools\poppler\` → ④ 跑自检并打印报告。**可重复运行（幂等）**。
+
+> 只有第 1 节（装 Python 本身）仍需你自己装一次：Python 安装包体积大且受公司软件策略影响，未随包外发。
+> 下面的 1–4 节是**手工版**（一键安装失败、或公司要求分步时用）。
+
+---
+
+## 1. Python 3.11+（勾 Add to PATH）
+
+1. 到 python.org 下载 **Windows installer (64-bit)**，版本 **3.11 或更高**（3.12/3.13 亦可）。
+2. 安装第一屏**务必勾选**：
+   - ☑ `Add python.exe to PATH`
+   - ☑ `Add Python to environment variables`（若有）
+   然后点 `Install Now`。
+3. 验证：`Win+R` → `cmd` → 输入
+   ```
+   py -3 --version
+   python --version
+   ```
+   应显示 `Python 3.11.x`（或更高）。
+4. **若公司禁止自行安装软件** → 见本文 §6 退阶方案。
+
+> ⚠️ 不要装 32 位 Python：进出口资料可达 GB 级，32 位会内存不足。
+
+---
+
+## 2. 安装 7 个依赖包
+
+### 2.1 联网安装（能上外网/公司内网有 PyPI 镜像）
+
+在 `HUATEX-Tools` 目录里，按住 `Shift` + 右键 → 「在此处打开 PowerShell/终端」，执行：
+
+```
+cd /d "D:\你解压的位置\HUATEX-Tools-Windows-v1.3.3-20261016\HUATEX-Tools"
+python -m pip install -r requirements.txt
+```
+
+> ❗ **必须先 `cd` 到 `HUATEX-Tools` 目录**（或直接用下面的绝对路径写法）。
+> 在 `C:\Users\...` 等其他目录下执行，会报 `Could not open requirements file: ... 'requirements.txt'`。
+
+> 如果 `python` 不是本工具用的解释器（见 `selftest.bat` 报告），就用报告里那行完整路径：
+> `"C:\Users\你\AppData\Local\Programs\Python\Python311\python.exe" -m pip install -r "D:\...\HUATEX-Tools\requirements.txt"`
+
+包清单：`PyYAML` `openpyxl` `pdfplumber` `pytesseract` `Pillow` `pdf2image` `xlrd`（外加自动装的 `pdfminer.six` 等依赖）。
+
+### 2.2 离线安装（内网 / 断网）—— 推荐先准备
+
+1. 在一台能联网的机器上下载 wheel：
+   ```
+   python -m pip download -r requirements.txt -d wheels
+   ```
+   （若目标机 Python 版本不同，加 `--python-version 3.11 --only-binary=:all:`）
+2. 把 `wheels` 整个目录拷到 `HUATEX-Tools\wheels\`。
+3. 在目标机执行（先 `cd` 到 `HUATEX-Tools` 目录；下面的绝对路径写法最稳）：
+   ```
+   cd /d "D:\你解压的位置\HUATEX-Tools-Windows-v1.3.3-20261016\HUATEX-Tools"
+   python -m pip install --no-index --find-links=wheels -r requirements.txt
+   ```
+
+---
+
+## 3. Tesseract-OCR（**语言包勾选是本步的关键**）
+
+1. 下载 Windows 版安装包（UB-Mannheim 构建的 `tesseract-ocr-w64-setup-5.x.exe`）。
+2. 安装时：
+   - 安装目录建议保持默认 `C:\Program Files\Tesseract-OCR\`
+   - **Additional language data（语言包）** 页：**勾选**
+     - ☑ **Vietnamese（vie）**
+     - ☑ **Chinese (Simplified)（chi_sim）**
+     - ☑ **English（eng，通常默认已勾）**
+   - 其他语言不勾也行。
+3. 若 Tesseract 装在非默认目录：用记事本打开 `config.yaml`，把这行改成实际路径（**单引号**）：
+   ```
+   tesseract_cmd: 'D:\Tools\Tesseract-OCR\tesseract.exe'
+   ```
+4. 验证：`selftest.bat` 第 6 项应显示 ✅ `vie/eng/chi_sim 齐全`。
+
+> 语言包事后补装：重跑安装包 → 选 `Modify`/重新安装 → 在语言包页补勾即可。
+> 手工补装：把 `vie.traineddata`、`chi_sim.traineddata` 放进 `Tesseract-OCR\tessdata\`。
+
+---
+
+## 4. Poppler（扫描件 PDF → 图片）
+
+1. 下载 `Release-xx.xx.x-0.zip`（Poppler for Windows）。
+2. 解压到 `HUATEX-Tools\tools\poppler\`（或任意固定目录）。
+3. 让程序找到它（任选其一）：
+   - 把 `...\poppler\Library\bin` 加进系统 `PATH`；或
+   - 新建环境变量 `POPPLER_PATH = ...\poppler\Library\bin`
+4. 验证：`selftest.bat` 第 7 项 ✅。
+
+> 只用文本层 PDF（非扫描件）时没有 Poppler 也能跑；一遇到扫描件就会报 `PDFInfoNotInstalledError`。
+
+---
+
+## 5. 权限 / 杀毒 / 路径
+
+| 风险 | 处置 |
+|---|---|
+| 解压到 `C:\Program Files` 无写权限 | 解压到 `D:\HUATEX-Tools` 或「文档」下（本工具需要写 `runs\`、`work\`） |
+| 杀毒/Defender 拦截脚本 | 把整个工具目录加入**排除项/白名单**；被误删就从源码包重新解压 |
+| 260 字符路径上限 | 目录层级浅一点（`D:\HUATEX-Tools`），数据文件夹路径也尽量短 |
+| 中文/越南文文件名 | 系统区域设置保持默认即可；本工具全程 UTF-8 + 标准 zip；拷盘时不要用会改名的工具 |
+| 多个人用同一台电脑 | 当前版本单人；每人各自解压一份、各自一份数据 |
+
+---
+
+## 6. 公司无法自行装软件时的退阶方案
+
+按“阻力从小到大”排：
+
+1. **便携版 Python（免安装）**：下载 `python-3.11.x-embed-amd64.zip` 解压到 `HUATEX-Tools\python\`，
+   用它来装依赖（**先 `cd` 到 `HUATEX-Tools` 目录**）：`cd /d "D:\...\HUATEX-Tools"`，再 `python\python.exe -m pip install --no-index --find-links=wheels -r requirements.txt`
+   然后手工修改 `start.bat` 把它第一行的 Python 探测指向该解释器（或把该目录加到 PATH 前面）。
+   *注：embeddable 版默认无 pip，需先放 `get-pip.py` 或直接解压 wheel 到 `site-packages`。*
+2. **Tesseract 便携版**：用绿色版 tesseract 目录（含 `tessdata`），把 `ocr.tesseract_cmd` 指向它的 `tesseract.exe` 即可，
+   无需安装。语言包 `vie/chi_sim` 的 `.traineddata` 放进该目录 `tessdata\`。
+3. **Poppler 便携版**：本来就是解压即用（§4）。
+4. **请 IT/管理员代装**：把本文件 + `requirements.txt` + `selftest.bat` 报告一并给 IT，需要的东西一目了然。
+5. **完全装不了的极端情况**：仍在 Mac/Linux 或由财务部统一在一台机器上跑，本包逻辑与操作系统无关（仅启停脚本不同）。
+
+---
+
+## 7. 装完的验收动作
+
+1. 双击 `selftest.bat` → 10 项全 ✅（警告项要能解释清楚）。
+2. 双击 `start.bat` → 浏览器打开页面 → ⓪ 填数据文件夹 → 用一个小批次跑通一次。
+3. 到 `runs\<时间戳>_<流程>\out\` 确认产出存在。
+4. 把 `selftest.bat` 报告截图发给管理员留档。
+'''
+
+
+ONEKEY_INSTALL_BAT = r'''@echo off
+chcp 936 >nul
+setlocal enabledelayedexpansion
+rem ============================================================
+rem  HUATEX 本地工具台 · 一键安装（全离线，不用你上网搜任何下载地址）
+rem  包内已内置：Tesseract 安装器 + Poppler 压缩包 + 4 个语言包 + 全部 pip 依赖(wheels\)
+rem  双击本文件自动：① 装依赖 → ② 装 Tesseract → ③ 解压 Poppler → ④ 复检
+rem  ※ 装 Tesseract 需要管理员权限：本机账号是 Administrator 直接双击即可，
+rem     否则请右键本文件 →「以管理员身份运行」。
+rem  ※ 本文件可重复运行（幂等）：已装好的步骤会跳过。
+rem ============================================================
+cd /d "%~dp0"
+set "FAILED="
+set "ADMIN=0"
+
+echo ================================================================
+echo   HUATEX 一键安装（离线版  v1.3）
+echo   安装目录：%CD%
+echo ================================================================
+echo.
+
+rem ── 0. 管理员权限检查 ──────────────────────────────────────────
+net session >nul 2>&1
+if not errorlevel 1 (
+  set "ADMIN=1"
+  echo [OK]  0. 管理员权限：有
+) else (
+  echo [!]   0. 管理员权限：无 —— Tesseract 静默安装会失败。
+  echo       补救：关掉本窗口 → 右键「一键安装.bat」→「以管理员身份运行」。
+  echo       （依赖包与 Poppler 不需要管理员，本窗口会继续装这两步。）
+)
+echo.
+
+rem ── 1. 找 Python ─────────────────────────────────────────────
+set "PY="
+where py >nul 2>nul && set "PY=py -3"
+if not defined PY ( where python >nul 2>nul && set "PY=python" )
+if not defined PY (
+  echo [x]   1. 找 Python —— 失败：没找到 py / python。
+  echo       补救：装 Python 3.11+（64 位），安装第一屏务必勾选
+  echo             "Add python.exe to PATH"；装完关掉所有黑窗口，再双击本文件。
+  echo             详见包内《安装清单-Windows.md》第 1 节。
+  echo.
+  echo 安装未完成：请先装好 Python，然后重新双击「一键安装.bat」。
+  pause
+  exit /b 1
+)
+echo [OK]  1. 找 Python：%PY%
+%PY% --version
+echo.
+
+rem ── 2. 离线装依赖（包内 wheels\，不需要联网）──────────────────
+if not exist "wheels\*.whl" (
+  echo [x]   2. 装依赖 —— 失败：包内 wheels\ 里没有 .whl 文件。
+  echo       补救：重新解压完整的交付 zip（wheels\ 必须一起解压出来）。
+  set "FAILED=!FAILED! 2"
+) else (
+  echo [..]  2. 装依赖：pip install --no-index --find-links=wheels -r requirements.txt
+  %PY% -m pip install --no-index --find-links=wheels -r requirements.txt
+  if errorlevel 1 (
+    echo [!]   2. 装依赖：requirements.txt 方式失败，改用「直接列包名」重试（v1.3.1 兜底）……
+    %PY% -m pip install --no-index --find-links=wheels PyYAML openpyxl pdfplumber pytesseract Pillow pdf2image xlrd
+  )
+  if errorlevel 1 (
+    echo [x]   2. 装依赖 —— 失败。
+    echo       补救：① 确认源解释器是 Python 3.10–3.13 / 64 位（包内 wheel 覆盖这四个版本）；
+    echo             ② 用 selftest.bat 报告里给出的解释器完整路径重跑本文件；
+    echo             ③ 把本窗口整段内容发给管理员。
+    set "FAILED=!FAILED! 2"
+  ) else (
+    echo [OK]  2. 装依赖：完成
+  )
+)
+echo.
+
+rem ── 3. 静默装 Tesseract（已装则跳过）────────────────────────
+set "TESS_EXE="
+if exist "C:\Program Files\Tesseract-OCR\tesseract.exe" set "TESS_EXE=C:\Program Files\Tesseract-OCR\tesseract.exe"
+if exist "C:\Program Files (x86)\Tesseract-OCR\tesseract.exe" set "TESS_EXE=C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
+rem v1.3 · 用户自己装在自定义目录（如 D:\Tools for Huatex）也认，避免重复装一份
+if not defined TESS_EXE for /f "delims=" %%P in ('dir /s /b "D:\Tools for Huatex\tesseract.exe" 2^>nul') do set "TESS_EXE=%%P"
+if not defined TESS_EXE for /f "delims=" %%P in ('dir /s /b "C:\Tools for Huatex\tesseract.exe" 2^>nul') do set "TESS_EXE=%%P"
+if not defined TESS_EXE for /f "delims=" %%P in ('dir /s /b "D:\Tesseract-OCR\tesseract.exe" 2^>nul') do set "TESS_EXE=%%P"
+if defined TESS_EXE (
+  echo [OK]  3. Tesseract：已安装（!TESS_EXE!），跳过
+) else (
+  set "TESS_SETUP="
+  for %%F in ("installers\tesseract-ocr-w64-setup-*.exe") do set "TESS_SETUP=%%~fF"
+  if not defined TESS_SETUP (
+    echo [x]   3. Tesseract —— 失败：installers\ 里没有 tesseract-ocr-w64-setup-*.exe
+    echo       补救：重新解压完整交付 zip（installers\ 必须一起解压出来）。
+    set "FAILED=!FAILED! 3"
+  ) else if "!ADMIN!"=="0" (
+    echo [!]   3. Tesseract —— 跳过：没有管理员权限，静默安装会失败。
+    echo       补救：右键「一键安装.bat」→「以管理员身份运行」再跑一次。
+    set "FAILED=!FAILED! 3"
+  ) else (
+    echo [..]  3. Tesseract：静默安装（约 1-2 分钟，请不要关窗口）……
+    "!TESS_SETUP!" /VERYSILENT /NORESTART /SUPPRESSMSGBOXES /LOG="%CD%\installers\tesseract-install.log"
+    if exist "C:\Program Files\Tesseract-OCR\tesseract.exe" (
+      echo [OK]  3. Tesseract：安装完成
+    ) else if exist "C:\Program Files (x86)\Tesseract-OCR\tesseract.exe" (
+      echo [OK]  3. Tesseract：安装完成（x86 目录）
+    ) else (
+      echo [x]   3. Tesseract —— 未检测到安装结果。
+      echo       补救：看 installers\tesseract-install.log；或手动双击该安装器完成安装。
+      echo             （语言包不用勾：程序会用包内 tessdata\ 接管语言包。）
+      set "FAILED=!FAILED! 3"
+    )
+  )
+)
+echo.
+
+rem ── 4. 解压 Poppler 到 tools\poppler\ ────────────────────────
+set "POPP_BIN="
+for /f "delims=" %%P in ('dir /s /b "tools\poppler\pdftoppm.exe" 2^>nul') do set "POPP_BIN=%%P"
+if defined POPP_BIN (
+  echo [OK]  4. Poppler：已就位（!POPP_BIN!），跳过
+) else (
+  set "POPP_ZIP="
+  for %%F in ("installers\*.zip") do set "POPP_ZIP=%%~fF"
+  if not defined POPP_ZIP (
+    echo [x]   4. Poppler —— 失败：installers\ 里没有 Poppler 压缩包（Release-*.zip）。
+    echo       补救：重新解压完整交付 zip。
+    set "FAILED=!FAILED! 4"
+  ) else (
+    echo [..]  4. Poppler：解压 !POPP_ZIP! → tools\poppler\
+    powershell -NoProfile -ExecutionPolicy Bypass -Command "Expand-Archive -LiteralPath '!POPP_ZIP!' -DestinationPath 'tools\poppler' -Force"
+    if errorlevel 1 (
+      echo [x]   4. Poppler —— 解压失败。
+      echo       补救：手动右键该 zip →「全部解压缩」到 tools\poppler\（保持 Library\bin 层级）。
+      set "FAILED=!FAILED! 4"
+    ) else (
+      echo [OK]  4. Poppler：解压完成
+    )
+  )
+)
+echo.
+
+rem ── 5. 复检（把整段报告发给管理员即可）──────────────────────
+echo [..]  5. 复检：
+%PY% -u tools\preflight.py --selftest
+if errorlevel 2 (
+  echo.
+  echo [x]   5. 复检 —— 有致命问题（❌），请按上面每条的修复提示处理。
+  set "FAILED=!FAILED! 5"
+) else if errorlevel 1 (
+  echo.
+  echo [!]   5. 复检 —— 有警告项（⚠️），多数情况下仍可使用；请按上面提示确认。
+) else (
+  echo [OK]  5. 复检：全部通过
+)
+echo.
+
+echo ================================================================
+if defined FAILED (
+  echo  安装结束：以下步骤未完成：!FAILED!
+  echo  请按上面每步的「补救」提示处理后，重新双击本文件（可重复运行，已好步骤会自动跳过）。
+) else (
+  echo  安装结束：全部步骤完成。
+  echo  下一步：双击 selftest.bat 看自检报告 → 通过后双击 start.bat 开始使用。
+)
+echo ================================================================
+echo.
+pause
+endlocal
+exit /b 0
+'''
+
+FIX_GUIDE = r'''# 修复指引 · 自检 4 项（**已内置，无需联网**）
+
+> 适用：`HUATEX-Tools-Windows-v1.3.3-20261016`
+>
+> **v1.3.1 修了两个「中文 Windows 专属」坑（都是实测踩到的）**：
+> ① `requirements.txt` 改成 **纯 ASCII**。旧版含中文注释，中文 Windows 下 pip 会用 GBK(cp936)
+>    解码 → `UnicodeDecodeError: 'gbk' codec can't decode byte 0xac ...` → 7 个依赖装不上；
+>    且 `一键安装.bat` 第 2 步新增「直接列包名」兑底重试（不读 requirements.txt 也能装）。
+> ② 四个 `.bat` 改为 **GBK 编码 + `chcp 936`**。旧版 UTF-8 + `chcp 65001` 在中文 Windows 上
+>    会被 cmd 误拆行，报 `The filename, directory name, or volume label syntax is incorrect.`
+>    和 `'...' is not recognized as an internal or external command`。
+>
+> **v1.3.2 新增（自愈能力）**：
+> ③ 包内新增 **`config.default.yaml`（原版备份）** + **`恢复配置.bat`**。当 `config.yaml` 被改坏
+>    （最常见：用 PowerShell 或非 UTF-8 记事本保存过 → 中文变成 `搴忓彿` 这种乱码，自检 3/12 报
+>    `config.yaml 无法解析`）→ **双击 `恢复配置.bat` 一键恢复原版**，损坏件自动另存为
+>    `config.yaml.broken-时间戳`。等价命令：`python tools\preflight.py --restore-config`。
+>    **⛔ 不要用 PowerShell 改 config.yaml**：PS 5.1 的 `Get-Content` 默认按 GBK 读、
+>    `Set-Content -Encoding UTF8` 写回 → 中文必乱码。请用「记事本 + 另存为 UTF-8」或页面 ⓪ 填写。
+>    （tesseract / Poppler / 语言包**都不用改配置**，程序会自动探测。）
+> 背景：早前 Windows 实测报过 4 项（① 缺 7 个 pip 依赖 ② 找不到 `tesseract.exe`
+> ③ 找不到 `pdftoppm`(Poppler) ④ 数据文件夹未填）。**从 v1.2 起前 3 项已全部内置，
+> 客户不需要再上网找任何下载地址。**
+
+---
+
+## 0. 先做这一件事（覆盖前 3 项）
+
+**右键包根的 `一键安装.bat` →「以管理员身份运行」**（本机账号是 Administrator 时直接双击）。
+
+它按顺序做 4 件事，全离线（`installers\` / `tessdata\` / `wheels\` 都在包里）：
+
+| 步 | 动作 | 对应早前的报错 |
+|---|---|---|
+| 1 | `pip install --no-index --find-links=wheels -r requirements.txt` | ① 缺 7 个 pip 依赖 |
+| 2 | 静默安装 `installers\tesseract-ocr-w64-setup-5.4.0.20240606.exe`（`/VERYSILENT`） | ② 找不到 tesseract.exe |
+| 3 | 把 `installers\Release-26.09.0-0.zip` 解压到 `tools\poppler\` | ③ 找不到 pdftoppm |
+| 4 | 调 `tools\preflight.py --selftest` 复检并打印报告 | — |
+
+---
+
+## 1. 缺 7 个 pip 依赖 → **已内置**
+
+- 包内 `wheels\` 已带全部 wheel（含传递依赖：`pdfminer.six`、`charset-normalizer`、
+  `cryptography`、`cffi`、`pypdfium2`、`et-xmlfile`、`packaging`、`pycparser`），
+  **覆盖 Python 3.10 / 3.11 / 3.12 / 3.13（64 位 Windows）**。
+- 一键安装.bat 第 1 步就是离线安装；不用联网，也不用自己 `pip download`。
+- 手工命令（备用）：**先切到包目录**再执行（否则找不到 `requirements.txt`）：
+  ```
+  cd /d "D:\你解压的位置\HUATEX-Tools-Windows-v1.3.3-20261016\HUATEX-Tools"
+  python -m pip install --no-index --find-links=wheels -r requirements.txt
+  ```
+  > 或一次写完绝对路径（不用 cd）：`python -m pip install --no-index --find-links="D:\...\HUATEX-Tools\wheels" -r "D:\...\HUATEX-Tools\requirements.txt"`
+- 若报「no matching distribution」：说明用的 Python 不在上述 4 个版本内 → 请装 Python 3.11+ 64 位。
+
+## 2. 找不到 tesseract.exe → **已内置**
+
+- 包内 `installers\tesseract-ocr-w64-setup-5.4.0.20240606.exe`（50,175,248 B，UB-Mannheim 官方构建）。
+- 一键安装.bat 第 2 步静默装到 `C:\Program Files\Tesseract-OCR\`；**语言包不用在安装器里勾**——
+  包内 `tessdata\`（eng / osd / vie / chi_sim）会通过 `TESSDATA_PREFIX` 接管。
+- 程序会自动探测：环境变量 `HUATEX_TESSERACT` → 配置值 → `C:\Program Files\Tesseract-OCR\`
+  → `C:\Program Files (x86)\Tesseract-OCR\` → 包内 `tools\tesseract\` → **常见自定义目录**
+  （如 `D:\Tools for Huatex\...`）→ **自定义目录限深扫描（≤3 层）**（都找不到才报错），
+  **不需要手改 config.yaml**。
+- **Tesseract 已装在别处**（如 `D:\Tools for Huatex\Tesseract-OCR\`）时二选一：
+  用记事本把 `config.yaml` 的 `ocr.tesseract_cmd` 改成该 `tesseract.exe` 完整路径；
+  或设环境变量 `HUATEX_TESSERACT=<完整路径>\tesseract.exe` 后重跑 `selftest.bat`。
+
+## 3. 找不到 pdftoppm（Poppler）→ **已内置**
+
+- 包内 `installers\Release-26.09.0-0.zip`（43,709,956 B）。
+- 一键安装.bat 第 3 步解压到 `tools\poppler\poppler-26.09.0\Library\bin`，
+  程序自动把该 bin 作为 `POPPLER_PATH` 传给 PDF 转图（**不需要手设环境变量**）。
+
+## 4. 数据文件夹未填 → 不是环境问题，是使用步骤
+
+- 打开页面 `http://127.0.0.1:8000/` → 最上方「⓪ 数据文件夹地址」→ 填**含 `RM-Database` 的那一层**
+  （例：`D:/HUATEX`，用正斜杠）→ 点「保存」。
+- 只跑「Payment 核销」不需要这项；跑「进出口材料」必须填。
+- 换盘/拷盘后盘符会变（`E:` → `F:`），请重新填写。
+
+---
+
+## 5. 一键安装后仍然报错怎么办
+
+1. 双击 `selftest.bat`，把**整段中文报告**发给管理员（报告里会写明：tesseract 实际路径、
+   `--list-langs` 实测语言、`POPPLER_PATH` 实际值、`TESSDATA_PREFIX` 实际值、三套内置素材是否齐全）。
+2. 看 `runs\<最近一次>\logs\stderr.log` 末尾 20 行。
+3. 查《自查表-常见报错.md》。
+
+> 提示：`一键安装.bat` 是**幂等**的——已装好的步骤会自动跳过，可以放心重复双击。
+'''
+
+# 内嵌文件表：包内相对路径 -> 内容（'.bat' 会写成 CRLF）
+# S4.2 新增/替换：`一键安装.bat`（全离线一键装）、`修复指引-自检4项.md`；
+#  `tools/preflight.py` 内容改由 portable/tools/preflight_win.py 提供（见上方 PREFLIGHT_PY 装载行）。
+# v1.3.2 · 恢复配置.bat：把 config.yaml 恢复成包内原版（config.default.yaml）
+RESTORE_CFG_BAT = r'''@echo off
+chcp 936 >nul
+setlocal
+cd /d "%~dp0"
+echo ================================================================
+echo   HUATEX 恢复配置（config.default.yaml  -^>  config.yaml）
+echo   当前 config.yaml 会先另存为 config.yaml.broken-时间戳
+echo ================================================================
+echo.
+set "PY="
+where py >nul 2>nul && set "PY=py -3"
+if not defined PY ( where python >nul 2>nul && set "PY=python" )
+if not defined PY (
+  echo [x] 没找到 Python（py / python）。请先装 Python 3.11+ 64 位，再双击本文件。
+  echo.
+  pause
+  exit /b 1
+)
+%PY% -u tools\preflight.py --restore-config
+if errorlevel 2 (
+  echo.
+  echo [x] 恢复失败：包内缺少 config.default.yaml，或工具目录不完整。
+  echo     补救：从原始交付 zip 重新解压一份 config.yaml 覆盖本文件。
+) else (
+  echo.
+  echo [OK] 已恢复。下一步：双击 selftest.bat 复核。
+)
+echo.
+pause
+'''
+
+WIN_FILES = {
+    '一键安装.bat': ONEKEY_INSTALL_BAT,
+    'start.bat': START_BAT,
+    'stop.bat': STOP_BAT,
+    'selftest.bat': SELFTEST_BAT,
+    '恢复配置.bat': RESTORE_CFG_BAT,
+    'tools/preflight.py': PREFLIGHT_PY,
+    'requirements.txt': REQUIREMENTS_TXT,
+    'README-先读我.md': README_FIRST,
+    '手册-徒弟操作.md': MANUAL,
+    '自查表-常见报错.md': ERRORS,
+    '安装清单-Windows.md': INSTALL,
+    '修复指引-自检4项.md': FIX_GUIDE,
+    'runs/说明.txt': RUNS_README_TXT,
+    'work/说明.txt': WORK_README_TXT,
+}
+
+# 包内 config.yaml 的 Windows 默认值（定点替换 dev 树的同名列）
+WIN_CONFIG_BANNER = '''# ============================================================
+# HUATEX Tools · **Windows 交付版配置**（本文件由 portable/tools/build_package.py 生成）
+#   与 Mac 开发树 config.yaml 的**唯一差异**（其余键与注释逐字保留）：
+#     1) paths.source_root   = ""                  → 由页面 ⓪「数据文件夹地址」填写
+#     2) paths.source_root_hint                    → 提示语改为「正斜杠」写法（避免 YAML 转义问题）
+#     3) paths.workspace     = ""                  → Windows 无工作区概念（脚本自动回退便携根）
+#     4) paths.output_root   = 'D:\\HUATEX\\work'    → 该盘不可用时 start.bat 自动回落为 work/
+#     5) ocr.tesseract_cmd   = 'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
+#   · server.port 保持 8000 不变；run.tag 保持 2026_10 不变。
+#   · 生成时间不写入本文件（保证打包幂等）。
+# ============================================================
+'''
+
+WIN_CONFIG_SUBS = [
+    ('source_root', '""                 # ← 由页面 ⓪ 填写；例：D:/HUATEX（正斜杠）。留空时运行会明确报错，不会静默'),
+    ('source_root_hint', "'请填写本机资料文件夹（含 RM-Database 的那一层），例如 D:/HUATEX（用正斜杠）'"),
+    ('workspace', '""                # Windows 无工作区概念；留空时脚本自动回退到程序所在目录'),
+    ('output_root', "'D:\\HUATEX\\work'   # 该盘不存在时，start.bat 会启动自检并自动回落为 程序目录/work"),
+    ('tesseract_cmd', "'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'   # 装在别处就改这一行（单引号）"),
+]
+
+# 包内 config.py 的定点修正（S4 实测发现，仅本包，dev 树不动）：
+#   config.py 的便携根启发式是「目录名叫 portable 就用自己，否则用上一级」。
+#   交付包顶层目录叫 HUATEX-Tools → 相对路径（runs_dir/output_root/workspace）会解析到**包外上一级**。
+#   这里把便携根钉死为「包根目录」，使 runs/ work/ 等落在包内。
+CONFIG_PY_OLD = ("PORTABLE_ROOT = HERE if os.path.basename(HERE) == 'portable' "
+                 "else os.path.abspath(os.path.join(HERE, '..'))")
+CONFIG_PY_NEW = ("# 【S4 打包器改写·仅本包】交付包顶层目录名不是 portable，\u4fbf\u643a\u6839\u5c31\u662f\u672c\u76ee\u5f55",
+                 "#（否则相对路径 runs_dir/output_root 会被解析到包的上一级目录）",
+                 "PORTABLE_ROOT = HERE")
+
+
+# ══════════════════════════════════════════════════════════════════
+#  二、打包逻辑
+# ══════════════════════════════════════════════════════════════════
+
+def sha256_file(path, buf=1 << 20):
+    h = hashlib.sha256()
+    with open(path, 'rb') as fh:
+        while True:
+            b = fh.read(buf)
+            if not b:
+                break
+            h.update(b)
+    return h.hexdigest()
+
+
+def exclude_reason(rel):
+    """返回排除原因；None = 保留。rel 用 '/' 分隔、相对 portable/。"""
+    parts = rel.split('/')
+    base = parts[-1]
+    if any(p in EXCLUDE_ANY_DIRS for p in parts):
+        return '__pycache__ 字节码缓存'
+    if parts[0] in EXCLUDE_TOP_DIRS:
+        return '运行留痕/输入输出/证据目录（含客户数据）：%s/' % parts[0]
+    if 'runs' in parts:
+        return 'runs/ 留痕'
+    if base in EXCLUDE_NAMES:
+        if base.endswith('.command'):
+            return 'Mac 专用启停脚本'
+        return 'mac 垃圾/缓存文件：%s' % base
+    for pat in EXCLUDE_PATTERNS:
+        if fnmatch.fnmatch(base, pat):
+            return '匹配排除模式 %s' % pat
+    return None
+
+
+def copy_tree(src_root, dst_root):
+    kept, excluded = [], []
+    for dirpath, dirnames, filenames in os.walk(src_root):
+        rel_dir = os.path.relpath(dirpath, src_root)
+        rel_dir = '' if rel_dir == '.' else rel_dir.replace(os.sep, '/')
+        # 目录剪枝（避免走进 runs/ 的 470MB）
+        keep = []
+        for d in dirnames:
+            rel = (rel_dir + '/' + d) if rel_dir else d
+            r = exclude_reason(rel + '/')
+            if r:
+                excluded.append((rel + '/', r))
+            else:
+                keep.append(d)
+        dirnames[:] = keep
+        for f in filenames:
+            rel = (rel_dir + '/' + f) if rel_dir else f
+            r = exclude_reason(rel)
+            if r:
+                excluded.append((rel, r))
+                continue
+            dst = os.path.join(dst_root, rel.replace('/', os.sep))
+            os.makedirs(os.path.dirname(dst), exist_ok=True)
+            shutil.copy2(os.path.join(dirpath, f), dst)
+            kept.append(rel)
+    return kept, excluded
+
+
+# v1.3.1 · .bat 里不属于 GBK 字符集的符号 → ASCII 等价物（打包时自动替换；仍无法编码则中止）
+BAT_CHAR_FIXUPS = (
+    ('\u274c', '[x]'),          # ❌
+    ('\u26a0', '[!]'),          # ⚠
+    ('\ufe0f', ''),             # variation selector（emoji 后缀）
+    ('\u2705', '[OK]'),         # ✅
+)
+
+
+def _bat_text(rel, content):
+    r"""Windows .bat：统一 CRLF + 校验 GBK(cp936) 可表示（v1.3.1）。
+    教训：UTF-8 的 .bat 配 `chcp 65001` 在中文 Windows 上会被 cmd 误拆行
+    （报 The filename, directory name, or volume label syntax is incorrect）。
+    → 改成 GBK 写出 + `chcp 936`，即中文 Windows 的稳妥组合。"""
+    text = content.replace('\r\n', '\n').replace('\n', '\r\n')
+    for _src, _dst in BAT_CHAR_FIXUPS:
+        text = text.replace(_src, _dst)
+    try:
+        text.encode('cp936')
+    except UnicodeEncodeError as e:
+        raise SystemExit('[x] .bat 含 GBK 无法表示的字符，打包中止：%s → %r'
+                         % (rel, text[e.start:e.end]))
+    return text
+
+
+def lint_text_opens(stage):
+    r"""v1.3.3 · 交付包硬校验：禁止「文本模式 open() 不写 encoding=」。
+    教训：`manual_review.py` 用 `json.load(open(RECON))` 读 UTF-8 的 .recon.json →
+    中文 Windows 默认编码 cp936 → `UnicodeDecodeError: 'gbk' codec` → 任务被判 failed。
+    这类问题在 macOS 开发树**永远不复现** → 必须用静态校验卡住。
+    用 AST 判定（只认真实 open() 调用；字符串/文档串里的字眼不算）。
+    返回 [(相对路径, 行号, 源码行), ...]。"""
+    bad = []
+    for dirpath, dirnames, filenames in os.walk(stage):
+        dirnames[:] = [d for d in dirnames if d != '__pycache__']
+        for f in sorted(filenames):
+            if not f.endswith('.py'):
+                continue
+            full = os.path.join(dirpath, f)
+            rel = os.path.relpath(full, stage)
+            try:
+                with open(full, encoding='utf-8') as fh:
+                    src = fh.read()
+                tree = ast.parse(src)
+            except Exception:
+                continue
+            lines = src.splitlines()
+            for node in ast.walk(tree):
+                if not (isinstance(node, ast.Call) and isinstance(node.func, ast.Name)
+                        and node.func.id == 'open'):
+                    continue
+                if any(k.arg == 'encoding' for k in node.keywords):
+                    continue
+                mode = None
+                if len(node.args) > 1 and isinstance(node.args[1], ast.Constant):
+                    mode = node.args[1].value
+                for k in node.keywords:
+                    if k.arg == 'mode' and isinstance(k.value, ast.Constant):
+                        mode = k.value.value
+                if isinstance(mode, str) and 'b' in mode:
+                    continue
+                ln = lines[node.lineno - 1].strip() if node.lineno - 1 < len(lines) else ''
+                bad.append((rel, node.lineno, ln))
+    return bad
+
+
+def write_overlay(stage):
+    written = []
+    for rel, content in WIN_FILES.items():
+        dst = os.path.join(stage, rel.replace('/', os.sep))
+        os.makedirs(os.path.dirname(dst), exist_ok=True)
+        if rel.endswith('.bat'):                  # v1.3.1：.bat 一律 GBK 写出
+            with open(dst, 'w', encoding='cp936', newline='') as fh:
+                fh.write(_bat_text(rel, content))
+        else:
+            with open(dst, 'w', encoding='utf-8', newline='') as fh:
+                fh.write(content)
+        written.append(rel)
+    return written
+
+
+def write_windows_config(stage):
+    src = os.path.join(PORTABLE, 'config.yaml')
+    with open(src, encoding='utf-8') as fh:
+        txt = fh.read()
+    report = []
+    for key, literal in WIN_CONFIG_SUBS:
+        pat = re.compile(r'(?m)^([ \t]*)' + re.escape(key) + r':[ \t]*.*$')
+        n = len(pat.findall(txt))
+        if n != 1:
+            raise SystemExit('[x] config.yaml 中 %s 行匹配 %d 处（预期 1 处）→ 打包中止' % (key, n))
+        txt = pat.sub(lambda m: m.group(1) + key + ': ' + literal, txt)
+        report.append((key, literal))
+    txt = WIN_CONFIG_BANNER + txt
+    dst = os.path.join(stage, 'config.yaml')
+    with open(dst, 'w', encoding='utf-8') as fh:
+        fh.write(txt)
+    return report
+
+
+def patch_config_py(stage):
+    """包内 config.py 的 1 行定点修正（把便携根钉死为包根；dev 树不受影响）。"""
+    p = os.path.join(stage, 'config.py')
+    with open(p, encoding='utf-8') as fh:
+        txt = fh.read()
+    if txt.count(CONFIG_PY_OLD) != 1:
+        raise SystemExit('[x] 包内 config.py 未找到唯一待改行（PORTABLE_ROOT 启发式）→ 中止')
+    txt = txt.replace(CONFIG_PY_OLD, '\n'.join(CONFIG_PY_NEW))
+    with open(p, 'w', encoding='utf-8') as fh:
+        fh.write(txt)
+    return 'PORTABLE_ROOT = HERE（钉死包根，dev 树未改）'
+
+
+def place_ocr_engine(stage):
+    """自包含性修正（S4 实测发现）：`gen_payment_recon_v2.py` 按 `WS/expense_mvp` 找 OCR 引擎，
+    而 WS = 脚本上两级 = **包内 `workflows/`**，于是引擎变成 `workflows/expense_mvp/`
+    （S3 之所以通过，是因为它的备用候选恰好指到了**开发树**的 expense_mvp = 自包含漏洞）。
+    处置：包内**多放一份** OCR 引擎到 `workflows/expense_mvp/`（逐字节复制，**脚本一行未改**）。
+    """
+    src = os.path.join(stage, 'expense_mvp')
+    dst = os.path.join(stage, 'workflows', 'expense_mvp')
+    if not os.path.isdir(src):
+        raise SystemExit('[x] dev 树缺少 expense_mvp/ → 打包中止')
+    if os.path.isdir(dst):
+        shutil.rmtree(dst)
+    shutil.copytree(src, dst)
+    return sorted(os.listdir(dst))
+
+
+def verify_ocr_engine_resolution(stage):
+    """按脚本的真实解析顺序验证：包内能否找到 OCR 引擎，且不与包外隔离。"""
+    ws = os.path.join(stage, 'workflows')                 # 脚本 = .../workflows/payprep/xx.py
+    mvp0 = os.path.join(ws, 'expense_mvp')
+    outer = os.path.join(os.path.dirname(os.path.dirname(ws)), 'expense_mvp')
+    cands = [os.environ.get('HUATEX_MVP') or '', outer, mvp0]
+    effective = mvp0
+    for c in cands:
+        if c and os.path.isdir(c):
+            effective = c
+            break
+    inside = os.path.abspath(effective).startswith(os.path.abspath(stage) + os.sep)
+    return effective, inside, outer
+
+
+def snapshot(stage):
+    files = []
+    for dirpath, dirnames, filenames in os.walk(stage):
+        dirnames[:] = sorted(dirnames)
+        for f in sorted(filenames):
+            full = os.path.join(dirpath, f)
+            rel = os.path.relpath(full, stage).replace(os.sep, '/')
+            files.append({'rel': rel, 'size': os.path.getsize(full), 'sha256': sha256_file(full)})
+    files.sort(key=lambda x: x['rel'])
+    return files
+
+
+def _force_utf8_filename_flags():
+    """S4.2：让 zipfile **对所有条目**（含纯 ASCII 名）均置「UTF-8 文件名」标志 bit 11。
+    Python 默认只给非 ASCII 名置位；显式全置后，Windows 资源管理器/7-Zip 一律按 UTF-8 解码，
+    中文名条目不会乱码（教训：`zip -X` 会把该标志丢掉）。
+    做法 = 覆写 ZipInfo._encodeFilenameFlags —— 不改压缩数据、不改任何其它行为。"""
+    def _enc(self):
+        try:
+            return self.filename.encode('ascii'), self.flag_bits | 0x800
+        except UnicodeEncodeError:
+            return self.filename.encode('utf-8'), self.flag_bits | 0x800
+    zipfile.ZipInfo._encodeFilenameFlags = _enc
+
+
+def make_zip(stage, zip_path):
+    if os.path.exists(zip_path):
+        os.remove(zip_path)
+    os.makedirs(os.path.dirname(os.path.abspath(zip_path)), exist_ok=True)
+    _force_utf8_filename_flags()          # S4.2：全条目置 UTF-8 标志（bit 11）
+    n = 0
+    with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as zf:
+        for dirpath, dirnames, filenames in os.walk(stage):
+            dirnames[:] = sorted(dirnames)
+            for f in sorted(filenames):
+                full = os.path.join(dirpath, f)
+                rel = os.path.relpath(full, stage).replace(os.sep, '/')
+                zi = zipfile.ZipInfo('%s/%s' % (PKG_DIR_NAME, rel), date_time=ZIP_TS)
+                zi.compress_type = zipfile.ZIP_DEFLATED
+                zi.external_attr = 0o644 << 16
+                with open(full, 'rb') as fh:
+                    zf.writestr(zi, fh.read())
+                n += 1
+    return n
+
+
+def scan_zip(zip_path):
+    """打包后全包扫描：必须没有客户数据。返回 (问题列表, 统计)。"""
+    problems = []
+    exts = {}
+    with zipfile.ZipFile(zip_path) as zf:
+        names = zf.namelist()
+    for d in ASSET_DIRS:                                    # S4.2：内置素材三件套必须在包内
+        if not any(n.startswith(PKG_DIR_NAME + '/' + d + '/') for n in names):
+            problems.append('包内缺少内置素材目录：%s/' % d)
+    for n in names:
+        if n.endswith('/'):
+            continue
+        rel = n[len(PKG_DIR_NAME) + 1:]
+        ext = os.path.splitext(n)[1].lower()
+        exts[ext] = exts.get(ext, 0) + 1
+        if ext in FORBIDDEN_EXT:
+            problems.append('禁止的客户数据类文件：%s' % rel)
+        if ext in ('.xlsx', '.xls', '.xlsm') and rel not in ALLOWED_XLSX:
+            problems.append('白名单外的表格文件：%s' % rel)
+        if rel not in PLACEHOLDERS and ('/runs/' in n or rel.startswith('runs/')):
+            problems.append('含 runs 留痕：%s' % rel)
+        if fnmatch.fnmatch(os.path.basename(n), 'config.regression-*'):
+            problems.append('含回归配置：%s' % rel)
+    return problems, exts
+
+
+def place_assets(stage):
+    """S4.2：把 dist-assets/{installers,tessdata,wheels} 原样拷进包内，并逐文件校验字节数。
+    返回 (report, wheels 列表, wheels 总字节)。任何缺失/字节不符 → SystemExit（中止打包）。"""
+    for d in ASSET_DIRS:
+        src = os.path.join(ASSET_SRC_DIR, d)
+        if not os.path.isdir(src):
+            raise SystemExit('[x] 缺少内置素材目录 %s（先按 S4.2 说明把素材下载到 portable/dist-assets/）→ 中止' % src)
+        dst = os.path.join(stage, d)
+        if os.path.isdir(dst):
+            shutil.rmtree(dst)
+        shutil.copytree(src, dst)
+    report = []
+    for rel, (size, desc) in sorted(ASSET_EXPECT.items()):
+        full = os.path.join(stage, rel.replace('/', os.sep))
+        if not os.path.isfile(full):
+            raise SystemExit('[x] 内置素材缺失：%s（%s）→ 中止（不得伪造文件）' % (rel, desc))
+        got = os.path.getsize(full)
+        if got != size:
+            raise SystemExit('[x] 内置素材字节数不符：%s = %d（应为 %d）→ 中止' % (rel, got, size))
+        report.append((rel, got, sha256_file(full), desc))
+    wdir = os.path.join(stage, 'wheels')
+    whls = sorted(f for f in os.listdir(wdir) if f.endswith('.whl'))
+    if not whls:
+        raise SystemExit('[x] wheels/ 里没有 .whl → 离线装依赖会失败，中止打包')
+    wtot = sum(os.path.getsize(os.path.join(wdir, f)) for f in whls)
+    return report, whls, wtot
+
+
+def write_manifest(path, files, zip_path, zsha, zsize, excluded, pkg_report,
+                   assets=None, whls=None, wtot=0):
+    total = sum(f['size'] for f in files)
+    lines = []
+    lines.append('HUATEX Tools · Windows 交付包 内容清单（MANIFEST）')
+    lines.append('=' * 100)
+    lines.append('包文件名   : %s' % os.path.basename(zip_path))
+    lines.append('包 sha256  : %s' % zsha)
+    lines.append('包大小     : %s bytes (%.2f MB)' % (zsize, zsize / 1048576.0))
+    lines.append('条目数     : %d 个文件（解压后）' % len(files))
+    lines.append('解压后总字节: %s bytes (%.2f MB)' % (total, total / 1048576.0))
+    lines.append('生成器     : portable/tools/build_package.py（S4 · 2026-10-15 · VERSION=%s）' % VERSION)
+    lines.append('生成时间   : %s      ← 幂等性检查时请忽略本行（其余行必须完全一致）' % datetime.now().isoformat(timespec='seconds'))
+    lines.append('')
+    lines.append('包内 config.yaml 的 Windows 默认值（相对 dev 树 config.yaml 的差异）：')
+    for k, v in pkg_report:
+        lines.append('  · %s: %s' % (k, v))
+    lines.append('')
+    if assets:
+        lines.append('S4.2 · 内置素材（随包外发；已逐文件校验字节数）')
+        for rel, size, sha, desc in assets:
+            lines.append('  · %-52s %10d B  sha256=%s  %s' % (rel, size, sha, desc))
+        lines.append('  · %-52s %10d B（%d 个 wheel）  %s' % ('wheels/*.whl', wtot, len(whls or []),
+                                                              '离线装依赖（win_amd64 · cp310/311/312/313）'))
+        lines.append('  说明：用户双击包根《一键安装.bat》即可全部装好，**不需要联网、不需要自己搜网址**；')
+        lines.append('        Tesseract 安装器只做静默安装（/VERYSILENT），语言包由包内 tessdata/ 经')
+        lines.append('        TESSDATA_PREFIX 接管，因此**不依赖安装器的语言包勾选项**。')
+        lines.append('')
+    lines.append('包内 config.py 相对 dev 树的差异（仅 1 处，S4 实测发现）：')
+    lines.append('  · PORTABLE_ROOT：dev = 「目录名 portable 才用自己，否则用上一级」')
+    lines.append('                 包内 = HERE（钉死包根）——否则相对路径 runs_dir/output_root 会落到包外上一级')
+    lines.append('')
+    lines.append('-' * 100)
+    lines.append('%-64s %10s  %s' % ('sha256', 'size', '包内相对路径'))
+    lines.append('-' * 100)
+    for f in files:
+        lines.append('%-64s %10d  %s' % (f['sha256'], f['size'], f['rel']))
+    lines.append('-' * 100)
+    lines.append('')
+    lines.append('排除清单（不随包外发；规则写死在 build_package.py 的 EXCLUDE_* 常量里）')
+    lines.append('  1) runs/**（含客户 PDF 与 470MB 级运行留痕）、runs/_uploads/**')
+    lines.append('  2) **/__pycache__/**、*.pyc、*.pyo')
+    lines.append('  3) **/.pdftext_cache.json、.DS_Store、*.log、*.tmp、~$*')
+    lines.append('  4) in/**、out/**、evidence/**（输入/输出/证据目录，含客户数据）')
+    lines.append('  5) config.regression-*.yaml（回归专用配置，不随包外发）')
+    lines.append('  6) start.command / stop.command（Mac 专用启停脚本）')
+    lines.append('  7) 任何 *.zip（散落的压缩包）—— 例外：installers/ 下的安装器与 Poppler 包（S4.2 内置素材）')
+    lines.append('  8) tools/build_package.py（打包器本身 = 开发工具，不随包外发）')
+    lines.append('  9) 例外：runs/说明.txt 与 work/说明.txt 是**占位说明**（非运行留痕、非客户数据），随包保留')
+    lines.append(' 10) 例外：workflows/expense_mvp/ 是**OCR 引擎的包内第二份副本**（脚本按 WS/expense_mvp 解析，WS=包内 workflows/）')
+    lines.append('      —— 为保自包含而刻意重复（3 个小文件，合计 <30KB）；dev 树脚本一行未改')
+    lines.append('')
+    lines.append('本次实际被排除的条目（%d 条）：' % len(excluded))
+    for rel, why in excluded[:400]:
+        lines.append('  - %-58s  %s' % (rel, why))
+    if len(excluded) > 400:
+        lines.append('  … 其余 %d 条省略' % (len(excluded) - 400))
+    lines.append('')
+    lines.append('校验方法：')
+    lines.append('  unzip -o %s -d <目标目录>' % os.path.basename(zip_path))
+    lines.append('  # 逐文件核对 sha256（macOS）：')
+    lines.append('  (cd <目标目录>/%s && find . -type f | sort | xargs shasum -a 256)' % PKG_DIR_NAME)
+    lines.append('  # 幂等性：同样输入重复打包 → 本清单除「生成时间」行外逐字节一致')
+    with open(path, 'w', encoding='utf-8') as fh:
+        fh.write('\n'.join(lines) + '\n')
+
+
+def main():
+    ap = argparse.ArgumentParser(description='HUATEX Tools Windows 交付包打包器（S4）')
+    ap.add_argument('--stage', default=DEFAULT_STAGE, help='临时构建目录（默认 %s）' % DEFAULT_STAGE)
+    ap.add_argument('--zip-out', default=os.path.join(DELIV, ZIP_BASENAME))
+    ap.add_argument('--manifest-out', default=None)
+    a = ap.parse_args()
+    zip_out = os.path.abspath(a.zip_out)
+    manifest_out = a.manifest_out or (zip_out[:-4] + '-MANIFEST.txt')
+
+    if not os.path.isfile(os.path.join(PORTABLE, 'config.yaml')):
+        raise SystemExit('[x] 找不到 %s/config.yaml' % PORTABLE)
+
+    stage = os.path.join(a.stage, PKG_DIR_NAME)
+    if os.path.exists(a.stage):
+        shutil.rmtree(a.stage)
+    os.makedirs(stage, exist_ok=True)
+
+    print('== HUATEX Tools · Windows 交付包打包（S4） ==')
+    print('输入   : %s' % PORTABLE)
+    print('临时目录: %s' % stage)
+    kept, excluded = copy_tree(PORTABLE, stage)
+    print('· dev 树复制：保留 %d 个文件，排除 %d 个条目' % (len(kept), len(excluded)))
+    ov = write_overlay(stage)
+    print('· Windows 专属文件内嵌生成：%d 个 → %s' % (len(ov), '、'.join(ov)))
+    rep = write_windows_config(stage)
+    # v1.3.2：把定稿（Windows 默认值）的 config.yaml 另存为包内原版备份 config.default.yaml
+    shutil.copy2(os.path.join(stage, 'config.yaml'), os.path.join(stage, 'config.default.yaml'))
+    print('· 包内原版配置备份：config.default.yaml（供「恢复配置.bat」一键恢复）')
+    pypatch = patch_config_py(stage)
+    print('· 包内 config.py 定点修正：%s' % pypatch)
+    assets, whls, wtot = place_assets(stage)
+    print('· 内置素材（S4.2）：%d 个文件逐字节校验通过' % len(assets))
+    for rel, size, sha, desc in assets:
+        print('    %s  %d B  sha256=%s  %s' % (rel, size, sha[:16] + '…', desc))
+    print('· wheels：%d 个 .whl（%.1f MB）→ 离线装依赖（win_amd64 · cp310/311/312/313）'
+          % (len(whls), wtot / 1048576.0))
+    eng = place_ocr_engine(stage)
+    eff, inside, outer = verify_ocr_engine_resolution(stage)
+    print('· 包内 OCR 引擎副本：workflows/expense_mvp/ → %s' % '、'.join(eng))
+    print('· OCR 引擎解析：生效路径 = %s（包外候选 %s%s）'
+          % (eff, outer + '（不存在）' if not os.path.isdir(outer) else outer + '（存在！）',
+             '' if inside else ' ⚠ 在包外！'))
+    if not os.path.isdir(eff) or not inside:
+        raise SystemExit('[x] OCR 引擎自包含性预检失败 → 打包中止（否则 Payment 会静默降级）')
+    print('· 包内 config.yaml 已按 Windows 默认值生成（%d 处定点替换）：' % len(rep))
+    for k, v in rep:
+        print('    %s → %s' % (k, v))
+    # v1.3.3 · 文本 open() 必须指定 encoding（否则中文 Windows 按 cp936 读写 → 乱码/报错）
+    bad_opens = lint_text_opens(stage)
+    if bad_opens:
+        print('· 文本 open() 编码校验：FAIL ❌ %d 处未指定 encoding' % len(bad_opens))
+        for rel, ln, line in bad_opens[:12]:
+            print('    %s:%d  %s' % (rel, ln, line[:110]))
+        raise SystemExit('[x] 文本模式 open() 未指定 encoding → 中文 Windows 上会按 cp936 读写'
+                         '（Mac 上测不出来），打包中止')
+    print('· 文本 open() 编码校验：PASS ✅ 无裸 open()')
+    files = snapshot(stage)
+    n = make_zip(stage, zip_out)
+    zsha = sha256_file(zip_out)
+    zsize = os.path.getsize(zip_out)
+    print('· zip：%d 条目 → %s（%d bytes / %.2f MB）' % (n, zip_out, zsize, zsize / 1048576.0))
+    print('· zip sha256 = %s' % zsha)
+
+    problems, exts = scan_zip(zip_out)
+    print('· 自检扫描（包内客户数据）：%s' % ('PASS ✅ 未发现客户数据' if not problems else 'FAIL ❌'))
+    # S4.2：回读校验 UTF-8 标志（教训：zip -X 会丢标志 → Windows 中文名乱码）
+    with zipfile.ZipFile(zip_out) as _zf:
+        _noflag = [i.filename for i in _zf.infolist() if not (i.flag_bits & 0x800)]
+    print('· UTF-8 标志回读校验：%d 条目中 %d 条缺 0x800 → %s'
+          % (n, len(_noflag), 'PASS ✅ 全部带标志' if not _noflag else 'FAIL ❌ %s' % _noflag[:5]))
+    if _noflag:
+        problems.append('zip 条目缺 UTF-8 标志（0x800）：%s' % _noflag[:5])
+    print('  扩展名统计：%s' % ', '.join('%s×%d' % (k or '(无)', v) for k, v in sorted(exts.items())))
+    for pr in problems:
+        print('  ✗ %s' % pr)
+
+    write_manifest(manifest_out, files, zip_out, zsha, zsize, excluded, rep,
+                   assets=assets, whls=whls, wtot=wtot)
+    print('· 清单 → %s' % manifest_out)
+    print('== 完成：ZIP=%s SHA256=%s SIZE=%d FILES=%d ==' % (zip_out, zsha, zsize, len(files)))
+    if problems:
+        return 1
+    return 0
+
+
+if __name__ == '__main__':
+    sys.exit(main())

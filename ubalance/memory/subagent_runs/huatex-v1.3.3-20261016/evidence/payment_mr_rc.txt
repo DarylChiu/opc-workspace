@@ -1,0 +1,3 @@
+[jobs] 解压凭证：3 个 zip → 79 个文件 → /private/tmp/huatex-v133-test/HUATEX-Tools/runs/20261016_093944_payment/work/attachments
+[jobs] payprep to-bank rc=0 (54.4s)
+[jobs] 待人工核清单 rc=0 (0.3s)

@@ -1,0 +1,5 @@
+-rw-------  1 zhaoyuzhao  staff      15524 Oct 16 08:25 /Users/zhaoyuzhao/WorkBuddy/Claw/opc-dashboard/HUATEX-Tools-Windows-v1.3-20261016-MANIFEST.txt
+-rw-------  1 zhaoyuzhao  staff  151999887 Oct 16 08:25 /Users/zhaoyuzhao/WorkBuddy/Claw/opc-dashboard/HUATEX-Tools-Windows-v1.3-20261016.zip
+trashed v1.2 zip
+-rw-------   1 zhaoyuzhao  staff      15524 Oct 16 08:25 HUATEX-Tools-Windows-v1.3-20261016-MANIFEST.txt
+-rw-------   1 zhaoyuzhao  staff  151999887 Oct 16 08:25 HUATEX-Tools-Windows-v1.3-20261016.zip

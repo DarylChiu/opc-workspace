@@ -1,0 +1,3 @@
+[git diff exit=0]
+--- 佐证：portable/ 被 .gitignore 忽略 ---
+.gitignore:2:portable/	portable/config.py

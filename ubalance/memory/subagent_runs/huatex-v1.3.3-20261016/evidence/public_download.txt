@@ -1,0 +1,6 @@
+http_code=200 size=152005201 time=72.115604
+real 72.13
+user 1.40
+sys 2.26
+sha256(downloaded)=43ed833b3e8e821b21f7d9b6b5a7600281f5fc2f470e08fc6e5909d66ef1c0e2
+sz=152005201

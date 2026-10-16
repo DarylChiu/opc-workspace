@@ -1,0 +1,45 @@
+{
+  "id": "20261016_085826_payment",
+  "workflow": "payment",
+  "workflow_label": "Payment Request（付款核销）",
+  "status": "done",
+  "created_at": "2026-10-16T08:58:26",
+  "started_at": "2026-10-16T08:58:26",
+  "finished_at": "2026-10-16T08:59:16",
+  "elapsed_sec": 50.9,
+  "exit_code": 0,
+  "error": null,
+  "inputs": [
+    "10-12华特明细待确认.xlsx",
+    "voucher-a1013.zip",
+    "voucher-b1013.zip",
+    "voucher-c1013.zip"
+  ],
+  "params": {
+    "date": "20261013"
+  },
+  "artifacts": [
+    {
+      "name": "Payment recon ledger-20261013.xlsx",
+      "size": 14409
+    },
+    {
+      "name": "Payment request to Bank-20261013.xlsx",
+      "size": 15729
+    },
+    {
+      "name": "Payment request to Bank-20261013.xlsx.recon.txt",
+      "size": 5413
+    },
+    {
+      "name": "Payment 待人工核清单-20261013.xlsx",
+      "size": 9897
+    },
+    {
+      "name": "payprep-log-20261013.txt",
+      "size": 24194
+    }
+  ],
+  "stdout_tail": "  行35 卷28  372          body        105,753,600     能源费     (触发:điện   )\n  行36 卷29  8794         body        113,400,000     能源费     (触发:điện   )\n  行37 卷30  802          body        113,400,000     能源费     (触发:điện   )\n  行38 卷31  8526         body        123,930,000     能源费     (触发:điện   )\n  行39 卷32  10314        body        135,467,640     能源费     (触发:điện   )\n  行40 卷33  862          filename    135,648,000     服务费     (触发:dịch vụ)  📝số hóa đơn cần kiểm tra (không đọc được từ hóa đơn)\n  行41 卷34  10475        body        136,890,000     能源费     (触发:điện   )\n  行42 卷35  11445        body        46,196,980      运费      (触发:cfs    )\n  行43 卷35  11914        body        107,551,820     运费      (触发:cfs    )\n  行44 卷36  00000509     body        167,022,000     能源费     (触发:nước   )\n  行45 卷37  105          ocr-heade   171,687,300     能源费     (触发:điện   )  📝cần kiểm tra thủ công (chưa xác nhận hóa đơn điện tử chính thức)\n  行46 卷38  572          filename    182,520,000     服务费     (触发:dịch vụ)  📝số hóa đơn cần kiểm tra (không đọc được từ hóa đơn)\n  行47 卷39  135          body        287,168,544     服务费     (触发:dịch vụ)\n  行48 卷40  8572         body        290,800,800     能源费     (触发:điện   )\n  行49 卷41  286          body        58,320,000      能源费     (触发:điện   )\n  行50 卷41  296          body        136,080,000     能源费     (触发:điện   )\n  行51 卷41  475          body        70,502,400      能源费     (触发:điện   )\n  行52 卷41  493          body        101,347,200     能源费     (触发:điện   )\n  行53 卷42  00002891     body        395,712,000     能源费     (触发:điện   )\n  行54 卷43  684          body        415,238,400     能源费     (触发:điện   )\n  行55 卷44  00001218     body        240,556,068     能源费     (触发:điện   )\n  行56 卷44  00001269     body        203,245,200     能源费     (触发:điện   )\n  行57 卷45  00001158     body        42,840,900      能源费     (触发:điện   )\n  行58 卷45  00001193     body        40,653,846      能源费     (触发:điện   )\n  行59 卷45  00001202     body        164,535,624     能源费     (触发:điện   )\n  行60 卷45  00001239     body        213,321,762     能源费     (触发:điện   )\n  行61 卷46  10313        body        554,850,000     能源费     (触发:điện   )\n  行62 卷47  00001053     body        211,988,016     能源费     (触发:điện   )\n  行63 卷47  00001077     body        81,994,032      能源费     (触发:điện   )\n  行64 卷47  00001110     body        113,909,652     能源费     (触发:điện   )\n  行65 卷47  00001125     body        85,681,800      能源费     (触发:điện   )\n  行66 卷47  00001164     body        113,578,200     能源费     (触发:điện   )\n  行67 卷48  541          body        610,934,400     能源费     (触发:điện   )\n  行68 卷49  00000088     body        738,805,990     能源费     (触发:điện   )\n  行69 卷50  108          body        832,603,200     能源费     (触发:điện   )\n  行70 卷51  432          body        1,543,659,204   设备      (触发:máy    )\n\n✅ 输出: /private/tmp/huatex-v132-test/HUATEX-Tools/runs/20261016_085826_payment/out/._payprep_1.xlsx（68 行）\n📋 对账报告: /private/tmp/huatex-v132-test/HUATEX-Tools/runs/20261016_085826_payment/out/._payprep_1.xlsx.recon.txt\n\n=== 收尾（摘要静态化/净化 + 日期格式 + 删列 + 格式规范） ===\n✅ 摘要静态化 0 行（提交版：61 行因 K/L 空 → 摘要留空）\n🧹 清除残留占位符摘要 7 行\n💱 H 列表头: 「Số tiền trên hóa đơn/ Hợp đồng (USD)」→「Số tiền trên hóa đơn/ Hợp đồng (VND)」\n📅 Ngày hóa đơn → MM/DD/YYYY（61 格）\n📅 payment date → MM/DD/YYYY（0 格）\n🎨 格式规范: Times New Roman + 全框线 + 取消 wrap text（70行×22列）\n\n✅ 输出 → /private/tmp/huatex-v132-test/HUATEX-Tools/runs/20261016_085826_payment/out/Payment request to Bank-20261013.xlsx\n✅ 台账 68 行（= 发票行数）\n✅ 差异清单 26 行\n✅ 输出 → /private/tmp/huatex-v132-test/HUATEX-Tools/runs/20261016_085826_payment/out/Payment recon ledger-20261013.xlsx\n\n✅ (a-ledger) /private/tmp/huatex-v132-test/HUATEX-Tools/runs/20261016_085826_payment/out/Payment recon ledger-20261013.xlsx\n\n✅ (a) /private/tmp/huatex-v132-test/HUATEX-Tools/runs/20261016_085826_payment/out/Payment request to Bank-20261013.xlsx\n✅ (a-ledger) /private/tmp/huatex-v132-test/HUATEX-Tools/runs/20261016_085826_payment/out/Payment recon ledger-20261013.xlsx\n\n$ /opt/homebrew/opt/python@3.14/bin/python3.14 /private/tmp/huatex-v132-test/HUATEX-Tools/workflows/payprep/manual_review.py --recon-json /private/tmp/huatex-v132-test/HUATEX-Tools/runs/20261016_085826_payment/out/Payment request to Bank-20261013.xlsx.recon.json --detail /private/tmp/huatex-v132-test/HUATEX-Tools/runs/20261016_085826_payment/in/10-12华特明细待确认.xlsx --out /private/tmp/huatex-v132-test/HUATEX-Tools/runs/20261016_085826_payment/out/Payment 待人工核清单-20261013.xlsx --date 20261013\n✅ 待人工核清单已生成: /private/tmp/huatex-v132-test/HUATEX-Tools/runs/20261016_085826_payment/out/Payment 待人工核清单-20261013.xlsx | 条目: 26",
+  "stderr_tail": ""
+}

@@ -1,0 +1,105 @@
+{
+  "assets": {
+    "installers/Release-26.09.0-0.zip": {
+      "actual": 43709956,
+      "expected": 43709956,
+      "found": true,
+      "ok": true
+    },
+    "installers/tesseract-ocr-w64-setup-5.4.0.20240606.exe": {
+      "actual": 50175248,
+      "expected": 50175248,
+      "found": true,
+      "ok": true
+    },
+    "tessdata/chi_sim.traineddata": {
+      "actual": 2469156,
+      "expected": 2469156,
+      "found": true,
+      "ok": true
+    },
+    "tessdata/eng.traineddata": {
+      "actual": 4113088,
+      "expected": 4113088,
+      "found": true,
+      "ok": true
+    },
+    "tessdata/osd.traineddata": {
+      "actual": 10562727,
+      "expected": 10562727,
+      "found": true,
+      "ok": true
+    },
+    "tessdata/vie.traineddata": {
+      "actual": 531275,
+      "expected": 531275,
+      "found": true,
+      "ok": true
+    }
+  },
+  "bats": {
+    "HUATEX-Tools/selftest.bat": {
+      "chcp936": true,
+      "cp936": true,
+      "name": "HUATEX-Tools/selftest.bat",
+      "no_bad_marks": true
+    },
+    "HUATEX-Tools/start.bat": {
+      "chcp936": true,
+      "cp936": true,
+      "name": "HUATEX-Tools/start.bat",
+      "no_bad_marks": true
+    },
+    "HUATEX-Tools/stop.bat": {
+      "chcp936": true,
+      "cp936": true,
+      "name": "HUATEX-Tools/stop.bat",
+      "no_bad_marks": true
+    },
+    "HUATEX-Tools/一键安装.bat": {
+      "chcp936": true,
+      "cp936": true,
+      "name": "HUATEX-Tools/一键安装.bat",
+      "no_bad_marks": true
+    },
+    "HUATEX-Tools/恢复配置.bat": {
+      "chcp936": true,
+      "cp936": true,
+      "name": "HUATEX-Tools/恢复配置.bat",
+      "no_bad_marks": true
+    }
+  },
+  "bytes": 152005201,
+  "config_bytes_equal": true,
+  "config_default": "HUATEX-Tools/config.default.yaml",
+  "config_sha256_default": "66e9e09e8bff5237fe84826dbe8b5f2d09c556b739fc0462f4ca6732e320c8e1",
+  "config_sha256_yaml": "66e9e09e8bff5237fe84826dbe8b5f2d09c556b739fc0462f4ca6732e320c8e1",
+  "config_yaml": "HUATEX-Tools/config.yaml",
+  "content_checks": {
+    "doc_classify_encoding_count": 2,
+    "jobs_has_PYTHONUTF8": true,
+    "manual_review_has_open_encoding": true,
+    "manual_review_has_open_encoding_alt": true,
+    "preflight_has_v133": true
+  },
+  "entries": 83,
+  "ext_counts": {
+    ".bat": 5,
+    ".exe": 1,
+    ".html": 1,
+    ".md": 7,
+    ".py": 30,
+    ".traineddata": 4,
+    ".txt": 3,
+    ".whl": 28,
+    ".xlsx": 1,
+    ".yaml": 2,
+    ".zip": 1
+  },
+  "requirements_ascii": true,
+  "sha256": "43ed833b3e8e821b21f7d9b6b5a7600281f5fc2f470e08fc6e5909d66ef1c0e2",
+  "testzip": null,
+  "utf8_missing": [],
+  "wheels": 28,
+  "zip": "deliverables/HUATEX-Tools-Windows-v1.3.3-20261016.zip"
+}

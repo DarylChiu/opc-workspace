@@ -1,0 +1,23 @@
+== 验收：deliverables/HUATEX-Tools-Windows-v1.3-20261016.zip ==
+[1] 字节数     : 151999887
+[1] sha256     : 3b42e64a0ed592abf8b03ecc21bb3c4cc0cdf8d5ae7351865d5c8b552701966c
+[1] 条目数     : 81
+[2] testzip()  : None (OK)
+[3] UTF-8 0x800: 81/81 带标志，缺 0 条
+[4] 内置素材逐字节核对：
+    OK   43709956 B  HUATEX-Tools/installers/Release-26.09.0-0.zip
+    OK   50175248 B  HUATEX-Tools/installers/tesseract-ocr-w64-setup-5.4.0.20240606.exe
+    OK   2469156 B  HUATEX-Tools/tessdata/chi_sim.traineddata
+    OK   4113088 B  HUATEX-Tools/tessdata/eng.traineddata
+    OK   10562727 B  HUATEX-Tools/tessdata/osd.traineddata
+    OK   531275 B  HUATEX-Tools/tessdata/vie.traineddata
+    wheels 数量 : 28  OK
+[5] 包内文件内容标识：
+    OK   HUATEX-Tools/tools/preflight.py  
+    OK   HUATEX-Tools/config.py  
+    OK   HUATEX-Tools/一键安装.bat  
+
+结论：全部 PASS ✅
+ZIP_BYTES=151999887
+ZIP_SHA256=3b42e64a0ed592abf8b03ecc21bb3c4cc0cdf8d5ae7351865d5c8b552701966c
+ZIP_ENTRIES=81

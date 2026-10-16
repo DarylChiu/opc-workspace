@@ -1,0 +1,13 @@
+[0;32m[PASS][0m ① 文件存在且非空: memory/subagent_runs/huatex-v1.3-20261016/execution_trace.jsonl (3707 bytes)
+[0;32m[PASS][0m ② 全部 14 行 JSON 合法
+[0;32m[PASS][0m ③ 全部 14 行包含 ts/step/action/result 四字段
+[0;32m[PASS][0m ④ 时间戳单调递增: 14 行全部有序
+[0;32m[PASS][0m ⑤ summary.md 存在: memory/subagent_runs/huatex-v1.3-20261016/summary.md (6670 bytes)
+
+--- 验收结果 ---
+  文件: memory/subagent_runs/huatex-v1.3-20261016/execution_trace.jsonl
+  行数: 14
+  错误: 0
+  警告: 0
+
+[0;32m═══ [PASS] 全部检查通过，trace 完整合规 ═══[0m

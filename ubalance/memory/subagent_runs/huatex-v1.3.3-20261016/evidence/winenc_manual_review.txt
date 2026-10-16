@@ -1,0 +1,23 @@
+######## A) 修复版（包内原样）
+✅ 待人工核清单已生成: /tmp/mr_fixed.xlsx | 条目: 26
+RC_FIXED=0
+-rw-------  1 zhaoyuzhao  wheel  9896 Oct 16 09:32 /tmp/mr_fixed.xlsx
+
+######## B) 控制组：旧写法 open(RECON)（无 encoding）
+Traceback (most recent call last):
+  File "/tmp/old_manual_review.py", line 204, in <module>
+    main()
+    ~~~~^^
+  File "/tmp/old_manual_review.py", line 40, in main
+    j = json.load(_rf)
+  File "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/__init__.py", line 298, in load
+    return loads(fp.read(),
+                 ~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/encodings/ascii.py", line 26, in decode
+    return codecs.ascii_decode(input, self.errors)[0]
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'ascii' codec can't decode byte 0xc3 in position 238: ordinal not in range(128)
+RC_OLD=1
+✅ 待人工核清单已生成: /tmp/mr_pkg.xlsx | 条目: 26
+RC_PKG_RECON=0
+-rw-------  1 zhaoyuzhao  wheel  9897 Oct 16 09:33 /tmp/mr_pkg.xlsx

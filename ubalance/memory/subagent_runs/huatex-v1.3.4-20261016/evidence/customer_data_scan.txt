@@ -1,0 +1,108 @@
+== 包内客户数据扫描 · 83 条目逐条 ==
+  1  HUATEX-Tools/README-先读我.md
+  2  HUATEX-Tools/README.md
+  3  HUATEX-Tools/app/README.md
+  4  HUATEX-Tools/app/index.html
+  5  HUATEX-Tools/app/jobs.py
+  6  HUATEX-Tools/app/server.py
+  7  HUATEX-Tools/config.default.yaml
+  8  HUATEX-Tools/config.py
+  9  HUATEX-Tools/config.yaml
+ 10  HUATEX-Tools/expense_mvp/classifier.py
+ 11  HUATEX-Tools/expense_mvp/ocr_engine.py
+ 12  HUATEX-Tools/expense_mvp/preprocess.py
+ 13  HUATEX-Tools/installers/Release-26.09.0-0.zip
+ 14  HUATEX-Tools/installers/tesseract-ocr-w64-setup-5.4.0.20240606.exe
+ 15  HUATEX-Tools/requirements.txt
+ 16  HUATEX-Tools/runs/说明.txt
+ 17  HUATEX-Tools/selftest.bat
+ 18  HUATEX-Tools/start.bat
+ 19  HUATEX-Tools/stop.bat
+ 20  HUATEX-Tools/templates/Payment核销-模板.xlsx
+ 21  HUATEX-Tools/tessdata/chi_sim.traineddata
+ 22  HUATEX-Tools/tessdata/eng.traineddata
+ 23  HUATEX-Tools/tessdata/osd.traineddata
+ 24  HUATEX-Tools/tessdata/vie.traineddata
+ 25  HUATEX-Tools/tools/compare_xlsx.py
+ 26  HUATEX-Tools/tools/preflight.py
+ 27  HUATEX-Tools/tools/regress_compare.py
+ 28  HUATEX-Tools/wheels/cffi-2.1.1-cp310-cp310-win_amd64.whl
+ 29  HUATEX-Tools/wheels/cffi-2.1.1-cp311-cp311-win_amd64.whl
+ 30  HUATEX-Tools/wheels/cffi-2.1.1-cp312-cp312-win_amd64.whl
+ 31  HUATEX-Tools/wheels/cffi-2.1.1-cp313-cp313-win_amd64.whl
+ 32  HUATEX-Tools/wheels/charset_normalizer-3.5.2-cp310-cp310-win_amd64.whl
+ 33  HUATEX-Tools/wheels/charset_normalizer-3.5.2-cp311-cp311-win_amd64.whl
+ 34  HUATEX-Tools/wheels/charset_normalizer-3.5.2-cp312-cp312-win_amd64.whl
+ 35  HUATEX-Tools/wheels/charset_normalizer-3.5.2-cp313-cp313-win_amd64.whl
+ 36  HUATEX-Tools/wheels/cryptography-50.0.2-cp311-abi3-win_amd64.whl
+ 37  HUATEX-Tools/wheels/cryptography-50.0.2-cp39-abi3-win_amd64.whl
+ 38  HUATEX-Tools/wheels/et_xmlfile-2.0.0-py3-none-any.whl
+ 39  HUATEX-Tools/wheels/openpyxl-3.1.5-py2.py3-none-any.whl
+ 40  HUATEX-Tools/wheels/packaging-26.3-py3-none-any.whl
+ 41  HUATEX-Tools/wheels/pdf2image-1.17.0-py3-none-any.whl
+ 42  HUATEX-Tools/wheels/pdfminer_six-20260107-py3-none-any.whl
+ 43  HUATEX-Tools/wheels/pdfplumber-0.11.10-py3-none-any.whl
+ 44  HUATEX-Tools/wheels/pillow-12.3.0-cp310-cp310-win_amd64.whl
+ 45  HUATEX-Tools/wheels/pillow-12.3.0-cp311-cp311-win_amd64.whl
+ 46  HUATEX-Tools/wheels/pillow-12.3.0-cp312-cp312-win_amd64.whl
+ 47  HUATEX-Tools/wheels/pillow-12.3.0-cp313-cp313-win_amd64.whl
+ 48  HUATEX-Tools/wheels/pycparser-3.11-py3-none-any.whl
+ 49  HUATEX-Tools/wheels/pypdfium2-5.14.0-py3-none-win_amd64.whl
+ 50  HUATEX-Tools/wheels/pytesseract-0.3.13-py3-none-any.whl
+ 51  HUATEX-Tools/wheels/pyyaml-6.0.3-cp310-cp310-win_amd64.whl
+ 52  HUATEX-Tools/wheels/pyyaml-6.0.3-cp311-cp311-win_amd64.whl
+ 53  HUATEX-Tools/wheels/pyyaml-6.0.3-cp312-cp312-win_amd64.whl
+ 54  HUATEX-Tools/wheels/pyyaml-6.0.3-cp313-cp313-win_amd64.whl
+ 55  HUATEX-Tools/wheels/xlrd-2.0.2-py2.py3-none-any.whl
+ 56  HUATEX-Tools/work/说明.txt
+ 57  HUATEX-Tools/workflows/__init__.py
+ 58  HUATEX-Tools/workflows/expense_mvp/classifier.py
+ 59  HUATEX-Tools/workflows/expense_mvp/ocr_engine.py
+ 60  HUATEX-Tools/workflows/expense_mvp/preprocess.py
+ 61  HUATEX-Tools/workflows/loan_materials/__init__.py
+ 62  HUATEX-Tools/workflows/loan_materials/doc_classify.py
+ 63  HUATEX-Tools/workflows/loan_materials/doc_fields.py
+ 64  HUATEX-Tools/workflows/loan_materials/loan_input.py
+ 65  HUATEX-Tools/workflows/loan_materials/run_loan_2025_12_v28d.py
+ 66  HUATEX-Tools/workflows/loan_materials/tokhai_extract.py
+ 67  HUATEX-Tools/workflows/payprep/__init__.py
+ 68  HUATEX-Tools/workflows/payprep/fill_bank_receipt.py
+ 69  HUATEX-Tools/workflows/payprep/fill_payment_paid.py
+ 70  HUATEX-Tools/workflows/payprep/gen_payment_recon_v2.py
+ 71  HUATEX-Tools/workflows/payprep/manual_review.py
+ 72  HUATEX-Tools/workflows/payprep/misa_import_gen.py
+ 73  HUATEX-Tools/workflows/payprep/payment_recon_finalize.py
+ 74  HUATEX-Tools/workflows/payprep/payprep.py
+ 75  HUATEX-Tools/workflows/payprep/recon_ledger.py
+ 76  HUATEX-Tools/workflows/payprep/summary_text.py
+ 77  HUATEX-Tools/workflows/payprep/vn_invoice_parse.py
+ 78  HUATEX-Tools/一键安装.bat
+ 79  HUATEX-Tools/修复指引-自检4项.md
+ 80  HUATEX-Tools/安装清单-Windows.md
+ 81  HUATEX-Tools/恢复配置.bat
+ 82  HUATEX-Tools/手册-徒弟操作.md
+ 83  HUATEX-Tools/自查表-常见报错.md
+
+== 关键词扫描（真实客户/业务标识）==
+命中数 = 18
+  HIT HUATEX-Tools/README.md <= Daryl
+  HIT HUATEX-Tools/config.default.yaml <= Daryl
+  HIT HUATEX-Tools/config.py <= Daryl
+  HIT HUATEX-Tools/config.yaml <= Daryl
+  HIT HUATEX-Tools/expense_mvp/ocr_engine.py <= Daryl
+  HIT HUATEX-Tools/workflows/expense_mvp/ocr_engine.py <= Daryl
+  HIT HUATEX-Tools/workflows/loan_materials/doc_classify.py <= Daryl
+  HIT HUATEX-Tools/workflows/loan_materials/doc_fields.py <= Daryl
+  HIT HUATEX-Tools/workflows/loan_materials/loan_input.py <= Daryl
+  HIT HUATEX-Tools/workflows/loan_materials/tokhai_extract.py <= Daryl
+  HIT HUATEX-Tools/workflows/payprep/fill_bank_receipt.py <= Daryl
+  HIT HUATEX-Tools/workflows/payprep/gen_payment_recon_v2.py <= Daryl
+  HIT HUATEX-Tools/workflows/payprep/misa_import_gen.py <= Daryl
+  HIT HUATEX-Tools/workflows/payprep/payment_recon_finalize.py <= Daryl
+  HIT HUATEX-Tools/workflows/payprep/payprep.py <= Daryl
+  HIT HUATEX-Tools/workflows/payprep/summary_text.py <= Daryl
+  HIT HUATEX-Tools/workflows/payprep/vn_invoice_parse.py <= invoice_no
+  HIT HUATEX-Tools/workflows/payprep/vn_invoice_parse.py <= Daryl
+
+说明：RM-Database / HUATEX进出口材料 属程序结构性目录名与文档示例（非客户数据），
+      已单独复核：包内 config.yaml source_root 为空串，无本机路径、无客户单据数据。
