@@ -1,7 +1,7 @@
-# HEARTBEAT.md
+# HEARTBEAT.md — Balance
 
-## 定期记忆维护（每周日下午）
-- [ ] 检查 memory/active.md 是否有过期任务需要清理
-- [ ] 检查日记文件，>30天的移入 archive/
-- [ ] 从近期日记中提炼经验到 lessons.md
-- [ ] 验证 identity.md 信息准确性
+心跳已瘦身 (2026-07-22)。所有周期性任务走 cron，心跳仅做轻量存活确认。
+
+- 如果无事，回复 `HEARTBEAT_OK`
+- 不需要扫描成本、汇率检查、项目状态 — 这些由 cron 单独触发
+- 不需要读写任何文件

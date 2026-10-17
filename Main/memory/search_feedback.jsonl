@@ -1,0 +1,3 @@
+# Search Quality Feedback Log
+# Format: {"ts":"ISO时间戳","agent":"Agent名","query":"搜索词","engine":"searxng|brave","issue":"问题描述","rating":1-5}
+# Rating: 1=完全不相关, 2=大部分不相关, 3=基本可用, 4=大部分相关, 5=完美
