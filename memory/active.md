@@ -1,8 +1,44 @@
 # 当前活跃任务 (中期记忆 — 每次session加载)
 
-> 最后更新: 2026-09-24 23:59（9/24 记忆归档刷新；安静日无新任务，各进行中/挂起项均保持原状态，成本今日 $0.05/本月 $9.01 正常）
+> 最后更新: 2026-10-17 23:59（10/17 完成 Daryl 邮件转 PDF：HTCRN26010802 Defects 用 Chromium 渲染 .eml→A4 PDF，8 图内联+21行表格，已交付；待 Daryl 拍板：IELTS C1+C2+C3 验收 / Token 级财务三件事 / 调研下一步）
+
+## 🔧 10/17 状态（小风侧 · 新增）
+- **Daryl 邮件转 PDF**：第一版手工排版失败（截图丢失、表格打散）→ 第二版改 Chromium 渲染 `.eml`→HTML（cid 内联 base64）→ 竖版 A4 PDF（2.1MB），程序化验证 8/8 图内联、主表 21 行完整 → 已交付 Daryl
+- ⚠️ **image 工具不可用**：`google/gemini-3-flash-preview` API key 无效，无法视觉校验，改用 Playwright 断言；**待 Kitty 修 key**
+- ⚠️ **模型降档未生效**：该 feishu 直聊 session 实际仍跑 `deepseek-v4-pro`（$0.179，今日最贵），10/15 的 flash override 未覆盖该 session
+
+## 🔧 10/15–10/16 状态（小风侧）
+- **10/15**：Daryl 报「Kitty 重复发消息」→ 诊断为 **v4-pro 超时触发飞书重投**（网关健康，未重启）；按指令把 Kitty(main) + 自己(xiaofeng) 模型**临时 override 到 `deepseek-v4-flash`**（可随时 `model=default` 回退）
+- **10/16**：无新 Daryl 指令；00:01 审计 8 项全通过（成本 $3.52/$80.20）；当日跨 Agent 主战场＝Balance 的 HUATEX Windows 包 v1.3→v1.3.4 四连发（真机编码/Python 探测修复）
+- 待拍板项（延续，均**未开工**）：① IELTS C1+C2+C3 重启 8767 验收 ② Token 级财务三件事 ③ 资源禀赋调研「deal flow 扫描」验证实验 ④ 模型降级是否长期保留
+
+## 🔴 全局运营规则变更（2026-10-10 Daryl 指令 · 最高优先级）
+
+- **OPC 不再以 Daryl 指令为单一驱动，目标转向「变现」为核心**
+- 除 Balance（继续帮 Daryl 赚上班工资）外，所有 Agent 接收指令后**先不要执行任务**
+- 必须第一步问澄清问题：「这个指令/任务服务于哪一个变现项目？」
+- ⚠️ 后续收到任何 Daryl 新指令：先确认变现归属，再决定是否/如何执行（C1+C2+C3 听读训练开发完成，待 Daryl 重启 8767 验收；10/8 无新任务）
 
 ## 🟢 进行中
+
+### IELTS陪练助手 C1+C2+C3 听读训练（10/7 开发完成 ✅，待重启验收）🟢
+- C1 后端：双路径分流（字幕优先秒级/无字幕 Whisper 转写兜底）+ 分句过滤 + DeepSeek 批量翻译，端到端测试通过（TED 14.5s 105句）
+- C2：素材句子范音（原音频切片/TTS）+ 跟读打分（STT+WER）+ shadow.html 双标签 + 导入框 + 调速 + 中文揭开
+- C3：复述闭环（听→隐藏→复述→LLM 对比漏听/误听）+ 中文揭开升级为「跟读+复述都完成」
+- 新文件 `backend/import_material.py`；`materials`/`sentences` 表 + 10 方法；server 新增 7 路由
+- 全部测试通过（语法/前端JS/路由/导入/切片/状态标记/LLM对比）；**待重启服务（localhost:8767）加载新路由后 Daryl 验收**
+- 计划：`ielts_tutor/DEV_PLAN_A_C_2026-10-07.md`；调研：`RESEARCH_opensource_2026-10-07.md`
+
+### Token级全自动AI财务与审计项目（10/5 启动 · Daryl 战略新方向）🟢
+- **定位**：财务核算+审计取证中可标准化的部分做成 Source-to-Report 自动化主干，人只保留判断/例外/签字
+- **脉络**：8/7《OPC-AI财务与内审方法论v0.2》（Token级控制+五层幻觉防控+四大边界+三层架构）→ 9/5 战略定调（财务体系化→变现基础）→ 10/5 Balance v0.1 工程化落地
+- **变现**：A 按项目收费（已在跑）→ A+B 口径库产品化 → C 托管订阅（需持牌）；红线不做税务申报代理/审计签字
+- **⏳ 待 Daryl 拍板三件事**：① Token级读法（A成本口径/B动作粒度）② 认不认 L3 上限 ③ 变现从 A 起步
+- 主要文档：`workspace-balance/reports/`（Balance 侧）、`workspace-balance/memory/project_Balance.md`
+
+### IELTS陪练助手 + 视频剪辑MVP — 待完结（10/5 Daryl 指令）⏳
+- Daryl 指令：完结这两个项目后再正式投入新项目
+- Bryson 已问完结方式（归档收尾 / 出完结 checklist），**等 Daryl 明确**
 
 > ⚠️ **9/17 工具口径问题**：xiaofeng tool profile 为 `coding`，不含 `message` 工具（group:messaging 未挂载），无法主动 DM Daryl。已报 Kitty：需补 message 工具或由 Kitty 转达。
 
@@ -93,6 +129,22 @@
 | 管线2 Qwen Omni 对接 | ❌ 冻结 | 30% |
 
 ## 🔵 待办
+### 🧭 资源禀赋市场调研（10/13 Daryl 指令 · ✅ 已交付）
+- Daryl 让 Bryson 基于个人资源禀赋做市场调研，看 OPC 能做什么创业项目，题眼＝「工程 Agent 的调研思路」
+- 已交付：方法论（禀赋向量化→约束剪枝→外部信号证伪→打分→最小实验）+ 3 组 web_search 证伪 + 收敛候选（越南一级市场 AI 尽调服务商 / 中企出海越南财税合规高客单 / 组合外溢）
+- 下一步（待 Daryl 拍板）：跑「deal flow 扫描」验证实验（从 A&C 客户 + 越南公开数据扫 3 家高增长缺钱企业）
+- 详情见 2026-10-13.md
+
+### 🧭 个人竞争力战略辅助定位（10/12 Daryl 问询 · 待 Daryl 反馈）
+- Kitty 在做 Daryl 个人「竞争力盘点 + 能力缺口」调研，Daryl 问 Bryson 在定战略里能辅助做啥
+- Bryson 已回复四个位置：①地面事实证据供给 ②反方压力测试(grill-me) ③英语/投资人沟通 ④调研收敛成能力地图
+- 定位：Kitty 定方向做主线调研；Bryson 做证据+反方拷问+英语表达+落地收敛
+- 待 Daryl 反馈：Kitty 调研卡点 或 已有初步清单，然后对着它干活
+
+### 💬 调研方法论资产化（10/10 Daryl DM 提议，待 Daryl 响应）
+- Daryl 问能否让 agent 学会调研能力；小风结论：不建第 5 个 agent，把「术/器」沉淀成共享调研 Playbook/Skill，判断力（道）留在 Daryl
+- 下一步待 Daryl 口述调研框架 → 小风沉淀 Playbook（未开工，等 Daryl）
+
 ### IELTS陪练助手 — v1.4.1 题库改造 + v1.5.0 用户系统P1（🟢 开发完成，待 Daryl 验收）
 - 服务 LaunchAgent 持久化：localhost:8767 ACTIVE（v1.5.0）
 - OPC 看板 workflow：`wf_ielts_tutor_v130`「雅思陪练助手 v1.3.0 · 双管线实时陪练」11 节点已同步（8/5 建，随版本迭代需更新）
