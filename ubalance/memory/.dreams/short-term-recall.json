@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-16T01:19:16.277Z",
+  "updatedAt": "2026-10-17T08:37:51.169Z",
   "entries": {
     "memory:memory/2026-06-10.md:1:29": {
       "key": "memory:memory/2026-06-10.md:1:29",
@@ -7660,6 +7660,37 @@
         "12.1s",
         "deepseek/deepseek-v4-flash",
         "s4.2"
+      ]
+    },
+    "memory:memory/2026-10-16.md:107:114": {
+      "key": "memory:memory/2026-10-16.md:107:114",
+      "path": "memory/2026-10-16.md",
+      "startLine": 107,
+      "endLine": 114,
+      "source": "memory",
+      "snippet": "- 另：他上传的 L1 是 `L1-成品采购入库-test1016.xlsx`（84 行，2026_10 测试批票号 HMFZR2600xx…）→ **L1 与 1–3 月资料本身也不匹配**，需成套更换。 - **已回覆**：解读报告 + 请其跑一段目录树命令定位 `RM-Database` 层级 + 给两种修法 + months 改法 + 提醒 L1 要换。 - **产品改进建议（待 Daryl 选）**：① source_root 运行时预检（找不到 RM-Database/月份目录 → 直接报错停止，而不是产出 84 票全缺的可疑交付件）；② 页面加「月份」输入框（现在只能改 config.yaml）。 ## 10:1x ✅ v1.3.4-20261016 上架（config.yaml 引号根因修复） - **交付**：`deliverables/HUATEX-Tools-Windows-v1.3.4-20261016.zip`｜152,006,308 B｜sha256 `403006b7…1990b`｜83 条目｜已上架（v1.3.3 下架） - **主代理独立验收 PASS**：trace PASS｜sha256/字节/83 条目/testzip｜包内 server.py 单引号写回 `'{safe}'`｜config.py `load_yaml_tolerant`/`repair_yaml_quotes`｜jobs.py 容错读取｜preflight 版本 v1.3.4｜config.default==config｜requirements ASCII｜83/8",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4105624675750732,
+      "maxScore": 0.4105624675750732,
+      "firstRecalledAt": "2026-10-17T08:37:51.169Z",
+      "lastRecalledAt": "2026-10-17T08:37:51.169Z",
+      "queryHashes": [
+        "3e0ba6b64ca9"
+      ],
+      "recallDays": [
+        "2026-10-17"
+      ],
+      "conceptTags": [
+        "l1-成品采购入库-test1016.xlsx",
+        "2026-10",
+        "rm-database",
+        "source-root",
+        "rm-database/月份目录",
+        "config.yaml",
+        "v1.3.4-20261016",
+        "v1.3.3"
       ]
     }
   }
