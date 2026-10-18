@@ -1,6 +1,11 @@
 # 当前活跃任务 (中期记忆 — 每次session加载)
 
-> 最后更新: 2026-10-17 23:59（10/17 完成 Daryl 邮件转 PDF：HTCRN26010802 Defects 用 Chromium 渲染 .eml→A4 PDF，8 图内联+21行表格，已交付；待 Daryl 拍板：IELTS C1+C2+C3 验收 / Token 级财务三件事 / 调研下一步）
+> 最后更新: 2026-10-18 23:59（10/18 深夜审计：修复备份仓 5 个 stash 冲突 + audit.sh 两处 stash 逻辑 Bug，备份链恢复；遗留 OPC 成本 API 8765 不可达待 Kitty）
+
+## 🔧 10/18 状态（小风侧 · 新增）
+- **备份链修复（重要）**：`~/.opc-workspace-cache` 卡了 5 个未解决 stash 冲突（根目录 AGENTS.md / memory/active|lessons|workflow-rules|project_xiaofeng）→ `git commit` 静默失败，记忆未真正落盘备份。已取 upstream 版解决并提交 `d19a196`，现 pull/commit/push 全绿、远端已验证含当日日记
+- **audit.sh 根因修复**：①无条件 `stash pop` 会误弹历史 stash → 改为比对 `git stash list` 条数，只在真新建时 pop；②pop 冲突无人处理 → 冲突即回落取 HEAD 版并保留 stash
+- ⚠️ **OPC 成本仪表盘 API（localhost:8765）不可达** → 状态降级 `fresh_api_down`，成本数字为缓存值（今日 $0.01 / 本月 $86.22）。按成本护栏，账单/服务排查归 Kitty(main)，小风只上报不自查
 
 ## 🔧 10/17 状态（小风侧 · 新增）
 - **Daryl 邮件转 PDF**：第一版手工排版失败（截图丢失、表格打散）→ 第二版改 Chromium 渲染 `.eml`→HTML（cid 内联 base64）→ 竖版 A4 PDF（2.1MB），程序化验证 8/8 图内联、主表 21 行完整 → 已交付 Daryl
