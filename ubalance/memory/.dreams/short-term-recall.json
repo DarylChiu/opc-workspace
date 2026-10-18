@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-17T08:37:51.169Z",
+  "updatedAt": "2026-10-17T17:04:20.653Z",
   "entries": {
     "memory:memory/2026-06-10.md:1:29": {
       "key": "memory:memory/2026-06-10.md:1:29",
@@ -5502,20 +5502,21 @@
       "endLine": 33,
       "source": "memory",
       "snippet": "- 📌 最终交付物已归档在 `reports/`：管理办法 v1.0.5、明细表 v0.5.5（无保护版）、征集意见整理 - 📌 待 Daryl 新任务（OA 表单如需要 Excel 逻辑说明可随时提供） - 📌 越南差旅费管理办法征集意见整理：已融入 v1.0.5，无遗留 ## ⚠️ 待观察 - 自进化基建 L1 Phase 0 影子模式测试期（8/5→8/7）：今日起进入第 2 天，8/7 由 Kitty 评估 shadow_log 精度决定 Phase 1 放行或回退 - 8/5 单日成本 $7.60 偏高归因（Balance $3.08 + Self $2.90，疑与全量重扫有关）——8/6 数据已回落，继续观察 ## 📌 Session 活动摘要（近24h，跨 8/5 → 8/6 凌晨） - 8/5 主要活动均已在昨日日记完整记录（误餐补贴 v0.5.x 系列修复、管理办法 v1.0.x 交付、教训 3 条已写入 lessons.md） - 8/6 凌晨：本次 cron 审计执行（无其他 session 活动） ## 🕛 00:10 OPC 群聊汇报发送（Cron 2fe401f9 收尾） - 发送成功：messageId om_x100b6802afdda8a4df9a925b0da46a8 → chatId oc_7d71d54d87cbd265d9c3811bc59840b2 - **修正认知**: 历史日记记录的 `om_x100b6ae474f85ca0c02e04ea387e92e` 是消息 ID 而非群聊 ID；正确 OPC 群聊 ID",
-      "recallCount": 6,
+      "recallCount": 7,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 2.270759457349777,
-      "maxScore": 0.40224097371101375,
+      "totalScore": 2.673045617341995,
+      "maxScore": 0.402286159992218,
       "firstRecalledAt": "2026-09-17T17:01:34.887Z",
-      "lastRecalledAt": "2026-10-09T17:02:29.695Z",
+      "lastRecalledAt": "2026-10-17T17:04:20.653Z",
       "queryHashes": [
         "f883fe147c7c",
         "96340f7cb7b0",
         "c5dad0c58b13",
         "e175fee64a3a",
         "344bd1afd11e",
-        "6527226eb3c8"
+        "6527226eb3c8",
+        "03df95586152"
       ],
       "recallDays": [
         "2026-09-18",
@@ -5523,7 +5524,8 @@
         "2026-09-20",
         "2026-09-24",
         "2026-10-02",
-        "2026-10-10"
+        "2026-10-10",
+        "2026-10-18"
       ],
       "conceptTags": [
         "v1.0.5",
@@ -5636,22 +5638,24 @@
       "endLine": 44,
       "source": "memory",
       "snippet": "- 合规: P2 PASS；post-op 触发今日日记创建（本条） - 模型: deepseek/deepseek-v4-pro ## 晚间：每日成本扫描（cron 成本全量扫描推Kitty） - 状态: ⚠️已降级写文件，Kitty未确认（sessions_send 30s超时） - 全量台账扫描: 4178个.jsonl → 总调用 27,216（新增186） - 数据: 今日 $1.9478 | 本月 $34.4681 | 全量 $160.2547 | Token 1,842,555,850 - 看板 /api/costs 读数 totalCost $160.25，与台账 $160.2547 差异 <$1 → 已对齐，无需改接口 - 兜底文件: ~/WorkBuddy/Claw/opc-dashboard/data/cost_daily.json（已写入） - 按Agent: Bryson $93.22 | Balance $32.39 | Kitty $19.78 | Self $14.85 - 模型: deepseek/deepseek-v4-pro ## 🕛 23:59 OPC 群聊汇报发送（Cron 2fe401f9 每日记忆归档收尾） - 审计: 修复2项（归档 2026-07-20.md + Git 备份 commit/push），深层问题0，浅层1（共享repo pull 瞬时报错，已自愈） - 成本: 今日 $1.95 | 本月 $34.47 | 全量 $160.25 | API 正常（fresh_api_ok） - Kitty 同步: 降级文件已",
-      "recallCount": 3,
+      "recallCount": 4,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.1211204946041107,
-      "maxScore": 0.399974775314331,
+      "totalScore": 1.5371588677167891,
+      "maxScore": 0.4160383731126785,
       "firstRecalledAt": "2026-09-19T17:01:46.176Z",
-      "lastRecalledAt": "2026-10-09T17:02:29.695Z",
+      "lastRecalledAt": "2026-10-17T17:04:20.653Z",
       "queryHashes": [
         "c5dad0c58b13",
         "e175fee64a3a",
-        "6527226eb3c8"
+        "6527226eb3c8",
+        "03df95586152"
       ],
       "recallDays": [
         "2026-09-20",
         "2026-09-24",
-        "2026-10-10"
+        "2026-10-10",
+        "2026-10-18"
       ],
       "conceptTags": [
         "备份",
@@ -5702,20 +5706,22 @@
       "endLine": 47,
       "source": "memory",
       "snippet": "- 兜底文件: ~/WorkBuddy/Claw/opc-dashboard/data/cost_daily.json 已就位 - sessions_send 超时(32s)，数据已写入，无需接口改动 ## 🕛 23:59 每日记忆归档审计（Cron: 2fe401f9 当日末轮） - L4 审计 v2 执行：10 项检查，修复 2 项（归档 2026-07-21.md / 2026-07-22.md），浅层问题 1 项 / 深层问题 0 - 浅层问题：审计时 OPC API 端点（localhost:8765/api/costs）不可达 → 复核时已恢复（curl 实测 ok:true，数据新鲜） - 自进化基建对账：checker-log / reflexion_journal 仍缺失（Kitty 侧基建，WARN 不阻塞） - 成本仪表盘：今日 $4.12 | 本月 $38.98 | 全量 $164.77 - Git 备份：commit + push 成功 - OPC 群聊汇报已发送：chatId oc_7d71d54d87cbd265d9c3811bc59840b2 - 模型: deepseek/deepseek-v4-pro",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.7702658563852309,
+      "totalScore": 1.1647868394851684,
       "maxScore": 0.3990901798009872,
       "firstRecalledAt": "2026-09-23T17:01:28.669Z",
-      "lastRecalledAt": "2026-10-09T17:02:29.695Z",
+      "lastRecalledAt": "2026-10-17T17:04:20.653Z",
       "queryHashes": [
         "e175fee64a3a",
-        "6527226eb3c8"
+        "6527226eb3c8",
+        "03df95586152"
       ],
       "recallDays": [
         "2026-09-24",
-        "2026-10-10"
+        "2026-10-10",
+        "2026-10-18"
       ],
       "conceptTags": [
         "备份",
@@ -7691,6 +7697,37 @@
         "config.yaml",
         "v1.3.4-20261016",
         "v1.3.3"
+      ]
+    },
+    "memory:memory/2026-10-10.md:30:38": {
+      "key": "memory:memory/2026-10-10.md:30:38",
+      "path": "memory/2026-10-10.md",
+      "startLine": 30,
+      "endLine": 38,
+      "source": "memory",
+      "snippet": "- **FOC 业务场景**：v2.0（保守口径）已交付，等 Daryl 拍——①加权售价 ②上游合同 HFHT-2025/01（B↔HUATEX，定性缺它做不完）③出口侧是否发 công văn ④破保口径 ⑤MISA 子科目（6411/6412/6413）⑥ERP 1–9 月 FOC 导出；另待一句「旧版（`免费质量补货执行口径-v1.0` + `FOC处理方案-v1.1`）是否加作废横幅」 - **LITCHI → Tân Thuận 进口估价争议**：本项已关案（10-09 收口，不改原合同/发票单价 0.8）；遗留：其余 4 票敞口、**AD10 措施 2026-10-15 到期**是否续期、未来申报基准 - **Mai 岗位效率优化专案**：A/B 投入深度未拍 + MISA 主数据（Mã đối tượng / Mã NCC）+ 试导入授权待 Daryl/Mai；10-05 r2 正式交付版仍是首件待办 - ⚠️ **环境（仅上报，未自主排查）**：`image` 工具 API key 失效（延续 9/25）→ OCR 走本机 tesseract；看板 CF 隧道自 10-06 13:50 停摆，本地 8765 正常 → 请 Kitty 重起 watchdog - ⚠️ **Kitty 同步**：10-09 23:45 成本扫描推送 → 降级写 `cost_daily.json` 已就位，按「严禁失败重试风暴」不重试 ## 🕛 00:1x OPC 群聊汇报发送（Cron 2fe401f9 收尾） - 发送成功：messageId `om_x100b63a5a",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4011225402355194,
+      "maxScore": 0.4011225402355194,
+      "firstRecalledAt": "2026-10-17T17:04:20.653Z",
+      "lastRecalledAt": "2026-10-17T17:04:20.653Z",
+      "queryHashes": [
+        "03df95586152"
+      ],
+      "recallDays": [
+        "2026-10-18"
+      ],
+      "conceptTags": [
+        "v2.0",
+        "hfht-2025/01",
+        "6411/6412/6413",
+        "免费质量补货执行口径-v1.0",
+        "foc处理方案-v1.1",
+        "10-09",
+        "不改原合同/发票单价",
+        "0.8"
       ]
     }
   }
