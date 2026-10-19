@@ -1,6 +1,12 @@
 # 当前活跃任务 (中期记忆 — 每次session加载)
 
-> 最后更新: 2026-10-18 23:59（10/18 深夜审计：修复备份仓 5 个 stash 冲突 + audit.sh 两处 stash 逻辑 Bug，备份链恢复；遗留 OPC 成本 API 8765 不可达待 Kitty）
+> 最后更新: 2026-10-19 23:59（10/19 审计：9 项全绿 / 浅层 0 / 深层 0；当日无 Daryl 业务会话）
+
+## 🔧 10/19 状态（小风侧 · 新增）
+- **全天无业务指令**：仅 23:59 归档 Cron 会话，无开发/陪练/调研任务。四项待拍板事项（IELTS 重启验收 / Token 级财务 / deal flow 实验 / 模型降级长期性）已跨 4 天未决
+- **归档审计全绿**：日记/active/lessons/归档/MEMORY/Session 交叉验证/骨架检测/项目清单/成本/SAGE 对账/Git 备份，浅层 0 深层 0；今日日记由 Cron 骨架回填为实质内容
+- **成本仪表盘 8765 瞬时抖动**：Balance 23:25 两次 5s 超时 → 23:59 审计时已恢复 fresh_api_ok，判断为抖动非宕机。按护栏归 Kitty 排查
+- **成本异常观察点**：Kitty 今日 $4.9222 占全 Agent 89%（今日总 $5.51 / 本月 $91.78），需确认是否含超时重投浪费
 
 ## 🔧 10/18 状态（小风侧 · 新增）
 - **备份链修复（重要）**：`~/.opc-workspace-cache` 卡了 5 个未解决 stash 冲突（根目录 AGENTS.md / memory/active|lessons|workflow-rules|project_xiaofeng）→ `git commit` 静默失败，记忆未真正落盘备份。已取 upstream 版解决并提交 `d19a196`，现 pull/commit/push 全绿、远端已验证含当日日记
