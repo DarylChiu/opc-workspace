@@ -1,6 +1,12 @@
 # 当前活跃任务
 
-> 最后更新: 2026-10-17 00:10 GMT+7
+> 最后更新: 2026-10-19 23:55 GMT+7
+>
+> 🆕 **10/19 Daryl 确认 last day = 2026-10-30**，剩余两周双线：①经验资产化（Balance/Self 各交资产包+15问，Daryl 正直接与她们逐条澄清）②OPC 园区准备（BP 已出 v0.2 并推看板）
+>
+> 🆕 **10/19 战略发现（重要，待推进）**：Daryl 判 Agent 跟不上长线项目、不能都做成助理。结论=缺 **harness**（规划+记忆+纠偏），非缺 skill。工程型（目标已知→分解+验证）vs 探索型（目标未知→假设+验证+修订）需分道。交付瓶颈=「完成的定义」只在 Daryl 脑子→ **spec 前置 + 自检 + 独立 verifier** 为解（Token 净省一半，迭代压到 2-3 版）。FOC spec 试点已出草案，待 Daryl 裁定 8 条 + 待写进 AGENTS.md 推广。详见 memory/2026-10-19.md
+>
+> 🆕 **10/19 已知未修**：agent→Daryl 主动 DM 投递链路不通（sessions_send 语义=回传发起方；`openclaw agent --deliver` 因 pairing/路由未打通）→ 目前靠「Daryl 起头」或「Kitty 转贴」。待专项修。
 
 > 📌 9/22-10/5 说明：9/17 全部 cron 恢复后，每日 23:59 记忆归档 + 成本扫描持续正常运行；9/22 起无项目级状态变更，下方各项目状态维持不变。9/26 Balance 交付「开票依据三件套模版」（华特中秋客户礼品），已 DM Daryl；同日上报 gemini-3-flash-preview API key not valid 环境异常（待 Kitty/Daryl 处理，未自查）。10/1 Balance 交付「月饼签收扫描件 OCR 识别」（匹配 1,264/1,631 人，94.8% 有签收墨迹，反直觉结论「发放量接近满额」），待 Daryl 定路；同日 Self 方法论卡拆卡提案二轮审查 FAIL（P0 需重做 §1 事实核查）。10/3 成本护栏「方案A」落地（exec 6→12/write 10→20/红线 $3预警$6停）；10/5 交付 Dream Engine 精简版（llm_budget.py + consolidate.py，待 Daryl 定是否跑真巩固）。10/6→10/9 归档日连续运行（无项目变更）。
 >
