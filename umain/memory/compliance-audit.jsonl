@@ -324,3 +324,7 @@
 {"timestamp":"2026-10-20T00:05:41+0700","check":"L4-audit-v2","agent":"main","fixes":4,"shallow_issues":1,"deep_issues":0,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
 {"timestamp":"2026-10-20T00:06:19+0700","check":"L4-audit-v2","agent":"main","fixes":2,"shallow_issues":0,"deep_issues":0,"diary_lines":21,"diary_sections":4,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
 {"timestamp":"2026-10-20T23:59:00+0700","check":"L4-audit-v2","agent":"main","fixes":2,"shallow_issues":0,"deep_issues":0,"diary_lines":21,"diary_sections":4,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-10-21T00:07:36+0700","check":"L4-audit-v2","agent":"main","fixes":4,"shallow_issues":1,"deep_issues":0,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-10-21T00:08:07+0700","check":"post-op","task":"每日记忆系统归档审计 + 日记补实","score":3,"total":5,"warnings":[
+  "🔴 任务涉及问题/失败/审计发现，建议提炼到 lessons.md"
+]}

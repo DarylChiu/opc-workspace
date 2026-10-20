@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; font-family:"PingFang SC","Microsoft YaHei",sans-serif; }
+  body { background:#fff; }
+  .canvas { position:relative; width:1760px; height:1480px; background:#fff; }
+  .title { position:absolute; top:14px; left:0; width:100%; text-align:center; font-size:26px; font-weight:700; color:#1a1a2e; }
+  .title .sub { font-size:15px; font-weight:400; color:#666; margin-top:4px; }
+  .lane { position:absolute; top:76px; bottom:24px; border-left:1px dashed #d5d9e2; }
+  .lane .lane-head { position:absolute; top:0; left:0; right:0; text-align:center; font-size:15px; font-weight:600; color:#fff; padding:8px 0; border-radius:8px 8px 0 0; }
+  .lane .lane-head .vi { font-size:11px; font-weight:400; opacity:.85; }
+  .node { position:absolute; width:212px; background:#fff; border:2px solid #3b6fd4; border-radius:10px; padding:10px 12px; box-shadow:0 2px 6px rgba(30,60,120,.12); text-align:center; }
+  .node .no { display:inline-block; background:#3b6fd4; color:#fff; border-radius:50%; width:24px; height:24px; line-height:24px; font-size:13px; font-weight:700; margin-bottom:4px; }
+  .node .zh { font-size:15px; font-weight:700; color:#1a1a2e; }
+  .node .vi { font-size:11.5px; color:#5a6b8c; margin-top:2px; }
+  .node .docs { font-size:11px; color:#8a94a6; margin-top:4px; border-top:1px dashed #e2e6ee; padding-top:4px; }
+  .node.green { border-color:#2e9e5b; } .node.green .no { background:#2e9e5b; }
+  .node.orange { border-color:#e07b2e; } .node.orange .no { background:#e07b2e; }
+  .node.purple { border-color:#7a5fd0; } .node.purple .no { background:#7a5fd0; }
+  .node.fin { border-color:#b04a5a; } .node.fin .no { background:#b04a5a; }
+  svg { position:absolute; top:0; left:0; width:1760px; height:1480px; pointer-events:none; }
+  .foot { position:absolute; bottom:4px; left:0; width:100%; text-align:center; font-size:11px; color:#999; }
+</style>
+</head>
+<body>
+<div class="canvas" id="cv">
+  <div class="title">应付采购 · 单据流转时序 / Trình tự luân chuyển chứng từ mua hàng
+    <div class="sub">PR → 合同 → PO → 发货 → 报关/验收 → 三单匹配 → 入账 → 付款</div>
+  </div>
+  <!-- 泳道背景 -->
+  <div class="lane" style="left:30px;width:230px;"><div class="lane-head" style="background:#5b6b8c;">需求部门<div class="vi">BP yêu cầu</div></div></div>
+  <div class="lane" style="left:270px;width:230px;"><div class="lane-head" style="background:#3b6fd4;">采购部<div class="vi">P. Mua hàng</div></div></div>
+  <div class="lane" style="left:510px;width:230px;"><div class="lane-head" style="background:#2e9e5b;">供应商<div class="vi">Nhà cung cấp</div></div></div>
+  <div class="lane" style="left:750px;width:230px;"><div class="lane-head" style="background:#e07b2e;">物流 / 报关<div class="vi">Logistics / HQ</div></div></div>
+  <div class="lane" style="left:990px;width:230px;"><div class="lane-head" style="background:#7a5fd0;">仓库 / 质检<div class="vi">Kho / QC</div></div></div>
+  <div class="lane" style="left:1230px;width:230px;"><div class="lane-head" style="background:#b04a5a;">财务部<div class="vi">Phòng Kế toán</div></div></div>
+  <div class="lane" style="left:1470px;width:260px;"><div class="lane-head" style="background:#3a3f51;">管理层<div class="vi">Ban lãnh đạo</div></div></div>
+
+  <!-- 节点 -->
+  <div class="node" style="left:39px;top:150px;"><div class="no">1</div><div class="zh">PR 请购</div><div class="vi">Yêu cầu mua</div><div class="docs">请购单 PR</div></div>
+
+  <div class="node" style="left:279px;top:290px;"><div class="no">2</div><div class="zh">合同签订</div><div class="vi">Ký hợp đồng</div><div class="docs">合同 Hợp đồng</div></div>
+  <div class="node" style="left:279px;top:450px;"><div class="no">3</div><div class="zh">PO 下单</div><div class="vi">Đặt hàng</div><div class="docs">采购订单 PO</div></div>
+
+  <div class="node green" style="left:489px;top:610px;"><div class="no">4a</div><div class="zh">进口发货</div><div class="vi">Giao hàng NK</div><div class="docs">提单 / 发票 / PL</div></div>
+  <div class="node green" style="left:729px;top:610px;"><div class="no">4b</div><div class="zh">本地发货</div><div class="vi">Giao hàng nội địa</div><div class="docs">送货单</div></div>
+
+  <div class="node orange" style="left:489px;top:780px;"><div class="no">5a</div><div class="zh">报关 · 缴税</div><div class="vi">Khai HQ · nộp thuế</div><div class="docs">封签 / 报关单 / 缴款书</div></div>
+  <div class="node purple" style="left:729px;top:780px;"><div class="no">5b</div><div class="zh">收货验收</div><div class="vi">Nhận hàng</div><div class="docs">过磅单 / 入库单</div></div>
+
+  <div class="node purple" style="left:489px;top:950px;"><div class="no">6a</div><div class="zh">到厂验收</div><div class="vi">Nghiệm thu</div><div class="docs">验收记录</div></div>
+  <div class="node purple" style="left:729px;top:950px;"><div class="no">6b</div><div class="zh">质检</div><div class="vi">Kiểm tra chất lượng</div><div class="docs">质检报告</div></div>
+
+  <div class="node" style="left:279px;top:1110px;"><div class="no">7</div><div class="zh">三单匹配</div><div class="vi">Đối chiếu 3 CT</div><div class="docs">PO ↔ 收货 ↔ 发票</div></div>
+
+  <div class="node fin" style="left:1239px;top:1110px;"><div class="no">8</div><div class="zh">财务入账</div><div class="vi">Hạch toán</div><div class="docs">会计凭证</div></div>
+  <div class="node" style="left:1479px;top:1110px;"><div class="no">9</div><div class="zh">付款审批</div><div class="vi">Phê duyệt</div><div class="docs">付款批准</div></div>
+  <div class="node fin" style="left:1239px;top:1320px;"><div class="no">10</div><div class="zh">付款执行</div><div class="vi">Thanh toán</div><div class="docs">付款凭证 → 供应商</div></div>
+
+  <!-- 箭头 (节点高约115px) -->
+  <svg viewBox="0 0 1760 1480">
+    <defs>
+      <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L9,3 L0,6 Z" fill="#5b6b8c"/></marker>
+    </defs>
+    <!-- 1(145,265)→2(385,290) -->
+    <path d="M145 267 V280 H385 V290" fill="none" stroke="#5b6b8c" stroke-width="2.5" marker-end="url(#arr)"/>
+    <!-- 2(385,405)→3(385,450) -->
+    <path d="M385 405 V450" fill="none" stroke="#5b6b8c" stroke-width="2.5" marker-end="url(#arr)"/>
+    <!-- 3(385,565)→4a(595,610) -->
+    <path d="M385 565 V580 H595 V610" fill="none" stroke="#5b6b8c" stroke-width="2.5" marker-end="url(#arr)"/>
+    <!-- 3→4b(835,610) -->
+    <path d="M385 565 V580 H835 V610" fill="none" stroke="#5b6b8c" stroke-width="2.5" marker-end="url(#arr)"/>
+    <!-- 4a(595,725)→5a(595,780) -->
+    <path d="M595 725 V780" fill="none" stroke="#5b6b8c" stroke-width="2.5" marker-end="url(#arr)"/>
+    <!-- 4b(835,725)→5b(835,780) -->
+    <path d="M835 725 V780" fill="none" stroke="#5b6b8c" stroke-width="2.5" marker-end="url(#arr)"/>
+    <!-- 5a(595,895)→6a(595,950) -->
+    <path d="M595 895 V950" fill="none" stroke="#5b6b8c" stroke-width="2.5" marker-end="url(#arr)"/>
+    <!-- 5b(835,895)→6b(835,950) -->
+    <path d="M835 895 V950" fill="none" stroke="#5b6b8c" stroke-width="2.5" marker-end="url(#arr)"/>
+    <!-- 6a(595,1065)→7(385,1110) -->
+    <path d="M595 1065 V1082 H385 V1110" fill="none" stroke="#5b6b8c" stroke-width="2.5" marker-end="url(#arr)"/>
+    <!-- 6b(835,1065)→7(385,1110) -->
+    <path d="M835 1065 V1082 H385 V1110" fill="none" stroke="#5b6b8c" stroke-width="2.5" marker-end="url(#arr)"/>
+    <!-- 7(491,1167)→8(1239,1167) -->
+    <path d="M491 1167 H1239" fill="none" stroke="#5b6b8c" stroke-width="2.5" marker-end="url(#arr)"/>
+    <!-- 8(1451,1167)→9(1479,1167) -->
+    <path d="M1451 1167 H1479" fill="none" stroke="#5b6b8c" stroke-width="2.5" marker-end="url(#arr)"/>
+    <!-- 9(1585,1225)→10(1345,1320) -->
+    <path d="M1585 1225 V1252 H1345 V1320" fill="none" stroke="#5b6b8c" stroke-width="2.5" marker-end="url(#arr)"/>
+  </svg>
+  <div class="foot">HUATEX · 财务部 2026-08-12 · 单据流转时序 / Trình tự luân chuyển chứng từ</div>
+</div>
+</body>
+</html>
