@@ -1,0 +1,14 @@
+# Recent Conversation Context Snapshot
+# Saved: $(date -Iseconds)
+# Reason: Model switch to deepseek-v4-flash (max thinking)
+
+## Today (8/4) key interactions:
+- Kitty asked for July stats: Daryl互动session数 2, 消息22条, 大部分是OPC Dashboard通知
+- Daryl ordered model switch to deepseek-v4-flash
+
+## Active tasks (from active.md):
+
+## Active projects (from project_Balance.md):
+- OPC成本仪表盘修复 — append-only台账 (85%)
+- Future Textile × Wellname 利息豁免 (85%, 待攻击9-12防御)
+- 车辆费用专项分析 (待Daryl数据)

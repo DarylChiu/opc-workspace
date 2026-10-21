@@ -1,0 +1,81 @@
+{
+  "scan_info": {
+    "files_scanned": 262,
+    "parse_errors": 0,
+    "timestamp": "2026-07-09T09:05:13.954129",
+    "method": ".jsonl full-scan"
+  },
+  "summary": {
+    "total_cost": 100.865,
+    "month_cost": 39.4623,
+    "today_cost": 0.3119,
+    "total_tokens": 238276939,
+    "total_calls": 5372
+  },
+  "by_agent": {
+    "Bryson 🌬️": {
+      "cost": 58.7227,
+      "month_cost": 3.5914,
+      "today_cost": 0.0,
+      "tokens": 136571273,
+      "calls": 3553
+    },
+    "Kitty 😿": {
+      "cost": 36.6439,
+      "month_cost": 34.0606,
+      "today_cost": 0.2849,
+      "tokens": 81799994,
+      "calls": 975
+    },
+    "Balance ⚖️": {
+      "cost": 3.5695,
+      "month_cost": 1.1206,
+      "today_cost": 0.018,
+      "tokens": 11759675,
+      "calls": 507
+    },
+    "Self 📚": {
+      "cost": 1.9289,
+      "month_cost": 0.6897,
+      "today_cost": 0.0089,
+      "tokens": 8145997,
+      "calls": 337
+    }
+  },
+  "by_model": {
+    "openrouter/deepseek/deepseek-r1": {
+      "cost": 51.0628,
+      "tokens": 88420408,
+      "calls": 2865
+    },
+    "deepseek/deepseek-v4-pro": {
+      "cost": 24.3441,
+      "tokens": 139196934,
+      "calls": 2426
+    },
+    "openrouter/anthropic/claude-opus-4.8": {
+      "cost": 23.4949,
+      "tokens": 9905055,
+      "calls": 44
+    },
+    "openrouter/anthropic/claude-sonnet-4.5": {
+      "cost": 1.8138,
+      "tokens": 708624,
+      "calls": 36
+    },
+    "openrouter/anthropic/claude-3.7-sonnet": {
+      "cost": 0.1495,
+      "tokens": 45918,
+      "calls": 1
+    }
+  },
+  "daily_last7": {
+    "2026-07-03": 2.3973,
+    "2026-07-04": 0.4942,
+    "2026-07-05": 2.4618,
+    "2026-07-06": 3.5278,
+    "2026-07-07": 25.0455,
+    "2026-07-08": 4.4541,
+    "2026-07-09": 0.3119
+  }
+}

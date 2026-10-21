@@ -1,19 +1,23 @@
-# 模型路由策略 v3 (2026-06-09 更新)
+# 模型分级调用规则 v3 (2026-06-14 废弃)
 
-> Daryl策略调整：2026-06-09 08:50  
-> 本周有效，后续可能继续调整
+> ⚠️ **已废弃** — OpenRouter 余额不足，所有 Agent 统一改用 DeepSeek 直连 `deepseek/deepseek-v4-pro`。
+> 
+> 本文件保留作为历史记录，不再生效。
+> 
+> 废弃原因：Kitty (main agent) 调用 OpenRouter API 时报 billing error，余额耗尽。
+> 新策略：全量使用 DeepSeek v4 Pro 直连，取消分级调用。
 
-## 当前策略
+## ~~原四层分级（已废弃）~~
 
-| Agent | 路由通道 | 模型 | 策略类型 |
-|-------|---------|------|---------|
-| **Kitty** (main) | OpenRouter | 三级调用 | Sonnet分类 → Opus/Sonnet/Flash 三级执行 |
-| **Bryson** (xiaofeng) | DeepSeek直连 | deepseek-v4-pro | 单模型 |
-| **Balance** | DeepSeek直连 | deepseek-v4-pro | 单模型 |
-| **Self** | DeepSeek直连 | deepseek-v4-pro | 单模型 |
+| 级别 | 模型全称 | 通道 | 适用场景 |
+|------|---------|------|---------|
+| ~~T1 重型~~ | ~~`openrouter/anthropic/claude-opus-4.6`~~ | ~~OpenRouter~~ | ~~复杂财务分析、架构级方案~~ |
+| ~~T2 中型~~ | ~~`openrouter/anthropic/claude-sonnet-4.5`~~ | ~~OpenRouter~~ | ~~财务分析、方案框架、数据拆解~~ |
+| **T3 标准** | `deepseek/deepseek-v4-pro` | DeepSeek直连 | **全部场景（当前唯一）** |
+| ~~T4 极轻量~~ | ~~`openrouter/google/gemini-2.5-flash`~~ | ~~OpenRouter~~ | ~~心跳、确认回复~~ |
 
-## 变化说明
-
-- Bryson/Balance/Self 从 OpenRouter Claude Sonnet 4.5 切换回 DeepSeek V4 Pro 直连
-- Kitty 保留 OpenRouter 三级调用策略（重任务需要 Opus）
-- 目的：降低成本，集中重型任务到 Kitty
+## 新规则
+- **唯一模型**: `deepseek/deepseek-v4-pro` (DeepSeek 直连)
+- **分类器**: 废弃，无需分级
+- **汇报格式**: 不再标注模型和成本
+- **月预算**: 无限制（DeepSeek 直连成本极低）
