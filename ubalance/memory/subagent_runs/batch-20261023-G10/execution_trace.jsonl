@@ -1,0 +1,5 @@
+{"ts":"2026-10-23T17:04:00+07:00","step":"1","action":"启动批次","result":"G10 批次启动，输入 L1-G10.xlsx（manifest n=32），env HT_TAG=G10 / HT_MONTHS=11个月（2025-12 ~ 2026-10），脚本 scripts/run_loan_2025_12_v28d.py，nohup 后台执行，日志 work/loan-materials-2026-10/logs/run-G10.log"}
+{"ts":"2026-10-23T17:11:00+07:00","step":"2","action":"脚本执行完成","result":"处理完成，日志出现 ===SUMMARY===，进程退出码 0；32 票全部输出，复制文件数（已去重）=161；DEDUP-DROP 7 条（md5重复/同文档多版本），无 ERROR/COPY-ERR/Traceback"}
+{"ts":"2026-10-23T17:13:00+07:00","step":"3","action":"内容标签审计","result":"python3 scripts/audit_outcome2_from_report.py 结果：32票 {'成对': 29, '空夹(源盘无目录)': 3}；空夹=HMXCAW260099 / HMXCP260070 / HMXCP260072；无「只有PDF」「只有Excel」类"}
+{"ts":"2026-10-23T17:14:00+07:00","step":"4","action":"未决问题取证","result":"处理报告「未决问题」① 未匹配目录票号: HMXCAW260099, HMXCP260070, HMXCP260072；② base 回退: 无；③ -N 兄弟目录回退: 无"}
+{"ts":"2026-10-23T17:15:00+07:00","step":"5","action":"独立抽检落盘","result":"Outcome2 目录 32 个、文件 161 个，与日志一致；空夹仅 3 个（HMXCAW260099/HMXCP260070/HMXCP260072）；抽检 17-HMXCFZK260007 落盘 4 文件含 ToKhaiHQ7N_QDTQ_108691589420.xlsx，与报告 7 件（含内容标签拆分）一致；抽检 25-IV260912149 落盘 4 文件、无 ToKhai，与「⚠️缺ToKhai (4件)」一致"}

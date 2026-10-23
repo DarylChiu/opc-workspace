@@ -1,0 +1,6 @@
+{"ts":"2026-10-23T17:03:30+07:00","step":"1","action":"startup","result":"目录创建完成；L1-G08.xlsx(5375B)存在；run_loan_2025_12_v28d.py + audit_outcome2_from_report.py 均存在"}
+{"ts":"2026-10-23T17:04:00+07:00","step":"2","action":"run_start","result":"HT_TAG=G08, HT_L1=L1-G08.xlsx(32票), HT_MONTHS=2025-12~2026-10 共11月, RM目录1236个, 命令 scripts/run_loan_2025_12_v28d.py 已启动(python pid 9893)，未改任何脚本"}
+{"ts":"2026-10-23T17:11:00+07:00","step":"3","action":"run_done","result":"进程正常退出code=0；复制文件数(已去重)=194；日志出现 ===SUMMARY=== 32行；Outcome1=.../v2.8d-2025_12-G08-20261023_1704/Outcome1-...xlsx (33行含表头,13列)；Outcome2 目录32个"}
+{"ts":"2026-10-23T17:12:00+07:00","step":"4","action":"audit_outcome2","result":"python3 scripts/audit_outcome2_from_report.py 输出: 32票 {'成对':30,'只有Excel':1,'空夹(源盘无目录)':1}; 只有Excel=HMFZV260066; 空夹=HMXCM260011; 只有PDF=0"}
+{"ts":"2026-10-23T17:13:00+07:00","step":"5","action":"report_check","result":"报告未决问题①未匹配目录票号=HMXCM260011；②base回退=无；③-N兄弟目录回退=无；日志 ERROR=0 COPY-ERR=0 Traceback=0（仅FontBBox字体告警）"}
+{"ts":"2026-10-23T17:14:00+07:00","step":"6","action":"spot_check","result":"抽检 32-HMXCFZAZ260001：Outcome2 内4件(BIL HUATEX21.pdf / 出货资料xlsm / 出货资料pdf / ToKhaiHQ7N_QDTQ_108559617500.xls)，与SUMMARY 4件及标签一致；抽检 16-HMFZV260066 内含2 PDF+1 xlsm+1 ToKhai xlsx；18-HMXCM260011 目录为空(确认空夹)"}

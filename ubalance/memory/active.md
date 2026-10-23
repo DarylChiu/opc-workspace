@@ -1,6 +1,22 @@
 # 当前活跃任务
 
-> 最后更新: 2026-10-22 11:5x（越南华特经营模式 v4 双 Sheet 已交付，等 Daryl 反馈）
+> 最后更新: 2026-10-23 17:20（进出口材料 323 票 10 组批量已交付）
+
+## ✅ 2026-10-23 17:20 【已交付】进出口材料 323 票 · 10 组并行跑批（v2.8e）
+- **需求（Daryl）**：L1 323 票，spawn 10 组，Outcome2 含 SC/Invoice/PL 的 **Excel 版**，主代理汇总
+- **产出**：`work/loan-materials-2026-10/merged/`｜Outcome2 = 323 票夹 / 1,732 文件 / 521MB｜Outcome1-ALL 323 行×13 列（+分组对照/待补清单/完整性缺口 3 个 sheet）
+- **结果**：成对 298（92.3%）｜空夹 19（源盘无目录）｜只有Excel 3｜只有PDF 2｜无三件套 1
+- **完整性缺口**：52 条（缺 ToKhai 29 ／ 缺 BL·AWB 23）；金额合计 USD 8,290,131，待补金额 29 票
+- **新增工具**：`scripts/audit_outcome2_from_report.py`（内容标签审计）、`scripts/merge_outcome2_groups.py`（合并+待补+缺口）；`run_loan_2025_12_v28d.py` 加 HT_TAG/HT_L1/HT_MONTHS/HT_DISK 环境变量覆盖
+- **教训**：配对审计必须用**内容标签**，不能用文件名关键词（「华特陆运出货资料」等命名会造成大量假阴性）
+- **⏳ 等 Daryl**：①19 票空夹是否要追补材料 ②3 票只有 Excel（HMXCAC260357 / HMFZAK260250 / HMFZV260066）要不要补 PDF ③HMFZAK260250 疑似 OCR 漏标，需人工核
+
+## ✅ 2026-10-23 10:5x 进出口材料自动化整理 v2.8d → **v2.8e**：SC/Invoice/PackingList 增加 Excel 版
+- **需求（Daryl）**：Outcome2 之前只有 PDF 版，要加上 Excel 版
+- **改法**：`scripts/doc_classify.py` 新增 `excel_doc_tags()`／`excel_text()`；`classify_keep()` Excel 分支由「非 ToKhai 一律排除」改为「ToKhai → 再判清关资料明细(合同/发票/装箱 工作表)收」；9 个 runner（v2.8d/v29/1010/0810 + batch7 p1–p5）Excel 改读工作表文本做票号归属
+- **回归**：`work/loan-materials-2025-12/out/v2.8d-2025_12-20261023_1045/`（94 秒；Outcome2 70→88 件，+18 份明细 Excel，零删减）；18/18 票 PDF+Excel 成对；兄弟票 -1 未串票；Outcome1 仅 HMXCAR250004「缺SalesConfirmation」→✅完整（Excel 合同表补上）
+- **已知口子**：legacy `.xls`(BIFF) 不支持，明细若只有 .xls 仍判 OTHER（本批未发生）
+- **⏳ 等 Daryl**：①是否把 Excel 明细拆成 SC/INV/PL 三个独立文件（现为原样一份合订工作簿）②是否要把 .xls 支路补上
 
 ## 🚧 2026-10-22 11:5x 【已交付·等反馈】越南华特经营模式 v4：Sheet1 销售出货 / Sheet2 采购入库
 - **背景**：Daryl 今早被领导催进度 → 明确只做两块结构，不再扩范围

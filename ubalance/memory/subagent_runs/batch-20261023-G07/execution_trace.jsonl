@@ -1,0 +1,7 @@
+{"ts":"2026-10-23T17:04:00+07:00","step":"01","action":"start","result":"启动 G07 批次 v2.8e，pid=9876，输入 L1-G07.xlsx（5395B），11个月份（2025-12 → 2026-10），HT_TAG=G07"}
+{"ts":"2026-10-23T17:04:30+07:00","step":"02","action":"matching","result":"L1 32 行，RM 目录数 1236（2025/THÁNG 12→2026/THÁNG 10），精确匹配 30 票，无目录 2 票（HMFZAQ260207 / HMXCM260008），无 base 或 -N 回退"}
+{"ts":"2026-10-23T17:09:30+07:00","step":"03","action":"ocr_copy","result":"OCR 本机 Tesseract（chi_sim+eng）并行完成，复制文件 175 件（已去重，DEDUP-DROP 3 条：HMFZAT260062 正式提单.pdf md5 重复；HMFZAT260065 两版清关明细 (1)(2)）"}
+{"ts":"2026-10-23T17:10:00+07:00","step":"04","action":"run_done","result":"===SUMMARY=== 输出，32 票，进程退出 0；STAGE=work/loan-materials-2025-12/out/v2.8d-2025_12-G07-20261023_1704"}
+{"ts":"2026-10-23T17:11:00+07:00","step":"05","action":"audit","result":"audit_outcome2_from_report.py: 成对 29 / 只有PDF 0 / 只有Excel 0 / 空夹(源盘无目录) 2 / 其他(无三件套) 1；非成对：HMFZAQ260207(空), HMXCM260008(空), HMFZAT260062(仅 Waybill.pdf)"}
+{"ts":"2026-10-23T17:12:00+07:00","step":"06","action":"spot_check","result":"抽检 3-HMXCFZV260069：BL(DA2614SSG106电放.pdf)+Invoice/PackingList(合并PDF)+SalesContract(.xlsm)+Tokhai(108371389120) 齐全，按内容标签配对正确；抽检 8-HMFZV260043 6 件含 SWB.pdf，配对正确；HMFZAT260062 与 2026-10-14 p4 批次旧产出（同样仅 Waybill.pdf）一致 → 源盘缺件，非脚本回归"}
+{"ts":"2026-10-23T17:13:00+07:00","step":"07","action":"error_scan","result":"日志 grep ERROR|COPY-ERR|Traceback|Exception 无命中；无异常"}

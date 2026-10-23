@@ -34,6 +34,25 @@ os.makedirs(OUT2, exist_ok=True)
 
 L1_XLSX = os.path.join(WS, 'work/loan-materials-2025-12/in/L1-成品采购入库补单测试20条.xlsx')
 
+# ---------- 并行分组跑批的可选覆盖（环境变量；不设则与旧行为完全一致）----------
+#   HT_TAG    = 分组标记（如 g01）→ 输出目录名加上该后缀，避免并行互相覆盖
+#   HT_L1     = 该组 L1 Excel 路径
+#   HT_MONTHS = JSON 数组，如 '[["2026","THÁNG 01"],["2026","THÁNG 02"]]'
+#   HT_DISK   = 数据盘根目录（默认 Toshiba 盘）
+if os.environ.get('HT_DISK'):
+    DISK = os.environ['HT_DISK']
+    RM = os.path.join(DISK, 'RM-Database')
+if os.environ.get('HT_MONTHS'):
+    MONTHS = [tuple(x) for x in json.loads(os.environ['HT_MONTHS'])]
+_TAG = os.environ.get('HT_TAG', '').strip()
+if _TAG:
+    STAGE = os.path.join(WS, 'work', 'loan-materials-2025-12', 'out', f'v2.8d-{BATCH}-{_TAG}-{TS}')
+    OUT2 = os.path.join(STAGE, 'Outcome2')
+    shutil.rmtree(STAGE, ignore_errors=True)
+    os.makedirs(OUT2, exist_ok=True)
+if os.environ.get('HT_L1'):
+    L1_XLSX = os.environ['HT_L1']
+
 TRANSPORT = {'BL', 'SWB', 'AWB'}
 FIVE = ['SalesConfirmation', 'Invoice', 'PackingList', 'BL_or_AWB', 'ToKhai']
 TICKET = re.compile(r'[A-Z]{2,}[A-Z0-9]{2,}\d{3,}(?:-\d+)?')
@@ -190,6 +209,14 @@ for fp in dirpath2cands:
                 text = '\n'.join(DC.pdf_pages_text(f))
             except Exception:
                 pass
+        elif f.lower().endswith(('.xlsx', '.xlsm', '.xls')):
+            # v2.8e: Excel 版（清关资料明细 / ToKhai）读工作表文本，供「票号归属」判定
+            try:
+                text = DC.excel_text(f)
+            except Exception:
+                text = ''
+            if tk and tk.get('so_hoa_don'):
+                text += f" {tk.get('so_hoa_don')} {tk.get('so_to_khai','')}"
         elif tk and tk.get('so_hoa_don'):
             text = f"{tk.get('so_hoa_don')} {tk.get('so_to_khai','')}"
         attrs = {t: DC.attribute_file(text, os.path.basename(f), t, L1_SET) for t in cands}

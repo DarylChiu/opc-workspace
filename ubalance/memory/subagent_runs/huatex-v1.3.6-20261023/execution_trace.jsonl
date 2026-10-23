@@ -1,0 +1,18 @@
+{"ts":"2026-10-23T11:42:00+07:00","step":"0","action":"init","result":"创建 trace 目录；核对前置源码改动"}
+{"ts":"2026-10-23T11:42:30+07:00","step":"1","action":"verify_source","result":"doc_classify.py: def excel_text@230, def excel_doc_tags@258, classify_keep Excel 分支调用 excel_doc_tags(fp)@310 —— 已就位"}
+{"ts":"2026-10-23T11:42:40+07:00","step":"2","action":"verify_source","result":"版本串: build_package.py VERSION='v1.3.6-20261023'@35 + 多处文档串；preflight_win.py 477/585 均为 v1.3.6-20261023"}
+{"ts":"2026-10-23T11:42:47+07:00","step":"3","action":"build","result":"build_package.py 成功：zip 83 条目 / 144.97MB / sha256=a027e1610d184a0d5949b23e16e357583761871320c87cd9a7e3ab04376260fd；内置扫描「未发现客户数据」PASS；UTF-8 标志 0 缺失"}
+{"ts":"2026-10-23T11:43:30+07:00","step":"4","action":"unzip_verify","result":"解压 /tmp/hv136/unzip；doc_classify.py 行230/258/310 三项全中；py_compile OK"}
+{"ts":"2026-10-23T11:43:50+07:00","step":"5","action":"verify_nocustdata","result":"独立复核：pdf/图片 0；xlsx 仅 templates/Payment核销-模板.xlsx（1 行表头 0 数据行）；runs/ work/ 各仅 说明.txt"}
+{"ts":"2026-10-23T11:44:00+07:00","step":"6","action":"verify_version","result":"包内 tools/preflight.py 行477/585 = v1.3.6-20261023"}
+{"ts":"2026-10-23T11:44:05+07:00","step":"7","action":"verify_manifest","result":"MANIFEST 83 条；实际 83 个文件 / 162108558 B；逐文件 sha256+size 83/83 全匹配，集合 diff 空 → PASS（注：首轮 84 因自跑 py_compile 产生 cpython-314.pyc，已剔除）"}
+{"ts":"2026-10-23T11:44:15+07:00","step":"8","action":"regression_start","result":"起包内 app/server.py 127.0.0.1:8000；preflight --selftest rc=3（仅 macOS 环境警告，无 ❌，12/12 通过）"}
+{"ts":"2026-10-23T11:44:22+07:00","step":"9","action":"save_source_root","result":"POST /api/save-source-root → {\"ok\":true,\"source_root\":\"/Volumes/TOSHIBA EXT/HUATEX进出口材料\"}"}
+{"ts":"2026-10-23T11:44:27+07:00","step":"10","action":"loan_run","result":"/api/run workflow=loan override=config.regression-2025_12.yaml tag=2025_12 输入 L1-成品采购入库补单测试20条.xlsx"}
+{"ts":"2026-10-23T11:50:08+07:00","step":"11","action":"loan_done","result":"job=20261023_114427_loan status=done elapsed=341.2s；产出 Outcome1 xlsx 7493B / Outcome2.zip 25552063B / 处理报告 27199B"}
+{"ts":"2026-10-23T11:50:20+07:00","step":"12","action":"verify_pairs","result":"20 票：成对(PDF+Excel)=18、半对=0、空票=2(10-HMXCAM250001,19-HMFZR250008) → 硬验收 PASS（要求≥15）"}
+{"ts":"2026-10-23T11:50:40+07:00","step":"13","action":"verify_attribution","result":"18 票 Excel 文件名全含本票票号，异常=0；兄弟票 14-/15-/16-HMFZR25000x-1/-3 均对手本票，无串票"}
+{"ts":"2026-10-23T11:51:00+07:00","step":"14","action":"verify_excel_content","result":"抽检 3 票：包内 excel_doc_tags 均返回 {INVOICE,PACKING_LIST,SALES_CONTRACT}；工作表=合同/发票/装箱/明细"}
+{"ts":"2026-10-23T11:51:20+07:00","step":"15","action":"compare_outcome1","result":"对拍 10-14 基线：21×13 尺寸同，差异 1 处 R14C11 ⚠️缺SalesConfirmation→✅完整（v1.3.6 预期改善，非回归）"}
+{"ts":"2026-10-23T11:51:40+07:00","step":"16","action":"download_and_stop","result":"Outcome2.zip 下载回读 25552063B；server 已停，0 listeners"}
+{"ts":"2026-10-23T11:52:00+07:00","step":"17","action":"report","result":"包 152007965B sha256=a027e161...60fd；验收 5/5 PASS；端到端 PASS；summary.md 已写"}
