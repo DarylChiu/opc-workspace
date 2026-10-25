@@ -1,6 +1,44 @@
 # 当前活跃任务 (中期记忆 — 每次session加载)
 
-> 最后更新: 2026-10-17 23:59（10/17 完成 Daryl 邮件转 PDF：HTCRN26010802 Defects 用 Chromium 渲染 .eml→A4 PDF，8 图内联+21行表格，已交付；待 Daryl 拍板：IELTS C1+C2+C3 验收 / Token 级财务三件事 / 调研下一步）
+> 最后更新: 2026-10-25 23:59（10/25 审计：10 项检查 / 自动修复 4 / 浅层 1 已闭环 / 深层 0；当日无 Daryl 业务会话）
+
+## 🔧 10/25 状态（小风侧 · 新增）
+- **连续第五日无业务指令**：10/25 仅 23:59 归档 Cron 会话，无开发/陪练/调研任务；跨 Agent（Kitty/Balance/Self）同样静默
+- **10/25 归档**：浅层问题＝今日日记缺失 → Cron 骨架已回填实质内容；归档 2026-09-24.md；Git pull/commit/push 全绿，远端含 10/25 日记
+- **成本**：今日 $0.01（纯审计开销）/ 本月 $95.28 / 全量 $282.79（fresh_api_ok，8765 正常）
+- **SAGE 对账**：checker 0 次 / reflexion 0 条，与 FAIL 0 条一致
+- ⚠️ 五项待拍板事项（IELTS 重启验收 / Token 级财务 / deal flow 实验 / 模型降级长期性 / 预算口径）已跨 10 天未决；归档 Cron 降频建议（每 2–3 日）仍待 Daryl 拍板
+
+## 🔧 10/24 状态（小风侧 · 新增）
+- **连续第四日无业务指令**：10/22–10/24 均仅 23:59 归档 Cron 会话，无开发/陪练/调研任务；跨 Agent（Kitty/Balance/Self）同样静默
+- **10/24 归档**：浅层问题＝今日日记缺失 → Cron 骨架已回填实质内容；同步归档 2026-09-23.md；Git pull/commit/push 全绿，远端含 10/24 日记
+- **成本**：今日 $0.14（纯审计开销）/ 本月 $95.20 / 全量 $282.71（fresh_api_ok，8765 正常）
+- **建议（待 Daryl 拍板）**：连续四日零业务下，归档 Cron 可降频至每 2–3 日一次以省成本
+- ⚠️ 五项待拍板事项（IELTS 重启验收 / Token 级财务 / deal flow 实验 / 模型降级长期性 / 预算口径）已跨 9 天未决，Agent 侧无自主推进空间
+
+## 🔧 10/22–10/23 状态（小风侧）
+- **连续三日无业务指令**：10/22、10/23 均仅 23:59 归档 Cron 会话；四项待拍板事项（IELTS 重启验收 / Token 级财务 / deal flow 实验 / 模型降级长期性）已跨 8 天未决
+- **10/23 归档**：唯一浅层问题＝active.md 47h 未更新 → 已补写状态段；Cron 骨架日记（10/23）已回填实质内容；Git pull/commit/push 全绿，远端含 10/23 日记
+- **成本**：今日 $1.29 / 本月 $94.98 / 全量 $282.50（fresh_api_ok，8765 正常）
+- ⚠️ 四项待拍板 + 预算口径（Kitty 超 426%、Balance 超 192%）仍等 Daryl 一句话，Agent 侧无自主推进空间
+
+## 🔧 10/20–10/21 状态（小风侧 · 新增）
+- **连续两天无业务指令**：仅有归档 Cron 会话；四项待拍板事项（IELTS 重启验收 / Token 级财务 / deal flow 实验 / 模型降级长期性）已跨 6 天未决
+- **10/21 归档闭环的 3 个浅层问题**：① active.md 47h 未更新 → 已刷新 ② workspace `git pull --rebase` 失败（远端被其他 Agent 推进）→ 手动 stash+pull+8 文件冲突取 HEAD+保留 stash，现与 origin 干净对齐 ③ `git push` non-fast-forward 被拒 → 缓存仓已 rebase 推送成功，远端验证含 10/21 日记
+- **成本**：今日 $1.03 / 本月 $93.52 / 全量 $281.03（fresh_api_ok）
+- **跨 Agent**：Balance 主战场＝华特（Huatex）越南 EPE 出口税务「问 5/问 6」结构分析；Balance 建议下周与 Daryl 一起看预算口径（Kitty 本月超 426%、Balance 超 192%）
+- ⚠️ workspace 本地仍有大量未提交业务改动（ielts_tutor 前后端/db、Bryson、TOOLS.md 等），下次审计纳入备份
+
+## 🔧 10/19 状态（小风侧）
+- **全天无业务指令**：仅 23:59 归档 Cron 会话，无开发/陪练/调研任务。四项待拍板事项（IELTS 重启验收 / Token 级财务 / deal flow 实验 / 模型降级长期性）已跨 4 天未决
+- **归档审计全绿**：日记/active/lessons/归档/MEMORY/Session 交叉验证/骨架检测/项目清单/成本/SAGE 对账/Git 备份，浅层 0 深层 0；今日日记由 Cron 骨架回填为实质内容
+- **成本仪表盘 8765 瞬时抖动**：Balance 23:25 两次 5s 超时 → 23:59 审计时已恢复 fresh_api_ok，判断为抖动非宕机。按护栏归 Kitty 排查
+- **成本异常观察点**：Kitty 今日 $4.9222 占全 Agent 89%（今日总 $5.51 / 本月 $91.78），需确认是否含超时重投浪费
+
+## 🔧 10/18 状态（小风侧 · 新增）
+- **备份链修复（重要）**：`~/.opc-workspace-cache` 卡了 5 个未解决 stash 冲突（根目录 AGENTS.md / memory/active|lessons|workflow-rules|project_xiaofeng）→ `git commit` 静默失败，记忆未真正落盘备份。已取 upstream 版解决并提交 `d19a196`，现 pull/commit/push 全绿、远端已验证含当日日记
+- **audit.sh 根因修复**：①无条件 `stash pop` 会误弹历史 stash → 改为比对 `git stash list` 条数，只在真新建时 pop；②pop 冲突无人处理 → 冲突即回落取 HEAD 版并保留 stash
+- ⚠️ **OPC 成本仪表盘 API（localhost:8765）不可达** → 状态降级 `fresh_api_down`，成本数字为缓存值（今日 $0.01 / 本月 $86.22）。按成本护栏，账单/服务排查归 Kitty(main)，小风只上报不自查
 
 ## 🔧 10/17 状态（小风侧 · 新增）
 - **Daryl 邮件转 PDF**：第一版手工排版失败（截图丢失、表格打散）→ 第二版改 Chromium 渲染 `.eml`→HTML（cid 内联 base64）→ 竖版 A4 PDF（2.1MB），程序化验证 8/8 图内联、主表 21 行完整 → 已交付 Daryl
