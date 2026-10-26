@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-24T04:16:32.217Z",
+  "updatedAt": "2026-10-26T01:45:39.928Z",
   "entries": {
     "memory:memory/2026-06-10.md:1:29": {
       "key": "memory:memory/2026-06-10.md:1:29",
@@ -7885,6 +7885,99 @@
         "交易",
         "性质",
         "进出口"
+      ]
+    },
+    "memory:memory/archive/2026-09-25.md:26:33": {
+      "key": "memory:memory/archive/2026-09-25.md:26:33",
+      "path": "memory/archive/2026-09-25.md",
+      "startLine": 26,
+      "endLine": 33,
+      "source": "memory",
+      "snippet": "- **Daryl 原话**: 「昨天和前天是 A&C audit Firm 来执行 Huatex 的 Tax Review 执行 Test of Internal Control 的 Inquiries，所以我真的忙得头皮都麻了」（情绪=疲惫，非新任务指令） - **事实登记**: 主体=**Huatex（华特越南）**；执行方=A&C；作业类型=①Tax Review ②Test of Internal Control 的 Inquiry（问询/访谈）程序；现场窗口=2026-09-23 至 09-24 两天 - **关联底稿**: 我方 `reports/Huaxing-Tax-Review-Audit-Plan-v1.2-20260807.md`（合同 HDKT.1.2607.064-KT，A&C 为乙方，四税种两阶段）+ 英文版 `outputs/Huaxing_Tax_Review_Plan_v1.2_EN.docx`（8/11 已交 Daryl）→ 本次驻场问询即该审计计划 W1 访谈阶段的落地；主体由「华星」扩至「华特」待 Daryl 确认范围 - **Balance 回应**: 共情 + 提出「问询记录 → 内控缺陷台账」模板（沿用 v1.2 认定/程序/证据/效果 程序导向结构）以承接后续 Management Letter 与凭证索要；询问是否需要现场 procedure list / 我们作答记录 - **⚠️ 成本观察**: 本次回复仅 1 轮 memory_search + 1 次 exec + 1 次 edit，无 websearch（纯内部上下文",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3924004405736923,
+      "maxScore": 0.3924004405736923,
+      "firstRecalledAt": "2026-10-26T01:45:39.928Z",
+      "lastRecalledAt": "2026-10-26T01:45:39.928Z",
+      "queryHashes": [
+        "8424d42aa5a7"
+      ],
+      "recallDays": [
+        "2026-10-26"
+      ],
+      "conceptTags": [
+        "问询/访谈",
+        "09-24",
+        "hdkt.1.2607.064-kt",
+        "8/11",
+        "v1.2",
+        "认定/程序/证据/效果",
+        "memory-search",
+        "daryl"
+      ]
+    },
+    "memory:memory/2026-10-21.md:71:80": {
+      "key": "memory:memory/2026-10-21.md:71:80",
+      "path": "memory/2026-10-21.md",
+      "startLine": 71,
+      "endLine": 80,
+      "source": "memory",
+      "snippet": "- **自我更正**：上一轮我把 TT 103/2014 Đ1.2「加工并复出口」排除条款说成「明文排除」，实为二手措辞未核原文 → 已在备忘里降为辅助论据并标「必须核原文」 - **另一条判断**：Huatex 不应开 8% 运费发票给 HFGI（DAP 卖方是 HFGI，运输义务不在 Huatex；拆开开票＝白缴 8% + 破坏 0% 凭证链 + 给 HFGI 制造在越采购服务痕迹） ## 23:47 每日成本扫描（cron 全量扫描推Kitty） - 全量台账：今日 $1.0319 | 本月 $93.5155 | 全量 $281.0310 | 调用 36,498 次 - 看板 /api/costs totalCost = $281.03 → 与台账对齐（差异 < $0.01），跳过接口改造请求 - 兜底文件已写入：~/WorkBuddy/Claw/opc-dashboard/data/cost_daily.json - Kitty 通知：sessions_send 30s 超时 → ⚠️已降级写文件，Kitty未确认 - 按 Agent：Balance 今日 $0.9633 / 本月 $38.44；Kitty $0.0686 / $42.55；Bryson $0 / $8.62；Self $0 / $3.91",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.37569019496440886,
+      "maxScore": 0.37569019496440886,
+      "firstRecalledAt": "2026-10-26T01:45:39.928Z",
+      "lastRecalledAt": "2026-10-26T01:45:39.928Z",
+      "queryHashes": [
+        "8424d42aa5a7"
+      ],
+      "recallDays": [
+        "2026-10-26"
+      ],
+      "conceptTags": [
+        "103/2014",
+        "đ1.2",
+        "1.0319",
+        "93.5155",
+        "281.0310",
+        "api/costs",
+        "281.03",
+        "0.01"
+      ]
+    },
+    "memory:memory/2026-10-21.md:67:73": {
+      "key": "memory:memory/2026-10-21.md:67:73",
+      "path": "memory/2026-10-21.md",
+      "startLine": 67,
+      "endLine": 73,
+      "source": "memory",
+      "snippet": "- **Daryl 结论**：四方合同（HFGI 卖／Huatex 产／Sintex 买／Esprinta 收｜E62｜DAP 直发不走 HFGI）中 HFGI 根本无 FCT，因其向 Sintex 收款、双方均非越南公司 - **我确认结论对，但理由站不住**：FCT 的适用对象**恰恰是外国公司**，「不是越南公司」是适用前提而不是豁免理由 → 写进文档会被一句话推翻 - **替换为三条主论据**：①无越南来源收入（收款方在台湾、货直进非关税区、无 PE/人员/服务）②**无任何越南付款方 → 无扣缴义务人**（FCT 征管靠越南付款方代扣，本链条无越南境内支付环节）③非关税区视同境外 - **命门＝「收货方是谁」**：税局对外国商人就地进出口赚差价征 CIT 1% 的先例，货物都进入**越南境内市场**；本场景收获方是 EPE/非关税区，性质不同 - **自我更正**：上一轮我把 TT 103/2014 Đ1.2「加工并复出口」排除条款说成「明文排除」，实为二手措辞未核原文 → 已在备忘里降为辅助论据并标「必须核原文」 - **另一条判断**：Huatex 不应开 8% 运费发票给 HFGI（DAP 卖方是 HFGI，运输义务不在 Huatex；拆开开票＝白缴 8% + 破坏 0% 凭证链 + 给 HFGI 制造在越采购服务痕迹）",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3754353910684585,
+      "maxScore": 0.3754353910684585,
+      "firstRecalledAt": "2026-10-26T01:45:39.928Z",
+      "lastRecalledAt": "2026-10-26T01:45:39.928Z",
+      "queryHashes": [
+        "8424d42aa5a7"
+      ],
+      "recallDays": [
+        "2026-10-26"
+      ],
+      "conceptTags": [
+        "pe/人员/服务",
+        "epe/非关税区",
+        "103/2014",
+        "đ1.2",
+        "daryl",
+        "结论",
+        "四方",
+        "合同"
       ]
     }
   }

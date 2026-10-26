@@ -553,3 +553,10 @@ Daryl 认知类型 Ni+Te——看分析报告像看 X 光，表面数据堆砌�
 - **正确做法**：任何「push 成功」断言，必须用 `git rev-parse HEAD` vs `git ls-remote origin refs/heads/main`（或 `git show origin/main:<file>`）交叉验证，不得只信脚本日志。
 - **影响**：2026-10-21~10-25 连续 5 天远端备份断链；本地 commit 完好，数字资产未丢，但违反 T0 铁律的「可追溯备份」要求。
 - **待办**：给 audit.sh 加远端 ref 校验；网络恢复后补推积压 8 个提交。
+
+## 2026-10-26 · Git push 断链的真正根因 = 3.3GB 二进制进库，不是网络
+- **现象**：连续 5 天「push 失败/假成功」，远端落后 11 个提交；`ssh -T git@github.com` 认证正常，误以为网络/密钥问题。
+- **真因**：未推送历史含 **2831 个 blob / 3.3GB**（481MB 的 Outcome2 zip + 6×145MB 的 Tools-Windows zip）。SSH 传输触发超时 → push 永远不完成。
+- **教训**：备份链路断了，先量体积（`git rev-list --objects @{u}..HEAD | git cat-file --batch-check | awk 求和`），再怀疑网络。**诊断顺序：体积 → 网络 → 认证**。
+- **规矩（立即生效）**：`*.zip`、`work/` 下的大产物一律 .gitignore；交付包只留在本地/OPC 静态目录，不进 git。
+- **待决策（Daryl）**：已进历史的 3.3GB 需 `git filter-repo`/BFG 清理或拆仓，破坏性操作不自主执行。
