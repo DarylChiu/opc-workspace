@@ -1,0 +1,4 @@
+{"ts":"2026-10-23T16:52:30+07:00","step":"01","action":"start","result":"启动 run_loan_2025_12_v28d.py，HT_TAG=G05，HT_L1=L1-G05.xlsx，HT_MONTHS=2025-12~2026-10 共11期，pid 7085"}
+{"ts":"2026-10-23T17:01:10+07:00","step":"02","action":"run_complete","result":"检测到 ===SUMMARY===，进程正常退出；L1 32 行，RM 目录 1236，去重后复制 175 个文件，DEDUP-DROP 4 条"}
+{"ts":"2026-10-23T17:02:40+07:00","step":"03","action":"stat_outcome","result":"STAGE=/Users/zhaoyuzhao/.openclaw/workspace-balance/work/loan-materials-2025-12/out/v2.8d-2025_12-G05-20261023_1654；Outcome2 子文件夹 32 个、根目录散文件 0；文件总数 175（与日志一致）；清关资料明细统计：成对9 / 只有PDF 0 / 只有Excel 7 / 两者都无 16"}
+{"ts":"2026-10-23T17:03:20+07:00","step":"04","action":"attribution_spotcheck","result":"抽检 HMFZAP260123：源目录 RM-Database/2026/THÁNG 04/150.HMFZAP260123 中 6 个文件与 Outcome2/20-HMFZAP260123 逐一对应（含 3 份清关明细PDF+1份xlsm、HAWB、ToKhai），归属正确；未决问题①未匹配目录：HMFZAW260005, HMFZAW260011, HMFZAK260243；日志无 ERROR/COPY-ERR/Traceback"}

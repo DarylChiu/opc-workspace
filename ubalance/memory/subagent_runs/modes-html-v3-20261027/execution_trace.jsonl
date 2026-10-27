@@ -1,0 +1,22 @@
+{"ts": "2026-10-27T15:39:49+07:00", "step": "01", "action": "read", "result": "读取基线 v2 单文件 HTML（2169 行 / 102KB），定位 style/body/script 三段结构与 v2 的 8 预设、S 状态、engine、computeCost、renderFlow、drawer 逻辑"}
+{"ts": "2026-10-27T15:39:49+07:00", "step": "02", "action": "extract", "result": "抽出 v2 的 MODES 数组（8 个销售模式 + MODE_CODE）原文保存为 work/huatex-modes-html-v3/modes.js（164 行，口径逐字沿用，未改写结论）"}
+{"ts": "2026-10-27T15:39:49+07:00", "step": "03", "action": "write", "result": "新写 head.html：深蓝白灰样式 + v3 版式；删除 .presets 样式，新增合同结构徽标 .shapebadge(sb0/sb2/sb3/sb4)、默认规则块 .defrule、待维护 .valuetodo/.costwarn、柔和未定义 .softbanner 等样式"}
+{"ts": "2026-10-27T15:39:49+07:00", "step": "04", "action": "write", "result": "新写 body 结构：左侧主体池 + 判定说明（去预设面板）；中部「合同结构徽标 + 四角色槽位（①②必填）+ 默认规则块 + 判定结论 + 三流图」；右侧「采购材料/采购方式/料价 + 成本底线 + 待维护提示 + 成本树 + 报价校验」"}
+{"ts": "2026-10-27T15:39:49+07:00", "step": "05", "action": "write", "result": "新写 app.js 主体：defaultParams 中 weave/dye/ohRate、物流 6 档、采购附加 4 档 全部 v:null（待维护）；defaultRules 9 条（v2 8 条 + v3 新增 1 条三方缺收货方规则）；STORE_KEY=huatex_modes_v3"}
+{"ts": "2026-10-27T15:39:49+07:00", "step": "06", "action": "write", "result": "实现 effectiveRoles()：销售方=Huatex 时供货方默认 Huatex；收货方留空默认=购买方。contractShape()：按补位后实际参与主体去重计数 → 2/3/4 方"}
+{"ts": "2026-10-27T15:39:49+07:00", "step": "07", "action": "write", "result": "引擎改造：仅要求 seller+buyer；undef 分支输出最接近模式＋缺失要件；未定义不阻断渲染（flow 用通用链 ['supplier','gate:⚠ 未定义组合','receiver']）"}
+{"ts": "2026-10-27T15:39:49+07:00", "step": "08", "action": "write", "result": "三流图改造：空角色节点剔除、相邻同主体去重；补位主体以虚线辅助节点呈现（销售方/供货方/合同买方），保证 2/3/4 方节点数=2/3/4；宽度按节点数自适应，文字按框宽截断"}
+{"ts": "2026-10-27T15:39:49+07:00", "step": "09", "action": "write", "result": "成本层改造：采购材料(yarn/grey/fin) → 料价/关税/反倾销；采购方式(本地/A12/E31/A42) → 是否计征＋采购附加；加工(织造/染整/制造费用率)、物流档位、采购附加空值不计入；返回 missing[] 驱动待维护提示"}
+{"ts": "2026-10-27T15:39:49+07:00", "step": "10", "action": "write", "result": "渲染层：成本树 ①采购②税费③加工④物流⑤采购附加 + 合计 + 待维护 tip；总成本旁 .costwarn；报价校验（❌/🟢+毛利额与%）；维护抽屉 params tab 支持空值（清空即 null）并标 待维护/手工维护"}
+{"ts": "2026-10-27T15:39:49+07:00", "step": "11", "action": "build", "result": "拼接 head.html + modes.js + app.js → build.html（2373 行 / 114,528 字节），单文件零外链"}
+{"ts": "2026-10-27T15:39:49+07:00", "step": "12", "action": "check", "result": "外链扫描：src=0 / href=0 / @import=0 / http=0 / 唯一 url( 为 SVG 内部 marker 锚点 url(#arw-*)。禁用词扫描：供应形态 0 / 自织 0 / 预设 0 / preset 0"}
+{"ts": "2026-10-27T15:39:49+07:00", "step": "13", "action": "check", "result": "抽取 <script> 内容跑 node --check → 语法通过（1892 行 JS）；纯净页面 chrome-headless-shell 控制台无 Uncaught 报错"}
+{"ts": "2026-10-27T15:39:49+07:00", "step": "14", "action": "test", "result": "注入 test.js 到 probe.html，chrome-headless-shell --dump-dom 真实浏览器执行：70 条断言全部 PASS（初始状态/6 类合同结构场景/成本手算/localStorage 往返/抽屉 5 tab/点选填槽位交互）"}
+{"ts": "2026-10-27T15:39:49+07:00", "step": "15", "action": "test", "result": "场景断言明细：双方出口 S1-01 0% 出口报关 2 节点；双方内销 S1-07 8%；三方缺供货方 S1-09 0% E62 3 节点；三方缺收货方 S1-01 3 节点＋收货方默认同购买方；四方 S1-02 0% E62 4 节点；双解 S1-08/S1-09 双卡；未定义黄框不空白"}
+{"ts": "2026-10-27T15:39:49+07:00", "step": "16", "action": "test", "result": "成本手算比对：本地采购 1.6995（=1.65×1.03）；A12 1.8777（+0.0495 关税 +0.1287 反倾销）；填 weave0.35/dye0.55/oh6%/logFob0.04/purNormal0.02 → 2.9367（与手算差 0）；清空后回落且不计入"}
+{"ts": "2026-10-27T15:39:49+07:00", "step": "17", "action": "test", "result": "localStorage 往返：改 tarYarn=4.44、purLocal=0.031 → 导出 JSON → hardReset（清空）→ 导入 → 总成本 1.7305 与导出前一致；键名 huatex_modes_v3 已验证写入"}
+{"ts": "2026-10-27T15:39:49+07:00", "step": "18", "action": "test", "result": "几何自检（geom.js）：7 个场景三流图节点无重叠、无越界（viewBox 1000 内）、连线数正常，主体节点数 2/2/3/3/4/3/2 全对"}
+{"ts": "2026-10-27T15:39:49+07:00", "step": "19", "action": "render", "result": "headless 截图 5 张（初始/双方/三方双解/四方/未定义，1680×1500）：初始四槽全空、徽标 待填角色、单位总成本 1.6995、待维护提示均渲染正常"}
+{"ts": "2026-10-27T15:39:49+07:00", "step": "20", "action": "ocr", "result": "tesseract chi_sim OCR 读出：标题「越南华特(HUATEX)经营模式·交互图解 v3」、徽标「待填角色/双方合同/三方合同/四方合同」、「单位总成本 1.6995」、「— 待维护」「加工成本/物流成本/采购附加尚未维护，当前总成本仅含采购成本＋税费成本」"}
+{"ts": "2026-10-27T15:39:49+07:00", "step": "21", "action": "render", "result": "打印/移动端：--print-to-pdf 生成 1.49MB PDF 正常；420×900 视口下 documentElement.scrollWidth=420 = clientWidth（无横向溢出）"}
+{"ts": "2026-10-27T15:39:49+07:00", "step": "22", "action": "deliver", "result": "产出 deliverables/华特经营模式-交互图解-v3-20261027.html（112KB / 2373 行），并复核外链 0、禁用词 0、交付文件 JS 语法通过"}

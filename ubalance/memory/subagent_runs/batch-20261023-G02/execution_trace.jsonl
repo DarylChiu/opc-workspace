@@ -1,0 +1,6 @@
+{"ts":"2026-10-23T09:54:17Z","step":"1","action":"start","result":"launched run_loan_2025_12_v28d.py pid=7044 tag=G02 L1=L1-G02.xlsx months=11"}
+{"ts": "2026-10-23T10:05:41Z", "step": "2", "action": "run_complete", "result": "exit ok; log 80 lines; Outcome1=work/loan-materials-2025-12/out/v2.8d-2025_12-G02-20261023_1654/Outcome1-v2.8d-2025_12-20261023_1654.xlsx; copied 186 files after md5 dedup(5 dropped)"}
+{"ts": "2026-10-23T10:05:41Z", "step": "3", "action": "count_folders", "result": "Outcome2 dirs=33, files=186; L1 rows=33; all matched [exact]"}
+{"ts": "2026-10-23T10:05:41Z", "step": "4", "action": "pairing_check", "result": "PAIR=29; PDF_ONLY=0; EXCEL_ONLY=4 (14-HMFZR260025,17-HMFZR260029,10-HMFZAG260004,32-HMFZAG260005); NONE=0 (strict keyword '清关' gave 5 NONE because 5 dirs use '华特...出货资料' naming, which also holds pdf+xlsm pair)"}
+{"ts": "2026-10-23T10:05:41Z", "step": "5", "action": "report_audit", "result": "未决问题: 未匹配到目录的票号=无; base回退=无; -N兄弟目录回退=无; log ERROR/COPY-ERR/Traceback=0"}
+{"ts":"2026-10-23T10:05:50Z","step":"6","action":"trace_verify","result":"verify_trace.sh PASS: 5 lines, 0 error, 0 warn (summary.md added)"}

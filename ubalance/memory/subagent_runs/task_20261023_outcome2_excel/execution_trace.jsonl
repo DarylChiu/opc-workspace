@@ -1,0 +1,9 @@
+{"ts": "2026-10-23T10:45:55+07:00", "step": "1", "action": "init", "result": "trace dir created; baseline v2.8d output found at work/loan-materials-2025-12/out/v2.8d-2025_12-20261014_1526"}
+{"ts": "2026-10-23T10:46:25+07:00", "step": "2", "action": "start_run", "result": "nohup python3 scripts/run_loan_2025_12_v28d.py started PID 55913; log=work/loan-materials-2025-12/out/run_v28e_excel_test.log; L1 20 invoices, RM dirs 271"}
+{"ts": "2026-10-23T10:46:55+07:00", "step": "3", "action": "run_completed", "result": "run finished exit0; STAGE=work/loan-materials-2025-12/out/v2.8d-2025_12-20261023_1045; SUMMARY 20 invoices; 88 files copied"}
+{"ts": "2026-10-23T10:47:25+07:00", "step": "4", "action": "file_inventory", "result": "Outcome2 new run 88 files (old 70), +18 exactly = 18 个「清关资料中英文明细」Excel(.xlsx/.xlsm)；0 删减。逐票 pdf/excel 统计完成：18票 pdf>=1且excel=2(1份明细+1份ToKhai)，2票(HMXCAM250001/HMFZR250008)0文件"}
+{"ts": "2026-10-23T10:47:55+07:00", "step": "5", "action": "sheet_verify", "result": "18个Excel全部含工作表[合同,发票,装箱] → SC/INV/PL 三标签齐备（doc_classify._XL_SHEET_TAGS 命中，非内容兜底）"}
+{"ts": "2026-10-23T10:48:25+07:00", "step": "6", "action": "attribution_check", "result": "逐票解析Excel内文本+工作表名提取票号：18/18 only自己的票号，FOREIGN=0；兄弟票 NHFMYAT250029-1 的 .xlsm/.pdf 均在剔除清单标 OTHER_TICKET:NHFMYAT250029-1，未误收进 1-NHFMYAT250029"}
+{"ts": "2026-10-23T10:48:55+07:00", "step": "7", "action": "outcome1_diff", "result": "Outcome1 20票逐列对比(五类完整性/ToKhai勾稽/关单号/金额/置信度/备注/分类)：唯一变化 HMXCAR250004 ⚠️缺SalesConfirmation → ✅完整；其余19票无变化"}
+{"ts": "2026-10-23T10:49:25+07:00", "step": "8", "action": "exclusion_audit", "result": "剔除清单158行：仍含'清关资料'的仅2条，均为兄弟票 NHFMYAT250029-1（非L1票，正确剔除）。OTHER类Excel残余=C1-02报关表模板/ToKhai缴税单/付款报销单/LIST.xlsx(内部费用汇总,票号跨多票,已核)/NHFMYR250450_107779140600.xls(BIFF旧格式,非明细)"}
+{"ts": "2026-10-23T10:49:55+07:00", "step": "9", "action": "gap_note", "result": "风险项：excel_doc_tags/excel_text 仅支持 .xlsx/.xlsm，legacy .xls(BIFF) 返回空集→若某票清关资料只存 .xls 则仍会被判 OTHER；本批未实际发生"}

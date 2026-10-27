@@ -139,6 +139,14 @@ for fp in dirpath2cands:
                 text = '\n'.join(DC.pdf_pages_text(f))
             except Exception:
                 pass
+        elif f.lower().endswith(('.xlsx', '.xlsm', '.xls')):
+            # v2.8e: Excel 版（清关资料明细 / ToKhai）读工作表文本，供「票号归属」判定
+            try:
+                text = DC.excel_text(f)
+            except Exception:
+                text = ''
+            if tk and tk.get('so_hoa_don'):
+                text += f" {tk.get('so_hoa_don')} {tk.get('so_to_khai','')}"
         elif tk and tk.get('so_hoa_don'):
             text = f"{tk.get('so_hoa_don')} {tk.get('so_to_khai','')}"
         attrs = {t: DC.attribute_file(text, os.path.basename(f), t, L1_SET) for t in cands}

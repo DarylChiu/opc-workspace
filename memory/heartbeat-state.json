@@ -1,9 +1,29 @@
 {
   "lastChecks": {
+<<<<<<< HEAD
     "email": null,
     "calendar": null,
     "weather": null,
     "services": 1786665853,
     "sessions": 1786665853
   }
+=======
+    "system_health": 1752167400,
+    "gateway": 1752167400,
+    "ngrok": 1752167400,
+    "aggregated_gateway": 1752167400,
+    "services": 1752167400,
+    "diary": 1752167400,
+    "heartbeat_round": 1784567668
+  },
+  "lastFullCheck": "2026-07-18 15:36 ICT",
+  "services_status": {
+    "dashboard_8765": "UP",
+    "searxng_8888": "UP",
+    "diary_07-19": "EXISTS",
+    "diary_07-20": "EXISTS",
+    "diary_07-21": "EXISTS"
+  },
+  "notes": {}
+>>>>>>> f84ca06f29566ba0eac5d0b2a33984ab963d31d6
 }

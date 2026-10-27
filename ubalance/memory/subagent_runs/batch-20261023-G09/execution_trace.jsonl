@@ -1,0 +1,7 @@
+{"ts":"2026-10-23T17:04:00+07:00","step":"01","action":"启动 workflow v2.8e 批次 G09","result":"HT_TAG=G09 HT_L1=L1-G09.xlsx HT_MONTHS=11个月(2025-12~2026-10)，nohup PID=9903，脚本 scripts/run_loan_2025_12_v28d.py"}
+{"ts":"2026-10-23T17:11:00+07:00","step":"02","action":"跑完","result":"===SUMMARY=== 输出 32 票，进程正常退出(exit 0)，耗时约 7 分钟；日志 ERROR/COPY-ERR/Traceback 均 0 条"}
+{"ts":"2026-10-23T17:12:00+07:00","step":"03","action":"取 STAGE 路径","result":"Outcome1: work/loan-materials-2025-12/out/v2.8d-2025_12-G09-20261023_1704/Outcome1-v2.8d-2025_12-20261023_1704.xlsx"}
+{"ts":"2026-10-23T17:13:00+07:00","step":"04","action":"按内容标签审计 Outcome2 (audit_outcome2_from_report.py)","result":"32票: 成对28 / 只有PDF0 / 只有Excel0 / 空夹(源盘无目录)4；审计脚本自动跳过 xlsm/pdf 同名明细与 _template 非内容文件"}
+{"ts":"2026-10-23T17:14:00+07:00","step":"05","action":"抽检内容(非文件名)","result":"30-HMFZAZ260028 pdftotext 抽检: INV.pdf=HUA FENG GROUP INC. 发票(Invoice No.字段)；PKL.pdf=装箱单(PACKING LIST)；SALES CONFIRMATION.pdf / BIL HUATEX260.pdf 为扫描件无文本层(预期)。23-HMXCFZK260001 4文件含明细xlsm/pdf+SWB+ToKhai。目录数与报告一致"}
+{"ts":"2026-10-23T17:15:00+07:00","step":"06","action":"检查 Outcome1 内容","result":"Outcome1 rows=33(表头+32票) cols=13，关键列 序号/发票号/关单号/报关日期/金额USD/供应商/贷款用途分类 完整，末行 HMFZK260469 amt=53600.98"}
+{"ts":"2026-10-23T17:16:00+07:00","step":"07","action":"检查未决问题","result":"① 未匹配目录票号 4 个: HMFZAX260043, HMXCM260009, HMXCP260060, HMXCP260063；②base回退:无；③-N兄弟目录回退:无；RM快照 mtime=2026-10-13"}

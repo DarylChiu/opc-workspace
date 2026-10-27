@@ -14,8 +14,13 @@ Daryl 口径（2026-07-15 明确）—— 贷款材料包 = 以下 5 类，全�
 关键点：
   - 一份 PDF 可能同时含多类（如清关明细第1页SC+第2页Invoice+第3页装箱单，
     或 Invoice 与 B/L 合订）——按「多标签」处理，只要含任一保留类就保留。
-  - 运费/物流发票、到货通知、产地证、DONG THUE 缴税单、清关资料Excel副本、
+  - 运费/物流发票、到货通知、产地证、DONG THUE 缴税单、
     请款/付款单等 → 排除。
+
+v2.8e（2026-10-23 Daryl）—— SC/Invoice/PackingList 增加 Excel 版：
+  以前「清关资料中英文明细」的 Excel 副本(.xlsx/.xlsm)一律当 OTHER 排除，Outcome2 里
+  只有 PDF 版。现改为：Excel 若含 合同 / 发票 / 装箱 类工作表（即 SC+Invoice+PL 的
+  Excel 版），按多标签保留并与 PDF 版一起进 Outcome2。判定见 excel_doc_tags()。
 """
 import os
 import re
@@ -189,6 +194,82 @@ def _bl_type(pages, tu, n, fname, allow_weak=True):
     return None
 
 
+# ===== Excel 版 SC / Invoice / Packing List（v2.8e）=====
+# 工作表名 → 标签（先按名判定，名字不规范再按内容兜底）
+_XL_SHEET_TAGS = {
+    '合同': 'SALES_CONTRACT', '销售合同': 'SALES_CONTRACT',
+    'salesconfirmation': 'SALES_CONTRACT', 'salescontract': 'SALES_CONTRACT',
+    'contract': 'SALES_CONTRACT',
+    '发票': 'INVOICE', '商业发票': 'INVOICE',
+    'invoice': 'INVOICE', 'commercialinvoice': 'INVOICE',
+    '装箱': 'PACKING_LIST', '装箱单': 'PACKING_LIST',
+    'packing': 'PACKING_LIST', 'packinglist': 'PACKING_LIST',
+}
+_EXCEL_TXT = {}
+
+
+def excel_text(fp, max_rows=150, max_cols=40):
+    """读 .xlsx/.xlsm 前若干行文本（供票号归属判定）。.xls 不支持 → 返回空串。"""
+    if fp in _EXCEL_TXT:
+        return _EXCEL_TXT[fp]
+    txt = ''
+    if os.path.splitext(fp)[1].lower() in ('.xlsx', '.xlsm'):
+        try:
+            import openpyxl
+            wb = openpyxl.load_workbook(fp, data_only=True, read_only=True)
+            try:
+                parts = []
+                for sn in wb.sheetnames[:6]:
+                    parts.append(sn)
+                    rows = 0
+                    for row in wb[sn].iter_rows(values_only=True, max_col=max_cols):
+                        parts.append(' '.join(str(c) for c in row if c is not None))
+                        rows += 1
+                        if rows >= max_rows:
+                            break
+                txt = '\n'.join(parts)
+            finally:
+                wb.close()
+        except Exception:
+            txt = ''
+    _EXCEL_TXT[fp] = txt
+    return txt
+
+
+def excel_doc_tags(fp):
+    """Excel 清关资料明细 → {'INVOICE','SALES_CONTRACT','PACKING_LIST'} 子集；
+    不像 SC/INV/PL 合订明细则返回空集。要求命中 ≥2 类，避免误收杂表。"""
+    if os.path.splitext(fp)[1].lower() not in ('.xlsx', '.xlsm'):
+        return set()
+    tags = set()
+    try:
+        import openpyxl
+        wb = openpyxl.load_workbook(fp, data_only=True, read_only=True)
+        try:
+            names = list(wb.sheetnames)
+        finally:
+            wb.close()
+    except Exception:
+        return set()
+    for sn in names:
+        k = re.sub(r'[^0-9a-z\u4e00-\u9fff]', '', (sn or '').lower())
+        tg = _XL_SHEET_TAGS.get(k)
+        if tg:
+            tags.add(tg)
+    if len(tags) < 2:                       # 表名不规范 → 按内容兜底
+        tu = excel_text(fp, max_rows=30).upper()
+        alt = set()
+        if 'SALES CONFIRMATION' in tu or 'SALES CONTRACT' in tu or '销售合同' in tu:
+            alt.add('SALES_CONTRACT')
+        if 'COMMERCIAL INVOICE' in tu or 'INVOICE NO' in tu:
+            alt.add('INVOICE')
+        if 'PACKING LIST' in tu or '装箱单' in tu:
+            alt.add('PACKING_LIST')
+        if len(alt) > len(tags):
+            tags = alt
+    return tags if len(tags) >= 2 else set()
+
+
 def classify_keep(fp):
     """
     内容级多标签判定。返回 (keep: bool, tags: set, extract_result)
@@ -200,14 +281,17 @@ def classify_keep(fp):
     fname = os.path.basename(fp)
     ext = os.path.splitext(fp)[1].lower()
 
-    # ===== Excel: 只有已通关 ToKhai QDTQ 保留 =====
+    # ===== Excel: 已通关 ToKhai QDTQ + SC/INV/PL 的 Excel 版（v2.8e）=====
     if ext in ('.xls', '.xlsx', '.xlsm'):
         if is_tokhai_filename(fname):
             r = extract_tokhai(fp)
             if r['is_cleared']:
                 return (True, {'TOKHAI_QDTQ'}, r)
             return (False, {'TOKHAI_OTHER'}, r)   # 未通关/DONG THUE缴税单等
-        return (False, {'OTHER'}, None)            # 清关资料Excel副本/临时文件等
+        tg = excel_doc_tags(fp)                    # 清关资料中英文明细 = SC+INV+PL 的 Excel 版
+        if tg:
+            return (True, tg, None)
+        return (False, {'OTHER'}, None)            # 其他临时表/杂表
 
     # ===== PDF: 多标签 =====
     if ext == '.pdf':
