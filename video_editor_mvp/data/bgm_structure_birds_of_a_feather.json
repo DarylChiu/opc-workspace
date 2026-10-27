@@ -1,0 +1,268 @@
+{
+  "song": "Birds of a Feather",
+  "artist": "Billie Eilish",
+  "source": "Hooktheory + librosa beat tracking",
+  "bpm": 103,
+  "key": "G major",
+  "time_signature": "4/4",
+  "duration_sec": 206,
+  "total_bars": 90,
+  "bar_duration_sec": 2.33,
+  "bar_8_duration_sec": 18.6,
+  "sections": [
+    {
+      "label": "Intro",
+      "bars": 8,
+      "start_sec": 1,
+      "end_sec": 19,
+      "emotion": "建立",
+      "energy": 0.3,
+      "chord_progression": [
+        "D",
+        "A",
+        "Bm",
+        "G",
+        "D",
+        "A",
+        "Bm",
+        "G"
+      ]
+    },
+    {
+      "label": "Verse 1",
+      "bars": 16,
+      "start_sec": 19,
+      "end_sec": 56,
+      "emotion": "叙述",
+      "energy": 0.4,
+      "chord_progression": [
+        "D",
+        "A",
+        "Bm",
+        "G",
+        "D",
+        "A",
+        "Bm",
+        "G"
+      ]
+    },
+    {
+      "label": "Pre-Chorus 1",
+      "bars": 8,
+      "start_sec": 56,
+      "end_sec": 74,
+      "emotion": "期待",
+      "energy": 0.5,
+      "chord_progression": [
+        "G",
+        "D",
+        "A",
+        "Bm",
+        "G",
+        "D",
+        "A",
+        "Bm"
+      ]
+    },
+    {
+      "label": "Chorus 1",
+      "bars": 16,
+      "start_sec": 74,
+      "end_sec": 110,
+      "emotion": "释放",
+      "energy": 0.7,
+      "chord_progression": [
+        "D",
+        "A",
+        "Bm",
+        "G",
+        "D",
+        "A",
+        "Bm",
+        "G",
+        "D",
+        "A",
+        "Bm",
+        "G",
+        "D",
+        "A",
+        "Bm",
+        "G"
+      ]
+    },
+    {
+      "label": "Verse 2",
+      "bars": 8,
+      "start_sec": 110,
+      "end_sec": 129,
+      "emotion": "叙述",
+      "energy": 0.45,
+      "chord_progression": [
+        "D",
+        "A",
+        "Bm",
+        "G",
+        "D",
+        "A",
+        "Bm",
+        "G"
+      ]
+    },
+    {
+      "label": "Pre-Chorus 2",
+      "bars": 8,
+      "start_sec": 129,
+      "end_sec": 147,
+      "emotion": "期待",
+      "energy": 0.55,
+      "chord_progression": [
+        "G",
+        "D",
+        "A",
+        "Bm",
+        "G",
+        "D",
+        "A",
+        "Bm"
+      ]
+    },
+    {
+      "label": "Chorus 2",
+      "bars": 16,
+      "start_sec": 147,
+      "end_sec": 184,
+      "emotion": "高潮",
+      "energy": 0.8,
+      "chord_progression": [
+        "D",
+        "A",
+        "Bm",
+        "G",
+        "D",
+        "A",
+        "Bm",
+        "G",
+        "D",
+        "A",
+        "Bm",
+        "G",
+        "D",
+        "A",
+        "Bm",
+        "G"
+      ]
+    },
+    {
+      "label": "Outro",
+      "bars": 10,
+      "start_sec": 184,
+      "end_sec": 206,
+      "emotion": "收束",
+      "energy": 0.35,
+      "chord_progression": [
+        "D",
+        "A",
+        "Bm",
+        "G",
+        "D",
+        "A",
+        "Bm",
+        "G",
+        "D",
+        "A",
+        "Bm",
+        "G",
+        "D",
+        "A",
+        "Bm",
+        "G"
+      ]
+    }
+  ],
+  "sub_8bars": [
+    {
+      "section": "Intro",
+      "unit": 1,
+      "start_sec": 1,
+      "end_sec": 19,
+      "bars": 8
+    },
+    {
+      "section": "Verse 1",
+      "unit": 1,
+      "start_sec": 19,
+      "end_sec": 37,
+      "bars": 8
+    },
+    {
+      "section": "Verse 1",
+      "unit": 2,
+      "start_sec": 37,
+      "end_sec": 56,
+      "bars": 8
+    },
+    {
+      "section": "Pre-Chorus 1",
+      "unit": 1,
+      "start_sec": 56,
+      "end_sec": 74,
+      "bars": 8
+    },
+    {
+      "section": "Chorus 1",
+      "unit": 1,
+      "start_sec": 74,
+      "end_sec": 92,
+      "bars": 8
+    },
+    {
+      "section": "Chorus 1",
+      "unit": 2,
+      "start_sec": 92,
+      "end_sec": 110,
+      "bars": 8
+    },
+    {
+      "section": "Verse 2",
+      "unit": 1,
+      "start_sec": 110,
+      "end_sec": 129,
+      "bars": 8
+    },
+    {
+      "section": "Pre-Chorus 2",
+      "unit": 1,
+      "start_sec": 129,
+      "end_sec": 147,
+      "bars": 8
+    },
+    {
+      "section": "Chorus 2",
+      "unit": 1,
+      "start_sec": 147,
+      "end_sec": 165,
+      "bars": 8
+    },
+    {
+      "section": "Chorus 2",
+      "unit": 2,
+      "start_sec": 165,
+      "end_sec": 184,
+      "bars": 8
+    },
+    {
+      "section": "Outro",
+      "unit": 1,
+      "start_sec": 184,
+      "end_sec": 202,
+      "bars": 8
+    },
+    {
+      "section": "Outro",
+      "unit": 2,
+      "start_sec": 202,
+      "end_sec": 206,
+      "bars": 2
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "song": "Birds of a Feather - Billie Eilish",
+  "bpm": 103.0,
+  "bars_total": 90,
+  "duration_sec": 211.0,
+  "bar_sec": 2.32,
+  "sections": [
+    {
+      "type": "Intro (instrumental)",
+      "bars": 90,
+      "bar_start": 0,
+      "bar_end": 90,
+      "time_start": 0.7,
+      "time_end": 204.5
+    }
+  ]
+}

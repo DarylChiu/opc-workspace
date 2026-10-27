@@ -1,0 +1,232 @@
+{
+  "duration": 211.0,
+  "bpm": 103.0,
+  "total_beats": 359,
+  "total_bars": 89,
+  "bar_duration_sec": 2.32,
+  "section_8bar_duration": 18.6,
+  "sections": [
+    {
+      "id": 0,
+      "beat_start": 0,
+      "beat_end": 40,
+      "start": 0.7,
+      "end": 23.0,
+      "duration": 22.3,
+      "beats": 40,
+      "bars": 10,
+      "energy": 0.672,
+      "onset_density": 0.547,
+      "similar_to": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "label": "Chorus",
+      "highlight": "⚡高潮 🥁节奏密集",
+      "sub_8bars": [
+        {
+          "bar_offset": 0,
+          "start": 0.7,
+          "end": 18.5,
+          "duration": 17.7,
+          "bars": 8,
+          "beats": 32
+        },
+        {
+          "bar_offset": 8,
+          "start": 19.0,
+          "end": 23.0,
+          "duration": 4.0,
+          "bars": 2,
+          "beats": 8
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "beat_start": 40,
+      "beat_end": 96,
+      "start": 23.6,
+      "end": 55.1,
+      "duration": 31.4,
+      "beats": 56,
+      "bars": 14,
+      "energy": 0.728,
+      "onset_density": 0.33,
+      "similar_to": [
+        0,
+        2,
+        3,
+        4
+      ],
+      "label": "Chorus",
+      "highlight": "⚡高潮",
+      "sub_8bars": [
+        {
+          "bar_offset": 0,
+          "start": 23.6,
+          "end": 41.3,
+          "duration": 17.7,
+          "bars": 8,
+          "beats": 32
+        },
+        {
+          "bar_offset": 8,
+          "start": 41.9,
+          "end": 55.1,
+          "duration": 13.1,
+          "bars": 6,
+          "beats": 24
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "beat_start": 96,
+      "beat_end": 168,
+      "start": 55.6,
+      "end": 96.2,
+      "duration": 40.6,
+      "beats": 72,
+      "bars": 18,
+      "energy": 0.77,
+      "onset_density": 0.243,
+      "similar_to": [
+        0,
+        1,
+        3,
+        4
+      ],
+      "label": "Chorus",
+      "highlight": "⚡高潮",
+      "sub_8bars": [
+        {
+          "bar_offset": 0,
+          "start": 55.6,
+          "end": 73.3,
+          "duration": 17.7,
+          "bars": 8,
+          "beats": 32
+        },
+        {
+          "bar_offset": 8,
+          "start": 73.9,
+          "end": 91.6,
+          "duration": 17.7,
+          "bars": 8,
+          "beats": 32
+        },
+        {
+          "bar_offset": 16,
+          "start": 92.2,
+          "end": 96.2,
+          "duration": 4.0,
+          "bars": 2,
+          "beats": 8
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "beat_start": 168,
+      "beat_end": 260,
+      "start": 96.8,
+      "end": 148.8,
+      "duration": 52.0,
+      "beats": 92,
+      "bars": 23,
+      "energy": 0.562,
+      "onset_density": 0.367,
+      "similar_to": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "label": "Chorus",
+      "highlight": "⚡高潮 🥁节奏密集",
+      "sub_8bars": [
+        {
+          "bar_offset": 0,
+          "start": 96.8,
+          "end": 114.5,
+          "duration": 17.7,
+          "bars": 8,
+          "beats": 32
+        },
+        {
+          "bar_offset": 8,
+          "start": 115.1,
+          "end": 132.7,
+          "duration": 17.7,
+          "bars": 8,
+          "beats": 32
+        },
+        {
+          "bar_offset": 16,
+          "start": 133.3,
+          "end": 148.8,
+          "duration": 15.4,
+          "bars": 7,
+          "beats": 28
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "beat_start": 260,
+      "beat_end": 358,
+      "start": 149.3,
+      "end": 205.1,
+      "duration": 55.7,
+      "beats": 98,
+      "bars": 24,
+      "energy": 0.712,
+      "onset_density": 0.215,
+      "similar_to": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "label": "Chorus",
+      "highlight": "⚡高潮",
+      "sub_8bars": [
+        {
+          "bar_offset": 0,
+          "start": 149.3,
+          "end": 167.1,
+          "duration": 17.7,
+          "bars": 8,
+          "beats": 32
+        },
+        {
+          "bar_offset": 8,
+          "start": 167.6,
+          "end": 185.3,
+          "duration": 17.7,
+          "bars": 8,
+          "beats": 32
+        },
+        {
+          "bar_offset": 16,
+          "start": 185.9,
+          "end": 203.9,
+          "duration": 18.0,
+          "bars": 8,
+          "beats": 32
+        },
+        {
+          "bar_offset": 24,
+          "start": 204.5,
+          "end": 205.1,
+          "duration": 0.6,
+          "bars": 0,
+          "beats": 2
+        }
+      ]
+    }
+  ]
+}

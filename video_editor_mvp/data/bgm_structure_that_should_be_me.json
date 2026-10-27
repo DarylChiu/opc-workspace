@@ -1,0 +1,37 @@
+{
+  "song": "That Should Be Me",
+  "artist": "Justin Bieber",
+  "source": "chordie.com + manual analysis",
+  "bpm": 76,
+  "key": "C major",
+  "time_signature": "4/4",
+  "duration_sec": 224,
+  "total_bars": 71,
+  "bar_duration_sec": 3.16,
+  "bar_8_duration_sec": 25.3,
+  "sections": [
+    {"label": "Intro",           "bars": 4,  "start_sec": 0,   "end_sec": 13,  "emotion": "建立", "energy": 0.25},
+    {"label": "Verse 1",         "bars": 12, "start_sec": 13,  "end_sec": 51,  "emotion": "叙述", "energy": 0.35},
+    {"label": "Pre-Chorus 1",    "bars": 6,  "start_sec": 51,  "end_sec": 70,  "emotion": "期待", "energy": 0.50},
+    {"label": "Chorus 1",        "bars": 8,  "start_sec": 70,  "end_sec": 95,  "emotion": "释放", "energy": 0.65},
+    {"label": "Verse 2",         "bars": 8,  "start_sec": 95,  "end_sec": 121, "emotion": "叙述", "energy": 0.40},
+    {"label": "Pre-Chorus 2",    "bars": 6,  "start_sec": 121, "end_sec": 140, "emotion": "期待", "energy": 0.55},
+    {"label": "Chorus 2",        "bars": 8,  "start_sec": 140, "end_sec": 165, "emotion": "释放", "energy": 0.70},
+    {"label": "Bridge",          "bars": 4,  "start_sec": 165, "end_sec": 178, "emotion": "转折", "energy": 0.60},
+    {"label": "Chorus 3",        "bars": 8,  "start_sec": 178, "end_sec": 203, "emotion": "高潮", "energy": 0.80},
+    {"label": "Outro",           "bars": 5,  "start_sec": 203, "end_sec": 224, "emotion": "收束", "energy": 0.35}
+  ],
+  "sub_8bars": [
+    {"section": "Intro",          "unit": 1,  "start_sec": 0,   "end_sec": 13,  "bars": 4},
+    {"section": "Verse 1",        "unit": 1,  "start_sec": 13,  "end_sec": 38,  "bars": 8},
+    {"section": "Verse 1",        "unit": 2,  "start_sec": 38,  "end_sec": 51,  "bars": 4},
+    {"section": "Pre-Chorus 1",   "unit": 1,  "start_sec": 51,  "end_sec": 70,  "bars": 6},
+    {"section": "Chorus 1",       "unit": 1,  "start_sec": 70,  "end_sec": 95,  "bars": 8},
+    {"section": "Verse 2",        "unit": 1,  "start_sec": 95,  "end_sec": 121, "bars": 8},
+    {"section": "Pre-Chorus 2",   "unit": 1,  "start_sec": 121, "end_sec": 140, "bars": 6},
+    {"section": "Chorus 2",       "unit": 1,  "start_sec": 140, "end_sec": 165, "bars": 8},
+    {"section": "Bridge",         "unit": 1,  "start_sec": 165, "end_sec": 178, "bars": 4},
+    {"section": "Chorus 3",       "unit": 1,  "start_sec": 178, "end_sec": 203, "bars": 8},
+    {"section": "Outro",          "unit": 1,  "start_sec": 203, "end_sec": 224, "bars": 5}
+  ]
+}

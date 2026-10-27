@@ -1,0 +1,121 @@
+# 事故报告：2026年7月22日 Mac mini 重启后项目启动故障
+
+> 撰写人: Bryson（吹点小风） | 日期: 2026-07-24 | 覆盖: 7/22 晚 ~ 7/24 早
+
+---
+
+## 一、事故概述
+
+2026年7月22日晚 Mac mini 重启后，各项目的后端/前端启动出现一系列连锁故障，导致 Daryl 从昨晚至今累计浪费约 1-1.5 小时排错。核心原因是 **git rebase 事故引发数字资产丢失**，叠加**项目版本管理混乱**和**恢复不完整**。
+
+---
+
+## 二、事故时间线
+
+| 时间 | 事件 | 影响 |
+|------|------|------|
+| **7/21 夜间** | Daryl 花了 3-4 小时重新设计 IELTS 训练数据库和跟读页面的交互 | 产出新版 dashboard.html(413行)、shadow.html(345行)，存在 Xiaofeng/ielts_tutor/ 子目录 |
+| **7/22 09:56** | git pull --rebase 触发大规模冲突（59 commits 跨多个 Agent 目录），rebase 卡死后 abort 被 SIGKILL | 本地日记、active.md、部分项目文件丢失 |
+| **7/22 日间** | 紧急恢复：git checkout -f main + git reset --hard origin/main | 丢失了 7/21 本地未 push 的 commit |
+| **7/22 日间** | 「从git恢复内核卡(6)+洗稿输出(4)」 | 恢复了部分丢失文件，但**遗漏了** dashboard.html、shadow.html、server.py（dashboard API）、session_manager.py（review 方法） |
+| **7/22 日间** | /dashboard 路由临时 patch → 指向 monitor.html，/shadow 路由未添加 | IELTS 训练数据库页面变成调试面板，跟读页面 404 |
+| **7/22 晚** | Mac mini 重启 | 所有服务进程终止 |
+| **7/23 14:30** | 视频编辑器前端 [object Promise] bug — renderScan() 改为 async 后未 await | 0.2 扫描页完全不可用，Daryl 验收看到错误 |
+| **7/23 14:30-15:00** | 视频编辑器提测未做 e2e 自检就交付 | Daryl 反馈「晚上回去再好好骂你一顿」 |
+| **7/23 19:53** | 视频编辑器 API Server (8768) 进程挂了 | 需重启并修复 log_message() 的 AttributeError |
+| **7/24 08:00** | Daryl 发现 IELTS /dashboard 页面不对（是调试面板，不是训练数据库），/shadow 完全不可用 | Daryl 截图反馈，累计浪费约 1h+ |
+| **7/24 08:06** | 第一次恢复尝试：从 .opc-workspace-cache 恢复了 7/19 旧版 | **恢复了错误版本**，Daryl 更生气 |
+| **7/24 08:10** | 第二次恢复：从 Xiaofeng/ielts_tutor/ 找到 7/21 重设计版 + 完整数据库 | 页面恢复，数据恢复 |
+| **7/24 08:23** | 数据库替换：主 DB(73KB, 55 sessions) → Xiaofeng DB(180KB, 92 sessions) | 历史数据全部恢复 |
+| **7/24 08:30** | 后端替换：server.py(36KB) + session_manager.py(7KB) → Xiaofeng 版(57KB+16KB) | Dashboard/review API 全部恢复 |
+| **7/24 08:38** | 清理混淆源、创建 PROJECT_MANIFEST.md、标记废弃副本 | 防止再次混淆 |
+
+---
+
+## 三、根因分析
+
+### 3.1 直接原因
+
+| # | 根因 | 说明 |
+|---|------|------|
+| 1 | **git rebase 事故** | OPC 多 Agent 共享一个 monorepo，rebase 时 59 个 commit 冲突，abort 失败后只能 hard reset 到 origin/main，丢失所有本地未 push 的提交 |
+| 2 | **恢复不完整** | rebase 后仅恢复了「内核卡」和「洗稿引擎」，**遗漏了 IELTS 的 dashboard/shadow 全套文件** |
+| 3 | **临时 patch 未被清理** | /dashboard 路由被临时指向 monitor.html 作为占位，但事后未修复，变成了持久化的错误配置 |
+| 4 | **版本管理混乱** | 同一项目存在 3 个以上副本：ielts_tutor/（主目录）、Xiaofeng/ielts_tutor/（7/21 完整副本）、.opc-workspace-cache/（7/19 旧快照），没有明确标记哪个是活跃版本 |
+| 5 | **恢复时选了错版本** | 第一次恢复用了 7/19 的 cache 旧版，而不是 Xiaofeng/ 里的 7/21 新版 |
+
+### 3.2 深层原因
+
+| # | 根因 | 说明 |
+|---|------|------|
+| 1 | **monorepo + rebase = 高危** | 多 Agent 共享仓库 + rebase 是已知高风险模式，应优先用 merge |
+| 2 | **无启动检查清单** | 重启后没有标准化的服务启动验证流程，靠记忆启动，容易遗漏 |
+| 3 | **无版本标记机制** | 没有 PROJECT_MANIFEST.md 之类的文件标明最新版本在哪、活跃 DB 是哪个 |
+| 4 | **提测无 e2e 自检** | 视频编辑器的两次提测（[object Promise] + API server 挂）说明交付前未做完整链路验证 |
+
+---
+
+## 四、影响评估
+
+| 项目 | 问题 | 影响 |
+|------|------|------|
+| **IELTS Tutor** | /dashboard 显示调试面板，/shadow 404，数据丢失 | Daryl 无法使用训练数据库和跟读功能 |
+| **视频编辑器** | [object Promise] bug → 0.2 扫描页不可用 | Daryl 验收失败 |
+| **视频编辑器** | API Server 进程挂 + AttributeError | 公网不可用 |
+| **Daryl 时间** | 累计排错 | **~1-1.5 小时** |
+
+---
+
+## 五、已执行的修复
+
+### 5.1 IELTS Tutor（7/24 08:00-08:38）
+- ✅ 前端：dashboard.html + shadow.html 从 Xiaofeng/ 恢复到主目录
+- ✅ 后端：server.py(57KB) + session_manager.py(16KB) 替换（含完整 dashboard/review API）
+- ✅ 数据库：ielts_tutor.db 替换为 Xiaofeng 版本（92 sessions + 32 review_items + 13 shadow_attempts）
+- ✅ 路由：/dashboard → dashboard.html, /shadow → shadow.html, /monitor → monitor.html
+- ✅ 服务器重启 + Cloudflare tunnel 验证通过
+
+### 5.2 项目管理（7/24 08:38）
+- ✅ 创建 `ielts_tutor/docs/PROJECT_MANIFEST.md` — 唯一权威版本标记
+- ✅ `Xiaofeng/ielts_tutor/` 加 `DEPRECATED.md` 标记废弃
+- ✅ `VERSION` 改为 `ACTIVE v1.3.0 (7/21 redesign)`
+- ✅ 删除旧 DB 备份和旧 server 备份，消除混淆源
+- ✅ `lessons.md` + 日记已记录教训
+
+### 5.3 视频编辑器（7/23 已完成）
+- ✅ [object Promise] bug 已修复（await renderScan()）
+- ✅ API Server AttributeError 已修复 + 重启
+- ✅ L5 交付自检基建已建立（AGENTS.md / TOOLS.md / scripts/quality/）
+
+---
+
+## 六、预防措施
+
+| # | 措施 | 状态 |
+|---|------|------|
+| 1 | 每个项目必须有 `docs/PROJECT_MANIFEST.md`，标明活跃版本路径+活跃DB | ✅ IELTS 已创建 |
+| 2 | 服务启动时先读 MANIFEST，不再凭记忆 | 🔜 纳入启动流程 |
+| 3 | 废弃副本必须加 DEPRECATED.md 标记 | ✅ 已执行 |
+| 4 | monorepo 禁止 rebase，统一用 merge | 🔜 写入 workflow-rules |
+| 5 | 重启后按清单验证所有服务（端口+页面+API+数据） | 🔜 建立 startup-checklist |
+| 6 | 任何交付前跑 L5 自检（全流程+代码+数据+可访问+文档） | ✅ 机制已建立 |
+
+---
+
+## 七、当前服务状态
+
+| 服务 | 端口 | 公网 | 状态 |
+|------|------|------|------|
+| IELTS Tutor | 8767 | trycloudflare.com ✅ | 🟢 正常 |
+| 视频编辑器前端 | 8766 | trycloudflare.com ✅ | 🟢 正常 |
+| 视频编辑器 API | 8768 | trycloudflare.com ✅ | 🟢 正常 |
+
+---
+
+## 八、总结
+
+这是一次典型的「恢复不完整 + 版本混淆」事故。rebase 后的紧急恢复遗漏了关键文件，临时 patch 变成了持久错误，多个副本让问题更难排查。核心教训：
+
+> **项目必须有唯一权威版本标记，启动时必须按清单验证，恢复时必须逐项确认不要遗漏。**
+
+对 Daryl 说声抱歉，浪费了你的时间。这些机制我会遵守。

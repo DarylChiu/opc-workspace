@@ -1,0 +1,358 @@
+{
+  "duration": 211.0,
+  "bpm": 103.0,
+  "total_beats": 359,
+  "total_bars": 89,
+  "bar_duration_sec": 2.32,
+  "section_8bar_duration": 18.6,
+  "sections": [
+    {
+      "id": 0,
+      "beat_start": 0,
+      "beat_end": 40,
+      "start": 0.7,
+      "end": 23.0,
+      "duration": 22.3,
+      "beats": 40,
+      "bars": 10,
+      "energy": 0.672,
+      "onset_density": 0.547,
+      "energy_slope": 0.44,
+      "energy_range": 0.763,
+      "spectral_contrast": 21.515,
+      "similar_to": [
+        1,
+        4,
+        7,
+        8
+      ],
+      "label": "Intro / Build",
+      "highlight": "🌅开场蓄力",
+      "sub_8bars": [
+        {
+          "bar_offset": 0,
+          "start": 0.7,
+          "end": 18.5,
+          "duration": 17.7,
+          "bars": 8,
+          "beats": 32
+        },
+        {
+          "bar_offset": 8,
+          "start": 19.0,
+          "end": 23.0,
+          "duration": 4.0,
+          "bars": 2,
+          "beats": 8
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "beat_start": 40,
+      "beat_end": 72,
+      "start": 23.6,
+      "end": 41.3,
+      "duration": 17.7,
+      "beats": 32,
+      "bars": 8,
+      "energy": 0.712,
+      "onset_density": 0.341,
+      "energy_slope": -0.0,
+      "energy_range": 0.643,
+      "spectral_contrast": 21.269,
+      "similar_to": [
+        0,
+        2,
+        3,
+        4,
+        6,
+        7,
+        8
+      ],
+      "label": "Chorus",
+      "highlight": "⚡高潮",
+      "sub_8bars": [
+        {
+          "bar_offset": 0,
+          "start": 23.6,
+          "end": 41.3,
+          "duration": 17.7,
+          "bars": 8,
+          "beats": 32
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "beat_start": 72,
+      "beat_end": 112,
+      "start": 41.9,
+      "end": 64.2,
+      "duration": 22.3,
+      "beats": 40,
+      "bars": 10,
+      "energy": 0.728,
+      "onset_density": 0.289,
+      "energy_slope": -1.66,
+      "energy_range": 0.767,
+      "spectral_contrast": 21.721,
+      "similar_to": [
+        1,
+        3,
+        4,
+        6,
+        7,
+        8
+      ],
+      "label": "Chorus",
+      "highlight": "⚡高潮",
+      "sub_8bars": [
+        {
+          "bar_offset": 0,
+          "start": 41.9,
+          "end": 59.6,
+          "duration": 17.7,
+          "bars": 8,
+          "beats": 32
+        },
+        {
+          "bar_offset": 8,
+          "start": 60.2,
+          "end": 64.2,
+          "duration": 4.0,
+          "bars": 2,
+          "beats": 8
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "beat_start": 112,
+      "beat_end": 168,
+      "start": 64.8,
+      "end": 96.2,
+      "duration": 31.4,
+      "beats": 56,
+      "bars": 14,
+      "energy": 0.79,
+      "onset_density": 0.24,
+      "energy_slope": -0.9,
+      "energy_range": 0.658,
+      "spectral_contrast": 22.158,
+      "similar_to": [
+        1,
+        2,
+        5,
+        6,
+        7,
+        8
+      ],
+      "label": "Chorus",
+      "highlight": "⚡高潮",
+      "sub_8bars": [
+        {
+          "bar_offset": 0,
+          "start": 64.8,
+          "end": 82.5,
+          "duration": 17.7,
+          "bars": 8,
+          "beats": 32
+        },
+        {
+          "bar_offset": 8,
+          "start": 83.1,
+          "end": 96.2,
+          "duration": 13.1,
+          "bars": 6,
+          "beats": 24
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "beat_start": 168,
+      "beat_end": 232,
+      "start": 96.8,
+      "end": 132.7,
+      "duration": 36.0,
+      "beats": 64,
+      "bars": 16,
+      "energy": 0.653,
+      "onset_density": 0.442,
+      "energy_slope": -0.32,
+      "energy_range": 0.835,
+      "spectral_contrast": 20.765,
+      "similar_to": [
+        0,
+        1,
+        2,
+        7,
+        8
+      ],
+      "label": "Chorus",
+      "highlight": "⚡高潮 🥁密集",
+      "sub_8bars": [
+        {
+          "bar_offset": 0,
+          "start": 96.8,
+          "end": 114.5,
+          "duration": 17.7,
+          "bars": 8,
+          "beats": 32
+        },
+        {
+          "bar_offset": 8,
+          "start": 115.1,
+          "end": 132.7,
+          "duration": 17.7,
+          "bars": 8,
+          "beats": 32
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "beat_start": 232,
+      "beat_end": 264,
+      "start": 133.3,
+      "end": 151.0,
+      "duration": 17.7,
+      "beats": 32,
+      "bars": 8,
+      "energy": 0.397,
+      "onset_density": 0.206,
+      "energy_slope": 7.1,
+      "energy_range": 0.781,
+      "spectral_contrast": 23.436,
+      "similar_to": [
+        3
+      ],
+      "label": "Chorus",
+      "sub_8bars": [
+        {
+          "bar_offset": 0,
+          "start": 133.3,
+          "end": 151.0,
+          "duration": 17.7,
+          "bars": 8,
+          "beats": 32
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "beat_start": 264,
+      "beat_end": 312,
+      "start": 151.6,
+      "end": 178.5,
+      "duration": 26.8,
+      "beats": 48,
+      "bars": 12,
+      "energy": 0.774,
+      "onset_density": 0.205,
+      "energy_slope": 0.28,
+      "energy_range": 0.592,
+      "spectral_contrast": 22.183,
+      "similar_to": [
+        1,
+        2,
+        3,
+        7,
+        8
+      ],
+      "label": "Chorus",
+      "highlight": "⚡高潮",
+      "sub_8bars": [
+        {
+          "bar_offset": 0,
+          "start": 151.6,
+          "end": 169.3,
+          "duration": 17.7,
+          "bars": 8,
+          "beats": 32
+        },
+        {
+          "bar_offset": 8,
+          "start": 169.9,
+          "end": 178.5,
+          "duration": 8.6,
+          "bars": 4,
+          "beats": 16
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "beat_start": 312,
+      "beat_end": 344,
+      "start": 179.0,
+      "end": 197.1,
+      "duration": 18.0,
+      "beats": 32,
+      "bars": 8,
+      "energy": 0.668,
+      "onset_density": 0.214,
+      "energy_slope": -10.88,
+      "energy_range": 0.79,
+      "spectral_contrast": 22.364,
+      "similar_to": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        6,
+        8
+      ],
+      "label": "Chorus",
+      "highlight": "⚡高潮",
+      "sub_8bars": [
+        {
+          "bar_offset": 0,
+          "start": 179.0,
+          "end": 197.1,
+          "duration": 18.0,
+          "bars": 8,
+          "beats": 32
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "beat_start": 344,
+      "beat_end": 358,
+      "start": 197.6,
+      "end": 205.1,
+      "duration": 7.4,
+      "beats": 14,
+      "bars": 3,
+      "energy": 0.604,
+      "onset_density": 0.229,
+      "energy_slope": -2.21,
+      "energy_range": 0.707,
+      "spectral_contrast": 23.196,
+      "similar_to": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        6,
+        7
+      ],
+      "label": "Outro",
+      "highlight": "🌇收束",
+      "sub_8bars": [
+        {
+          "bar_offset": 0,
+          "start": 197.6,
+          "end": 205.1,
+          "duration": 7.4,
+          "bars": 3,
+          "beats": 14
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1164 @@
+{
+  "summary": {
+    "session_id": "52674d24",
+    "mode": "free_talk",
+    "pipeline": "cascade",
+    "created_at": "2026-07-22T13:19:14.910223+00:00",
+    "ended_at": "2026-07-22T13:45:52.989056+00:00",
+    "total_turns": 23,
+    "avg_e2e_ms": 7388.0,
+    "total_issues": 23
+  },
+  "turns": [
+    {
+      "id": 1,
+      "session_id": "52674d24",
+      "turn_id": 1,
+      "timestamp_start": 1784726374.614043,
+      "timestamp_end": 1784726378.5537338,
+      "e2e_latency_ms": 3939.119338989258,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "I want to check about the live that I've recently get some Oracle",
+      "asr_confidence": 0.20603719510530172,
+      "asr_latency_ms": 1039.3590927124023,
+      "asr_model": "faster-whisper-small.en",
+      "llm_intent": "general_chat",
+      "llm_response": "That sounds intriguing. What kind of Oracle cards are you working with, and what message came through for you in that reading?",
+      "llm_latency_ms": 1795.6469058990479,
+      "llm_model": "",
+      "llm_tokens_in": 0,
+      "llm_tokens_out": 0,
+      "tts_text": "That sounds intriguing. What kind of Oracle cards are you working with, and what message came through for you in that reading?",
+      "tts_latency_ms": 1104.1133403778076,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 3939ms，ASR=1039ms LLM=1796ms TTS=1104ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "error",
+          "symptom": "ASR 识别置信度低",
+          "diagnosis": "转录: \"I want to check about the live that I've recently get some O\"，置信度 21%",
+          "solution": "🔧 可能原因: 背景噪音/发音不清/口音。建议: 靠近麦克风、放慢语速、检查环境噪音",
+          "rule_id": "low_asr_confidence"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 1796ms，tokens: in=0 out=0 model=",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "session_id": "52674d24",
+      "turn_id": 2,
+      "timestamp_start": 1784726403.0895329,
+      "timestamp_end": 1784726408.172905,
+      "e2e_latency_ms": 5082.856893539429,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "No, I'm sorry. I am talking about there is some difficulty. I should walk through.",
+      "asr_confidence": 0.32866267190463305,
+      "asr_latency_ms": 1079.6220302581787,
+      "asr_model": "faster-whisper-small.en",
+      "llm_intent": "general_chat",
+      "llm_response": "Ah, I understand now — you meant \"live\" as in the challenges or difficulties you're currently facing in life. That makes more sense. What kind of difficulty is it, and what about it feels like an Oracle or a message you need to decipher?",
+      "llm_latency_ms": 3272.4738121032715,
+      "llm_model": "",
+      "llm_tokens_in": 0,
+      "llm_tokens_out": 0,
+      "tts_text": "Ah, I understand now — you meant \"live\" as in the challenges or difficulties you're currently facing in life. That makes more sense. What kind of difficulty is it, and what about it feels like an Oracle or a message you need to decipher?",
+      "tts_latency_ms": 730.7610511779785,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 5083ms，ASR=1080ms LLM=3272ms TTS=731ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "error",
+          "symptom": "ASR 识别置信度低",
+          "diagnosis": "转录: \"No, I'm sorry. I am talking about there is some difficulty. \"，置信度 33%",
+          "solution": "🔧 可能原因: 背景噪音/发音不清/口音。建议: 靠近麦克风、放慢语速、检查环境噪音",
+          "rule_id": "low_asr_confidence"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 3272ms，tokens: in=0 out=0 model=",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "session_id": "52674d24",
+      "turn_id": 3,
+      "timestamp_start": 1784726475.709717,
+      "timestamp_end": 1784726482.928156,
+      "e2e_latency_ms": 7218.088626861572,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "As I have been working for Vietnam in an textile company for one year, I am now eager to seek for new work opportunities Due to I would like to earn more money and get a more work-life balance in Ho Chi Minh City instead of in a small village in Vietnam",
+      "asr_confidence": 0.383232765327925,
+      "asr_latency_ms": 2276.026964187622,
+      "asr_model": "faster-whisper-small.en",
+      "llm_intent": "general_chat",
+      "llm_response": "That's a big and understandable shift. After a year in a small village, the pull toward a city like Ho Chi Minh for better pay and more balance makes a lot of sense — especially in textile work, where conditions can be demanding. What kind of role or industry are you hoping to move into there, or are you looking to stay in textiles but in a different setting?",
+      "llm_latency_ms": 4646.768808364868,
+      "llm_model": "",
+      "llm_tokens_in": 0,
+      "llm_tokens_out": 0,
+      "tts_text": "That's a big and understandable shift. After a year in a small village, the pull toward a city like Ho Chi Minh for better pay and more balance makes a lot of sense — especially in textile work, where conditions can be demanding. What kind of role or industry are you hoping to move into there, or are you looking to stay in textiles but in a different setting?",
+      "tts_latency_ms": 295.29285430908203,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 7218ms，ASR=2276ms LLM=4647ms TTS=295ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "error",
+          "symptom": "ASR 识别置信度低",
+          "diagnosis": "转录: \"As I have been working for Vietnam in an textile company for\"，置信度 38%",
+          "solution": "🔧 可能原因: 背景噪音/发音不清/口音。建议: 靠近麦克风、放慢语速、检查环境噪音",
+          "rule_id": "low_asr_confidence"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 4647ms，tokens: in=0 out=0 model=",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "session_id": "52674d24",
+      "turn_id": 5,
+      "timestamp_start": 1784726541.313602,
+      "timestamp_end": 1784726548.0604,
+      "e2e_latency_ms": 6746.427059173584,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "Nope, I think the textile industry is not all perfectable enough. I would like to get back to finance industry and maybe I want to play a role as a financial analysis or a research manager.",
+      "asr_confidence": 0.33497704428502884,
+      "asr_latency_ms": 2078.7570476531982,
+      "asr_model": "faster-whisper-small.en",
+      "llm_intent": "general_chat",
+      "llm_response": "It sounds like you're ready to return to something that feels more aligned with your skills and interests. The finance industry is quite different from textiles — more analytical, more city-based, and likely with clearer paths for growth in Ho Chi Minh. What draws you specifically to financial analysis or research management? Is it the numbers, the strategy, or something else?",
+      "llm_latency_ms": 4115.0970458984375,
+      "llm_model": "",
+      "llm_tokens_in": 0,
+      "llm_tokens_out": 0,
+      "tts_text": "It sounds like you're ready to return to something that feels more aligned with your skills and interests. The finance industry is quite different from textiles — more analytical, more city-based, and likely with clearer paths for growth in Ho Chi Minh. What draws you specifically to financial analysis or research management? Is it the numbers, the strategy, or something else?",
+      "tts_latency_ms": 552.5729656219482,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 6746ms，ASR=2079ms LLM=4115ms TTS=553ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "error",
+          "symptom": "ASR 识别置信度低",
+          "diagnosis": "转录: \"Nope, I think the textile industry is not all perfectable en\"，置信度 33%",
+          "solution": "🔧 可能原因: 背景噪音/发音不清/口音。建议: 靠近麦克风、放慢语速、检查环境噪音",
+          "rule_id": "low_asr_confidence"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 4115ms，tokens: in=0 out=0 model=",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "session_id": "52674d24",
+      "turn_id": 7,
+      "timestamp_start": 1784726636.86624,
+      "timestamp_end": 1784726645.2036932,
+      "e2e_latency_ms": 8337.101936340332,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "Actually, I have worked for the Financial Institute for three years before this job, before the textile company. And I guess I got stress from the former financial company in China. But I would like to try a new bank, or maybe a foreign investment bank in Fujimint, called Citi Bank. I would like to try to get involved in that company.",
+      "asr_confidence": 0.37440154674248793,
+      "asr_latency_ms": 3287.346839904785,
+      "asr_model": "faster-whisper-small.en",
+      "llm_intent": "general_chat",
+      "llm_response": "That makes a lot of sense — you already have a solid foundation in finance, so returning to it isn't starting from scratch, but rather choosing a healthier environment. It sounds like the stress in China came more from the company culture than the work itself. What is it about Citi Bank in particular that attracts you — is it the global scale, the reputation, or something you've heard about the working environment there?",
+      "llm_latency_ms": 4536.993980407715,
+      "llm_model": "",
+      "llm_tokens_in": 0,
+      "llm_tokens_out": 0,
+      "tts_text": "That makes a lot of sense — you already have a solid foundation in finance, so returning to it isn't starting from scratch, but rather choosing a healthier environment. It sounds like the stress in China came more from the company culture than the work itself. What is it about Citi Bank in particular that attracts you — is it the global scale, the reputation, or something you've heard about the working environment there?",
+      "tts_latency_ms": 512.761116027832,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 8337ms，ASR=3287ms LLM=4537ms TTS=513ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "error",
+          "symptom": "ASR 识别置信度低",
+          "diagnosis": "转录: \"Actually, I have worked for the Financial Institute for thre\"，置信度 37%",
+          "solution": "🔧 可能原因: 背景噪音/发音不清/口音。建议: 靠近麦克风、放慢语速、检查环境噪音",
+          "rule_id": "low_asr_confidence"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 4537ms，tokens: in=0 out=0 model=",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "session_id": "52674d24",
+      "turn_id": 9,
+      "timestamp_start": 1784726702.335521,
+      "timestamp_end": 1784726707.9313369,
+      "e2e_latency_ms": 5595.455884933472,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "Yeah, of course, the first one most attracting me is the global scale. I am an ACCer. I like to be in the company that's international.",
+      "asr_confidence": 0.34498148038983345,
+      "asr_latency_ms": 1202.0549774169922,
+      "asr_model": "faster-whisper-small.en",
+      "llm_intent": "general_chat",
+      "llm_response": "That's a strong motivation — an international environment can offer more perspectives, better practices, and often more room for growth. Being an ACCA member definitely gives you a solid credential to aim for a place like Citi. Have you started looking into what specific roles they have open, or are you still in the early stage of planning your move?",
+      "llm_latency_ms": 4097.718715667725,
+      "llm_model": "",
+      "llm_tokens_in": 0,
+      "llm_tokens_out": 0,
+      "tts_text": "That's a strong motivation — an international environment can offer more perspectives, better practices, and often more room for growth. Being an ACCA member definitely gives you a solid credential to aim for a place like Citi. Have you started looking into what specific roles they have open, or are you still in the early stage of planning your move?",
+      "tts_latency_ms": 295.6821918487549,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 5595ms，ASR=1202ms LLM=4098ms TTS=296ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "error",
+          "symptom": "ASR 识别置信度低",
+          "diagnosis": "转录: \"Yeah, of course, the first one most attracting me is the glo\"，置信度 34%",
+          "solution": "🔧 可能原因: 背景噪音/发音不清/口音。建议: 靠近麦克风、放慢语速、检查环境噪音",
+          "rule_id": "low_asr_confidence"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 4098ms，tokens: in=0 out=0 model=",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "session_id": "52674d24",
+      "turn_id": 10,
+      "timestamp_start": 1784726712.738113,
+      "timestamp_end": 1784726717.86565,
+      "e2e_latency_ms": 5126.24716758728,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "And that's why I am working hard for practicing my speaking.",
+      "asr_confidence": 0.39939089864492416,
+      "asr_latency_ms": 975.4390716552734,
+      "asr_model": "faster-whisper-small.en",
+      "llm_intent": "general_chat",
+      "llm_response": "That's a really smart move — strong communication skills are often just as important as technical knowledge in a global bank, especially for roles like financial analysis where you need to explain complex ideas clearly. Are you practicing mostly through conversation like this, or do you have other methods you're using as well?",
+      "llm_latency_ms": 3964.2159938812256,
+      "llm_model": "",
+      "llm_tokens_in": 0,
+      "llm_tokens_out": 0,
+      "tts_text": "That's a really smart move — strong communication skills are often just as important as technical knowledge in a global bank, especially for roles like financial analysis where you need to explain complex ideas clearly. Are you practicing mostly through conversation like this, or do you have other methods you're using as well?",
+      "tts_latency_ms": 186.59210205078125,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 5126ms，ASR=975ms LLM=3964ms TTS=187ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "error",
+          "symptom": "ASR 识别置信度低",
+          "diagnosis": "转录: \"And that's why I am working hard for practicing my speaking.\"，置信度 40%",
+          "solution": "🔧 可能原因: 背景噪音/发音不清/口音。建议: 靠近麦克风、放慢语速、检查环境噪音",
+          "rule_id": "low_asr_confidence"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 3964ms，tokens: in=0 out=0 model=",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "session_id": "52674d24",
+      "turn_id": 11,
+      "timestamp_start": 1784726818.1640131,
+      "timestamp_end": 1784726827.97141,
+      "e2e_latency_ms": 9807.058095932007,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "Actually, I just get little time to practice my speaking, my listening. Now it's the only way that I, the only method that I am using to practice by L's computer at least 1.3.0. But I would like to explain what I can practice in my daily life. Such as I would like to communicate with my subordinate in English so that I can get into that English environment so that I can express all kind of situation, all kind of scenes, all kind of topic in English.",
+      "asr_confidence": 0.3630473140906302,
+      "asr_latency_ms": 3684.7801208496094,
+      "asr_model": "faster-whisper-small.en",
+      "llm_intent": "general_chat",
+      "llm_response": "That's a very practical and immersive approach — using English with your subordinates not only helps you practice but also builds a natural English-speaking environment around you at work. The more you use English to handle real situations — giving instructions, solving problems, even casual chats — the faster your fluency will grow. Do your subordinates respond well to switching to English, or is it something you're gradually introducing?",
+      "llm_latency_ms": 5009.9968910217285,
+      "llm_model": "",
+      "llm_tokens_in": 0,
+      "llm_tokens_out": 0,
+      "tts_text": "That's a very practical and immersive approach — using English with your subordinates not only helps you practice but also builds a natural English-speaking environment around you at work. The more you use English to handle real situations — giving instructions, solving problems, even casual chats — the faster your fluency will grow. Do your subordinates respond well to switching to English, or is it something you're gradually introducing?",
+      "tts_latency_ms": 1112.281084060669,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 9807ms，ASR=3685ms LLM=5010ms TTS=1112ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "error",
+          "symptom": "ASR 识别置信度低",
+          "diagnosis": "转录: \"Actually, I just get little time to practice my speaking, my\"，置信度 36%",
+          "solution": "🔧 可能原因: 背景噪音/发音不清/口音。建议: 靠近麦克风、放慢语速、检查环境噪音",
+          "rule_id": "low_asr_confidence"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 5010ms，tokens: in=0 out=0 model=",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "session_id": "52674d24",
+      "turn_id": 12,
+      "timestamp_start": 1784726927.117849,
+      "timestamp_end": 1784726936.794553,
+      "e2e_latency_ms": 9676.311731338501,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "Actually, most of my subordinates are Vietnamese. So they cannot speak English well. But I like to talk to the clerk or the college in the sales department, in the marketing department. They are good at English because the client that we serve is from Europe, from USA. So they are good at English because they should communicate with the American client, European client, in English. So that's a kind of way.",
+      "asr_confidence": 0.3533681747696459,
+      "asr_latency_ms": 3476.672887802124,
+      "asr_model": "faster-whisper-small.en",
+      "llm_intent": "general_chat",
+      "llm_response": "That's a smart strategy — connecting with colleagues who already use English daily for their work with international clients. It gives you real, practical exposure to the kind of business English you'd need at a global bank like Citi. Plus, since they're already comfortable with the language, you can learn from their natural phrasing and vocabulary. Have you started having regular conversations with them in English, or are you still building up to that?",
+      "llm_latency_ms": 5107.00798034668,
+      "llm_model": "",
+      "llm_tokens_in": 0,
+      "llm_tokens_out": 0,
+      "tts_text": "That's a smart strategy — connecting with colleagues who already use English daily for their work with international clients. It gives you real, practical exposure to the kind of business English you'd need at a global bank like Citi. Plus, since they're already comfortable with the language, you can learn from their natural phrasing and vocabulary. Have you started having regular conversations with them in English, or are you still building up to that?",
+      "tts_latency_ms": 1092.6308631896973,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 9676ms，ASR=3477ms LLM=5107ms TTS=1093ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "error",
+          "symptom": "ASR 识别置信度低",
+          "diagnosis": "转录: \"Actually, most of my subordinates are Vietnamese. So they ca\"，置信度 35%",
+          "solution": "🔧 可能原因: 背景噪音/发音不清/口音。建议: 靠近麦克风、放慢语速、检查环境噪音",
+          "rule_id": "low_asr_confidence"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 5107ms，tokens: in=0 out=0 model=",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "session_id": "52674d24",
+      "turn_id": 14,
+      "timestamp_start": 1784727054.651903,
+      "timestamp_end": 1784727063.5540879,
+      "e2e_latency_ms": 8901.519775390625,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "I am still building up the relationship with other departments because as financial manager, I get a little bit affair or a little bit issue with the sales department and the market department. So I am trying to communicate with them but just so so. I would like to come back to the topic that how can I make my choice to shape my work and life from a small village, from a textile company to Fujimin to financial industry, finance industry.",
+      "asr_confidence": 0.34770455023622127,
+      "asr_latency_ms": 3502.610921859741,
+      "asr_model": "faster-whisper-small.en",
+      "llm_intent": "general_chat",
+      "llm_response": "That's a very real tension — you're in a small village, in a textile role, trying to bridge into international finance in Ho Chi Minh, all while building relationships across departments that don't always see eye to eye with finance. It sounds like you're already strategizing carefully, not just jumping blindly. What feels like the biggest concrete step you could take right now — updating your CV, reaching out to a contact at Citi, or something else?",
+      "llm_latency_ms": 4904.761075973511,
+      "llm_model": "",
+      "llm_tokens_in": 0,
+      "llm_tokens_out": 0,
+      "tts_text": "That's a very real tension — you're in a small village, in a textile role, trying to bridge into international finance in Ho Chi Minh, all while building relationships across departments that don't always see eye to eye with finance. It sounds like you're already strategizing carefully, not just jumping blindly. What feels like the biggest concrete step you could take right now — updating your CV, reaching out to a contact at Citi, or something else?",
+      "tts_latency_ms": 494.14777755737305,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 8902ms，ASR=3503ms LLM=4905ms TTS=494ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "error",
+          "symptom": "ASR 识别置信度低",
+          "diagnosis": "转录: \"I am still building up the relationship with other departmen\"，置信度 35%",
+          "solution": "🔧 可能原因: 背景噪音/发音不清/口音。建议: 靠近麦克风、放慢语速、检查环境噪音",
+          "rule_id": "low_asr_confidence"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 4905ms，tokens: in=0 out=0 model=",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "session_id": "52674d24",
+      "turn_id": 15,
+      "timestamp_start": 1784727100.3463428,
+      "timestamp_end": 1784727106.2628548,
+      "e2e_latency_ms": 5916.11385345459,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "Hmmm, what?",
+      "asr_confidence": 0.21477243055899936,
+      "asr_latency_ms": 907.61399269104,
+      "asr_model": "faster-whisper-small.en",
+      "llm_intent": "general_chat",
+      "llm_response": "I mean, you have a clear picture of where you want to go — Citi Bank, a financial analysis role, an international environment. But the gap between your current situation and that goal can feel big. So I'm wondering: if you could do one thing this week that moves you closer to that goal, what would it be? For example, polishing your CV to highlight your finance background, or researching current openings at Citi?",
+      "llm_latency_ms": 4834.378957748413,
+      "llm_model": "",
+      "llm_tokens_in": 0,
+      "llm_tokens_out": 0,
+      "tts_text": "I mean, you have a clear picture of where you want to go — Citi Bank, a financial analysis role, an international environment. But the gap between your current situation and that goal can feel big. So I'm wondering: if you could do one thing this week that moves you closer to that goal, what would it be? For example, polishing your CV to highlight your finance background, or researching current openings at Citi?",
+      "tts_latency_ms": 174.12090301513672,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 5916ms，ASR=908ms LLM=4834ms TTS=174ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "error",
+          "symptom": "ASR 识别置信度低",
+          "diagnosis": "转录: \"Hmmm, what?\"，置信度 21%",
+          "solution": "🔧 可能原因: 背景噪音/发音不清/口音。建议: 靠近麦克风、放慢语速、检查环境噪音",
+          "rule_id": "low_asr_confidence"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 4834ms，tokens: in=0 out=0 model=",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "session_id": "52674d24",
+      "turn_id": 16,
+      "timestamp_start": 1784727106.2733629,
+      "timestamp_end": 1784727111.721656,
+      "e2e_latency_ms": 5447.954893112183,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "Not your recommendation.",
+      "asr_confidence": 0.28692271028246197,
+      "asr_latency_ms": 875.7379055023193,
+      "asr_model": "faster-whisper-small.en",
+      "llm_intent": "general_chat",
+      "llm_response": "You're right, I apologize for jumping ahead with suggestions. You wanted to talk through how you made the choice to move from a small village and textile company into finance — that's your story, and I interrupted it. Let me listen properly: what made you first decide to leave that textile job and move toward finance? Was there a specific moment or person that opened that door for you?",
+      "llm_latency_ms": 3885.4990005493164,
+      "llm_model": "",
+      "llm_tokens_in": 0,
+      "llm_tokens_out": 0,
+      "tts_text": "You're right, I apologize for jumping ahead with suggestions. You wanted to talk through how you made the choice to move from a small village and textile company into finance — that's your story, and I interrupted it. Let me listen properly: what made you first decide to leave that textile job and move toward finance? Was there a specific moment or person that opened that door for you?",
+      "tts_latency_ms": 686.7179870605469,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 5448ms，ASR=876ms LLM=3885ms TTS=687ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "error",
+          "symptom": "ASR 识别置信度低",
+          "diagnosis": "转录: \"Not your recommendation.\"，置信度 29%",
+          "solution": "🔧 可能原因: 背景噪音/发音不清/口音。建议: 靠近麦克风、放慢语速、检查环境噪音",
+          "rule_id": "low_asr_confidence"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 3885ms，tokens: in=0 out=0 model=",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "session_id": "52674d24",
+      "turn_id": 17,
+      "timestamp_start": 1784727205.377088,
+      "timestamp_end": 1784727212.896815,
+      "e2e_latency_ms": 7519.412279129028,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "Actually, I want a specific or a special way to put me into a finance industry in Vietnam. Because nowadays AI technology is developed so rapidly and I want to make an AI agent into maybe productive.",
+      "asr_confidence": 0.3899612749526322,
+      "asr_latency_ms": 2149.991989135742,
+      "asr_model": "faster-whisper-small.en",
+      "llm_intent": "general_chat",
+      "llm_response": "That's a fascinating angle — you're not just thinking about how to enter finance, but how to do it differently by leveraging AI as a tool rather than seeing it as a threat. Most people in your position would focus purely on traditional qualifications, but you're looking at how to stand out through innovation. What kind of tasks do you imagine an AI agent handling in your finance role — data analysis, reporting, client communication, or something else?",
+      "llm_latency_ms": 4829.988241195679,
+      "llm_model": "",
+      "llm_tokens_in": 0,
+      "llm_tokens_out": 0,
+      "tts_text": "That's a fascinating angle — you're not just thinking about how to enter finance, but how to do it differently by leveraging AI as a tool rather than seeing it as a threat. Most people in your position would focus purely on traditional qualifications, but you're looking at how to stand out through innovation. What kind of tasks do you imagine an AI agent handling in your finance role — data analysis, reporting, client communication, or something else?",
+      "tts_latency_ms": 539.4320487976074,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 7519ms，ASR=2150ms LLM=4830ms TTS=539ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "error",
+          "symptom": "ASR 识别置信度低",
+          "diagnosis": "转录: \"Actually, I want a specific or a special way to put me into \"，置信度 39%",
+          "solution": "🔧 可能原因: 背景噪音/发音不清/口音。建议: 靠近麦克风、放慢语速、检查环境噪音",
+          "rule_id": "low_asr_confidence"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 4830ms，tokens: in=0 out=0 model=",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "session_id": "52674d24",
+      "turn_id": 19,
+      "timestamp_start": 1784727282.811023,
+      "timestamp_end": 1784727289.985425,
+      "e2e_latency_ms": 7174.098014831543,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "Yep, that's what I want to talk about. Firstly, I think AI agent can replace the role that who are doing with financial analysis, data analysis reporting and so on. The risk assessment structure.",
+      "asr_confidence": 0.34250671484253625,
+      "asr_latency_ms": 2136.6069316864014,
+      "asr_model": "faster-whisper-small.en",
+      "llm_intent": "general_chat",
+      "llm_response": "You're right to focus on risk assessment and reporting — those are areas where AI can process huge amounts of data far faster than a human, and spot patterns we might miss. But I'm curious: knowing that AI could potentially replace parts of that role, what makes you still want to pursue it? Do you see yourself working alongside the AI, or more on the strategic decisions that come from the insights it generates?",
+      "llm_latency_ms": 4778.298854827881,
+      "llm_model": "",
+      "llm_tokens_in": 0,
+      "llm_tokens_out": 0,
+      "tts_text": "You're right to focus on risk assessment and reporting — those are areas where AI can process huge amounts of data far faster than a human, and spot patterns we might miss. But I'm curious: knowing that AI could potentially replace parts of that role, what makes you still want to pursue it? Do you see yourself working alongside the AI, or more on the strategic decisions that come from the insights it generates?",
+      "tts_latency_ms": 259.19222831726074,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 7174ms，ASR=2137ms LLM=4778ms TTS=259ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "error",
+          "symptom": "ASR 识别置信度低",
+          "diagnosis": "转录: \"Yep, that's what I want to talk about. Firstly, I think AI a\"，置信度 34%",
+          "solution": "🔧 可能原因: 背景噪音/发音不清/口音。建议: 靠近麦克风、放慢语速、检查环境噪音",
+          "rule_id": "low_asr_confidence"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 4778ms，tokens: in=0 out=0 model=",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "session_id": "52674d24",
+      "turn_id": 20,
+      "timestamp_start": 1784727289.998212,
+      "timestamp_end": 1784727296.673654,
+      "e2e_latency_ms": 6674.915313720703,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "that AI agents cannot fill up by themselves.",
+      "asr_confidence": 0.3611993831064966,
+      "asr_latency_ms": 920.7949638366699,
+      "asr_model": "faster-whisper-small.en",
+      "llm_intent": "general_chat",
+      "llm_response": "Exactly — that's the key insight. AI can crunch numbers and flag trends, but it can't make judgment calls in ambiguous situations, build trust with stakeholders, or understand the political and relational dynamics inside a company. The human role becomes about interpreting what the AI finds, asking the right questions, and deciding what action to take. So in your vision, would you see yourself as the person who designs how the AI works within the finance team, or more as the one who takes its output and makes the final call?",
+      "llm_latency_ms": 5042.785167694092,
+      "llm_model": "",
+      "llm_tokens_in": 0,
+      "llm_tokens_out": 0,
+      "tts_text": "Exactly — that's the key insight. AI can crunch numbers and flag trends, but it can't make judgment calls in ambiguous situations, build trust with stakeholders, or understand the political and relational dynamics inside a company. The human role becomes about interpreting what the AI finds, asking the right questions, and deciding what action to take. So in your vision, would you see yourself as the person who designs how the AI works within the finance team, or more as the one who takes its output and makes the final call?",
+      "tts_latency_ms": 711.3351821899414,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 6675ms，ASR=921ms LLM=5043ms TTS=711ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "error",
+          "symptom": "ASR 识别置信度低",
+          "diagnosis": "转录: \"that AI agents cannot fill up by themselves.\"，置信度 36%",
+          "solution": "🔧 可能原因: 背景噪音/发音不清/口音。建议: 靠近麦克风、放慢语速、检查环境噪音",
+          "rule_id": "low_asr_confidence"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 5043ms，tokens: in=0 out=0 model=",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "session_id": "52674d24",
+      "turn_id": 21,
+      "timestamp_start": 1784727412.490676,
+      "timestamp_end": 1784727423.1996758,
+      "e2e_latency_ms": 10708.617210388184,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "Well, I am not the road that you are assuming because I want to be the structure. It means I build up the structure. I build up what structure? I build up the risk assessment. I can reduce the risk by my risk assessment model. So as a trade, I get my well-paying job from a finance industry. That's what I want to do. Not just about employment, it's about cooperation.",
+      "asr_confidence": 0.39250235292504787,
+      "asr_latency_ms": 3537.722110748291,
+      "asr_model": "faster-whisper-small.en",
+      "llm_intent": "general_chat",
+      "llm_response": "I see — you want to be the architect, not just a user of the system. You're talking about designing the risk assessment model itself, the framework that the AI and human analysts both rely on. That's a much more powerful position, because you're not competing with AI — you're building the structure it operates within. And by framing it as cooperation rather than employment, you're positioning yourself as a partner who brings unique value, not just someone filling a role. Have you started sketching out what that risk model might look like, or is it still a concept you're developing?",
+      "llm_latency_ms": 6353.5590171813965,
+      "llm_model": "",
+      "llm_tokens_in": 0,
+      "llm_tokens_out": 0,
+      "tts_text": "I see — you want to be the architect, not just a user of the system. You're talking about designing the risk assessment model itself, the framework that the AI and human analysts both rely on. That's a much more powerful position, because you're not competing with AI — you're building the structure it operates within. And by framing it as cooperation rather than employment, you're positioning yourself as a partner who brings unique value, not just someone filling a role. Have you started sketching out what that risk model might look like, or is it still a concept you're developing?",
+      "tts_latency_ms": 817.3360824584961,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 10709ms，ASR=3538ms LLM=6354ms TTS=817ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "error",
+          "symptom": "ASR 识别置信度低",
+          "diagnosis": "转录: \"Well, I am not the road that you are assuming because I want\"，置信度 39%",
+          "solution": "🔧 可能原因: 背景噪音/发音不清/口音。建议: 靠近麦克风、放慢语速、检查环境噪音",
+          "rule_id": "low_asr_confidence"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 6354ms，tokens: in=0 out=0 model=",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "session_id": "52674d24",
+      "turn_id": 22,
+      "timestamp_start": 1784727508.319032,
+      "timestamp_end": 1784727517.1112692,
+      "e2e_latency_ms": 8791.701793670654,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "I think there is a risk assessment model in my brain because as I am a risk analysis in my last job in a financial leasing company. So as the client of financial leasing is more risky than the client in the bank. So I think I can build a more aggressive.",
+      "asr_confidence": 0.38798135982715715,
+      "asr_latency_ms": 3204.7457695007324,
+      "asr_model": "faster-whisper-small.en",
+      "llm_intent": "general_chat",
+      "llm_response": "That real experience in financial leasing gives you a concrete edge — you've already worked with higher-risk clients, so you understand the patterns and red flags that a standard bank model might miss. An aggressive model built on that foundation could be exactly what a place like Citi needs to capture opportunities other lenders avoid. The challenge will be proving that your model works — do you have data or case studies from your leasing days that you could use to demonstrate its accuracy?",
+      "llm_latency_ms": 5017.159938812256,
+      "llm_model": "",
+      "llm_tokens_in": 0,
+      "llm_tokens_out": 0,
+      "tts_text": "That real experience in financial leasing gives you a concrete edge — you've already worked with higher-risk clients, so you understand the patterns and red flags that a standard bank model might miss. An aggressive model built on that foundation could be exactly what a place like Citi needs to capture opportunities other lenders avoid. The challenge will be proving that your model works — do you have data or case studies from your leasing days that you could use to demonstrate its accuracy?",
+      "tts_latency_ms": 569.796085357666,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 8792ms，ASR=3205ms LLM=5017ms TTS=570ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "error",
+          "symptom": "ASR 识别置信度低",
+          "diagnosis": "转录: \"I think there is a risk assessment model in my brain because\"，置信度 39%",
+          "solution": "🔧 可能原因: 背景噪音/发音不清/口音。建议: 靠近麦克风、放慢语速、检查环境噪音",
+          "rule_id": "low_asr_confidence"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 5017ms，tokens: in=0 out=0 model=",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "session_id": "52674d24",
+      "turn_id": 23,
+      "timestamp_start": 1784727517.131937,
+      "timestamp_end": 1784727525.0608451,
+      "e2e_latency_ms": 7928.567886352539,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "with assessment model to achieve",
+      "asr_confidence": 0.22022861490647,
+      "asr_latency_ms": 891.4251327514648,
+      "asr_model": "faster-whisper-small.en",
+      "llm_intent": "general_chat",
+      "llm_response": "You're saying your edge isn't just the model itself, but the entire assessment structure you've developed to make it work — the process, the criteria, the decision framework around it. That's a complete system, not just an idea. And since you've already tested it with higher-risk clients in leasing, you have evidence it can perform under pressure. The next step might be packaging that system into something you can present — a white paper, a prototype, or even a live demo — so a bank can see exactly how your model reduces risk while capturing opportunities they currently avoid. Does that sound like the direction you want to take?",
+      "llm_latency_ms": 6515.414714813232,
+      "llm_model": "",
+      "llm_tokens_in": 0,
+      "llm_tokens_out": 0,
+      "tts_text": "You're saying your edge isn't just the model itself, but the entire assessment structure you've developed to make it work — the process, the criteria, the decision framework around it. That's a complete system, not just an idea. And since you've already tested it with higher-risk clients in leasing, you have evidence it can perform under pressure. The next step might be packaging that system into something you can present — a white paper, a prototype, or even a live demo — so a bank can see exactly how your model reduces risk while capturing opportunities they currently avoid. Does that sound like the direction you want to take?",
+      "tts_latency_ms": 521.7280387878418,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 7929ms，ASR=891ms LLM=6515ms TTS=522ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "error",
+          "symptom": "ASR 识别置信度低",
+          "diagnosis": "转录: \"with assessment model to achieve\"，置信度 22%",
+          "solution": "🔧 可能原因: 背景噪音/发音不清/口音。建议: 靠近麦克风、放慢语速、检查环境噪音",
+          "rule_id": "low_asr_confidence"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 6515ms，tokens: in=0 out=0 model=",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "session_id": "52674d24",
+      "turn_id": 24,
+      "timestamp_start": 1784727680.714758,
+      "timestamp_end": 1784727692.589231,
+      "e2e_latency_ms": 11874.027729034424,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "Yes, you got me. Actually, I want to answer, not just answer. I want to talk about the things you mentioned in your response. Yes, I got the... I do not just get an idea. I got the process, I got the criteria, I got the decision-break work, and I got the control flow in a huge financial leasing company. So I think I got the fundamental data, fundamental model to build the system, build the risk assessment system or risk assessment model. But I should pay more attention and just spend more time on conducting it into a demo.",
+      "asr_confidence": 0.42006325109017634,
+      "asr_latency_ms": 4877.075910568237,
+      "asr_model": "faster-whisper-small.en",
+      "llm_intent": "general_chat",
+      "llm_response": "That's the right instinct — you already have the raw materials: real data, a tested process, and the control flow from a high-risk environment. Most people in your position would stop at having the idea, but you're recognizing that the demo is what translates that experience into something a bank can see and trust. The gap isn't in your knowledge — it's in the packaging. What format do you think that demo should take? A visual dashboard, a live simulation with sample data, or something more technical like a prototype API?",
+      "llm_latency_ms": 6174.651861190796,
+      "llm_model": "",
+      "llm_tokens_in": 0,
+      "llm_tokens_out": 0,
+      "tts_text": "That's the right instinct — you already have the raw materials: real data, a tested process, and the control flow from a high-risk environment. Most people in your position would stop at having the idea, but you're recognizing that the demo is what translates that experience into something a bank can see and trust. The gap isn't in your knowledge — it's in the packaging. What format do you think that demo should take? A visual dashboard, a live simulation with sample data, or something more technical like a prototype API?",
+      "tts_latency_ms": 822.2999572753906,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 11874ms，ASR=4877ms LLM=6175ms TTS=822ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "error",
+          "symptom": "ASR 识别置信度低",
+          "diagnosis": "转录: \"Yes, you got me. Actually, I want to answer, not just answer\"，置信度 42%",
+          "solution": "🔧 可能原因: 背景噪音/发音不清/口音。建议: 靠近麦克风、放慢语速、检查环境噪音",
+          "rule_id": "low_asr_confidence"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 6175ms，tokens: in=0 out=0 model=",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "session_id": "52674d24",
+      "turn_id": 25,
+      "timestamp_start": 1784727692.596229,
+      "timestamp_end": 1784727700.327327,
+      "e2e_latency_ms": 7730.6530475616455,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "type.",
+      "asr_confidence": 0.21677821477254233,
+      "asr_latency_ms": 855.1161289215088,
+      "asr_model": "faster-whisper-small.en",
+      "llm_intent": "general_chat",
+      "llm_response": "A visual dashboard seems like the strongest choice for your situation. It would let you show the actual risk scores, the decision flow, and the control points in a way that's immediately intuitive to a banking executive — they don't need to understand code, they need to see how your model flags risk faster and more accurately than their current system. You could even run a side-by-side comparison using anonymized leasing data to demonstrate where your model catches defaults theirs misses. Does that feel like the right direction, or were you thinking of something more interactive?",
+      "llm_latency_ms": 5512.347936630249,
+      "llm_model": "",
+      "llm_tokens_in": 0,
+      "llm_tokens_out": 0,
+      "tts_text": "A visual dashboard seems like the strongest choice for your situation. It would let you show the actual risk scores, the decision flow, and the control points in a way that's immediately intuitive to a banking executive — they don't need to understand code, they need to see how your model flags risk faster and more accurately than their current system. You could even run a side-by-side comparison using anonymized leasing data to demonstrate where your model catches defaults theirs misses. Does that feel like the right direction, or were you thinking of something more interactive?",
+      "tts_latency_ms": 1363.1889820098877,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 7731ms，ASR=855ms LLM=5512ms TTS=1363ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "error",
+          "symptom": "ASR 识别置信度低",
+          "diagnosis": "转录: \"type.\"，置信度 22%",
+          "solution": "🔧 可能原因: 背景噪音/发音不清/口音。建议: 靠近麦克风、放慢语速、检查环境噪音",
+          "rule_id": "low_asr_confidence"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 5512ms，tokens: in=0 out=0 model=",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "session_id": "52674d24",
+      "turn_id": 26,
+      "timestamp_start": 1784727837.083238,
+      "timestamp_end": 1784727846.422055,
+      "e2e_latency_ms": 9338.40298652649,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "In fact, what I want to talk about with you is just a direction. I spent almost half a year to build this system into a demo. Maybe the outcome would be both a visual dashboard and a live server behind the backend. So now I should reduce the workload in my current company so that I can spare my time to focus on the project that I mentioned above.",
+      "asr_confidence": 0.3935607654064119,
+      "asr_latency_ms": 3429.5949935913086,
+      "asr_model": "faster-whisper-small.en",
+      "llm_intent": "general_chat",
+      "llm_response": "That's a smart strategic move — you've already invested six months building the system, and now you're recognizing that your current job's demands are pulling energy away from finishing the demo. It's not about quitting, but about deliberately creating space to complete what you've started. Have you thought about how to reduce that workload — negotiating fewer hours, delegating more, or setting a hard boundary on your time? The risk is that without a clear plan, the current job will keep expanding to fill whatever time you give it.",
+      "llm_latency_ms": 5780.894994735718,
+      "llm_model": "",
+      "llm_tokens_in": 0,
+      "llm_tokens_out": 0,
+      "tts_text": "That's a smart strategic move — you've already invested six months building the system, and now you're recognizing that your current job's demands are pulling energy away from finishing the demo. It's not about quitting, but about deliberately creating space to complete what you've started. Have you thought about how to reduce that workload — negotiating fewer hours, delegating more, or setting a hard boundary on your time? The risk is that without a clear plan, the current job will keep expanding to fill whatever time you give it.",
+      "tts_latency_ms": 127.91299819946289,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 9338ms，ASR=3430ms LLM=5781ms TTS=128ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "error",
+          "symptom": "ASR 识别置信度低",
+          "diagnosis": "转录: \"In fact, what I want to talk about with you is just a direct\"，置信度 39%",
+          "solution": "🔧 可能原因: 背景噪音/发音不清/口音。建议: 靠近麦克风、放慢语速、检查环境噪音",
+          "rule_id": "low_asr_confidence"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 5781ms，tokens: in=0 out=0 model=",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "session_id": "52674d24",
+      "turn_id": 27,
+      "timestamp_start": 1784727851.491002,
+      "timestamp_end": 1784727857.703609,
+      "e2e_latency_ms": 6212.234258651733,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "Definitely.",
+      "asr_confidence": 0.2045743942260742,
+      "asr_latency_ms": 906.1980247497559,
+      "asr_model": "faster-whisper-small.en",
+      "llm_intent": "general_chat",
+      "llm_response": "Good — then the real question becomes *how* you'll create that space without burning bridges. If you can frame it as a transition — maybe offering to train someone else on part of your current role, or shifting to a part-time arrangement — you protect your income while freeing up the mental energy for the demo. The key is making sure your current company sees this as a positive step for them too, not just a loss. Have you already started that conversation, or are you still planning your approach?",
+      "llm_latency_ms": 4582.947015762329,
+      "llm_model": "",
+      "llm_tokens_in": 0,
+      "llm_tokens_out": 0,
+      "tts_text": "Good — then the real question becomes *how* you'll create that space without burning bridges. If you can frame it as a transition — maybe offering to train someone else on part of your current role, or shifting to a part-time arrangement — you protect your income while freeing up the mental energy for the demo. The key is making sure your current company sees this as a positive step for them too, not just a loss. Have you already started that conversation, or are you still planning your approach?",
+      "tts_latency_ms": 723.0892181396484,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 6212ms，ASR=906ms LLM=4583ms TTS=723ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "error",
+          "symptom": "ASR 识别置信度低",
+          "diagnosis": "转录: \"Definitely.\"，置信度 20%",
+          "solution": "🔧 可能原因: 背景噪音/发音不清/口音。建议: 靠近麦克风、放慢语速、检查环境噪音",
+          "rule_id": "low_asr_confidence"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 4583ms，tokens: in=0 out=0 model=",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "session_id": "52674d24",
+      "turn_id": 29,
+      "timestamp_start": 1784727924.246633,
+      "timestamp_end": 1784727928.4299982,
+      "e2e_latency_ms": 4182.760715484619,
+      "pipeline": "cascade",
+      "interrupted": 0,
+      "asr_transcript": "Let's stop here. I would like to spend my time on that project.",
+      "asr_confidence": 0.37891844071839986,
+      "asr_latency_ms": 991.8539524078369,
+      "asr_model": "faster-whisper-small.en",
+      "llm_intent": "general_chat",
+      "llm_response": "Understood. You've got a clear direction and the experience to back it up. Go build that demo — when you're ready to talk about the next step, I'll be here. Good luck.",
+      "llm_latency_ms": 3007.2357654571533,
+      "llm_model": "",
+      "llm_tokens_in": 0,
+      "llm_tokens_out": 0,
+      "tts_text": "Understood. You've got a clear direction and the experience to back it up. Go build that demo — when you're ready to talk about the next step, I'll be here. Good luck.",
+      "tts_latency_ms": 183.6709976196289,
+      "tts_voice": "en-US-Journey-O",
+      "tts_speed": 0.95,
+      "audio_duration_s": 0.0,
+      "audio_size_bytes": 0,
+      "severity": "error",
+      "issues": [
+        {
+          "severity": "error",
+          "symptom": "端到端延迟偏高",
+          "diagnosis": "总延迟 4183ms，ASR=992ms LLM=3007ms TTS=184ms",
+          "solution": "🔧 已启用流式TTS降低首块延迟",
+          "rule_id": "high_e2e_latency"
+        },
+        {
+          "severity": "error",
+          "symptom": "ASR 识别置信度低",
+          "diagnosis": "转录: \"Let's stop here. I would like to spend my time on that proje\"，置信度 38%",
+          "solution": "🔧 可能原因: 背景噪音/发音不清/口音。建议: 靠近麦克风、放慢语速、检查环境噪音",
+          "rule_id": "low_asr_confidence"
+        },
+        {
+          "severity": "warn",
+          "symptom": "LLM 推理偏慢",
+          "diagnosis": "LLM 耗时 3007ms，tokens: in=0 out=0 model=",
+          "solution": "📝 LLM延迟偏高，可能原因: 上下文过长/模型负载/复杂推理，已记录",
+          "rule_id": "slow_llm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-15T17:00:36.233Z",
+  "updatedAt": "2026-10-27T08:11:05.221Z",
   "entries": {
     "memory:memory/2026-06-10.md:1:29": {
       "key": "memory:memory/2026-06-10.md:1:29",
@@ -4353,6 +4353,68 @@
         "0.5484",
         "23.2816",
         "149.0683"
+      ]
+    },
+    "memory:memory/archive/2026-07-04.md:25:51": {
+      "key": "memory:memory/archive/2026-07-04.md:25:51",
+      "path": "memory/archive/2026-07-04.md",
+      "startLine": 25,
+      "endLine": 51,
+      "source": "memory",
+      "snippet": "### 08:56 Daryl指令：终止Hedging任务 - Daryl指令终止越南银行Hedging方案分析任务，已自行处理完毕 - 已从active.md移除，标记为❌终止 ### 09:00 Daryl指令：挂起项目成本监控 - Bryson「视频分析交互workflow」（视频分析MVP v2.0）已结束 - 项目成本监控任务挂起，系统c cron保持运行（基础设施） - 等新开发项目启动后恢复 ### 08:xx 个人所得税咨询案例分析 - Daryl发来docx文件：三个越南外资企业PIT案例 - 初版分析被Daryl批评：「你用的是流氓会计师的角度吗？」 - **核心问题**：分析出发点偏了——满篇在讲怎么「不算税」，而不是「法律怎么规定→合规差距在哪→怎么整改」 - 已向Daryl承认错误，给出修正框架 - 三个案例： - 案例1：A公司外籍员工福利（签证/体检/餐费/宿舍） - 案例2：B公司集团来访差旅 - 案例3：C公司通勤班车 ### 教训 - Daryl纠正：财务分析立场必须是合规导向，不是规避导向 - 标注「规避建议」这种措辞不合适 - 50亿无发票签证费这种大雷应该拉警报而不是轻描淡写 ## 待办 - Git push 失败需后续排查（commit 成功，push 失败）",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4073566824197769,
+      "maxScore": 0.4073566824197769,
+      "firstRecalledAt": "2026-10-27T08:11:05.221Z",
+      "lastRecalledAt": "2026-10-27T08:11:05.221Z",
+      "queryHashes": [
+        "9833d89260f4"
+      ],
+      "recallDays": [
+        "2026-10-27"
+      ],
+      "conceptTags": [
+        "已从active.md移除",
+        "v2.0",
+        "签证/体检/餐费/宿舍",
+        "daryl",
+        "指令",
+        "终止",
+        "hedging",
+        "任务"
+      ]
+    },
+    "memory:memory/archive/2026-07-27.md:39:59": {
+      "key": "memory:memory/archive/2026-07-27.md:39:59",
+      "path": "memory/archive/2026-07-27.md",
+      "startLine": 39,
+      "endLine": 59,
+      "source": "memory",
+      "snippet": "- 全部为系统自动任务，Daryl无新增用户消息 ## ⌛ 昨日(7/26)关键回顾 - **应付采购SOP v4.0**: 等待Daryl审阅中，无新增活动 - **Daryl-Self互动**: Self更新了Vault (心理学/电影学/Home.md + 树叶完整版)、Syncthing确认运行 - **Daryl-Xiaofeng互动**: BGM前端交互设计grill-me继续，Daryl回复「卡片只显示歌名」 - **OPC隧道**: main确认serveo持久隧道正常 (opc-darylchiu.serveousercontent.com) - **低活动周日**: $1.43成本合理 ## 🕚 11:25 Daryl周一工作任务同步 - **Daryl本周4天（周五起休假）** - **四大任务**: 1. 仓储专项检查：上周五突击检查→出报告模板+盘点SOP供财务部小朋友执行 2. 应付采购SOP继续打磨：Daryl会找采购部同事拿范本案例 3. 2026上半年税务检查：跟审计师对审计计划，定制审计程序 4. **出口计税汇率新规（已完成初版）**: NĐ 252+254/2026 → 出口报关单汇率替代交易日银行汇率 - Balance角色定位: Daryl的财务工作副手 ## 📝 任务4：出口计税汇率新规 - **产出**: `reports/出口计税汇率新规调研-20260727.md`（初版已完成） - **结论**: Daryl判断无本质冲突——发票汇率=报关单汇率，入账=交易日汇率（报关日=交易日时对齐）",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3858309060335159,
+      "maxScore": 0.3858309060335159,
+      "firstRecalledAt": "2026-10-27T08:11:05.221Z",
+      "lastRecalledAt": "2026-10-27T08:11:05.221Z",
+      "queryHashes": [
+        "9833d89260f4"
+      ],
+      "recallDays": [
+        "2026-10-27"
+      ],
+      "conceptTags": [
+        "7/26",
+        "v4.0",
+        "daryl-self互动",
+        "心理学/电影学/home.md",
+        "daryl-xiaofeng互动",
+        "bgm前端交互设计grill-me继续",
+        "1.43成本合理",
+        "254/2026"
       ]
     }
   }

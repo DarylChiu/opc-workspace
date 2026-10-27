@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Vocabulary · IELTS Tutor</title>
+<style>
+:root {
+    --bg:#0a0a0a; --card-bg:#141414; --card-border:#252525;
+    --text:#e0e0e0; --muted:#777; --green:#22c55e; --amber:#fbbf24;
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:-apple-system,BlinkMacSystemFont,sans-serif; background:var(--bg); color:var(--text); min-height:100vh; padding:12px; }
+h1 { font-size:18px; margin-bottom:4px; }
+h2 { font-size:14px; color:var(--muted); font-weight:400; margin-bottom:14px; }
+.header { display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }
+.header a { color:var(--green); text-decoration:none; font-size:12px; }
+.tabs { display:flex; gap:4px; margin-bottom:12px; }
+.tab-btn { background:var(--card-bg); border:1px solid var(--card-border); color:var(--muted); padding:6px 14px; border-radius:16px; font-size:12px; cursor:pointer; }
+.tab-btn.active { background:var(--green); color:#000; border-color:var(--green); font-weight:600; }
+.stats { display:flex; gap:8px; margin-bottom:12px; }
+.stat { background:var(--card-bg); border:1px solid var(--card-border); border-radius:10px; padding:10px 14px; flex:1; text-align:center; }
+.stat .num { font-size:22px; font-weight:700; }
+.stat .label { font-size:10px; color:var(--muted); margin-top:2px; }
+.vocab-list { display:flex; flex-direction:column; gap:6px; }
+.vocab-item { background:var(--card-bg); border:1px solid var(--card-border); border-radius:10px; padding:10px 12px; display:flex; align-items:center; gap:10px; }
+.vocab-item.mastered { opacity:0.4; }
+.vocab-item .word { font-size:15px; font-weight:700; flex-shrink:0; min-width:80px; }
+.vocab-item .meta { flex:1; min-width:0; }
+.vocab-item .source { font-size:11px; color:var(--muted); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.vocab-item .explanation { font-size:11px; color:var(--amber); margin-top:2px; }
+.vocab-item .actions { display:flex; gap:4px; flex-shrink:0; }
+.vocab-item .act-btn { background:rgba(255,255,255,0.05); border:1px solid var(--card-border); color:var(--text); border-radius:6px; padding:4px 8px; font-size:11px; cursor:pointer; }
+.vocab-item .act-btn.speak { color:var(--green); }
+.vocab-item .act-btn.master { color:var(--amber); }
+.vocab-item .act-btn.del { color:#ef4444; }
+.empty { text-align:center; color:var(--muted); padding:40px 20px; font-size:13px; line-height:1.6; }
+.empty .big { font-size:36px; display:block; margin-bottom:10px; }
+</style>
+</head>
+<body>
+<div class="header">
+    <div><h1>📚 Vocabulary</h1><h2>待巩固词汇库</h2></div>
+    <a href="/">← Back to Tutor</a>
+</div>
+
+<div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('active')">📝 Active</button>
+    <button class="tab-btn" onclick="switchTab('mastered')">✅ Mastered</button>
+</div>
+
+<div class="stats">
+    <div class="stat"><div class="num" id="statActive">-</div><div class="label">待巩固</div></div>
+    <div class="stat"><div class="num" id="statMastered">-</div><div class="label">已掌握</div></div>
+    <div class="stat"><div class="num" id="statTotal">-</div><div class="label">总计</div></div>
+</div>
+
+<div class="vocab-list" id="vocabList"></div>
+
+<script>
+let currentTab = 'active';
+
+async function loadVocab() {
+    const mastered = currentTab === 'mastered' ? 1 : 0;
+    try {
+        const resp = await fetch(`/api/vocab/list?limit=100&mastered=${mastered}`);
+        const data = await resp.json();
+        renderList(data.items);
+        updateStats();
+    } catch(e) {
+        document.getElementById('vocabList').innerHTML = '<div class="empty">Failed to load</div>';
+    }
+}
+
+async function updateStats() {
+    try {
+        const [activeResp, masteredResp] = await Promise.all([
+            fetch('/api/vocab/list?limit=1&mastered=0'),
+            fetch('/api/vocab/list?limit=1&mastered=1')
+        ]);
+        const [aData, mData] = await Promise.all([activeResp.json(), masteredResp.json()]);
+        // Need to count total, not just returned items
+        // Simple approach: get all
+        const allResp = await fetch('/api/vocab/list?limit=1000&mastered=0');
+        const allData = await allResp.json();
+        const allMResp = await fetch('/api/vocab/list?limit=1000&mastered=1');
+        const allMData = await allMResp.json();
+        document.getElementById('statActive').textContent = allData.items.length;
+        document.getElementById('statMastered').textContent = allMData.items.length;
+        document.getElementById('statTotal').textContent = allData.items.length + allMData.items.length;
+    } catch(e) {}
+}
+
+function renderList(items) {
+    const container = document.getElementById('vocabList');
+    if (items.length === 0) {
+        container.innerHTML = `<div class="empty"><span class="big">📭</span>${currentTab==='active'?'No vocabulary saved yet. Long-press a word in conversation to add it.':'No mastered words yet.'}</div>`;
+        return;
+    }
+    container.innerHTML = items.map(item => `
+        <div class="vocab-item ${item.mastered ? 'mastered' : ''}">
+            <div class="word">${item.word}</div>
+            <div class="meta">
+                <div class="source">${item.source_sentence || ''}</div>
+                ${item.better_expression ? `<div class="explanation">→ ${item.better_expression}</div>` : ''}
+            </div>
+            <div class="actions">
+                <button class="act-btn speak" onclick="speakWord('${item.word.replace(/'/g,"\\'")}')">🔊</button>
+                ${item.mastered ? '' : `<button class="act-btn master" onclick="markMastered(${item.id})">✅</button>`}
+                <button class="act-btn del" onclick="deleteVocab(${item.id})">🗑</button>
+            </div>
+        </div>
+    `).join('');
+}
+
+function switchTab(tab) {
+    currentTab = tab;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+    loadVocab();
+}
+
+function speakWord(word) {
+    const u = new SpeechSynthesisUtterance(word);
+    u.lang = 'en-US'; u.rate = 0.85;
+    speechSynthesis.speak(u);
+}
+
+async function markMastered(id) {
+    await fetch(`/api/vocab/${id}/master`, {method:'PUT'});
+    loadVocab();
+}
+
+async function deleteVocab(id) {
+    if (!confirm('Delete this word?')) return;
+    await fetch(`/api/vocab/${id}`, {method:'DELETE'});
+    loadVocab();
+}
+
+loadVocab();
+</script>
+</body>
+</html>
