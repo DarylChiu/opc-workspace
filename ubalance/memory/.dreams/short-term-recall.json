@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-26T01:45:39.928Z",
+  "updatedAt": "2026-10-27T07:23:54.109Z",
   "entries": {
     "memory:memory/2026-06-10.md:1:29": {
       "key": "memory:memory/2026-06-10.md:1:29",
@@ -7863,18 +7863,20 @@
       "endLine": 144,
       "source": "memory",
       "snippet": "- **三问三答（要点）**：① 交易性质=**就地进出口**（越南境内交付 Exprinta）→ HUATEX 办就地出口、Exprinta 办就地进口；**必须**签书面文件/补充协议明确不合格品数量·价值·责任·补偿，并事先约定加工费调整机制与海关/税务/单据义务。② **合同对价不能按交付数量认定**（100 vs 120 取决于合同约定：HUATEX 自担→不增加；HFGI 承担→调整+补充协议+调整发票；扣减加工费→按书面确认扣减）。③ **质量保修条款可做**（例 60 天免费换货、上限批次 5%），但须明确费用承担主体/处理机制/加工费与质量责任关系 + 分方案评税费。 - **税务关键结论**：FOC 补偿货物 **VAT 0%**（符合条件）、出口税免税但有例外（境内采购且应征出口税的原料部分不免）；加工进口原料**不征 VAT** 但**消耗定额必须与出口数量匹配可核实**（否则补税）；新增加工费→HUATEX CIT 应税收入；海关按 **01/TB-XNKTC/GSQL** 表月报税务机关。",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.4021400451660156,
+      "totalScore": 0.7923911958932877,
       "maxScore": 0.4021400451660156,
       "firstRecalledAt": "2026-10-24T04:16:32.217Z",
-      "lastRecalledAt": "2026-10-24T04:16:32.217Z",
+      "lastRecalledAt": "2026-10-27T07:23:54.109Z",
       "queryHashes": [
-        "9b33d796cd71"
+        "9b33d796cd71",
+        "a4c03e53eb93"
       ],
       "recallDays": [
-        "2026-10-24"
+        "2026-10-24",
+        "2026-10-27"
       ],
       "conceptTags": [
         "签书面文件/补充协议明确不合格品数量",
@@ -7978,6 +7980,161 @@
         "结论",
         "四方",
         "合同"
+      ]
+    },
+    "memory:memory/archive/2026-08-20.md:14:31": {
+      "key": "memory:memory/archive/2026-08-20.md:14:31",
+      "path": "memory/archive/2026-08-20.md",
+      "startLine": 14,
+      "endLine": 31,
+      "source": "memory",
+      "snippet": "2. Future Textile：Wellname 新加坡→Future 越南 USD 3000万，4%/年，365天，2026-07-30 签（4份正本） - 关键差异（Future vs 华特旧合同）： ① 4.2 FCT 全部由借方承担（华特旧无此条） ② 4.3 贷方每月开 Debt Note（华特旧无） ③ 5.1 转股=本金+已产生利息（华特旧只转本金） ④ 期限 365 天 vs 360 天 - **Daryl 指令**：以 Future 新合同条款套入华特×华丰需新拟的合同（旧合同还剩约10天过期） - 产出： - `work/loan-renewal-huatex/华特×华丰股东借款合同-新拟草案-v0.1-20260820.md`（英越双语草案+变更说明+待确认变量） - `reports/华特×华丰股东借款合同-中越英三语-v0.1-20260820.docx`（135段，中越英三语，可直接打印盖章） - `work/loan-renewal-huatex/gen_loan_docx.py`（可复跑生成脚本） - 待 Daryl 确认变量（已用默认值）: 金额(1000万)/期限(365天)/利率(4%)/合同号(08.2026/HDV-HF-HT)/签署日(空)/FCT承担(套入)/正本份数(02各01) - 合规: P2 PASS；post-op 触发今日日记创建（本条） - 模型: deepseek/deepseek-v4-pro ## 晚间：每日成本扫描（cron 成本全量扫描推Kitty） - 状态: ⚠️已降",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.35724142491817473,
+      "maxScore": 0.35724142491817473,
+      "firstRecalledAt": "2026-10-27T02:57:32.101Z",
+      "lastRecalledAt": "2026-10-27T02:57:32.101Z",
+      "queryHashes": [
+        "6a64d8342bee"
+      ],
+      "recallDays": [
+        "2026-10-27"
+      ],
+      "conceptTags": [
+        "4.2",
+        "4.3",
+        "5.1",
+        "work/loan-renewal-huatex/华特",
+        "华丰股东借款合同-新拟草案-v0.1-20260820.md",
+        "reports/华特",
+        "08.2026/hdv-hf-ht",
+        "post-op"
+      ]
+    },
+    "memory:memory/2026-10-22.md:19:23": {
+      "key": "memory:memory/2026-10-22.md:19:23",
+      "path": "memory/2026-10-22.md",
+      "startLine": 19,
+      "endLine": 23,
+      "source": "memory",
+      "snippet": "- **Daryl 指令**：按昨天讨论的四方合同情景（购买方=外国企业、收货方=EPE 等），Sheet1 每种情况一个「销售和出货（出口/内销）模式」；Sheet2 按原材料（纱线/胚布/成品布）总结「采购和入库（进口/本地采购）模式」 - **交付**：`deliverables/越南华特经营模式-销售出货与采购入库模式-v1-20261022.xlsx`｜脚本 `scripts/build_huatex_model_v4_modes.py` - **Sheet1（9 个模式）**：S1-01 离境出口｜S1-02 四方·收货=EPE（E62 就地出口）｜S1-03 四方·收货=本地企业买断｜S1-04 四方·收货=本地企业代工｜S1-05 买方=EPE 自收货｜S1-06 买方EPE+收货本地（❌不适用，昨日已定商业上不成立）｜S1-07 内销｜S1-08 买方本地+收货EPE 结构A（Huatex 8%）｜S1-09 同场景结构B（Huatex 直接 E62，0%） - **Sheet1 19 列**：交易结构/出货性质/买卖方身份/货物流向/开票对象/发票与VAT率/报关类型/收付款路径/双方税负/单证包/成立前提/红线/结论/政策依据/状态 - **Sheet2（12 个模式）**：纱线 4（本地/一般贸易/保税SXXK/自EPE视同进口）、胚布 4、成品布 3、辅料化学品 1；16 列含关税率/进口VAT/反倾销/是否核销/入库成本构成/适用销售场景",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.38400866389274596,
+      "maxScore": 0.38400866389274596,
+      "firstRecalledAt": "2026-10-27T07:23:54.109Z",
+      "lastRecalledAt": "2026-10-27T07:23:54.109Z",
+      "queryHashes": [
+        "a4c03e53eb93"
+      ],
+      "recallDays": [
+        "2026-10-27"
+      ],
+      "conceptTags": [
+        "出口/内销",
+        "纱线/胚布/成品布",
+        "进口/本地采购",
+        "s1-01",
+        "s1-02",
+        "s1-03",
+        "s1-04",
+        "s1-05"
+      ]
+    },
+    "memory:memory/2026-10-22.md:13:20": {
+      "key": "memory:memory/2026-10-22.md:13:20",
+      "path": "memory/2026-10-22.md",
+      "startLine": 13,
+      "endLine": 20,
+      "source": "memory",
+      "snippet": "- 成本核算能力建设（P1，离职后第一顺位）：`memory/project-cost-accounting-ai.md` 已建档，M0 完成，M1 待启动（出《成本核算手册 v1》） - 华星 2608 成本报表审阅 v1 已交付，4 处断链待与 Daryl 确认修复口径 - 待核事项：越南-美国 DTA 是否生效；NĐ 181/2025 Đ17 原文未逐字核；TT 103/2014 Đ1.2 排除条款需核原文 - Kitty 成本扫描 10-21 晚 sessions_send 超时 → 已降级写文件，Kitty 未确认（今日审计已含成本数据，可视为兜底） ## 11:5x 📊 越南华特经营模式 v4：销售出货 + 采购入库 双 Sheet（Daryl 被领导催进度后指定结构） - **Daryl 指令**：按昨天讨论的四方合同情景（购买方=外国企业、收货方=EPE 等），Sheet1 每种情况一个「销售和出货（出口/内销）模式」；Sheet2 按原材料（纱线/胚布/成品布）总结「采购和入库（进口/本地采购）模式」 - **交付**：`deliverables/越南华特经营模式-销售出货与采购入库模式-v1-20261022.xlsx`｜脚本 `scripts/build_huatex_model_v4_modes.py`",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3801832050085068,
+      "maxScore": 0.3801832050085068,
+      "firstRecalledAt": "2026-10-27T07:23:54.109Z",
+      "lastRecalledAt": "2026-10-27T07:23:54.109Z",
+      "queryHashes": [
+        "a4c03e53eb93"
+      ],
+      "recallDays": [
+        "2026-10-27"
+      ],
+      "conceptTags": [
+        "越南-美国",
+        "181/2025",
+        "103/2014",
+        "đ1.2",
+        "10-21",
+        "sessions-send",
+        "出口/内销",
+        "纱线/胚布/成品布"
+      ]
+    },
+    "memory:memory/2026-10-20.md:54:63": {
+      "key": "memory:memory/2026-10-20.md:54:63",
+      "path": "memory/2026-10-20.md",
+      "startLine": 54,
+      "endLine": 63,
+      "source": "memory",
+      "snippet": "- **Daryl 原话**：v2 总表按采购模式分类 → 应**按销售客户的企业类型**分类，让业务部先看到哪类客户合同税负最低，再以销定产、倒推采购（国内采购 / 一般贸易 / 保税进口） - **产出**：`deliverables/越南华特-税负测算模型-按客户类型-v3-20261020.xlsx`（7 sheet）+ 脚本 `scripts/build_huatex_taxmodel_v3_bycustomer.py` - `01-客户类型税负矩阵`（主视图 5 客户类型 × 5 采购模式，每行自动标最低） - `02-采购倒推决策表`（推荐模式/次优/差额/采购动作/供应商要求/报关单证/红线/替代方案） - `03-明细底稿`（25 组合全公式）｜`04-参数区`｜`05-口径与来源`（14 条）｜`06-操作指引` - **决策结论（占位售价 18 万 VND/kg）**： - **C1 越南鞋厂·非EPE 内销**：最优 **P4 国内采购 5,400（3.0%）**；最差 **P1 保税进口转内销 32,608（18.1%）** → **6.0 倍差** - **C2 鞋厂·EPE / C5 本地第三方 出口**：最优 **P1 保税 或 P2 进料加工 5,400（3.0%）**；P4 国内采购 5,493（3.05%）几乎持平 - **C3/C4 境外母公司/HFG**：最优同 P1/P2 但 +1% 承包税 → 7,020（3.9%） - **P3 一般贸易进口成品布 全线最贵**（19,008~20,732，10.6%~",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.37481164932250977,
+      "maxScore": 0.37481164932250977,
+      "firstRecalledAt": "2026-10-27T07:23:54.109Z",
+      "lastRecalledAt": "2026-10-27T07:23:54.109Z",
+      "queryHashes": [
+        "a4c03e53eb93"
+      ],
+      "recallDays": [
+        "2026-10-27"
+      ],
+      "conceptTags": [
+        "01-客户类型税负矩阵",
+        "02-采购倒推决策表",
+        "03-明细底稿",
+        "04-参数区",
+        "05-口径与来源",
+        "06-操作指引",
+        "vnd/kg",
+        "3.0"
+      ]
+    },
+    "memory:memory/2026-10-21.md:54:62": {
+      "key": "memory:memory/2026-10-21.md:54:62",
+      "path": "memory/2026-10-21.md",
+      "startLine": 54,
+      "endLine": 62,
+      "source": "memory",
+      "snippet": "- **待确认关键事实**：HFGI 收货后转售越南客户（→分销→FCT 必触发）还是再出口 - **契约建议**：币别条款 / FCT 承担条款 / Incoterms 条款（DAP 不含卸货，要卸货用 DPU） - **待核**：越南-美国 DTA 是否生效（置信度中）；NĐ 181/2025 Đ17 未逐字核原文 ## 16:3x ⚠️ Daryl 纠正：FCT 方向搞反了（重要） - **我的错**：说「付款方 Huatex 有代扣代缴 FCT 义务」→ 本合同中 **Huatex 是卖方（收款方）**，根本不付款；FCT 只对外国**收款方**征税，越南居民卖方永不可能缴 FCT - **根因**：把\"越南付款方代扣\"规则机械套用，没先确认现金流方向（谁收谁付） - **正确图谱**：Huatex（卖方/收款）→ 无 FCT；HFGI（买方）→ 只有在越南**转售给 EPE/本地客户**（分销）才有 CIT 1%，由越南买方代扣；外国承运人向 Huatex 收境内运输费 → 这才是 Huatex 代扣场景（运输 3%VAT+2%CIT） - **DAP 对 Huatex 的真实影响（与 FCT 无关）**：①0% VAT 取决于交货地是否 EPE/非关税区 ②境内运费单独开票按 8% 而非 0%，打包进 DAP 价则可全额 0% 但报关价口径要能解释 ③风险到 EPE 门口需自购境内货运险 ④DAP 不含卸货（要卸货用 DPU）⑤连带成本必须进报价",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3705984771251678,
+      "maxScore": 0.3705984771251678,
+      "firstRecalledAt": "2026-10-27T07:23:54.109Z",
+      "lastRecalledAt": "2026-10-27T07:23:54.109Z",
+      "queryHashes": [
+        "a4c03e53eb93"
+      ],
+      "recallDays": [
+        "2026-10-27"
+      ],
+      "conceptTags": [
+        "越南-美国",
+        "181/2025",
+        "卖方/收款",
+        "epe/本地客户",
+        "epe/非关税区",
+        "确认",
+        "关键",
+        "事实"
       ]
     }
   }

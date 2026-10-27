@@ -1,0 +1,24 @@
+{"ts": "2026-10-27T14:54:29+07:00", "step": "M0-01", "action": "INIT", "result": "接收任务：重做单文件 HTML 交互图解 v2（四方角色拖拽 + 判定引擎 + 成本底线 + 维护抽屉），仅做 HTML 不动 Excel"}
+{"ts": "2026-10-27T14:55:09+07:00", "step": "M1-01", "action": "READ_FILE", "result": "读取 v1 交付件 deliverables/华特经营模式-交互图解-v1-20261027.html（33,910B）作为基线，复用其 keyline/红线/单证/依据文案"}
+{"ts": "2026-10-27T14:55:49+07:00", "step": "M2-01", "action": "DECIDE", "result": "架构决策：数据层(MODES/CFG)+引擎层(runEngine)+成本层(computeCost)+渲染层(SVG字符串)+交互层；改用 svg.innerHTML 字符串拼接，彻底移除 createElementNS 与命名空间 URL"}
+{"ts": "2026-10-27T14:56:29+07:00", "step": "M2-02", "action": "DECIDE", "result": "规则引擎 token 设计：*=任意 / ^buyer=同购买方 / #overseas|#epe|#vn|#cmt|#bonded=属性类 / @id=指定主体；规则表落为可编辑数组，先命中先生效"}
+{"ts": "2026-10-27T14:57:09+07:00", "step": "M2-03", "action": "CREATE_FILE", "result": "编写 part1.html（样式与骨架，深蓝 #1F3864/#2E5496 + 白 + 灰，移动端横向滚动 + @media print A3 横向）"}
+{"ts": "2026-10-27T14:57:49+07:00", "step": "M2-04", "action": "CREATE_FILE", "result": "编写 part2.js（8 个模式口径逐字沿用 v4；默认主体 7 个；参数 30 项含 已核实/占位待核；规则 8 条；预设 8 组）"}
+{"ts": "2026-10-27T14:58:29+07:00", "step": "M2-05", "action": "CREATE_FILE", "result": "编写 part3.js（配置读写/localStorage、判定引擎、相似度兜底、成本计算 computeCost）"}
+{"ts": "2026-10-27T14:59:09+07:00", "step": "M2-06", "action": "CREATE_FILE", "result": "编写 part4.js（三流图 SVG 渲染、判定结论面板、成本树、报价校验）"}
+{"ts": "2026-10-27T14:59:49+07:00", "step": "M2-07", "action": "CREATE_FILE", "result": "编写 part5.js（主体池/槽位/预设/维护抽屉五个 tab 的渲染）"}
+{"ts": "2026-10-27T15:00:29+07:00", "step": "M2-08", "action": "CREATE_FILE", "result": "编写 part6.js（拖拽+点击双通道、抽屉事件代理、导入导出、启动与 __TEST__ 钩子）"}
+{"ts": "2026-10-27T15:01:09+07:00", "step": "M3-01", "action": "RUN_TEST", "result": "node --check 校验抽取后的 JS：语法通过（1,691 行）"}
+{"ts": "2026-10-27T15:01:49+07:00", "step": "M3-02", "action": "RUN_TEST", "result": "编写 test.js（DOM 桩 + vm 真实执行页面 JS）：首轮 55 通过 / 3 失败"}
+{"ts": "2026-10-27T15:02:29+07:00", "step": "M3-03", "action": "FIX", "result": "修复 3 项：① loadCfg 未重置 CFG 导致「清空本地」失效 ② 转售形态加工行不显示「不适用」 ③ 测试断言读 textContent 而非 innerHTML"}
+{"ts": "2026-10-27T15:03:09+07:00", "step": "M3-04", "action": "RUN_TEST", "result": "test.js 复跑：59 通过 / 0 失败（含 8 预设判定、51 组组合扫描、手算 2.7435、报价 2.5/3.0、localStorage 往返）"}
+{"ts": "2026-10-27T15:03:49+07:00", "step": "M4-01", "action": "CHECK", "result": "grep 外链检查：src=0 / href=0 / @import=0 / http=0 / <link>=0 / <img>=0；url( 仅 SVG 内部 marker 片段 url(#arw-*)"}
+{"ts": "2026-10-27T15:04:29+07:00", "step": "M4-02", "action": "RENDER", "result": "qlmanage -t 生成 Quick Look 缩略图成功，但 WebKit 沙箱不执行 JS，动态内容缺失（仅静态外壳）→ 判定为环境限制，改用 headless Chromium 复核"}
+{"ts": "2026-10-27T15:05:09+07:00", "step": "M4-03", "action": "RENDER", "result": "使用本机 ms-playwright chromium-headless-shell 截图 + --dump-dom 探针：确认 JS 真实执行，2.7435 渲染、7 主体/8 预设/4 槽位/13 rect/7 path、overflow=0"}
+{"ts": "2026-10-27T15:05:49+07:00", "step": "M4-04", "action": "RENDER", "result": "交互探针（真实 DOM 事件）：S1-08 双解+tab 切换、S1-02 落位、2.5→红/3.0→绿 0.2565、成本树展开 6 档物流、抽屉 5 tab 各自渲染、主体增删、保税仓拦截 toast"}
+{"ts": "2026-10-27T15:06:29+07:00", "step": "M4-05", "action": "CHECK", "result": "SVG 几何检查：8 个预设 0 处节点重叠，maxY=336 / viewBox 高 364 不越界；货物流连线加报关代码标签（出口报关/E62/无）"}
+{"ts": "2026-10-27T15:07:09+07:00", "step": "M4-06", "action": "RENDER", "result": "--print-to-pdf 验证打印样式：输出 2 页（A3 横向），参数控件与抽屉在打印时隐藏"}
+{"ts": "2026-10-27T15:07:49+07:00", "step": "M5-01", "action": "CREATE_FILE", "result": "交付 deliverables/华特经营模式-交互图解-v2-20261027.html（101,141B / 2,160 行，单文件零外链）"}
+{"ts": "2026-10-27T15:08:29+07:00", "step": "M5-02", "action": "COMPLETE", "result": "全部自检完成：59 项断言通过 0 失败；写入 summary.md 并向主代理汇报（含 3 条最可能被挑错项）"}
+{"ts": "2026-10-27T15:09:36+07:00", "step": "M4-07", "action": "FIX", "result": "补充改进：双解面板加「结构 A/B 成本口径对比」；成本脚注对 8% 模式显示「客户到手价＝报价×(1+8%)」；收货方锁定态加 🔒 样式；vhead 去掉与表格重复的 VAT 徽章"}
+{"ts": "2026-10-27T15:09:36+07:00", "step": "M5-03", "action": "CHECK", "result": "终版复核：102,029B / 2,169 行；test.js 59/59 通过；chromium 截图 OCR 复核 2.7435 与判定表正常；verify_trace PASS"}
