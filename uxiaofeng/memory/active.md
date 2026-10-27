@@ -1,5 +1,6 @@
-# 当前活跃任务 (中期记忆 — 每次session加载)
+# 当前活跃任务
 
+<<<<<<< HEAD
 > 最后更新: 2026-10-27 23:59（10/27 审计：自动修复 2 / 浅层 1 已闭环 / 深层 0；当日业务恢复，交接清单主线）
 
 ## 🔥 10/27 状态（小风侧 · 业务恢复）
@@ -59,168 +60,208 @@
 - **备份链修复（重要）**：`~/.opc-workspace-cache` 卡了 5 个未解决 stash 冲突（根目录 AGENTS.md / memory/active|lessons|workflow-rules|project_xiaofeng）→ `git commit` 静默失败，记忆未真正落盘备份。已取 upstream 版解决并提交 `d19a196`，现 pull/commit/push 全绿、远端已验证含当日日记
 - **audit.sh 根因修复**：①无条件 `stash pop` 会误弹历史 stash → 改为比对 `git stash list` 条数，只在真新建时 pop；②pop 冲突无人处理 → 冲突即回落取 HEAD 版并保留 stash
 - ⚠️ **OPC 成本仪表盘 API（localhost:8765）不可达** → 状态降级 `fresh_api_down`，成本数字为缓存值（今日 $0.01 / 本月 $86.22）。按成本护栏，账单/服务排查归 Kitty(main)，小风只上报不自查
+=======
+> 最后更新: 2026-10-25 00:15 GMT+7
+>
+> 🆕 **10/24 私聊战略主线（last day 10/30 前最重的一段，详见 memory/2026-10-24.md 10:12–11:02）**：
+> ① 身份转换＝打工人→创业者（销售/采购/HR/财务/战略），核心难点是**失去外部否定信号**
+> ② Daryl 自认最没底＝**战略**（前几轮赛道调研都不满意）→ 回国走访创业园：深圳/广州/佛山（资产复用）→ 杭州（能力迁移，放最后当对照组）
+> ③ 新方向草案：**中资出海 AI FDE**。一线信号＝10 人中籍管理层的中小出海团队，管理决策压力 > Huatex 200 人体系 → 流程/合规/自动化决策需求更高（规模小≠需求小，是杠杆缺失）
+> ④ 商业化两条腿：**创造需求/居间（启动现金，不可规模化）** vs **FDE/顾问订阅（资产，可规模化）**；顾问费不稳的根因＝价值不可见 → 收费应锚在客户刚性事件（交割/注资/年审/稽查/授信/扩产）
+> ⑤ Daryl 自指致命风险：资金掮客需求可能被宽松金融环境打败 → 我方判断掮客赚的是**摩擦租金**，只有「关系与信任摩擦」不消失
+> ⑥ 抛给 Daryl 未答的关键问题：**如果只能留一条产品线做三年，留哪条？**
+>
+> 🆕 **10/19 Daryl 确认 last day = 2026-10-30**，剩余两周双线：①经验资产化（Balance/Self 各交资产包+15问，Daryl 正直接与她们逐条澄清）②OPC 园区准备（BP 已出 v0.2 并推看板）
+>
+> 🆕 **10/19 战略发现（重要，待推进）**：Daryl 判 Agent 跟不上长线项目、不能都做成助理。结论=缺 **harness**（规划+记忆+纠偏），非缺 skill。工程型（目标已知→分解+验证）vs 探索型（目标未知→假设+验证+修订）需分道。交付瓶颈=「完成的定义」只在 Daryl 脑子→ **spec 前置 + 自检 + 独立 verifier** 为解（Token 净省一半，迭代压到 2-3 版）。FOC spec 试点已出草案，待 Daryl 裁定 8 条 + 待写进 AGENTS.md 推广。详见 memory/2026-10-19.md
+>
+> 🆕 **10/19 已知未修**：agent→Daryl 主动 DM 投递链路不通（sessions_send 语义=回传发起方；`openclaw agent --deliver` 因 pairing/路由未打通）→ 目前靠「Daryl 起头」或「Kitty 转贴」。待专项修。
+>>>>>>> f84ca06f29566ba0eac5d0b2a33984ab963d31d6
 
-## 🔧 10/17 状态（小风侧 · 新增）
-- **Daryl 邮件转 PDF**：第一版手工排版失败（截图丢失、表格打散）→ 第二版改 Chromium 渲染 `.eml`→HTML（cid 内联 base64）→ 竖版 A4 PDF（2.1MB），程序化验证 8/8 图内联、主表 21 行完整 → 已交付 Daryl
-- ⚠️ **image 工具不可用**：`google/gemini-3-flash-preview` API key 无效，无法视觉校验，改用 Playwright 断言；**待 Kitty 修 key**
-- ⚠️ **模型降档未生效**：该 feishu 直聊 session 实际仍跑 `deepseek-v4-pro`（$0.179，今日最贵），10/15 的 flash override 未覆盖该 session
-
-## 🔧 10/15–10/16 状态（小风侧）
-- **10/15**：Daryl 报「Kitty 重复发消息」→ 诊断为 **v4-pro 超时触发飞书重投**（网关健康，未重启）；按指令把 Kitty(main) + 自己(xiaofeng) 模型**临时 override 到 `deepseek-v4-flash`**（可随时 `model=default` 回退）
-- **10/16**：无新 Daryl 指令；00:01 审计 8 项全通过（成本 $3.52/$80.20）；当日跨 Agent 主战场＝Balance 的 HUATEX Windows 包 v1.3→v1.3.4 四连发（真机编码/Python 探测修复）
-- 待拍板项（延续，均**未开工**）：① IELTS C1+C2+C3 重启 8767 验收 ② Token 级财务三件事 ③ 资源禀赋调研「deal flow 扫描」验证实验 ④ 模型降级是否长期保留
-
-## 🔴 全局运营规则变更（2026-10-10 Daryl 指令 · 最高优先级）
-
-- **OPC 不再以 Daryl 指令为单一驱动，目标转向「变现」为核心**
-- 除 Balance（继续帮 Daryl 赚上班工资）外，所有 Agent 接收指令后**先不要执行任务**
-- 必须第一步问澄清问题：「这个指令/任务服务于哪一个变现项目？」
-- ⚠️ 后续收到任何 Daryl 新指令：先确认变现归属，再决定是否/如何执行（C1+C2+C3 听读训练开发完成，待 Daryl 重启 8767 验收；10/8 无新任务）
+> 📌 9/22-10/5 说明：9/17 全部 cron 恢复后，每日 23:59 记忆归档 + 成本扫描持续正常运行；9/22 起无项目级状态变更，下方各项目状态维持不变。9/26 Balance 交付「开票依据三件套模版」（华特中秋客户礼品），已 DM Daryl；同日上报 gemini-3-flash-preview API key not valid 环境异常（待 Kitty/Daryl 处理，未自查）。10/1 Balance 交付「月饼签收扫描件 OCR 识别」（匹配 1,264/1,631 人，94.8% 有签收墨迹，反直觉结论「发放量接近满额」），待 Daryl 定路；同日 Self 方法论卡拆卡提案二轮审查 FAIL（P0 需重做 §1 事实核查）。10/3 成本护栏「方案A」落地（exec 6→12/write 10→20/红线 $3预警$6停）；10/5 交付 Dream Engine 精简版（llm_budget.py + consolidate.py，待 Daryl 定是否跑真巩固）。10/6→10/9 归档日连续运行（无项目变更）。
+>
+> 🆕 **10/10 14:57 Daryl 群发「变现为核心」新指令**：OPC 运作不再以 Daryl 指令为单一驱动；接指令后先问一句澄清问题——「这个指令/任务服务哪个变现项目」；例外：Balance 继续帮 Daryl 赚工资。目标转向以变现为核心。已回复「收到」，待具体变现任务落地。
+>
+> 🆕 **10/12 私聊重大战略信息（需长期记住）**：Daryl 自述第三季度「堕怠」根因＝准备离职（现公司土壤不利），计划离职空窗期找回节奏、一个月内重做 OPC 战略。我方回应基调＝换土壤 > 硬扛意志力。详见 memory/2026-10-12.md。
+>
+> 🆕 **10/12 成本备注**：单日 $20.03（其中 Kitty $19.39），已定位＝session 4d6153e6（10/12 Daryl 私聊战略对话，trajectory 7.6MB），属正常深度对话消耗，非泄漏/异常。
+>
+> 🆕 **10/16 全量降档 flash（Daryl 拍板「直接执行」）**：`openclaw.json` agents.list 中 main + xiaofeng `deepseek-v4-pro` → `deepseek-v4-flash`，4 家 Agent 统一 flash。备份 `openclaw.json.bak_modelchange_20261016`，热加载生效，`check_workspaces.py` 0 FAIL。深度推理任务按需会话级临时升 pro（不常驻）。预期日成本下降。
+>
+> 🆕 **10/16 成本**：今日 $4.23 | 本月 $84.54 | 全量 $272.05（Balance 23:45 扫描，看板 `/api/costs` 读数一致）。略高于 $2–3 基线（主因今早 pro 时段 + HUATEX 多子代理），未触红线。
 
 ## 🟢 进行中
 
-### IELTS陪练助手 C1+C2+C3 听读训练（10/7 开发完成 ✅，待重启验收）🟢
-- C1 后端：双路径分流（字幕优先秒级/无字幕 Whisper 转写兜底）+ 分句过滤 + DeepSeek 批量翻译，端到端测试通过（TED 14.5s 105句）
-- C2：素材句子范音（原音频切片/TTS）+ 跟读打分（STT+WER）+ shadow.html 双标签 + 导入框 + 调速 + 中文揭开
-- C3：复述闭环（听→隐藏→复述→LLM 对比漏听/误听）+ 中文揭开升级为「跟读+复述都完成」
-- 新文件 `backend/import_material.py`；`materials`/`sentences` 表 + 10 方法；server 新增 7 路由
-- 全部测试通过（语法/前端JS/路由/导入/切片/状态标记/LLM对比）；**待重启服务（localhost:8767）加载新路由后 Daryl 验收**
-- 计划：`ielts_tutor/DEV_PLAN_A_C_2026-10-07.md`；调研：`RESEARCH_opensource_2026-10-07.md`
+### 🆕 Dream Engine 精简版（记忆巩固）— 10/05 交付，待 Daryl 定下一步
+- **交付**: scripts/llm_budget.py（四道闸护栏）+ scripts/consolidate.py（巩固引擎），dry-run 验证 47 文件/71092 字符，commit 202c1029
+- **遗忘边界（Daryl 10/05 拍板）**: 只产出建议不改文件 / 源记录永不删只归档 / 删除替换永远人审阅
+- **待 Daryl**: ①是否现在跑真巩固（写 STAGING，$0.03-0.06/次）②首跑范围 bootstrap 全量 vs --since 7（建议先跑 --since 7）
 
-### Token级全自动AI财务与审计项目（10/5 启动 · Daryl 战略新方向）🟢
-- **定位**：财务核算+审计取证中可标准化的部分做成 Source-to-Report 自动化主干，人只保留判断/例外/签字
-- **脉络**：8/7《OPC-AI财务与内审方法论v0.2》（Token级控制+五层幻觉防控+四大边界+三层架构）→ 9/5 战略定调（财务体系化→变现基础）→ 10/5 Balance v0.1 工程化落地
-- **变现**：A 按项目收费（已在跑）→ A+B 口径库产品化 → C 托管订阅（需持牌）；红线不做税务申报代理/审计签字
-- **⏳ 待 Daryl 拍板三件事**：① Token级读法（A成本口径/B动作粒度）② 认不认 L3 上限 ③ 变现从 A 起步
-- 主要文档：`workspace-balance/reports/`（Balance 侧）、`workspace-balance/memory/project_Balance.md`
+### ✅ 已落地：成本护栏「方案A」放宽（10/03 Daryl 批准）
+- **背景**: 10/2 Daryl 要求列出成本红线规则拟解除部分；根因＝旧 API Key 泄露（换 Key 后已验证修复）
+- **方案A（已执行）**: exec 6→12 次 · write 10→20 次 · 超限 BLOCK→WARN · 红线 $1.5→$3 预警 / $3→$6 停止
+- **落地**: AGENTS.md 共 8 份已同步（4 家实目录 + xiaofeng_workspace 4 个镜像）· sentinel.config execThreshold=12 / writeThreshold=20（enabled 仍 false）· check_workspaces.py **0 FAIL** · openclaw.json 已备份 .bak_guardrailA_20261003
+- **待 Daryl**: ① MEMORY.md 成本口径（锁定文件，仍写 $1.5/$2）是否同步改 ② Balance 专属冻结 exec ≤4/write ≤6 是否一并放宽 ③ 是否发 OPC 群公告
 
-### IELTS陪练助手 + 视频剪辑MVP — 待完结（10/5 Daryl 指令）⏳
-- Daryl 指令：完结这两个项目后再正式投入新项目
-- Bryson 已问完结方式（归档收尾 / 出完结 checklist），**等 Daryl 明确**
+### ⚠️ 待办：MEMORY.md 模型口径已过时（9/17 发现）
+- 现值：私聊 main/xiaofeng = pro · 群聊四家 = flash · balance/self = flash
+- MEMORY.md 仍写「模型: deepseek-v4-pro · 全部任务统一」→ 锁定文件，需 Daryl 批准修改
 
-> ⚠️ **9/17 工具口径问题**：xiaofeng tool profile 为 `coding`，不含 `message` 工具（group:messaging 未挂载），无法主动 DM Daryl。已报 Kitty：需补 message 工具或由 Kitty 转达。
+### 🟢 进行中：团队恢复 + 进度收口（9/17 Daryl 指令）
+- **① 通知 3 Agent 恢复开发** ✅ 已发（xiaofeng/balance/self）→ 要求各自飞书 DM Daryl 在手项目进度
+- **② 成本管线恢复** ✅ cron `521a3db3`（每日 23:45 成本全量扫描）已 enable；`cost_daily.json` 已手工刷新至 9/17；Balance 已被要求恢复每日监控
+- **③ 全部 cron 恢复** ✅（9/17 10:50 Daryl 拍板）：4 个 23:59 每日记忆归档 + self methodology Git 备份已 enable；**去重**：main/balance 各自的重复归档 job（ab1010cf / 434a8462）已 rm；今晚 23:59 起 OPC 群恢复每日完成汇报
+- **待确认**: 3 个旧项目检查 job（daily-project-check/report/weekly-project-review）+ 过期一次性 job daryl-morning-reminder 未动\xa0
+- **跟进**: 收集 3 Agent 的进度汇报，汇总给 Daryl；处理 Self 报的 cron 双通道（已随去重解决）
 
-> 2026-09-15 09:30 服务拉起（Daryl 指令）：IELTS 8767 ✅ + ngrok ielts-tutor ✅
-> - LaunchAgent 已恢复：`ai.openclaw.ielts`（v1.5.0, DEBUG_MODE=1, KeepAlive）
-> - 新增 LaunchAgent：`ai.openclaw.ngrok.ielts` → `ngrok start ielts-tutor`（8767）
-> - localhost:8767 200 ✅ / api/health 200 ✅ / 公网 https://unwhispering-imani-digitately.ngrok-free.dev 200 ✅
-> - ⚠️ 该静态域名此前指向 video-editor(8768)，现已切回 IELTS(8767)；video-editor 隧道未启动
-### M2 剪辑MVP 试点（8/6 开工 · Kitty 下发）🟢
-- **8/6**: Daryl 拍板 M2 试点 = 剪辑MVP（决策自主环），wf01-wf05 冻结为 v4.0 基线（2 必改已核验落实）
-- 30% 节点完成：交互方案定稿 + 账本记录；进行中：前端 v4.0 交互版开发（60% 节点预估 8-12h 后）
+### ✅ 已关闭：DeepSeek key 轮换 + 成本泄漏（9/15 → 9/17 定案）
+- **结论（9/17 Daryl 确认）**: 根因 = **旧 key 泄漏**；换新 key（`sk-9638…35cf`）后全天监控无成本失控 → **Agent 团队开发回归正轨**
+- **证据**: 余额曲线平缓 ¥30.78(9/15) → ¥27.57(9/16) → ¥23.01(9/17)，无凌晨跳变；旧 key 复测 401；新 key 200
+- **已完成**: 本机 7 文件 12 处 key 切换（备份 `.bak_20260915-084341`）+ Gateway 热重启 + 旧 key 控制台删除
+- **不做（Daryl 明确决定，不再提议）**: Sentinel 启用 / 余额告警
+- **存档**: memory/incident_2026-09-15_overnight_api_spend.md（已定案关闭）、memory/2026-09-17.md
+- **次要遗留**: `cost_daily.json` 管线停更（8/22 起）→ 成本看板不可见，待 Daryl 决定是否修复
 
+### 🆕 OPC 变现战略 v1.1 — 先卖后建，接单制（8/12 Daryl 三连纠偏后）
+- **约束**: 月入 $200（第一阶段）| API 预算 ≤ $85/月
+- **框架**: 资产 = 4 Agent 劳动力 + 基建交付管线 + 工程纪律 + 失败认知；代码库≠产品≠收入；卖结果不卖软件
+- **交付物**: docs/opc_longterm_plan_20260812.md (v1.1) + docs/opc_service_catalog_v1.md（五条服务线价目表）
+- **可用性实测结论（8/12）**: 雅思🟡 / 剪辑引擎🟡(v4.0前端0代码) / 视频分析❌死 / 费用报销🟡(代码完部署死)；完成度%从汇报中废除
+- **待 Daryl**: ①选定第一个获客渠道（华特网络/搞钱群/内容账号）→ 对应 Agent 出价目表+样例 → 接单制运行
+- **后续**: 接单后对应 Agent 生产，Daryl 验收（链接+5分钟亲手操作）
 
-### 视频自动化剪辑 MVP（video-editor-mvp）🟢 v3.0 重构完成（7/25）
-- **v3.0 重构**: 🟡 M0-M5 全模块完成，Daryl 已开始交互（7/28）
-  - ✅ BGM 结构: Hooktheory 方案（Birds of a Feather · 8乐句 + 12个8bar单元）
-  - ✅ 数据层: SQLite song_lib + phrase_lib + 8bar_units
-  - ✅ API: 模块化（api/bgm scan asr emotion match）+ server.py v3.0
-  - ✅ 前端: 5节点 pipeline 全可视化 · OPC Design System
-  - ✅ 输出: ffmpeg 渲染 → Toshiba HDD → Syncthing → Tab S8 验收
-  - ✅ 服务: localhost:8768 / frontend/index.html ~400行
-  - ✅ **7/28 修复**: 前端 API 路径从 localhost:8768 改为相对路径，隧道可正常访问
-  - 🔗 旧隧道: `coral-katie-senator-urw` (可能已掉线)
-  - 🚇 **最新隧道 (8/3)**: `https://freebsd-present-rome-modes.trycloudflare.com/frontend/index.html`（旧地址 synthesis-ent-hawaii-booth 已过期）
-  - ✅ **BGM节点v2 完成** (7/30): 歌曲卡片/音频播放器/乐句播放+和弦弹窗/ffmpeg乐句连接
-  - ⏳ 待验证: Gemini 场景检测 + Emotion 三层漏斗 + ffmpeg 渲染（需素材+API Key）
-  - ⏳ Daryl 7/30指令：先不动，等他把剩余模块需求全部写出再一次性迭代
-  - ✅ **8/9**: ngrok 隧道已切回 8768（launchd plist 修复，KeepAlive 常驻），公网 https://unwhispering-imani-digitately.ngrok-free.dev 可达
-  - ⏳ 剩余3模块（ASR/情感/匹配）交互需求 Daryl 即将澄清（8/5 线框 wf02/wf03/wf04 为基线）
-  - 🆕 **7/31**: Daryl 飞书发送 01-素材扫描 模块改造需求（4项），小风已回复可行性评估（~3.5h，全部可行），等待Daryl确认2个前置问题
-  - 🆕 **8/4**: Daryl 度假回来要求恢复开发；服务已持久化（LaunchAgent: videoeditor/ielts/ngrok，Gateway重启不掉）；隧道 `https://unwhispering-imani-digitately.ngrok-free.dev` ✅
-  - ⚠️ **8/4 阻塞**: TOSHIBA EXT 1TB 硬盘文件系统层卡死（ls 卡 EINTR），需 Daryl 物理重插；watchdog LaunchAgent 每10分钟探测，恢复后自动挂载+前端可用
+### 决策自主环（Decision Loop / Loop Engineering）— 进行中
+- **项目ID**: decision-loop | 发起: Daryl 8/5 | 负责人/开发权: Kitty (Daryl指定, Bryson移交) | 模型: deepseek-v4-pro
+- **定位**: 决策自主层（建在自进化基建L1之上），减少长线项目对管理决策的依赖
+- **设计基准**: 「只加机制，不加细节限制」（Daryl 8/5 原则，最高准绳）
+- **问题实证**: Bryson 剪辑MVP 三次对齐复盘（含 Daryl 两处纠正）→ 机制缺口五条
+- **核心机制四件套**: 决策状态机(decide.py三分类) + 上报必带默认值 + 周度批量审批 + 需求分层前置节点 + 提问质量门禁
+- **里程碑 M0→M3 (40-80h)**: M0机制冻结(10-14h) → M1决策自主层工具(12-20h) → M2剪辑MVP试点(16-30h) → M3推广+指标化(8-12h)
+- **状态**: 🚀 M0+M1 完成（8/5），M2 剪辑MVP 试点已启动（8/6 Daryl 拍板）
+- **M2 进展 (8/6)**: 试点框架 docs/m2_jianji_pilot.md + 账本种子 dec_20260806_001 已落；线框 wf01-wf05 冻结（2必改已核验）；Bryson 已完成 30%（交互方案定稿）→ 开发 v4.0 前端中（60% 节点预计 8-12h 后）
+- **待办**: ①M2 试点跟踪（Bryson 60%/90%/100% 汇报节点）②M2 完成后试点报告（决策次数对比/预算/例外）③Bryson 工具链清单（~6h，试点中可搭）
+- **文档**: LOOP_ENGINEERING_PLAN.md（详见该文件）
 
+### 🆕 OPC自进化基建L1 — M0+M1+M2 已交付 (8/4) + Balance试点Phase0影子模式 (8/5)
+- **⏸️ 汇报节奏调整 (8/7 Daryl指令)**: Phase0 评估报告不用专门汇报，这几天监控着即可；**周日(8/9) Daryl 一次性做「是否全面应用」决策** → 周日汇总时需备好 Phase0 评估结果 + 决策自主环 M2 进度
+- **M0 信号捕获** ✅: capture_correction.sh(4类信号) + distill_patterns.py(周度LLM蒸馏) + launchd周日22:00
+- **M1 失败模式库** ✅: failure_patterns.json(trigger+embedding) + rules_table.json(4规则) + embed_patterns.py(1536维) + retrieve_patterns.py(三层检索)
+- **种子数据**: 4条模式(设计语言/git/搜索/数据来源)，来自Daryl历史纠错
+- **回归测试**: 11/11通过 · **commit**: 7bf03311/dfccca86/6175b1ed
+- **⚠️ 试点范围**: Self(8/4指令) + Balance Phase0影子模式(8/5批准)；main/balance已回退注入
+- **⚠️ 成本红线**: 注入≤500tokens/任务，检索<1s，单任务API$0 → bench_evolution.py周度基准(实测37ms/50tokens/$0)
+- **M2 任务级注入** ✅: classify_task.py(三层信号+状态机) + inject_lessons.py(全量/轻量注入) + task_state.json，11/11回归通过
+- **🆕 Balance Phase0影子模式 (8/5部署, 测试窗口8/5→8/7)**: shadow_inject.py(只记录不注入+独立shadow状态机+fail-open) + shadow_report.py(周五评估) + 种子库7条(4条Balance域蒸馏/补录+3条共享通用) + rules_table含财务路径口径rule-005 + classify_task补充财务域关键词(做/入账/申报/台账等) + AGENTS.md条款；**评估通过才开Phase1低风险任务**
 
-## ⏸️ 挂起
-### 洗稿MVP — v1.2.0 已交付 · 需求收集模式（7/18 起，20+ 天无输入）
-- **状态**: ⏸️ standby · 等待 Daryl 发送新需求（v1.2.0 内核卡 M1-M3 已完整交付）
-- **恢复条件**: Daryl 提供具体需求后一次性动工
+### Websearch 全面升级 v2.0 — M0+M1+M2+M3 全部完成 ✅ (7/29)
+- **M0 基建侧**: 4Agent AGENTS.md 新增搜索强制条款 ✅
+- **M1 引擎精简**: SearXNG 5→3引擎(google+ddg+bing)，Brave独立API路由 ✅
+- **M2 方法论**: search_methodology.md v2.0（6场景模板+路由表+后处理）✅
+- **M3 部署**: 基准测试66.8(原67.0持平)，crontab周度抽检运行中 ✅
+- **commit**: 4fae35cb
 
-### IELTS陪练助手 — v1.3.0 开发完毕，⏸️ 等待Daryl晚间验收（7/25更新 · 8/4服务持久化）
-- **7/25晚**: Daryl 调试中发现两个Bug，已修复：
-  - DeepSeek API 模型名废弃 deepseek-chat → deepseek-v4-pro（旧名导致LLM乱码）
-  - 跟读模块 JS null safe 兜底（deviceInfo DOM不存在时报错）
-- Daryl 刷新后继续测试中
-- **v1.3.0 变更**: free_talk深度对话优化 + 词汇学习模块 + 训练库Dashboard重构
-  - free_talk: VAD思考窗口 / STT碎片过滤 / 提示词重写 / LLM max_tokens 500→700
-  - 词汇: 对话气泡长按选词→同义表达卡片→收录 / B2+词表预高亮 / 复习页
-  - Dashboard: 14天趋势+6周日历双栏 / To Improve Sentence+Vocab分拆 / 模式总结
-  - 自动评估: ≥10轮对话断开时自动触发LLM评估→入trend+review队列
-- **⚠️ 数据**: 昨晚session 987e4762丢失（重启后启动错误版本导致），已修复版本指向
-- **待验收**: Daryl晚上到家练习口语时一并验收
-- **8/4**: 服务已由 LaunchAgent 持久化（localhost:8767，v1.3.0 ACTIVE，health + dashboard 均 200 ✅）
-- **v1.0.1**: 手机移动端自适应优化，Daryl 全部验收通过 ✅
-- **v1.1.0 挂起原因**: iPhone 语音输入问题 + 交互逻辑拖沓，Daryl 要求暂停转其他任务
-  - M1-M3 已完成 ✅（数据层/Dashboard/跟读闭环），M4 串联验收搁置
-  - Debug 模式已确认正常（7/17 ~21:17-21:43）
-  - iOS 回退完成，平板测试正面反馈（7/17 ~21:43 Daryl 👍）
-  - 恢复条件：Daryl 进入 Debug 迭代模式逐一核对
-- **管线1-IELST Part1**: ✅ v1.0.1 验收通过（e2e 3-4.5s）
-- **管线2-Qwen Omni**: ❄️ 冻结
-- **注意**: ngrok 已切给洗稿MVP（8777），IELTS 本地 8767 继续可用
+### 🆕 第二期确定性基建 · OPC运营中枢 (7/25)
+- **M1 开发**: 4模块(阻塞扫描/成本预警/新鲜度/搜索质量) ✅
+- **M2 集成**: 主脚本集成+测试 ✅
+- **M3 部署**: crontab 每日08:00 ✅
+- **交付**: `scripts/ops_center/` 6文件 | **状态**: ✅ 已上线
+- **commit**: 2dba501c
+
+### SearXNG搜索质量迭代 — M1+M2+P0+P1 已交付 (7/17)
+- **M1 SearXNG修复**: Brave API上线 + 6引擎精简 ✅
+- **M2 子代理中断协议**: 4Agent config+AGENTS.md 更新 ✅
+- **P0 自动重启**: keepalive.sh + launchd 守护 ✅
+- **P1 搜索方法论**: methodology.md + 4Agent同步 ✅
+- **验收状态**: 7/18 Daryl 验收通过，基线报告已提交
+- **归档**: 任务闭环
+
+### 基建长线任务 — M1+M2+M3 全部完成 ✅ (7/18)
+- **M1 成本根因**: Dashboard ↔ Balance 数据口径统一，Balance台账接入Dashboard API ✅
+- **M2 搜索基准**: 39条基准query + Python自动评分器 + 基线均分67.0 + weekly_check脚本 ✅
+- **M3 trace协议**: verify_trace.sh + README.md + Balance/Xiaofeng/Self 三个Agent AGENTS.md 接入trace条款 ✅
+- **交付**: memory/subagent_runs/infra_longline_20260718/ 完整trace链路
+- **遗留**: crontab周度抽检安装待手动操作（macOS非交互式权限阻塞）
+- **cost_daily.json路径修正**: ✅ 7/19 Balance已修复
+
+### Agent自进化基建 — ⚪ 暂停 (7/21 Daryl指令)
+- **全部暂停**: 项目整体暂停，不再推进任何自进化相关开发
+- **GEPA禁令**: GEPA类项目（提示自动进化/模型自我优化）严禁再开发
+- **保留物**: SAGE Checker + Reflexion 反思机制仍可用（非自进化，仅校验用途）
+- **调研文档**: memory/research_agent_self_evolution.md（归档参考）
+
+### OPC Dashboard v1.5 → v1.6 — 运行中
+- **地址**: http://localhost:8765
+- **当前版本**: v1.6 · M3 项目总线集成完成 ✅ (commit: 690decf)
+- **M3 完成**: 项目总线面板 + 成本项目拆分 + 产物项目分组
+- **管理**: `cd /Users/zhaoyuzhao/WorkBuddy/Claw/opc-dashboard && bash manage.sh {start|stop|restart|status|logs}`
+
+### 🆕 Dashboard M4 · Agent版本变更通知 — 🟡 进行中 (8/4)
+- OPC看板Agent卡片增加「约定版本」字段，机制变更时自动通知对应Agent
+- Daryl 已推入 In Progress，制定开发计划中
 
 ## ✅ 已完成
-### 8/6 工作区指针事故（✅ 已闭环 8/7）
-- 根因: 8/4 openclaw.json 重写删 workspace 字段 → 会话回退空壳工作区失忆
-- 修复: Kitty 写死 4 agent workspace + 空壳合并 + gateway 重启；8/7 验证新会话正确读取真工作区 ✅
-- 教训: 启动必核对记忆完整性；单 Agent 单工作区；openclaw.json 变更后验证指针（已入 lessons.md）
+### Maker-Checker 审查协议 — Self试点 ✅ (7/21 上线)
+- **范围**: 仅 Self(恨点小己)，其他Agent不动
+- **交付**: `scripts/evolution/reviewer.md` (对抗性审查员prompt) + AGENTS.md/EVEVOLUTION.md 更新
+- **流程**: Self起草 → spawn审查子Agent(Gemini Flash) → 三维打分 → PASS通过/FAIL修改重审(最多2轮)
 
-### M2 开发计划（Daryl 7/5 指令 → 7/16 Daryl 看板验收认定完成 ✅）
-- **P0 延时优化** ✅(7/15): ASR 4-8s→0.3-1.5s，e2e ~10s→3-4.5s，达标
-- **P1 管线2 Qwen Omni**: 按决策冻结（重启触发条件存档 DEV_PLAN 附录A），随 M2 关闭
-- **P2 评估面板 UI** ✅: 7/15 布局调整 + 7/16 v1.0.1 移动端自适应
-- **P2 Part 2/3**: 基础模式已上线，深度模式归入后续里程碑（看板 M3）
-- **7/14晚测试三问题** ✅ 全部修复并验收: TTS引擎翻转Piper主、长句软60s/硬90s断句、评估HTTP兜底+轮询
-- **TTS 吞音/粘连** ✅: 方案B（句尾300ms静音填充），随 v1.0.0 验收
+### 生活提醒 crontab 安装 (7/15)
+- crontab 已安装并验证通过 ✅，4 个生活提醒 (07:20/20:00/23:00/23:30) + 审计 + 看门狗 + 项目通知均已就位
 
-### IELTS陪练助手v2.0 M1 交付清单
-| 模块 | 状态 | 完成度 |
-|------|------|--------|
-| 管线1 链式流式核心 | ✅ | 100% |
-| 配置管理 + API Key | ✅ | 100% |
-| SQLite 会话持久化 | ✅ | 100% |
-| HTML 评估报告 | ✅ | 100% |
-| Debug 验收模块 | ✅ | 90% |
-| VAD + 音频采集修复 | ✅ | 100% |
-| 成本追踪 Dashboard | ✅ | 100% |
-| OPC 看板接入 | ✅ | 100% |
-| 管线2 Qwen Omni 对接 | ❌ 冻结 | 30% |
+### 记忆系统v3 cron 安装 (7/15)
+- crontab 安装完成 ✅，7/15 起 07:00/13:00/19:00 正常触发
+
+### 记忆系统v3 — project文件开发 (7/6)
+- 模板+API+Cron 全部完成 ✅
+
+### OPC看板持久化修复 (7/6)
+- Agent 状态面板：30s→30min 刷新 + 磁盘持久化 ✅
+- 成本仪表盘：启动加载快照 + 过期自动刷新 ✅
 
 ## 🔵 待办
-### 🧭 资源禀赋市场调研（10/13 Daryl 指令 · ✅ 已交付）
-- Daryl 让 Bryson 基于个人资源禀赋做市场调研，看 OPC 能做什么创业项目，题眼＝「工程 Agent 的调研思路」
-- 已交付：方法论（禀赋向量化→约束剪枝→外部信号证伪→打分→最小实验）+ 3 组 web_search 证伪 + 收敛候选（越南一级市场 AI 尽调服务商 / 中企出海越南财税合规高客单 / 组合外溢）
-- 下一步（待 Daryl 拍板）：跑「deal flow 扫描」验证实验（从 A&C 客户 + 越南公开数据扫 3 家高增长缺钱企业）
-- 详情见 2026-10-13.md
+### ~~Agent版本变更通知（并入 Dashboard M4）~~ → 🟡 进行中 (8/4 Daryl 推入)
 
-### 🧭 个人竞争力战略辅助定位（10/12 Daryl 问询 · 待 Daryl 反馈）
-- Kitty 在做 Daryl 个人「竞争力盘点 + 能力缺口」调研，Daryl 问 Bryson 在定战略里能辅助做啥
-- Bryson 已回复四个位置：①地面事实证据供给 ②反方压力测试(grill-me) ③英语/投资人沟通 ④调研收敛成能力地图
-- 定位：Kitty 定方向做主线调研；Bryson 做证据+反方拷问+英语表达+落地收敛
-- 待 Daryl 反馈：Kitty 调研卡点 或 已有初步清单，然后对着它干活
+### Daryl 8/5 决策：A7/8/9搁置 + B组取消 + C15已做
+- 8月预算调整 / 12G存储清理 / Model Router 提案 → ⚪ 搁置不处理
+- 音乐文件/车辆费用/JGL → ❌ 全部取消
+- C15 搜索基准 → ✅ 已做（8/5：SearXNG路39.9引擎坍塌 + Brave路65.9持平，报告已归档）
+- 🔴 待Daryl确认: Brave接回主搜索路由
 
-### 💬 调研方法论资产化（10/10 Daryl DM 提议，待 Daryl 响应）
-- Daryl 问能否让 agent 学会调研能力；小风结论：不建第 5 个 agent，把「术/器」沉淀成共享调研 Playbook/Skill，判断力（道）留在 Daryl
-- 下一步待 Daryl 口述调研框架 → 小风沉淀 Playbook（未开工，等 Daryl）
+### Self · Daryl 决策阻塞项 (7/24)
+- OPC看板方法论卡片集成方向确认
+- 2张卡片审核（胭脂扣/VAS-FDI）
+- 心理学域子分类确认
+- 树叶收集剩余5片落盘确认
+- ACCA Vault深度验收
 
-### IELTS陪练助手 — v1.4.1 题库改造 + v1.5.0 用户系统P1（🟢 开发完成，待 Daryl 验收）
-- 服务 LaunchAgent 持久化：localhost:8767 ACTIVE（v1.5.0）
-- OPC 看板 workflow：`wf_ielts_tutor_v130`「雅思陪练助手 v1.3.0 · 双管线实时陪练」11 节点已同步（8/5 建，随版本迭代需更新）
-- **8/15**: ① 成本模型费率更新 ② Free Talk 持久记忆 v1.4.0 ③ 题库改造 A+B v1.4.1（120题+变体）④ 用户系统 P1 v1.5.0（登录页 /login，AUTH_REQUIRED=0 guest 模式，详见 2026-08-15.md）
-- ⏸️ 待 Daryl 验收：v1.3.0 IELTS 1/2/3（对定式题型麻木，优先级让位）+ 今晚四个成果；Daryl 商业化方向：每月免费额度+按量收费
-- 下一步：P2 数据隔离（全表挂 user_id + 强制登录开关）
+### Balance · Daryl 审阅待办 (7/24)
+- 应付采购入账SOP v2.0 审阅
 
+### Xiaofeng · 等待 Daryl 提供文件 (7/24)
+- 404Hz/Sova1 "I NEED YOU" 音乐文件（QQ音乐下载）
 
-### ~/opc-workspace 本地仓库卡死 rebase（7/16发现）
-- 卡在 6/24 interactive rebase 中间态，每日 auto-backup 在 detached HEAD 上提交
-- 推送暂用临时 sparse clone 绕过；待与 Daryl/Kitty 确认修复方式
+## ⚪ 搁置
+### Sentinel 合规哨兵 v1.0 — 暂停
+- **原因**: Daryl与Bryson讨论后认为当前方案风险较大，先搁置
+- **状态**: 插件配置保留但未激活
 
-### 硬件语音助手(MCU)开发
-- 规划阶段
+## 🔧 10/25 系统状态
+- **归档审计**：00:11 audit.sh 全量跑完，自动修复 3 项（今日日记/归档/Git commit+push），浅层 1 项已人工闭环（active.md 刷新）
+- **备份链路**：远端 `umain/memory/2026-10-25.md` 已确认
+- **成本**：今日 $0.14（跨日瞬时读数）| 本月 $95.20 | 全量 $282.71
+- **距 last day（10/30）剩 5 天**：重心＝经验资产化交付（Balance/Self 资产包+15问）+ OPC 园区准备（BP v0.2 已推看板）+ 10/24 FDE 方向故事打磨
 
+## 🔧 10/22 系统状态
+- **归档审计**：00:07 audit.sh 全量跑完，自动修复 4 项（今日日记/归档/Git commit+push），浅层 2 项已人工闭环（active.md 刷新 + 日记骨架补实）
+- **备份链路**：远端 `umain/memory/2026-10-22.md` 已确认，10/18 加固后观察期满 3 天无复发 → 闭环
+- **成本**：今日 $1.03（跨日瞬时读数）| 本月 $93.52 | 全量 $281.03
+- **距 last day（10/30）剩 8 天**：重心仍是经验资产化交付 + OPC 园区准备
 
-## 📦 历史归档项目（看板忽略此段）
-- 抖音视频分析MVP（B站/douyin 下载器+分析，2026年4月）→ 已归档
-- 语音转录测试(STT) → 已归档
-- 投资者路演短语库 → 已归档
-- ngrok 备用隧道 / Agent自进化 → 7/16 Daryl 看板验收确认非现存任务，已从待办移除
+## 🔧 10/19 系统状态
+- **归档审计通过**：00:10 audit.sh 全量跑完，0 浅层 0 深层；10-18 日记骨架误报已补写真实事实章节修正
+- **备份链路正常**：远端 `umain/memory/2026-10-19.md` 存在，10/18 加固的远端内容校验持续生效；建议观察至 10/21 确认无复发
+- **成本**：今日 $0.01 | 本月 $86.22 | 全量 $273.73
+
+## 🔧 10/18 系统状态
+- **备份断链已修复**：共享备份仓 `~/.opc-workspace-cache` 曾因 stash 冲突卡死 → Main 记忆 2026-07-03~10-18 未进远端；已解决冲突并补推（commit 97659b9，origin 含 10-15~10-18 日记）
+- **audit.sh 加固**：冲突检测 + commit 返回码检查 + 远端内容校验三重兜底，杜绝「push 空推报成功」
