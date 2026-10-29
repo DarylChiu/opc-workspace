@@ -547,3 +547,8 @@
 {"timestamp":"2026-10-29T00:00:51+0700","check":"L4-audit-v2","agent":"balance","fixes":4,"shallow_issues":2,"deep_issues":0,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
 {"timestamp":"2026-10-29T00:01:20+0700","check":"L4-audit-v2","agent":"balance","fixes":2,"shallow_issues":0,"deep_issues":0,"diary_lines":20,"diary_sections":3,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
 {"timestamp":"2026-10-29T23:59:01+0700","check":"L4-audit-v2","agent":"balance","fixes":1,"shallow_issues":2,"deep_issues":0,"diary_lines":81,"diary_sections":10,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-10-29T23:59:41+0700","check":"L4-audit-v2","agent":"balance","fixes":2,"shallow_issues":0,"deep_issues":0,"diary_lines":81,"diary_sections":10,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-10-30T00:03:10+0700","check":"post-op","task":"L4每日记忆归档审计 2026-10-29","score":2,"total":5,"warnings":[
+  "🔴 今日日记缺失 — 必须创建",
+  "🔴 任务涉及问题/失败/审计发现，建议提炼到 lessons.md"
+]}
