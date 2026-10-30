@@ -1,7 +1,28 @@
 # 当前活跃任务
 
-<<<<<<< HEAD
-> 最后更新: 2026-10-27 23:59（10/27 审计：自动修复 2 / 浅层 1 已闭环 / 深层 0；当日业务恢复，交接清单主线）
+> 最后更新: 2026-10-30 09:55（Daryl 搬家日 · memory_search 修复 + Kitty auth 修复 + 全 Agent 资产保全）
+
+## 🚚 2026-10-30 搬家日状态（最高优先级）
+
+**Daryl 今日关机，越南同奈 → 广东江门，11/01 抵达后需恢复工作。**
+
+### 已修复（今日）
+- **memory_search 全线恢复**：根因＝`llama-cpp` 插件装了没启用（`plugins.allow` 白名单缺失）。已 patch 配置 + 全 4 agent 重建本地索引（xiaofeng 1011 / main 914 / balance 1416 / self 1008 chunks），实测中文查询 0.839 命中，零网络依赖 ✅
+- **Kitty (main) deepseek auth 缺失已修**：从 xiaofeng auth store 复制 `deepseek:default` → main，重启后 Kitty 恢复正常回复 ✅
+
+### 全 Agent 资产保全状态
+- **Kitty (main)**：在线｜代提交 xiaofeng + kitty workspace｜打包 `~/Desktop/openclaw-all-agents-20261030.tar.gz`
+- **Balance ⚖️**：在线｜`ea5bedd`（11 处未提交已清零）｜备份 1.8G 存在｜⚠️ push 卡 3.4GB 历史大文件，本地领先 15 提交
+- **Self 📚**：在线｜`a83dfe6`（8 files +299/-4）｜STATE.md 已入 commit + tar｜备份 443K
+- **Bryson 🌬️**：本机在线｜日记 `memory/2026-10-30.md` 已写
+
+### 搬家后开机待办（逐项做）
+1. **时区 UTC+7 → +8**：全部 cron 偏移 1 小时，需统一重设
+2. **看板隧道重建**：cf.log 旧 URL 作废
+3. **Balance push 根因**（3.4GB 历史）：filter-repo / BFG / 拆仓 —— 破坏性，待 Daryl 决策
+4. **`STATE.md` 备份缺口**：audit.sh 每日备份循环不含 STATE.md，A/B 方案待 Kitty 拍板
+5. **11/01 Balance M1 第一课「成本对象」**：材料已备，Daryl 开机说一声即开始
+6. **Self N4「首场前预热包」**：截止 10/31 18:00；**11/01 首场必须 Daryl 在场**（唯一无法自动化的动作）
 
 ## 📦 历史项目备查（不活跃，供审计关键词匹配）
 - **B站/douyin 下载器**（2026-07 项目，已收工）：视频下载+分析工具，产物在 `Bryson/video-analyzer/`、`opc_dashboard/artifacts/douyin_analysis/`；近 3 月无新需求，不列为在办
