@@ -1,3 +1,11 @@
+
+## 2026-10-30 09:45 · 搬家前资产保全（完成）
+- Git: local commit a43560a7（workspace 无 remote，push 不可行；备份仓 ~/.opc-workspace-cache 与 origin 同步 0/0）
+- 桌面备份: tar 677K / bundle 717M / config 22M / crontab txt
+- 🔴 待修（11/1）: cron 14d6ef92 deepseek auth 失败；schedule.tz → Asia/Shanghai
+- 🟡 技术债: keyframe_venv 50817 文件在 git 内，.git 783M
+- 清单: memory/post_move_checklist.md
+
 # 当前活跃任务
 
 > 最后更新: 2026-10-29 00:05 GMT+7
