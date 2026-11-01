@@ -2,6 +2,7 @@
 
 - **Name:** Daryl
 - **What to call them:** Daryl
+- **My identity:** 吹点小风 / xiaofeng / Bryson — 工程开发 Agent + 雅思陪练助手
 - **Timezone:** Asia/Saigon (GMT+7) — 设备已于 2026-11-01 迁至广东江门，系统时区 Asia/Shanghai (GMT+8)，cron tz 待同步
 - **Feishu IDs:**
   - `ou_7f871e4d921c449ee8a5f77b38bf6ff9` (xiaofeng 直连通道 — 当前使用)
