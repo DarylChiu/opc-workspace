@@ -2,6 +2,30 @@
 
 > 最后更新: 2026-10-27 23:59（10/27 审计：自动修复 2 / 浅层 1 已闭环 / 深层 0；当日业务恢复，交接清单主线）
 
+> 最后更新: 2026-10-30 09:55（Daryl 搬家日 · memory_search 修复 + Kitty auth 修复 + 全 Agent 资产保全）
+
+## 🚚 2026-10-30 搬家日状态（最高优先级）
+
+**Daryl 今日关机，越南同奈 → 广东江门，11/01 抵达后需恢复工作。**
+
+### 已修复（今日）
+- **memory_search 全线恢复**：根因＝`llama-cpp` 插件装了没启用（`plugins.allow` 白名单缺失）。已 patch 配置 + 全 4 agent 重建本地索引（xiaofeng 1011 / main 914 / balance 1416 / self 1008 chunks），实测中文查询 0.839 命中，零网络依赖 ✅
+- **Kitty (main) deepseek auth 缺失已修**：从 xiaofeng auth store 复制 `deepseek:default` → main，重启后 Kitty 恢复正常回复 ✅
+
+### 全 Agent 资产保全状态
+- **Kitty (main)**：在线｜代提交 xiaofeng + kitty workspace｜打包 `~/Desktop/openclaw-all-agents-20261030.tar.gz`
+- **Balance ⚖️**：在线｜`ea5bedd`（11 处未提交已清零）｜备份 1.8G 存在｜⚠️ push 卡 3.4GB 历史大文件，本地领先 15 提交
+- **Self 📚**：在线｜`a83dfe6`（8 files +299/-4）｜STATE.md 已入 commit + tar｜备份 443K
+- **Bryson 🌬️**：本机在线｜日记 `memory/2026-10-30.md` 已写
+
+### 搬家后开机待办（逐项做）
+1. **时区 UTC+7 → +8**：全部 cron 偏移 1 小时，需统一重设
+2. **看板隧道重建**：cf.log 旧 URL 作废
+3. **Balance push 根因**（3.4GB 历史）：filter-repo / BFG / 拆仓 —— 破坏性，待 Daryl 决策
+4. **`STATE.md` 备份缺口**：audit.sh 每日备份循环不含 STATE.md，A/B 方案待 Kitty 拍板
+5. **11/01 Balance M1 第一课「成本对象」**：材料已备，Daryl 开机说一声即开始
+6. **Self N4「首场前预热包」**：截止 10/31 18:00；**11/01 首场必须 Daryl 在场**（唯一无法自动化的动作）
+
 ## 📦 历史项目备查（不活跃，供审计关键词匹配）
 - **B站/douyin 下载器**（2026-07 项目，已收工）：视频下载+分析工具，产物在 `Bryson/video-analyzer/`、`opc_dashboard/artifacts/douyin_analysis/`；近 3 月无新需求，不列为在办
 
@@ -63,6 +87,7 @@
 - **audit.sh 根因修复**：①无条件 `stash pop` 会误弹历史 stash → 改为比对 `git stash list` 条数，只在真新建时 pop；②pop 冲突无人处理 → 冲突即回落取 HEAD 版并保留 stash
 - ⚠️ **OPC 成本仪表盘 API（localhost:8765）不可达** → 状态降级 `fresh_api_down`，成本数字为缓存值（今日 $0.01 / 本月 $86.22）。按成本护栏，账单/服务排查归 Kitty(main)，小风只上报不自查
 
+## 🧭 历史战略主线（10/24 私聊 · 冲突残留块修复保留）
 > 最后更新: 2026-10-25 00:15 GMT+7
 >
 > 🆕 **10/24 私聊战略主线（last day 10/30 前最重的一段，详见 memory/2026-10-24.md 10:12–11:02）**：
@@ -75,6 +100,7 @@
 > 🆕 **10/19 Daryl 确认 last day = 2026-10-30**，剩余两周双线：①经验资产化（Balance/Self 各交资产包+15问，Daryl 正直接与她们逐条澄清）②OPC 园区准备（BP 已出 v0.2 并推看板）
 > 🆕 **10/19 战略发现（重要，待推进）**：Daryl 判 Agent 跟不上长线项目、不能都做成助理。结论=缺 **harness**（规划+记忆+纠偏），非缺 skill。工程型（目标已知→分解+验证）vs 探索型（目标未知→假设+验证+修订）需分道。交付瓶颈=「完成的定义」只在 Daryl 脑子→ **spec 前置 + 自检 + 独立 verifier** 为解（Token 净省一半，迭代压到 2-3 版）。FOC spec 试点已出草案，待 Daryl 裁定 8 条 + 待写进 AGENTS.md 推广。详见 memory/2026-10-19.md
 > 🆕 **10/19 已知未修**：agent→Daryl 主动 DM 投递链路不通（sessions_send 语义=回传发起方；`openclaw agent --deliver` 因 pairing/路由未打通）→ 目前靠「Daryl 起头」或「Kitty 转贴」。待专项修。
+
 
 > 📌 9/22-10/5 说明：9/17 全部 cron 恢复后，每日 23:59 记忆归档 + 成本扫描持续正常运行；9/22 起无项目级状态变更，下方各项目状态维持不变。9/26 Balance 交付「开票依据三件套模版」（华特中秋客户礼品），已 DM Daryl；同日上报 gemini-3-flash-preview API key not valid 环境异常（待 Kitty/Daryl 处理，未自查）。10/1 Balance 交付「月饼签收扫描件 OCR 识别」（匹配 1,264/1,631 人，94.8% 有签收墨迹，反直觉结论「发放量接近满额」），待 Daryl 定路；同日 Self 方法论卡拆卡提案二轮审查 FAIL（P0 需重做 §1 事实核查）。10/3 成本护栏「方案A」落地（exec 6→12/write 10→20/红线 $3预警$6停）；10/5 交付 Dream Engine 精简版（llm_budget.py + consolidate.py，待 Daryl 定是否跑真巩固）。10/6→10/9 归档日连续运行（无项目变更）。
 >

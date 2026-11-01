@@ -34,6 +34,8 @@ cron update jobId=14d6ef92-a3af-4b6f-bb78-6b3cb2d33437 patch.schedule.tz=Asia/Sh
 - 本 session 正常跑在 deepseek-v4-flash 上 → **auth 链已恢复正常**，无需修
 - 若 11/1 后 cron 再报同样错，才需 `openclaw agents add main` 重配
 - 验证方式：`cron run jobId=14d6ef92-... runMode=force`
+- ⚠️ 10/30 09:47 手动 force 跑一次：**auth 已正常**（不再报 No API key），但子代理在 276s 后因 `Process: grand-rook failed` 中断（exec 工具层失败，非业务失败）。同时手动跑 `bash scripts/compliance/audit.sh --report` → **exit 0，修复 2 / 浅层 0 / 深层 0，全绿**，且远端已确认 `umain/memory/2026-10-30.md` 在位
+- 结论：**归档功能本身健康，cron 失败是子代理 exec 超时/工具层问题**。11/1 后若复现，调 job 的 `payload.timeoutSeconds` 或把 audit 拆成单独脚本任务
 
 ## P1 · 应做（体验退化）
 
