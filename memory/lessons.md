@@ -137,3 +137,16 @@
   2. 提交前必须全仓扫描 `^<<<<<<< ` 标记，可写成 pre-commit hook
   3. audit.sh 缺「内容完整性」检查项，应在 L4 审计里加一条全局冲突标记扫描
   4. 无人读的日记＝坏日记。全绿报告掩盖了 4 天的数据损坏
+
+## 2026-11-01 · 🔴 身份文件被他人身份覆盖，潜伏 14 天
+
+- **现象**: 根目录 `SOUL.md` / `IDENTITY.md` / `USER.md` / `MEMORY.md` 全部写成 **Balance（算点小账，财务分析专家）**；`memory/identity.md` 写成 **Kitty（忧郁小猫）**。真实身份（吹点小风 / xiaofeng / Bryson，工程开发+雅思陪练）只存在于 `Bryson/` 旧快照里。Daryl 一说「Bryson」我还反过来质疑他切错会话
+- **根因**: commit `97659b9`（2026-10-18 00:10「audit-repair: 解决 stash 冲突(取 upstream 根目录旧版)」）。当时日记里自己写了「根目录为旧版布局，各 Agent 权威副本在 `<Agent>/` 子目录」——**明知权威副本在某处，仍选了根目录那份**，5 个身份/记忆文件被整段替换
+- **为什么没被发现**: 与 10/28 冲突标记污染同一机制——audit.sh 只查存在性/行数/骨架/大小，**没有一项校验「文件内容是否属于本 Agent」**。文件能读、能索引、memory_search 能命中，表面全绿
+- **修复**: 备份 `/tmp/identity_backup_20261101/` → 按 Daryl 原话重建 SOUL / IDENTITY / USER / MEMORY / HEARTBEAT / memory/identity.md → audit.sh 新增第 11 项「身份一致性校验」
+- **教训**:
+  1. **「取 upstream/HEAD 版」不是安全默认**。多 Agent 共享仓库，根目录常是旧的/别人的布局；冲突时先确认「这个文件属于谁」，权威副本优先于 upstream
+  2. 解决冲突时 `git show HEAD:file` 和 `git show other:file` 都要看**内容**，不能只看哪个分支新
+  3. 身份类文件（SOUL/IDENTITY/USER/identity.md）应纳入内容级校验，否则被覆盖后一切指标仍显示健康
+  4. **Embedding 正常 ≠ 记忆正确**。向量能精准检索到错误内容，检索质量越好，错误人格越"可信"。问题出在语料，不在检索链路
+  5. 被用户质疑身份时，**先取证（读文件+查 git log），不要反过来质疑用户切错会话**——这比单纯记错更伤人
