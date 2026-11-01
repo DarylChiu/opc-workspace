@@ -1,14 +1,23 @@
 
+## 2026-11-01 16:10 · 搬家后开机恢复（完成）
+- 机器 10/30 10:58 关机 → 11/1 16:02:55 开机，停机 2 天 5 小时，期间全部 cron 未触发
+- 系统时区已自动为 **CST +0800** ✅；cron 14d6ef92 `tz=Asia/Shanghai` 已于 10/30 提前切换，无 00:59 偏移风险
+- 归档审计手动 force 跑通（第2轮：修复 2 / 浅层 3 / 深层 0），备份链路全绿，远端含 `umain/memory/2026-11-01.md` + D-1~D-3 ✅
+- 3 项浅层问题全部定性为「离线派生」并人工闭环（补记 10/31 日记 + 刷新 active.md + 成本台账待自愈）
+- 看板 `localhost:8765` 200 ✅ / `@reboot` 自启生效 ✅
+- 🟡 待观察（11/2 复核）: ①成本台账今晚 23:45 是否回填 ②生活提醒 crontab 是否正常 ③23:59 归档首次国内时区自然触发
+- 🟡 技术债（未处理）: keyframe_venv 50817 文件在 git 内，.git 783M
+
 ## 2026-10-30 09:45 · 搬家前资产保全（完成）
 - Git: local commit a43560a7（workspace 无 remote，push 不可行；备份仓 ~/.opc-workspace-cache 与 origin 同步 0/0）
 - 桌面备份: tar 677K / bundle 717M / config 22M / crontab txt
-- 🔴 待修（11/1）: cron 14d6ef92 deepseek auth 失败；schedule.tz → Asia/Shanghai
+- ✅ cron 14d6ef92 auth 已自愈；`schedule.tz` 已改 `Asia/Shanghai`（原为待修项，已闭环）
 - 🟡 技术债: keyframe_venv 50817 文件在 git 内，.git 783M
 - 清单: memory/post_move_checklist.md
 
 # 当前活跃任务
 
-> 最后更新: 2026-10-29 00:05 GMT+7
+> 最后更新: 2026-11-01 16:12 GMT+8（搬家后首次开机）
 >
 > 🆕 **10/24 私聊战略主线（last day 10/30 前最重的一段，详见 memory/2026-10-24.md 10:12–11:02）**：
 > ① 身份转换＝打工人→创业者（销售/采购/HR/财务/战略），核心难点是**失去外部否定信号**
