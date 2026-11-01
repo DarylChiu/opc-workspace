@@ -585,3 +585,16 @@ Daryl 认知类型 Ni+Te——看分析报告像看 X 光，表面数据堆砌�
 - **真因**：`~/.opc-workspace-cache` 是多 Agent 共享仓，umain/uself/ubalance/uxiaofeng 四个 cron 挤在同一分钟推同一分支 → `git pull --rebase` / `push` 撞锁瞬时失败；脚本把瞬时竞争记为 issue。
 - **判据（一眼区分真假）**：`git rev-parse HEAD` == `git ls-remote origin refs/heads/main`，且 `origin/main:<agent>/memory/` 下 D-0~D-3 日记齐全 → 备份有效，**不必手工干预**。本次远端 7a4713c 含 ubalance 10-26/27/28/29 四天日记，本地与缓存 diff 一致。
 - **附带**：`post-op.sh` 报「今日日记缺失」是午夜边界误报（00:03 判 10-30，日记写的是 10-29），与 audit.sh 第 19 次复现属同一类；不要因此重建文件。
+
+## 2026-11-01 · 审计脚本的「修复成功」不可信（跨仓库假阳性，第 2 次）
+- **现象**：audit.sh 打印「Fast-forward / create mode 100644 memory/2026-10-31.md / Git push 成功 / 远端含今日日记」，但 `workspace-balance` 的 `memory/2026-10-31.md` **压根不存在**，`git log --all` 也查无此文件。
+- **根因**：audit.sh §10 的 git 段用 `REPO_DIR=$HOME/.opc-workspace-cache`（共享 opc-workspace 仓库），**并非本 agent 工作区仓库**。所以 pull/commit/push/远端校验的日志全部在给另一个 repo 背书 → 对 workspace-balance 的备份状态 **零证明力**。
+- **与 10-25 的关系**：10-25 已记过「push 成功假阳性」，当时以为是 SSH 断链；这次暴露同一假阳性的**第二种形态：commit 假阳性**。说明当时只修了「push 结论」，没修「校验对象错了」这个真正病根。
+- **正确做法**：任何「备份/提交/推送成功」的结论，必须用**本工作区自身**的命令独立验证，不能信脚本日志：
+  ```bash
+  git -C <本工作区> rev-parse --short HEAD
+  git -C <本工作区> rev-parse --short origin/main
+  GIT_TERMINAL_PROMPT=0 git ls-remote origin main   # 与远端实时比对
+  git -C <本工作区> cat-file -e HEAD:<file>         # 关键文件真的在 HEAD 里吗
+  ```
+- **体检口诀**：**「文件存在」≠「日记有效」**。骨架日记（标题+「内容待补充」）能骗过 §1 的存在性检查，只有骨架检测器（行数/章节数）能抓。判断日记状态永远先看内容密度。
