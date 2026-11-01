@@ -1,13 +1,12 @@
 {
   "lastChecks": {
-<<<<<<< HEAD
     "email": null,
     "calendar": null,
     "weather": null,
     "services": 1786665853,
     "sessions": 1786665853
   }
-=======
+
     "system_health": 1752167400,
     "gateway": 1752167400,
     "ngrok": 1752167400,
@@ -23,7 +22,5 @@
     "diary_07-19": "EXISTS",
     "diary_07-20": "EXISTS",
     "diary_07-21": "EXISTS"
-  },
   "notes": {}
->>>>>>> f84ca06f29566ba0eac5d0b2a33984ab963d31d6
 }
