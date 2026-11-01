@@ -150,3 +150,15 @@
   3. 身份类文件（SOUL/IDENTITY/USER/identity.md）应纳入内容级校验，否则被覆盖后一切指标仍显示健康
   4. **Embedding 正常 ≠ 记忆正确**。向量能精准检索到错误内容，检索质量越好，错误人格越"可信"。问题出在语料，不在检索链路
   5. 被用户质疑身份时，**先取证（读文件+查 git log），不要反过来质疑用户切错会话**——这比单纯记错更伤人
+
+## 2026-11-01 · ⚠️ `git stash pop` 会弹出历史遗留 stash —— 与 10/18 事故同源
+
+- **现象**: 修身份文件时，为让 `git pull --rebase` 通过，对子模块改动做 `git stash push` → pull 后 `git stash pop` → **弹出的是 8 个月前的 `daily-audit-stash-2026-07-16`**，瞬间 29 个文件冲突（26 个 rename/delete + 3 个内容冲突），冲突里夹带 7 月日记、lessons、审计日志
+- **根因**: `git stash push` 在无改动时不会新建 stash 条目，随后 `git stash pop` 就弹出栈里最老的遗留 stash。仓库里积压了 9 条历史 stash（最早 7/6），任何一次裸 pop 都可能炸
+- **与 10/18 事故关系**: **完全同一机制**。10/18 日记已记录「Bug A：`git stash pop` 无条件执行 → 误弹历史遗留 stash」，当时只在 audit.sh 里修了，本次手工操作又踩一次
+- **正确做法**:
+  1. pop 前必须比对 `git stash list` 前后条数，确认 stash 是自己刚建的
+  2. 或直接指定 `git stash pop stash@{N}`，不用裸 pop
+  3. 或改用 `git stash create` 拿 commit hash（不污染栈）
+- **本次处理**: 冲突现场先备份 `/tmp/stash_conflict_backup_20261101/` → 确认我的提交已推远端 → `git reset --hard HEAD` 恢复 → stash@{0} 保留未丢
+- **教训**: **"清干净工作区"的快捷手段往往是事故源**。多 Agent 共享仓库尤其危险——别人的遗留 stash 里全是过期日记
