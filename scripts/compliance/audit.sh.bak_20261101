@@ -1,0 +1,488 @@
+#!/bin/bash
+# L4: 完整审计 v2（共享版） — 每日 23:59 Cron 兜底检查
+# 用法: bash ~/.openclaw/compliance/scripts/audit.sh [--report]
+# 
+# v2 新增:
+# - 步骤 6: Session-Diary 交叉验证（session 活动是否写入日记）
+# - 步骤 7: 日记骨架检测（Cron 行占比 >50% → 告警）
+# - 步骤 8: 项目清单校验（active.md 漏项目 → 告警）
+
+WORKSPACE="${OPENCLAW_WORKSPACE:-$(cd "$(dirname "$0")/../.." && pwd)}"
+COMPLIANCE_DIR="${OPENCLAW_COMPLIANCE_DIR:-$HOME/.openclaw/compliance}"
+AGENT=$(basename "$WORKSPACE" | sed 's/.*workspace-//' | sed 's/_workspace//')
+# BUGFIX: main/Kitty's workspace has no agent prefix
+[ "$AGENT" = "workspace" ] && AGENT="main"
+[ -z "$AGENT" ] && AGENT="unknown"
+
+cd "$WORKSPACE" || exit 1
+
+# BUGFIX: support both active.md and _working_active_tasks.md (prefer newer)
+ACTIVE_FILE="memory/active.md"
+if [ -f "memory/_working_active_tasks.md" ]; then
+    if [ ! -f "$ACTIVE_FILE" ]; then
+        ACTIVE_FILE="memory/_working_active_tasks.md"
+    else
+        # Both exist, use the newer one
+        AM_TIME=$(stat -f "%m" "$ACTIVE_FILE" 2>/dev/null || echo 0)
+        WAT_TIME=$(stat -f "%m" "memory/_working_active_tasks.md" 2>/dev/null || echo 0)
+        [ "$WAT_TIME" -gt "$AM_TIME" ] && ACTIVE_FILE="memory/_working_active_tasks.md"
+    fi
+fi
+
+TODAY=$(date +%Y-%m-%d)
+YESTERDAY=$(date -v-1d +%Y-%m-%d 2>/dev/null || date -d "yesterday" +%Y-%m-%d)
+TIMESTAMP=$(date +"%Y-%m-%dT%H:%M:%S%z")
+REPORT_MODE=false
+[ "$1" = "--report" ] && REPORT_MODE=true
+
+FIXES=0
+ISSUES=0
+DEEP_ISSUES=0
+
+log_fix() { FIXES=$((FIXES + 1)); echo "  🔧 $1"; }
+log_issue() { ISSUES=$((ISSUES + 1)); echo "  ❌ $1"; }
+log_ok() { echo "  ✅ $1"; }
+log_warn() { echo "  ⚠️ $1"; }
+
+echo "📋 L4 每日审计 v2 | Agent: $AGENT | $TODAY $TIMESTAMP"
+echo "================================"
+
+# --- 1. 日记完整性 ---
+echo "1/8 日记检查"
+TODAY_FILE="memory/$TODAY.md"
+DIARY_LINES=0
+DIARY_SECTIONS=0
+DIARY_CRON_LINES=0
+
+if [ -f "$TODAY_FILE" ] && [ -s "$TODAY_FILE" ]; then
+    DIARY_LINES=$(wc -l < "$TODAY_FILE" | tr -d ' \n')
+    DIARY_SECTIONS=$(grep -c "^##" "$TODAY_FILE" 2>/dev/null | tr -d ' \n' || echo 0)
+    DIARY_CRON_LINES=$(grep -ciE "(Cron|cron|审计|audit)" "$TODAY_FILE" 2>/dev/null | tr -d ' \n' || echo 0)
+    log_ok "日记存在 ($DIARY_LINES 行, $DIARY_SECTIONS 段落)"
+else
+    log_issue "今日日记缺失"
+    # 自动创建骨架
+    cat > "$TODAY_FILE" << EOF
+# $TODAY 日记
+
+## ⚠️ Cron 审计自动创建（内容待补充）
+- 本日记由 23:59 Cron 自动创建，当日内容未记录
+- 需从 session 历史补充实际事件
+EOF
+    log_fix "已创建骨架日记（$TODAY_FILE）"
+    DIARY_LINES=4
+    DIARY_SECTIONS=1
+    DIARY_CRON_LINES=2
+fi
+
+# 昨天日记
+if [ -f "memory/${YESTERDAY}.md" ]; then
+    YESTERDAY_LINES=$(wc -l < "memory/${YESTERDAY}.md" | tr -d ' \n')
+    log_ok "昨天日记存在 ($YESTERDAY_LINES 行)"
+else
+    log_issue "昨天日记缺失 ($YESTERDAY)"
+fi
+
+# --- 2. active.md 新鲜度 ---
+echo ""
+echo "2/8 active.md 检查"
+if [ -f "$ACTIVE_FILE" ]; then
+    LAST_MOD=$(stat -f "%m" "$ACTIVE_FILE" 2>/dev/null || stat -c "%Y" "$ACTIVE_FILE" 2>/dev/null)
+    NOW=$(date +%s)
+    AGE=$(( (NOW - LAST_MOD) / 3600 ))
+    if [ "$AGE" -gt 24 ]; then
+        log_issue "active.md ${AGE}h 未更新"
+    else
+        log_ok "active.md 新鲜 (${AGE}h)"
+    fi
+else
+    log_issue "active.md 缺失"
+fi
+
+# --- 3. lessons.md 覆盖 ---
+echo ""
+echo "3/8 lessons.md 检查"
+if [ -f "memory/lessons.md" ]; then
+    if grep -q "$TODAY" "memory/lessons.md" 2>/dev/null; then
+        log_ok "lessons.md 有今日记录"
+    else
+        echo "  ℹ️ lessons.md 无需今日更新"
+    fi
+else
+    log_issue "lessons.md 缺失"
+fi
+
+# --- 4. 清理过期日记 ---
+echo ""
+echo "4/8 归档检查"
+ARCHIVE_COUNT=0
+mkdir -p memory/archive
+for f in memory/202[0-9]-[01][0-9]-[0-3][0-9].md; do
+    [ -f "$f" ] || continue
+    BASENAME=$(basename "$f" .md)
+    FILE_DATE_EPOCH=$(date -j -f "%Y-%m-%d" "$BASENAME" +%s 2>/dev/null || date -d "$BASENAME" +%s 2>/dev/null)
+    if [ -n "$FILE_DATE_EPOCH" ]; then
+        NOW=$(date +%s)
+        DAYS_OLD=$(( (NOW - FILE_DATE_EPOCH) / 86400 ))
+        if [ "$DAYS_OLD" -gt 30 ]; then
+            mv "$f" memory/archive/ 2>/dev/null && log_fix "归档 $BASENAME.md" && ARCHIVE_COUNT=$((ARCHIVE_COUNT + 1))
+        fi
+    fi
+done
+[ "$ARCHIVE_COUNT" -eq 0 ] && log_ok "无需归档"
+
+# --- 5. MEMORY.md 大小 ---
+echo ""
+echo "5/8 MEMORY.md 检查"
+if [ -f "MEMORY.md" ]; then
+    MEM_LINES=$(wc -l < "MEMORY.md" | tr -d ' \n')
+    if [ "$MEM_LINES" -gt 40 ]; then
+        log_issue "MEMORY.md 过大 (${MEM_LINES}行, 建议<30)"
+    else
+        log_ok "MEMORY.md ${MEM_LINES}行, 符合规范"
+    fi
+else
+    log_warn "MEMORY.md 不存在（可选文件）"
+fi
+
+# --- 6. Session-Diary 交叉验证 🆕 ---
+echo ""
+echo "6/8 Session-Diary 交叉验证"
+SESSION_DIR="$HOME/.openclaw/agents/$AGENT/sessions"
+SESSIONS_FOUND=false
+
+if [ -d "$SESSION_DIR" ]; then
+    # 查找今天有活动的 session（按自然日窗口；避免 00:0x 运行时 24h 窗口误捞昨日 session）
+    # 排除 *.trajectory.jsonl（与主 jsonl 重复计数）
+    TODAY_FILES=$(find "$SESSION_DIR" -name "*.jsonl" -not -name "*.trajectory.jsonl" -newermt "$(date +%Y-%m-%d) 00:00" 2>/dev/null | head -20)
+
+    # 2026-10-15 修复：过滤掉「纯 cron/审计会话」（无任何非 cron 的 user 消息）
+    # 根因：本审计 cron 每日 00:00 运行，其自身 session 会被算作「今日活动」，
+    #       导致新的一天刚开始就误报「日记过短」——属误报，不应触发补记。
+    TODAY_SESSIONS=""
+    for sf in $TODAY_FILES; do
+        if grep -o '"role":"user".\{0,1500\}' "$sf" 2>/dev/null | grep -o '"text":"[^"]*"' | grep -v '\[cron:' | grep -q .; then
+            TODAY_SESSIONS="$TODAY_SESSIONS $sf"
+        fi
+    done
+    TODAY_SESSIONS=$(echo "$TODAY_SESSIONS" | tr -s ' ' '\n' | sed '/^$/d')
+
+    if [ -n "$TODAY_SESSIONS" ]; then
+        SESSIONS_FOUND=true
+        SESSION_COUNT=$(echo "$TODAY_SESSIONS" | wc -l | tr -d ' \n')
+        echo "  发现 $SESSION_COUNT 个今天有实质活动的 session（已排除 cron/审计会话）"
+        
+        # 从 session 提取关键主题词
+        SESSION_TOPICS=""
+        for sf in $TODAY_SESSIONS; do
+            # 提取 user message 中的中文关键词
+            SESSION_TOPICS="$SESSION_TOPICS $(grep -oP '"text":"[^"]*"' "$sf" 2>/dev/null | head -50 | tr '[:upper:]' '[:lower:]')"
+        done
+        
+        # 检查日记是否覆盖了今天的 session 主题
+        DIARY_COVERAGE=0
+        if [ "$DIARY_LINES" -lt 15 ]; then
+            log_issue "日记过短（${DIARY_LINES}行），但有 $SESSION_COUNT 个活动 session → 可能遗漏内容"
+            DEEP_ISSUES=$((DEEP_ISSUES + 1))
+        elif [ "$DIARY_CRON_LINES" -gt "$((DIARY_LINES / 2))" ]; then
+            log_issue "日记中 Cron/审计行占比过高（${DIARY_CRON_LINES}/${DIARY_LINES}）→ 可能为骨架日记"
+            DEEP_ISSUES=$((DEEP_ISSUES + 1))
+        else
+            log_ok "日记长度正常（${DIARY_LINES}行），session 活动覆盖检查通过"
+        fi
+    else
+        log_ok "今天无实质 session 活动（仅 cron/审计会话，无需补记日记）"
+    fi
+else
+    log_warn "Session 目录不存在，跳过交叉验证"
+fi
+
+# --- 7. 日记骨架检测 🆕 ---
+echo ""
+echo "7/8 日记骨架检测"
+
+# 检查近 3 天日记是否有仅含 Cron 的骨架
+# 注：D0（当日）在 00:0x 由 Cron 刚创建骨架日记属正常流程，纳入检测会必然误报
+#     （9/25–9/29 连续五日复现）→ 本检测仅对 D-1 及更早日期生效
+SKELETON_DAYS=0
+for days_ago in 1 2 3; do
+    if [ "$days_ago" -eq 0 ]; then
+        check_date="$TODAY"
+        check_file="$TODAY_FILE"
+    elif [ "$days_ago" -eq 1 ]; then
+        check_date="$YESTERDAY"
+        check_file="memory/${YESTERDAY}.md"
+    else
+        check_date=$(date -v-${days_ago}d +%Y-%m-%d 2>/dev/null || date -d "${days_ago} days ago" +%Y-%m-%d)
+        check_file="memory/${check_date}.md"
+    fi
+    
+    if [ -f "$check_file" ]; then
+        cl=$(wc -l < "$check_file" | tr -d ' \n')
+        cs=$(grep -c "^##" "$check_file" 2>/dev/null | tr -d ' \n' || echo 0)
+        cc=$(grep -ciE "(Cron|cron|审计|audit)" "$check_file" 2>/dev/null | tr -d ' \n' || echo 0)
+        
+        # count sections with REAL content (exclude cron/审计/placeholder/empty sections)
+        real_sec=$(grep "^## " "$check_file" 2>/dev/null | grep -civE "(Cron|审计|audit|修复项|审计划归|午夜边界|Git|备份|当日事件)" | tr -d ' \n' || echo 0)
+        
+        # PATH A: classic skeleton (short, few sections, mostly cron)
+        # PATH B: verbose skeleton (any length, but ZERO real event sections)
+        if ([ "$cl" -lt 15 ] && [ "$cs" -le 2 ] && [ "$cc" -ge "$((cl / 2))" ]) || [ "$real_sec" -eq 0 ]; then
+            log_issue "$check_date: 疑似 Cron 骨架日记（${cl}行, ${cs}段落, Cron行=${cc}, 真实章节=${real_sec}）"
+            SKELETON_DAYS=$((SKELETON_DAYS + 1))
+            DEEP_ISSUES=$((DEEP_ISSUES + 1))
+        fi
+    fi
+done
+
+if [ "$SKELETON_DAYS" -eq 0 ]; then
+    log_ok "近 3 天日记（D-1 ~ D-3）无骨架问题"
+fi
+
+# --- 8. 项目清单校验 🆕 ---
+echo ""
+echo "8/8 项目清单校验"
+CONFIG_FILE="$COMPLIANCE_DIR/config/$AGENT.json"
+if [ -f "$CONFIG_FILE" ] && [ -f "$ACTIVE_FILE" ]; then
+    # 读取 agent 的项目关键词
+    PROJECT_KWS=$(python3 -c "import json; print(' '.join(json.load(open('$CONFIG_FILE')).get('project_keywords',[])))" 2>/dev/null || echo "")
+    
+    if [ -n "$PROJECT_KWS" ] && [ -d "$SESSION_DIR" ]; then
+        MISSING_PROJECTS=""
+        for kw in $PROJECT_KWS; do
+            # 检查最近 48h 的 session 是否有此关键词
+            IN_SESSION=$(grep -rl "$kw" "$SESSION_DIR"/*.jsonl 2>/dev/null | head -1)
+            # 检查 active.md 是否有此关键词
+            IN_ACTIVE=$(grep -il "$kw" "$ACTIVE_FILE" 2>/dev/null)
+            
+            if [ -n "$IN_SESSION" ] && [ -z "$IN_ACTIVE" ]; then
+                MISSING_PROJECTS="$MISSING_PROJECTS $kw"
+            fi
+        done
+        
+        if [ -n "$MISSING_PROJECTS" ]; then
+            log_issue "以下项目关键词在 session 中出现但 active.md 中缺失:$MISSING_PROJECTS"
+            DEEP_ISSUES=$((DEEP_ISSUES + 1))
+        else
+            log_ok "项目清单与 session 一致"
+        fi
+    else
+        log_ok "无需项目清单校验（无关键词配置）"
+    fi
+else
+    log_warn "配置文件或 active.md 不存在，跳过项目清单校验"
+fi
+
+# --- 9. 成本仪表盘验证 🆕 ---
+echo ""
+echo "9/9 成本仪表盘验证"
+COST_FILE="$HOME/opc-workspace/Kitty/opc-dashboard/data/cost_daily.json"
+# 2026-10-19: 看板 node 监听 IPv6 (*:8765)，双栈但地址族曾致 localhost 解析失败 → 按优先级逐个探测
+COST_API_LIST="http://[::1]:8765/api/costs http://127.0.0.1:8765/api/costs http://localhost:8765/api/costs"
+COST_STATUS="Unknown"
+COST_DETAIL=""
+
+if [ -f "$COST_FILE" ]; then
+    # 检查文件新鲜度
+    # 2026-10-30: 该文件由 Balance 台账扫描每日 23:45 覆盖写入一次（非实时）。
+    # 旧逻辑用 60 分钟阈值 → 本审计 cron 在早上 09:45 运行时必然误报 stale。
+    # 改为按「日更周期」判定：正常最大年龄 ≈ 24h（昨日 23:45 → 今日 23:44），
+    # 阈值取 26h，可容忍时钟漂移，同时仍能捕获「漏跑一整天」的异常。
+    COST_MTIME=$(stat -L -f "%m" "$COST_FILE" 2>/dev/null || stat -c "%Y" "$COST_FILE" 2>/dev/null)
+    NOW=$(date +%s)
+    COST_AGE=$(( (NOW - COST_MTIME) / 60 ))
+    COST_AGE_H=$(( COST_AGE / 60 ))
+    COST_MAX_AGE_MIN=1560   # 26 小时（日更文件容差）
+    
+    # 从文件提取关键数据（summary.total_cost / month_cost / today_cost）
+    COST_TODAY=$(python3 -c "import json; d=json.load(open('$COST_FILE')); s=d.get('summary',{}); v=s.get('today_cost',0); print(f'{v:.2f}')" 2>/dev/null || echo "N/A")
+    COST_MONTH=$(python3 -c "import json; d=json.load(open('$COST_FILE')); s=d.get('summary',{}); v=s.get('month_cost',0); print(f'{v:.2f}')" 2>/dev/null || echo "N/A")
+    COST_TOTAL=$(python3 -c "import json; d=json.load(open('$COST_FILE')); s=d.get('summary',{}); v=s.get('total_cost',0); print(f'{v:.2f}')" 2>/dev/null || echo "N/A")
+    
+    if [ "$COST_AGE" -lt "$COST_MAX_AGE_MIN" ]; then
+        log_ok "成本数据新鲜（${COST_AGE_H}h前，日更周期内）| 今日: \$$COST_TODAY | 本月: \$$COST_MONTH | 全量: \$$COST_TOTAL"
+        COST_STATUS="fresh"
+        COST_DETAIL="今日 \$$COST_TODAY | 本月 \$$COST_MONTH | 全量 \$$COST_TOTAL"
+    else
+        log_issue "成本数据过期（${COST_AGE_H}h前，超过26h日更阈值 → Balance 23:45 台账扫描疑似漏跑）"
+        COST_STATUS="stale"
+        COST_DETAIL="数据过期（${COST_AGE_H}h前）"
+    fi
+    
+    # 验证 API 端点（IPv6 → IPv4 → localhost 依次回退）
+    API_RESP=""
+    API_USED=""
+    for _u in $COST_API_LIST; do
+        API_RESP=$(curl --max-time 8 -s "$_u" 2>/dev/null)
+        if [ -n "$API_RESP" ]; then API_USED="$_u"; break; fi
+    done
+    if [ -n "$API_RESP" ]; then
+        log_ok "OPC API 端点正常 ($API_USED)"
+        COST_STATUS="${COST_STATUS}_api_ok"
+    else
+        log_issue "OPC API 端点全部不可达（IPv6/IPv4/localhost 三种均失败 → 看板真挂了）"
+        COST_STATUS="${COST_STATUS}_api_down"
+    fi
+else
+    log_issue "成本数据文件缺失: $COST_FILE"
+    COST_STATUS="missing"
+    COST_DETAIL="文件缺失，23:45 Cron 可能未执行"
+fi
+
+# 写入成本状态文件供汇报使用
+mkdir -p memory
+echo "$COST_STATUS|$COST_DETAIL" > memory/cost-check-status.txt
+
+# --- 9.5 自进化基建对账 🧬 (2026-07-15 Daryl授权新增) ---
+echo ""
+echo "9.5 自进化基建对账 (SAGE Checker + Reflexion)"
+CHECKER_LOG="memory/evolution/checker-log.jsonl"
+REFLEXION_JOURNAL="memory/reflexion_journal.md"
+CHECKER_RUNS_TODAY=0
+CHECKER_FAILS_TODAY=0
+REFLEX_TODAY=0
+
+# 对账项①: checker 执行率（当日 session 活动 vs checker 运行次数）
+if [ -f "$CHECKER_LOG" ]; then
+    CHECKER_RUNS_TODAY=$(grep -c "$TODAY" "$CHECKER_LOG" 2>/dev/null | tr -d ' \n' || echo 0)
+    CHECKER_FAILS_TODAY=$(grep "$TODAY" "$CHECKER_LOG" 2>/dev/null | grep -ci '"verdict"[: ]*"FAIL"' | tr -d ' \n' || echo 0)
+    # D0 凌晨豁免：审计多在 00:0x 运行，当日刚开始且无实质交付，checker 无触发条件
+    NOW_HM=$((10#$(date +%H%M)))
+    if [ "$SESSIONS_FOUND" = true ] && [ "$CHECKER_RUNS_TODAY" -eq 0 ] && [ "$NOW_HM" -gt 100 ]; then
+        log_issue "今日有 session 活动但 checker 零运行 → 可能漏跑交付前审查（若当日无实质性交付则误报，人工确认）"
+        DEEP_ISSUES=$((DEEP_ISSUES + 1))
+    else
+        log_ok "checker 今日运行 $CHECKER_RUNS_TODAY 次（其中 FAIL $CHECKER_FAILS_TODAY 次）"
+    fi
+else
+    log_warn "checker-log.jsonl 不存在（基建刚上线或今日未运行）"
+fi
+
+# 对账项②: 纠正事件 vs 检讨条目（checker两轮FAIL必须有当日检讨）
+if [ -f "$REFLEXION_JOURNAL" ]; then
+    REFLEX_TODAY=$(grep -c "^## $TODAY" "$REFLEXION_JOURNAL" 2>/dev/null | tr -d ' \n' || echo 0)
+    if [ "$CHECKER_FAILS_TODAY" -ge 2 ] && [ "$REFLEX_TODAY" -eq 0 ]; then
+        log_issue "checker 今日 FAIL ≥ 2 次但无当日检讨条目 → 违反 Reflexion 协议，需补写"
+        DEEP_ISSUES=$((DEEP_ISSUES + 1))
+    else
+        log_ok "reflexion 今日检讨 $REFLEX_TODAY 条，与 FAIL 事件对账通过"
+    fi
+else
+    log_warn "reflexion_journal.md 不存在（基建刚上线）"
+fi
+
+# --- 10. Git 备份 ---
+echo ""
+echo "10. Git 备份"
+REPO_DIR="$HOME/.opc-workspace-cache"
+AGENT_CAP=$(echo "$AGENT" | sed 's/.*/\u&/' | sed 's/-//g')
+if [ -d "$REPO_DIR/.git" ]; then
+    cd "$REPO_DIR" || exit 1
+    # BUGFIX 2026-10-18: 原逻辑无条件 pop，若 push 无东西可存(工作区干净)会误 pop 历史遗留 stash
+    # → 每次审计都把旧冲突重新引入、pull/commit 连带失败。现在只在真的新建了 stash 时才 pop。
+    STASH_N_BEFORE=$(git stash list 2>/dev/null | wc -l | tr -d ' ')
+    git stash push -m "audit-auto-stash-$(date +%s)" 2>/dev/null
+    STASH_N_AFTER=$(git stash list 2>/dev/null | wc -l | tr -d ' ')
+    git pull --rebase origin main 2>/dev/null && log_ok "repo pull 成功" || log_issue "repo pull 失败"
+    if [ "${STASH_N_AFTER:-0}" -gt "${STASH_N_BEFORE:-0}" ]; then
+        if ! git stash pop 2>/dev/null; then
+            CONF=$(git diff --name-only --diff-filter=U 2>/dev/null)
+            if [ -n "$CONF" ]; then
+                echo "$CONF" | xargs git checkout HEAD -- 2>/dev/null
+                git reset -q 2>/dev/null
+                log_fix "stash pop 冲突($(echo "$CONF" | wc -l | tr -d ' ') 文件) → 已取 upstream 版恢复，stash 保留"
+            else
+                log_warn "stash pop 失败（无冲突文件）"
+            fi
+        fi
+    fi
+else
+    git clone git@github.com:DarylChiu/opc-workspace.git "$REPO_DIR" 2>/dev/null && log_fix "首次 clone repo" || log_issue "repo clone 失败"
+fi
+
+if [ -d "$REPO_DIR/.git" ]; then
+    rsync -a --delete "$WORKSPACE/memory/" "$REPO_DIR/$AGENT_CAP/memory/" 2>/dev/null
+    rsync -a "$WORKSPACE/scripts/" "$REPO_DIR/$AGENT_CAP/scripts/" 2>/dev/null
+    for f in AGENTS.md SOUL.md IDENTITY.md MEMORY.md USER.md TOOLS.md HEARTBEAT.md; do
+        [ -f "$WORKSPACE/$f" ] && cp "$WORKSPACE/$f" "$REPO_DIR/$AGENT_CAP/" 2>/dev/null
+    done
+
+    cd "$REPO_DIR" || exit 1
+    # BUGFIX 2026-10-18: 共享 clone 曾因 stash pop 冲突卡死 → git commit 静默失败(2>/dev/null)、
+    # 空 push 仍返回 0 被误报「push 成功」，导致 Main 记忆未进远端备份 2026-07-03~2026-10-18（3.5个月）。
+    # 以下三重兜底：冲突检测 / commit 真实结果检查 / 远端内容校验。
+    UNMERGED=$(git diff --name-only --diff-filter=U 2>/dev/null | wc -l | tr -d ' ')
+    if [ "${UNMERGED:-0}" -gt 0 ]; then
+        log_issue "备份仓有 $UNMERGED 个未解决冲突 → 提交必静默失败，需先修复"
+        DEEP_ISSUES=$((DEEP_ISSUES + 1))
+    fi
+    DID_COMMIT=false
+    if ! git diff --quiet 2>/dev/null || ! git diff --cached --quiet 2>/dev/null; then
+        git add "$AGENT_CAP/" 2>/dev/null
+        if git commit -q -m "$AGENT_CAP: 每日记忆审计备份 $TODAY" 2>/dev/null; then
+            DID_COMMIT=true
+            log_fix "备份 commit 成功"
+        else
+            log_issue "备份 commit 失败（返回非 0，检查冲突/锁）→ 本次备份未落盘"
+            DEEP_ISSUES=$((DEEP_ISSUES + 1))
+        fi
+    else
+        log_ok "无变更，跳过 commit"
+    fi
+    if git push origin main 2>/dev/null; then
+        [ "$DID_COMMIT" = true ] && log_fix "Git push 成功" || log_ok "push 成功（无新提交）"
+    else
+        log_issue "Git push 失败"
+    fi
+    # 远端内容校验：必须能在 origin/main 里看到今日日记，否则备份形同虚设
+    REMOTE_TREE=$(git ls-tree -r --name-only origin/main "$AGENT_CAP/memory/" 2>/dev/null)
+    if echo "$REMOTE_TREE" | grep -q "$TODAY.md"; then
+        log_ok "远端备份含今日日记（$AGENT_CAP/memory/$TODAY.md）"
+    else
+        log_issue "远端备份缺今日日记（$AGENT_CAP/memory/$TODAY.md）→ 备份未生效"
+        DEEP_ISSUES=$((DEEP_ISSUES + 1))
+    fi
+    # BUGFIX 2026-10-26: 原校验只看今日 → 漏检 10-24/10-25 两天未进远端备份。
+    # 近 3 天(D-1~D-3)日记都必须存在于远端，否则视为备份链路断点。
+    MISSING_DAYS=""
+    for i in 1 2 3; do
+        D=$(date -v-${i}d +%Y-%m-%d 2>/dev/null || date -d "-$i day" +%Y-%m-%d)
+        [ -f "$WORKSPACE/memory/$D.md" ] || continue
+        echo "$REMOTE_TREE" | grep -q "$D.md" || MISSING_DAYS="$MISSING_DAYS $D"
+    done
+    if [ -z "$MISSING_DAYS" ]; then
+        log_ok "远端备份含近 3 天日记（D-1~D-3 完整）"
+    else
+        log_issue "远端备份缺近 3 天日记:$MISSING_DAYS → rsync/push 链路有断点"
+        ISSUES=$((ISSUES + 1))
+    fi
+fi
+
+# --- 总结 ---
+cd "$WORKSPACE" || exit 1  # BUGFIX 2026-07-15: 步骤10 cd到REPO_DIR后未切回,导致审计日志写错位置
+echo ""
+echo "================================"
+TOTAL_ISSUES=$((ISSUES + DEEP_ISSUES))
+echo "📊 审计完成 | 修复: $FIXES | 浅层问题: $ISSUES | 深层问题: $DEEP_ISSUES"
+
+AUDIT_LOG="memory/compliance-audit.jsonl"
+mkdir -p memory
+cat >> "$AUDIT_LOG" << EOF
+{"timestamp":"$TIMESTAMP","check":"L4-audit-v2","agent":"$AGENT","fixes":$FIXES,"shallow_issues":$ISSUES,"deep_issues":$DEEP_ISSUES,"diary_lines":$DIARY_LINES,"diary_sections":$DIARY_SECTIONS,"checker_runs_today":$CHECKER_RUNS_TODAY,"checker_fails_today":$CHECKER_FAILS_TODAY,"reflexion_today":$REFLEX_TODAY}
+EOF
+
+if [ "$REPORT_MODE" = true ]; then
+    echo ""
+    echo "📊 成本仪表盘状态: $COST_STATUS"
+    if [ -n "$COST_DETAIL" ]; then
+        echo "   $COST_DETAIL"
+    fi
+    echo ""
+    if [ "$TOTAL_ISSUES" -eq 0 ]; then
+        echo "✅ 记忆系统健康，所有检查通过（含深度检查）"
+    else
+        echo "⚠️ 有 $ISSUES 个浅层问题 + $DEEP_ISSUES 个深层问题需要关注，$FIXES 项已自动修复"
+    fi
+fi
+
+exit $TOTAL_ISSUES
