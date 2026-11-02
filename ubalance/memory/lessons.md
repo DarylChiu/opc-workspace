@@ -761,3 +761,22 @@ stat -f "%Sm" -t "%s" <file>; sleep 10; stat -f "%Sm" -t "%s" <file>  # 两次�
 **正确做法**：按**误用特征**搜 —— `grep "const days=daily?Object.values"`（那个先赋值再取最后一格的具体形态）
 
 **规则**：断言要描述「什么形态是错的」，不是「什么词不该出现」。
+
+## 2026-11-03 · 报「偶发」前先做并发压力测试，否则会把 100% 可复现缺陷误判成抖动
+- **我犯的错**：`Cannot rebase onto multiple branches` 我只做了**单点复现**（手工跑一次成功 + 第二次审计成功）→ 结论「偶发/重跑即可/建议降 WARN」，还给了「C. 不改，重跑一次」这个选项。
+- **Kitty 打回**：30 并发 → 24 次命中；4 Agent 真实并发 → **4/4 全部命中**。**它不是偶发，是必然**。每晚给每个 Agent 灌 1 个假 issue，且在钝化所有人的告警敏感度。
+- **判据**：怀疑「并发竞争」时，**单点复现成功不构成反证**。必须跑并发压测（N≥10 同命令 / 真实多进程），并对比串行基线。串行 0 次 + 并发高频命中 = 确诊。
+- **连带教训**：只做降级（WARN）＝把问题藏起来。有根治手段（锁）就该上，降级只作为**锁拿不到时的兜底**，不能当主方案。
+
+## 2026-11-03 · 锁的目录选择：TMPDIR 在 cron 下与交互 shell 不是同一个
+- 想在 macOS 用锁，但 `flock` 不存在 → 用系统自带 `lockf -s -k -t <timeout> /dev/fd/9`。
+- **致命坑**：锁文件路径若用 `${TMPDIR:-/tmp}` —— 交互 shell 的 `TMPDIR=~/.openclaw/tmp`，**cron/launchd 下 TMPDIR 未设置** → 落到 `/tmp` → **两把不同的锁 = 等于没锁**，cron 和手工审计照样并发。
+- **正确做法**：锁放固定绝对路径（如 `$HOME/.openclaw/compliance/.locks/`），不依赖任何环境变量。
+- **其他坑**：① `/tmp/xxx.out` 这类固定名在并发下会串台（A 读到 B 的报错）→ 用 `mktemp` 独占 ② **BSD/macOS mktemp 只替换结尾的 X**，模板写 `xxx.XXXXXX.out` 会原样返回一个不存在的文件名 → X 必须顶在末尾。
+- **超时要有降级路径**：拿不到锁时不能把审计卡死（`-t 180` 超时 → 无锁跑 + WARN）。
+
+## 2026-11-03 · `git diff` 判「有无变更」会漏掉 untracked 整目录 → 新 Agent 备份永远不落盘
+- 原逻辑：`git diff --quiet && git diff --cached --quiet` → 都空就「无变更，跳过 commit」。
+- **漏点**：新 Agent 首次备份时 `$AGENT_CAP/` **整个目录都是 untracked**，`git diff` 完全看不到 → 被判无变更 → **备份静默不落盘**（且 push 空提交仍返回 0，被报「push 成功」）。
+- **正确判据**：`git diff` + `git diff --cached` + `git ls-files --others --exclude-standard` 三者任一非空才算有变更。
+- **通用规律**：「静默跳过 + 空操作也返回成功」的组合＝最危险的假阳性温床。凡是 `if 无变更 then 跳过`，必须确认判「无变更」的判据是完备的。
