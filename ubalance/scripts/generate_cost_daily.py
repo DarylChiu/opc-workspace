@@ -4,7 +4,7 @@
 输出到共享路径，供Kitty的node server直接读取
 作为sessions_send超时时的兜底方案
 """
-import json, os, sys
+import json, os, sys, tempfile
 from datetime import datetime
 
 HOME = os.path.expanduser('~')
@@ -31,8 +31,22 @@ daily_report = {
 }
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
-with open(OUTPUT_FILE, 'w') as f:
-    json.dump(daily_report, f, ensure_ascii=False, indent=2)
+# FIX 2026-11-03: 此文件每 2 小时被 launchd 重写（com.balance.cost-refresh），
+# 而看板 server.js 随时可能读 → 非原子写会让它读到半截 JSON 导致解析失败。
+# 先写临时文件，再 os.replace() 原子替换。
+fd, tmp = tempfile.mkstemp(dir=OUTPUT_DIR, prefix='.cost_daily.', suffix='.tmp')
+try:
+    with os.fdopen(fd, 'w') as f:
+        json.dump(daily_report, f, ensure_ascii=False, indent=2)
+        f.flush()
+        os.fsync(f.fileno())
+    os.replace(tmp, OUTPUT_FILE)
+except Exception:
+    try:
+        os.unlink(tmp)
+    except Exception:
+        pass
+    raise
 
 print(f"✅ 兜底数据已写入: {OUTPUT_FILE}")
 print(json.dumps(daily_report['summary'], indent=2))

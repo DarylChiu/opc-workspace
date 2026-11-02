@@ -14,7 +14,7 @@ OPC 成本统计 v2 — append-only 台账模式 (Balance 财务口径)
 去重键: message.responseId (回退 record.id)。
 成本源: message.usage.cost.total (真实 provider 回写值,无估算/无 mock)。
 """
-import json, os, sys, glob
+import json, os, sys, glob, fcntl, tempfile
 from datetime import datetime, date, timedelta
 from collections import defaultdict
 
@@ -155,7 +155,48 @@ def scan_all():
     return found, files
 
 
+def acquire_lock():
+    """并发保护：launchd(每2h) / cron(每日23:45) / 手动重跑 可能同时启动。
+
+    FIX 2026-11-03: 台账是财务底稿，旧代码 open(LEDGER_PATH,'w') 是非原子写入，
+    两个进程同时跑会互相截断，丢掉已记账的成本（不可恢复）。
+    这里用 flock 排他锁：拿不到锁直接退出（退出码 0，不算失败），
+    因为另一个进程正在干同样的事，结果是一样的。
+    """
+    lock_path = LEDGER_PATH + '.lock'
+    os.makedirs(os.path.dirname(lock_path), exist_ok=True)
+    fh = open(lock_path, 'w')
+    try:
+        fcntl.flock(fh.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except BlockingIOError:
+        print('⏭  另一个成本扫描进程正在运行，本次跳过（台账数据不受影响）')
+        fh.close()
+        sys.exit(0)
+    return fh  # 保持打开状态，进程退出时自动释放
+
+
+def atomic_write_ledger(ledger):
+    """原子写入台账：先写临时文件再 os.replace()。
+    中途崩溃也不会留下半截文件（rename 在同一文件系统上是原子的）。"""
+    d = os.path.dirname(LEDGER_PATH)
+    fd, tmp = tempfile.mkstemp(dir=d, prefix='.cost_ledger.', suffix='.tmp')
+    try:
+        with os.fdopen(fd, 'w') as f:
+            for e in ledger.values():
+                f.write(json.dumps(e, ensure_ascii=False) + '\n')
+            f.flush()
+            os.fsync(f.fileno())
+        os.replace(tmp, LEDGER_PATH)
+    except Exception:
+        try:
+            os.unlink(tmp)
+        except Exception:
+            pass
+        raise
+
+
 def main():
+    lock = acquire_lock()  # noqa: F841  (保持引用，不能提前释放)
     ledger = load_ledger()
     scanned, files = scan_all()
 
@@ -177,11 +218,9 @@ def main():
                 ledger[rid]['date'] = e['date']
                 date_fixed += 1
 
-    # 持久化台账
+    # 持久化台账（原子写：避免并发/崩溃损坏财务底稿）
     os.makedirs(os.path.dirname(LEDGER_PATH), exist_ok=True)
-    with open(LEDGER_PATH, 'w') as f:
-        for e in ledger.values():
-            f.write(json.dumps(e, ensure_ascii=False) + '\n')
+    atomic_write_ledger(ledger)
 
     # ===== 从台账（真值）汇总 =====
     by_agent = defaultdict(lambda: {'cost': 0.0, 'tokens': 0, 'calls': 0,
