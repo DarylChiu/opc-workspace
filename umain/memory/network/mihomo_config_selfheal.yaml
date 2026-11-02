@@ -1,0 +1,75 @@
+allow-lan: false
+dns:
+  default-nameserver:
+  - 223.5.5.5
+  - 119.29.29.29
+  - 114.114.114.114
+  - 1.1.1.1
+  enable: true
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fallback:
+  - https://1.1.1.1/dns-query
+  - https://dns.cloudflare.com/dns-query
+  - tls://8.8.8.8
+  fallback-filter:
+    domain:
+    - +.google.com
+    - +.facebook.com
+    - +.youtube.com
+    geoip: true
+    geoip-code: CN
+    ipcidr:
+    - 240.0.0.0/4
+  ipv6: false
+  listen: 0.0.0.0:11056
+  nameserver:
+  - https://dns.alidns.com/dns-query
+  - https://doh.pub/dns-query
+  - https://doh.dns.sb/dns-query
+  - https://dns.cloudflare.com/dns-query
+  - https://dns.twnic.tw/dns-query
+  - 223.5.5.5
+  - 119.29.29.29
+  - 114.114.114.114
+  proxy-server-nameserver:
+  - 43.108.56.44
+  respect-rules: true
+  use-hosts: true
+external-controller: 127.0.0.1:19094
+geodata-mode: true
+log-level: warning
+mixed-port: 17894
+mode: rule
+proxy-groups:
+- name: PROXY
+  proxies:
+  - 自动选择
+  type: select
+  use:
+  - wf
+- interval: 300
+  name: 自动选择
+  tolerance: 50
+  type: url-test
+  url: http://www.gstatic.com/generate_204
+  use:
+  - wf
+proxy-providers:
+  wf:
+    exclude-filter: 香港 02
+    header:
+      User-Agent:
+      - clash-verge/v2.0.0
+    health-check:
+      enable: true
+      interval: 600
+      url: http://www.gstatic.com/generate_204
+    interval: 86400
+    path: ./wf_provider.yaml
+    type: http
+    url: https://api02.weifengapi.com/api/v1/client/subscribe?token=d671810ffc3409a2bfdbeae9fe0a1e23
+rules:
+- MATCH,PROXY
+tcp-concurrent: true
+unified-delay: true
