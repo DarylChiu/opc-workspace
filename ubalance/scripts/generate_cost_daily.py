@@ -25,6 +25,9 @@ daily_report = {
     'by_agent': data['by_agent'],
     'by_model': data['by_model'],
     'daily_last7': data.get('daily_last7', {}),
+    # 看板契约 v2: 把 by_agent × by_date 交叉表一并传出，供 server.js 直接画图
+    'by_agent_daily_last30': data.get('by_agent_daily_last30', {}),
+    'ledger_coverage': data.get('ledger_coverage', {}),
 }
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)

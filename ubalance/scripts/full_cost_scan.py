@@ -15,7 +15,7 @@ OPC 成本统计 v2 — append-only 台账模式 (Balance 财务口径)
 成本源: message.usage.cost.total (真实 provider 回写值,无估算/无 mock)。
 """
 import json, os, sys, glob
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 from collections import defaultdict
 
 HOME = os.path.expanduser('~')
@@ -37,10 +37,21 @@ month_start = today.replace(day=1)
 
 
 def parse_ts(ts):
+    """统一按【本地时区】取日期。
+
+    FIX 2026-11-03 (Kitty 定位): 旧代码对 ISO 时间串直接 .date()，得到的是 UTC 日期，
+    而 today = date.today() 是本地日期。两者比较在 UTC+8 的 00:00-07:59 区间永远对不上，
+    导致凌晨消耗被算进前一天、today_total 恒为 0。
+    另注：旧代码数字时间戳走 fromtimestamp() = 本地时区，与 ISO 分支口径不一致，本次一并统一。
+    另注2: 台账里的 date 是扫描时冻结的字符串，naive 日期 astimezone() 不改变值，
+    因此旧账需靠 merge 阶段回填（见 main()）。
+    """
     if isinstance(ts, (int, float)):
         return datetime.fromtimestamp(ts / 1000).date()
     try:
-        return datetime.fromisoformat(str(ts).replace('Z', '+00:00')).date()
+        dt = datetime.fromisoformat(str(ts).replace('Z', '+00:00'))
+        # 不带参数的 astimezone() = 转本机时区；naive datetime 视为本地时间，幂等
+        return dt.astimezone().date()
     except Exception:
         return None
 
@@ -149,7 +160,9 @@ def main():
     scanned, files = scan_all()
 
     # ===== append-only 合并：台账只增不减 =====
+    # 例外：date 字段允许「修正」(时区口径纠错)，金额/调用次数绝不改动
     new_ids = 0
+    date_fixed = 0
     for rid, e in scanned.items():
         if rid not in ledger:
             ledger[rid] = e
@@ -158,6 +171,11 @@ def main():
             # 已在账上：补全更优的 agent 归属，但绝不删除、绝不改成本
             if ledger[rid].get('agent') == ARCHIVED and e['agent'] != ARCHIVED:
                 ledger[rid]['agent'] = e['agent']
+            # 日期回填：源文件仍在 → 用源 timestamp 重算的本地日期覆盖旧的 UTC 日期
+            # FIX 2026-11-03: 旧 parse_ts 把日期按 UTC 冻结进台账，光改函数救不了旧账
+            if e.get('date') and ledger[rid].get('date') != e['date']:
+                ledger[rid]['date'] = e['date']
+                date_fixed += 1
 
     # 持久化台账
     os.makedirs(os.path.dirname(LEDGER_PATH), exist_ok=True)
@@ -170,6 +188,11 @@ def main():
                                     'today_cost': 0.0, 'month_cost': 0.0})
     by_model = defaultdict(lambda: {'cost': 0.0, 'tokens': 0, 'calls': 0})
     daily = defaultdict(float)
+    # FIX 2026-11-03: 新增 by_agent × by_date 交叉表。
+    # 起因: 看板需要「每个 agent 每天的金额」才能把台账真值画进 daily 图，
+    # 但旧输出只有 daily_last7（全天总计）+ by_agent（累计），缺交叉维度，
+    # 导致 server.js 只能把台账数据补成 0（死代码），daily 图只能去自己扫描。
+    by_agent_daily = defaultdict(lambda: defaultdict(float))
     total_cost = total_tokens = total_calls = 0
 
     for e in ledger.values():
@@ -182,6 +205,7 @@ def main():
         d = parse_ts(e.get('date')) if e.get('date') else None
         if d:
             daily[d.isoformat()] += c
+            by_agent_daily[e['agent']][d.isoformat()] += c
             if d >= month_start: a['month_cost'] += c
             if d == today:       a['today_cost'] += c
 
@@ -194,7 +218,7 @@ def main():
     print(f"  📊 OPC 成本统计 v2 (append-only 台账 · 全量去重)")
     print(f"{'='*70}")
     print(f"  扫描文件: {files} 个 .jsonl (已排除 backups/.trash 历史副本)")
-    print(f"  台账总调用: {len(ledger):,} (本次新增 {new_ids})")
+    print(f"  台账总调用: {len(ledger):,} (本次新增 {new_ids} / 日期更正 {date_fixed})")
     print(f"  统计时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
     print(f"  💰 累计成本(去重真值): ${total_cost:.4f}")
     print(f"  📅 本月累计:           ${month_total:.4f}")
@@ -218,6 +242,8 @@ def main():
             'files_scanned': files,
             'ledger_calls': len(ledger),
             'new_calls_this_scan': new_ids,
+            'date_corrected': date_fixed,
+            'timezone': 'local (Asia/Shanghai, UTC+8) — FIX 2026-11-03',
             'timestamp': datetime.now().isoformat(),
             'method': 'append-only ledger (responseId dedup, full ~/.openclaw walk)',
         },
@@ -235,6 +261,19 @@ def main():
         'by_model': {m: {'cost': round(s['cost'], 4), 'tokens': s['tokens'], 'calls': s['calls']}
                      for m, s in sorted(by_model.items(), key=lambda x: x[1]['cost'], reverse=True)},
         'daily_last7': daily_7,
+        # 看板契约 v2 (2026-11-03 Balance → Kitty): by_agent × by_date 交叉表（近30天）。
+        # 用途: 让 server.js 用台账真值直接画 daily 图，替代「UTC + 无去重」的自扫描。
+        # 口径: 本地时区(UTC+8) · responseId 去重 · usage.cost.total 累加
+        'by_agent_daily_last30': {
+            ag: {d: round(v, 6) for d, v in sorted(days.items())
+                 if d >= (today - timedelta(days=30)).isoformat()}
+            for ag, days in by_agent_daily.items()
+        },
+        'ledger_coverage': {
+            'first_date': min(daily) if daily else None,
+            'last_date': max(daily) if daily else None,
+            'distinct_dates': len(daily),
+        },
     }
     out = sys.argv[1] if len(sys.argv) > 1 else None
     if out:

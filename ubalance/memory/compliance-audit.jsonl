@@ -555,3 +555,7 @@
 {"timestamp":"2026-10-30T00:03:18+0700","check":"L4-audit-v2","agent":"balance","fixes":4,"shallow_issues":1,"deep_issues":0,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
 {"timestamp":"2026-10-30T00:03:36+0700","check":"L4-audit-v2","agent":"balance","fixes":2,"shallow_issues":0,"deep_issues":0,"diary_lines":5,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
 {"timestamp":"2026-11-01T16:19:00+0800","check":"L4-audit-v2","agent":"balance","fixes":5,"shallow_issues":5,"deep_issues":1,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-11-02T00:59:25+0800","check":"L4-audit-v2","agent":"balance","fixes":3,"shallow_issues":5,"deep_issues":2,"diary_lines":4,"diary_sections":1,"checker_runs_today":0,"checker_fails_today":0,"reflexion_today":0}
+{"timestamp":"2026-11-03T00:56:12+0800","check":"post-op","task":"修复成本统计时区bug+台账日期回填","score":3,"total":5,"warnings":[
+  "🔴 任务涉及问题/失败/审计发现，建议提炼到 lessons.md"
+]}
