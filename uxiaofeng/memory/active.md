@@ -1,6 +1,25 @@
 # 当前活跃任务
 
-> 最后更新: 2026-11-02 11:55（网络方案技术审查完成 · 🔴 3 个阻断/复发项已交 Kitty）
+> 最后更新: 2026-11-03 01:25（✅ 成本看板 daily 虚高修复完成，待 Kitty + Balance 验收）
+
+## ✅ 2026-11-03 成本看板 daily 虚高修复（Balance 派单 / Kitty 批准方案 B）
+
+**状态**：改动完成并自测通过，**待 Kitty + Balance 二次验收**
+
+**工程路径**：`/Users/zhaoyuzhao/WorkBuddy/Claw/opc-dashboard`（生产 :8765，PID 33906）
+- 备份：`server.js.bak_costfix_20261103` / `index.html.bak_costfix_20261103`
+- ⚠️ `xiaofeng_workspace/Kitty/opc-dashboard` 是旧副本，不是生产
+
+**改了什么**：UTC 日期→本地时区（3 处）+ responseId 去重 + daily 图数据源换台账 `by_agent_daily_last30` + 删 `balTotalDay` 死代码 + 前端取值修正 + 过期/不可用提示条
+
+**验证结果**：
+- 4.1 脚本 4 项全 PASS：11-03 图表合计 == 台账，差 $0.000000
+- 降级实测（文件缺失 / 缺字段）→ `unavailable` + 空图，0 次 fallback 回自扫描
+- 前端 4 场景模拟全通过
+
+**我修正了方案文档的一处缺陷**：文档让取"每个 agent values 最后一格"，当日零消耗的 agent 会取到昨天的值 → 改为按 `latestDay` + `indexOf` 对齐（详见 lessons 2026-11-03）
+
+---
 
 ## 🔴 2026-11-02 网络方案技术审查（Daryl 新机制首单）
 
