@@ -1,6 +1,14 @@
 # 当前活跃任务
 
-> 最后更新: 2026-11-03 01:00（新增：成本统计时区 bug 已修，看板 server.js 待同步，等 Kitty 定）
+> 最后更新: 2026-11-03 01:20（新增：审计完成 + Git 并发假阳性待 Kitty/Daryl 定 + workspace-balance push 仍阻）
+
+## 🔍 2026-11-03 · 每日记忆归档审计（结果 + 3 项遗留）
+- **审计**：修复 3｜浅层 1｜深层 0｜成本 `fresh_api_ok`（今日 $0.36 / 本月 $2.42 / 全量 $291.26）
+- ✅ 备份链路已实检：`~/.opc-workspace-cache` rsync + commit + push 成功（a06bb86..dc7c434），远端 `ubalance/memory/` 11-01/11-02/11-03 齐全
+- ⏳ **遗留1（等 Kitty/Daryl）**：审计报 `repo pull 失败: Cannot rebase onto multiple branches` = **假阳性**。手工同命令 → `Already up to date.`，无 rebase 残留、`branch.main.merge` 单值。根因＝该 cache repo 多 Agent 共享，23:59 各审计 cron **同分钟并发**写同一 `.git`。修复点在 `~/.openclaw/compliance/scripts/audit.sh`（**全 Agent 共享**）→ P1，不擅动
+- ⏳ **遗留2（等 Daryl）**：`workspace-balance` 自有仓 `origin/main` 停在 d64f635，**本地领先 20 提交推不上去**，根因仍是 3.3GB 历史二进制（前排：Outcome2 323票 zip 504MB + Tools Windows 3 个 152MB zip）。记忆备份走 opc-workspace 已兜底，但自有仓需 Daryl 定拆库/清理
+- ✅ **遗留3（已修）**：`2026-11-02.md` 原为 5 行 Cron 骨架 → 已按证据链重写定性「无实质业务活动」；`lessons.md` 补 2 条（纯 Cron 日写法模板 / Git 并发假阳性先怀疑并发）
+
 
 ## 🔧 2026-11-03 · 成本统计时区修复（已修完我的，看板待定）
 - ✅ `scripts/full_cost_scan.py`：`parse_ts()` 改本地时区 + 台账 date 回填 8244 条
