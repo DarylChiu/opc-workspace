@@ -195,6 +195,42 @@ def atomic_write_ledger(ledger):
         raise
 
 
+def _build_daily_matrix(by_agent_daily, today):
+    """构造 by_agent × by_date 的「完整矩阵」：所有 agent 用同一套日期轴，缺的补 0。
+
+    为什么需要：前端 Chart A 的 labels 是全局共享数组，所有 agent 的 values 按 index 对齐。
+    若某 agent 某日无消耗就不出 key，labels 与 values 长度不一致 → Chart.js 静默错位/报错。
+
+    FIX 2026-11-03(b): 实测未补零前各 agent 日期集合不一致（Bryson 缺 2 天等）。
+
+    FIX 2026-11-03(c): 加自检断言。这个函数一旦失效，前端会静默取到错值
+    （dev 侧 fallback 会取“最后一格”= 昨天值），不会报错。
+    所以必须在这里留痕，不能依赖下游发现。
+    """
+    floor = (today - timedelta(days=30)).isoformat()
+    # 先取所有 agent 在该窗口内出现过的日期并集
+    all_dates = set()
+    for days in by_agent_daily.values():
+        all_dates.update(d for d in days if d >= floor)
+    axis = sorted(all_dates)
+    if not axis:
+        return {}
+    matrix = {
+        ag: {d: round(days.get(d, 0.0), 6) for d in axis}
+        for ag, days in by_agent_daily.items()
+    }
+    # ---- 自检：所有 agent 必须拥有完全相同的日期键集合 ----
+    key_sets = {ag: frozenset(row.keys()) for ag, row in matrix.items()}
+    if len(set(key_sets.values())) > 1:
+        print('⚠️  WARN: by_agent_daily_last30 矩阵日期轴不一致（下补零逻辑失效），')
+        print('    这将导致前端 Chart.js 错位。详情：')
+        for ag, ks in key_sets.items():
+            print(f'      {ag}: {len(ks)} 天')
+    else:
+        print(f'  ✅ 矩阵自检通过: {len(matrix)} agents × {len(axis)} 天（日期轴完全一致）')
+    return matrix
+
+
 def main():
     lock = acquire_lock()  # noqa: F841  (保持引用，不能提前释放)
     ledger = load_ledger()
@@ -303,11 +339,12 @@ def main():
         # 看板契约 v2 (2026-11-03 Balance → Kitty): by_agent × by_date 交叉表（近30天）。
         # 用途: 让 server.js 用台账真值直接画 daily 图，替代「UTC + 无去重」的自扫描。
         # 口径: 本地时区(UTC+8) · responseId 去重 · usage.cost.total 累加
-        'by_agent_daily_last30': {
-            ag: {d: round(v, 6) for d, v in sorted(days.items())
-                 if d >= (today - timedelta(days=30)).isoformat()}
-            for ag, days in by_agent_daily.items()
-        },
+        #
+        # FIX 2026-11-03(b): 矩阵补零。前端 Chart A 的 labels 是全局共享的，
+        # 若某 agent 某日无消耗就不出 key，会导致 labels.length != values.length → Chart.js 错位。
+        # （实测未补零前：Bryson 缺 2 天、Balance 缺 1 天、Self 缺 1 天，日期集合不一致）
+        # 因此取「并集日期」作为共同轴，缺的补 0。
+        'by_agent_daily_last30': _build_daily_matrix(by_agent_daily, today),
         'ledger_coverage': {
             'first_date': min(daily) if daily else None,
             'last_date': max(daily) if daily else None,
