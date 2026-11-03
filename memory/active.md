@@ -1,8 +1,47 @@
 # 当前活跃任务
 
-> 最后更新: 2026-11-01 16:30（搬家后首次开机 · 🔴 157 个记忆文件冲突标记污染已无损修复）
+> 最后更新: 2026-11-03 01:25（✅ 成本看板 daily 虚高修复完成，待 Kitty + Balance 验收）
 
-## 🔴 2026-11-01 搬家后首次开机（最高优先级）
+## ✅ 2026-11-03 成本看板 daily 虚高修复（Balance 派单 / Kitty 批准方案 B）
+
+**状态**：改动完成并自测通过，**待 Kitty + Balance 二次验收**
+
+**工程路径**：`/Users/zhaoyuzhao/WorkBuddy/Claw/opc-dashboard`（生产 :8765，PID 33906）
+- 备份：`server.js.bak_costfix_20261103` / `index.html.bak_costfix_20261103`
+- ⚠️ `xiaofeng_workspace/Kitty/opc-dashboard` 是旧副本，不是生产
+
+**改了什么**：UTC 日期→本地时区（3 处）+ responseId 去重 + daily 图数据源换台账 `by_agent_daily_last30` + 删 `balTotalDay` 死代码 + 前端取值修正 + 过期/不可用提示条
+
+**验证结果**：
+- 4.1 脚本 4 项全 PASS：11-03 图表合计 == 台账，差 $0.000000
+- 降级实测（文件缺失 / 缺字段）→ `unavailable` + 空图，0 次 fallback 回自扫描
+- 前端 4 场景模拟全通过
+
+**我修正了方案文档的一处缺陷**：文档让取"每个 agent values 最后一格"，当日零消耗的 agent 会取到昨天的值 → 改为按 `latestDay` + `indexOf` 对齐（详见 lessons 2026-11-03）
+
+---
+
+## 🔴 2026-11-02 网络方案技术审查（Daryl 新机制首单）
+
+**Daryl 指令**：找 Kitty 要网络准备实施方案 → 给建议 → 各 Agent 以后互相复盘方案和审查，避免方案出错浪费钱。
+
+**产出**：`memory/reviews/2026-11-02-网络方案技术审查.md`（约 4KB，全部基于本机实测取证，未改任何配置）
+
+**审出的关键问题（均已回传 Kitty）**：
+- **P0-1（阻断）** 路径 C「Mac 当旁路由」当前物理不可行：实测 7892 只绑 `127.0.0.1`，配合 App `allow-lan=false`，手机根本连不上。方案缺「开 allow-lan → 确认监听 0.0.0.0」前置步骤，不补必白测一轮
+- **P0-2** iOS 手工代理只覆盖遵循系统代理的 App，自带网络栈的 App 会直连失败 → C 的验收天花板，不能承诺「全部 App 可上网」
+- **P1-1** 带宽门槛单位错位：方案写 `>30MB/s`，自己实测却是 `4.57MB/s≈36Mbps`，300M 宽带理论才 37.5MB/s → 会假通过。建议改「合格 25 / 优秀 35 MB/s」
+- **P1-2** 「互联网共享 + TUN 冲突」缺判据 → 给出 `netstat -rn -f inet | head -3` 看 default 指向 utun* 还是 en0
+- **P2-1** 流量不构成约束：实测总量 200GB / 已用 199.4MB（0.1%）/ 到期 2026-12-01 → 删除一切「省流量」取舍
+- **P2-2（复发坑）** `wf_sub_cleaned.yaml` 明天就失效：实测 `auto_update=1`、`86400000ms`＝每日自动更新，香港02 坏节点每次都会写回。建议 mihomo `proxy-providers` + health-check 自愈，否则每天复发 `invalid REALITY short ID`
+- **P3-1（漏掉的最大风险）** 代理单点故障：实测 `OPENCLAW_PROXY_ACTIVE=1` + `http_proxy/https_proxy` 全指向 7892，按官方文档 = Gateway **全量** egress 走代理，不止 web_search。微风挂 → DeepSeek API 全挂 → 四 Agent 同时停摆。建议补端口探活 + 失败自动回退 `proxy.enabled=false` + 告警
+- **🟡** `wf_sub_raw.yaml` 含订阅 token，`~/.openclaw/workspace` 的 `.gitignore` 未排除 `memory/network/`，加 remote 会明文外泄 → 建议加 .gitignore
+
+**旁证收益**：实测走代理访问 LLM 更稳（直连 0.24/0.86/0.20s 抖动 vs 代理 0.19/0.18/0.19s 稳定），本地服务 8765 走 7892 也正常（200/0.87s）→ 代理本身没问题，缺的只是降级机制。
+
+**后续**：已向 Kitty 提议把「跨 Agent 方案互审」固化为流程（动基础设施的方案 → 另一 Agent 做「阻断项/成本/复发风险」三档审查 → 结果落 `memory/reviews/`），等 Daryl 拍板。
+
+## 🔴 2026-11-01 搬家后首次开机（已完成）
 
 **系统已迁至广东江门（UTC+8），10/30 10:58 关机 → 11/01 16:02 开机，空窗约 4 天。**
 
