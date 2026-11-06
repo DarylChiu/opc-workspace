@@ -1,4 +1,14 @@
 
+## 2026-11-06 23:59 · 系统状态（当日主线：代理事故复盘 + 微风第3次故障 + IELTS Tutor 对抗评审）
+- **🔴 当日最大事件**：11-05 全天无法回复根因定位 = `proxy.enabled=true` 指向死端口 7892（无监听）。11-06 10:53 Daryl 批准后 `proxy.enabled=false` + 网关重启（pid 36140），deepseek 401/0.28s、feishu 404/0.13s 直连复验通过。事故报告 `memory/incident_2026-11-05_no_reply_proxy.md` 已交付
+- **同步查出历史断层**：11-01、11-02、11-04×2、11-05 归档 cron 全部 `Connection error` 失败 → 历史日记有缺口，已补记
+- **微风（WeiFeng）当日第 3 次故障**：节点域名 `asfhwsrgseg.weifengchat.vip` NXDOMAIN（阿里/腾讯/Google/DoH 全无记录），父域也死，历史 IP 直连全不通 → 服务商侧删 DNS，**不可自愈**。已上线 `scripts/compliance/proxy_alert.sh`（launchd `ai.openclaw.proxy-alert`，每 3 分钟，只查代理出口，连续 3 轮失败才报）
+- **看板**：真身 `/Users/zhaoyuzhao/WorkBuddy/Claw/opc-dashboard`（端口 8765，不在 workspace 内）。新增 `/api/collab` + 「协作记录」panel + `scripts/compliance/collab_log.py`。Kitty 角色铁律 = **B 呈现者 + C 问假设者，不做 A 拍板者**
+- **Atlas 授权澄清**：Daryl 确认 Atlas 是他授权的（撤回“未授权安全缺口”判断）；保留事实 = 通道**单向**（Atlas→Agent 能，Agent→Atlas 不能）
+- **IELTS Tutor 对抗评审**：与 Bryson 完整对打一轮（6 条批评我逐条裁：反驳 2 / 认 1 且更狠 / 他误读 1 / 方向对结论错 1 / 一半打空 1 / 对但归因错 1）。交付 `docs/ielts_tutor_v01_daryl_质询清单_20261106.md`（10 条 Q，含“可能输在哪”一栏）。看板 `ct_51704405`
+- 🟡 **未决（等 Daryl）**：① 微风是否换服务商/加备用链路 ② IELTS Tutor 明日逐条质询（Daryl 已预告）③ Atlas 屏幕上是否“持续输出”还是“Reconnecting”待确认
+- **教训**：①静默故障可连躺 4 天——失败路径全指日志、无一指向人，**可用性告警必须与故障组件走不同链路** ②代理类故障必须多时刻多次验证（我当天两次判断被推翻）③“替对方预设答案”是最隐蔽的降标准，预设在文档里比嘴上说错更危险
+
 ## 2026-11-02 23:59 · 系统状态（当日主线：网络方案 + Codex 代理 + 电视改造取证）
 - **归档审计**：23:59 audit.sh 全量跑完，自动修复 2 项（Git commit+push）；浅层 3 项已人工闭环：①active.md 刷新（本段）②成本台账手动补跑（Balance 23:45 扫描连续 2 天漏跑 → 已用 full_cost_scan + generate_cost_daily 回填至 11-03 00:01）③repo pull 已复核为「Already up to date」（`/tmp` 报错实为浅层告警，非真断链）
 - **备份链路**：远端 `umain/memory/2026-11-02.md` 已确认，D-1~D-3 完整 ✅
@@ -24,7 +34,7 @@
 
 # 当前活跃任务
 
-> 最后更新: 2026-11-02 23:59 GMT+8（每日归档审计）
+> 最后更新: 2026-11-06 23:59 GMT+8（每日归档审计）
 >
 > 🆕 **10/24 私聊战略主线（last day 10/30 前最重的一段，详见 memory/2026-10-24.md 10:12–11:02）**：
 > ① 身份转换＝打工人→创业者（销售/采购/HR/财务/战略），核心难点是**失去外部否定信号**
