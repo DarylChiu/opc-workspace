@@ -1,0 +1,238 @@
+#!/bin/bash
+# alive_check.sh — 可用性守夜人（系统级，不依赖 LLM）
+# 2026-11-06 建立，起因：11-05 全天静默故障，无任何告警送达 Daryl
+#
+# 设计铁律：
+#   1. 不回显任何 secret（凭证只写临时 header 文件，用后即删）
+#   2. 告警走 openclaw message send —— 与 Agent 的 LLM 链路完全独立
+#      （LLM 挂了 → 消息通道照样能发；两者同时挂才发不出，此时本地落盘）
+#   3. 状态机去重：FAIL 只在「首次进入失败」时告警，持续失败每 30min 复报一次
+#   4. 依赖仅 curl / python3 / openclaw，无第三方包
+#
+# 检查项：
+#   A. DeepSeek API 直连可达（带真实鉴权）
+#   B. 飞书 API 可达
+#   C. 网关进程存活 + 18789 端口监听
+#   D. 网关出站是否仍被代理污染（OPENCLAW_PROXY_ACTIVE）
+#   E. 各 Agent 最近一次 LLM 调用是否报错（扫 session jsonl 尾部）
+#   F. 本机默认路由可用
+#
+# 用法：
+#   alive_check.sh            # 正常检查，异常才告警（静默成功）
+#   alive_check.sh --test     # 只跑检查并打印结果，不发送告警
+
+set -uo pipefail
+export PATH=/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+
+WS="/Users/zhaoyuzhao/.openclaw/workspace"
+STATE_DIR="$WS/memory/alive"
+STATE_FILE="$STATE_DIR/state.json"
+LOG_FILE="$STATE_DIR/alive.log"
+TARGET="user:ou_3bf0d4dcf7a80d6ddf15be5bd2f7ad4f"
+COOLDOWN=1800   # 持续失败时复报间隔（秒）
+
+TEST_MODE=0
+[ "${1:-}" = "--test" ] && TEST_MODE=1
+
+mkdir -p "$STATE_DIR"
+touch "$LOG_FILE"
+
+log() { echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" >> "$LOG_FILE"; }
+
+FAILS=()
+FAIL_KEYS=()
+add_fail() { FAIL_KEYS+=("$1"); FAILS+=("$2"); log "FAIL[$1] $2"; }
+
+# ---------- A. DeepSeek 真实鉴权探测 ----------
+probe_deepseek() {
+  local key="" hdr resp code
+  # 优先环境变量
+  key="${DEEPSEEK_API_KEY:-}"
+  # 退回配置里的 apiKey（只读取，不打印）
+  if [ -z "$key" ] && [ -f "$HOME/.openclaw/openclaw.json" ]; then
+    key=$(python3 - <<'PY' 2>/dev/null
+import json,os
+p=os.path.expanduser('~/.openclaw/openclaw.json')
+d=json.load(open(p))
+def walk(o):
+    if isinstance(o,dict):
+        for k,v in o.items():
+            if k in ('apiKey','api_key','key') and isinstance(v,str) and v.startswith('sk-'):
+                return v
+            r=walk(v)
+            if r: return r
+    elif isinstance(o,list):
+        for v in o:
+            r=walk(v)
+            if r: return r
+    return None
+print(walk(d) or '')
+PY
+)
+  fi
+  if [ -z "$key" ]; then
+    add_fail "deepseek_key" "DeepSeek 凭证读取失败（无法验证 API 可用性）"
+    return
+  fi
+
+  hdr=$(mktemp)
+  chmod 600 "$hdr"
+  printf 'Authorization: Bearer %s\n' "$key" > "$hdr"
+  # 用余额查询接口：能鉴权即代表链路+凭证双通（不消耗 token）
+  resp=$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 \
+        --noproxy '*' -H @"$hdr" https://api.deepseek.com/user/balance 2>/dev/null)
+  rm -f "$hdr"
+
+  case "$resp" in
+    200) : ;;  # 完全健康
+    401|403) add_fail "deepseek_auth" "DeepSeek 鉴权失败（HTTP $resp）—— key 可能失效/欠费" ;;
+    000|"") add_fail "deepseek_net" "DeepSeek 网络不可达（连接失败）—— 网络或代理问题" ;;
+    *) add_fail "deepseek_http" "DeepSeek 返回异常状态 HTTP $resp" ;;
+  esac
+}
+
+# ---------- B. 飞书 API ----------
+probe_feishu() {
+  local code
+  code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 15 --noproxy '*' \
+         https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal 2>/dev/null)
+  case "$code" in
+    000|"") add_fail "feishu_net" "飞书 API 不可达（连接失败）" ;;
+    5*)     add_fail "feishu_5xx" "飞书 API 异常 HTTP $code" ;;
+    *)      : ;;
+  esac
+}
+
+# ---------- C. 网关进程 + 端口 ----------
+# 端口探测优先（不受 argv 截断影响）：18789 监听 = 网关活着
+GW_PIDS=""
+find_gateway() {
+  # 候选 1: 端口持有者
+  local p
+  p=$(lsof -nP -iTCP:18789 -sTCP:LISTEN -t 2>/dev/null | head -1)
+  if [ -n "$p" ]; then echo "$p"; return; fi
+  # 候选 2: ps 全量比对（避免 pgrep -f 的 argv 截断误判）
+  ps -ax -o pid,command 2>/dev/null | grep -F "index.js gateway" | grep -v grep | awk '{print $1}' | head -1
+}
+
+probe_gateway() {
+  GW_PIDS=$(find_gateway)
+  if [ -z "$GW_PIDS" ]; then
+    add_fail "gateway_proc" "网关进程不存在（Agent 全部离线）"
+    return
+  fi
+  if ! lsof -nP -iTCP:18789 -sTCP:LISTEN >/dev/null 2>&1; then
+    add_fail "gateway_port" "网关 18789 未监听"
+  fi
+}
+
+# ---------- D. 代理污染检测 ----------
+probe_proxy_pollution() {
+  local gwpid
+  local gwpid
+  gwpid=$([ -n "${GW_PIDS:-}" ] && echo "$GW_PIDS" || find_gateway)
+  [ -z "$gwpid" ] && return
+  if ps eww "$gwpid" 2>/dev/null | grep -q "OPENCLAW_PROXY_ACTIVE=1"; then
+    local pj
+    pj=$(python3 -c "import json,os;print(json.dumps(json.load(open(os.path.expanduser('~/.openclaw/openclaw.json'))).get('proxy'),ensure_ascii=False))" 2>/dev/null)
+    add_fail "proxy_pollution" "网关进程仍带代理环境变量（proxy 配置=$pj）—— 与 11-05 故障同形态"
+  fi
+}
+
+# ---------- E. Agent 最近 LLM 调用健康 ----------
+probe_agent_llm() {
+  local bad=""
+  for d in "$HOME"/.openclaw/agents/*/sessions; do
+    [ -d "$d" ] || continue
+    local agent newest
+    agent=$(basename "$(dirname "$d")")
+    newest=$(ls -t "$d"/*.jsonl 2>/dev/null | head -1)
+    [ -z "$newest" ] && continue
+    # 只看最近 10 分钟内有更新的 session，避免历史错误反复报警
+    if [ -n "$(find "$newest" -mmin -10 2>/dev/null)" ]; then
+      local err
+      err=$(tail -20 "$newest" 2>/dev/null | python3 -c "
+import sys,json
+last=None
+for line in sys.stdin:
+    try: o=json.loads(line)
+    except: continue
+    if o.get('type')=='message' and o.get('message',{}).get('role')=='assistant':
+        last=o['message']
+if last and last.get('stopReason')=='error':
+    print(last.get('errorMessage','error')[:120])
+" 2>/dev/null)
+      [ -n "$err" ] && bad="$bad $agent($err)"
+    fi
+  done
+  [ -n "$bad" ] && add_fail "agent_llm" "Agent 最近调用报错:$bad"
+}
+
+# ---------- F. 默认路由 ----------
+probe_route() {
+  local gw
+  gw=$(route -n get default 2>/dev/null | awk '/gateway:/{print $2}')
+  if [ -z "$gw" ]; then
+    add_fail "route" "无默认路由（网络断开）"
+  elif ! ping -c 1 -t 3 "$gw" >/dev/null 2>&1; then
+    add_fail "route_gw" "默认网关 $gw 不可达"
+  fi
+}
+
+# ========== 执行 ==========
+probe_route
+probe_gateway          # 先定位网关 pid
+probe_proxy_pollution
+probe_deepseek
+probe_feishu
+probe_agent_llm
+
+NOW=$(date +%s)
+PREV_STATUS=$(python3 -c "import json,os;print(json.load(open('$STATE_FILE'))['status'])" 2>/dev/null || echo "ok")
+PREV_TS=$(python3 -c "import json,os;print(json.load(open('$STATE_FILE'))['last_alert_ts'])" 2>/dev/null || echo "0")
+
+if [ ${#FAILS[@]} -eq 0 ]; then
+  if [ "$PREV_STATUS" != "ok" ]; then
+    log "RECOVERED — 所有检查恢复正常"
+  fi
+  printf '{"status":"ok","last_check_ts":%s,"last_alert_ts":%s,"fails":[]}\n' "$NOW" "$PREV_TS" > "$STATE_FILE"
+  if [ $TEST_MODE -eq 1 ]; then echo "OK — 全部检查通过"; fi
+  exit 0
+fi
+
+# 有失败
+SIG=$(printf '%s\n' "${FAIL_KEYS[@]}" | sort | tr '\n' ',')
+LAST_SIG=$(python3 -c "import json;print(json.load(open('$STATE_FILE')).get('sig',''))" 2>/dev/null || echo "")
+
+NEED_ALERT=0
+if [ "$PREV_STATUS" = "ok" ] || [ "$LAST_SIG" != "$SIG" ]; then
+  NEED_ALERT=1                      # 首次进入失败 / 故障集合变化
+elif [ $((NOW - PREV_TS)) -ge $COOLDOWN ]; then
+  NEED_ALERT=1                      # 持续失败，定期复报
+fi
+
+BODY="🚨 守夜人告警 · $(date '+%m-%d %H:%M')
+
+检测到 ${#FAILS[@]} 项异常：
+$(printf '• %s\n' "${FAILS[@]}")
+
+（若需排查请直接问我；这是系统级自动告警，不消耗模型额度）"
+
+printf '{"status":"fail","sig":"%s","last_check_ts":%s,"last_alert_ts":%s,"fails":%s}\n' \
+  "$SIG" "$NOW" \
+  "$([ $NEED_ALERT -eq 1 ] && echo $NOW || echo $PREV_TS)" \
+  "$(python3 -c "import json,sys;print(json.dumps(sys.argv[1:],ensure_ascii=False))" "${FAILS[@]}")" \
+  > "$STATE_FILE"
+
+if [ $TEST_MODE -eq 1 ]; then
+  echo "FAIL — ${FAILS[*]}"
+  exit 1
+fi
+
+if [ $NEED_ALERT -eq 1 ]; then
+  openclaw message send --channel feishu --account default --target "$TARGET" --message "$BODY" >> "$LOG_FILE" 2>&1
+  log "ALERT SENT: $SIG"
+else
+  log "fail persists (no alert, cooldown): $SIG"
+fi
+exit 1

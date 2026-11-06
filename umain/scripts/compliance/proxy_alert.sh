@@ -1,0 +1,272 @@
+#!/bin/bash
+# proxy_alert.sh — 代理专用告警（只报代理，不报别的）
+# 2026-11-06 晚建立。起因：微风 17:37-20:20 挂 2.5 小时，无人告警。
+#
+# 与之前失败方案的区别（吸取 2026-11-06 两次教训）：
+#   ❌ 旧 alive_check.sh  : 什么都查 → 盲扫 sk- 抓到 Kimi key → 误报"DeepSeek key 失效"
+#   ❌ 旧 health_ping.sh  : 只查 Agent 死活（DeepSeek 直连）→ 代理挂了完全不管
+#   ✅ 本脚本           : 只查一件事——代理能不能真的出网
+#
+# 设计铁律：
+#   1. 只查代理出口，不查 API key / 网关 / 磁盘（那些会误报且与代理无关）
+#   2. 连续 FAIL_THRESHOLD 轮失败才告警（默认 3 轮 × 3 分钟 = 9 分钟），避免抖动误报
+#   3. 纯事实陈述，不猜原因（"代理不可用"，不写"可能欠费/失效"）
+#   4. 一天最多 MAX_ALERT_PER_DAY 次告警（默认 3），防刷屏
+#   5. 恢复也通知，带持续时长
+#   6. 故障持续中每 REPEAT_INTERVAL 复报一次（默认 60 分钟），不闷死
+
+set -uo pipefail
+export PATH=/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+
+WS="/Users/zhaoyuzhao/.openclaw/workspace"
+STATE_DIR="$WS/memory/proxy_alert"
+STATE_FILE="$STATE_DIR/state.json"
+LOG="$STATE_DIR/proxy_alert.log"
+TARGET="user:ou_3bf0d4dcf7a80d6ddf15be5bd2f7ad4f"
+
+PROXY_HOST="127.0.0.1"
+PROXY_PORT="7892"
+PROXY_API="http://127.0.0.1:9090"
+PROBE_URL="https://chatgpt.com"       # 只走代理才能到的目标
+PROBES_PER_ROUND=3                     # 每轮探几次（全失败才算这轮失败）
+FAIL_THRESHOLD=3                       # 连续几轮失败才告警（3轮×3分=9分钟）
+MAX_ALERT_PER_DAY=3                    # 每天最多告警次数
+REPEAT_INTERVAL=3600                   # 持续故障复报间隔（秒）
+RECOVER_REPORT=1                       # 恢复也通知
+
+# 节点健康度（2026-11-06 新增，Daryl 要求全节点可见）
+HEALTH_ENABLE=1                        # 1=启用全节点健康度探测
+HEALTH_GROUP="自动选择"                 # 测哪个组（自动选择含全部56节点）
+HEALTH_COOLDOWN=900                    # 健康度探测间隔（秒，默认15分钟）
+HEALTH_WARN_PCT=20                     # 可用率低于此值才告警（%）
+HEALTH_RECOVER_PCT=80                  # 恢复到此值才算健康
+
+TEST=0
+[ "${1:-}" = "--test" ] && TEST=1
+
+mkdir -p "$STATE_DIR"; touch "$LOG"
+log() { echo "[$(date '+%F %T')] $*" >> "$LOG"; }
+
+# ---------- 单轮探测 ----------
+probe() {
+  ROUND_OK=0
+  ROUND_FAIL=0
+  PORT_UP=0
+  EXIT_CODE=""
+
+  nc -z -G 2 "$PROXY_HOST" "$PROXY_PORT" >/dev/null 2>&1 && PORT_UP=1
+
+  if [ "$PORT_UP" -eq 0 ]; then
+    ROUND_FAIL=$PROBES_PER_ROUND
+    EXIT_CODE="port_down"
+    return
+  fi
+
+  local i code
+  for i in $(seq 1 "$PROBES_PER_ROUND"); do
+    code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 10 \
+           -x "http://${PROXY_HOST}:${PROXY_PORT}" "$PROBE_URL" 2>/dev/null)
+    if [ "$code" = "200" ]; then
+      ROUND_OK=$((ROUND_OK+1))
+    else
+      ROUND_FAIL=$((ROUND_FAIL+1))
+      EXIT_CODE="$code"
+    fi
+  done
+}
+
+# ---------- 节点健康度探测（全组，2秒出结果）----------
+HEALTH_TOTAL=0
+HEALTH_OK=0
+HEALTH_PCT=0
+HEALTH_DETAIL=""
+probe_health() {
+  [ "$HEALTH_ENABLE" -ne 1 ] && return
+  [ "$PORT_UP" -eq 0 ] && { HEALTH_DETAIL="port_down"; return; }
+
+  local out
+  out=$(python3 - "$HEALTH_GROUP" <<'PY' 2>/dev/null
+import json, urllib.request, urllib.parse, sys, time
+group = sys.argv[1]
+API = "http://127.0.0.1:9090"
+opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
+enc = urllib.parse.quote(group)
+
+# 注意：单节点超时太小会让整组返回 504（实测 3000ms 挂、5000ms 正常）
+# 节点越少（大面积故障）阈值需要越大，所以用 5000ms + 失败重试
+def try_probe(node_timeout):
+    url = f"{API}/group/{enc}/delay?url=http%3A%2F%2Fwww.gstatic.com%2Fgenerate_204&timeout={node_timeout}"
+    return json.load(opener.open(url, timeout=120))
+
+r = None
+for tmo in (5000, 8000):
+    try:
+        r = try_probe(tmo)
+        break
+    except Exception:
+        time.sleep(1)
+
+if not isinstance(r, dict) or not r:
+    print("0 0")
+    raise SystemExit
+total = len(r)
+ok = sum(1 for v in r.values() if v)
+print(f"{total} {ok}")
+PY
+)
+  HEALTH_TOTAL=$(echo "$out" | awk '{print $1}')
+  HEALTH_OK=$(echo "$out" | awk '{print $2}')
+  if [ -n "$HEALTH_TOTAL" ] && [ "$HEALTH_TOTAL" -gt 0 ]; then
+    HEALTH_PCT=$((HEALTH_OK * 100 / HEALTH_TOTAL))
+  else
+    HEALTH_PCT=0
+  fi
+  log "HEALTH $HEALTH_OK/$HEALTH_TOTAL (${HEALTH_PCT}%)"
+}
+
+# ---------- 读取历史状态 ----------
+NOW=$(date +%s)
+TODAY=$(date +%Y-%m-%d)
+
+read_state() {
+  if [ -f "$STATE_FILE" ]; then
+    ST_STATUS=$(python3 -c "import json;print(json.load(open('$STATE_FILE')).get('status','ok'))" 2>/dev/null || echo ok)
+    ST_FAIL_ROUNDS=$(python3 -c "import json;print(json.load(open('$STATE_FILE')).get('fail_rounds',0))" 2>/dev/null || echo 0)
+    ST_FAIL_SINCE=$(python3 -c "import json;print(json.load(open('$STATE_FILE')).get('fail_since',0))" 2>/dev/null || echo 0)
+    ST_ALERT_DAY=$(python3 -c "import json;print(json.load(open('$STATE_FILE')).get('alert_day',''))" 2>/dev/null || echo "")
+    ST_ALERT_CNT=$(python3 -c "import json;print(json.load(open('$STATE_FILE')).get('alert_count',0))" 2>/dev/null || echo 0)
+    ST_LAST_ALERT=$(python3 -c "import json;print(json.load(open('$STATE_FILE')).get('last_alert_ts',0))" 2>/dev/null || echo 0)
+  else
+    ST_STATUS=ok; ST_FAIL_ROUNDS=0; ST_FAIL_SINCE=0
+    ST_ALERT_DAY=""; ST_ALERT_CNT=0; ST_LAST_ALERT=0
+  fi
+  [ "$ST_ALERT_DAY" != "$TODAY" ] && ST_ALERT_CNT=0
+}
+
+write_state() {
+  local LH=${LAST_HEALTH:-0}
+  [ "$HEALTH_TOTAL" -gt 0 ] && LH=$NOW
+  printf '{"status":"%s","fail_rounds":%s,"fail_since":%s,"alert_day":"%s","alert_count":%s,"last_alert_ts":%s,"last_check_ts":%s,"last_health_ts":%s,"health_ok":%s,"health_total":%s}\n' \
+    "$1" "$2" "$3" "$TODAY" "$ST_ALERT_CNT" "$ST_LAST_ALERT" "$NOW" "$LH" "${HEALTH_OK:-0}" "${HEALTH_TOTAL:-0}" > "$STATE_FILE"
+}
+
+# ---------- 时长格式化 ----------
+human_duration() {
+  local secs=$1
+  [ "$secs" -lt 0 ] && secs=0
+  if [ "$secs" -lt 60 ]; then echo "${secs}秒"
+  elif [ "$secs" -lt 3600 ]; then echo "$((secs/60))分钟"
+  else
+    local h=$((secs/3600)) m=$(((secs%3600)/60))
+    [ "$m" -eq 0 ] && echo "${h}小时" || echo "${h}小时${m}分钟"
+  fi
+}
+
+# ---------- 发送通知 ----------
+send() {
+  local body="$1"
+  if [ "$TEST" -eq 1 ]; then
+    echo "[TEST] 将发送: $body"
+    return
+  fi
+  openclaw message send --channel feishu --account default --target "$TARGET" --message "$body" >> "$LOG" 2>&1
+  log "NOTIFIED"
+}
+
+# ========== 主流程 ==========
+read_state
+
+probe
+
+if [ "$ROUND_OK" -gt 0 ]; then
+  # ===== 本轮成功 =====
+  # 健康度：按冷却间隔跑（默认15分钟一次，避免每3分钟测全组）
+  HEALTH_LINE=""
+  LAST_HEALTH=$(python3 -c "import json;print(json.load(open('$STATE_FILE')).get('last_health_ts',0))" 2>/dev/null || echo 0)
+  if [ $((NOW - LAST_HEALTH)) -ge $HEALTH_COOLDOWN ]; then
+    probe_health
+    HEALTH_LINE="
+节点健康度：${HEALTH_OK}/${HEALTH_TOTAL} 可用（${HEALTH_PCT}%）"
+    # 健康度严重下降也告警（当前出口通但大面积节点失效）
+    if [ "$HEALTH_TOTAL" -gt 0 ] && [ "$HEALTH_PCT" -lt "$HEALTH_WARN_PCT" ]; then
+      if [ "$ST_ALERT_CNT" -lt "$MAX_ALERT_PER_DAY" ]; then
+        send "⚠️ 节点大面积失效 · $(date '+%m-%d %H:%M')
+
+当前出口还能用，但节点健康度只有 ${HEALTH_OK}/${HEALTH_TOTAL}（${HEALTH_PCT}%）。
+
+说明微风服务商在批量掉线，随时可能全部不可用。"
+        ST_ALERT_CNT=$((ST_ALERT_CNT+1)); ST_LAST_ALERT=$NOW
+        log "HEALTH ALERT SENT (${HEALTH_PCT}%)"
+      fi
+    fi
+  else
+    HEALTH_LINE="
+节点健康度：上次 ${HEALTH_OK:-?}/${HEALTH_TOTAL:-?}（每 $((HEALTH_COOLDOWN/60)) 分钟更新）"
+  fi
+
+  if [ "$ST_STATUS" = "fail" ]; then
+    # 刚恢复
+    DUR=$(human_duration $((NOW - ST_FAIL_SINCE)))
+    log "RECOVERED after $DUR (fail_rounds was $ST_FAIL_ROUNDS)"
+    if [ "$RECOVER_REPORT" -eq 1 ]; then
+      send "✅ 代理已恢复 · $(date '+%m-%d %H:%M')
+
+故障持续约 ${DUR}，现在已能正常访问。${HEALTH_LINE}"
+    fi
+  fi
+  write_state "ok" 0 0
+  [ "$TEST" -eq 1 ] && echo "OK — 代理正常（${ROUND_OK}/${PROBES_PER_ROUND} 成功）"
+  exit 0
+fi
+
+# ===== 本轮全失败 =====
+NEW_FAIL_ROUNDS=$((ST_FAIL_ROUNDS + 1))
+NEW_FAIL_SINCE=$ST_FAIL_SINCE
+[ "$NEW_FAIL_SINCE" -eq 0 ] && NEW_FAIL_SINCE=$NOW
+
+log "FAIL round $NEW_FAIL_ROUNDS/$FAIL_THRESHOLD (port_up=$PORT_UP code=$EXIT_CODE)"
+
+# 还没到阈值 → 只记录，不打扰
+if [ "$NEW_FAIL_ROUNDS" -lt "$FAIL_THRESHOLD" ]; then
+  write_state "degraded" "$NEW_FAIL_ROUNDS" "$NEW_FAIL_SINCE"
+  [ "$TEST" -eq 1 ] && echo "DEGRADED — 连续失败 $NEW_FAIL_ROUNDS/$FAIL_THRESHOLD 轮（未到告警阈值）"
+  exit 0
+fi
+
+# 到阈值 → 判断是否该发
+NEED_ALERT=0
+if [ "$ST_STATUS" != "fail" ]; then
+  NEED_ALERT=1                                    # 首次进入故障
+elif [ $((NOW - ST_LAST_ALERT)) -ge $REPEAT_INTERVAL ]; then
+  NEED_ALERT=1                                    # 持续故障，定期复报
+fi
+
+if [ "$ST_ALERT_CNT" -ge "$MAX_ALERT_PER_DAY" ] && [ "$NEED_ALERT" -eq 1 ]; then
+  log "今日告警已达上限($MAX_ALERT_PER_DAY)，跳过通知"
+  NEED_ALERT=0
+fi
+
+if [ "$NEED_ALERT" -eq 1 ]; then
+  DUR=$(human_duration $((NOW - NEW_FAIL_SINCE)))
+
+  if [ "$PORT_UP" -eq 0 ]; then
+    DETAIL="代理程序没有在运行（端口 ${PROXY_PORT} 无响应）"
+  else
+    DETAIL="代理程序还在跑，但连不上外网（连续 ${NEW_FAIL_ROUNDS} 轮探测全部失败）"
+  fi
+
+  send "⚠️ 代理不可用 · $(date '+%m-%d %H:%M')
+
+${DETAIL}
+已持续约 ${DUR}。
+
+需要翻墙的程序（Codex / ChatGPT）现在用不了，其他一切正常。"
+
+  ST_ALERT_CNT=$((ST_ALERT_CNT+1))
+  ST_LAST_ALERT=$NOW
+  log "ALERT SENT (count=$ST_ALERT_CNT, duration=$DUR)"
+fi
+
+write_state "fail" "$NEW_FAIL_ROUNDS" "$NEW_FAIL_SINCE"
+[ "$TEST" -eq 1 ] && echo "FAIL — 连续失败 $NEW_FAIL_ROUNDS 轮（port_up=$PORT_UP code=$EXIT_CODE）已持续 $(human_duration $((NOW - NEW_FAIL_SINCE)))"
+exit 1
