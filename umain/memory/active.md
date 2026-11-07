@@ -163,6 +163,13 @@ CAUSE = 微风服务商侧节点整体不可用
 
 ## 🟢 进行中
 
+### 🔧 audit.sh git pull 无故阻塞（2026-11-08 00:01 实证）
+- **现象**：每日 23:59 审计首次运行完全卡死（无 banner 输出），2 分钟后被 SIGKILL
+- **根因**：第 10 段 `git pull --rebase origin main` SSH 直连 github，网络抖动时 TCP 挂死不返回；现有 3 次重试只覆盖「报错」不覆盖「挂死」
+- **暂解**：外部 `timeout 180` 包裹重跑 → 全绿（本次审计 4 修复 / 1 浅层 / 0 深层）
+- **待办**：给 audit.sh 中 git 调用加 `timeout 30`（P2，改合规脚本需先报备 Daryl）
+- 归属日：2026-11-08 日记已记录
+
 ### 🆕 Dream Engine 精简版（记忆巩固）— 10/05 交付，待 Daryl 定下一步
 - **交付**: scripts/llm_budget.py（四道闸护栏）+ scripts/consolidate.py（巩固引擎），dry-run 验证 47 文件/71092 字符，commit 202c1029
 - **遗忘边界（Daryl 10/05 拍板）**: 只产出建议不改文件 / 源记录永不删只归档 / 删除替换永远人审阅
