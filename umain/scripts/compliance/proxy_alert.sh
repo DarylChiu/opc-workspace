@@ -28,6 +28,7 @@ PROXY_HOST="127.0.0.1"
 PROXY_PORT="7892"
 PROXY_API="http://127.0.0.1:9090"
 PROBE_URL="https://chatgpt.com"       # 只走代理才能到的目标
+CTRL_URL="https://www.gstatic.com/generate_204"  # 对照探针：无反爬、无内容，仅验链路
 PROBES_PER_ROUND=3                     # 每轮探几次（全失败才算这轮失败）
 FAIL_THRESHOLD=3                       # 连续几轮失败才告警（3轮×3分=9分钟）
 MAX_ALERT_PER_DAY=3                    # 每天最多告警次数
@@ -62,15 +63,47 @@ probe() {
     return
   fi
 
-  local i code
+  # 2026-11-07 加归因列：fail 时记录 目标URL/耗时/curl退出码/代理出口IP
+  # 目的：区分「代理侧故障」与「本机 egress 或目标站点故障」，避免归因偏差
+  # 2026-11-07 10:20 加对照探针 generate_204（无反爬、无内容）：
+  #   generate_204 通 + chatgpt 000 → 目标站对出口IP的处置，不是链路问题
+  #   generate_204 也失败            → 链路/代理侧真故障
+  local i code t tmo curlrc exit_ip ctrl eff_url
   for i in $(seq 1 "$PROBES_PER_ROUND"); do
-    code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 10 \
-           -x "http://${PROXY_HOST}:${PROXY_PORT}" "$PROBE_URL" 2>/dev/null)
+    t=$(curl -s -o /dev/null -w '%{http_code}|%{time_total}|%{url_effective}' --max-time 10 \
+        -x "http://${PROXY_HOST}:${PROXY_PORT}" "$PROBE_URL" 2>/dev/null)
+    curlrc=$?
+    code="${t%%|*}"
+    local rest="${t#*|}"
+    tmo="${rest%%|*}"
+    eff_url="${rest#*|}"
     if [ "$code" = "200" ]; then
       ROUND_OK=$((ROUND_OK+1))
     else
       ROUND_FAIL=$((ROUND_FAIL+1))
       EXIT_CODE="$code"
+      exit_ip=$(curl -s --max-time 8 -x "http://${PROXY_HOST}:${PROXY_PORT}" \
+                https://api.ipify.org 2>/dev/null | head -c 40)
+      [ -z "$exit_ip" ] && exit_ip="(取不到)"
+      # 对照探针：无反爬目标，判定链路 vs 目标站处置
+      local ct
+      ct=$(curl -s -o /dev/null -w '%{http_code}|%{time_total}' --max-time 8 \
+           -x "http://${PROXY_HOST}:${PROXY_PORT}" "$CTRL_URL" 2>/dev/null)
+      ctrl="${ct%%|*}/${ct##*|}"
+      FAIL_DETAIL="url=$PROBE_URL t=${tmo}s curlrc=$curlrc exit_ip=$exit_ip ctrl204=$ctrl"
+      # curl exit code 含义（code=000 是黑洞，掩盖 4 种不同故障）
+      case "$curlrc" in
+        7)  FAIL_DETAIL="$FAIL_DETAIL rc含义=连不上代理/拒绝连接" ;;
+        28) FAIL_DETAIL="$FAIL_DETAIL rc含义=超时(链路通但无响应)" ;;
+        35) FAIL_DETAIL="$FAIL_DETAIL rc含义=TLS握手失败" ;;
+        56) FAIL_DETAIL="$FAIL_DETAIL rc含义=收包失败(连接被重置)" ;;
+        0)  FAIL_DETAIL="$FAIL_DETAIL rc含义=HTTP层返回非200 eff=$eff_url" ;;
+        *)  FAIL_DETAIL="$FAIL_DETAIL rc含义=其他($curlrc)" ;;
+      esac
+      # 若发生了重定向，eff_url 可能揭示反爬/挑战页（不同于原始 URL）
+      if [ -n "$eff_url" ] && [ "$eff_url" != "$PROBE_URL" ] && [ "$eff_url" != "$PROBE_URL/" ]; then
+        FAIL_DETAIL="$FAIL_DETAIL REDIRECTED=$eff_url"
+      fi
     fi
   done
 }
@@ -224,7 +257,49 @@ NEW_FAIL_ROUNDS=$((ST_FAIL_ROUNDS + 1))
 NEW_FAIL_SINCE=$ST_FAIL_SINCE
 [ "$NEW_FAIL_SINCE" -eq 0 ] && NEW_FAIL_SINCE=$NOW
 
-log "FAIL round $NEW_FAIL_ROUNDS/$FAIL_THRESHOLD (port_up=$PORT_UP code=$EXIT_CODE)"
+log "FAIL round $NEW_FAIL_ROUNDS/$FAIL_THRESHOLD (port_up=$PORT_UP code=$EXIT_CODE) ${FAIL_DETAIL:-}"
+
+# ---------- 根因自动判定（2026-11-07 上线；7.13 修正版）----------
+# ⚠️ 依据 7.13：新错误形态不硬塞旧分类，先写「未知(形态X)」，需 ≥2 个独立故障事件复现才可分类。
+# ⚠️ 依据 10:37 真实故障教训：分类标签必须能对应到定义原文（见下方 CAUSE_DEF）。
+CAUSE="未知"
+CAUSE_NOTE=""
+CTRL_CODE=""
+RC_CODE=""
+# 直连对照探针（2026-11-07 真实故障验证：本条最能一击排除本机）
+DIRECT_CODE=$(curl -s -o /dev/null -w "%{http_code}" --max-time 8 "$CTRL_URL" 2>/dev/null || echo "000")
+ctrl_code="${FAIL_DETAIL#*ctrl204=}"; ctrl_code="${ctrl_code%%/*}"
+rc_code="${FAIL_DETAIL#*curlrc=}"; rc_code="${rc_code%% *}"
+CTRL_CODE="$ctrl_code"; RC_CODE="$rc_code"
+
+if [ -n "$ctrl_code" ] && [ "$ctrl_code" != "$FAIL_DETAIL" ]; then
+  if [ "$ctrl_code" = "204" ] && [ "$EXIT_CODE" != "200" ]; then
+    CAUSE="B"
+    CAUSE_NOTE="对照探针通(204)但目标失败 → 目标站对出口IP的处置，非链路问题"
+  elif [ "$ctrl_code" != "204" ]; then
+    # 对照也失败：先看直连能不能通（本机网络 vs 代理段）
+    if [ "$DIRECT_CODE" != "204" ]; then
+      CAUSE="A"
+      CAUSE_NOTE="直连对照也失败(direct=$DIRECT_CODE) → 本机网络段，非机场问题"
+    else
+      case "$rc_code" in
+        7)
+          CAUSE="A"
+          CAUSE_NOTE="curlrc=7 连不上代理(direct=204 本机正常) → 代理进程/入口段" ;;
+        28|35|56)
+          # 7.13：不直接判 C（瞬时），因为 28/35/56 同时兼容「持续型上游不可用」
+          CAUSE="未知(TLS/链路未完成)"
+          CAUSE_NOTE="curlrc=$rc_code 且对照失败、直连正常 → 上游不可达 or 本机隧道未建立；需≥2个独立故障事件才可分类" ;;
+        *)
+          CAUSE="未知"
+          CAUSE_NOTE="对照也失败但 curlrc=$rc_code 未映射(direct=$DIRECT_CODE)" ;;
+      esac
+    fi
+  fi
+fi
+log "CAUSE=$CAUSE direct=$DIRECT_CODE ctrl=$CTRL_CODE ${CAUSE_NOTE}"
+log "CAUSE_DEF: A=本机/代理段 B=目标站处置出口IP C=链路/节点(需≥2独立事件确认)"
+export CAUSE CAUSE_NOTE DIRECT_CODE
 
 # 还没到阈值 → 只记录，不打扰
 if [ "$NEW_FAIL_ROUNDS" -lt "$FAIL_THRESHOLD" ]; then
