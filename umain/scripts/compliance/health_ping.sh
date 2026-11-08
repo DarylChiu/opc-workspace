@@ -79,11 +79,16 @@ check_llm() {
 }
 
 # C. 飞书通道（能不能发消息）
+# 2026-11-08 修复：旧实现用 GET 打 tenant_access_token，该接口只接 POST → 永远 404。
+# 404 本身不触发告警（只判 000），但等于是个无效检测；网络抖动时又误报。
+# 现在改用 POST app_access_token（空 body 也返 200）：200/4xx 都说明通道通，只有连不上才报。
 check_feishu() {
   local code
   code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 12 --noproxy '*' \
-    https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal 2>/dev/null)
+    -X POST -H 'Content-Type: application/json' -d '{}' \
+    https://open.feishu.cn/open-apis/auth/v3/app_access_token/internal 2>/dev/null)
   case "$code" in
+    200|4*)  : ;;  # 200=通；4xx=服务端有响应也说明通（凭证问题不是通道问题）
     000|"") FAILS+=("连不上飞书（网络问题，我可能发不出消息）") ;;
     5*)     FAILS+=("飞书服务异常（HTTP $code）") ;;
   esac
@@ -116,13 +121,23 @@ fi
 
 [ "$TEST" -eq 1 ] && { echo "FAIL — ${FAILS[*]}"; exit 1; }
 
-# 去重：同样的故障集合，一天只报一次
+# 防抖动：连续 2 次失败才告警（旧行为：单次抖动就报，12:35 与 14:35 各误报一次）
+# 依据：瞬时抖动几十秒就恢复，不是服务不可用。
 SIG=$(printf '%s|' "${FAILS[@]}" | md5 2>/dev/null || printf '%s|' "${FAILS[@]}")
 LAST_SIG=$(echo "$PREV" | python3 -c "import sys,json;print(json.load(sys.stdin).get('sig',''))" 2>/dev/null || echo "")
+PREV_PENDING=$(echo "$PREV" | python3 -c "import sys,json;print(json.load(sys.stdin).get('pending',0))" 2>/dev/null || echo 0)
+
 if [ "$PREV_STATUS" = "fail" ] && [ "$LAST_SIG" = "$SIG" ]; then
   log "同类故障已报过，不重复通知: $SIG"
-  printf '{"status":"fail","sig":"%s","ts":%s,"notify_day":"%s","notify_count":%s}\n' "$SIG" "$NOW" "$TODAY" "$NOTIFY_CNT" > "$STATE_FILE"
+  printf '{"status":"fail","sig":"%s","ts":%s,"notify_day":"%s","notify_count":%s,"pending":0}\n' "$SIG" "$NOW" "$TODAY" "$NOTIFY_CNT" > "$STATE_FILE"
   exit 1
+fi
+
+# 首次见到该故障 → 只记账不告警，等下一次仍失败才报
+if [ "$PREV_PENDING" -lt 1 ] || [ "$LAST_SIG" != "$SIG" ]; then
+  log "首次检测到（待确认，不告警）: ${FAILS[*]}"
+  printf '{"status":"ok","sig":"%s","ts":%s,"notify_day":"%s","notify_count":%s,"pending":1}\n' "$SIG" "$NOW" "$TODAY" "$NOTIFY_CNT" > "$STATE_FILE"
+  exit 0
 fi
 
 # 每天通知上限

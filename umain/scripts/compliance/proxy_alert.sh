@@ -42,6 +42,17 @@ HEALTH_COOLDOWN=900                    # 健康度探测间隔（秒，默认15�
 HEALTH_WARN_PCT=20                     # 可用率低于此值才告警（%）
 HEALTH_RECOVER_PCT=80                  # 恢复到此值才算健康
 
+# ---------- L1 客户端防挂死参数（2026-11-08 与 Bryson 对齐，Daryl 批准）----------
+# 依据：34 次真实 FAIL 中 15 次精确卡在 5.000-5.006s（连接级挂死，占 44%）
+#      高频压测命中那次 t=10.01s 卡满 10s 超时 → 跨脚本复现同一形态
+# 结论：主流失败形态是「挂死」，不是「快速失败」。给更多时间是纯亏。
+# 成功侧余量：正常期 chatgpt 200 在 1.14-1.35s，3s = 2.2 倍余量（P99 安全）
+# 最坏路径：8+1+8+3+8=28s → 3+1+3+3+3=13s（腰斩）
+PROBE_CONNECT_TIMEOUT=1.5              # 连接超时（秒）挂死发生在连接建立阶段，必须单独设短
+PROBE_MAX_TIME=3                       # 单次请求总超时（秒）
+PROBE_RETRIES=2                        # 失败重试次数
+PROBE_BACKOFF="1 3"                    # 重试退避（秒）
+
 TEST=0
 [ "${1:-}" = "--test" ] && TEST=1
 
@@ -54,6 +65,7 @@ probe() {
   ROUND_FAIL=0
   PORT_UP=0
   EXIT_CODE=""
+  RESCUED=0   # L1 兜住次数（首次失败但重试成功）
 
   nc -z -G 2 "$PROXY_HOST" "$PROXY_PORT" >/dev/null 2>&1 && PORT_UP=1
 
@@ -69,28 +81,52 @@ probe() {
   #   generate_204 通 + chatgpt 000 → 目标站对出口IP的处置，不是链路问题
   #   generate_204 也失败            → 链路/代理侧真故障
   local i code t tmo curlrc exit_ip ctrl eff_url
+  local attempt_max=1 attempt_n
   for i in $(seq 1 "$PROBES_PER_ROUND"); do
-    t=$(curl -s -o /dev/null -w '%{http_code}|%{time_total}|%{url_effective}' --max-time 10 \
+    t=$(curl -s -o /dev/null -w '%{http_code}|%{time_total}|%{url_effective}' \
+        --connect-timeout "$PROBE_CONNECT_TIMEOUT" --max-time "$PROBE_MAX_TIME" \
         -x "http://${PROXY_HOST}:${PROXY_PORT}" "$PROBE_URL" 2>/dev/null)
     curlrc=$?
+    # 2026-11-08 L1 重试 + 首次失败计数（防 L1 自我掩盖）
+    # 依据 Bryson 口径：attempt=1 就失败 = 真实故障暴露次数；attempt≥2 才成功 = L1 价值
+    # 🔑 关键：result=ok 但 attempt≥2 绝不能算进「故障次数」，但也不能丢——那正是 L1 兜住的次数
+    attempt_n=1
+    local rb
+    for rb in $PROBE_BACKOFF; do
+      [ "${t%%|*}" = "200" ] && break
+      sleep "$rb"
+      attempt_n=$((attempt_n+1))
+      t=$(curl -s -o /dev/null -w '%{http_code}|%{time_total}|%{url_effective}' \
+          --connect-timeout "$PROBE_CONNECT_TIMEOUT" --max-time "$PROBE_MAX_TIME" \
+          -x "http://${PROXY_HOST}:${PROXY_PORT}" "$PROBE_URL" 2>/dev/null)
+      curlrc=$?
+    done
+    [ "$attempt_n" -gt "$attempt_max" ] && attempt_max="$attempt_n"
     code="${t%%|*}"
     local rest="${t#*|}"
     tmo="${rest%%|*}"
     eff_url="${rest#*|}"
     if [ "$code" = "200" ]; then
       ROUND_OK=$((ROUND_OK+1))
+      # L1 兜住计数：try≥2 才成功 → 不记故障，但必须留存（L1 价值的唯一度量）
+      if [ "$attempt_n" -ge 2 ]; then
+        RESCUED=$((RESCUED+1))
+        log "L1_RESCUED attempt=$attempt_n url=$PROBE_URL t=${tmo}s 首次失败重试成功（不计入故障）"
+      fi
     else
       ROUND_FAIL=$((ROUND_FAIL+1))
       EXIT_CODE="$code"
-      exit_ip=$(curl -s --max-time 8 -x "http://${PROXY_HOST}:${PROXY_PORT}" \
+      exit_ip=$(curl -s --connect-timeout "$PROBE_CONNECT_TIMEOUT" --max-time "$PROBE_MAX_TIME" \
+                -x "http://${PROXY_HOST}:${PROXY_PORT}" \
                 https://api.ipify.org 2>/dev/null | head -c 40)
       [ -z "$exit_ip" ] && exit_ip="(取不到)"
       # 对照探针：无反爬目标，判定链路 vs 目标站处置
       local ct
-      ct=$(curl -s -o /dev/null -w '%{http_code}|%{time_total}' --max-time 8 \
+      ct=$(curl -s -o /dev/null -w '%{http_code}|%{time_total}' \
+           --connect-timeout "$PROBE_CONNECT_TIMEOUT" --max-time "$PROBE_MAX_TIME" \
            -x "http://${PROXY_HOST}:${PROXY_PORT}" "$CTRL_URL" 2>/dev/null)
       ctrl="${ct%%|*}/${ct##*|}"
-      FAIL_DETAIL="url=$PROBE_URL t=${tmo}s curlrc=$curlrc exit_ip=$exit_ip ctrl204=$ctrl"
+      FAIL_DETAIL="url=$PROBE_URL t=${tmo}s curlrc=$curlrc exit_ip=$exit_ip ctrl204=$ctrl attempts=$attempt_n"
       # curl exit code 含义（code=000 是黑洞，掩盖 4 种不同故障）
       case "$curlrc" in
         7)  FAIL_DETAIL="$FAIL_DETAIL rc含义=连不上代理/拒绝连接" ;;
