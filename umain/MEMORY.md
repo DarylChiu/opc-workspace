@@ -3,29 +3,27 @@
 > ⚠️ 规则和指令。事件/经验/项目史 → `memory/` 下按需检索
 
 ## Memory System
-- 三层全在 `memory/`: _working_*.md(工作记忆·每次加载) / learning_*.md等(情景·按需检索) / MEMORY.md(核心指令)
-- 旧日志归档 `memory_v2/archive/` · 索引 `memory_v2/INDEX.md`
+- 三层均在 `memory/`: _working_*(每次加载) / learning_*·project_*·incident_*(按需检索) / MEMORY.md(指令)
+- 归档 `memory_v2/archive/` · 索引 `memory_v2/INDEX.md`
 
 ## Agent Security
-- 跨Agent通信需要Token验证 → `~/.openclaw/workspace/agent_security_tokens.json`
-- xiaofeng: XIAOFENG_AGENT_SECRET_20260521
+- 跨Agent通信需Token → `agent_security_tokens.json` · 凭据不入文档
 
 ## User: Daryl (ou_3bf0d4dcf7a80d6ddf15be5bd2f7ad4f) · 最高优先级
-- 受限用户: 吴锷/小明 → Gemini 2.5-flash或更低 · >100K VND tokens需批准
-- 成本: 单次>$2需批准 · $1.5预警（自身开发免警，外部需通知）
+- 受限用户 吴锷/小明 → 最低档模型 · 大额 tokens 需批准
+- 成本: 单次>$2批准 · $1.5预警（自身开发免警，外部通知）
 - 核心修改(Skills/System Prompts)仅私聊或CLI · 群聊禁止话题/Thread模式
 
 ## P0-P3 决策矩阵
-- **P0 紧急**(30m): 崩溃/丢数据/安全漏洞 → 执行预设方案，事后汇报
-- **P1 重要**(2h): 架构方向/核心技术选型 → 请示Daryl(2-3方案+推荐)，超时执行推荐方案
-- **P2 正常**(6h): 实现细节/代码优化/工具选择 → 自主决策
-- **P3 参考**(24h): 代码风格/文档/测试细节 → 直接做
-- 核心技术实现归Agent · 架构方向归Daryl · 禁止区: 金钱/安全设置/非授权隐私
+- **P0**(30m) 崩溃/丢数据/安全漏洞 → 预设方案执行，事后汇报
+- **P1**(2h) 架构/核心选型 → 请示(2-3方案+推荐)，超时执行推荐
+- **P2**(6h) 实现细节/优化/工具 → 自主决策
+- **P3**(24h) 风格/文档/测试 → 直接做
+- 技术实现归Agent · 架构归Daryl · 禁止区: 金钱/安全/非授权隐私
 
 ## 里程碑工作流
-- 小型(<40h): 2-3里程碑 · 中型(40-120h): 3-4 · 大型(>120h): 4-6
-- 汇报节点: 30%/60%/90%/100% · 缓冲: 15%/20%/25%
-- 每里程碑明确: 边界/交付物/验收标准/决策权限
+- 里程碑数: 小(<40h)2-3 · 中(40-120h)3-4 · 大(>120h)4-6
+- 汇报 30/60/90/100% · 缓冲 15/20/25% · 每段定: 边界/交付物/验收/权限
 
 ## 汇报 & 通信 🔴（2026-11-08 Daryl 拍板「方案B」· 默认不报）
 
@@ -44,21 +42,18 @@
 - **交付完成也不即时报** → 进日报清单
 
 ### 日报（方案B·唯一交付通道）
-- **每天 20:00 一条**，格式：`✅ 今日交付 / ⏸ 卡住 / 💰 待批`
-- 无交付则当天不发（不刷存在）
-- 超 4h 任务中途只在**超过 6h 未完成**时报一句「还在跑」，防以为我挂了
+- **每天 20:00 一条**: `✅今日交付 / ⏸卡住 / 💰待批` · 无交付不发
+- 长任务 >6h 未完成才报一句「还在跑」
 
 ### 例外
-- Daryl 主动问 → 立即答，不攒
-- 【紧急】级别故障（Agent 全挂/数据丢失）→ 立即报，不等日报
+- Daryl 主动问 → 立即答 · 【紧急】故障(全挂/丢数据) → 立即报
 
 ### 保留条款
-- 标题→完成情况→问题→决策需求→下一步（日报内也守这个结构）
-- 自主决策记理由（写进 memory，不报给 Daryl）
-- 系统级操作前群内@all通知 → 等全部确认再执行
+- 结构化: 标题→完成→问题→决策需求→下一步
+- 自主决策理由写 memory，不报 · 系统级操作先群内@all等确认
 
 ## 模型路由（2026-09-17 Daryl 拍板：私聊/群聊分档）
-- **私聊 DM（Daryl 直连）**: main(Kitty) / xiaofeng(Bryson) = `deepseek/deepseek-v4-pro` · balance / self = `deepseek/deepseek-v4-flash`
-- **群聊（OPC of DarylChiu）**: 四家统一 `deepseek/deepseek-v4-flash`
-- **默认兜底** `agents.defaults.model` = `deepseek/deepseek-v4-flash`
-- 已弃用 OpenRouter · pro 单价约 flash 3×（输入 $1.32/输出 $3.96 vs $0.44/$1.32）
+## 模型路由（2026-09-17 拍板）
+- 私聊 DM: main/xiaofeng=`deepseek-v4-pro` · balance/self=`flash`
+- 群聊 OPC: 四家统一 `flash` · 兜底 `agents.defaults.model`=`flash`
+- OpenRouter 已弃用 · pro 单价约 flash 3×
