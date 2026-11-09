@@ -1,3 +1,15 @@
+## 2026-11-09 22:5x · ✅ 已处置：M4c「机制约定版本更新」刷屏事故
+
+- **根因**：opc-dashboard 处理通知靠 rename 到 `data/notifications/processed/`，该目录不存在 → ENOENT → 文件原地 → 每轮重发，死循环。实测 9412 条（4 agent × 2353）
+- **已做**：①建 `processed/` ②4 条通知移出留档 `backups/notif_drain_20261109/` ③验证日志 delta=0，停止
+- **事故报告**：`memory/incident_2026-11-09_mech_notify_storm.md`
+- **⚠️ 遗留（P2，待 Daryl 定）**：
+  - crontab `*/5 watchdog.sh` 指向已删脚本，macOS `crontab` 写操作挂起 → 需 sudo 或 launchd 清理。备份 `backups/crontab.bak.20261109_2248`
+  - 看板如需重装：M4c 必须补 ①null 不当变更 ②已发送去重 ③单轮上限 ④启动自建 processed 目录
+  - `~/WorkBuddy` 残留（仅 data，无源码）+ autossh serveo 隧道进程仍在
+
+---
+
 ## 2026-11-08 12:30 · 🟢 稳定代理方案已定稿（Daryl 要求「断连无感」）
 
 > 本节为当前状态，优先于下方。文档 `docs/稳定代理方案_断连无感_v1.md`，commit `e59a3497`
