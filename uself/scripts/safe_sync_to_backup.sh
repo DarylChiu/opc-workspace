@@ -53,6 +53,7 @@ SYNC_DIRS=("memory" "scripts")
 SYNC_FILES=(AGENTS.md SOUL.md IDENTITY.md MEMORY.md USER.md TOOLS.md HEARTBEAT.md)
 
 HAS_DELETING=false
+SKIPPED_TOTAL=0
 PLAN=""
 SKIP_PATHS=()
 
@@ -82,6 +83,13 @@ for d in "${SYNC_DIRS[@]}"; do
         case "$ex" in "$d"/*) RSYNC_EXTRA+=(--exclude "${ex#"$d"/}") ;; esac
     done
     OUT=$(rsync -a --no-links --dry-run --itemize-changes ${RSYNC_EXTRA[@]+"${RSYNC_EXTRA[@]}"} "$WORKSPACE/$d/" "$TARGET/$d/" 2>&1)
+    # Kitty 2026-11-10: 「跳过可以，但必须看得见」——软链跳过项逐条列出，不做静默忽略
+    SKIPPED=$(printf '%s\n' "$OUT" | grep -o 'skipping non-regular file "[^"]*"' | sed 's/skipping non-regular file "//;s/"$//' || true)
+    if [ -n "$SKIPPED" ]; then
+        echo "  ℹ️  $d/ 软链跳过 $(printf '%s\n' "$SKIPPED" | wc -l | tr -d ' ') 项（--no-links，备份只存可独立存在的实体）:"
+        printf '%s\n' "$SKIPPED" | sed 's/^/       ⏭ /'
+        SKIPPED_TOTAL=$((SKIPPED_TOTAL + $(printf '%s\n' "$SKIPPED" | wc -l | tr -d ' ')))
+    fi
     DEL=$(printf '%s\n' "$OUT" | grep -c '^\*deleting' || true)
     if [ "${DEL:-0}" -gt 0 ]; then
         HAS_DELETING=true
@@ -158,5 +166,10 @@ done < <(find "$TARGET" -maxdepth 3 -type l 2>/dev/null)
 [ "${BROKEN:-0}" -eq 0 ] || { echo "🛑 发现 $BROKEN 个断链，请检查" >&2; exit 5; }
 
 echo
+if [ "${SKIPPED_TOTAL:-0}" -gt 0 ]; then
+    echo "ℹ️  本次共跳过 ${SKIPPED_TOTAL} 个软链（--no-links 全局策略）。"
+    echo "   原则：备份只存可独立存在的实体，不存路径依赖；软链实体应在备份仓有实体副本（如 *.bak）。"
+    echo "   ⚠️  若新增指向备份仓之外路径的软链 → 该文件将完全无备份，需人工补实体副本。"
+fi
 echo "✅ 同步完成。确认无误后按需 commit/push（本脚本不自动 push）。"
 echo "   回滚方式: cd $BACKUP_REPO && git reset --hard HEAD~1"
