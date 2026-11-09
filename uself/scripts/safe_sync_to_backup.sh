@@ -10,6 +10,9 @@
 # 本脚本的设计原则：把「先 dry-run 再执行」写进代码，不靠人记得。
 #   1. 默认 --dry-run，只打印将要做什么；带 --apply 才真执行
 #   2. --apply 时若 dry-run 输出里出现 "deleting"，直接中止并要求 --allow-delete
+#   2b. 全局使用 --no-links：源端软链一律跳过（备份保留实体副本策略）。
+#       rsync 原生 exit 0，比自制检测更稳（2026-11-10 Kitty 最小复现 CASE B1 证实）
+
 #   3. 真执行前自动 git 快照（备份仓本身是 git 仓 = 天然保险）
 #   4. 不使用 -L；-a 保留软链语义
 #
@@ -64,7 +67,7 @@ check_link_dir_conflicts() {
         target_dir="$TARGET/$d/$rel"
         if [ -d "$target_dir" ] && [ ! -L "$target_dir" ]; then
             echo "  ⚠️  跳过软链覆盖实体目录: $d/$rel/（源=软链 → $(readlink "$link")；目标=实体目录 $(find "$target_dir" -type f | wc -l | tr -d ' ') 个文件）"
-            echo "       备份仓保留实体副本（对备份更保险），需人工确认后再处理"
+            echo "       → 双保险：手工 --exclude 跳过 + rsync --no-links 原生跳过；备份仓保留实体副本"
             SKIP_PATHS+=("$d/$rel")
         fi
     done < <(cd "$WORKSPACE/$d" 2>/dev/null && find . -maxdepth 2 -type l -exec sh -c 'for p; do [ -d "$p" ] && echo "${p#./}"; done' _ {} + 2>/dev/null)
@@ -78,7 +81,7 @@ for d in "${SYNC_DIRS[@]}"; do
     for ex in "${SKIP_PATHS[@]:-}"; do
         case "$ex" in "$d"/*) RSYNC_EXTRA+=(--exclude "${ex#"$d"/}") ;; esac
     done
-    OUT=$(rsync -a --dry-run --itemize-changes ${RSYNC_EXTRA[@]+"${RSYNC_EXTRA[@]}"} "$WORKSPACE/$d/" "$TARGET/$d/" 2>&1)
+    OUT=$(rsync -a --no-links --dry-run --itemize-changes ${RSYNC_EXTRA[@]+"${RSYNC_EXTRA[@]}"} "$WORKSPACE/$d/" "$TARGET/$d/" 2>&1)
     DEL=$(printf '%s\n' "$OUT" | grep -c '^\*deleting' || true)
     if [ "${DEL:-0}" -gt 0 ]; then
         HAS_DELETING=true
@@ -87,7 +90,7 @@ for d in "${SYNC_DIRS[@]}"; do
     else
         echo "  ✅ $d/ 无删除项（$(printf '%s\n' "$OUT" | grep -c '^[<>ch]' || true) 项变更）"
     fi
-    PLAN+="rsync -a ${RSYNC_EXTRA[*]:-} \"$WORKSPACE/$d/\" \"$TARGET/$d/\""$'\n'
+    PLAN+="rsync -a --no-links ${RSYNC_EXTRA[*]:-} \"$WORKSPACE/$d/\" \"$TARGET/$d/\""$'\n'
 done
 
 if [ "$HAS_DELETING" = true ] && [ "$MODE" = "apply" ] && [ "$ALLOW_DELETE" = false ]; then
@@ -128,7 +131,7 @@ for d in "${SYNC_DIRS[@]}"; do
     for ex in "${SKIP_PATHS[@]:-}"; do
         case "$ex" in "$d"/*) RSYNC_EXTRA+=(--exclude "${ex#"$d"/}") ;; esac
     done
-    if rsync -a ${RSYNC_EXTRA[@]+"${RSYNC_EXTRA[@]}"} "$WORKSPACE/$d/" "$TARGET/$d/"; then
+    if rsync -a --no-links ${RSYNC_EXTRA[@]+"${RSYNC_EXTRA[@]}"} "$WORKSPACE/$d/" "$TARGET/$d/"; then
         echo "  ✅ $d/ 同步完成"
     else
         echo "  ❌ $d/ 同步失败" >&2
