@@ -1,1 +1,0 @@
-/Users/zhaoyuzhao/.openclaw/compliance/scripts/pre-op.sh

@@ -1,1 +1,0 @@
-/Users/zhaoyuzhao/.openclaw/compliance/scripts/post-op.sh
