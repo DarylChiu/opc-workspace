@@ -51,11 +51,34 @@ SYNC_FILES=(AGENTS.md SOUL.md IDENTITY.md MEMORY.md USER.md TOOLS.md HEARTBEAT.m
 
 HAS_DELETING=false
 PLAN=""
+SKIP_PATHS=()
+
+# 源「软链」vs 目标「实体目录」冲突检测（2026-11-10 事故根因的实际修复）
+# rsync 默认 -a 会把源软链覆盖到目标端，但目标端若已是含文件的实体目录，
+# unlinkat "Directory not empty" → 退出码 23。这类条目必须**跳过**，不是硬同步。
+check_link_dir_conflicts() {
+    local d="$1"
+    local rel link target_dir
+    while IFS= read -r rel; do
+        link="$WORKSPACE/$d/$rel"
+        target_dir="$TARGET/$d/$rel"
+        if [ -d "$target_dir" ] && [ ! -L "$target_dir" ]; then
+            echo "  ⚠️  跳过软链覆盖实体目录: $d/$rel/（源=软链 → $(readlink "$link")；目标=实体目录 $(find "$target_dir" -type f | wc -l | tr -d ' ') 个文件）"
+            echo "       备份仓保留实体副本（对备份更保险），需人工确认后再处理"
+            SKIP_PATHS+=("$d/$rel")
+        fi
+    done < <(cd "$WORKSPACE/$d" 2>/dev/null && find . -maxdepth 2 -type l -exec sh -c 'for p; do [ -d "$p" ] && echo "${p#./}"; done' _ {} + 2>/dev/null)
+}
 
 echo "── 1/3 dry-run 检查 ──"
 for d in "${SYNC_DIRS[@]}"; do
     [ -d "$WORKSPACE/$d" ] || { echo "  ⏭  跳过（源端无此目录）: $d"; continue; }
-    OUT=$(rsync -a --dry-run --itemize-changes "$WORKSPACE/$d/" "$TARGET/$d/" 2>&1)
+    check_link_dir_conflicts "$d"
+    RSYNC_EXTRA=()  # 空数组；set -u 下必须用 ${arr[@]+"${arr[@]}"} 展开
+    for ex in "${SKIP_PATHS[@]:-}"; do
+        case "$ex" in "$d"/*) RSYNC_EXTRA+=(--exclude "${ex#"$d"/}") ;; esac
+    done
+    OUT=$(rsync -a --dry-run --itemize-changes ${RSYNC_EXTRA[@]+"${RSYNC_EXTRA[@]}"} "$WORKSPACE/$d/" "$TARGET/$d/" 2>&1)
     DEL=$(printf '%s\n' "$OUT" | grep -c '^\*deleting' || true)
     if [ "${DEL:-0}" -gt 0 ]; then
         HAS_DELETING=true
@@ -64,7 +87,7 @@ for d in "${SYNC_DIRS[@]}"; do
     else
         echo "  ✅ $d/ 无删除项（$(printf '%s\n' "$OUT" | grep -c '^[<>ch]' || true) 项变更）"
     fi
-    PLAN+="rsync -a \"$WORKSPACE/$d/\" \"$TARGET/$d/\""$'\n'
+    PLAN+="rsync -a ${RSYNC_EXTRA[*]:-} \"$WORKSPACE/$d/\" \"$TARGET/$d/\""$'\n'
 done
 
 if [ "$HAS_DELETING" = true ] && [ "$MODE" = "apply" ] && [ "$ALLOW_DELETE" = false ]; then
@@ -101,7 +124,11 @@ echo "── 3/3 执行同步 ──"
 for d in "${SYNC_DIRS[@]}"; do
     [ -d "$WORKSPACE/$d" ] || continue
     mkdir -p "$TARGET/$d"
-    if rsync -a "$WORKSPACE/$d/" "$TARGET/$d/"; then
+    RSYNC_EXTRA=()  # 空数组；set -u 下必须用 ${arr[@]+"${arr[@]}"} 展开
+    for ex in "${SKIP_PATHS[@]:-}"; do
+        case "$ex" in "$d"/*) RSYNC_EXTRA+=(--exclude "${ex#"$d"/}") ;; esac
+    done
+    if rsync -a ${RSYNC_EXTRA[@]+"${RSYNC_EXTRA[@]}"} "$WORKSPACE/$d/" "$TARGET/$d/"; then
         echo "  ✅ $d/ 同步完成"
     else
         echo "  ❌ $d/ 同步失败" >&2
