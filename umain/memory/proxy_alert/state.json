@@ -1,1 +1,1 @@
-{"status":"ok","fail_rounds":0,"fail_since":0,"alert_day":"2026-11-09","alert_count":3,"last_alert_ts":1794231887,"last_check_ts":1794239909,"last_health_ts":1794239909,"health_ok":45,"health_total":45}
+{"status":"fail","fail_rounds":3,"fail_since":1794325695,"alert_day":"2026-11-10","alert_count":3,"last_alert_ts":1794326133,"last_check_ts":1794326133,"last_health_ts":0,"health_ok":0,"health_total":0}
