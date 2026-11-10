@@ -1,3 +1,14 @@
+## 2026-11-10 23:59 · 🟢 当前状态速览（每日审计同步）
+
+- **今日主线**：成本看板修复（`/api/costs` 补金额字段 + 前端三张金额卡，commit `bfd9830`），Self 复验 `fresh_api_ok`
+- **新待办（健康）**：跟进中山眼科 OCT 报告；「避免剧烈运动」需并入 v1.4 训练计划约束（骑行/负重调整）
+- **新待办（基建）**：crontab 看门狗指向已删脚本（`WorkBuddy/Claw/opc-dashboard/scripts/watchdog.sh`）→ 改指 `~/opc-workspace/Kitty/opc-dashboard/manage.sh` 或迁 launchd KeepAlive。**涉及调度器，未动，待 Daryl 定**
+- **观察项**：微风可用率 90.25%（<95%），根因＝新加坡01 单节点境外出口，建议加备用节点+失败自动切换
+- **教训沉淀**：监控会腐烂（路径迁移忘同步 crontab）；HTTP 200 ≠ 有数据；rsync 软链陷阱归因须先复现（已认错 `--delete` 误判）
+- **今日成本**：$0.46（本月 $9.27 / 全量 $298.10）
+
+---
+
 ## 2026-11-09 22:5x · ✅ 已处置：M4c「机制约定版本更新」刷屏事故
 
 - **根因**：opc-dashboard 处理通知靠 rename 到 `data/notifications/processed/`，该目录不存在 → ENOENT → 文件原地 → 每轮重发，死循环。实测 9412 条（4 agent × 2353）
