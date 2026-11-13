@@ -1,11 +1,11 @@
-## 2026-11-10 23:59 · 🟢 当前状态速览（每日审计同步）
+## 2026-11-12 23:59 · 🟢 当前状态速览（每日审计同步）
 
-- **今日主线**：成本看板修复（`/api/costs` 补金额字段 + 前端三张金额卡，commit `bfd9830`），Self 复验 `fresh_api_ok`
-- **新待办（健康）**：跟进中山眼科 OCT 报告；「避免剧烈运动」需并入 v1.4 训练计划约束（骑行/负重调整）
-- **新待办（基建）**：crontab 看门狗指向已删脚本（`WorkBuddy/Claw/opc-dashboard/scripts/watchdog.sh`）→ 改指 `~/opc-workspace/Kitty/opc-dashboard/manage.sh` 或迁 launchd KeepAlive。**涉及调度器，未动，待 Daryl 定**
-- **观察项**：微风可用率 90.25%（<95%），根因＝新加坡01 单节点境外出口，建议加备用节点+失败自动切换
-- **教训沉淀**：监控会腐烂（路径迁移忘同步 crontab）；HTTP 200 ≠ 有数据；rsync 软链陷阱归因须先复现（已认错 `--delete` 误判）
-- **今日成本**：$0.46（本月 $9.27 / 全量 $298.10）
+- **今日主线**：无 Daryl 直接指令；系统按日更周期运转，23:59 审计 修复4/浅层3/深层0
+- **成本**：今日 $0.28 | 本月 $9.73 | 全量 $298.57（`fresh_api_ok`）
+- **观察项**：`MEMORY.md` 59 行超建议上限（30）→ 待 Daryl 授权蒸馏
+- **遗留（P2，待 Daryl 定）**：crontab watchdog 指向已删脚本（`WorkBuddy/Claw/opc-dashboard/scripts/watchdog.sh`）→ 改指 `~/opc-workspace/Kitty/opc-dashboard/manage.sh` 或迁 launchd KeepAlive
+- **健康待办**：跟进中山眼科 OCT 报告；「避免剧烈运动」并入 v1.4 训练计划约束
+- **观察项2**：微风可用率 90.25%（<95%），根因＝新加坡01 单节点境外出口，建议加备用节点+失败自动切换
 
 ---
 
