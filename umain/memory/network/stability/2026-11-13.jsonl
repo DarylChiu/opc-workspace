@@ -665,3 +665,4 @@
 {"ts": 1794585166, "round": "20261113235246", "proxy_port_up": 1, "sys_proxy": 1, "gateway_up": 1, "node": "🇺🇸 美国 02", "ok": 3, "fail": 0, "total": 3, "lat_avg": 3.829, "fail_codes": "", "cn_direct_ok": 1}
 {"ts": 1794585300, "round": "20261113235500", "proxy_port_up": 1, "sys_proxy": 1, "gateway_up": 1, "node": "🇺🇸 美国 02", "ok": 3, "fail": 0, "total": 3, "lat_avg": 3.617, "fail_codes": "", "cn_direct_ok": 1}
 {"ts": 1794585434, "round": "20261113235714", "proxy_port_up": 1, "sys_proxy": 1, "gateway_up": 1, "node": "🇺🇸 美国 02", "ok": 3, "fail": 0, "total": 3, "lat_avg": 5.968, "fail_codes": "", "cn_direct_ok": 1}
+{"ts": 1794585575, "round": "20261113235935", "proxy_port_up": 1, "sys_proxy": 1, "gateway_up": 1, "node": "🇺🇸 美国 02", "ok": 3, "fail": 0, "total": 3, "lat_avg": 5.083, "fail_codes": "", "cn_direct_ok": 1}
