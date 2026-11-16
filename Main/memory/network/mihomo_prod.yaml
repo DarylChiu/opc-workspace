@@ -1,0 +1,1636 @@
+# mihomo 生产配置 · 由 build_mihomo_config.py 自动生成，请勿手工编辑
+# 源: https://api02.weifengapi.com/api/v1/client/subscribe?token=***
+# 节点 55 个（剔除 1 个坏节点: 香港 02）· 规则 524 条
+# 刷新: python3 build_mihomo_config.py --reload  （建议 cron 每日）
+mixed-port: 7893
+allow-lan: true
+mode: rule
+log-level: warning
+ipv6: false
+unified-delay: true
+tcp-concurrent: true
+bind-address: '*'
+external-controller: 127.0.0.1:19093
+secret: lFnVm66-_cMlkJNYkkIrlTvzE-Bz7vKs
+geodata-mode: true
+geodata-loader: memconservative
+profile:
+  store-selected: true
+  store-fake-ip: true
+dns:
+  enable: true
+  ipv6: false
+  default-nameserver:
+  - 223.5.5.5
+  - 119.29.29.29
+  - 114.114.114.114
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  use-hosts: true
+  respect-rules: false
+  nameserver:
+  - 223.5.5.5
+  - 119.29.29.29
+  - 114.114.114.114
+  proxy-server-nameserver:
+  - 43.108.56.44
+  fallback:
+  - https://1.1.1.1/dns-query
+  - tls://8.8.8.8
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+    ipcidr:
+    - 240.0.0.0/4
+    domain:
+    - +.google.com
+    - +.facebook.com
+    - +.youtube.com
+  fake-ip-filter:
+  - '*.weifengapi.com'
+  - '*.weifengchat.vip'
+  - '*.lan'
+  - '*.local'
+proxies:
+- name: 🇭🇰 香港 01
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44101
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: python.org
+  reality-opts:
+    public-key: el7COCQNky0vXWD_nWrun_b5CpXS4sTHeUpeIn2F3S8
+    short-id: df3de44e
+- name: 🇭🇰 香港 03
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44103
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: www.mozilla.org
+  reality-opts:
+    public-key: TaV3la9gp2P9jZU7c7SYeELTAMSDsOHMDeF3aqE_d0c
+    short-id: 0bfac6dd
+- name: 🇭🇰 香港 04
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44104
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: www.mozilla.org
+  reality-opts:
+    public-key: XJcez8utxr950LVrHVaukI-NbHkIhHzDqmJ1BCGWh3s
+    short-id: 89254db1
+- name: 🇭🇰 香港 05
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44105
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: www.mozilla.org
+  reality-opts:
+    public-key: ilC_NBFMYPSaSVktoQ76-kaA8JT6w95MudlvDk3yRi4
+    short-id: 1ab4a644
+- name: 🇭🇰 香港 06
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44106
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: www.mozilla.org
+  reality-opts:
+    public-key: bzLG_fw_MoFRHdvqfLOH8lLtxJahQWnrUVq8v1T80Sc
+    short-id: 9f276947
+- name: 🇭🇰 香港 07
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44107
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: www.mozilla.org
+  reality-opts:
+    public-key: 4YvAQugoLc2n8KM97y2rdZuQv9iuhxJwyTI2I0y6rAQ
+    short-id: 40e430c2
+- name: 🇭🇰 香港 08
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44108
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: www.mozilla.org
+  reality-opts:
+    public-key: 3xCgCRMxQWPAAt2EiH39JWgU6YFaTXyPZxeD2D9aMn0
+    short-id: f4a45b9a
+- name: 🇭🇰 香港 09
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44109
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: www.mozilla.org
+  reality-opts:
+    public-key: n58zOO_XygUzJQ3k3sKAAAJoYyTrqonUMyGnDNXHiw0
+    short-id: 81a4bf17
+- name: 🇭🇰 香港 10
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44110
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: www.mozilla.org
+  reality-opts:
+    public-key: KRMjtYj-TKxryBkJojhXo9kMRKlJfOXqKRQDLlLG_lA
+    short-id: d735e6bc
+- name: 🇭🇰 香港 11
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44111
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: www.mozilla.org
+  reality-opts:
+    public-key: h6Zfu-hY0zst_0o_NvM41uWRBVMuQf4zjReJsnTTcTE
+    short-id: ac18abe1
+- name: 🇭🇰 香港 12
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44112
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: www.mozilla.org
+  reality-opts:
+    public-key: sRZetvdYdlM4GQZrH9_roKqTI8xv8E-D6gx4p0FhAWQ
+    short-id: 563cf89c
+- name: 🇭🇰 香港 14
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44114
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: www.mozilla.org
+  reality-opts:
+    public-key: 6a-lavOTTj-haYOJaeRCXT5fdAiqj61jRoypO-kd7n4
+    short-id: 04827fff
+- name: 🇹🇼 台湾 01
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44201
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: www.mozilla.org
+  reality-opts:
+    public-key: J0I0d0pYLWJdXRCLAJfemBSEQdGoL1p-z4keJ3voG14
+    short-id: 3c89334a
+- name: 🇹🇼 台湾 02
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44202
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: www.mozilla.org
+  reality-opts:
+    public-key: 1bGJP3jF47ROzm---svsrYjeBjBK8H37tqctxxCioDM
+    short-id: b3e25554
+- name: 🇹🇼 台湾 03
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44203
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: www.mozilla.org
+  reality-opts:
+    public-key: XS5pNnYmhi6r-V3yx94PJDoC2HRMOzmC2G5ke5ue4So
+    short-id: '68966745'
+- name: 🇹🇼 台湾 04
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44204
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: www.mozilla.org
+  reality-opts:
+    public-key: qxARea3wvvJ5LSurwBNosL651klW-X0I_lV_lcOQgTI
+    short-id: e4a8cdd3
+- name: 🇹🇼 台湾 05
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44205
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: www.mozilla.org
+  reality-opts:
+    public-key: TyP55GyfymaYVh-hHKvR3CNs0EoLpCgYcYKfHfUiE00
+    short-id: ff2608c8
+- name: 🇸🇬 新加坡 01
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44301
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: vuejs.org
+  reality-opts:
+    public-key: poqG5rQtFGnW4FrbtY6CYJz37i4yKUCeRGrbqsVQLD4
+    short-id: a4900275
+- name: 🇸🇬 新加坡 02
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44302
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: vuejs.org
+  reality-opts:
+    public-key: iPO_GbvAfGTWAy5cRc7GDYczcqT7vHFO_EcEGzPaMyY
+    short-id: 958400a6
+- name: 🇸🇬 新加坡 03
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44303
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: vuejs.org
+  reality-opts:
+    public-key: CxhIu47yJ6eTI6lPLVOk4D2a6wk75vsyZmpM9jCO1x0
+    short-id: 2308496e
+- name: 🇸🇬 新加坡 04
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44304
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: vuejs.org
+  reality-opts:
+    public-key: FND2VjsBK9ZzSxLB5W0wnaF2mYrdN61mjyEhF4oA_l8
+    short-id: 829cb71e
+- name: 🇸🇬 新加坡 05
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44305
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: vuejs.org
+  reality-opts:
+    public-key: TRMMsEVvM8lezc025rIPgkRv-dOV3EonXGsO7nB5rhk
+    short-id: 37187c1c
+- name: 🇸🇬 新加坡 06
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44306
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: vuejs.org
+  reality-opts:
+    public-key: fCbzjxx_xSvzB2cwDx-owwFPreQvfsW3xwDG0oIQ9l8
+    short-id: 1fdbf080
+- name: 🇸🇬 新加坡 07
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44307
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: vuejs.org
+  reality-opts:
+    public-key: iStKJC-ZWHXYmJ7cb_vPSvseI3JlEIzJglccVXaUThQ
+    short-id: d5199455
+- name: 🇸🇬 新加坡 08
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44308
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: vuejs.org
+  reality-opts:
+    public-key: OEesJXo-x44EIr9pC6A-Ja_RKvZ6No4MmG2xmiRjFlY
+    short-id: 6614de14
+- name: 🇸🇬 新加坡 09
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44309
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: vuejs.org
+  reality-opts:
+    public-key: zKNLY2zjKnFm4T_rEz3bJYHxqn3dD-IvlwBBDu5wICE
+    short-id: 5d6f7a99
+- name: 🇸🇬 新加坡 10
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44310
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: vuejs.org
+  reality-opts:
+    public-key: iS4VZfjKrpOgwqjqJQ1bLHmdp-RHSCH8FPdiSkpTVC8
+    short-id: 4de501cc
+- name: 🇯🇵 日本 01
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44401
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: www.mozilla.org
+  reality-opts:
+    public-key: lPsoKVANumz3kjAxMUjiVLgVzARO48-1zpsS5EvwkTE
+    short-id: 2f7c76be
+- name: 🇯🇵 日本 02
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44402
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: www.mozilla.org
+  reality-opts:
+    public-key: iP_urVvajmhBQ3ZeNvUDW5fVHDE7fZ08He9Tp7nt9DA
+    short-id: 54e3e9d1
+- name: 🇯🇵 日本 03
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44403
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: www.mozilla.org
+  reality-opts:
+    public-key: dsoAKJ29Byv4AQ0h72SzeIEfhmHOvQZWf9zeSqaIPEk
+    short-id: 040a9b89
+- name: 🇯🇵 日本 04
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44404
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: www.mozilla.org
+  reality-opts:
+    public-key: hMqKFzNLBUt-_MihwHr6GkGFUT2Q_r_VHlXxznJdEzU
+    short-id: 2818ee3f
+- name: 🇯🇵 日本 05
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44405
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: www.mozilla.org
+  reality-opts:
+    public-key: oO1KidBcKAU5iJ17KTGilfVLLwmrAMpoEoB86IfkuU8
+    short-id: 148dc003
+- name: 🇯🇵 日本 06
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44406
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: www.mozilla.org
+  reality-opts:
+    public-key: zABSoEzkcfPxgyf2NZIrBwuaorBnST7yWk3VvALCwEk
+    short-id: d6651e78
+- name: 🇯🇵 日本 07
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44407
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: www.mozilla.org
+  reality-opts:
+    public-key: RVWYsKQgH6XoiE_VCcjvfXIGm88rbQbhjDYRQlbNOWs
+    short-id: 596fa89e
+- name: 🇯🇵 日本 08
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44408
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: www.mozilla.org
+  reality-opts:
+    public-key: i-RkOIhZVJzAjqjEQGNUD6spAXmuuUDJheTi2qXkiH0
+    short-id: 74f3462a
+- name: 🇯🇵 日本 09
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44409
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: www.mozilla.org
+  reality-opts:
+    public-key: OL6CzNlE0-7kayT6jhM4kl67Lzs0_nws9aecmXDgF3s
+    short-id: b484ff68
+- name: 🇯🇵 日本 10
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44410
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: www.mozilla.org
+  reality-opts:
+    public-key: oSsg88bXfKfHHhm-HFezZXNkpxkeb0XcBFWkdTl-qic
+    short-id: b97501fd
+- name: 🇺🇸 美国 01
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44501
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: www.mozilla.org
+  reality-opts:
+    public-key: k6QgZP5AX3emkmxVtk4eIPfwbQNV7DbBA9X2f-RxcWo
+    short-id: faa163ef
+- name: 🇺🇸 美国 02
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44502
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: www.mozilla.org
+  reality-opts:
+    public-key: Iaw6TF9F-S8h45aumVnbhMLpHfExJaM3oDVcbQvq_Eo
+    short-id: 5929034d
+- name: 🇺🇸 美国 03
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44503
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: www.mozilla.org
+  reality-opts:
+    public-key: Yvu0uug0dGnxCTXr-EP9gFGUm23nkvJysmB6DF7jy04
+    short-id: 377cbb17
+- name: 🇺🇸 美国 04
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44504
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: www.mozilla.org
+  reality-opts:
+    public-key: x-6UMqF6rOZKjlfwVef55oWQjWuPHt_Yt2fHoV9h8xE
+    short-id: f25df916
+- name: 🇺🇸 美国 05
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44505
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: www.mozilla.org
+  reality-opts:
+    public-key: CCJ9Gb78sm87G8NGCIJrWiKp1-nNEL6MYgfDtInmkzw
+    short-id: f722278e
+- name: 🇺🇸 美国 06
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44506
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: www.mozilla.org
+  reality-opts:
+    public-key: bev3aqD5ev8DWaPnk96zhklDNqtqbuys4bD97A-B3hE
+    short-id: 14df2523
+- name: 🇺🇸 美国 07
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44507
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: www.mozilla.org
+  reality-opts:
+    public-key: hKYpKbsuCnaL0L77HIi3CrxeFt54I6SxjJ5k4yeLSno
+    short-id: 7d238d71
+- name: 🇺🇸 美国 08
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44508
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: www.mozilla.org
+  reality-opts:
+    public-key: iwc1YvAzHajnp-tfEbUQUMAIsXKMsFF9OGQOFLZakVY
+    short-id: 89c8892e
+- name: 🇺🇸 美国 09
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44509
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: www.mozilla.org
+  reality-opts:
+    public-key: H5EsLwmvint6Uh44U9NOntaw-pRWEE7P0LwACL-z2y8
+    short-id: 1fbd0a55
+- name: 🇺🇸 美国 10
+  type: vless
+  server: asfhwsrgseg.weifengchat.vip
+  port: 44510
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: www.mozilla.org
+  reality-opts:
+    public-key: KXZA30rS5YG7zLXXOK6rXrk0Rx8tmRZPjo9eBQbHXy0
+    short-id: fde88f0d
+- name: 🇩🇪 德国 01-直连
+  type: vless
+  server: dg-drect.iz2ze58f9krop9tgbc.org
+  port: 11101
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: python.org
+  reality-opts:
+    public-key: agI-6mcXaT_yz8KEWEd3lAE3SZDHOeFXMhxrDaKGXXg
+    short-id: 6689566b
+- name: 🇩🇪 德国 02-直连
+  type: vless
+  server: dg-drect.iz2ze58f9krop9tgbc.org
+  port: 11102
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: python.org
+  reality-opts:
+    public-key: FQlmrzZH7ynEbupcin69TV7EXf2cQiUp9r44JiIFzQQ
+    short-id: 20411a96
+- name: 🇩🇪 德国 03-直连
+  type: vless
+  server: dg-drect.iz2ze58f9krop9tgbc.org
+  port: 11103
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: python.org
+  reality-opts:
+    public-key: BammRc4XuNogvOA50OPbUT_iEzOhYMjGJit1QiAxXRE
+    short-id: 8ca1277f
+- name: 🇩🇪 德国 04-直连
+  type: vless
+  server: dg-drect.iz2ze58f9krop9tgbc.org
+  port: 11104
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: python.org
+  reality-opts:
+    public-key: pptcUeUfaS33hbfCC7TRCfd4YQqS4WDJ_sw_Al91KAQ
+    short-id: 931a1478
+- name: 🇺🇸 日本 01-直连
+  type: vless
+  server: jp-drect.iz2ze58f9krop9tgbc.org
+  port: 31101
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: python.org
+  reality-opts:
+    public-key: XOjJ0wlaeuDnjo_aP7plKGt8sPYLVXtX8deYWdzbgmk
+    short-id: cf301149
+- name: 🇯🇵 日本 02-直连
+  type: vless
+  server: jp-drect.iz2ze58f9krop9tgbc.org
+  port: 31102
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: python.org
+  reality-opts:
+    public-key: PHkBLoXu1huEwrLSt-O3ISewQ_j7vc7t3l9NDH4Qhm4
+    short-id: e75b86e0
+- name: 🇯🇵 日本 03-直连
+  type: vless
+  server: jp-drect.iz2ze58f9krop9tgbc.org
+  port: 31103
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: python.org
+  reality-opts:
+    public-key: nWl0-FJp2kIprqnkWU_QGPaIxH8HbzwGQPBG_2kzkgM
+    short-id: 1f696036
+- name: 🇯🇵 日本 04-直连
+  type: vless
+  server: jp-drect.iz2ze58f9krop9tgbc.org
+  port: 31104
+  uuid: 34a23741-b67b-4adb-a210-d557e92a5298
+  encryption: none
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  flow: xtls-rprx-vision
+  client-fingerprint: chrome
+  servername: python.org
+  reality-opts:
+    public-key: JcZ9IfGC1JJHJEdgymYgZOPfb8fKx-0nOA7Kne57MHE
+    short-id: d980a42d
+proxy-groups:
+- name: PROXY
+  type: select
+  proxies:
+  - AUTO
+  - NON-HK
+  - FALLBACK
+  - 🇭🇰 香港 01
+  - 🇭🇰 香港 03
+  - 🇭🇰 香港 04
+  - 🇭🇰 香港 05
+  - 🇭🇰 香港 06
+  - 🇭🇰 香港 07
+  - 🇭🇰 香港 08
+  - 🇭🇰 香港 09
+  - 🇭🇰 香港 10
+  - 🇭🇰 香港 11
+  - 🇭🇰 香港 12
+  - 🇭🇰 香港 14
+  - 🇹🇼 台湾 01
+  - 🇹🇼 台湾 02
+  - 🇹🇼 台湾 03
+  - 🇹🇼 台湾 04
+  - 🇹🇼 台湾 05
+  - 🇸🇬 新加坡 01
+  - 🇸🇬 新加坡 02
+  - 🇸🇬 新加坡 03
+  - 🇸🇬 新加坡 04
+  - 🇸🇬 新加坡 05
+  - 🇸🇬 新加坡 06
+  - 🇸🇬 新加坡 07
+  - 🇸🇬 新加坡 08
+  - 🇸🇬 新加坡 09
+  - 🇸🇬 新加坡 10
+  - 🇯🇵 日本 01
+  - 🇯🇵 日本 02
+  - 🇯🇵 日本 03
+  - 🇯🇵 日本 04
+  - 🇯🇵 日本 05
+  - 🇯🇵 日本 06
+  - 🇯🇵 日本 07
+  - 🇯🇵 日本 08
+  - 🇯🇵 日本 09
+  - 🇯🇵 日本 10
+  - 🇺🇸 美国 01
+  - 🇺🇸 美国 02
+  - 🇺🇸 美国 03
+  - 🇺🇸 美国 04
+  - 🇺🇸 美国 05
+  - 🇺🇸 美国 06
+  - 🇺🇸 美国 07
+  - 🇺🇸 美国 08
+  - 🇺🇸 美国 09
+  - 🇺🇸 美国 10
+  - 🇩🇪 德国 01-直连
+  - 🇩🇪 德国 02-直连
+  - 🇩🇪 德国 03-直连
+  - 🇩🇪 德国 04-直连
+  - 🇺🇸 日本 01-直连
+  - 🇯🇵 日本 02-直连
+  - 🇯🇵 日本 03-直连
+  - 🇯🇵 日本 04-直连
+- name: NON-HK
+  type: url-test
+  proxies:
+  - 🇹🇼 台湾 01
+  - 🇹🇼 台湾 02
+  - 🇹🇼 台湾 03
+  - 🇹🇼 台湾 04
+  - 🇹🇼 台湾 05
+  - 🇸🇬 新加坡 01
+  - 🇸🇬 新加坡 02
+  - 🇸🇬 新加坡 03
+  - 🇸🇬 新加坡 04
+  - 🇸🇬 新加坡 05
+  - 🇸🇬 新加坡 06
+  - 🇸🇬 新加坡 07
+  - 🇸🇬 新加坡 08
+  - 🇸🇬 新加坡 09
+  - 🇸🇬 新加坡 10
+  - 🇯🇵 日本 01
+  - 🇯🇵 日本 02
+  - 🇯🇵 日本 03
+  - 🇯🇵 日本 04
+  - 🇯🇵 日本 05
+  - 🇯🇵 日本 06
+  - 🇯🇵 日本 07
+  - 🇯🇵 日本 08
+  - 🇯🇵 日本 09
+  - 🇯🇵 日本 10
+  - 🇺🇸 美国 01
+  - 🇺🇸 美国 02
+  - 🇺🇸 美国 03
+  - 🇺🇸 美国 04
+  - 🇺🇸 美国 05
+  - 🇺🇸 美国 06
+  - 🇺🇸 美国 07
+  - 🇺🇸 美国 08
+  - 🇺🇸 美国 09
+  - 🇺🇸 美国 10
+  - 🇩🇪 德国 01-直连
+  - 🇩🇪 德国 02-直连
+  - 🇩🇪 德国 03-直连
+  - 🇩🇪 德国 04-直连
+  - 🇺🇸 日本 01-直连
+  - 🇯🇵 日本 02-直连
+  - 🇯🇵 日本 03-直连
+  - 🇯🇵 日本 04-直连
+  url: http://www.gstatic.com/generate_204
+  interval: 300
+  tolerance: 50
+- name: AUTO
+  type: url-test
+  proxies:
+  - 🇭🇰 香港 01
+  - 🇭🇰 香港 03
+  - 🇭🇰 香港 04
+  - 🇭🇰 香港 05
+  - 🇭🇰 香港 06
+  - 🇭🇰 香港 07
+  - 🇭🇰 香港 08
+  - 🇭🇰 香港 09
+  - 🇭🇰 香港 10
+  - 🇭🇰 香港 11
+  - 🇭🇰 香港 12
+  - 🇭🇰 香港 14
+  - 🇹🇼 台湾 01
+  - 🇹🇼 台湾 02
+  - 🇹🇼 台湾 03
+  - 🇹🇼 台湾 04
+  - 🇹🇼 台湾 05
+  - 🇸🇬 新加坡 01
+  - 🇸🇬 新加坡 02
+  - 🇸🇬 新加坡 03
+  - 🇸🇬 新加坡 04
+  - 🇸🇬 新加坡 05
+  - 🇸🇬 新加坡 06
+  - 🇸🇬 新加坡 07
+  - 🇸🇬 新加坡 08
+  - 🇸🇬 新加坡 09
+  - 🇸🇬 新加坡 10
+  - 🇯🇵 日本 01
+  - 🇯🇵 日本 02
+  - 🇯🇵 日本 03
+  - 🇯🇵 日本 04
+  - 🇯🇵 日本 05
+  - 🇯🇵 日本 06
+  - 🇯🇵 日本 07
+  - 🇯🇵 日本 08
+  - 🇯🇵 日本 09
+  - 🇯🇵 日本 10
+  - 🇺🇸 美国 01
+  - 🇺🇸 美国 02
+  - 🇺🇸 美国 03
+  - 🇺🇸 美国 04
+  - 🇺🇸 美国 05
+  - 🇺🇸 美国 06
+  - 🇺🇸 美国 07
+  - 🇺🇸 美国 08
+  - 🇺🇸 美国 09
+  - 🇺🇸 美国 10
+  - 🇩🇪 德国 01-直连
+  - 🇩🇪 德国 02-直连
+  - 🇩🇪 德国 03-直连
+  - 🇩🇪 德国 04-直连
+  - 🇺🇸 日本 01-直连
+  - 🇯🇵 日本 02-直连
+  - 🇯🇵 日本 03-直连
+  - 🇯🇵 日本 04-直连
+  url: http://www.gstatic.com/generate_204
+  interval: 300
+  tolerance: 50
+- name: FALLBACK
+  type: fallback
+  proxies:
+  - 🇭🇰 香港 01
+  - 🇭🇰 香港 03
+  - 🇭🇰 香港 04
+  - 🇭🇰 香港 05
+  - 🇭🇰 香港 06
+  - 🇭🇰 香港 07
+  - 🇭🇰 香港 08
+  - 🇭🇰 香港 09
+  - 🇭🇰 香港 10
+  - 🇭🇰 香港 11
+  - 🇭🇰 香港 12
+  - 🇭🇰 香港 14
+  - 🇹🇼 台湾 01
+  - 🇹🇼 台湾 02
+  - 🇹🇼 台湾 03
+  - 🇹🇼 台湾 04
+  - 🇹🇼 台湾 05
+  - 🇸🇬 新加坡 01
+  - 🇸🇬 新加坡 02
+  - 🇸🇬 新加坡 03
+  - 🇸🇬 新加坡 04
+  - 🇸🇬 新加坡 05
+  - 🇸🇬 新加坡 06
+  - 🇸🇬 新加坡 07
+  - 🇸🇬 新加坡 08
+  - 🇸🇬 新加坡 09
+  - 🇸🇬 新加坡 10
+  - 🇯🇵 日本 01
+  - 🇯🇵 日本 02
+  - 🇯🇵 日本 03
+  - 🇯🇵 日本 04
+  - 🇯🇵 日本 05
+  - 🇯🇵 日本 06
+  - 🇯🇵 日本 07
+  - 🇯🇵 日本 08
+  - 🇯🇵 日本 09
+  - 🇯🇵 日本 10
+  - 🇺🇸 美国 01
+  - 🇺🇸 美国 02
+  - 🇺🇸 美国 03
+  - 🇺🇸 美国 04
+  - 🇺🇸 美国 05
+  - 🇺🇸 美国 06
+  - 🇺🇸 美国 07
+  - 🇺🇸 美国 08
+  - 🇺🇸 美国 09
+  - 🇺🇸 美国 10
+  - 🇩🇪 德国 01-直连
+  - 🇩🇪 德国 02-直连
+  - 🇩🇪 德国 03-直连
+  - 🇩🇪 德国 04-直连
+  - 🇺🇸 日本 01-直连
+  - 🇯🇵 日本 02-直连
+  - 🇯🇵 日本 03-直连
+  - 🇯🇵 日本 04-直连
+  url: http://www.gstatic.com/generate_204
+  interval: 300
+rules:
+- DOMAIN-SUFFIX,tiktok.com,NON-HK
+- DOMAIN-SUFFIX,tiktokv.com,NON-HK
+- DOMAIN-SUFFIX,tiktokcdn.com,NON-HK
+- DOMAIN-SUFFIX,byteoversea.com,NON-HK
+- DOMAIN-SUFFIX,ibyteimg.com,NON-HK
+- DOMAIN-SUFFIX,muscdn.com,NON-HK
+- DOMAIN-KEYWORD,tiktok,NON-HK
+- IP-CIDR,1.1.1.1/32,PROXY,no-resolve
+- IP-CIDR,8.8.8.8/32,PROXY,no-resolve
+- DOMAIN-SUFFIX,services.googleapis.cn,PROXY
+- DOMAIN-SUFFIX,xn--ngstr-lra8j.com,PROXY
+- DOMAIN,safebrowsing.urlsec.qq.com,DIRECT
+- DOMAIN,safebrowsing.googleapis.com,DIRECT
+- DOMAIN,developer.apple.com,PROXY
+- DOMAIN-SUFFIX,digicert.com,PROXY
+- DOMAIN,ocsp.apple.com,PROXY
+- DOMAIN,ocsp.comodoca.com,PROXY
+- DOMAIN,ocsp.usertrust.com,PROXY
+- DOMAIN,ocsp.sectigo.com,PROXY
+- DOMAIN,ocsp.verisign.net,PROXY
+- DOMAIN-SUFFIX,apple-dns.net,PROXY
+- DOMAIN,testflight.apple.com,PROXY
+- DOMAIN,sandbox.itunes.apple.com,PROXY
+- DOMAIN,itunes.apple.com,PROXY
+- DOMAIN-SUFFIX,apps.apple.com,PROXY
+- DOMAIN-SUFFIX,blobstore.apple.com,PROXY
+- DOMAIN,cvws.icloud-content.com,PROXY
+- DOMAIN-SUFFIX,mzstatic.com,DIRECT
+- DOMAIN-SUFFIX,itunes.apple.com,DIRECT
+- DOMAIN-SUFFIX,icloud.com,DIRECT
+- DOMAIN-SUFFIX,icloud-content.com,DIRECT
+- DOMAIN-SUFFIX,me.com,DIRECT
+- DOMAIN-SUFFIX,aaplimg.com,DIRECT
+- DOMAIN-SUFFIX,cdn20.com,DIRECT
+- DOMAIN-SUFFIX,cdn-apple.com,DIRECT
+- DOMAIN-SUFFIX,akadns.net,DIRECT
+- DOMAIN-SUFFIX,akamaiedge.net,DIRECT
+- DOMAIN-SUFFIX,edgekey.net,DIRECT
+- DOMAIN-SUFFIX,mwcloudcdn.com,DIRECT
+- DOMAIN-SUFFIX,mwcname.com,DIRECT
+- DOMAIN-SUFFIX,apple.com,DIRECT
+- DOMAIN-SUFFIX,apple-cloudkit.com,DIRECT
+- DOMAIN-SUFFIX,apple-mapkit.com,DIRECT
+- DOMAIN,cn.bing.com,DIRECT
+- DOMAIN-SUFFIX,126.com,DIRECT
+- DOMAIN-SUFFIX,126.net,DIRECT
+- DOMAIN-SUFFIX,127.net,DIRECT
+- DOMAIN-SUFFIX,163.com,DIRECT
+- DOMAIN-SUFFIX,360buyimg.com,DIRECT
+- DOMAIN-SUFFIX,36kr.com,DIRECT
+- DOMAIN-SUFFIX,acfun.tv,DIRECT
+- DOMAIN-SUFFIX,air-matters.com,DIRECT
+- DOMAIN-SUFFIX,aixifan.com,DIRECT
+- DOMAIN-KEYWORD,alicdn,DIRECT
+- DOMAIN-KEYWORD,alipay,DIRECT
+- DOMAIN-KEYWORD,taobao,DIRECT
+- DOMAIN-SUFFIX,amap.com,DIRECT
+- DOMAIN-SUFFIX,autonavi.com,DIRECT
+- DOMAIN-KEYWORD,baidu,DIRECT
+- DOMAIN-SUFFIX,bdimg.com,DIRECT
+- DOMAIN-SUFFIX,bdstatic.com,DIRECT
+- DOMAIN-SUFFIX,bilibili.com,DIRECT
+- DOMAIN-SUFFIX,bilivideo.com,DIRECT
+- DOMAIN-SUFFIX,caiyunapp.com,DIRECT
+- DOMAIN-SUFFIX,clouddn.com,DIRECT
+- DOMAIN-SUFFIX,cnbeta.com,DIRECT
+- DOMAIN-SUFFIX,cnbetacdn.com,DIRECT
+- DOMAIN-SUFFIX,cootekservice.com,DIRECT
+- DOMAIN-SUFFIX,csdn.net,DIRECT
+- DOMAIN-SUFFIX,ctrip.com,DIRECT
+- DOMAIN-SUFFIX,dgtle.com,DIRECT
+- DOMAIN-SUFFIX,dianping.com,DIRECT
+- DOMAIN-SUFFIX,douban.com,DIRECT
+- DOMAIN-SUFFIX,doubanio.com,DIRECT
+- DOMAIN-SUFFIX,duokan.com,DIRECT
+- DOMAIN-SUFFIX,easou.com,DIRECT
+- DOMAIN-SUFFIX,ele.me,DIRECT
+- DOMAIN-SUFFIX,feng.com,DIRECT
+- DOMAIN-SUFFIX,fir.im,DIRECT
+- DOMAIN-SUFFIX,frdic.com,DIRECT
+- DOMAIN-SUFFIX,g-cores.com,DIRECT
+- DOMAIN-SUFFIX,godic.net,DIRECT
+- DOMAIN-SUFFIX,gtimg.com,DIRECT
+- DOMAIN,cdn.hockeyapp.net,DIRECT
+- DOMAIN-SUFFIX,hongxiu.com,DIRECT
+- DOMAIN-SUFFIX,hxcdn.net,DIRECT
+- DOMAIN-SUFFIX,iciba.com,DIRECT
+- DOMAIN-SUFFIX,ifeng.com,DIRECT
+- DOMAIN-SUFFIX,ifengimg.com,DIRECT
+- DOMAIN-SUFFIX,ipip.net,DIRECT
+- DOMAIN-SUFFIX,iqiyi.com,DIRECT
+- DOMAIN-SUFFIX,jd.com,DIRECT
+- DOMAIN-SUFFIX,jianshu.com,DIRECT
+- DOMAIN-SUFFIX,knewone.com,DIRECT
+- DOMAIN-SUFFIX,le.com,DIRECT
+- DOMAIN-SUFFIX,lecloud.com,DIRECT
+- DOMAIN-SUFFIX,lemicp.com,DIRECT
+- DOMAIN-SUFFIX,licdn.com,DIRECT
+- DOMAIN-SUFFIX,luoo.net,DIRECT
+- DOMAIN-SUFFIX,meituan.com,DIRECT
+- DOMAIN-SUFFIX,meituan.net,DIRECT
+- DOMAIN-SUFFIX,mi.com,DIRECT
+- DOMAIN-SUFFIX,miaopai.com,DIRECT
+- DOMAIN-SUFFIX,microsoft.com,DIRECT
+- DOMAIN-SUFFIX,microsoftonline.com,DIRECT
+- DOMAIN-SUFFIX,miui.com,DIRECT
+- DOMAIN-SUFFIX,miwifi.com,DIRECT
+- DOMAIN-SUFFIX,mob.com,DIRECT
+- DOMAIN-SUFFIX,netease.com,DIRECT
+- DOMAIN-SUFFIX,office.com,DIRECT
+- DOMAIN-SUFFIX,office365.com,DIRECT
+- DOMAIN-KEYWORD,officecdn,DIRECT
+- DOMAIN-SUFFIX,oschina.net,DIRECT
+- DOMAIN-SUFFIX,ppsimg.com,DIRECT
+- DOMAIN-SUFFIX,pstatp.com,DIRECT
+- DOMAIN-SUFFIX,qcloud.com,DIRECT
+- DOMAIN-SUFFIX,qdaily.com,DIRECT
+- DOMAIN-SUFFIX,qdmm.com,DIRECT
+- DOMAIN-SUFFIX,qhimg.com,DIRECT
+- DOMAIN-SUFFIX,qhres.com,DIRECT
+- DOMAIN-SUFFIX,qidian.com,DIRECT
+- DOMAIN-SUFFIX,qihucdn.com,DIRECT
+- DOMAIN-SUFFIX,qiniu.com,DIRECT
+- DOMAIN-SUFFIX,qiniucdn.com,DIRECT
+- DOMAIN-SUFFIX,qiyipic.com,DIRECT
+- DOMAIN-SUFFIX,qq.com,DIRECT
+- DOMAIN-SUFFIX,qqurl.com,DIRECT
+- DOMAIN-SUFFIX,rarbg.to,DIRECT
+- DOMAIN-SUFFIX,ruguoapp.com,DIRECT
+- DOMAIN-SUFFIX,segmentfault.com,DIRECT
+- DOMAIN-SUFFIX,sinaapp.com,DIRECT
+- DOMAIN-SUFFIX,smzdm.com,DIRECT
+- DOMAIN-SUFFIX,snapdrop.net,DIRECT
+- DOMAIN-SUFFIX,sogou.com,DIRECT
+- DOMAIN-SUFFIX,sogoucdn.com,DIRECT
+- DOMAIN-SUFFIX,sohu.com,DIRECT
+- DOMAIN-SUFFIX,soku.com,DIRECT
+- DOMAIN-SUFFIX,speedtest.net,DIRECT
+- DOMAIN-SUFFIX,sspai.com,DIRECT
+- DOMAIN-SUFFIX,suning.com,DIRECT
+- DOMAIN-SUFFIX,taobao.com,DIRECT
+- DOMAIN-SUFFIX,tencent.com,DIRECT
+- DOMAIN-SUFFIX,tenpay.com,DIRECT
+- DOMAIN-SUFFIX,tianyancha.com,DIRECT
+- DOMAIN-SUFFIX,tmall.com,DIRECT
+- DOMAIN-SUFFIX,tudou.com,DIRECT
+- DOMAIN-SUFFIX,umetrip.com,DIRECT
+- DOMAIN-SUFFIX,upaiyun.com,DIRECT
+- DOMAIN-SUFFIX,upyun.com,DIRECT
+- DOMAIN-SUFFIX,veryzhun.com,DIRECT
+- DOMAIN-SUFFIX,weather.com,DIRECT
+- DOMAIN-SUFFIX,weibo.com,DIRECT
+- DOMAIN-SUFFIX,xiami.com,DIRECT
+- DOMAIN-SUFFIX,xiami.net,DIRECT
+- DOMAIN-SUFFIX,xiaomicp.com,DIRECT
+- DOMAIN-SUFFIX,ximalaya.com,DIRECT
+- DOMAIN-SUFFIX,xmcdn.com,DIRECT
+- DOMAIN-SUFFIX,xunlei.com,DIRECT
+- DOMAIN-SUFFIX,yhd.com,DIRECT
+- DOMAIN-SUFFIX,yihaodianimg.com,DIRECT
+- DOMAIN-SUFFIX,yinxiang.com,DIRECT
+- DOMAIN-SUFFIX,ykimg.com,DIRECT
+- DOMAIN-SUFFIX,youdao.com,DIRECT
+- DOMAIN-SUFFIX,youku.com,DIRECT
+- DOMAIN-SUFFIX,zealer.com,DIRECT
+- DOMAIN-SUFFIX,zhihu.com,DIRECT
+- DOMAIN-SUFFIX,zhimg.com,DIRECT
+- DOMAIN-SUFFIX,zimuzu.tv,DIRECT
+- DOMAIN-SUFFIX,zoho.com,DIRECT
+- DOMAIN-KEYWORD,amazon,PROXY
+- DOMAIN-KEYWORD,google,PROXY
+- DOMAIN-KEYWORD,gmail,PROXY
+- DOMAIN-KEYWORD,youtube,PROXY
+- DOMAIN-KEYWORD,facebook,PROXY
+- DOMAIN-SUFFIX,fb.me,PROXY
+- DOMAIN-SUFFIX,fbcdn.net,PROXY
+- DOMAIN-KEYWORD,twitter,PROXY
+- DOMAIN-KEYWORD,instagram,PROXY
+- DOMAIN-KEYWORD,dropbox,PROXY
+- DOMAIN-SUFFIX,twimg.com,PROXY
+- DOMAIN-KEYWORD,blogspot,PROXY
+- DOMAIN-SUFFIX,youtu.be,PROXY
+- DOMAIN-KEYWORD,whatsapp,PROXY
+- DOMAIN-KEYWORD,admarvel,REJECT
+- DOMAIN-KEYWORD,admaster,REJECT
+- DOMAIN-KEYWORD,adsage,REJECT
+- DOMAIN-KEYWORD,adsmogo,REJECT
+- DOMAIN-KEYWORD,adsrvmedia,REJECT
+- DOMAIN-KEYWORD,adwords,REJECT
+- DOMAIN-KEYWORD,adservice,REJECT
+- DOMAIN-SUFFIX,appsflyer.com,REJECT
+- DOMAIN-KEYWORD,domob,REJECT
+- DOMAIN-SUFFIX,doubleclick.net,REJECT
+- DOMAIN-KEYWORD,duomeng,REJECT
+- DOMAIN-KEYWORD,dwtrack,REJECT
+- DOMAIN-KEYWORD,guanggao,REJECT
+- DOMAIN-KEYWORD,lianmeng,REJECT
+- DOMAIN-SUFFIX,mmstat.com,REJECT
+- DOMAIN-KEYWORD,mopub,REJECT
+- DOMAIN-KEYWORD,omgmta,REJECT
+- DOMAIN-KEYWORD,openx,REJECT
+- DOMAIN-KEYWORD,partnerad,REJECT
+- DOMAIN-KEYWORD,pingfore,REJECT
+- DOMAIN-KEYWORD,supersonicads,REJECT
+- DOMAIN-KEYWORD,uedas,REJECT
+- DOMAIN-KEYWORD,umeng,REJECT
+- DOMAIN-KEYWORD,usage,REJECT
+- DOMAIN-SUFFIX,vungle.com,REJECT
+- DOMAIN-KEYWORD,wlmonitor,REJECT
+- DOMAIN-KEYWORD,zjtoolbar,REJECT
+- DOMAIN-SUFFIX,9to5mac.com,PROXY
+- DOMAIN-SUFFIX,abpchina.org,PROXY
+- DOMAIN-SUFFIX,adblockplus.org,PROXY
+- DOMAIN-SUFFIX,adobe.com,PROXY
+- DOMAIN-SUFFIX,akamaized.net,PROXY
+- DOMAIN-SUFFIX,alfredapp.com,PROXY
+- DOMAIN-SUFFIX,amplitude.com,PROXY
+- DOMAIN-SUFFIX,ampproject.org,PROXY
+- DOMAIN-SUFFIX,android.com,PROXY
+- DOMAIN-SUFFIX,angularjs.org,PROXY
+- DOMAIN-SUFFIX,aolcdn.com,PROXY
+- DOMAIN-SUFFIX,apkpure.com,PROXY
+- DOMAIN-SUFFIX,appledaily.com,PROXY
+- DOMAIN-SUFFIX,appshopper.com,PROXY
+- DOMAIN-SUFFIX,appspot.com,PROXY
+- DOMAIN-SUFFIX,arcgis.com,PROXY
+- DOMAIN-SUFFIX,archive.org,PROXY
+- DOMAIN-SUFFIX,armorgames.com,PROXY
+- DOMAIN-SUFFIX,aspnetcdn.com,PROXY
+- DOMAIN-SUFFIX,att.com,PROXY
+- DOMAIN-SUFFIX,awsstatic.com,PROXY
+- DOMAIN-SUFFIX,azureedge.net,PROXY
+- DOMAIN-SUFFIX,azurewebsites.net,PROXY
+- DOMAIN-SUFFIX,bing.com,PROXY
+- DOMAIN-SUFFIX,bintray.com,PROXY
+- DOMAIN-SUFFIX,bit.com,PROXY
+- DOMAIN-SUFFIX,bit.ly,PROXY
+- DOMAIN-SUFFIX,bitbucket.org,PROXY
+- DOMAIN-SUFFIX,bjango.com,PROXY
+- DOMAIN-SUFFIX,bkrtx.com,PROXY
+- DOMAIN-SUFFIX,blog.com,PROXY
+- DOMAIN-SUFFIX,blogcdn.com,PROXY
+- DOMAIN-SUFFIX,blogger.com,PROXY
+- DOMAIN-SUFFIX,blogsmithmedia.com,PROXY
+- DOMAIN-SUFFIX,blogspot.com,PROXY
+- DOMAIN-SUFFIX,blogspot.hk,PROXY
+- DOMAIN-SUFFIX,bloomberg.com,PROXY
+- DOMAIN-SUFFIX,box.com,PROXY
+- DOMAIN-SUFFIX,box.net,PROXY
+- DOMAIN-SUFFIX,cachefly.net,PROXY
+- DOMAIN-SUFFIX,chromium.org,PROXY
+- DOMAIN-SUFFIX,cl.ly,PROXY
+- DOMAIN-SUFFIX,cloudflare.com,PROXY
+- DOMAIN-SUFFIX,cloudfront.net,PROXY
+- DOMAIN-SUFFIX,cloudmagic.com,PROXY
+- DOMAIN-SUFFIX,cmail19.com,PROXY
+- DOMAIN-SUFFIX,cnet.com,PROXY
+- DOMAIN-SUFFIX,cocoapods.org,PROXY
+- DOMAIN-SUFFIX,comodoca.com,PROXY
+- DOMAIN-SUFFIX,crashlytics.com,PROXY
+- DOMAIN-SUFFIX,culturedcode.com,PROXY
+- DOMAIN-SUFFIX,d.pr,PROXY
+- DOMAIN-SUFFIX,danilo.to,PROXY
+- DOMAIN-SUFFIX,dayone.me,PROXY
+- DOMAIN-SUFFIX,db.tt,PROXY
+- DOMAIN-SUFFIX,deskconnect.com,PROXY
+- DOMAIN-SUFFIX,disq.us,PROXY
+- DOMAIN-SUFFIX,disqus.com,PROXY
+- DOMAIN-SUFFIX,disquscdn.com,PROXY
+- DOMAIN-SUFFIX,dnsimple.com,PROXY
+- DOMAIN-SUFFIX,docker.com,PROXY
+- DOMAIN-SUFFIX,dribbble.com,PROXY
+- DOMAIN-SUFFIX,droplr.com,PROXY
+- DOMAIN-SUFFIX,duckduckgo.com,PROXY
+- DOMAIN-SUFFIX,dueapp.com,PROXY
+- DOMAIN-SUFFIX,dytt8.net,PROXY
+- DOMAIN-SUFFIX,edgecastcdn.net,PROXY
+- DOMAIN-SUFFIX,edgekey.net,PROXY
+- DOMAIN-SUFFIX,edgesuite.net,PROXY
+- DOMAIN-SUFFIX,engadget.com,PROXY
+- DOMAIN-SUFFIX,entrust.net,PROXY
+- DOMAIN-SUFFIX,eurekavpt.com,PROXY
+- DOMAIN-SUFFIX,evernote.com,PROXY
+- DOMAIN-SUFFIX,fabric.io,PROXY
+- DOMAIN-SUFFIX,fast.com,PROXY
+- DOMAIN-SUFFIX,fastly.net,PROXY
+- DOMAIN-SUFFIX,fc2.com,PROXY
+- DOMAIN-SUFFIX,feedburner.com,PROXY
+- DOMAIN-SUFFIX,feedly.com,PROXY
+- DOMAIN-SUFFIX,feedsportal.com,PROXY
+- DOMAIN-SUFFIX,fiftythree.com,PROXY
+- DOMAIN-SUFFIX,firebaseio.com,PROXY
+- DOMAIN-SUFFIX,flexibits.com,PROXY
+- DOMAIN-SUFFIX,flickr.com,PROXY
+- DOMAIN-SUFFIX,flipboard.com,PROXY
+- DOMAIN-SUFFIX,g.co,PROXY
+- DOMAIN-SUFFIX,gabia.net,PROXY
+- DOMAIN-SUFFIX,geni.us,PROXY
+- DOMAIN-SUFFIX,gfx.ms,PROXY
+- DOMAIN-SUFFIX,ggpht.com,PROXY
+- DOMAIN-SUFFIX,ghostnoteapp.com,PROXY
+- DOMAIN-SUFFIX,git.io,PROXY
+- DOMAIN-KEYWORD,github,PROXY
+- DOMAIN-SUFFIX,globalsign.com,PROXY
+- DOMAIN-SUFFIX,gmodules.com,PROXY
+- DOMAIN-SUFFIX,godaddy.com,PROXY
+- DOMAIN-SUFFIX,golang.org,PROXY
+- DOMAIN-SUFFIX,gongm.in,PROXY
+- DOMAIN-SUFFIX,goo.gl,PROXY
+- DOMAIN-SUFFIX,goodreaders.com,PROXY
+- DOMAIN-SUFFIX,goodreads.com,PROXY
+- DOMAIN-SUFFIX,gravatar.com,PROXY
+- DOMAIN-SUFFIX,gstatic.com,PROXY
+- DOMAIN-SUFFIX,gvt0.com,PROXY
+- DOMAIN-SUFFIX,hockeyapp.net,PROXY
+- DOMAIN-SUFFIX,hotmail.com,PROXY
+- DOMAIN-SUFFIX,icons8.com,PROXY
+- DOMAIN-SUFFIX,ifixit.com,PROXY
+- DOMAIN-SUFFIX,ift.tt,PROXY
+- DOMAIN-SUFFIX,ifttt.com,PROXY
+- DOMAIN-SUFFIX,iherb.com,PROXY
+- DOMAIN-SUFFIX,imageshack.us,PROXY
+- DOMAIN-SUFFIX,img.ly,PROXY
+- DOMAIN-SUFFIX,imgur.com,PROXY
+- DOMAIN-SUFFIX,imore.com,PROXY
+- DOMAIN-SUFFIX,instapaper.com,PROXY
+- DOMAIN-SUFFIX,ipn.li,PROXY
+- DOMAIN-SUFFIX,is.gd,PROXY
+- DOMAIN-SUFFIX,issuu.com,PROXY
+- DOMAIN-SUFFIX,itgonglun.com,PROXY
+- DOMAIN-SUFFIX,itun.es,PROXY
+- DOMAIN-SUFFIX,ixquick.com,PROXY
+- DOMAIN-SUFFIX,j.mp,PROXY
+- DOMAIN-SUFFIX,js.revsci.net,PROXY
+- DOMAIN-SUFFIX,jshint.com,PROXY
+- DOMAIN-SUFFIX,jtvnw.net,PROXY
+- DOMAIN-SUFFIX,justgetflux.com,PROXY
+- DOMAIN-SUFFIX,kat.cr,PROXY
+- DOMAIN-SUFFIX,klip.me,PROXY
+- DOMAIN-SUFFIX,libsyn.com,PROXY
+- DOMAIN-SUFFIX,linkedin.com,PROXY
+- DOMAIN-SUFFIX,line-apps.com,PROXY
+- DOMAIN-SUFFIX,linode.com,PROXY
+- DOMAIN-SUFFIX,lithium.com,PROXY
+- DOMAIN-SUFFIX,littlehj.com,PROXY
+- DOMAIN-SUFFIX,live.com,PROXY
+- DOMAIN-SUFFIX,live.net,PROXY
+- DOMAIN-SUFFIX,livefilestore.com,PROXY
+- DOMAIN-SUFFIX,llnwd.net,PROXY
+- DOMAIN-SUFFIX,macid.co,PROXY
+- DOMAIN-SUFFIX,macromedia.com,PROXY
+- DOMAIN-SUFFIX,macrumors.com,PROXY
+- DOMAIN-SUFFIX,mashable.com,PROXY
+- DOMAIN-SUFFIX,mathjax.org,PROXY
+- DOMAIN-SUFFIX,medium.com,PROXY
+- DOMAIN-SUFFIX,mega.co.nz,PROXY
+- DOMAIN-SUFFIX,mega.nz,PROXY
+- DOMAIN-SUFFIX,megaupload.com,PROXY
+- DOMAIN-SUFFIX,microsofttranslator.com,PROXY
+- DOMAIN-SUFFIX,mindnode.com,PROXY
+- DOMAIN-SUFFIX,mobile01.com,PROXY
+- DOMAIN-SUFFIX,modmyi.com,PROXY
+- DOMAIN-SUFFIX,msedge.net,PROXY
+- DOMAIN-SUFFIX,myfontastic.com,PROXY
+- DOMAIN-SUFFIX,name.com,PROXY
+- DOMAIN-SUFFIX,nextmedia.com,PROXY
+- DOMAIN-SUFFIX,nsstatic.net,PROXY
+- DOMAIN-SUFFIX,nssurge.com,PROXY
+- DOMAIN-SUFFIX,nyt.com,PROXY
+- DOMAIN-SUFFIX,nytimes.com,PROXY
+- DOMAIN-SUFFIX,omnigroup.com,PROXY
+- DOMAIN-SUFFIX,onedrive.com,PROXY
+- DOMAIN-SUFFIX,onenote.com,PROXY
+- DOMAIN-SUFFIX,ooyala.com,PROXY
+- DOMAIN-SUFFIX,openvpn.net,PROXY
+- DOMAIN-SUFFIX,openwrt.org,PROXY
+- DOMAIN-SUFFIX,orkut.com,PROXY
+- DOMAIN-SUFFIX,osxdaily.com,PROXY
+- DOMAIN-SUFFIX,outlook.com,PROXY
+- DOMAIN-SUFFIX,ow.ly,PROXY
+- DOMAIN-SUFFIX,paddleapi.com,PROXY
+- DOMAIN-SUFFIX,parallels.com,PROXY
+- DOMAIN-SUFFIX,parse.com,PROXY
+- DOMAIN-SUFFIX,pdfexpert.com,PROXY
+- DOMAIN-SUFFIX,periscope.tv,PROXY
+- DOMAIN-SUFFIX,pinboard.in,PROXY
+- DOMAIN-SUFFIX,pinterest.com,PROXY
+- DOMAIN-SUFFIX,pixelmator.com,PROXY
+- DOMAIN-SUFFIX,pixiv.net,PROXY
+- DOMAIN-SUFFIX,playpcesor.com,PROXY
+- DOMAIN-SUFFIX,playstation.com,PROXY
+- DOMAIN-SUFFIX,playstation.com.hk,PROXY
+- DOMAIN-SUFFIX,playstation.net,PROXY
+- DOMAIN-SUFFIX,playstationnetwork.com,PROXY
+- DOMAIN-SUFFIX,pushwoosh.com,PROXY
+- DOMAIN-SUFFIX,rime.im,PROXY
+- DOMAIN-SUFFIX,servebom.com,PROXY
+- DOMAIN-SUFFIX,sfx.ms,PROXY
+- DOMAIN-SUFFIX,shadowsocks.org,PROXY
+- DOMAIN-SUFFIX,sharethis.com,PROXY
+- DOMAIN-SUFFIX,shazam.com,PROXY
+- DOMAIN-SUFFIX,skype.com,PROXY
+- DOMAIN-SUFFIX,smartdns微风网络.com,PROXY
+- DOMAIN-SUFFIX,smartmailcloud.com,PROXY
+- DOMAIN-SUFFIX,sndcdn.com,PROXY
+- DOMAIN-SUFFIX,sony.com,PROXY
+- DOMAIN-SUFFIX,soundcloud.com,PROXY
+- DOMAIN-SUFFIX,sourceforge.net,PROXY
+- DOMAIN-SUFFIX,spotify.com,PROXY
+- DOMAIN-SUFFIX,squarespace.com,PROXY
+- DOMAIN-SUFFIX,sstatic.net,PROXY
+- DOMAIN-SUFFIX,st.luluku.pw,PROXY
+- DOMAIN-SUFFIX,stackoverflow.com,PROXY
+- DOMAIN-SUFFIX,startpage.com,PROXY
+- DOMAIN-SUFFIX,staticflickr.com,PROXY
+- DOMAIN-SUFFIX,steamcommunity.com,PROXY
+- DOMAIN-SUFFIX,symauth.com,PROXY
+- DOMAIN-SUFFIX,symcb.com,PROXY
+- DOMAIN-SUFFIX,symcd.com,PROXY
+- DOMAIN-SUFFIX,tapbots.com,PROXY
+- DOMAIN-SUFFIX,tapbots.net,PROXY
+- DOMAIN-SUFFIX,tdesktop.com,PROXY
+- DOMAIN-SUFFIX,techcrunch.com,PROXY
+- DOMAIN-SUFFIX,techsmith.com,PROXY
+- DOMAIN-SUFFIX,thepiratebay.org,PROXY
+- DOMAIN-SUFFIX,theverge.com,PROXY
+- DOMAIN-SUFFIX,time.com,PROXY
+- DOMAIN-SUFFIX,timeinc.net,PROXY
+- DOMAIN-SUFFIX,tiny.cc,PROXY
+- DOMAIN-SUFFIX,tinypic.com,PROXY
+- DOMAIN-SUFFIX,tmblr.co,PROXY
+- DOMAIN-SUFFIX,todoist.com,PROXY
+- DOMAIN-SUFFIX,trello.com,PROXY
+- DOMAIN-SUFFIX,trustasiassl.com,PROXY
+- DOMAIN-SUFFIX,tumblr.co,PROXY
+- DOMAIN-SUFFIX,tumblr.com,PROXY
+- DOMAIN-SUFFIX,tweetdeck.com,PROXY
+- DOMAIN-SUFFIX,tweetmarker.net,PROXY
+- DOMAIN-SUFFIX,twitch.tv,PROXY
+- DOMAIN-SUFFIX,txmblr.com,PROXY
+- DOMAIN-SUFFIX,typekit.net,PROXY
+- DOMAIN-SUFFIX,ubertags.com,PROXY
+- DOMAIN-SUFFIX,ublock.org,PROXY
+- DOMAIN-SUFFIX,ubnt.com,PROXY
+- DOMAIN-SUFFIX,ulyssesapp.com,PROXY
+- DOMAIN-SUFFIX,urchin.com,PROXY
+- DOMAIN-SUFFIX,usertrust.com,PROXY
+- DOMAIN-SUFFIX,v.gd,PROXY
+- DOMAIN-SUFFIX,v2ex.com,PROXY
+- DOMAIN-SUFFIX,vimeo.com,PROXY
+- DOMAIN-SUFFIX,vimeocdn.com,PROXY
+- DOMAIN-SUFFIX,vine.co,PROXY
+- DOMAIN-SUFFIX,vivaldi.com,PROXY
+- DOMAIN-SUFFIX,vox-cdn.com,PROXY
+- DOMAIN-SUFFIX,vsco.co,PROXY
+- DOMAIN-SUFFIX,vultr.com,PROXY
+- DOMAIN-SUFFIX,w.org,PROXY
+- DOMAIN-SUFFIX,w3schools.com,PROXY
+- DOMAIN-SUFFIX,webtype.com,PROXY
+- DOMAIN-SUFFIX,wikiwand.com,PROXY
+- DOMAIN-SUFFIX,wikileaks.org,PROXY
+- DOMAIN-SUFFIX,wikimedia.org,PROXY
+- DOMAIN-SUFFIX,wikipedia.com,PROXY
+- DOMAIN-SUFFIX,wikipedia.org,PROXY
+- DOMAIN-SUFFIX,windows.com,PROXY
+- DOMAIN-SUFFIX,windows.net,PROXY
+- DOMAIN-SUFFIX,wire.com,PROXY
+- DOMAIN-SUFFIX,wordpress.com,PROXY
+- DOMAIN-SUFFIX,workflowy.com,PROXY
+- DOMAIN-SUFFIX,wp.com,PROXY
+- DOMAIN-SUFFIX,wsj.com,PROXY
+- DOMAIN-SUFFIX,wsj.net,PROXY
+- DOMAIN-SUFFIX,xda-developers.com,PROXY
+- DOMAIN-SUFFIX,xeeno.com,PROXY
+- DOMAIN-SUFFIX,xiti.com,PROXY
+- DOMAIN-SUFFIX,yahoo.com,PROXY
+- DOMAIN-SUFFIX,yimg.com,PROXY
+- DOMAIN-SUFFIX,ying.com,PROXY
+- DOMAIN-SUFFIX,yoyo.org,PROXY
+- DOMAIN-SUFFIX,ytimg.com,PROXY
+- DOMAIN-SUFFIX,telegra.ph,PROXY
+- DOMAIN-SUFFIX,telegram.org,PROXY
+- IP-CIDR,91.108.4.0/22,PROXY,no-resolve
+- IP-CIDR,91.108.8.0/21,PROXY,no-resolve
+- IP-CIDR,91.108.16.0/22,PROXY,no-resolve
+- IP-CIDR,91.108.56.0/22,PROXY,no-resolve
+- IP-CIDR,149.154.160.0/20,PROXY,no-resolve
+- IP-CIDR6,2001:67c:4e8::/48,PROXY,no-resolve
+- IP-CIDR6,2001:b28:f23d::/48,PROXY,no-resolve
+- IP-CIDR6,2001:b28:f23f::/48,PROXY,no-resolve
+- IP-CIDR,120.232.181.162/32,PROXY,no-resolve
+- IP-CIDR,120.241.147.226/32,PROXY,no-resolve
+- IP-CIDR,120.253.253.226/32,PROXY,no-resolve
+- IP-CIDR,120.253.255.162/32,PROXY,no-resolve
+- IP-CIDR,120.253.255.34/32,PROXY,no-resolve
+- IP-CIDR,120.253.255.98/32,PROXY,no-resolve
+- IP-CIDR,180.163.150.162/32,PROXY,no-resolve
+- IP-CIDR,180.163.150.34/32,PROXY,no-resolve
+- IP-CIDR,180.163.151.162/32,PROXY,no-resolve
+- IP-CIDR,180.163.151.34/32,PROXY,no-resolve
+- IP-CIDR,203.208.39.0/24,PROXY,no-resolve
+- IP-CIDR,203.208.40.0/24,PROXY,no-resolve
+- IP-CIDR,203.208.41.0/24,PROXY,no-resolve
+- IP-CIDR,203.208.43.0/24,PROXY,no-resolve
+- IP-CIDR,203.208.50.0/24,PROXY,no-resolve
+- IP-CIDR,220.181.174.162/32,PROXY,no-resolve
+- IP-CIDR,220.181.174.226/32,PROXY,no-resolve
+- IP-CIDR,220.181.174.34/32,PROXY,no-resolve
+- DOMAIN,injections.adguard.org,DIRECT
+- DOMAIN,local.adguard.org,DIRECT
+- DOMAIN-SUFFIX,local,DIRECT
+- IP-CIDR,127.0.0.0/8,DIRECT
+- IP-CIDR,172.16.0.0/12,DIRECT
+- IP-CIDR,192.168.0.0/16,DIRECT
+- IP-CIDR,10.0.0.0/8,DIRECT
+- IP-CIDR,17.0.0.0/8,DIRECT
+- IP-CIDR,100.64.0.0/10,DIRECT
+- IP-CIDR,224.0.0.0/4,DIRECT
+- IP-CIDR6,fe80::/10,DIRECT
+- DOMAIN-SUFFIX,cn,DIRECT
+- DOMAIN-KEYWORD,-cn,DIRECT
+- DOMAIN,dnsrandom.dohchatdns.click,DIRECT
+- GEOIP,CN,DIRECT
+- MATCH,PROXY
