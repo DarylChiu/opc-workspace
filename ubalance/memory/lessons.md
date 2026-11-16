@@ -825,3 +825,9 @@ stat -f "%Sm" -t "%s" <file>; sleep 10; stat -f "%Sm" -t "%s" <file>  # 两次�
 - **规则**：别人（或自己）声称"已修好/已测试"，**不得直接采信 commit message**。必须：① 读源码确认逻辑真实存在（例：读 `watchdog.sh:33` 的 keys 数组）② 独立跑一次实测（不看对方输出）③ 要求存在**负向测试**（注入错误 → 应判失败）。
 - **判据**：只做正向测试（"改了之后正常"）证明不了修复，因为**改动前的旧行为可能也是"正常"**。负向测试能区分"修好了"和"改完了"。
 - 2026-11-15 审计教训：`audit.sh` 步骤7 的「真实章节」判定是**标题关键词黑名单**（含 Cron/审计/audit/Git/备份字样的标题一律不计）。写日记时章节标题若带「cron」等词会把实质内容判成骨架 → 标题应写业务动作（如「成本扫描与看板核对」），cron 说明放正文。
+
+## 2026-11-16 · 记忆归档 push 卡死 + opc-workspace rebase 残留
+- **现象**：`audit.sh` 报「Git push 成功」，但 `git ls-remote` 显示远端仍停在旧 commit（d64f635）。手工 push 无输出、无报错、静默退出 0，其实**没推上去**；.git 已 3.4GB，推送超时 400s。
+- **根因**：①balance-workspace 仓库历史含大对象，push 打包超时/被静默中断；②兜底仓 ~/opc-workspace 卡在 2026-06 的交互式 rebase 中（工作区 detached "no branch, rebasing main"），在其上 commit 只落到游离 HEAD。
+- **处理**：`git rebase --abort` 解除残留 rebase → 恢复 main → 本地 commit 7372ad6 已含日记与 active（推到 opc-workspace 待 Daryl 决定是否强推/拆库，因本地领先 28 / 落后 1403，不可强推）。
+- **教训**：审计脚本的"push 成功"必须用 `git ls-remote origin main` 校验 SHA，而不是信脚本输出；任何 commit 前先 `git branch --show-current`，`HEAD` 即为危险信号。
