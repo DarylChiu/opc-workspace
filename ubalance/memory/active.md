@@ -1,6 +1,15 @@
 # 当前活跃任务
 
-> 最后更新: 2026-11-16 00:59（每日审计：active.md 刷新）
+## 🔍 2026-11-17 · 每日记忆归档审计（修复 3 / 浅层 1 / 深层 2）
+- **审计**：`audit.sh --report` → 成本 API 正常（今日 $0.0051 / 本月 $10.5134 / 全量 $299.3496，43,635 调用）｜git pull + commit + push 成功，远端含 11-17 日记及 D-1~D-3｜自进化对账 PASS（checker 0 / reflexion 0）｜身份一致性 PASS
+- ✅ **已修1**：`2026-11-16.md` 被判 Cron 骨架日记 → 补「当日业务活动概览」，定性**纯 Cron 日**
+- ✅ **已修2**：`2026-11-15.md` 骨架误报 → 追加「归档复核」，说明真实章节在文首（脚本扫描末尾导致误判）
+- ✅ **已修3**：`active.md` 刷新 + Git commit + push（脚本自动）
+- ⚠️ **新增遗留**：`audit.sh` 步骤10 兜底路径 `~/opc-workspace/Kitty/opc-dashboard/data/cost_daily.json` 缺失；看板真实数据在 `~/WorkBuddy/Claw/opc-dashboard/data/cost_daily.json` → **路径漂移，需 Kitty 确认/修脚本**
+- ⏳ **遗留（延续）**：`audit.sh` 步骤7 午夜边界误报 → 建议加 `hour<1` 豁免（脚本全 Agent 共享，不擅改）；Git 历史 3.3GB 大文件清理/拆库 → 等 Daryl 决策
+- ⏳ **业务待确认（无新进展）**：HuaXing 利息 v2 两问（4% 覆盖区间 / 期初 57,526,807 归属）｜华特经营模式 CIT 10% 凭证｜M1 成本核算手册进度
+
+> 最后更新: 2026-11-17 00:59（每日审计：active.md 刷新）
 
 ## 🔍 2026-11-16 · 每日记忆归档审计（修复 3 / 浅层 1 / 深层 1）
 - **审计**：`audit.sh --report` → 成本 `fresh_api_ok`（今日 $0.00 / 本月 $10.41 / 全量 $299.24，与 OPC API 8765 一致）｜git pull + commit + push 成功，远端含 11-16 日记及 D-1~D-3｜自进化对账 PASS（checker 0 / reflexion 0）｜身份一致性 PASS
