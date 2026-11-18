@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<title>洋流 CURRENT DRIFT</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:#000;
+  font-family:'Courier New',monospace;color:#7fe3d4;cursor:crosshair}
+canvas{display:block;position:fixed;inset:0}
+#hud{position:fixed;inset:0;pointer-events:none;opacity:0;transition:opacity .6s}
+#hud.on{opacity:1}
+.panel{position:absolute;font-size:12px;letter-spacing:.12em;text-shadow:0 0 8px currentColor}
+#o2{left:24px;top:24px}
+#dpt{left:24px;top:56px;color:#4a9d94}
+#sonar-l{right:24px;top:24px;text-align:right}
+#hint{bottom:28px;left:0;right:0;text-align:center;color:#3d7f78;font-size:11px}
+#warn{top:50%;left:0;right:0;text-align:center;font-size:15px;color:#ff5a4a;
+  opacity:0;letter-spacing:.3em;font-weight:bold}
+#warn.on{animation:pulse .7s infinite}
+@keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
+.bar{width:160px;height:3px;background:#0d2b28;margin-top:6px;position:relative;overflow:hidden}
+.bar i{position:absolute;inset:0;transform-origin:left;background:#7fe3d4;
+  transition:transform .2s linear;box-shadow:0 0 10px currentColor}
+#o2 .bar i{background:#5fe0c0}
+#overlay{position:fixed;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;background:radial-gradient(ellipse at center,#03110f 0%,#000 75%);
+  text-align:center;z-index:10;transition:opacity .8s;padding:20px}
+#overlay.hide{opacity:0;pointer-events:none}
+h1{font-size:clamp(28px,6vw,58px);letter-spacing:.42em;font-weight:400;
+  color:#a8f0e4;text-shadow:0 0 30px #1de0b8,0 0 70px #0a6b5c;margin-bottom:6px;margin-right:-.42em}
+.sub{font-size:11px;letter-spacing:.5em;color:#3d8f84;margin-bottom:38px}
+.desc{font-size:12px;line-height:2.2;color:#5aa79c;max-width:440px;margin-bottom:34px;
+  letter-spacing:.06em}
+.desc b{color:#8ff0dd;font-weight:400}
+.key{color:#0b1f1c;background:#4fd6bd;padding:2px 7px;border-radius:2px;
+  font-size:11px;margin:0 2px;font-weight:bold}
+#start{pointer-events:auto;cursor:pointer;background:transparent;border:1px solid #2a8f7f;
+  color:#7fe3d4;padding:15px 52px;font-family:inherit;font-size:13px;letter-spacing:.42em;
+  transition:.3s;margin-right:-.42em}
+#start:hover{background:#7fe3d4;color:#03110f;box-shadow:0 0 40px #1de0b8}
+#o2val,#sonarval{color:#a8f0e4}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<div id="hud">
+  <div class="panel" id="o2">O₂ <span id="o2val">100</span>%<div class="bar"><i id="o2bar"></i></div></div>
+  <div class="panel" id="dpt">深度 <span id="dptval">0</span> m</div>
+  <div class="panel" id="sonar-l">声呐 <span id="sonarval">0</span> / 5 距标<br><span style="font-size:10px;color:#2e6b64">按住 [空格] 脉冲</span></div>
+  <div class="panel" id="hint">W A S D 推进 &nbsp;·&nbsp; 鼠标 转向 &nbsp;·&nbsp; 空格 声呐脉冲（吸引注意）</div>
+  <div class="panel" id="warn">缺氧警告</div>
+</div>
+
+<div id="overlay">
+  <h1>洋流</h1>
+  <div class="sub">C U R R E N T &nbsp; D R I F T</div>
+  <div class="desc">
+    你是一具失联的深潜器。电池将尽，氧气正在流失。<br>
+    下方海沟有 <b>5 个距离信标</b>，一个个去靠近它们，<br>
+    拼出回收坐标。<br><br>
+    但黑暗中有什么在巡游——<br>
+    它看不见你，只读声呐。<br>
+    <span class="key">空格</span> 发脉冲能照亮地形，也会暴露你自己。
+  </div>
+  <button id="start">入 水</button>
+</div>
+
+<script>
+(()=>{
+'use strict';
+
+// ============ 渲染器 ============
+const cvs = document.getElementById('c');
+let gl = cvs.getContext('webgl2', {antialias:false, alpha:false, powerPreference:'high-performance'});
+if(!gl) gl = cvs.getContext('webgl');
+if(!gl){ alert('此浏览器不支持 WebGL'); return; }
+
+function resize(){
+  const dpr = Math.min(devicePixelRatio||1, 1.5);
+  cvs.width = Math.floor(innerWidth*dpr);
+  cvs.height = Math.floor(innerHeight*dpr);
+  gl.viewport(0,0,cvs.width,cvs.height);
+}
+addEventListener('resize',resize); resize();
+
+// ============ 着色器 ============
+const VS = `
+attribute vec2 aPos;
+void main(){ gl_Position = vec4(aPos,0.0,1.0); }
+`;
+
+// 全屏体积渲染：光线步进 + 深度雾 + 焦散
+const FS = `
+precision highp float;
+uniform vec2  uRes;
+uniform float uTime;
+uniform vec3  uCamPos;
+uniform vec3  uCamDir;
+uniform vec3  uCamRight;
+uniform vec3  uCamUp;
+uniform float uFov;
+uniform float uPulse;      // 声呐脉冲强度 0..1
+uniform float uPulseR;     // 脉冲半径
+uniform float uO2;         // 氧气 0..1（影响视觉收缩）
+uniform vec3  uBeacons[5];
+uniform float uBeaconOn[5];
+uniform vec3  uEnemy;
+uniform float uEnemyVis;   // 敌人可见度
+uniform float uHurt;
+
+// -------- 噪声 --------
+float hash(vec3 p){
+  p = fract(p*0.3183099 + vec3(0.1,0.2,0.3));
+  p *= 17.0;
+  return fract(p.x*p.y*p.z*(p.x+p.y+p.z));
+}
+float noise(vec3 x){
+  vec3 i = floor(x), f = fract(x);
+  f = f*f*(3.0-2.0*f);
+  return mix(mix(mix(hash(i+vec3(0,0,0)),hash(i+vec3(1,0,0)),f.x),
+                 mix(hash(i+vec3(0,1,0)),hash(i+vec3(1,1,0)),f.x),f.y),
+             mix(mix(hash(i+vec3(0,0,1)),hash(i+vec3(1,0,1)),f.x),
+                 mix(hash(i+vec3(0,1,1)),hash(i+vec3(1,1,1)),f.x),f.y),f.z);
+}
+float fbm(vec3 p){
+  float a=0.5, s=0.0;
+  for(int i=0;i<4;i++){ s += a*noise(p); p*=2.02; a*=0.5; }
+  return s;
+}
+
+// -------- 地形高度场（海沟） --------
+float terrain(vec2 p){
+  float h = fbm(vec3(p*0.045, 0.0))*9.0;
+  // 海沟：中央下凹
+  float trench = -14.0*exp(-pow(p.x*0.035,2.0));
+  h += trench;
+  h -= fbm(vec3(p*0.13, 5.0))*2.4;
+  return -22.0 + h;
+}
+
+// 软阴影近似
+float softShadow(vec3 ro, vec3 rd){
+  float res = 1.0, t = 0.3;
+  for(int i=0;i<20;i++){
+    vec3 p = ro + rd*t;
+    float d = p.y - terrain(p.xz);
+    res = min(res, 10.0*d/t);
+    if(res < 0.01 || t > 40.0) break;
+    t += clamp(d, 0.1, 2.0);
+  }
+  return clamp(res, 0.0, 1.0);
+}
+
+// -------- 主渲染 --------
+void main(){
+  vec2 uv = (gl_FragCoord.xy - 0.5*uRes)/uRes.y;
+  vec3 rd = normalize(uCamDir + uCamRight*uv.x*uFov + uCamUp*uv.y*uFov);
+  vec3 ro = uCamPos;
+
+  // 光线步进地形
+  float t = 0.05;
+  float hit = 0.0;
+  vec3 p;
+  for(int i=0;i<90;i++){
+    p = ro + rd*t;
+    float d = p.y - terrain(p.xz);
+    if(d < 0.02){ hit = 1.0; break; }
+    if(t > 90.0) break;
+    t += max(d*0.7, 0.08);
+  }
+
+  // 水体基础色（深度衰减）
+  float depthF = exp(-max(ro.y,0.0)*0.045);
+  vec3 water = vec3(0.004,0.020,0.030) * depthF;
+
+  // 微生物悬浮粒子
+  float motes = 0.0;
+  for(int i=0;i<3;i++){
+    float fi = float(i);
+    vec3 mp = ro + rd*(4.0+fi*7.0);
+    float n = fbm(mp*1.6 + vec3(0.0, uTime*0.06*(1.0+fi*0.4), 0.0));
+    motes += smoothstep(0.62,0.9,n) * 0.5;
+  }
+  water += vec3(0.05,0.16,0.15)*motes*0.16;
+
+  vec3 col = water;
+
+  if(hit > 0.5){
+    vec3 n = normalize(vec3(
+      terrain(p.xz) - terrain(p.xz+vec2(0.2,0.0)),
+      0.2,
+      terrain(p.xz) - terrain(p.xz+vec2(0.0,0.2))
+    ));
+    vec3 ldir = normalize(vec3(0.35,1.0,0.2));
+    float sh = softShadow(p+vec3(0,0.25,0), ldir);
+    float diff = max(dot(n,ldir),0.0)*0.7 + 0.3;
+
+    // 焦散（穿透水面的光纹）
+    float caust = fbm(vec3(p.xz*0.28, uTime*0.13));
+    caust = pow(caust,3.0)*2.6;
+
+    // 泥沙颜色
+    vec3 sand = mix(vec3(0.10,0.13,0.12), vec3(0.20,0.22,0.18), fbm(p*0.35));
+    col = sand * diff * sh * (0.55 + caust*0.9);
+    col += vec3(0.02,0.07,0.06)*caust*sh;
+
+    // 距离雾
+    col = mix(col, water*1.4, 1.0-exp(-t*0.021));
+  } else {
+    // 远处逐渐变黑
+    col = mix(col, vec3(0.001,0.004,0.007), smoothstep(20.0,85.0,t));
+  }
+
+  // ---- 声呐脉冲：以玩家为中心的同心波，照亮地形轮廓 ----
+  if(uPulse > 0.001){
+    float dist = length(p - ro);
+    float ring = abs(dist - uPulse*34.0);
+    float band = exp(-ring*ring*1.6) * uPulse;
+    col += vec3(0.15,0.85,0.72)*band*0.55;
+    // 扫描线
+    col += vec3(0.10,0.55,0.48)*uPulse*exp(-dist*0.055)*0.35;
+  }
+
+  // ---- 信标（强引导：光柱 + 光晕 + 脉动） ----
+  for(int i=0;i<5;i++){
+    if(uBeaconOn[i] < 0.5) continue;
+    vec3 bp = uBeacons[i];
+
+    // 1) 核心球体光斑
+    vec3 op = bp - ro;
+    float tt = max(dot(op,rd),0.0);
+    vec3 cl = ro + rd*tt;
+    float dd = length(cl-bp);
+    float core = exp(-dd*dd*7.0) * 2.6;
+    float halo = exp(-dd*0.42) * 0.85;
+
+    // 2) 垂直光柱：把射线在该 XZ 列上的最近点抬到信标高度
+    float cx = length(ro.xz + rd.xz*max(dot(bp.xz-ro.xz, rd.xz)/max(dot(rd.xz,rd.xz),0.001),0.0) - bp.xz);
+    float hgt = clamp((ro.y + rd.y*tt - bp.y + 9.0)/26.0, 0.0, 1.0);
+    float pillar = exp(-cx*cx*2.4) * (1.0-hgt) * 0.95;
+
+    // 3) 呼吸脉动，配合时间让远处也能感知
+    float breathe = 0.72 + 0.28*sin(uTime*3.4 + float(i)*1.7);
+
+    // 4) 距离加成：远处也不衰减到看不见
+    float dcam = length(bp - ro);
+    float farBoost = 1.0 + smoothstep(12.0, 60.0, dcam)*1.4;
+
+    col += vec3(1.0,0.68,0.14) * (core + pillar) * breathe * farBoost;
+    col += vec3(1.0,0.55,0.10) * halo * 0.55;
+  }
+
+  // ---- 屏幕边缘方向箭头：指向最近的未收集信标 ----
+  {
+    float bestD = 1e9;
+    vec3 bestB = vec3(0.0);
+    for(int i=0;i<5;i++){
+      if(uBeaconOn[i] < 0.5) continue;
+      float d = length(uBeacons[i] - ro);
+      if(d < bestD){ bestD = d; bestB = uBeacons[i]; }
+    }
+    if(bestD < 1e8){
+      // 把目标投影到视空间，换算成屏幕方向
+      vec3 rel = bestB - ro;
+      float fw = dot(rel, uCamDir);
+      vec2 sv = vec2(dot(rel, uCamRight), dot(rel, uCamUp));
+      // 在视野内时给一个柔和指示，视野外贴边显示
+      float infov = step(0.0, fw);
+      vec2 dir2 = normalize(sv + vec2(0.0001));
+      float ang = atan(dir2.y, dir2.x);
+      // 当前像素相对屏幕中心的角度
+      vec2 puv = (gl_FragCoord.xy - 0.5*uRes)/uRes.y;
+      float pang = atan(puv.y, puv.x);
+      float adiff = abs(mod(ang - pang + 3.14159265, 6.2831853) - 3.14159265);
+      float arrow = smoothstep(0.45, 0.0, adiff)
+                  * smoothstep(0.30, 0.42, length(puv))
+                  * smoothstep(0.62, 0.48, length(puv));
+      float pulse = 0.55 + 0.45*sin(uTime*4.2);
+      col += vec3(1.0,0.72,0.20) * arrow * pulse * 0.85 * infov;
+    }
+  }
+
+  // ---- 敌人 ----
+  if(uEnemyVis > 0.01){
+    vec3 op = uEnemy - ro;
+    float tt = max(dot(op,rd),0.0);
+    vec3 cl = ro + rd*tt;
+    float dd = length(cl-uEnemy);
+    float shape = exp(-dd*dd*9.0);
+    float aura = exp(-dd*1.4)*0.32;
+    col += vec3(1.0,0.16,0.10)*(shape+aura)*uEnemyVis;
+  }
+
+  // ---- 后处理 ----
+  // 边角暗角（氧气越低越强）
+  float vig = smoothstep(1.25, 0.22, length(uv));
+  col *= mix(0.45, 1.0, vig);
+  col = mix(col, col*0.55, 1.0-uO2);
+
+  // 受伤红闪
+  col = mix(col, vec3(0.55,0.03,0.02), uHurt*0.75);
+
+  // 水下横向摆动
+  col *= 0.94 + 0.06*sin(gl_FragCoord.y*0.35 + uTime*2.0);
+
+  // 色调映射 + 轻微颗粒
+  col = col/(col+vec3(0.72));
+  col = pow(col, vec3(0.88));
+  float grain = hash(vec3(gl_FragCoord.xy, uTime))*0.045;
+  col += grain - 0.0225;
+
+  gl_FragColor = vec4(col,1.0);
+}
+`;
+
+function mkShader(type, src){
+  const s = gl.createShader(type);
+  gl.shaderSource(s, src);
+  gl.compileShader(s);
+  if(!gl.getShaderParameter(s, gl.COMPILE_STATUS)){
+    console.error(gl.getShaderInfoLog(s));
+    return null;
+  }
+  return s;
+}
+const prog = gl.createProgram();
+gl.attachShader(prog, mkShader(gl.VERTEX_SHADER, VS));
+gl.attachShader(prog, mkShader(gl.FRAGMENT_SHADER, FS));
+gl.linkProgram(prog);
+if(!gl.getProgramParameter(prog, gl.LINK_STATUS)){
+  console.error(gl.getProgramInfoLog(prog));
+}
+gl.useProgram(prog);
+
+const buf = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
+const aPos = gl.getAttribLocation(prog,'aPos');
+gl.enableVertexAttribArray(aPos);
+gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+const U = {};
+['uRes','uTime','uCamPos','uCamDir','uCamRight','uCamUp','uFov','uPulse','uPulseR',
+ 'uO2','uBeacons','uBeaconOn','uEnemy','uEnemyVis','uHurt'].forEach(n=>{
+  U[n] = gl.getUniformLocation(prog, n);
+});
+
+// ============ 游戏状态 ============
+const G = {
+  running:false,
+  time:0,
+  cam:{x:0,y:4,z:0, yaw:0, pitch:0, vy:0},
+  o2:1,
+  pulse:0,
+  pulseR:0,
+  sonarCD:0,
+  beacons:[],
+  found:0,
+  enemy:{x:10,y:2,z:-14, vx:0,vz:0, alert:0, target:null, mode:'patrol'},
+  enemyVis:0,
+  hurt:0,
+  noise:0,       // 累积噪音，越高敌人越警觉
+  depth:0,
+  shake:0
+};
+
+// 生成 5 个信标（沿海沟分布）
+function seedBeacons(){
+  G.beacons = [];
+  const ang = [0.3, 1.5, 2.7, 3.9, 5.1];
+  for(let i=0;i<5;i++){
+    const r = 13 + i*5.5;
+    const bx = Math.cos(ang[i])*r;
+    const bz = Math.sin(ang[i])*r;
+    G.beacons.push({
+      x: bx,
+      z: bz,
+      y: terrainCPU(bx,bz) + 5.0,   // 停在海床上方，便于看见也便于靠近
+      found: false
+    });
+  }
+  G.found = 0;
+}
+
+// 与着色器一致的 CPU 侧地形（用于高度约束和简易碰撞）
+function hash3(x,y,z){
+  let px = (x*0.3183099+0.1)%1, py=(y*0.3183099+0.2)%1, pz=(z*0.3183099+0.3)%1;
+  px*=17; py*=17; pz*=17;
+  return ((px*py*pz*(px+py+pz))%1+1)%1;
+}
+function vnoise(x,y,z){
+  const ix=Math.floor(x), iy=Math.floor(y), iz=Math.floor(z);
+  let fx=x-ix, fy=y-iy, fz=z-iz;
+  fx=fx*fx*(3-2*fx); fy=fy*fy*(3-2*fy); fz=fz*fz*(3-2*fz);
+  const L=(a,b,t)=>a+(b-a)*t;
+  const c=(dx,dy,dz)=>hash3(ix+dx,iy+dy,iz+dz);
+  return L(
+    L(L(c(0,0,0),c(1,0,0),fx), L(c(0,1,0),c(1,1,0),fx), fy),
+    L(L(c(0,0,1),c(1,0,1),fx), L(c(0,1,1),c(1,1,1),fx), fy), fz);
+}
+function fbm3(x,y,z){
+  let a=0.5,s=0;
+  for(let i=0;i<3;i++){ s+=a*vnoise(x,y,z); x*=2.02;y*=2.02;z*=2.02; a*=0.5; }
+  return s;
+}
+function terrainCPU(x,z){
+  let h = fbm3(x*0.045, 0, z*0.045)*9.0;
+  h += -14.0*Math.exp(-Math.pow(x*0.035,2));
+  h -= fbm3(x*0.13, 5, z*0.13)*2.4;
+  return -22.0 + h;
+}
+
+// ============ 输入 ============
+const keys = {};
+addEventListener('keydown', e=>{
+  keys[e.code]=true;
+  if(e.code==='Space' && G.running) e.preventDefault();
+});
+addEventListener('keyup', e=>{ keys[e.code]=false; });
+
+let pointerLocked = false;
+cvs.addEventListener('click', ()=>{
+  if(G.running && !pointerLocked) cvs.requestPointerLock();
+});
+document.addEventListener('pointerlockchange', ()=>{
+  pointerLocked = document.pointerLockElement === cvs;
+});
+addEventListener('mousemove', e=>{
+  if(!pointerLocked || !G.running) return;
+  G.cam.yaw   += e.movementX*0.0026;
+  G.cam.pitch -= e.movementY*0.0026;
+  G.cam.pitch = Math.max(-1.35, Math.min(1.35, G.cam.pitch));
+});
+
+// ============ HUD ============
+const hud     = document.getElementById('hud');
+const overlay = document.getElementById('overlay');
+const o2val   = document.getElementById('o2val');
+const o2bar   = document.getElementById('o2bar');
+const sonarval= document.getElementById('sonarval');
+const dptval  = document.getElementById('dptval');
+const warnEl  = document.getElementById('warn');
+
+function startGame(){
+  seedBeacons();
+  G.running = true;
+  G.o2 = 1;
+  G.time = 0;
+  G.found = 0;
+  G.hurt = 0;
+  G.noise = 0;
+  G.pulse = 0;
+  G.cam = {x:0,y:terrainCPU(0,0)+9,z:0, yaw:0, pitch:-0.12, vy:0};
+  G.enemy = {x:14,y:6,z:-18, vx:0, vz:0, alert:0, target:null, mode:'patrol'};
+  G.enemyVis = 0;
+  overlay.classList.add('hide');
+  hud.classList.add('on');
+  cvs.requestPointerLock();
+}
+document.getElementById('start').addEventListener('click', e=>{
+  e.stopPropagation();
+  startGame();
+});
+
+// ============ 更新 ============
+const dir3 = {x:0,y:0,z:0};
+function update(dt){
+  G.time += dt;
+
+  // --- 相机移动 ---
+  const c = G.cam;
+  const speed = 7.5;
+  const fx = Math.sin(c.yaw), fz = Math.cos(c.yaw);
+  const rx = Math.cos(c.yaw), rz = -Math.sin(c.yaw);
+  let mx=0, mz=0;
+  if(keys['KeyW']){ mx+=fx; mz+=fz; }
+  if(keys['KeyS']){ mx-=fx; mz-=fz; }
+  if(keys['KeyA']){ mx-=rx; mz-=rz; }
+  if(keys['KeyD']){ mx+=rx; mz+=rz; }
+  const ml = Math.hypot(mx,mz);
+  if(ml>0){ mx/=ml; mz/=ml; }
+  c.x += mx*speed*dt;
+  c.z += mz*speed*dt;
+
+  // 上下浮动（Shift 下沉 / Ctrl 上浮）
+  if(keys['ShiftLeft']||keys['ShiftRight']) c.y -= 5*dt;
+  if(keys['ControlLeft']||keys['ControlRight']) c.y += 5*dt;
+
+  // 地形与水面约束
+  const ground = terrainCPU(c.x, c.z);
+  const minY = ground + 2.2;
+  if(c.y < minY){ c.y = minY; c.vy = 0; }
+  const maxY = -1.0;
+  if(c.y > maxY) c.y = maxY;
+
+  // 轻微下沉（重力感）
+  c.y -= 0.55*dt;
+  if(c.y < minY) c.y = minY;
+
+  G.depth = Math.max(0, Math.round(-terrainCPU(c.x,c.z) + 22 + (c.y - ground)));
+
+  // --- 氧气 ---
+  const moving = ml>0 ? 1.0 : 0.55;
+  G.o2 -= dt * 0.0125 * moving * (1 + G.noise*0.35);
+  if(G.o2 < 0) G.o2 = 0;
+
+  if(G.o2 < 0.25){
+    warnEl.classList.add('on');
+  } else {
+    warnEl.classList.remove('on');
+  }
+
+  // --- 声呐脉冲 ---
+  if(G.sonarCD > 0) G.sonarCD -= dt;
+  if(keys['Space'] && G.sonarCD <= 0 && G.o2 > 0){
+    G.sonarCD = 2.4;
+    G.pulse = 1.0;
+    G.pulseR = 0;
+    G.noise = Math.min(1, G.noise + 0.42);
+    // 脉冲吸引敌人
+    G.enemy.alert = Math.min(1, G.enemy.alert + 0.55);
+    G.enemy.target = {x:c.x, z:c.z};
+  }
+  if(G.pulse > 0){
+    G.pulseR += dt*0.85;
+    G.pulse -= dt*0.62;
+    if(G.pulse < 0) G.pulse = 0;
+  }
+
+  // 噪音自然衰减
+  G.noise = Math.max(0, G.noise - dt*0.075);
+
+  // --- 信标检测 ---
+  for(const b of G.beacons){
+    if(b.found) continue;
+    const d = Math.hypot(b.x-c.x, b.y-c.y, b.z-c.z);
+    if(d < 7.0){
+      b.found = true;
+      G.found++;
+      G.o2 = Math.min(1, G.o2 + 0.13);   // 奖励氧气
+      G.beacons.forEach((_,i)=>{ G.beaconFlash = 1; });
+    }
+  }
+
+  // --- 敌人 AI ---
+  const e = G.enemy;
+  e.alert = Math.max(0, e.alert - dt*0.14);
+
+  if(e.alert > 0.25 && e.target){
+    // 追击
+    e.mode = 'chase';
+    const dx = e.target.x - e.x, dz = e.target.z - e.z;
+    const dl = Math.hypot(dx,dz) || 1;
+    const espd = 4.6 + e.alert*4.5;
+    e.vx = (dx/dl)*espd;
+    e.vz = (dz/dl)*espd;
+  } else {
+    // 巡游
+    e.mode = 'patrol';
+    if(!e.patrolT || G.time > e.patrolT){
+      e.patrolT = G.time + 3 + Math.random()*3;
+      const a = Math.random()*Math.PI*2;
+      e.pa = a;
+    }
+    e.vx = Math.cos(e.pa||0)*1.9;
+    e.vz = Math.sin(e.pa||0)*1.9;
+  }
+  e.x += e.vx*dt;
+  e.z += e.vz*dt;
+  const eg = terrainCPU(e.x, e.z);
+  e.y = eg + 5.5 + Math.sin(G.time*1.3)*1.4;
+
+  // 边界约束
+  const er = Math.hypot(e.x, e.z);
+  if(er > 52){ e.x *= 0.985; e.z *= 0.985; }
+
+  // 可见度：靠得越近越亮
+  const ed = Math.hypot(e.x-c.x, e.y-c.y, e.z-c.z);
+  const targetVis = Math.max(0, 1.0 - ed/26.0);
+  G.enemyVis += (targetVis - G.enemyVis) * Math.min(1, dt*3.2);
+
+  // 被撞 = 扣氧
+  if(ed < 3.2){
+    G.o2 -= dt*0.42;
+    G.hurt = Math.min(1, G.hurt + dt*5.5);
+    G.enemyVis = 1;
+  }
+  if(G.hurt > 0) G.hurt = Math.max(0, G.hurt - dt*1.5);
+
+  // --- 结束条件 ---
+  if(G.o2 <= 0 || G.found >= 5){
+    endGame(G.found >= 5);
+  }
+
+  // --- HUD ---
+  o2val.textContent = Math.round(G.o2*100);
+  o2bar.style.transform = 'scaleX('+G.o2+')';
+  sonarval.textContent = G.found;
+  dptval.textContent = G.depth;
+}
+
+function endGame(win){
+  G.running = false;
+  if(document.pointerLockElement) document.exitPointerLock();
+  hud.classList.remove('on');
+  warnEl.classList.remove('on');
+  overlay.classList.remove('hide');
+  const h1 = overlay.querySelector('h1');
+  const sub = overlay.querySelector('.sub');
+  const desc = overlay.querySelector('.desc');
+  const btn = document.getElementById('start');
+  if(win){
+    h1.textContent = '回收';
+    sub.textContent = 'C O O R D I N A T E S &nbsp; L O C K E D';
+    desc.innerHTML = '5 个信标全数接入，你可以回家了。<br><br>'+
+      '<span style="color:#3d7f78">用时 '+G.time.toFixed(1)+' 秒 · 剩余氧气 '+Math.round(G.o2*100)+'%</span>';
+    btn.textContent = '再来一次';
+  } else {
+    h1.textContent = '静默';
+    sub.textContent = 'S I G N A L &nbsp; L O S T';
+    desc.innerHTML = '氧气耗尽。深潜器停止运作。<br><br>'+
+      '<span style="color:#3d7f78">找到 '+G.found+' / 5 个信标 · 存活 '+G.time.toFixed(1)+' 秒</span>';
+    btn.textContent = '重新入水';
+  }
+  btn.onclick = (ev)=>{ ev.stopPropagation(); startGame(); };
+}
+
+// ============ 渲染循环 ============
+let last = performance.now();
+function frame(now){
+  const dt = Math.min(0.05, (now-last)/1000);
+  last = now;
+
+  if(G.running) update(dt);
+  else if(G.time === 0){
+    // 静态待机画面
+    G.cam.x = Math.sin(now*0.00013)*6;
+    G.cam.z = Math.cos(now*0.00013)*6;
+    G.cam.y = terrainCPU(G.cam.x,G.cam.z)+8;
+    G.cam.yaw = now*0.00007;
+    G.cam.pitch = -0.16;
+  }
+
+  const c = G.cam;
+  // 相机基向量
+  const cy=Math.cos(c.yaw), sy=Math.sin(c.yaw);
+  const cp=Math.cos(c.pitch), sp=Math.sin(c.pitch);
+  const dirX = sy*cp, dirY = sp, dirZ = cy*cp;
+  const rightX = cy, rightY = 0, rightZ = -sy;
+  const upX = -sy*sp, upY = cp, upZ = -cy*sp;
+
+  // 手抖
+  const shakeAmt = G.hurt*0.05 + (G.running?0.0018:0);
+  const sx = (Math.random()-0.5)*shakeAmt;
+  const sy2 = (Math.random()-0.5)*shakeAmt;
+
+  gl.uniform2f(U.uRes, cvs.width, cvs.height);
+  gl.uniform1f(U.uTime, now*0.001);
+  gl.uniform3f(U.uCamPos, c.x+sx, c.y+sy2, c.z);
+  gl.uniform3f(U.uCamDir, dirX, dirY, dirZ);
+  gl.uniform3f(U.uCamRight, rightX, rightY, rightZ);
+  gl.uniform3f(U.uCamUp, upX, upY, upZ);
+  gl.uniform1f(U.uFov, 1.05);
+  gl.uniform1f(U.uPulse, G.pulse);
+  gl.uniform1f(U.uPulseR, G.pulseR);
+  gl.uniform1f(U.uO2, G.o2);
+  gl.uniform1f(U.uHurt, G.hurt);
+  gl.uniform1f(U.uEnemyVis, G.running ? G.enemyVis : 0);
+
+  // 信标数组
+  const bpos = new Float32Array(15);
+  const bon  = new Float32Array(5);
+  for(let i=0;i<5;i++){
+    const b = G.beacons[i];
+    if(b){
+      bpos[i*3]   = b.x;
+      bpos[i*3+1] = b.y;
+      bpos[i*3+2] = b.z;
+      bon[i] = b.found ? 0 : 1;   // 未找到的发光
+    }
+  }
+  gl.uniform3fv(U.uBeacons, bpos);
+  gl.uniform1fv(U.uBeaconOn, bon);
+
+  if(G.enemy){
+    gl.uniform3f(U.uEnemy, G.enemy.x, G.enemy.y, G.enemy.z);
+  }
+
+  gl.drawArrays(gl.TRIANGLES, 0, 3);
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+
+})();
+</script>
+</body>
+</html>

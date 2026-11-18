@@ -1,1 +1,1 @@
-missing|文件缺失，23:45 Cron 可能未执行
+stale_api_ok|数据过期（47h前）
