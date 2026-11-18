@@ -4,8 +4,8 @@
 - **审计**：`audit.sh --report` → 成本数据 `stale_api_ok`（数据 47h 前，但 OPC API 8765 端点正常：今日 $0.0119 / 本月 $10.873 / 全量 $299.7093）｜git pull + commit + push 成功，远端含 11-19 日记及 D-1~D-3｜自进化对账 PASS（checker 0 / reflexion 0）｜身份一致性 PASS
 - ✅ **已修1**：`2026-11-18.md` 补「当日业务活动概览」，定性**纯 Cron 日**（修骨架日记告警）
 - ✅ **已修2**：`2026-11-19.md` 补「当日业务活动概览」，定性**纯 Cron 日** + active.md 刷新
-- ⚠️ **遗留1（新增）**：成本台账「日更扫描」47h 未跑（今日数据实为 00:45 cron 写入），疑似 cost_scan 任务漏跑 → 需核对 cron 列表
-- ⏳ **遗留（延续）**：`audit.sh` 步骤7 午夜边界骨架误报 → 建议加 `hour<1` 豁免；步骤10 兜底路径 `~/opc-workspace/...` 与真实 `~/WorkBuddy/Claw/...` 漂移（脚本全 Agent 共享，不擅改，等 Kitty/Daryl 定）
+- ✅ **已修3（脚本级）**：`audit.sh` 步骤10 成本文件路径漂移 → 改为优先取 `~/WorkBuddy/Claw/opc-dashboard/data/cost_daily.json`（0h 新鲜）、回退旧路径；双路径取最新 mtime。重跑后该项 PASS（29→1 行改动，已备份 /tmp/audit.sh.bak.*）
+- ⏳ **遗留（延续）**：`audit.sh` 步骤7 午夜边界骨架误报 → 建议加 `hour<1` 豁免（脚本全 Agent 共享，不擅改，等 Kitty/Daryl 定）；本次已就地修步骤10 路径漂移，**需告知 Kitty**
 - ⏳ **遗留（延续）**：Git 历史 3.3GB 大文件清理/拆库 → 等 Daryl 决策
 - ⏳ **业务待确认（无新进展）**：HuaXing 利息 v2 两问（4% 覆盖区间 / 期初 57,526,807 归属）｜华特经营模式 CIT 10% 凭证｜M1 成本核算手册进度
 
