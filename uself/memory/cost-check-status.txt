@@ -1,1 +1,1 @@
-stale_api_ok|数据过期（46h前）
+stale_api_ok|数据过期（47h前）
