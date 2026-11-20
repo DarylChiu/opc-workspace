@@ -831,3 +831,9 @@ stat -f "%Sm" -t "%s" <file>; sleep 10; stat -f "%Sm" -t "%s" <file>  # 两次�
 - **根因**：①balance-workspace 仓库历史含大对象，push 打包超时/被静默中断；②兜底仓 ~/opc-workspace 卡在 2026-06 的交互式 rebase 中（工作区 detached "no branch, rebasing main"），在其上 commit 只落到游离 HEAD。
 - **处理**：`git rebase --abort` 解除残留 rebase → 恢复 main → 本地 commit 7372ad6 已含日记与 active（推到 opc-workspace 待 Daryl 决定是否强推/拆库，因本地领先 28 / 落后 1403，不可强推）。
 - **教训**：审计脚本的"push 成功"必须用 `git ls-remote origin main` 校验 SHA，而不是信脚本输出；任何 commit 前先 `git branch --show-current`，`HEAD` 即为危险信号。
+
+## 2026-11-21 · audit.sh 步骤7「真实章节」判定坑（骨架误报根因）
+- **现象**：给 D-1 日记补了「## 当日业务活动概览（2026-11-21 审计补记）」，重跑仍报 `真实章节=0` → 骨架误报连续复现
+- **根因**：脚本 `real_sec` 用 `grep -ivE "(Cron|审计|audit|...)"` 过滤 `## ` 标题，**标题里只要出现「审计」二字就被排除**；`### ` 三级标题也不计数（只认 `^## `）
+- **正确做法**：纯 Cron 日的补记章节标题写成 `## 当日业务活动概览` / `## 当日结论`，**不带日期、不带「审计/Cron/Git/备份」字样**，且用二级标题
+- **验证**：改完重跑 `audit.sh --report` → 浅层 0 / 深层 0，全绿
