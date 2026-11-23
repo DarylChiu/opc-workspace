@@ -669,3 +669,4 @@
 {"ts": 1795362772, "round": "20261122235252", "proxy_port_up": 1, "sys_proxy": 1, "gateway_up": 1, "node": "🇸🇬 新加坡 01", "ok": 3, "fail": 0, "total": 3, "lat_avg": 2.766, "fail_codes": "", "cn_direct_ok": 1}
 {"ts": 1795362903, "round": "20261122235503", "proxy_port_up": 1, "sys_proxy": 1, "gateway_up": 1, "node": "🇸🇬 新加坡 01", "ok": 2, "fail": 1, "total": 3, "lat_avg": 2.382, "fail_codes": "000", "cn_direct_ok": 1}
 {"ts": 1795363036, "round": "20261122235716", "proxy_port_up": 1, "sys_proxy": 1, "gateway_up": 1, "node": "🇸🇬 新加坡 01", "ok": 3, "fail": 0, "total": 3, "lat_avg": 2.789, "fail_codes": "", "cn_direct_ok": 1}
+{"ts": 1795363167, "round": "20261122235927", "proxy_port_up": 1, "sys_proxy": 1, "gateway_up": 1, "node": "🇸🇬 新加坡 01", "ok": 3, "fail": 0, "total": 3, "lat_avg": 6.501, "fail_codes": "", "cn_direct_ok": 1}
