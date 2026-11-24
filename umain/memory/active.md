@@ -1,7 +1,19 @@
-## 2026-11-20 23:59 · 🟢 当前状态速览（每日审计同步）
+## 2026-11-23 23:59 · 🟢 当前状态速览（每日审计同步）
 
-- **今日主线**：无 Daryl 直接指令；连续 5 日无 session 实质活动（11-16~11-20），系统按日更周期运转
-- **审计结果（11-20）**：修复 2（Git 备份 commit + push，远端含今日及 D-1~D-3 日记）| 浅层 1（active.md 47h 未更新 → 本次已刷新）| 深层 0
+- **今日主线**：无 Daryl 直接指令；连续 8 日无 session 实质活动（11-16~11-23），系统按日更周期自动运转
+- **审计结果（11-23）**：修复 4（日记骨架 / 归档 10-23 / Git commit / push，远端含今日及 D-1~D-3 日记）| 浅层 3 | 深层 1
+- **本次人工闭环**：①`active.md` 47h 未更新 → 已刷新 ②11-22 骨架日记 → 已补实 ③11-23 骨架日记 → 已补实
+- **成本**：今日 $0.10 | 本月 $11.59 | 全量 $300.43（`fresh_api_ok`，OPC API 端点正常）
+- **自进化基建**：checker 今日 0 次（FAIL 0）| Reflexion 0 条，对账一致
+- **身份校验**：SOUL/IDENTITY/identity.md 均指向忧郁小猫，一致
+- **遗留观察（P2）**：①`data/cost_daily.json` 路径检查口径误报（真实路径 `~/WorkBuddy/Claw/opc-dashboard/data/`），audit.sh 需修 ②crontab watchdog 指向已删脚本，待 Daryl 定改为 `~/opc-workspace/Kitty/opc-dashboard/manage.sh` 或迁 launchd KeepAlive
+- **P3**：连续 8 日零 session 活动属外部输入缺失，非系统故障；若长期持续可议降低审计频次
+
+### 11-20
+
+
+- **主线**：无 Daryl 直接指令；连续 5 日无 session 实质活动（11-16~11-20）
+- **审计结果（11-20）：修复 2（Git 备份 commit + push，远端含今日及 D-1~D-3 日记）| 浅层 1（active.md 47h 未更新 → 本次已刷新）| 深层 0
 - **成本**：今日 $0.1309 | 本月 $11.0954 | 全量 $299.9316（`fresh_api_ok`，日更周期内 0h 前刚刷新）
 - **自进化基建**：checker 今日 0 次（FAIL 0）| Reflexion 0 条，对账一致
 - **身份校验**：SOUL/IDENTITY/identity.md 均指向忧郁小猫，一致
