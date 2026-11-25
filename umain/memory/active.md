@@ -1,13 +1,13 @@
-## 2026-11-23 23:59 · 🟢 当前状态速览（每日审计同步）
+## 2026-11-25 23:59 · 🟢 当前状态速览（每日审计同步）
 
-- **今日主线**：无 Daryl 直接指令；连续 8 日无 session 实质活动（11-16~11-23），系统按日更周期自动运转
-- **审计结果（11-23）**：修复 4（日记骨架 / 归档 10-23 / Git commit / push，远端含今日及 D-1~D-3 日记）| 浅层 3 | 深层 1
-- **本次人工闭环**：①`active.md` 47h 未更新 → 已刷新 ②11-22 骨架日记 → 已补实 ③11-23 骨架日记 → 已补实
-- **成本**：今日 $0.10 | 本月 $11.59 | 全量 $300.43（`fresh_api_ok`，OPC API 端点正常）
+- **今日主线**：无 Daryl 直接指令；连续 11 日无 session 实质活动（11-16~11-25），系统按日更周期自动运转
+- **审计结果（11-25）**：修复 1（Git 备份 commit）| 浅层 3 | 深层 1；远端 `origin/main` 含 11-23/24/25 日记，备份链路健康
+- **本次人工闭环**：①`active.md` 47h 未更新 → 已刷新 ②11-24 骨架日记 → 已补实 ③11-25 骨架日记 → 已补实 ④`Git push 失败` 复核为误报（workspace 无 remote 属预期，真实推送在 `~/.opc-workspace-cache`）
+- **成本**：今日 $0.10 | 本月 $11.82 | 全量 $300.65（`fresh_api_ok`，OPC API 端点正常，接口金额一致）
 - **自进化基建**：checker 今日 0 次（FAIL 0）| Reflexion 0 条，对账一致
 - **身份校验**：SOUL/IDENTITY/identity.md 均指向忧郁小猫，一致
-- **遗留观察（P2）**：①`data/cost_daily.json` 路径检查口径误报（真实路径 `~/WorkBuddy/Claw/opc-dashboard/data/`），audit.sh 需修 ②crontab watchdog 指向已删脚本，待 Daryl 定改为 `~/opc-workspace/Kitty/opc-dashboard/manage.sh` 或迁 launchd KeepAlive
-- **P3**：连续 8 日零 session 活动属外部输入缺失，非系统故障；若长期持续可议降低审计频次
+- **遗留观察（P2）**：①`audit.sh` push 失败判定应探测 `$REPO_DIR` 而非 workspace，否则每日必出 1 条假告警 ②`data/cost_daily.json` 路径检查口径误报（真实路径 `~/WorkBuddy/Claw/opc-dashboard/data/`）③crontab watchdog 指向已删脚本，待 Daryl 定改为 `~/opc-workspace/Kitty/opc-dashboard/manage.sh` 或迁 launchd KeepAlive
+- **P3**：连续 11 日零 session 活动属外部输入缺失，非系统故障；若长期持续可议降低审计频次
 
 ### 11-20
 
