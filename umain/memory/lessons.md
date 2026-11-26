@@ -26,3 +26,7 @@
 
 ---
 *更多详情见 memory/learning_*.md*
+
+## 2026-11-25 · 审计告警需先辨"真失败"与"探错对象"
+- **教训**: `audit.sh` 报「Git push 失败」连续多日，实为脚本在 workspace（无 remote）里执行 `git push origin main`，而真实备份推送走 `~/.opc-workspace-cache`。假告警稀释真实信号，还掩盖了 07-03~10-18 那次真断链的风险面。
+- **整改**: 任何常态化告警首现即验证一次根因；判定 push 成败必须探测**实际持有 remote 的仓库**（`$REPO_DIR`），不得在 workspace 内判定。已记入 active.md P2 待修。
